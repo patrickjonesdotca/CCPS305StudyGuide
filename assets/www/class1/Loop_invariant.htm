@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Loop invariant - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Loop_invariant_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 3 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Loop_invariant">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Loop_invariant_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Loop_invariant_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Loop_invariant_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Loop_invariant" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Schleifeninvariante">Deutsch</option><option value="//pl.m.wikipedia.org/wiki/Niezmiennik_p%C4%99tli">polski</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Loop invariant</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>loop invariant</b> is an <a href="http://en.m.wikipedia.org/wiki/Invariant_%28computer_science%29" title="Invariant (computer science)">invariant</a> used to prove properties of <a href="http://en.m.wikipedia.org/wiki/Loop_%28computing%29" title="Loop (computing)" class="mw-redirect">loops</a>.
+ Informally, a loop invariant is a statement of the conditions that 
+should be true on entry into a loop and that are guaranteed to remain 
+true on every iteration of the loop. This means that on exit from the 
+loop both the loop invariant and the loop termination condition can be 
+guaranteed.</p>
+<p>Specifically in <a href="http://en.m.wikipedia.org/wiki/Hoare_logic" title="Hoare logic">Floyd-Hoare logic</a>,<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> the <a href="http://en.m.wikipedia.org/wiki/Partial_correctness" title="Partial correctness" class="mw-redirect">partial correctness</a> of a <a href="http://en.m.wikipedia.org/wiki/While_loop" title="While loop">while loop</a> is governed by the following rule of inference:</p>
+<dl>
+<dd><img class="tex" alt="\frac{\{C\land I\}\;\mathrm{body}\;\{I\}} {\{I\}\;\mathbf{while}\ (C)\ \mathrm{body}\;\{\lnot C\land I\}}" src="Loop_invariant_files/dabd91f4145a31755c1d42f542422bd4.png"></dd>
+</dl>
+<p>This means:</p>
+<ul>
+<li>A while loop does not have the side effect of falsifying <img class="tex" alt="I" src="Loop_invariant_files/dd7536794b63bf90eccfd37f9b147d7f.png">—if the loop's body does not change an invariant <img class="tex" alt="I" src="Loop_invariant_files/dd7536794b63bf90eccfd37f9b147d7f.png"> from true to false given the condition <img class="tex" alt="C" src="Loop_invariant_files/0d61f8370cad1d412f80b84d143e1257.png">, then <img class="tex" alt="I" src="Loop_invariant_files/dd7536794b63bf90eccfd37f9b147d7f.png"> will still be true after the loop has run as long as it was true before.</li>
+<li>
+<img class="tex" alt="while(C) ..." src="Loop_invariant_files/6844027a3641883307cacdd7befe402b.png"> runs as long as the condition <img class="tex" alt="C" src="Loop_invariant_files/0d61f8370cad1d412f80b84d143e1257.png"> is true—after the loop has run, if it terminates, <img class="tex" alt="C" src="Loop_invariant_files/0d61f8370cad1d412f80b84d143e1257.png"> is false.</li>
+</ul>
+<p>The rule above is a deductive step that has as its premise the <a href="http://en.m.wikipedia.org/wiki/Hoare_triple" title="Hoare triple" class="mw-redirect">Hoare triple</a> <img class="tex" alt="\{C\land I\}\;\mathrm{body}\;\{I\}" src="Loop_invariant_files/3c6b85feaa8d1c9ef06b65e815ef5adb.png">. This triple is actually a <a href="http://en.m.wikipedia.org/wiki/Relation_%28mathematics%29" title="Relation (mathematics)" class="mw-redirect">relation</a> on machine states. It holds whenever starting from a state in which the boolean expression <img class="tex" alt="C\land I" src="Loop_invariant_files/371cdd49ee92259b5d09b14f877b54d2.png"> is true and successfully executing some program called <i>body</i>, the machine ends up in a state in which <img class="tex" alt="I" src="Loop_invariant_files/dd7536794b63bf90eccfd37f9b147d7f.png"> is true. If this relation can be proven, the rule then allows us to conclude that successful execution of the program <code>while (C) body</code> will lead from a state in which <img class="tex" alt="I" src="Loop_invariant_files/dd7536794b63bf90eccfd37f9b147d7f.png"> is true to a state in which <img class="tex" alt="\lnot C\land I" src="Loop_invariant_files/334e4656f0c490a4489cd71f348380d9.png"> holds. The boolean formula <i>I</i> in this rule is known as the loop invariant.</p>
+<p>The following example illustrates how this rule works. Consider the program</p>
+<pre>while (x &lt; 10)
+    x := x+1;
+</pre>
+<p>One can then prove the following Hoare triple:</p>
+<dl>
+<dd><img class="tex" alt="\{x\leq10\}\; \mathbf{while}\ (x&lt;10)\ x&nbsp;:= x+1\;\{x=10\}" src="Loop_invariant_files/9b653c5392a35e1ef536c484264f733c.png"></dd>
+</dl>
+<p>The condition <i>C</i> of the <code>while</code> loop is <img class="tex" alt="x&lt;10" src="Loop_invariant_files/188b6a454f3adfa535548223ec0929c5.png">. A useful loop invariant <i>I</i> is <img class="tex" alt="x\leq10" src="Loop_invariant_files/a93460b31e8a89919184c6b7704af98b.png">. Under these assumptions it is possible to prove the following Hoare triple:</p>
+<dl>
+<dd><img class="tex" alt="\{x&lt;10 \land x\leq10\}\; x&nbsp;:= x+1 \;\{x\leq10\}" src="Loop_invariant_files/35b5ca5038c3ed1b5977a6b6d281ee0b.png"></dd>
+</dl>
+<p>While this triple can be derived formally from the rules of 
+Floyd-Hoare logic governing assignment, it is also intuitively 
+justified: Computation starts in a state where <img class="tex" alt="x&lt;10 \land x\leq10" src="Loop_invariant_files/42429d0349394861af1c3654689cd27e.png"> is true, which means simply that <img class="tex" alt="x&lt;10" src="Loop_invariant_files/188b6a454f3adfa535548223ec0929c5.png"> is true. The computation adds 1 to x, which means that <img class="tex" alt="x\leq10" src="Loop_invariant_files/a93460b31e8a89919184c6b7704af98b.png"> is still true (for integer x).</p>
+<p>Under this premise, the rule for <code>while</code> loops permits the following conclusion:</p>
+<dl>
+<dd><img class="tex" alt="\{x\leq10\}\; \mathbf{while}\ (x&lt;10)\ x&nbsp;:= x+1 \;\{\lnot(x&lt;10) \land x\leq10\}" src="Loop_invariant_files/7b25b8cd3347a23b62c121ecb194ede4.png"></dd>
+</dl>
+<p>However, the post-condition <img class="tex" alt="\lnot(x&lt;10)\land x\leq10" src="Loop_invariant_files/30d4d7cb10eecec1b4241c8abd348973.png"> (<i>x</i> is less than or equal to 10, but it is not less than 10) is <a href="http://en.m.wikipedia.org/wiki/Logical_equivalence" title="Logical equivalence">logically equivalent</a> to <img class="tex" alt="x=10" src="Loop_invariant_files/285a5d1baf1b7b84552a0ab4104041b8.png">, which is what we wanted to show.</p>
+<p>The loop invariant plays an important role in the intuitive argument for soundness of the Floyd-Hoare rule for <code>while</code>
+ loops. The loop invariant has to be true before each iteration of the 
+loop body, and also after each iteration of the loop body. Since a <code>while</code>
+ loop is precisely the repeated iteration of the loop body, it follows 
+that if the invariant is true before entering the loop, it must also be 
+true after exiting the loop.</p>
+<p>Because of the fundamental similarity of loops and <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursive</a>
+ programs, proving partial correctness of loops with invariants is very 
+similar to proving correctness of recursive programs via <a href="http://en.m.wikipedia.org/wiki/Mathematical_induction" title="Mathematical induction">induction</a>.
+ In fact, the loop invariant is often the inductive property one has to 
+prove of a recursive program that is equivalent to a given loop.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Programming_language_support">Programming language support</span></h2><div class="content_block" id="content_1">
+<h3> <span class="mw-headline" id="Eiffel">Eiffel</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Eiffel_%28programming_language%29" title="Eiffel (programming language)">Eiffel</a> programming language provides native support for loop invariants.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> A loop invariant is expressed with the same syntax used for a <a href="http://en.m.wikipedia.org/wiki/Class_invariant" title="Class invariant">class invariant</a>. In the sample below, the loop invariant expression <code>x &lt;= 10</code> must be true following the loop initialization, and after each execution of the loop body.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="eiffel source-eiffel">
+<pre class="de1">    <span class="kw2">from</span>
+        x <span class="sy0">:=</span> <span class="nu0">0</span>
+    <span class="kw1">invariant</span>
+        x <span class="sy0">&lt;=</span> <span class="nu0">10</span>
+    <span class="kw2">until</span>
+        x <span class="sy0">=</span> <span class="nu0">10</span>
+    <span class="kw2">loop</span>
+        x <span class="sy0">:=</span> x <span class="sy0">+</span> <span class="nu0">1</span>
+    <span class="kw2">end</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_2">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Loop_variant" title="Loop variant">Loop variant</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Predicate_transformer_semantics#While_loop" title="Predicate transformer semantics">Weakest-preconditions of While loop</a></li>
+</ul>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_3">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Robert_Floyd" title="Robert Floyd" class="mw-redirect">R. W. Floyd</a>.
+ "Assigning meanings to programs." Proceedings of the American 
+Mathematical Society Symposia on Applied Mathematics. Vol. 19, pp. 
+19–31. 1967. (<a rel="nofollow" class="external autonumber" href="http://laser.cs.umass.edu/courses/cs521-621.Spr06/papers/Floyd.pdf">[1]</a>)</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/C._A._R._Hoare" title="C. A. R. Hoare" class="mw-redirect">C. A. R. Hoare</a>. "<a rel="nofollow" class="external text" href="http://sunnyday.mit.edu/16.355/Hoare-CACM-69.pdf">An axiomatic basis for computer programming</a>". <i><a href="http://en.m.wikipedia.org/wiki/Communications_of_the_ACM" title="Communications of the ACM">Communications of the ACM</a></i>, 12(10):576–585, October 1969. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F363235.363259">10.1145/363235.363259</a></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Bertrand_Meyer" title="Bertrand Meyer">Meyer, Bertrand</a>, <i>Eiffel: The Language,</i> <a href="http://en.m.wikipedia.org/wiki/Prentice_Hall" title="Prentice Hall">Prentice Hall</a>, 1991, pp. 129–131.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Further_reading">Further reading</span></h2><div class="content_block" id="content_4">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, and <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. MIT Press and McGraw-Hill, 2001. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a>. Pages 17–19, section 2.1: Insertion sort.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/David_Gries" title="David Gries">David Gries</a>. "A note on a standard strategy for developing loop invariants and loops." <i>Science of Computer Programming</i>, vol 2, pp.&nbsp;207–214. 1984.</li>
+<li>Michael D. Ernst, Jake Cockrell, William G. Griswold, David Notkin. "<a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/292512.html">Dynamically Discovering Likely Program Invariants to Support Program Evolution</a>." <i>International Conference on Software Engineering</i>, pp.&nbsp;213–224. 1999.</li>
+<li>Robert Paige. "Programming with Invariants." <i>IEEE Software</i>, 3(1):56–69. January 1986.</li>
+<li>Yanhong A. Liu, Scott D. Stoller, and Tim Teitelbaum. <a rel="nofollow" class="external text" href="http://www.cs.sunysb.edu/%7Estoller/SIEC-SCP.html">Strengthening Invariants for Efficient Computation</a>. <i>Science of Computer Programming</i>, 41(2):139–172. October 2001.</li>
+<li>Michael Huth, Mark Ryan. "Logic in Computer Science.", Second Edition.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Loop_invariant&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Loop+invariant&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Loop_invariant&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Loop+invariant&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Loop_invariant_files/load_002.php" type="text/javascript"></script>
+<script src="Loop_invariant_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

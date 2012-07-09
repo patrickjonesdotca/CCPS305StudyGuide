@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Knuth–Morris–Pratt algorithm - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 15 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Knuth-Morris-Pratt-Algorithmus">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Algoritmo_Knuth-Morris-Pratt">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%D8%AA%D8%B7%D8%A7%D8%A8%D9%82_%D8%B1%D8%B4%D8%AA%D9%87_%D8%A8%D8%A7_%D8%B2%D9%85%D8%A7%D9%86_%D8%AE%D8%B7%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Algorithme_de_Knuth-Morris-Pratt">français</option><option value="//ko.m.wikipedia.org/wiki/%ED%81%AC%EB%88%84%EC%8A%A4-%EB%AA%A8%EB%A6%AC%EC%8A%A4-%ED%94%84%EB%9E%AB_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">한국어</option><option value="//id.m.wikipedia.org/wiki/Algoritma_Knuth-Morris-Pratt">Bahasa Indonesia</option><option value="//it.m.wikipedia.org/wiki/Algoritmo_di_Knuth-Morris-Pratt">italiano</option><option value="//ja.m.wikipedia.org/wiki/%E3%82%AF%E3%83%8C%E3%83%BC%E3%82%B9-%E3%83%A2%E3%83%AA%E3%82%B9-%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E6%B3%95">日本語</option><option value="//pl.m.wikipedia.org/wiki/Algorytm_Knutha-Morrisa-Pratta">polski</option><option value="//pt.m.wikipedia.org/wiki/Algoritmo_de_Knuth-Morris-Pratt">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%9A%D0%BD%D1%83%D1%82%D0%B0_%E2%80%94_%D0%9C%D0%BE%D1%80%D1%80%D0%B8%D1%81%D0%B0_%E2%80%94_%D0%9F%D1%80%D0%B0%D1%82%D1%82%D0%B0">русский</option><option value="//uk.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%9A%D0%BD%D1%83%D1%82%D0%B0%E2%80%94%D0%9C%D0%BE%D1%80%D1%96%D1%81%D0%B0%E2%80%94%D0%9F%D1%80%D0%B0%D1%82%D0%B0">українська</option><option value="//vi.m.wikipedia.org/wiki/Thu%E1%BA%ADt_to%C3%A1n_Knuth%E2%80%93Morris%E2%80%93Pratt">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Knuth–Morris–Pratt algorithm</h1>			
+<table class="metadata plainlinks ambox ambox-content ambox-Refimprove" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/50px-Question_book-new.png" width="50" height="39"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article <b>needs additional <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">citations</a> for <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>. <span class="hide-when-compact">Please help <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&amp;action=edit">improve this article</a> by adding citations to <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Identifying_reliable_sources" title="Wikipedia:Identifying reliable sources">reliable sources</a>. Unsourced material may be <a href="http://en.m.wikipedia.org/wiki/Template:Citation_needed" title="Template:Citation needed">challenged</a> and <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence" title="Wikipedia:Verifiability">removed</a>.</span> <small><i>(October 2009)</i></small> </span></td>
+</tr></tbody></table>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, the <b>Knuth–Morris–Pratt <a href="http://en.m.wikipedia.org/wiki/String_searching_algorithm" title="String searching algorithm">string searching algorithm</a></b> (or <b>KMP algorithm</b>) searches for occurrences of a "word" <code>W</code> within a main "text string" <code>S</code>
+ by employing the observation that when a mismatch occurs, the word 
+itself embodies sufficient information to determine where the next match
+ could begin, thus bypassing re-examination of previously matched 
+characters.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> was conceived in 1974 by <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> and <a href="http://en.m.wikipedia.org/wiki/Vaughan_Pratt" title="Vaughan Pratt">Vaughan Pratt</a>, and independently by <a href="http://en.m.wikipedia.org/wiki/James_H._Morris" title="James H. Morris">James H. Morris</a>. The three published it jointly in 1977.</p>
+<p><b>NOTE:</b> <i>This article uses <a href="http://en.m.wikipedia.org/wiki/Array_data_type" title="Array data type">zero-based arrays</a> to represent strings; thus the <code>'C'</code> in <code>S={'A','B','C'}</code> is denoted <code>S[2]</code>.</i></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="KMP_algorithm">KMP algorithm</span></h2><div class="content_block" id="content_1">
+<h3> <span class="mw-headline" id="Worked_example_of_the_search_algorithm">Worked example of the search algorithm</span>
+</h3>
+<p>To illustrate the algorithm's details, we work through a (relatively 
+artificial) run of the algorithm. At any given time, the algorithm is in
+ a state determined by two integers, <code>m</code> and <code>i</code>, which denote respectively the position within <code>S</code> which is the beginning of a prospective <i>match</i> for <code>W</code>, and the <i>index</i> in <code>W</code> denoting the character currently under consideration. This is depicted, at the start of the run, like</p>
+<pre><code>             1         2  
+m: 01234567890123456789012
+S: ABC ABCDAB ABCDABCDABDE
+W: ABC<span style="color:red">D</span>ABD
+i: 0123456
+</code>
+</pre>
+<p>We proceed by comparing successive characters of <code>W</code> to "parallel" characters of <code>S</code>, moving from one to the next if they match. However, in the fourth step, we get <code>S[3]</code> is a space and <code>W[3] = 'D'</code>, a mismatch. Rather than beginning to search again at <code>S[1]</code>, we note that no <code>'A'</code> occurs between positions 0 and 3 in <code>S</code>
+ except at 0; hence, having checked all those characters previously, we 
+know there is no chance of finding the beginning of a match if we check 
+them again. Therefore we move on to the next character, setting <code>m = 4</code> and <code>i = 0</code>. (m will first become 3 since <code>m + i - T[i] = 0 + 3 - 0 = 3</code> and then become 4 since <code>T[0] = -1</code>)</p>
+<pre><code>             1         2  
+m: 01234567890123456789012
+S: ABC ABCDAB ABCDABCDABDE
+W:     ABCDAB<span style="color:red">D</span>
+i:     0123456
+</code>
+</pre>
+<p>We quickly obtain a nearly complete match <code>"ABCDAB"</code> when, at <code>W[6]</code> (<code>S[10]</code>), we again have a discrepancy. However, just prior to the end of the current partial match, we passed an <code>"AB"</code>
+ which could be the beginning of a new match, so we must take this into 
+consideration. As we already know that these characters match the two 
+characters prior to the current position, we need not check them again; 
+we simply reset <code>m = 8</code>, <code>i = 2</code> and continue matching the current character. Thus, not only do we omit previously matched characters of <code>S</code>, but also previously matched characters of <code>W</code>.</p>
+<pre><code>             1         2  
+m: 01234567890123456789012
+S: ABC ABCDAB ABCDABCDABDE
+W:         AB<span style="color:red">C</span>DABD
+i:         0123456
+</code>
+</pre>
+<p>This search fails immediately, however, as the pattern still does not
+ contain a space, so as in the first trial, we return to the beginning 
+of <code>W</code> and begin searching at the next character of <code>S</code>: <code>m = 11</code>, reset <code>i = 0</code>. (m will first become 10 since <code>m + i - T[i] = 8 + 2 - 0 = 10</code> and then become 11 since <code>T[0] = -1</code>)</p>
+<pre><code>             1         2  
+m: 01234567890123456789012
+S: ABC ABCDAB ABCDABCDABDE
+W:            ABCDAB<span style="color:red">D</span>
+i:            0123456
+</code>
+</pre>
+<p>Once again we immediately hit upon a match <code>"ABCDAB"</code> but the next character, <code>'C'</code>, does not match the final character <code>'D'</code> of the word <code>W</code>. Reasoning as before, we set <code>m = 15</code>, to start at the two-character string <code>"AB"</code> leading up to the current position, set <code>i = 2</code>, and continue matching from the current position.</p>
+<pre><code>             1         2  
+m: 01234567890123456789012
+S: ABC ABCDAB ABCD<span style="color:green">ABCDABD</span>E
+W:                ABCDABD
+i:                0123456
+</code>
+</pre>
+<p>This time we are able to complete the match, whose first character is <code>S[15]</code>.</p>
+<h3> <span class="mw-headline" id="Description_of_and_pseudocode_for_the_search_algorithm">Description of and pseudocode for the search algorithm</span>
+</h3>
+<p>The above example contains all the elements of the algorithm. For the
+ moment, we assume the existence of a "partial match" table <code>T</code>, described <a href="#.22partial_match.22_table_.28also_known_as_.22failure_function.22.29">below</a>,
+ which indicates where we need to look for the start of a new match in 
+the event that the current one ends in a mismatch. The entries of <code>T</code> are constructed so that if we have a match starting at <code>S[m]</code> that fails when comparing <code>S[m + i]</code> to <code>W[i]</code>, then the next possible match will start at index <code>m + i - T[i]</code> in <code>S</code> (that is, <code>T[i]</code> is the amount of "backtracking" we need to do after a mismatch). This has two implications: first, <code>T[0] = -1</code>, which indicates that if <code>W[0]</code> is a mismatch, we cannot backtrack and must simply check the next character; and second, although the next possible match will <i>begin</i> at index <code>m + i - T[i]</code>, as in the example above, we need not actually check any of the <code>T[i]</code> characters after that, so that we continue searching from <code>W[T[i]]</code>. The following is a sample <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a> implementation of the KMP search algorithm.</p>
+<pre><b>algorithm</b> <i>kmp_search</i>:
+    <b>input</b>:
+        an array of characters, S (the text to be searched)
+        an array of characters, W (the word sought)
+    <b>output</b>:
+        an integer (the <a href="http://en.m.wikipedia.org/wiki/Array_data_type" title="Array data type">zero-based</a> position in S at which W is found)
+
+    <b>define variables</b>:
+        an integer, m ← 0 (the beginning of the current match in S)
+        an integer, i ← 0 (the position of the current character in W)
+        an array of integers, T (the table, computed elsewhere)
+
+    <b>while</b> m+i is less than the length of S, <b>do</b>:
+        <b>if</b> W[i] = S[m + i],
+            <b>if</b> i equals the (length of W)-1,
+                <b>return</b> m
+            <b>let</b> i ← i + 1
+        <b>otherwise</b>,
+            <b>let</b> m ← m + i - T[i],
+            <b>if</b> T[i] is greater than -1,
+                <b>let</b> i ← T[i]
+            <b>else</b>
+                <b>let</b> i ← 0
+            
+    (if we reach here, we have searched all of S unsuccessfully)
+    <b>return</b> the length of S
+</pre>
+<h3> <span class="mw-headline" id="Efficiency_of_the_search_algorithm">Efficiency of the search algorithm</span>
+</h3>
+<p>Assuming the prior existence of the table <code>T</code>, the search portion of the Knuth–Morris–Pratt algorithm has <a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">complexity</a> <a href="http://en.m.wikipedia.org/wiki/Linear_time#Linear_time" title="Linear time" class="mw-redirect">O(k)</a>, where <code>k</code> is the length of <code>S</code> and the <code>O</code> is <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">big-O notation</a>. As except for the fixed overhead incurred in entering and exiting the function, all the computations are performed in the <code><b>while</b></code>
+ loop, we will calculate a bound on the number of iterations of this 
+loop; in order to do this we first make a key observation about the 
+nature of <code>T</code>. By definition it is constructed so that if a match which had begun at <code>S[m]</code> fails while comparing <code>S[m + i]</code> to <code>W[i]</code>, then the next possible match must begin at <code>S[m + (i - T[i])]</code>. In particular the next possible match must occur at a higher index than <code>m</code>, so that <code>T[i] &lt; i</code>.</p>
+<p>Using this fact, we will show that the loop can execute at most <code>2k</code> times. For in each iteration, it executes one of the two branches in the loop. The first branch invariably increases <code>i</code> and does not change <code>m</code>, so that the index <code>m + i</code> of the currently scrutinized character of <code>S</code> is increased. The second branch adds <code>i - T[i]</code> to <code>m</code>, and as we have seen, this is always a positive number. Thus the location <code>m</code> of the beginning of the current potential match is increased. Now, the loop ends if <code>m + i = k</code>; therefore each branch of the loop can be reached at most <code>k</code> times, since they respectively increase either <code>m + i</code> or <code>m</code>, and <code>m ≤ m + i</code>: if <code>m = k</code>, then certainly <code>m + i ≥ k</code>, so that since it increases by unit increments at most, we must have had <code>m + i = k</code> at some point in the past, and therefore either way we would be done.</p>
+<p>Thus the loop executes at most <code>2k</code> times, showing that the time complexity of the search algorithm is <code>O(k)</code>.</p>
+<p>Here is another way to think about the runtime: Let us say we begin 
+to match W and S at position i and p, if W exists as a substring of S at
+ p, then W[0 through m] == S[p through p+m]. Upon success, that is, the 
+word and the text matched at the positions(W[i] == S[p+i]), we increase i
+ by 1 (i++). Upon failure, that is, the word and the text does not match
+ at the positions(W[i]&nbsp;!= S[p+i]), the text pointer is kept still, 
+while the word pointer roll-back a certain amount(i = T[i], where T is 
+the jump table) And we attempt to match W[T[i]] with S[p+i]. The maximum
+ number of roll-back of i is bounded by i, that is to say, for any 
+failure, we can only roll-back as much as we have progressed up to the 
+failure. Then it is clear the runtime is 2k.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id=".22Partial_match.22_table_.28also_known_as_.22failure_function.22.29">"Partial match" table (also known as "failure function")</span></h2><div class="content_block" id="content_2">
+<p>The goal of the table is to allow the algorithm not to match any character of <code>S</code>
+ more than once. The key observation about the nature of a linear search
+ that allows this to happen is that in having checked some segment of 
+the main string against an <i>initial segment</i> of the pattern, we 
+know exactly at which places a new potential match which could continue 
+to the current position could begin prior to the current position. In 
+other words, we "pre-search" the pattern itself and compile a list of 
+all possible fallback positions that bypass a maximum of hopeless 
+characters while not sacrificing any potential matches in doing so.</p>
+<p>We want to be able to look up, for each position in <code>W</code>, the length of the longest possible initial segment of <code>W</code> leading up to (but not including) that position, other than the full segment starting at <code>W[0]</code> that just failed to match; this is how far we have to backtrack in finding the next match. Hence <code>T[i]</code> is exactly the length of the longest possible <i>proper</i> initial segment of <code>W</code> which is also a segment of the substring ending at <code>W[i - 1]</code>.
+ We use the convention that the empty string has length 0. Since a 
+mismatch at the very start of the pattern is a special case (there is no
+ possibility of backtracking), we set <code>T[0] = -1</code>, as discussed <a href="#Description_of_and_pseudocode_for_the_search_algorithm">above</a>.</p>
+<h3> <span class="mw-headline" id="Worked_example_of_the_table-building_algorithm">Worked example of the table-building algorithm</span>
+</h3>
+<p>We consider the example of <code>W = "ABCDABD"</code> first. We will see that it follows much the same pattern as the main search, and is efficient for similar reasons. We set <code>T[0] = -1</code>. To find <code>T[1]</code>, we must discover a <a href="http://en.m.wikipedia.org/wiki/Substring#Suffix" title="Substring">proper suffix</a> of <code>"A"</code> which is also a prefix of <code>W</code>. But there are no proper suffixes of <code>"A"</code>, so we set <code>T[1] = 0</code>. Likewise, <code>T[2] = 0</code>.</p>
+<p>Continuing to <code>T[3]</code>, we note that there is a shortcut to checking <i>all</i> suffixes: let us say that we discovered a <a href="http://en.m.wikipedia.org/wiki/Substring#Suffix" title="Substring">proper suffix</a> which is a <a href="http://en.m.wikipedia.org/wiki/Substring#Prefix" title="Substring">proper prefix</a> and ending at <code>W[2]</code> with length 2 (the maximum possible); then its first character is a proper prefix of a proper prefix of <code>W</code>, hence a proper prefix itself, and it ends at <code>W[1]</code>,
+ which we already determined cannot occur in case T[2]. Hence at each 
+stage, the shortcut rule is that one needs to consider checking suffixes
+ of a given size m+1 only if a valid suffix of size m was found at the 
+previous stage (e.g. T[x]=m).</p>
+<p>Therefore we need not even concern ourselves with substrings having 
+length 2, and as in the previous case the sole one with length 1 fails, 
+so <code>T[3] = 0</code>.</p>
+<p>We pass to the subsequent <code>W[4]</code>, <code>'A'</code>. The same logic shows that the longest substring we need consider has length 1, and although in this case <code>'A'</code> <i>does</i> work, recall that we are looking for segments ending <i>before</i> the current character; hence <code>T[4] = 0</code> as well.</p>
+<p>Considering now the next character, <code>W[5]</code>, which is <code>'B'</code>, we exercise the following logic: if we were to find a subpattern beginning before the previous character <code>W[4]</code>, yet continuing to the current one <code>W[5]</code>, then in particular it would itself have a proper initial segment ending at <code>W[4]</code> yet beginning before it, which contradicts the fact that we already found that <code>'A'</code> itself is the earliest occurrence of a proper segment ending at <code>W[4]</code>. Therefore we need not look before <code>W[4]</code> to find a terminal string for <code>W[5]</code>. Therefore <code>T[5] = 1</code>.</p>
+<p>Finally, we see that the next character in the ongoing segment starting at <code>W[4] = 'A'</code> would be <code>'B'</code>, and indeed this is also <code>W[5]</code>. Furthermore, the same argument as above shows that we need not look before <code>W[4]</code> to find a segment for <code>W[6]</code>, so that this is it, and we take <code>T[6] = 2</code>.</p>
+<p>Therefore we compile the following table:</p>
+<table class="wikitable" style="background-color: white; font-family: monospace; text-align: right;">
+<tbody><tr>
+<th><code>i</code></th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<th><code>W[i]</code></th>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>A</td>
+<td>B</td>
+<td>D</td>
+</tr>
+<tr>
+<th><code>T[i]</code></th>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>Other example more interesting and complex:</p>
+<table class="wikitable" style="background-color: white; font-family: monospace; text-align: right;">
+<tbody><tr>
+<th><code>i</code></th>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<th><code>W[i]</code></th>
+<td>P</td>
+<td>A</td>
+<td>R</td>
+<td>T</td>
+<td>I</td>
+<td>C</td>
+<td>I</td>
+<td>P</td>
+<td>A</td>
+<td>T</td>
+<td>E</td>
+<td></td>
+<td>I</td>
+<td>N</td>
+<td></td>
+<td>P</td>
+<td>A</td>
+<td>R</td>
+<td>A</td>
+<td>C</td>
+<td>H</td>
+<td>U</td>
+<td>T</td>
+<td>E</td>
+</tr>
+<tr>
+<th><code>T[i]</code></th>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h3> <span class="mw-headline" id="Description_of_pseudocode_for_the_table-building_algorithm">Description of pseudocode for the table-building algorithm</span>
+</h3>
+<p>The example above illustrates the general technique for assembling 
+the table with a minimum of fuss. The principle is that of the overall 
+search: most of the work was already done in getting to the current 
+position, so very little needs to be done in leaving it. The only minor 
+complication is that the logic which is correct late in the string 
+erroneously gives non-proper substrings at the beginning. This 
+necessitates some initialization code.</p>
+<pre><b>algorithm</b> <i>kmp_table</i>:
+    <b>input</b>:
+        an array of characters, W (the word to be analyzed)
+        an array of integers, T (the table to be filled)
+    <b>output</b>:
+        nothing (but during operation, it populates the table)
+
+    <b>define variables</b>:
+        an integer, pos ← 2 (the current position we are computing in T)
+        an integer, cnd ← 0 (the zero-based index in W of the next <br>character of the current candidate substring)
+
+    (the first few values are fixed but different from what the algorithm <br>might suggest)
+    <b>let</b> T[0] ← -1, T[1] ← 0
+
+    <b>while</b> pos is less than the length of W, do:
+        (first case: the substring continues)
+        <b>if</b> W[pos - 1] = W[cnd], <br><b>let</b> cnd ← cnd + 1, T[pos] ← cnd, pos ← pos + 1
+
+        (second case: it doesn't, but we can fall back)
+        <b>otherwise</b>, <b>if</b> cnd &gt; 0, <b>let</b> cnd ← T[cnd]
+
+        (third case: we have run out of candidates.  Note cnd = 0)
+        <b>otherwise</b>, <b>let</b> T[pos] ← 0, pos ← pos + 1
+</pre>
+<h3> <span class="mw-headline" id="Efficiency_of_the_table-building_algorithm">Efficiency of the table-building algorithm</span>
+</h3>
+<p>The complexity of the table algorithm is <code>O(n)</code>, where <code>n</code> is the length of <code>W</code>. As except for some initialization all the work is done in the <code><b>while</b></code> loop, it is sufficient to show that this loop executes in <code>O(n)</code> time, which will be done by simultaneously examining the quantities <code>pos</code> and <code>pos - cnd</code>. In the first branch, <code>pos - cnd</code> is preserved, as both <code>pos</code> and <code>cnd</code> are incremented simultaneously, but naturally, <code>pos</code> is increased. In the second branch, <code>cnd</code> is replaced by <code>T[cnd]</code>, which we saw <a href="#Efficiency_of_the_search_algorithm">above</a> is always strictly less than <code>cnd</code>, thus increasing <code>pos - cnd</code>. In the third branch, <code>pos</code> is incremented and <code>cnd</code> is not, so both <code>pos</code> and <code>pos - cnd</code> increase. Since <code>pos ≥ pos - cnd</code>, this means that at each stage either <code>pos</code> or a lower bound for <code>pos</code> increases; therefore since the algorithm terminates once <code>pos = n</code>, it must terminate after at most <code>2n</code> iterations of the loop, since <code>pos - cnd</code> begins at <code>1</code>. Therefore the complexity of the table algorithm is <code>O(n)</code>.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Efficiency_of_the_KMP_algorithm">Efficiency of the KMP algorithm</span></h2><div class="content_block" id="content_3">
+<p>Since the two portions of the algorithm have, respectively, complexities of <code>O(k)</code> and <code>O(n)</code>, the complexity of the overall algorithm is <code>O(n + k)</code>.</p>
+<p>These complexities are the same, no matter how many repetitive patterns are in <code>W</code> or <code>S</code>.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Variants">Variants</span></h2><div class="content_block" id="content_4">
+<p>A <a href="http://en.m.wikipedia.org/wiki/Real-time_computing" title="Real-time computing">real-time</a>
+ version of KMP can be implemented using a separate failure function 
+table for each character in the alphabet. If a mismatch occurs on 
+character <img class="tex" alt="x" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/9dd4e461268c8034f5c8564e155c67a6.png"> in the text, the failure function table for character <img class="tex" alt="x" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/9dd4e461268c8034f5c8564e155c67a6.png"> is consulted for the index <img class="tex" alt="i" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/865c0c0b4ab0e063e5caa3387c1a8741.png"> in the pattern at which the mismatch took place. This will return the length of the longest substring ending at <img class="tex" alt="i" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/865c0c0b4ab0e063e5caa3387c1a8741.png"> matching a prefix of the pattern, with the added condition that the character after the prefix is <img class="tex" alt="x" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/9dd4e461268c8034f5c8564e155c67a6.png">. With this restriction, character <img class="tex" alt="x" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/9dd4e461268c8034f5c8564e155c67a6.png">
+ in the text need not be checked again in the next phase, and so only a 
+constant number of operations are executed between the processing of 
+each index of the text. This satisfies the real-time computing 
+restriction.</p>
+<p>The Booth algorithm uses a modified version of the KMP preprocessing function to find the <a href="http://en.m.wikipedia.org/wiki/Lexicographically_minimal_string_rotation" title="Lexicographically minimal string rotation">lexicographically minimal string rotation</a>. The failure function is progressively calculated as the string is rotated.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_5">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm" title="Boyer–Moore string search algorithm">Boyer–Moore string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Rabin%E2%80%93Karp_string_search_algorithm" title="Rabin–Karp string search algorithm" class="mw-redirect">Rabin–Karp string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Aho%E2%80%93Corasick_string_matching_algorithm" title="Aho–Corasick string matching algorithm">Aho–Corasick string matching algorithm</a></li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_6">
+<ul>
+<li>
+<span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>; <a href="http://en.m.wikipedia.org/wiki/James_H._Morris,_Jr" title="James H. Morris, Jr" class="mw-redirect">James H. Morris, Jr</a>, <a href="http://en.m.wikipedia.org/wiki/Vaughan_Pratt" title="Vaughan Pratt">Vaughan Pratt</a> (1977). <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/context/23820/0">"Fast pattern matching in strings"</a>. <i>SIAM Journal on Computing</i> <b>6</b> (2): 323–350. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1137%2F0206024">10.1137/0206024</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://citeseer.ist.psu.edu/context/23820/0">http://citeseer.ist.psu.edu/context/23820/0</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Fast+pattern+matching+in+strings&amp;rft.jtitle=SIAM+Journal+on+Computing&amp;rft.aulast=%5B%5BDonald+Knuth%5D%5D&amp;rft.au=%5B%5BDonald+Knuth%5D%5D&amp;rft.date=1977&amp;rft.volume=6&amp;rft.issue=2&amp;rft.pages=323%E2%80%93350&amp;rft_id=info:doi/10.1137%2F0206024&amp;rft_id=http%3A%2F%2Fciteseer.ist.psu.edu%2Fcontext%2F23820%2F0&amp;rfr_id=info:sid/en.wikipedia.org:Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+<ul>
+<li>
+<span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a> (2001). "Section 32.4: The Knuth-Morris-Pratt algorithm". <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (Second ed.). MIT Press and McGraw-Hill. pp.&nbsp;923–931. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-262-03293-3" title="Special:BookSources/978-0-262-03293-3">978-0-262-03293-3</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Section+32.4%3A+The+Knuth-Morris-Pratt+algorithm&amp;rft.atitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=%5B%5BThomas+H.+Cormen%5D%5D&amp;rft.au=%5B%5BThomas+H.+Cormen%5D%5D&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B923%E2%80%93931&amp;rft.edition=Second&amp;rft.pub=MIT+Press+and+McGraw-Hill&amp;rft.isbn=978-0-262-03293-3&amp;rfr_id=info:sid/en.wikipedia.org:Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_7">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation">Algorithm implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation/String_searching/Knuth-Morris-Pratt_pattern_matcher">String searching/Knuth-Morris-Pratt pattern matcher</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.cs.pitt.edu/%7Ekirk/cs1501/animations/String.html">String Searching Applet animation</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.ics.uci.edu/%7Eeppstein/161/960227.html">An explanation of the algorithm</a> and <a rel="nofollow" class="external text" href="http://www.ics.uci.edu/%7Eeppstein/161/kmp/">sample C++ code</a> by <a href="http://en.m.wikipedia.org/wiki/David_Eppstein" title="David Eppstein">David Eppstein</a>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www-igm.univ-mlv.fr/%7Elecroq/string/node8.html">Knuth-Morris-Pratt algorithm</a> description and C code by Christian Charras and Thierry Lecroq</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm">Explanation of the algorithm from scratch</a> by FH Flensburg.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://oak.cs.ucla.edu/cs144/examples/KMPSearch.html">Breaking down steps of running KMP</a> by Chu-Cheng Hsieh.</li>
+<li>
+<a rel="nofollow" class="external autonumber" href="http://www.youtube.com/watch?v=Zj_er99KMb8">[1]</a> NPTELHRD YouTube lecture video</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Donald_Knuth_navbox" title="Template:Donald Knuth navbox"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Donald_Knuth_navbox" title="Template talk:Donald Knuth navbox"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Donald_Knuth_navbox&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Publications</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i></li>
+<li>"<a href="http://en.m.wikipedia.org/wiki/The_Complexity_of_Songs" title="The Complexity of Songs">The Complexity of Songs</a>"</li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Computers_and_Typesetting" title="Computers and Typesetting">Computers and Typesetting</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Concrete_Mathematics" title="Concrete Mathematics">Concrete Mathematics</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Surreal_Numbers_%28book%29" title="Surreal Numbers (book)" class="mw-redirect">Surreal Numbers</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Things_a_Computer_Scientist_Rarely_Talks_About" title="Things a Computer Scientist Rarely Talks About">Things a Computer Scientist Rarely Talks About</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Selected_papers_series_of_Knuth" title="Selected papers series of Knuth">Selected papers series</a></i></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Software" title="Software">Software</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/TeX" title="TeX"><span class="texhtml"><span style="font-family:cmr10, LMRoman10-Regular, Times, serif;">T<span style="text-transform:uppercase; vertical-align:-0.5ex; margin-left:-0.1667em; margin-right:-0.125em;">e</span>X</span></span></a></li>
+<li>MIXAL (<a href="http://en.m.wikipedia.org/wiki/MIX" title="MIX">MIX</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/MMIX" title="MMIX">MMIX</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/GNU_MIX_Development_Kit" title="GNU MIX Development Kit">GNU MDK</a>)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Font" title="Font">Fonts</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AMS_Euler" title="AMS Euler">AMS Euler</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Computer_Modern" title="Computer Modern">Computer Modern</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metafont" title="Metafont">Metafont</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Literate_programming" title="Literate programming">Literate programming</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/WEB" title="WEB">WEB</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/CWEB" title="CWEB">CWEB</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">Algorithms</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%27s_Algorithm_X" title="Knuth's Algorithm X">Knuth's Algorithm X</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%E2%80%93Bendix_completion_algorithm" title="Knuth–Bendix completion algorithm">Knuth–Bendix completion algorithm</a></li>
+<li><strong class="selflink">Knuth–Morris–Pratt algorithm</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" title="Fisher–Yates shuffle">Knuth shuffle</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Robinson%E2%80%93Schensted%E2%80%93Knuth_correspondence" title="Robinson–Schensted–Knuth correspondence">Robinson–Schensted–Knuth correspondence</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Trabb_Pardo%E2%80%93Knuth_algorithm" title="Trabb Pardo–Knuth algorithm">Trabb Pardo–Knuth algorithm</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Dancing_Links" title="Dancing Links">Dancing Links</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth_reward_check" title="Knuth reward check">Knuth reward check</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth_Prize" title="Knuth Prize">Knuth Prize</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Man_or_boy_test" title="Man or boy test">Man or boy test</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quater-imaginary_base" title="Quater-imaginary base">Quater-imaginary base</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/-yllion" title="-yllion">-yllion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Potrzebie#Unit_System" title="Potrzebie">Potrzebie system of weights and measures</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Knuth%E2%80%93Morris%E2%80%93Pratt+algorithm&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Knuth%E2%80%93Morris%E2%80%93Pratt+algorithm&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/load_002.php" type="text/javascript"></script>
+<script src="Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Boyer–Moore string search algorithm - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Boyer%E2%80%93Moore_string_search_algorithm_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 10 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Boyer%E2%80%93Moore_string_search_algorithm_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Boyer%E2%80%93Moore_string_search_algorithm_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Boyer%E2%80%93Moore_string_search_algorithm_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Boyer-Moore-Algorithmus">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_de_cadenas_Boyer-Moore">español</option><option value="//fr.m.wikipedia.org/wiki/Algorithme_de_Boyer-Moore">français</option><option value="//id.m.wikipedia.org/wiki/Algoritma_Boyer-Moore">Bahasa Indonesia</option><option value="//lt.m.wikipedia.org/wiki/Blogo_simbolio_taisykl%C4%97">lietuvių</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%9C%E3%82%A4%E3%83%A4%E3%83%BC-%E3%83%A0%E3%83%BC%E3%82%A2%E6%96%87%E5%AD%97%E5%88%97%E6%A4%9C%E7%B4%A2%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">日本語</option><option value="//pl.m.wikipedia.org/wiki/Algorytm_Boyera_i_Moore%27a">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%91%D0%BE%D0%B9%D0%B5%D1%80%D0%B0_%E2%80%94_%D0%9C%D1%83%D1%80%D0%B0">русский</option><option value="//zh.m.wikipedia.org/wiki/Boyer-Moore%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Boyer–Moore string search algorithm</h1>			
+<div class="dablink">For the Boyer-Moore theorem prover, see <a href="http://en.m.wikipedia.org/wiki/Nqthm" title="Nqthm">Nqthm</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, the <b>Boyer–Moore string search algorithm</b> is an efficient <a href="http://en.m.wikipedia.org/wiki/String_searching_algorithm" title="String searching algorithm">string searching algorithm</a> that is the standard benchmark for practical string search literature.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> It was developed by <a href="http://en.m.wikipedia.org/wiki/Robert_S._Boyer" title="Robert S. Boyer">Robert S. Boyer</a> and <a href="http://en.m.wikipedia.org/wiki/J_Strother_Moore" title="J Strother Moore">J Strother Moore</a> in 1977.<sup id="cite_ref-original_1-0" class="reference"><a href="#cite_note-original-1"><span>[</span>2<span>]</span></a></sup> The <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> <a href="http://en.m.wikipedia.org/wiki/Preprocessor" title="Preprocessor">preprocesses</a> the <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">string</a>
+ being searched for (the pattern), but not the string being searched in 
+(the text). It is thus well-suited for applications in which the text 
+does not persist across multiple searches. The Boyer-Moore algorithm 
+uses information gathered during the preprocess step to skip sections of
+ the text, resulting in a lower constant factor than many other string 
+algorithms. In general, the algorithm runs faster as the pattern length 
+increases.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Definitions">Definitions</span></h2><div class="content_block" id="content_1">
+<div class="thumb tright" style="width:160px;">
+<div>
+<table>
+<tbody><tr>
+<td>A</td>
+<td>N</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>M</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+</tr>
+<tr>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<div class="thumbcaption" style="width:160px;">Alignments of pattern <b>PAN</b> to text <b>ANPANMAN</b>, from <b>k=3</b> to <b>k=8</b>. A match occurs at <b>k=5</b>.</div>
+</div>
+</div>
+<ul>
+<li>
+<i><b>S[i]</b></i> refers to the character at index <i><b>i</b></i> of string <i><b>S</b></i>, counting from 1.</li>
+<li>
+<i><b>S[i..j]</b></i> refers to the <a href="http://en.m.wikipedia.org/wiki/Substring" title="Substring">substring</a> of string <i><b>S</b></i> starting at index <i><b>i</b></i> and ending at <i><b>j</b></i>, inclusive.</li>
+<li>A <a href="http://en.m.wikipedia.org/wiki/Substring#Prefix" title="Substring">prefix</a> of <i><b>S</b></i> is a substring <i><b>S[1..i]</b></i> for some <i><b>i</b></i> in range <i><b>[1, n]</b></i>, where <i><b>n</b></i> is the length of <i><b>S</b></i>.</li>
+<li>A <a href="http://en.m.wikipedia.org/wiki/Substring#Suffix" title="Substring">suffix</a> of <i><b>S</b></i> is a substring <i><b>S[i..n]</b></i> for some <i><b>i</b></i> in range <i><b>[1, n]</b></i>, where <i><b>n</b></i> is the length of <i><b>S</b></i>.</li>
+<li>The string to be searched for is called the <b>pattern</b>.</li>
+<li>The string being searched in is called the <b>text</b>.</li>
+<li>The pattern is referred to with symbol <i><b>P</b></i>.</li>
+<li>The text is referred to with symbol <i><b>T</b></i>.</li>
+<li>The length of <i><b>P</b></i> is <i><b>n</b></i>.</li>
+<li>The length of <i><b>T</b></i> is <i><b>m</b></i>.</li>
+<li>An <b>alignment</b> of <i><b>P</b></i> to <i><b>T</b></i> is an index <i><b>k</b></i> in <i><b>T</b></i> such that the last character of <i><b>P</b></i> is aligned with index <i><b>k</b></i> of <i><b>T</b></i>.</li>
+<li>A <b>match</b> or <b>occurrence</b> of <i><b>P</b></i> occurs at an alignment if <i><b>P</b></i> is equivalent to <i><b>T[(k-n+1)..k]</b></i>.</li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Description">Description</span></h2><div class="content_block" id="content_2">
+<p>The Boyer-Moore algorithm searches for occurrences of <i><b>P</b></i> in <i><b>T</b></i> by performing explicit character comparisons at different alignments. Instead of a <a href="http://en.m.wikipedia.org/wiki/Brute-force_search" title="Brute-force search">brute-force search</a> of all alignments (of which there are <i><b>m - n + 1</b></i>), Boyer-Moore uses information gained by preprocessing <i><b>P</b></i> to skip as many alignments as possible.</p>
+<p>The algorithm begins at alignment <i><b>k = n</b></i>, so the start of <i><b>P</b></i> is aligned with the start of <i><b>T</b></i>. Characters in <i><b>P</b></i> and <i><b>T</b></i> are then compared starting at index <i><b>n</b></i> in <i><b>P</b></i> and <i><b>k</b></i> in <i><b>T</b></i>, moving downward: the strings are matched from the end and toward the beginning of <i><b>P</b></i>. The comparisons continue until either a mismatch occurs or the beginning of <i><b>P</b></i>
+ is reached (which means there is a match), after which the alignment is
+ shifted to the right according to the maximum value permitted by a 
+number of rules. The comparisons are performed again at the new 
+alignment, and the process repeats until the alignment is shifted past 
+the end of <i><b>T</b></i>.</p>
+<p>The shift rules are implemented as constant-time table lookups, using tables generated during the preprocessing of <i><b>P</b></i>.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Shift_Rules">Shift Rules</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="The_Bad_Character_Rule">The Bad Character Rule</span>
+</h3>
+<h4> <span class="mw-headline" id="Description_2">Description</span>
+</h4>
+<div class="thumb tright" style="width:160px;">
+<div>
+<table>
+<tbody><tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>K</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A</td>
+<td>N</td>
+<td>P</td>
+<td>A</td>
+<td><span style="color:#FF0000">N</span></td>
+<td>M</td>
+<td>A</td>
+<td>N</td>
+<td>A</td>
+<td>M</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>N</td>
+<td><span style="color:#008000">N</span></td>
+<td>A</td>
+<td>A</td>
+<td>M</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>N</td>
+<td><span style="color:#008000">N</span></td>
+<td>A</td>
+<td>A</td>
+<td>M</td>
+<td>A</td>
+<td>N</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<div class="thumbcaption" style="width:160px;">Demonstration of bad character rule with pattern <b>NNAAMAN</b>.</div>
+</div>
+</div>
+<p>The bad-character rule considers the character in <i><b>T</b></i> at 
+which the comparison process failed (assuming such a failure occurred). 
+The next occurrence of that character to the left in <i><b>P</b></i> is found, and a shift which brings that occurrence in line with the mismatched occurrence in <i><b>T</b></i> is proposed. If the mismatched character does not occur to the left in <i><b>P</b></i>, a shift is proposed that moves the entirety of <i><b>P</b></i> past the point of mismatch.</p>
+<h4> <span class="mw-headline" id="Preprocessing">Preprocessing</span>
+</h4>
+<p>Methods vary on the exact form the table for the bad character rule 
+should take, but a simple constant-time lookup solution is as follows: 
+create a 2D table which is indexed first by the index of the character <i><b>c</b></i> in the alphabet and second by the index <i><b>i</b></i> in the pattern. This lookup will return the occurrence of <i><b>c</b></i> in <i><b>P</b></i> with the next-highest index <i><b>j &lt; i</b></i> or <i><b>-1</b></i> if there is no such occurrence. The proposed shift will then be <i><b>i - j</b></i>, with <i><b>O(1)</b></i> lookup time and <i><b>O(n)</b></i> space, assuming a finite alphabet.</p>
+<h3> <span class="mw-headline" id="The_Good_Suffix_Rule">The Good Suffix Rule</span>
+</h3>
+<h4> <span class="mw-headline" id="Description_3">Description</span>
+</h4>
+<div class="thumb tright" style="width:200px;">
+<div>
+<table>
+<tbody><tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>K</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>M</td>
+<td>A</td>
+<td>N</td>
+<td>P</td>
+<td>A</td>
+<td><span style="color:#008000">N</span></td>
+<td><span style="color:#008000">A</span></td>
+<td><span style="color:#008000">M</span></td>
+<td>A</td>
+<td>N</td>
+<td>A</td>
+<td>P</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A</td>
+<td><span style="color:#FF0000">N</span></td>
+<td><span style="color:#FF0000">A</span></td>
+<td><span style="color:#FF0000">M</span></td>
+<td>P</td>
+<td><span style="color:#008000">N</span></td>
+<td><span style="color:#008000">A</span></td>
+<td><span style="color:#008000">M</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>A</td>
+<td><span style="color:#FF0000">N</span></td>
+<td><span style="color:#FF0000">A</span></td>
+<td><span style="color:#FF0000">M</span></td>
+<td>P</td>
+<td>N</td>
+<td>A</td>
+<td>M</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<div class="thumbcaption" style="width:200px;">Demonstration of good suffix rule with pattern <b>ANAMPNAM</b>.</div>
+</div>
+</div>
+<p>The good suffix rule is markedly more complex in both concept and 
+implementation than the bad character rule. It is the reason comparisons
+ begin at the end of the pattern rather than the start, and is formally 
+stated thus:<sup id="cite_ref-ASTS_2-0" class="reference"><a href="#cite_note-ASTS-2"><span>[</span>3<span>]</span></a></sup></p>
+<blockquote>
+<p>Suppose for a given alignment of <i><b>P</b></i> and <i><b>T</b></i>, a substring <i><b>t</b></i> of <i><b>T</b></i> matches a suffix of <i><b>P</b></i>, but a mismatch occurs at the next comparison to the left. Then find, if it exists, the right-most copy <i><b>t'</b></i> of <i><b>t</b></i> in <i><b>P</b></i> such that <i><b>t'</b></i> is not a suffix of <i><b>P</b></i> and the character to the left of <i><b>t'</b></i> in <i><b>P</b></i> differs from the character to the left of <i><b>t</b></i> in <i><b>P</b></i>. Shift <i><b>P</b></i> to the right so that substring <i><b>t'</b></i> in <i><b>P</b></i> is below substring <i><b>t</b></i> in <i><b>T</b></i>. If <i><b>t'</b></i> does not exist, then shift the left end of <i><b>P</b></i> past the left end of <i><b>t</b></i> in <i><b>T</b></i> by the least amount so that a prefix of the shifted pattern matches a suffix of <i><b>t</b></i> in <i><b>T</b></i>. If no such shift is possible, then shift <i><b>P</b></i> by <i><b>n</b></i> places to the right. If an occurrence of <i><b>P</b></i> is found, then shift <i><b>P</b></i> by the least amount so that a <i>proper</i> prefix of the shifted <i><b>P</b></i> matches a suffix of the occurrence of <i><b>P</b></i> in <i><b>T</b></i>. If no such shift is possible, then shift <i><b>P</b></i> by <i><b>n</b></i> places, that is, shift <i><b>P</b></i> past <i><b>T</b></i>.</p>
+</blockquote>
+<h4> <span class="mw-headline" id="Preprocessing_2">Preprocessing</span>
+</h4>
+<p>The good suffix rule requires two tables: one for use in the general 
+case, and another for use when either the general case returns no 
+meaningful result or a match occurs. These tables will be designated <i><b>L</b></i> and <i><b>H</b></i> respectively. Their definitions are as follows:<sup id="cite_ref-ASTS_2-1" class="reference"><a href="#cite_note-ASTS-2"><span>[</span>3<span>]</span></a></sup></p>
+<blockquote>
+<p>For each <i><b>i</b></i>, <i><b>L[i]</b></i> is the largest position less than <i><b>n</b></i> such that string <i><b>P[i..n]</b></i> matches a suffix of <i><b>P[1..L[i]]</b></i> and such that the character preceding that suffix is not equal to <i><b>P[i-1]</b></i>. <i><b>L[i]</b></i> is defined to be zero if there is no position satisfying the condition.</p>
+</blockquote>
+<blockquote>
+<p>Let <i><b>H[i]</b></i> denote the length of the largest suffix of <i><b>P[i..n]</b></i> that is also a prefix of <i><b>P</b></i>, if one exists. If none exists, let <i><b>H[i]</b></i> be zero.</p>
+</blockquote>
+<p>Both of these tables are constructible in <i><b>O(n)</b></i> time and use <i><b>O(n)</b></i> space. The alignment shift for index <i><b>i</b></i> in <i><b>P</b></i> is given by <i><b>n - L[i]</b></i> or <i><b>n - H[i]</b></i>. <i><b>H</b></i> should only be used if <i><b>L[i]</b></i> is zero or a match has been found.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="The_Galil_Rule">The Galil Rule</span></h2><div class="content_block" id="content_4">
+<p>A simple but important optimization of Boyer-Moore was put forth by <a href="http://en.m.wikipedia.org/wiki/Zvi_Galil" title="Zvi Galil">Galil</a> in 1979.<sup id="cite_ref-galil_3-0" class="reference"><a href="#cite_note-galil-3"><span>[</span>4<span>]</span></a></sup>
+ As opposed to shifting, the Galil rule deals with speeding up the 
+actual comparisons done at each alignment by skipping sections that are 
+known to match. Suppose that at an alignment <i><b>k<sub>1</sub></b></i>, <i><b>P</b></i> is compared with <i><b>T</b></i> down to character <i><b>c</b></i> of <i><b>T</b></i>. Then if <i><b>P</b></i> is shifted to <i><b>k<sub>2</sub></b></i> such that its left end is between <i><b>c</b></i> and <i><b>k<sub>1</sub></b></i>, in the next comparison phase a prefix of <i><b>P</b></i> must match the substring <i><b>T[(k<sub>2</sub> - n)..k<sub>1</sub>]</b></i>. Thus if the comparisons get down to position <i><b>k<sub>1</sub></b></i> of <i><b>T</b></i>, an occurrence of <i><b>P</b></i> can be recorded without explicitly comparing past <i><b>k<sub>1</sub></b></i>.
+ In addition to increasing the efficiency of Boyer-Moore, the Galil rule
+ is required for proving linear-time execution in the worst case.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Performance">Performance</span></h2><div class="content_block" id="content_5">
+<p>The Boyer-Moore algorithm as presented in the original paper has worst-case running time of <i><b>O(n+m)</b></i> only if the pattern does <i>not</i> appear in the text. This was first proved by <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth</a>, <a href="http://en.m.wikipedia.org/wiki/James_H._Morris" title="James H. Morris">Morris</a>, and <a href="http://en.m.wikipedia.org/wiki/Vaughan_Pratt" title="Vaughan Pratt">Pratt</a> in 1977,<sup id="cite_ref-kmp_4-0" class="reference"><a href="#cite_note-kmp-4"><span>[</span>5<span>]</span></a></sup> followed by <a href="http://en.m.wikipedia.org/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Guibas</a> and <a href="http://en.m.wikipedia.org/wiki/Andrew_Odlyzko" title="Andrew Odlyzko">Odlyzko</a> in 1980<sup id="cite_ref-go_5-0" class="reference"><a href="#cite_note-go-5"><span>[</span>6<span>]</span></a></sup> with an upper bound of <i><b>5m</b></i> comparisons in the worst case. Cole gave a proof with an upper bound of <i><b>3m</b></i> comparisons in the worst case in 1991.<sup id="cite_ref-cole_6-0" class="reference"><a href="#cite_note-cole-6"><span>[</span>7<span>]</span></a></sup></p>
+<p>When the pattern <i>does</i> occur in the text, running time of the original algorithm is <i><b>O(nm)</b></i>
+ in the worst case. This is easy to see when both pattern and text 
+consist solely of the same repeated character. However, inclusion of the
+ Galil rule results in linear runtime across all cases.<sup id="cite_ref-galil_3-1" class="reference"><a href="#cite_note-galil-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-cole_6-1" class="reference"><a href="#cite_note-cole-6"><span>[</span>7<span>]</span></a></sup></p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Implementations">Implementations</span></h2><div class="content_block" id="content_6">
+<div class="NavFrame collapsed">
+<div class="NavHead">[Python Implementation]</div>
+<div class="NavContent">
+<div style="text-align:left">
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1"><span class="st0">"""
+Returns the index of the given character in the English alphabet, counting from 0.
+"""</span>
+<span class="kw1">def</span> alphabet_index<span class="br0">(</span>c<span class="br0">)</span>:
+    <span class="kw1">return</span> <span class="kw2">ord</span><span class="br0">(</span>c.<span class="me1">lower</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> - <span class="nu0">97</span> <span class="co1"># 'a' is ASCII character 97</span>
+ 
+<span class="st0">"""
+Returns the length of the match of the substrings of S beginning at idx1 and idx2.
+"""</span>
+<span class="kw1">def</span> match_length<span class="br0">(</span>S<span class="sy0">,</span> idx1<span class="sy0">,</span> idx2<span class="br0">)</span>:
+    <span class="kw1">if</span> idx1 <span class="sy0">==</span> idx2:
+        <span class="kw1">return</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> - idx1
+    match_count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> idx1 <span class="sy0">&lt;</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> <span class="kw1">and</span> idx2 <span class="sy0">&lt;</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> <span class="kw1">and</span> S<span class="br0">[</span>idx1<span class="br0">]</span> <span class="sy0">==</span> S<span class="br0">[</span>idx2<span class="br0">]</span>:
+        match_count +<span class="sy0">=</span> <span class="nu0">1</span>
+        idx1 +<span class="sy0">=</span> <span class="nu0">1</span>
+        idx2 +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> match_count
+ 
+<span class="st0">"""
+Returns Z, the Fundamental Preprocessing of S. Z[i] is the length of the substring 
+beginning at i which is also a prefix of S. This pre-processing is done in O(n) time,
+where n is the length of S.
+"""</span>
+<span class="kw1">def</span> fundamental_preprocess<span class="br0">(</span>S<span class="br0">)</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span>: <span class="co1"># Handles case of empty string</span>
+        <span class="kw1">return</span> <span class="br0">[</span><span class="br0">]</span>
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">1</span>: <span class="co1"># Handles case of single-character string</span>
+        <span class="kw1">return</span> <span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span>
+    z <span class="sy0">=</span> <span class="br0">[</span><span class="nu0">0</span> <span class="kw1">for</span> x <span class="kw1">in</span> S<span class="br0">]</span>
+    z<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span>
+    z<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> match_length<span class="br0">(</span>S<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">)</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">1</span>+z<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span>: <span class="co1"># Optimization from exercise 1-5</span>
+        z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> z<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span>-i+<span class="nu0">1</span>
+    <span class="co1"># Defines lower and upper limits of z-box</span>
+    l <span class="sy0">=</span> <span class="nu0">0</span>
+    r <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">2</span>+z<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span><span class="br0">)</span>:
+        <span class="kw1">if</span> i <span class="sy0">&lt;=</span> r: <span class="co1"># i falls within existing z-box</span>
+            k <span class="sy0">=</span> i-l
+            b <span class="sy0">=</span> z<span class="br0">[</span>k<span class="br0">]</span>
+            a <span class="sy0">=</span> r-i+<span class="nu0">1</span>
+            <span class="kw1">if</span> b <span class="sy0">&lt;</span> a: <span class="co1"># b ends within existing z-box</span>
+                z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> b
+            <span class="kw1">elif</span> b <span class="sy0">&gt;</span> a: <span class="co1"># Optimization from exercise 1-6</span>
+                z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> <span class="kw2">min</span><span class="br0">(</span>b<span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span>-i<span class="br0">)</span>
+                l <span class="sy0">=</span> i
+                r <span class="sy0">=</span> i+z<span class="br0">[</span>i<span class="br0">]</span>-<span class="nu0">1</span>
+            <span class="kw1">else</span>: <span class="co1"># b ends exactly at end of existing z-box</span>
+                z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> b+match_length<span class="br0">(</span>S<span class="sy0">,</span> a<span class="sy0">,</span> r+<span class="nu0">1</span><span class="br0">)</span>
+                l <span class="sy0">=</span> i
+                r <span class="sy0">=</span> i+z<span class="br0">[</span>i<span class="br0">]</span>-<span class="nu0">1</span>
+        <span class="kw1">else</span>: <span class="co1"># i does not reside within existing z-box</span>
+            z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> match_length<span class="br0">(</span>S<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> i<span class="br0">)</span>
+            <span class="kw1">if</span> z<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+                l <span class="sy0">=</span> i
+                r <span class="sy0">=</span> i+z<span class="br0">[</span>i<span class="br0">]</span>-<span class="nu0">1</span>
+    <span class="kw1">return</span> z
+ 
+<span class="st0">"""
+Generates R for S, which is an array indexed by the position of some character c in the 
+English alphabet. At that index in R is an array of length |S|+1, specifying for each
+index i in S (plus the index after S) the next location of character c encountered when
+traversing S from right to left starting at i. This is used for a constant-time lookup
+for the bad character rule in the Boyer-Moore string search algorithm, although it has
+a much larger size than non-constant-time solutions.
+"""</span>
+<span class="kw1">def</span> bad_character_table<span class="br0">(</span>S<span class="br0">)</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+        <span class="kw1">return</span> <span class="br0">[</span><span class="br0">[</span><span class="br0">]</span> <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">26</span><span class="br0">)</span><span class="br0">]</span>
+    R <span class="sy0">=</span> <span class="br0">[</span><span class="br0">[</span>-<span class="nu0">1</span><span class="br0">]</span> <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">26</span><span class="br0">)</span><span class="br0">]</span>
+    alpha <span class="sy0">=</span> <span class="br0">[</span>-<span class="nu0">1</span> <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">26</span><span class="br0">)</span><span class="br0">]</span>
+    <span class="kw1">for</span> i<span class="sy0">,</span> c <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">(</span>S<span class="br0">)</span>:
+        alpha<span class="br0">[</span>alphabet_index<span class="br0">(</span>c<span class="br0">)</span><span class="br0">]</span> <span class="sy0">=</span> i
+        <span class="kw1">for</span> j<span class="sy0">,</span> a <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">(</span>alpha<span class="br0">)</span>:
+            R<span class="br0">[</span>j<span class="br0">]</span>.<span class="me1">append</span><span class="br0">(</span>a<span class="br0">)</span>
+    <span class="kw1">return</span> R
+ 
+<span class="st0">"""
+Generates L for S, an array used in the implementation of the strong good suffix rule.
+L[i] = k, the largest position in S such that S[i:] (the suffix of S starting at i) matches
+a suffix of S[:k] (a substring in S ending at k). Used in Boyer-Moore, L gives an amount to
+shift P relative to T such that no instances of P in T are skipped and a suffix of P[:L[i]]
+matches the substring of T matched by a suffix of P in the previous match attempt.
+Specifically, if the mismatch took place at position i-1 in P, the shift magnitude is given
+by the equation len(P) - L[i]. In the case that L[i] = -1, the full shift table is used.
+Since only proper suffixes matter, L[0] = -1.
+"""</span>
+<span class="kw1">def</span> good_suffix_table<span class="br0">(</span>S<span class="br0">)</span>:
+    L <span class="sy0">=</span> <span class="br0">[</span>-<span class="nu0">1</span> <span class="kw1">for</span> c <span class="kw1">in</span> S<span class="br0">]</span>
+    N <span class="sy0">=</span> fundamental_preprocess<span class="br0">(</span>S<span class="br0">[</span>::-<span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span> <span class="co1"># S[::-1] reverses S</span>
+    N.<span class="me1">reverse</span><span class="br0">(</span><span class="br0">)</span>
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span>-<span class="nu0">1</span><span class="br0">)</span>:
+        i <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span> - N<span class="br0">[</span>j<span class="br0">]</span>
+        <span class="kw1">if</span> i <span class="sy0">!=</span> <span class="kw2">len</span><span class="br0">(</span>S<span class="br0">)</span>:
+            L<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> j
+    <span class="kw1">return</span> L
+ 
+<span class="st0">"""
+Generates F for S, an array used in a special case of the good suffix rule in the Boyer-Moore
+string search algorithm. F[i] is the length of the longest suffix of S[i:] that is also a
+prefix of S. In the cases it is used, the shift magnitude of the pattern P relative to the
+text T is len(P) - F[i] for a mismatch occurring at i-1.
+"""</span>
+<span class="kw1">def</span> full_shift_table<span class="br0">(</span>S<span class="br0">)</span>:
+    F <span class="sy0">=</span> <span class="br0">[</span><span class="nu0">0</span> <span class="kw1">for</span> c <span class="kw1">in</span> S<span class="br0">]</span>
+    Z <span class="sy0">=</span> fundamental_preprocess<span class="br0">(</span>S<span class="br0">)</span>
+    longest <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i<span class="sy0">,</span> zv <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">(</span><span class="kw2">reversed</span><span class="br0">(</span>Z<span class="br0">)</span><span class="br0">)</span>:
+        longest <span class="sy0">=</span> <span class="kw2">max</span><span class="br0">(</span>zv<span class="sy0">,</span> longest<span class="br0">)</span> <span class="kw1">if</span> zv <span class="sy0">==</span> i+<span class="nu0">1</span> <span class="kw1">else</span> longest
+        F<span class="br0">[</span>-i-<span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> longest
+    <span class="kw1">return</span> F
+ 
+<span class="st0">"""
+Implementation of the Boyer-Moore string search algorithm. This finds all occurrences of P
+in T, and incorporates numerous ways of pre-processing the pattern to determine the optimal 
+amount to shift the string and skip comparisons. In practice it runs in O(m) (and even 
+sublinear) time, where m is the length of T.
+"""</span>
+<span class="kw1">def</span> string_search<span class="br0">(</span>P<span class="sy0">,</span> T<span class="br0">)</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">or</span> <span class="kw2">len</span><span class="br0">(</span>T<span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">or</span> <span class="kw2">len</span><span class="br0">(</span>T<span class="br0">)</span> <span class="sy0">&lt;</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span>:
+        <span class="kw1">return</span> <span class="br0">[</span><span class="br0">]</span>
+ 
+    matches <span class="sy0">=</span> <span class="br0">[</span><span class="br0">]</span>
+ 
+    <span class="co1"># Preprocessing</span>
+    R <span class="sy0">=</span> bad_character_table<span class="br0">(</span>P<span class="br0">)</span>
+    L <span class="sy0">=</span> good_suffix_table<span class="br0">(</span>P<span class="br0">)</span>
+    F <span class="sy0">=</span> full_shift_table<span class="br0">(</span>P<span class="br0">)</span>
+ 
+    k <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> - <span class="nu0">1</span>      <span class="co1"># Represents alignment of end of P relative to T</span>
+    previous_k <span class="sy0">=</span> -<span class="nu0">1</span>     <span class="co1"># Represents alignment in previous phase (Galil's rule)</span>
+    <span class="kw1">while</span> k <span class="sy0">&lt;</span> <span class="kw2">len</span><span class="br0">(</span>T<span class="br0">)</span>:
+        i <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> - <span class="nu0">1</span>  <span class="co1"># Character to compare in P</span>
+        h <span class="sy0">=</span> k           <span class="co1"># Character to compare in T</span>
+        <span class="kw1">while</span> i <span class="sy0">&gt;=</span> <span class="nu0">0</span> <span class="kw1">and</span> h <span class="sy0">&gt;</span> previous_k <span class="kw1">and</span> P<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">==</span> T<span class="br0">[</span>h<span class="br0">]</span>:   <span class="co1"># Matches starting from end of P</span>
+            i -<span class="sy0">=</span> <span class="nu0">1</span>
+            h -<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">if</span> i <span class="sy0">==</span> -<span class="nu0">1</span> <span class="kw1">or</span> h <span class="sy0">==</span> previous_k:  <span class="co1"># Match has been found (Galil's rule)</span>
+            matches.<span class="me1">append</span><span class="br0">(</span>k - <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> + <span class="nu0">1</span><span class="br0">)</span>
+            k +<span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span>-F<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> <span class="sy0">&gt;</span> <span class="nu0">1</span> <span class="kw1">else</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:   <span class="co1"># No match, shift by max of bad character and good suffix rules</span>
+            char_shift <span class="sy0">=</span> i - R<span class="br0">[</span>alphabet_index<span class="br0">(</span>T<span class="br0">[</span>h<span class="br0">]</span><span class="br0">)</span><span class="br0">]</span><span class="br0">[</span>i<span class="br0">]</span>
+            <span class="kw1">if</span> i+<span class="nu0">1</span> <span class="sy0">==</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span>:   <span class="co1"># Mismatch happened on first attempt</span>
+                suffix_shift <span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw1">elif</span> L<span class="br0">[</span>i+<span class="nu0">1</span><span class="br0">]</span> <span class="sy0">==</span> -<span class="nu0">1</span>:   <span class="co1"># Matched suffix does not appear anywhere in P</span>
+                suffix_shift <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> - F<span class="br0">[</span>i+<span class="nu0">1</span><span class="br0">]</span>
+            <span class="kw1">else</span>:               <span class="co1"># Matched suffix appears in P</span>
+                suffix_shift <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>P<span class="br0">)</span> - L<span class="br0">[</span>i+<span class="nu0">1</span><span class="br0">]</span>
+            shift <span class="sy0">=</span> <span class="kw2">max</span><span class="br0">(</span>char_shift<span class="sy0">,</span> suffix_shift<span class="br0">)</span>
+            previous_k <span class="sy0">=</span> k <span class="kw1">if</span> shift <span class="sy0">&gt;=</span> i+<span class="nu0">1</span> <span class="kw1">else</span> previous_k  <span class="co1"># Galil's rule</span>
+            k +<span class="sy0">=</span> shift
+    <span class="kw1">return</span> matches
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="NavFrame collapsed">
+<div class="NavHead">[C Implementation]</div>
+<div class="NavContent">
+<div style="text-align:left">
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co2">#include &lt;stdint.h&gt;</span>
+<span class="co2">#include &lt;stdlib.h&gt;</span>
+ 
+<span class="co2">#define ALPHABET_LEN 255</span>
+<span class="co2">#define NOT_FOUND patlen</span>
+<span class="co2">#define max(a, b) ((a &lt; b) ? b : a)</span>
+ 
+<span class="co1">// delta1 table: delta1[c] contains the distance between the last</span>
+<span class="co1">// character of pat and the rightmost occurence of c in pat.</span>
+<span class="co1">// If c does not occur in pat, then delta1[c] = patlen.</span>
+<span class="co1">// If c is at string[i] and c != pat[patlen-1], we can</span>
+<span class="co1">// safely shift i over by delta1[c], which is the minimum distance</span>
+<span class="co1">// needed to shift pat forward to get string[i] lined up </span>
+<span class="co1">// with some character in pat.</span>
+<span class="co1">// this algorithm runs in alphabet_len+patlen time.</span>
+<span class="kw4">void</span> make_delta1<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>delta1<span class="sy0">,</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>pat<span class="sy0">,</span> <span class="kw4">int32_t</span> patlen<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> i<span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span>i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> ALPHABET_LEN<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+        delta1<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> NOT_FOUND<span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">for</span> <span class="br0">(</span>i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+        delta1<span class="br0">[</span>pat<span class="br0">[</span>i<span class="br0">]</span><span class="br0">]</span> <span class="sy0">=</span> patlen<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">-</span> i<span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+ 
+<span class="co1">// true if the suffix of word starting from word[pos] is a prefix </span>
+<span class="co1">// of word</span>
+<span class="kw4">int</span> is_prefix<span class="br0">(</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>word<span class="sy0">,</span> <span class="kw4">int</span> wordlen<span class="sy0">,</span> <span class="kw4">int</span> pos<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> i<span class="sy0">;</span>
+    <span class="kw4">int</span> suffixlen <span class="sy0">=</span> wordlen <span class="sy0">-</span> pos<span class="sy0">;</span>
+    <span class="co1">// could also use the strncmp() library function here</span>
+    <span class="kw1">for</span> <span class="br0">(</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> suffixlen<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>word<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">!=</span> word<span class="br0">[</span>pos<span class="sy0">+</span>i<span class="br0">]</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="co1">// length of the longest suffix of word ending on word[pos].</span>
+<span class="co1">// suffix_length("dddbcabc", 8, 4) = 2</span>
+<span class="kw4">int</span> suffix_length<span class="br0">(</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>word<span class="sy0">,</span> <span class="kw4">int</span> wordlen<span class="sy0">,</span> <span class="kw4">int</span> pos<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> i<span class="sy0">;</span>
+    <span class="co1">// increment suffix length i to the first mismatch or beginning</span>
+    <span class="co1">// of the word</span>
+    <span class="kw1">for</span> <span class="br0">(</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="br0">(</span>word<span class="br0">[</span>pos<span class="sy0">-</span>i<span class="br0">]</span> <span class="sy0">==</span> word<span class="br0">[</span>wordlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">-</span>i<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>i <span class="sy0">&lt;</span> pos<span class="br0">)</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> i<span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="co1">// delta2 table: given a mismatch at pat[pos], we want to align </span>
+<span class="co1">// with the next possible full match could be based on what we</span>
+<span class="co1">// know about pat[pos+1] to pat[patlen-1].</span>
+<span class="co1">//</span>
+<span class="co1">// In case 1:</span>
+<span class="co1">// pat[pos+1] to pat[patlen-1] does not occur elsewhere in pat,</span>
+<span class="co1">// the next plausible match starts at or after the mismatch.</span>
+<span class="co1">// If, within the substring pat[pos+1 .. patlen-1], lies a prefix</span>
+<span class="co1">// of pat, the next plausible match is here (if there are multiple</span>
+<span class="co1">// prefixes in the substring, pick the longest). Otherwise, the</span>
+<span class="co1">// next plausible match starts past the character aligned with </span>
+<span class="co1">// pat[patlen-1].</span>
+<span class="co1">// </span>
+<span class="co1">// In case 2:</span>
+<span class="co1">// pat[pos+1] to pat[patlen-1] does occur elsewhere in pat. The</span>
+<span class="co1">// mismatch tells us that we are not looking at the end of a match.</span>
+<span class="co1">// We may, however, be looking at the middle of a match.</span>
+<span class="co1">// </span>
+<span class="co1">// The first loop, which takes care of case 1, is analogous to</span>
+<span class="co1">// the KMP table, adapted for a 'backwards' scan order with the</span>
+<span class="co1">// additional restriction that the substrings it considers as </span>
+<span class="co1">// potential prefixes are all suffixes. In the worst case scenario</span>
+<span class="co1">// pat consists of the same letter repeated, so every suffix is</span>
+<span class="co1">// a prefix. This loop alone is not sufficient, however:</span>
+<span class="co1">// Suppose that pat is "ABYXCDEYX", and text is ".....ABYXCDEYX".</span>
+<span class="co1">// We will match X, Y, and find B != E. There is no prefix of pat</span>
+<span class="co1">// in the suffix "YX", so the first loop tells us to skip forward</span>
+<span class="co1">// by 9 characters.</span>
+<span class="co1">// Although superficially similar to the KMP table, the KMP table</span>
+<span class="co1">// relies on information about the beginning of the partial match</span>
+<span class="co1">// that the BM algorithm does not have.</span>
+<span class="co1">//</span>
+<span class="co1">// The second loop addresses case 2. Since suffix_length may not be</span>
+<span class="co1">// unique, we want to take the minimum value, which will tell us</span>
+<span class="co1">// how far away the closest potential match is.</span>
+<span class="kw4">void</span> make_delta2<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>delta2<span class="sy0">,</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>pat<span class="sy0">,</span> <span class="kw4">int32_t</span> patlen<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> p<span class="sy0">;</span>
+    <span class="kw4">int</span> last_prefix_index <span class="sy0">=</span> patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+ 
+    <span class="co1">// first loop</span>
+    <span class="kw1">for</span> <span class="br0">(</span>p<span class="sy0">=</span>patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> p<span class="sy0">&gt;=</span><span class="nu0">0</span><span class="sy0">;</span> p<span class="sy0">--</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>is_prefix<span class="br0">(</span>pat<span class="sy0">,</span> patlen<span class="sy0">,</span> p<span class="sy0">+</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+            last_prefix_index <span class="sy0">=</span> p<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        delta2<span class="br0">[</span>p<span class="br0">]</span> <span class="sy0">=</span> last_prefix_index <span class="sy0">+</span> <span class="br0">(</span>patlen<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">-</span> p<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+ 
+    <span class="co1">// second loop</span>
+    <span class="kw1">for</span> <span class="br0">(</span>p<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> p <span class="sy0">&lt;</span> patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> p<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw4">int</span> slen <span class="sy0">=</span> suffix_length<span class="br0">(</span>pat<span class="sy0">,</span> patlen<span class="sy0">,</span> p<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>pat<span class="br0">[</span>p <span class="sy0">-</span> slen<span class="br0">]</span> <span class="sy0">!=</span> pat<span class="br0">[</span>patlen<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">-</span> slen<span class="br0">]</span><span class="br0">)</span> <span class="br0">{</span>
+            delta2<span class="br0">[</span>patlen<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">-</span> slen<span class="br0">]</span> <span class="sy0">=</span> patlen<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">-</span> p <span class="sy0">+</span> slen<span class="sy0">;</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+ 
+<span class="kw4">char</span><span class="sy0">*</span> boyer_moore <span class="br0">(</span><span class="kw4">uint8_t</span> <span class="sy0">*</span>string<span class="sy0">,</span> <span class="kw4">uint32_t</span> stringlen<span class="sy0">,</span> <span class="kw4">uint8_t</span> <span class="sy0">*</span>pat<span class="sy0">,</span> <span class="kw4">uint32_t</span> patlen<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> i<span class="sy0">;</span>
+    <span class="kw4">int</span> delta1<span class="br0">[</span>ALPHABET_LEN<span class="br0">]</span><span class="sy0">;</span>
+    <span class="kw4">int</span> <span class="sy0">*</span>delta2 <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span>patlen <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">int</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+    make_delta1<span class="br0">(</span>delta1<span class="sy0">,</span> pat<span class="sy0">,</span> patlen<span class="br0">)</span><span class="sy0">;</span>
+    make_delta2<span class="br0">(</span>delta2<span class="sy0">,</span> pat<span class="sy0">,</span> patlen<span class="br0">)</span><span class="sy0">;</span>
+ 
+    i <span class="sy0">=</span> patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">while</span> <span class="br0">(</span>i <span class="sy0">&lt;</span> stringlen<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw4">int</span> j <span class="sy0">=</span> patlen<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">(</span>j <span class="sy0">&gt;=</span> <span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>string<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">==</span> pat<span class="br0">[</span>j<span class="br0">]</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="sy0">--</span>i<span class="sy0">;</span>
+            <span class="sy0">--</span>j<span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">if</span> <span class="br0">(</span>j <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="kw3">free</span><span class="br0">(</span>delta2<span class="br0">)</span><span class="sy0">;</span>
+            <span class="kw1">return</span> <span class="br0">(</span>string <span class="sy0">+</span> i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+ 
+        i <span class="sy0">+=</span> max<span class="br0">(</span>delta1<span class="br0">[</span>string<span class="br0">[</span>i<span class="br0">]</span><span class="br0">]</span><span class="sy0">,</span> delta2<span class="br0">[</span>j<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw3">free</span><span class="br0">(</span>delta2<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> NULL<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="NavFrame collapsed">
+<div class="NavHead">[Java Implementation]</div>
+<div class="NavContent">
+<div style="text-align:left">
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java source-java">
+<pre class="de1">  <span class="co3">/**
+   * Returns the index within this string of the first occurrence of the
+   * specified substring. If it is not a substring, return -1.
+   * 
+   * @param haystack The string to be scanned
+   * @param needle The target string to search
+   * @return The start index of the substring
+   */</span>
+  <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> indexOf<span class="br0">(</span><span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> haystack, <span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> needle<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">if</span> <span class="br0">(</span>needle.<span class="me1">length</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw4">int</span> charTable<span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> makeCharTable<span class="br0">(</span>needle<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw4">int</span> offsetTable<span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> makeOffsetTable<span class="br0">(</span>needle<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span>, j<span class="sy0">;</span> i <span class="sy0">&lt;</span> haystack.<span class="me1">length</span><span class="sy0">;</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">for</span> <span class="br0">(</span>j <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> needle<span class="br0">[</span>j<span class="br0">]</span> <span class="sy0">==</span> haystack<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">;</span> <span class="sy0">--</span>i, <span class="sy0">--</span>j<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>j <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span> <span class="br0">{</span>
+          <span class="kw1">return</span> i<span class="sy0">;</span>
+        <span class="br0">}</span>
+      <span class="br0">}</span>
+      <span class="co1">// i += needle.length - j; // For naive method</span>
+      i <span class="sy0">+=</span> <span class="kw3">Math</span>.<span class="me1">max</span><span class="br0">(</span>offsetTable<span class="br0">[</span>needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> j<span class="br0">]</span>, charTable<span class="br0">[</span>haystack<span class="br0">[</span>i<span class="br0">]</span><span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+  <span class="br0">}</span>
+ 
+  <span class="co3">/**
+   * Makes the jump table based on the mismatched character information.
+   */</span>
+  <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">[</span><span class="br0">]</span> makeCharTable<span class="br0">(</span><span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> needle<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">final</span> <span class="kw4">int</span> ALPHABET_SIZE <span class="sy0">=</span> <span class="nu0">256</span><span class="sy0">;</span>
+    <span class="kw4">int</span><span class="br0">[</span><span class="br0">]</span> table <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">[</span>ALPHABET_SIZE<span class="br0">]</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> table.<span class="me1">length</span><span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+      table<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> needle.<span class="me1">length</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+      table<span class="br0">[</span>needle<span class="br0">[</span>i<span class="br0">]</span><span class="br0">]</span> <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> i<span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> table<span class="sy0">;</span>
+  <span class="br0">}</span>
+ 
+  <span class="co3">/**
+   * Makes the jump table based on the scan offset which mismatch occurs.
+   */</span>
+  <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">[</span><span class="br0">]</span> makeOffsetTable<span class="br0">(</span><span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> needle<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span><span class="br0">[</span><span class="br0">]</span> table <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">[</span>needle.<span class="me1">length</span><span class="br0">]</span><span class="sy0">;</span>
+    <span class="kw4">int</span> lastPrefixPosition <span class="sy0">=</span> needle.<span class="me1">length</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> i <span class="sy0">&gt;=</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="sy0">--</span>i<span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">if</span> <span class="br0">(</span>isPrefix<span class="br0">(</span>needle, i <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+        lastPrefixPosition <span class="sy0">=</span> i <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="br0">}</span>
+      table<span class="br0">[</span>needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> i<span class="br0">]</span> <span class="sy0">=</span> lastPrefixPosition <span class="sy0">-</span> i <span class="sy0">+</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw4">int</span> slen <span class="sy0">=</span> suffixLength<span class="br0">(</span>needle, i<span class="br0">)</span><span class="sy0">;</span>
+      table<span class="br0">[</span>slen<span class="br0">]</span> <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> i <span class="sy0">+</span> slen<span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> table<span class="sy0">;</span>
+  <span class="br0">}</span>
+ 
+  <span class="co3">/**
+   * Is needle[p:end] a prefix of needle?
+   */</span>
+  <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">boolean</span> isPrefix<span class="br0">(</span><span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> needle, <span class="kw4">int</span> p<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> p, j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> needle.<span class="me1">length</span><span class="sy0">;</span> <span class="sy0">++</span>i, <span class="sy0">++</span>j<span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">if</span> <span class="br0">(</span>needle<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">!=</span> needle<span class="br0">[</span>j<span class="br0">]</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+      <span class="br0">}</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+  <span class="br0">}</span>
+ 
+  <span class="co3">/**
+   * Returns the maximum length of the substring ends at p and is a suffix.
+   */</span>
+  <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">int</span> suffixLength<span class="br0">(</span><span class="kw4">char</span><span class="br0">[</span><span class="br0">]</span> needle, <span class="kw4">int</span> p<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> len <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> p, j <span class="sy0">=</span> needle.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+         i <span class="sy0">&gt;=</span> <span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> needle<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">==</span> needle<span class="br0">[</span>j<span class="br0">]</span><span class="sy0">;</span> <span class="sy0">--</span>i, <span class="sy0">--</span>j<span class="br0">)</span> <span class="br0">{</span>
+      len <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> len<span class="sy0">;</span>
+  <span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Variants">Variants</span></h2><div class="content_block" id="content_7">
+<p>The <a href="http://en.m.wikipedia.org/wiki/Boyer-Moore-Horspool_algorithm" title="Boyer-Moore-Horspool algorithm" class="mw-redirect">Boyer-Moore-Horspool algorithm</a> is a simplification of the Boyer-Moore algorithm using only the bad character rule.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Apostolico-Giancarlo_algorithm" title="Apostolico-Giancarlo algorithm" class="mw-redirect">Apostolico-Giancarlo algorithm</a>
+ speeds up the process of checking whether a match has occurred at the 
+given alignment by skipping explicit character comparisons. This uses 
+information gleaned during the pre-processing of the pattern in 
+conjunction with suffix match lengths recorded at each match attempt. 
+Storing suffix match lengths requires an additional table equal in size 
+to the text being searched.</p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_8">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm" title="Knuth–Morris–Pratt algorithm">Knuth-Morris-Pratt string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Boyer-Moore-Horspool_algorithm" title="Boyer-Moore-Horspool algorithm" class="mw-redirect">Boyer-Moore-Horspool string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Apostolico-Giancarlo_algorithm" title="Apostolico-Giancarlo algorithm" class="mw-redirect">Apostolico-Giancarlo string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Aho-Corasick_string_matching_algorithm" title="Aho-Corasick string matching algorithm" class="mw-redirect">Aho-Corasick multi-pattern string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Rabin-Karp_algorithm" title="Rabin-Karp algorithm" class="mw-redirect">Rabin-Karp multi-pattern string search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">Suffix trees</a></li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_9">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">Hume and Sunday (1991) <i>[Fast String Searching]</i> SOFTWARE—PRACTICE AND EXPERIENCE, VOL. 21(11), 1221–1248 (NOVEMBER 1991)</span>
+</li>
+<li id="cite_note-original-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-original_1-0">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Robert_S._Boyer" title="Robert S. Boyer">Boyer, Robert S.</a>; <a href="http://en.m.wikipedia.org/wiki/J_Strother_Moore" title="J Strother Moore">Moore, J Strother</a> (October 1977). <a rel="nofollow" class="external text" href="http://dl.acm.org/citation.cfm?doid=359842.359859">"A Fast String Searching Algorithm."</a>. <i>Comm. ACM</i> (New York, NY, USA: Association for Computing Machinery) <b>20</b> (10): 762–772. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F359842.359859">10.1145/359842.359859</a>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Serial_Number" title="International Standard Serial Number">ISSN</a>&nbsp;<a rel="nofollow" class="external text" href="http://www.worldcat.org/issn/0001-0782">0001-0782</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://dl.acm.org/citation.cfm?doid=359842.359859">http://dl.acm.org/citation.cfm?doid=359842.359859</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Fast+String+Searching+Algorithm.&amp;rft.jtitle=Comm.+ACM&amp;rft.aulast=Boyer&amp;rft.aufirst=Robert+S.&amp;rft.au=Boyer%2C%26%2332%3BRobert+S.&amp;rft.au=Moore%2C%26%2332%3BJ+Strother&amp;rft.date=October+1977&amp;rft.volume=20&amp;rft.issue=10&amp;rft.pages=762%E2%80%93772&amp;rft.place=New+York%2C+NY%2C+USA&amp;rft.pub=Association+for+Computing+Machinery&amp;rft_id=info:doi/10.1145%2F359842.359859&amp;rft.issn=0001-0782&amp;rft_id=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fdoid%3D359842.359859&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-ASTS-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-ASTS_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-ASTS_2-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFGusfield1999">Gusfield, Dan (1999) [1997], "Chapter 2 - Exact Matching: Classical Comparison-Based Methods", <i>Algorithms on Strings, Trees, and Sequences</i> (1 ed.), Cambridge University Press, pp.&nbsp;19–21, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0521585198" title="Special:BookSources/0521585198">0521585198</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Chapter+2+-+Exact+Matching%3A+Classical+Comparison-Based+Methods&amp;rft.atitle=Algorithms+on+Strings%2C+Trees%2C+and+Sequences&amp;rft.aulast=Gusfield&amp;rft.aufirst=Dan&amp;rft.au=Gusfield%2C%26%2332%3BDan&amp;rft.date=1999&amp;rft.pages=pp.%26nbsp%3B19%E2%80%9321&amp;rft.edition=1&amp;rft.pub=Cambridge+University+Press&amp;rft.isbn=0521585198&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-galil-3">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-galil_3-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-galil_3-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Zvi_Galil" title="Zvi Galil">Galil, Z.</a> (September 1979). <a rel="nofollow" class="external text" href="http://dl.acm.org/citation.cfm?id=359146.359148">"On improving the worst case running time of the Boyer-Moore string matching algorithm"</a>. <i>Comm. ACM</i> (New York, NY, USA: Association for Computing Machinery) <b>22</b> (9): 505–508. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F359146.359148">10.1145/359146.359148</a>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Serial_Number" title="International Standard Serial Number">ISSN</a>&nbsp;<a rel="nofollow" class="external text" href="http://www.worldcat.org/issn/0001-0782">0001-0782</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://dl.acm.org/citation.cfm?id=359146.359148">http://dl.acm.org/citation.cfm?id=359146.359148</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+improving+the+worst+case+running+time+of+the+Boyer-Moore+string+matching+algorithm&amp;rft.jtitle=Comm.+ACM&amp;rft.aulast=Galil&amp;rft.aufirst=Z.&amp;rft.au=Galil%2C%26%2332%3BZ.&amp;rft.date=September+1979&amp;rft.volume=22&amp;rft.issue=9&amp;rft.pages=505%E2%80%93508&amp;rft.place=New+York%2C+NY%2C+USA&amp;rft.pub=Association+for+Computing+Machinery&amp;rft_id=info:doi/10.1145%2F359146.359148&amp;rft.issn=0001-0782&amp;rft_id=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fid%3D359146.359148&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-kmp-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-kmp_4-0">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a>; <a href="http://en.m.wikipedia.org/wiki/James_H._Morris" title="James H. Morris">Morris, James H.</a>; <a href="http://en.m.wikipedia.org/wiki/Vaughan_Pratt" title="Vaughan Pratt">Pratt, Vaughan</a> (1977). <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/context/23820/0">"Fast pattern matching in strings"</a>. <i>SIAM Journal on Computing</i> <b>6</b> (2): 323–350. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1137%2F0206024">10.1137/0206024</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://citeseer.ist.psu.edu/context/23820/0">http://citeseer.ist.psu.edu/context/23820/0</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Fast+pattern+matching+in+strings&amp;rft.jtitle=SIAM+Journal+on+Computing&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald&amp;rft.au=Knuth%2C%26%2332%3BDonald&amp;rft.au=Morris%2C%26%2332%3BJames+H.&amp;rft.au=Pratt%2C%26%2332%3BVaughan&amp;rft.date=1977&amp;rft.volume=6&amp;rft.issue=2&amp;rft.pages=323%E2%80%93350&amp;rft_id=info:doi/10.1137%2F0206024&amp;rft_id=http%3A%2F%2Fciteseer.ist.psu.edu%2Fcontext%2F23820%2F0&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-go-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-go_5-0">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Guibas, Odlyzko</a>; <a href="http://en.m.wikipedia.org/wiki/Andrew_Odlyzko" title="Andrew Odlyzko">Odlyzko, Andrew</a> (1977). <a rel="nofollow" class="external text" href="http://dl.acm.org/citation.cfm?id=1382431.1382552">"A new proof of the linearity of the Boyer-Moore string searching algorithm"</a>. <i>Proceedings of the 18th Annual Symposium on Foundations of Computer Science</i> (Washington, DC, USA: IEEE Computer Society): 189–195. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1977.3">10.1109/SFCS.1977.3</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://dl.acm.org/citation.cfm?id=1382431.1382552">http://dl.acm.org/citation.cfm?id=1382431.1382552</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+new+proof+of+the+linearity+of+the+Boyer-Moore+string+searching+algorithm&amp;rft.jtitle=Proceedings+of+the+18th+Annual+Symposium+on+Foundations+of+Computer+Science&amp;rft.aulast=Guibas&amp;rft.aufirst=Odlyzko&amp;rft.au=Guibas%2C%26%2332%3BOdlyzko&amp;rft.au=Odlyzko%2C%26%2332%3BAndrew&amp;rft.date=1977&amp;rft.pages=189%E2%80%93195&amp;rft.place=Washington%2C+DC%2C+USA&amp;rft.pub=IEEE+Computer+Society&amp;rft_id=info:doi/10.1109%2FSFCS.1977.3&amp;rft_id=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fid%3D1382431.1382552&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-cole-6">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-cole_6-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-cole_6-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation Journal">Cole, Richard (September 1991). <a rel="nofollow" class="external text" href="http://dl.acm.org/citation.cfm?id=127830">"Tight bounds on the complexity of the Boyer-Moore string matching algorithm"</a>. <i>Proceedings of the 2nd annual ACM-SIAM symposium on Discrete algorithms</i> (Philadelphia, PA, USA: Society for Industrial and Applied Mathematics): 224–233. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-89791-376-0" title="Special:BookSources/0-89791-376-0">0-89791-376-0</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://dl.acm.org/citation.cfm?id=127830">http://dl.acm.org/citation.cfm?id=127830</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Tight+bounds+on+the+complexity+of+the+Boyer-Moore+string+matching+algorithm&amp;rft.jtitle=Proceedings+of+the+2nd+annual+ACM-SIAM+symposium+on+Discrete+algorithms&amp;rft.aulast=Cole&amp;rft.aufirst=Richard&amp;rft.au=Cole%2C%26%2332%3BRichard&amp;rft.date=September+1991&amp;rft.pages=224%E2%80%93233&amp;rft.place=Philadelphia%2C+PA%2C+USA&amp;rft.pub=Society+for+Industrial+and+Applied+Mathematics&amp;rft.isbn=0-89791-376-0&amp;rft_id=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fid%3D127830&amp;rfr_id=info:sid/en.wikipedia.org:Boyer%E2%80%93Moore_string_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_10">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.cs.utexas.edu/%7Emoore/publications/fstrpos.pdf">Original paper on the Boyer-Moore algorithm</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/fstrpos-example.html">An example of the Boyer-Moore algorithm</a> from the homepage of <a href="http://en.m.wikipedia.org/wiki/J_Strother_Moore" title="J Strother Moore">J Strother Moore</a>, co-inventor of the algorithm</li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.nyu.edu/cs/faculty/cole/papers/CHPZ95.ps">Richard Cole's 1991 paper proving runtime linearity</a></li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Boyer%E2%80%93Moore_string_search_algorithm&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Boyer%E2%80%93Moore+string+search+algorithm&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Boyer%E2%80%93Moore_string_search_algorithm&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Boyer%E2%80%93Moore+string+search+algorithm&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Boyer%E2%80%93Moore_string_search_algorithm_files/load_002.php" type="text/javascript"></script>
+<script src="Boyer%E2%80%93Moore_string_search_algorithm_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

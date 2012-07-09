@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Tail call - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Tail_recursion_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 14 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Tail_call">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Tail_recursion_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Tail_recursion_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Tail_recursion_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Tail_recursion" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Koncov%C3%A1_rekurze">česky</option><option value="//de.m.wikipedia.org/wiki/Endrekursion">Deutsch</option><option value="//fr.m.wikipedia.org/wiki/R%C3%A9cursion_terminale">français</option><option value="//lt.m.wikipedia.org/wiki/Uodegin%C4%97_rekursija">lietuvių</option><option value="//nl.m.wikipedia.org/wiki/Staartrecursie">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E6%9C%AB%E5%B0%BE%E5%86%8D%E5%B8%B0">日本語</option><option value="//pl.m.wikipedia.org/wiki/Rekurencja_ogonowa">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%A5%D0%B2%D0%BE%D1%81%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D1%80%D0%B5%D0%BA%D1%83%D1%80%D1%81%D0%B8%D1%8F">русский</option><option value="//fi.m.wikipedia.org/wiki/H%C3%A4nt%C3%A4rekursio">suomi</option><option value="//sv.m.wikipedia.org/wiki/Svansrekursion">svenska</option><option value="//tr.m.wikipedia.org/wiki/Kuyruk_%C3%B6zyineleme">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A5%D0%B2%D0%BE%D1%81%D1%82%D0%BE%D0%B2%D0%B0_%D1%80%D0%B5%D0%BA%D1%83%D1%80%D1%81%D1%96%D1%8F">українська</option><option value="//zh.m.wikipedia.org/wiki/%E5%B0%BE%E9%83%A8%E9%80%92%E5%BD%92">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Tail call</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>tail call</b> is a <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">subroutine</a> call that happens inside another procedure as its final action; it may produce a return value which is then immediately <a href="http://en.m.wikipedia.org/wiki/Return_statement" title="Return statement">returned</a> by the calling procedure. The <a href="http://en.m.wikipedia.org/wiki/Call_site" title="Call site">call site</a> is then said to be in <b>tail position</b>,
+ i.e. at the end of the calling procedure. If any call that a subroutine
+ performs, such that it might eventually lead to this same subroutine 
+being called again down the call chain, is in tail position, such 
+subroutine is said to be <b>tail-recursive</b>. This is a special case of <a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">recursion</a>.</p>
+<p>Tail calls are significant because they can be implemented without adding a new <a href="http://en.m.wikipedia.org/wiki/Stack_frame" title="Stack frame" class="mw-redirect">stack frame</a> to the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a>.
+ Most of the frame of the current procedure is not needed any more, and 
+it can be replaced by the frame of the tail call, modified as 
+appropriate (similar to <a href="http://en.m.wikipedia.org/wiki/Overlay_%28operating_system%29" title="Overlay (operating system)">overlay</a> for processes, but for function calls). The program can then <a href="http://en.m.wikipedia.org/wiki/Jump_%28computer_science%29" title="Jump (computer science)" class="mw-redirect">jump</a> to the called subroutine. Producing such code instead of a standard call sequence is called <b>tail call elimination</b>, or <b>tail call optimization</b>.</p>
+<p>Traditionally, tail call elimination is optional. However, in <a href="http://en.m.wikipedia.org/wiki/Functional_programming_language" title="Functional programming language" class="mw-redirect">functional programming languages</a>, tail call elimination is often guaranteed by the language standard, and this guarantee allows using <a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">recursion</a>, in particular tail recursion, in place of <a href="http://en.m.wikipedia.org/wiki/Loop_%28computing%29" title="Loop (computing)" class="mw-redirect">loops</a>. In such cases, it is not correct (though it may be customary) to refer to it as an optimization.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Description">Description</span></h2><div class="content_block" id="content_1">
+<p>When a function is called, the computer must "remember" the place it was called from, the <i><a href="http://en.m.wikipedia.org/wiki/Return_address" title="Return address">return address</a></i>, so that it can return to that location with the result once the call is complete. Typically, this information is saved on the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a>,
+ a simple list of return locations in order of the times that the call 
+locations they describe were reached. For tail calls, there is no need 
+to remember the place we are calling from — instead, we can perform tail
+ call elimination by leaving the stack alone (except possibly for <a href="http://en.m.wikipedia.org/wiki/Function_argument" title="Function argument" class="mw-redirect">function arguments</a> and <a href="http://en.m.wikipedia.org/wiki/Local_variable" title="Local variable">local variables</a><sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup>), and the newly called function will return its result directly to the <i>original</i>
+ caller. Note that the tail call doesn't have to appear lexically after 
+all other statements in the source code; it is only important that the 
+calling function return immediately after the tail call, returning the 
+tail call's result if any, since the calling function will never get a 
+chance to do anything after the call if the optimization is performed.</p>
+<p>For non-recursive function calls, this is usually an <a href="http://en.m.wikipedia.org/wiki/Program_optimization" title="Program optimization">optimization</a>
+ that saves little time and space, since there are not that many 
+different functions available to call. When dealing with recursive or 
+mutually recursive functions where recursion happens through tail calls,
+ however, the stack space and the number of returns saved can grow to be
+ very significant, since a function can call itself, directly or 
+indirectly, many times. In fact, it often asymptotically reduces stack 
+space requirements from linear, or <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(n), to constant, or <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(1). Tail call elimination is thus required by the standard definitions of some programming languages, such as <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a>,<sup id="cite_ref-SchemeProperTailRec_1-0" class="reference"><a href="#cite_note-SchemeProperTailRec-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> and languages in the <a href="http://en.m.wikipedia.org/wiki/ML_%28programming_language%29" title="ML (programming language)">ML</a>
+ family among others. In the case of Scheme, the language definition 
+formalizes the intuitive notion of tail position exactly, by specifying 
+which syntactic forms allow having results in tail context.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup>
+ Implementations allowing an unlimited number of tail calls to be active
+ at the same moment, thanks to tail call elimination, can also be called
+ 'properly tail-recursive'.<sup id="cite_ref-SchemeProperTailRec_1-1" class="reference"><a href="#cite_note-SchemeProperTailRec-1"><span>[</span>2<span>]</span></a></sup></p>
+<p>Besides space and execution efficiency, tail call elimination is important in the <a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">functional programming</a> idiom known as <a href="http://en.m.wikipedia.org/wiki/Continuation_passing_style" title="Continuation passing style" class="mw-redirect">continuation passing style</a> (CPS), which would otherwise quickly run out of stack space.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Syntactic_form">Syntactic form</span></h2><div class="content_block" id="content_2">
+<p>A tail call can be located just before the syntactical end of a subroutine:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> foo<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">{</span>
+    a<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> b<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Here, both <code>a(data)</code> and <code>b(data)</code> are calls, but <code>b</code>
+ is the last thing the procedure executes before returning and is thus 
+in tail position. However, not all tail calls are necessarily located at
+ the syntactical end of a subroutine. Consider:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> bar<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">if</span> <span class="br0">(</span> a<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">return</span> b<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span>  c<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Here, both calls to <code>b</code> and <code>c</code> are in tail position, even though the first one is not syntactically at the end of <code>bar</code>'s body.</p>
+<p>Now consider this code:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> foo1<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">return</span> a<span class="br0">(</span>data<span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> foo2<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw2">var</span> ret <span class="sy0">=</span> a<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> ret<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> foo3<span class="br0">(</span>data<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw2">var</span> ret <span class="sy0">=</span> a<span class="br0">(</span>data<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="br0">(</span>ret <span class="sy0">===</span> <span class="nu0">0</span><span class="br0">)</span> <span class="sy0">?</span> <span class="nu0">1</span> <span class="sy0">:</span> ret<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Here, the call to <code>a(data)</code> is in tail position in <code>foo2</code>, but it is <b>not</b> in tail position either in <code>foo1</code> or in <code>foo3</code>, because control must return to the caller to allow it to inspect or modify the return value before returning it.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Example_programs">Example programs</span></h2><div class="content_block" id="content_3">
+<p>Take this <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> program as an example:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="scheme source-scheme">
+<pre class="de1"><span class="co1">;; factorial : number -&gt; number</span>
+<span class="co1">;; to calculate the product of all positive</span>
+<span class="co1">;; integers less than or equal to n.</span>
+<span class="br0">(</span><span class="kw1">define</span> <span class="br0">(</span>factorial n<span class="br0">)</span>
+ <span class="br0">(</span><span class="kw1">if</span> <span class="br0">(</span><span class="sy0">=</span> n <span class="nu0">0</span><span class="br0">)</span>
+     <span class="nu0">1</span>
+     <span class="br0">(</span><span class="sy0">*</span> n <span class="br0">(</span>factorial <span class="br0">(</span><span class="sy0">-</span> n <span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>This program is not written in a tail recursion style. Now take this <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> program as an example:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="scheme source-scheme">
+<pre class="de1"><span class="co1">;; factorial : number -&gt; number</span>
+<span class="co1">;; to calculate the product of all positive</span>
+<span class="co1">;; integers less than or equal to n.</span>
+<span class="br0">(</span><span class="kw1">define</span> <span class="br0">(</span>factorial n<span class="br0">)</span>
+    <span class="br0">(</span><span class="kw1">let</span> fact <span class="br0">(</span><span class="br0">[</span>i n<span class="br0">]</span> <span class="br0">[</span>acc <span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span>
+      <span class="br0">(</span><span class="kw1">if</span> <span class="br0">(</span><span class="kw1">zero?</span> i<span class="br0">)</span>
+          acc
+          <span class="br0">(</span>fact <span class="br0">(</span><span class="sy0">-</span> i <span class="nu0">1</span><span class="br0">)</span> <span class="br0">(</span><span class="sy0">*</span> acc i<span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>The inner procedure <code>fact</code> calls itself <i>last</i> in the control flow. This allows an <a href="http://en.m.wikipedia.org/wiki/Interpreter_%28computer_software%29" title="Interpreter (computer software)" class="mw-redirect">interpreter</a> or <a href="http://en.m.wikipedia.org/wiki/Compiler" title="Compiler">compiler</a> to reorganize the execution which would ordinarily look like this:</p>
+<pre>  call factorial (3)
+   call fact (3 1)
+    call fact (2 3)
+     call fact (1 6)
+      call fact (0 6)
+      return 6
+     return 6
+    return 6
+   return 6
+  return 6
+</pre>
+<p>into the more <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">efficient</a> variant, in terms of both space and time:</p>
+<pre>  call factorial (3)
+   call fact (3 1)
+   replace arguments with (2 3), jump to "fact"
+   replace arguments with (1 6), jump to "fact"
+   replace arguments with (0 6), jump to "fact"
+   return 6
+  return 6
+</pre>
+<p>This reorganization saves space because no state except for the 
+calling function's address needs to be saved, either on the stack or on 
+the heap, and the call stack frame for <code>fact</code> is reused for 
+the intermediate results storage. This also means that the programmer 
+need not worry about running out of stack or heap space for extremely 
+deep recursions. It is also worth noting, in typical implementations, 
+the tail recursive variant will be substantially faster than the other 
+variant, but only by a constant factor.</p>
+<p>Some programmers working in functional languages will rewrite 
+recursive code to be tail-recursive so they can take advantage of this 
+feature. This often requires addition of an "accumulator" argument (<code>acc</code>
+ in the above example) to the function. In some cases (such as filtering
+ lists) and in some languages, full tail recursion may require a 
+function that was previously purely functional to be written such that 
+it mutates references stored in other variables.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from April 2007">citation needed</span></a></i>]</sup></p>
+<p>An example in pseudo-C follows. Suppose we have the following functions:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> a<span class="br0">(</span><span class="kw4">int</span> x<span class="sy0">,</span> <span class="kw4">int</span> y<span class="br0">)</span>
+<span class="br0">{</span>
+    foobar<span class="br0">(</span>x<span class="sy0">,</span> y<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> b<span class="br0">(</span>x <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">,</span> y <span class="sy0">+</span> <span class="nu0">2</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+ 
+<span class="kw4">int</span> b<span class="br0">(</span><span class="kw4">int</span> u<span class="sy0">,</span> <span class="kw4">int</span> v<span class="br0">)</span>
+<span class="br0">{</span>
+    foobar<span class="br0">(</span>u<span class="sy0">,</span> v<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> u <span class="sy0">+</span> v<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Function <code>a</code> can be changed to:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> a<span class="br0">(</span><span class="kw4">int</span> x<span class="sy0">,</span> <span class="kw4">int</span> y<span class="br0">)</span>
+<span class="br0">{</span>
+    foobar<span class="br0">(</span>x<span class="sy0">,</span> y<span class="br0">)</span><span class="sy0">;</span>
+    b<span class="sy0">:</span>u <span class="sy0">=</span> a<span class="sy0">:</span>x <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    b<span class="sy0">:</span>v <span class="sy0">=</span> a<span class="sy0">:</span>y <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+    jump b<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>There are possible aliasing problems but this is the basic idea.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Tail_recursion_modulo_cons">Tail recursion modulo cons</span></h2><div class="content_block" id="content_4">
+<p><b>Tail recursion <a href="http://en.m.wikipedia.org/wiki/Modulo_%28jargon%29" title="Modulo (jargon)">modulo</a> cons</b> is a generalization of tail recursion optimization introduced by <a href="http://en.m.wikipedia.org/wiki/David_H._D._Warren" title="David H. D. Warren">David H. D. Warren</a><sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup> in the context of <a href="http://en.m.wikipedia.org/wiki/Compiler" title="Compiler">compilation</a> of <a href="http://en.m.wikipedia.org/wiki/Prolog" title="Prolog">Prolog</a>, seen as an explicitly <a href="http://en.m.wikipedia.org/wiki/Single_assignment#Single_assignment" title="Single assignment" class="mw-redirect">set-once</a>
+ language. As the name suggests, it applies when the only operation left
+ to perform after a recursive call is to prepend a known value in front 
+of a list returned from it (or to perform a constant number of simple 
+data-constructing operations in general), which would thus be <i>tail call</i> save for the said <i><a href="http://en.m.wikipedia.org/wiki/Cons" title="Cons">cons</a></i> operation. But prefixing a value at the start of a list <i>on exit</i> from a recursive call is the same as appending this value at the end of the growing list <i>on entry</i> into the recursive call, thus building the list as a <a href="http://en.m.wikipedia.org/wiki/Side_effect" title="Side effect">side effect</a>, as if in an implicit accumulator parameter. The following Prolog fragment illustrates the concept:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="prolog source-prolog">
+<pre class="de1">partition<span class="br0">(</span><span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> _<span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="br0">)</span><span class="sy4">.</span>                              <span class="co1">% -- Haskell translation:</span>
+partition<span class="br0">(</span><span class="br0">[</span>X<span class="sy5">|</span>Xs<span class="br0">]</span><span class="sy4">,</span> Pivot<span class="sy4">,</span> <span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span><span class="sy4">,</span> Bigs<span class="br0">)</span> <span class="sy1">:-</span>            <span class="co1">% partition [] _ = ([],[])</span>
+  X <span class="sy5">@</span><span class="sy6">&lt;</span> Pivot<span class="sy4">,</span> <span class="sy5">!</span><span class="sy4">,</span>                                       <span class="co1">% partition (x:xs) p | x &lt; p = (x:a,b)</span>
+  partition<span class="br0">(</span>Xs<span class="sy4">,</span> Pivot<span class="sy4">,</span> Rest<span class="sy4">,</span> Bigs<span class="br0">)</span><span class="sy4">.</span>                    <span class="co1">%                    | True  = (a,x:b)</span>
+partition<span class="br0">(</span><span class="br0">[</span>X<span class="sy5">|</span>Xs<span class="br0">]</span><span class="sy4">,</span> Pivot<span class="sy4">,</span> Smalls<span class="sy4">,</span> <span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span><span class="br0">)</span> <span class="sy1">:-</span>          <span class="co1">%    where</span>
+  partition<span class="br0">(</span>Xs<span class="sy4">,</span> Pivot<span class="sy4">,</span> Smalls<span class="sy4">,</span> Rest<span class="br0">)</span><span class="sy4">.</span>                  <span class="co1">%       (a,b) = partition xs p</span>
+ 
+<span class="co1">% to be compiled not as this:                          % but as this:</span>
+partition<span class="br0">(</span><span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> _<span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="br0">)</span><span class="sy4">.</span>                              partition<span class="br0">(</span><span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> _<span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="sy4">,</span> <span class="br0">[</span><span class="br0">]</span><span class="br0">)</span><span class="sy4">.</span>  
+partition<span class="br0">(</span><span class="br0">[</span>X<span class="sy5">|</span>Xs<span class="br0">]</span><span class="sy4">,</span> Pivot<span class="sy4">,</span> Smalls<span class="sy4">,</span> Bigs<span class="br0">)</span> <span class="sy1">:-</span>              partition<span class="br0">(</span><span class="br0">[</span>X<span class="sy5">|</span>Xs<span class="br0">]</span><span class="sy4">,</span> Pivot<span class="sy4">,</span> Smalls<span class="sy4">,</span> Bigs<span class="br0">)</span> <span class="sy1">:-</span>
+  <span class="br0">(</span>  X <span class="sy5">@</span><span class="sy6">&lt;</span> Pivot                                          <span class="br0">(</span>  X <span class="sy5">@</span><span class="sy6">&lt;</span> Pivot
+  <span class="sy3">-</span><span class="sy6">&gt;</span> partition<span class="br0">(</span>Xs<span class="sy4">,</span>Pivot<span class="sy4">,</span>Rest<span class="sy4">,</span>Bigs<span class="br0">)</span><span class="sy4">,</span>Smalls<span class="sy6">=</span><span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span>       <span class="sy3">-</span><span class="sy6">&gt;</span> Smalls<span class="sy6">=</span><span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span><span class="sy4">,</span>partition<span class="br0">(</span>Xs<span class="sy4">,</span>Pivot<span class="sy4">,</span>Rest<span class="sy4">,</span>Bigs<span class="br0">)</span>
+  <span class="sy4">;</span>  partition<span class="br0">(</span>Xs<span class="sy4">,</span>Pivot<span class="sy4">,</span>Smalls<span class="sy4">,</span>Rest<span class="br0">)</span><span class="sy4">,</span>Bigs<span class="sy6">=</span><span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span>       <span class="sy4">;</span>  Bigs<span class="sy6">=</span><span class="br0">[</span>X<span class="sy5">|</span>Rest<span class="br0">]</span><span class="sy4">,</span>partition<span class="br0">(</span>Xs<span class="sy4">,</span>Pivot<span class="sy4">,</span>Smalls<span class="sy4">,</span>Rest<span class="br0">)</span>
+  <span class="br0">)</span><span class="sy4">.</span>                                                     <span class="br0">)</span><span class="sy4">.</span>
+</pre>
+</div>
+</div>
+<p>Thus such a call is transformed into creating a new <a href="http://en.m.wikipedia.org/wiki/Node_%28computer_science%29" title="Node (computer science)">list node</a>, setting its <code>first</code> field, and then making a tail call which is also passed a pointer to where its result should be written (here, the node's <code>rest</code> field).</p>
+<p>As another example, consider a function in <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C language</a> that duplicates a linked list:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1">list <span class="sy0">*</span>duplicate<span class="br0">(</span><span class="kw4">const</span> list <span class="sy0">*</span>input<span class="br0">)</span>
+<span class="br0">{</span>
+    list <span class="sy0">*</span>head<span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">(</span>input <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="br0">{</span>
+        head        <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span> <span class="sy0">*</span>head<span class="br0">)</span><span class="sy0">;</span>
+        head<span class="sy0">-&gt;</span>value <span class="sy0">=</span> input<span class="sy0">-&gt;</span>value<span class="sy0">;</span>
+        head<span class="sy0">-&gt;</span>next  <span class="sy0">=</span> duplicate<span class="br0">(</span>input<span class="sy0">-&gt;</span>next<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        head <span class="sy0">=</span> NULL<span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw1">return</span> head<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>In this form the function is not tail-recursive, because control 
+returns to the caller after the recursive call duplicates the rest of 
+input list. Even though it actually allocates the head node prior to 
+duplicating the rest, the caller still has to plug in the result from 
+the callee into the <code>next</code> field. So the function is <i>almost</i> tail-recursive. Warren's method gives the following purely tail-recursive implementation which passes the <code>head</code> node to the callee to have its <code>next</code> field set by it:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1">list <span class="sy0">*</span>duplicate<span class="br0">(</span><span class="kw4">const</span> list <span class="sy0">*</span>input<span class="br0">)</span>
+<span class="br0">{</span>
+    list head<span class="sy0">;</span>
+    duplicate_aux<span class="br0">(</span>input<span class="sy0">,</span> <span class="sy0">&amp;</span>head<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">return</span> head.<span class="me1">next</span><span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="kw4">void</span> duplicate_aux<span class="br0">(</span><span class="kw4">const</span> list <span class="sy0">*</span>input<span class="sy0">,</span> list <span class="sy0">*</span>end<span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw1">if</span> <span class="br0">(</span>input <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="br0">{</span>
+        end<span class="sy0">-&gt;</span>next        <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span> <span class="sy0">*</span>end<span class="br0">)</span><span class="sy0">;</span>
+        end<span class="sy0">-&gt;</span>next<span class="sy0">-&gt;</span>value <span class="sy0">=</span> input<span class="sy0">-&gt;</span>value<span class="sy0">;</span>
+        duplicate_aux<span class="br0">(</span>input<span class="sy0">-&gt;</span>next<span class="sy0">,</span> end<span class="sy0">-&gt;</span>next<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        end<span class="sy0">-&gt;</span>next        <span class="sy0">=</span> NULL<span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Note how the callee now appends to the end of the list, rather than 
+have the caller prepend to the beginning. Characteristically for this 
+technique, a parent <a href="http://en.m.wikipedia.org/wiki/Call_frame" title="Call frame" class="mw-redirect">frame</a>
+ is created here in the execution call stack, which calls 
+(non-tail-recursively) into the tail-recursive callee which could reuse 
+its call frame if the tail-call optimization were present in C, thus 
+defining an <a href="http://en.m.wikipedia.org/wiki/Iterative" title="Iterative" class="mw-redirect">iterative</a> computation.</p>
+<p>This properly tail-recursive implementation can be converted into explicitly iterative form:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1">list <span class="sy0">*</span>duplicate<span class="br0">(</span><span class="kw4">const</span> list <span class="sy0">*</span>input<span class="br0">)</span>
+<span class="br0">{</span>
+    list head<span class="sy0">,</span> <span class="sy0">*</span>end<span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span> end <span class="sy0">=</span> <span class="sy0">&amp;</span>head<span class="sy0">;</span> input <span class="sy0">!=</span> NULL<span class="sy0">;</span> input <span class="sy0">=</span> input<span class="sy0">-&gt;</span>next<span class="sy0">,</span> end <span class="sy0">=</span> end<span class="sy0">-&gt;</span>next <span class="br0">)</span> 
+    <span class="br0">{</span>
+        end<span class="sy0">-&gt;</span>next        <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span> <span class="sy0">*</span>end<span class="br0">)</span><span class="sy0">;</span>
+        end<span class="sy0">-&gt;</span>next<span class="sy0">-&gt;</span>value <span class="sy0">=</span> input<span class="sy0">-&gt;</span>value<span class="sy0">;</span> 
+    <span class="br0">}</span>
+    end<span class="sy0">-&gt;</span>next <span class="sy0">=</span> NULL<span class="sy0">;</span>
+    <span class="kw1">return</span> head.<span class="me1">next</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="History">History</span></h2><div class="content_block" id="content_5">
+<p>In a paper delivered to the <a href="http://en.m.wikipedia.org/wiki/Association_for_Computing_Machinery" title="Association for Computing Machinery">ACM</a> conference in Seattle in 1977, <a href="http://en.m.wikipedia.org/wiki/Guy_L._Steele" title="Guy L. Steele" class="mw-redirect">Guy L. Steele</a> summarized the debate over the <a href="http://en.m.wikipedia.org/wiki/GOTO" title="GOTO" class="mw-redirect">GOTO</a> and <a href="http://en.m.wikipedia.org/wiki/Structured_programming" title="Structured programming">structured programming</a>,
+ and observed that procedure calls in the tail position of a procedure 
+can be best treated as a direct transfer of control to the called 
+procedure, typically eliminating unnecessary stack manipulation 
+operations.<sup id="cite_ref-aim-443_5-0" class="reference"><a href="#cite_note-aim-443-5"><span>[</span>6<span>]</span></a></sup> Since such "tail calls" are very common in <a href="http://en.m.wikipedia.org/wiki/Lisp_%28programming_language%29" title="Lisp (programming language)">Lisp</a>,
+ a language where procedure calls are ubiquitous, this form of 
+optimization considerably reduces the cost of a procedure call compared 
+to other implementations. Steele argued that poorly implemented 
+procedure calls had led to an artificial perception that the GOTO was 
+cheap compared to the procedure call. Steele further argued that "in 
+general procedure calls may be usefully thought of as GOTO statements 
+which also pass parameters, and can be uniformly coded as [machine code]
+ JUMP instructions", with the machine code stack manipulation 
+instructions "considered an optimization (rather than vice versa!)".<sup id="cite_ref-aim-443_5-1" class="reference"><a href="#cite_note-aim-443-5"><span>[</span>6<span>]</span></a></sup>
+ Steele cited evidence that well optimized numerical algorithms in Lisp 
+could execute faster than code produced by then-available commercial 
+Fortran compilers because the cost of a procedure call in Lisp was much 
+lower. In <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a>, a Lisp dialect developed by Steele with <a href="http://en.m.wikipedia.org/wiki/Gerald_Jay_Sussman" title="Gerald Jay Sussman">Gerald Jay Sussman</a>, tail call elimination is mandatory.<sup id="cite_ref-r5rs_6-0" class="reference"><a href="#cite_note-r5rs-6"><span>[</span>7<span>]</span></a></sup></p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Implementation_methods">Implementation methods</span></h2><div class="content_block" id="content_6">
+<p>Tail recursion is important to some <a href="http://en.m.wikipedia.org/wiki/High-level_programming_language" title="High-level programming language">high-level languages</a>, especially <a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">functional</a> and <a href="http://en.m.wikipedia.org/wiki/Logic_programming" title="Logic programming">logic</a> languages and members of the <a href="http://en.m.wikipedia.org/wiki/Lisp_programming_language" title="Lisp programming language" class="mw-redirect">Lisp</a>
+ family. In these languages, tail recursion is the most commonly used 
+way (and sometimes the only way available) of implementing iteration. 
+The language specification of Scheme requires that tail calls are to be 
+optimized so as not to grow the stack. Tail calls can be made explicitly
+ in <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a>, with a variant of the "goto" statement that takes a function name: <code>goto &amp;NAME;</code><sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup></p>
+<p>Various implementation methods are available.</p>
+<h3> <span class="mw-headline" id="In_assembler">In assembler</span>
+</h3>
+<p>For compilers generating assembly directly, tail call elimination is 
+easy: it suffices to replace a call opcode with a jump one, after fixing
+ parameters on the stack. From a compiler's perspective, the first 
+example above is initially translated into pseudo-<a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly language</a>:</p>
+<pre>foo:
+ call B
+ call A
+ ret
+</pre>
+<p>Tail call elimination replaces the last two lines with a single jump instruction:</p>
+<pre>foo:
+ call B
+ jmp  A
+</pre>
+<p>After subroutine <code>A</code> completes, it will then return directly to the return address of <code>foo</code>, omitting the unnecessary <code>ret</code> statement.</p>
+<p>Typically, the subroutines being called need to be supplied with <a href="http://en.m.wikipedia.org/wiki/Parameter_%28computer_science%29" title="Parameter (computer science)" class="mw-redirect">parameters</a>. The generated code thus needs to make sure that the <a href="http://en.m.wikipedia.org/wiki/Call_frame" title="Call frame" class="mw-redirect">call frame</a> for A is properly set up before jumping to the tail-called subroutine. For instance, on <a href="http://en.m.wikipedia.org/wiki/Platform_%28computing%29" title="Platform (computing)" class="mw-redirect">platforms</a> where the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a> does not just contain the <a href="http://en.m.wikipedia.org/wiki/Return_statement" title="Return statement">return address</a>,
+ but also the parameters for the subroutine, the compiler may need to 
+emit instructions to adjust the call stack. On such a platform, consider
+ the code:</p>
+<pre><b>function</b> foo(data1, data2)
+   B(data1)
+   <b>return</b> A(data2)
+</pre>
+<p>where <code>data1</code> and <code>data2</code> are parameters. A compiler might translate to the following pseudo assembly code:</p>
+<pre>foo:
+  mov  reg,[sp+data1] ; fetch data1 from stack (sp) parameter into a scratch register.
+  push reg            ; put data1 on stack where B expects it
+  call B              ; B uses data1
+  pop                 ; remove data1 from stack
+  mov  reg,[sp+data2] ; fetch data2 from stack (sp) parameter into a scratch register.
+  push reg            ; put data2 on stack where A expects it
+  call A              ; A uses data2
+  pop                 ; remove data2 from stack.
+  ret
+</pre>
+<p>A tail call optimizer could then change the code to:</p>
+<pre>foo:
+  mov  reg,[sp+data1] ; fetch data1 from stack (sp) parameter into a scratch register.
+  push reg            ; put data1 on stack where B expects it
+  call B              ; B uses data1
+  pop                 ; remove data1 from stack
+  mov  reg,[sp+data2] ; fetch data2 from stack (sp) parameter into a scratch register.
+  <i>mov  [sp+data2],reg ; put data2 where A expects it</i>
+  <i>jmp  A              ; A uses data2 and returns immediately to caller.</i>
+</pre>
+<p>This changed code is more efficient both in terms of execution speed and use of stack space.</p>
+<h3> <span class="mw-headline" id="Through_trampolining">Through trampolining</span>
+</h3>
+<p>However, since many <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> compilers use <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a>
+ as an intermediate target code, the problem comes down to coding tail 
+recursion in C without growing the stack, even if the back-end compiler 
+does not optimize tail calls. Many implementations achieve this by using
+ a device known as a <a href="http://en.m.wikipedia.org/wiki/Trampoline_%28computers%29" title="Trampoline (computers)" class="mw-redirect">trampoline</a>,
+ a piece of code that repeatedly calls functions. All functions are 
+entered via the trampoline. When a function has to call another, instead
+ of calling it directly it returns the address of the function to be 
+called, the arguments to be used, and so on, to the trampoline. This 
+ensures that the C stack does not grow and iteration can continue 
+indefinitely.</p>
+<p>It is possible to implement trampolining using <a href="http://en.m.wikipedia.org/wiki/Higher-order_function" title="Higher-order function">higher-order functions</a> in languages that support them, such as <a href="http://en.m.wikipedia.org/wiki/Groovy_%28programming_language%29" title="Groovy (programming language)">Groovy</a>, <a href="http://en.m.wikipedia.org/wiki/Visual_Basic_.NET" title="Visual Basic .NET">Visual Basic .NET</a> and <a href="http://en.m.wikipedia.org/wiki/C_Sharp_%28programming_language%29" title="C Sharp (programming language)">C#</a>.<sup id="cite_ref-onyourtail_8-0" class="reference"><a href="#cite_note-onyourtail-8"><span>[</span>9<span>]</span></a></sup></p>
+<p>Using a trampoline for all function calls is rather more expensive 
+than the normal C function call, so at least one Scheme compiler, <a href="http://en.m.wikipedia.org/wiki/Chicken_%28Scheme_implementation%29" title="Chicken (Scheme implementation)">Chicken</a>, uses a technique first described by <a href="http://en.m.wikipedia.org/wiki/Henry_Baker_%28computer_scientist%29" title="Henry Baker (computer scientist)">Henry Baker</a> from an unpublished suggestion by <a href="http://en.m.wikipedia.org/wiki/Andrew_Appel" title="Andrew Appel">Andrew Appel</a>,<sup id="cite_ref-Chicken_9-0" class="reference"><a href="#cite_note-Chicken-9"><span>[</span>10<span>]</span></a></sup>
+ in which normal C&nbsp;calls are used but the stack size is checked 
+before every call. When the stack reaches its maximum permitted size, 
+objects on the stack are <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage-collected</a> using the <a href="http://en.m.wikipedia.org/wiki/Cheney_algorithm" title="Cheney algorithm" class="mw-redirect">Cheney algorithm</a>
+ by moving all live data into a separate heap. Following this, the stack
+ is unwound ("popped") and the program resumes from the state saved just
+ before the garbage collection. Baker says "Appel's method avoids making
+ a large number of small trampoline bounces by occasionally jumping off 
+the Empire State Building."<sup id="cite_ref-Chicken_9-1" class="reference"><a href="#cite_note-Chicken-9"><span>[</span>10<span>]</span></a></sup>
+ The garbage collection ensures that mutual tail recursion can continue 
+indefinitely. However, this approach requires that no C function call 
+ever returns, since there is no guarantee that its caller's stack frame 
+still exists; therefore, it involves a much more dramatic internal 
+rewriting of the program code: <a href="http://en.m.wikipedia.org/wiki/Continuation-passing_style" title="Continuation-passing style">continuation-passing style</a>.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_7">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Course-of-values_recursion" title="Course-of-values recursion">Course-of-values recursion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">Recursion (computer science)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Inline_expansion" title="Inline expansion">Inline expansion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Leaf_subroutine" title="Leaf subroutine">Leaf subroutine</a></li>
+</ul>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_8">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Tail_recursion_files/37px-Wiktionary-logo-en.png" width="37" height="40"></td>
+<td class="mbox-text" style="">Look up <i><b><a class="external text" href="http://en.wiktionary.org/wiki/tail_recursion">tail recursion</a></b></i> in Wiktionary, the free dictionary.</td>
+</tr></tbody></table>
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://cstheory.stackexchange.com/q/7540/1037">http://cstheory.stackexchange.com/q/7540/1037</a></span>
+</li>
+<li id="cite_note-SchemeProperTailRec-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-SchemeProperTailRec_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-SchemeProperTailRec_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-8.html#node_sec_5.11">http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-8.html#node_sec_5.11</a></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.r6rs.org/final/html/r6rs-rationale/r6rs-rationale-Z-H-7.html#node_sec_5.3">http://www.r6rs.org/final/html/r6rs-rationale/r6rs-rationale-Z-H-7.html#node_sec_5.3</a></span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-14.html#node_sec_11.20">http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-14.html#node_sec_11.20</a></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text">D. H. D. Warren, <i>DAI Research Report 141</i>, University of Edinburgh, 1980.</span>
+</li>
+<li id="cite_note-aim-443-5">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-aim-443_5-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-aim-443_5-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Guy
+ Lewis Steele, Jr.. "Debunking the 'Expensive Procedure Call' Myth, or, 
+Procedure Call Implementations Considered Harmful, or, Lambda: The 
+Ultimate GOTO". MIT AI Lab. AI Lab Memo AIM-443. October 1977.</span>
+</li>
+<li id="cite_note-r5rs-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-r5rs_6-0">^</a></b></span> <span class="reference-text">R5RS Sec. 3.5, <span class="citation Journal">Richard Kelsey, William Clinger, Jonathan Rees et al. (August 1998). <a rel="nofollow" class="external text" href="http://www.schemers.org/Documents/Standards/R5RS/">"Revised<sup>5</sup> Report on the Algorithmic Language Scheme"</a>. <i>Higher-Order and Symbolic Computation</i> <b>11</b> (1): 7–105. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1023%2FA%3A1010051815785">10.1023/A:1010051815785</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.schemers.org/Documents/Standards/R5RS/">http://www.schemers.org/Documents/Standards/R5RS/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Revised%3Csup%3E5%3C%2Fsup%3E+Report+on+the+Algorithmic+Language+Scheme&amp;rft.jtitle=Higher-Order+and+Symbolic+Computation&amp;rft.aulast=Richard+Kelsey%2C+William+Clinger%2C+Jonathan+Rees+et+al.&amp;rft.au=Richard+Kelsey%2C+William+Clinger%2C+Jonathan+Rees+et+al.&amp;rft.date=August+1998&amp;rft.volume=11&amp;rft.issue=1&amp;rft.pages=7%E2%80%93105&amp;rft_id=info:doi/10.1023%2FA%3A1010051815785&amp;rft_id=http%3A%2F%2Fwww.schemers.org%2FDocuments%2FStandards%2FR5RS%2F&amp;rfr_id=info:sid/en.wikipedia.org:Tail_call"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://perldoc.perl.org/functions/goto.html">http://perldoc.perl.org/functions/goto.html</a></span>
+</li>
+<li id="cite_note-onyourtail-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-onyourtail_8-0">^</a></b></span> <span class="reference-text">Samuel Jack, <a rel="nofollow" class="external text" href="http://blog.functionalfun.net/2008/04/bouncing-on-your-tail.html">Bouncing on your tail</a>. <i>Functional Fun</i>. April 9, 2008.</span>
+</li>
+<li id="cite_note-Chicken-9">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Chicken_9-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Chicken_9-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Henry Baker, <a rel="nofollow" class="external text" href="http://home.pipeline.com/%7Ehbaker1/CheneyMTA.html">"CONS Should Not CONS Its Arguments, Part II: Cheney on the M.T.A."</a></span>
+</li>
+</ol>
+<p><span class="citation foldoc">This article is based on material taken from the <a href="http://en.m.wikipedia.org/wiki/Free_On-line_Dictionary_of_Computing" title="Free On-line Dictionary of Computing">Free On-line Dictionary of Computing</a> prior to 1 November 2008 and incorporated under the "relicensing" terms of the <a href="http://en.m.wikipedia.org/wiki/GNU_Free_Documentation_License" title="GNU Free Documentation License">GFDL</a>, version 1.3 or later.</span></p>
+
+
+
+
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Tail_recursion&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Tail+call&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Tail_recursion&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Tail+call&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Tail_recursion_files/load_002.php" type="text/javascript"></script>
+<script src="Tail_recursion_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

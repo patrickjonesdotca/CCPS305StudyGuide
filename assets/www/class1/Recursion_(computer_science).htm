@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Recursion (computer science) - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Recursion_%28computer_science%29_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 18 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Recursion_%28computer_science%29">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Recursion_%28computer_science%29_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Recursion_%28computer_science%29_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Recursion_%28computer_science%29_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Recursion_(computer_science)" selected="selected">English</option><option value="//ar.m.wikipedia.org/wiki/%D8%A7%D8%B3%D8%AA%D8%AF%D8%B9%D8%A7%D8%A1_%D8%B0%D8%A7%D8%AA%D9%8A_(%D8%B9%D9%84%D9%85_%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8)">العربية</option><option value="//bar.m.wikipedia.org/wiki/Rekursive_Programmierung">Boarisch</option><option value="//ca.m.wikipedia.org/wiki/Algoritme_recursiu">català</option><option value="//cs.m.wikipedia.org/wiki/Rekurzivn%C3%AD_funkce_(programov%C3%A1n%C3%AD)">česky</option><option value="//de.m.wikipedia.org/wiki/Rekursive_Programmierung">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Recursi%C3%B3n_(ciencias_de_computaci%C3%B3n)">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%AA%D9%88%D8%A7%D8%A8%D8%B9_%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%AA%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Algorithme_r%C3%A9cursif">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98">한국어</option><option value="//it.m.wikipedia.org/wiki/Algoritmo_ricorsivo">italiano</option><option value="//kk.m.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BA%D1%83%D1%80%D1%81%D0%B8%D0%B2%D1%82%D1%96_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F">Қазақша</option><option value="//pt.m.wikipedia.org/wiki/Recursividade_(ci%C3%AAncia_da_computa%C3%A7%C3%A3o)">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BA%D1%83%D1%80%D1%81%D0%B8%D0%B2%D0%BD%D0%B0%D1%8F_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F">русский</option><option value="//simple.m.wikipedia.org/wiki/Recursive_algorithm">Simple English</option><option value="//sv.m.wikipedia.org/wiki/Rekursiv_algoritm">svenska</option><option value="//vi.m.wikipedia.org/wiki/%C4%90%E1%BB%87_quy">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E9%80%92%E5%BD%92_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Recursion (computer science)</h1>			
+<div class="dablink">This article is about recursive approaches to solving problems.  For recursion in computer science acronyms, see <a href="http://en.m.wikipedia.org/wiki/Recursive_acronym#Computer-related_examples" title="Recursive acronym">Recursive acronym#Computer-related examples</a>.</div>
+<table class="vertical-navbox nowraplinks" style="float: right; clear: right; background-color: rgb(249, 249, 249); border: 1px solid rgb(170, 170, 170); width: 22em; margin: 0pt 0pt 1em 1em; padding: 0.2em; border-spacing: 0.4em 0pt; text-align: center; line-height: 1.4em; font-size: 88%;" cellpadding="0" cellspacing="5">
+<tbody><tr>
+<th class="" style="padding: 0.2em 0.4em; font-size: 145%; line-height: 1.2em;"><a href="http://en.m.wikipedia.org/wiki/Programming_paradigm" title="Programming paradigm">Programming paradigms</a></th>
+</tr>
+<tr>
+<td class="" style="padding-top: 0.2em; padding-bottom: 0.2em; text-align: left;">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Aspect-oriented_programming" title="Aspect-oriented programming">Aspect-oriented</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Imperative_programming" title="Imperative programming">Imperative</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">Functional</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Logic_programming" title="Logic programming">Logic</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Object-oriented_programming" title="Object-oriented programming">Object-oriented</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: right; font-size: 115%;">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Programming_paradigms" title="Template:Programming paradigms"><span title="View this template" style="">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Programming_paradigms" title="Template talk:Programming paradigms"><span title="Discuss this template" style="">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Programming_paradigms&amp;action=edit"><span title="Edit this template" style="">e</span></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p><b>Recursion</b> in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a> is a method where the solution to a problem depends on solutions to smaller instances of the same problem.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> The approach can be applied to many types of problems, and is one of the central ideas of computer science.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup></p>
+<blockquote>
+<p>"The power of recursion evidently lies in the possibility of defining
+ an infinite set of objects by a finite statement. In the same manner, 
+an infinite number of computations can be described by a finite 
+recursive program, even if this program contains no explicit 
+repetitions." <sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+</blockquote>
+<p>Most computer programming languages support recursion by allowing a function to call itself within the program text. Some <a href="http://en.m.wikipedia.org/wiki/Functional_languages" title="Functional languages" class="mw-redirect">functional programming languages</a> do not define any looping constructs but rely solely on recursion to repeatedly call code. <a href="http://en.m.wikipedia.org/wiki/Computability_theory_%28computer_science%29" title="Computability theory (computer science)" class="mw-redirect">Computability theory</a> has proven<sup class="noprint Inline-Template" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Attribution_needed" title="Wikipedia:Attribution needed"><span title="This sentence may contain perspectives and opinions without stating whose they are. from August 2011">attribution needed</span></a></i>]</sup>that
+ these recursive-only languages are mathematically equivalent to the 
+imperative languages, meaning they can solve the same kinds of problems 
+even without the typical control structures like “while” and “for”.<br></p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:RecursiveTree.JPG" class="image"><img alt="" src="Recursion_%28computer_science%29_files/220px-RecursiveTree.JPG" class="thumbimage" width="220" height="290"></a>
+<div class="thumbcaption">
+
+Tree created using the <a href="http://en.m.wikipedia.org/wiki/Logo_%28programming_language%29" title="Logo (programming language)">Logo programming language</a> and relying heavily on recursion.</div>
+</div>
+</div>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Recursive_data_types">Recursive data types</span></h2><div class="content_block" id="content_1">
+<p>Many <a href="http://en.m.wikipedia.org/wiki/Computer_program" title="Computer program">computer programs</a> must process or generate an arbitrarily large quantity of <a href="http://en.m.wikipedia.org/wiki/Data" title="Data">data</a>. Recursion is one technique for representing data whose exact size the <a href="http://en.m.wikipedia.org/wiki/Programmer" title="Programmer">programmer</a> does not know: the programmer can specify this data with a <a href="http://en.m.wikipedia.org/wiki/Self_reference" title="Self reference" class="mw-redirect">self-referential</a> definition. There are two types of self-referential definitions: inductive and <a href="http://en.m.wikipedia.org/wiki/Coinduction" title="Coinduction">coinductive</a> definitions.</p>
+<div class="rellink boilerplate further">Further information: <a href="http://en.m.wikipedia.org/wiki/Algebraic_data_type" title="Algebraic data type">Algebraic data type</a>
+</div>
+<h3> <span class="mw-headline" id="Inductively_defined_data">Inductively defined data</span>
+</h3>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Recursive_data_type" title="Recursive data type">Recursive data type</a>
+</div>
+<p>An inductively defined recursive data definition is one that specifies how to construct instances of the data. For example, <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked lists</a> can be defined inductively (here, using <a href="http://en.m.wikipedia.org/wiki/Haskell_%28programming_language%29" title="Haskell (programming language)">Haskell</a> syntax):</p>
+<dl>
+<dd><code>data ListOfStrings = EmptyList | Cons String ListOfStrings</code></dd>
+</dl>
+<p>The code above specifies a list of strings to be either empty, or a 
+structure that contains a string and a list of strings. The 
+self-reference in the definition permits the construction of lists of 
+any (finite) number of strings.</p>
+<p>Another <a href="http://en.m.wikipedia.org/wiki/Example" title="Example">example</a> of <a href="http://en.m.wikipedia.org/wiki/Inductive" title="Inductive" class="mw-redirect">inductive</a> <a href="http://en.m.wikipedia.org/wiki/Definition" title="Definition">definition</a> is the <a href="http://en.m.wikipedia.org/wiki/Natural_numbers" title="Natural numbers" class="mw-redirect">natural numbers</a> (or non-negative <a href="http://en.m.wikipedia.org/wiki/Integers" title="Integers" class="mw-redirect">integers</a>):</p>
+<dl>
+<dd><code>A natural number is either 1 or n+1, where n is a natural number.</code></dd>
+</dl>
+<p>Similarly recursive <a href="http://en.m.wikipedia.org/wiki/Definition" title="Definition">definitions</a> are often used to model the structure of <a href="http://en.m.wikipedia.org/wiki/Expression_%28programming%29" title="Expression (programming)" class="mw-redirect">expressions</a> and <a href="http://en.m.wikipedia.org/wiki/Statement_%28programming%29" title="Statement (programming)" class="mw-redirect">statements</a> in programming languages. Language designers often express grammars in a syntax such as <a href="http://en.m.wikipedia.org/wiki/Backus-Naur_form" title="Backus-Naur form" class="mw-redirect">Backus-Naur form</a>; here is such a grammar, for a simple language of arithmetic expressions with multiplication and addition:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="bnf source-bnf">
+<pre class="de1"> <span class="sy1">&lt;</span><span class="re0">expr</span><span class="sy1">&gt;</span> <span class="sy4">::=</span> <span class="sy1">&lt;</span><span class="re0">number</span><span class="sy1">&gt;</span>
+          <span class="sy4">|</span> <span class="br0">(</span><span class="sy1">&lt;</span><span class="re0">expr</span><span class="sy1">&gt;</span> <span class="sy4">*</span> <span class="sy1">&lt;</span><span class="re0">expr</span><span class="sy1">&gt;</span><span class="br0">)</span>
+          <span class="sy4">|</span> <span class="br0">(</span><span class="sy1">&lt;</span><span class="re0">expr</span><span class="sy1">&gt;</span> + <span class="sy1">&lt;</span><span class="re0">expr</span><span class="sy1">&gt;</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>This says that an expression is either a number, a product of two 
+expressions, or a sum of two expressions. By recursively referring to 
+expressions in the second and third lines, the grammar permits 
+arbitrarily complex arithmetic expressions such as <code>(5 * ((3 * 6) + 8))</code>, with more than one product or sum operation in a single expression.</p>
+<h3> <span class="mw-headline" id="Coinductively_defined_data_and_corecursion">Coinductively defined data and corecursion</span>
+</h3>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Coinduction" title="Coinduction">Coinduction</a>
+</div>
+<p>A coinductive data definition is one that specifies the operations 
+that may be performed on a piece of data; typically, self-referential 
+coinductive definitions are used for data structures of infinite size.</p>
+<p>A coinductive definition of infinite <a href="http://en.m.wikipedia.org/wiki/Stream_%28computing%29" title="Stream (computing)">streams</a> of strings, given informally, might look like this:</p>
+<pre>A stream of strings is an object s such that
+ head(s) is a string, and
+ tail(s) is a stream of strings.
+</pre>
+<p>This is very similar to an inductive definition of lists of strings; 
+the difference is that this definition specifies how to access the 
+contents of the data structure—namely, via the <a href="http://en.m.wikipedia.org/wiki/Accessor" title="Accessor" class="mw-redirect">accessor</a> functions <code>head</code> and <code>tail</code>
+ -- and what those contents may be, whereas the inductive definition 
+specifies how to create the structure and what it may be created from.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Corecursion" title="Corecursion">Corecursion</a>
+ is related to coinduction, and can be used to compute particular 
+instances of (possibly) infinite objects. As a programming technique, it
+ is used most often in the context of <a href="http://en.m.wikipedia.org/wiki/Lazy_evaluation" title="Lazy evaluation">lazy</a>
+ programming languages, and can be preferable to recursion when the 
+desired size or precision of a program's output is unknown. In such 
+cases the program requires both a definition for an infinitely large (or
+ infinitely precise) result, and a mechanism for taking a finite portion
+ of that result. The problem of computing the first n <a href="http://en.m.wikipedia.org/wiki/Prime_numbers" title="Prime numbers" class="mw-redirect">prime numbers</a> is one that can be solved with a corecursive program (e.g. <a href="http://en.m.wikipedia.org/wiki/Fold_%28higher-order_function%29#Examples" title="Fold (higher-order function)">here</a>).</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Recursive_algorithms">Recursive algorithms</span></h2><div class="content_block" id="content_2">
+<p>A common <a href="http://en.m.wikipedia.org/wiki/Computer_programming" title="Computer programming">computer programming</a>
+ tactic is to divide a problem into sub-problems of the same type as the
+ original, solve those problems, and combine the results. This is often 
+referred to as the <a href="http://en.m.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">divide-and-conquer</a> method; when combined with a <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup table</a>
+ that stores the results of solving sub-problems (to avoid solving them 
+repeatedly and incurring extra computation time), it can be referred to 
+as <a href="http://en.m.wikipedia.org/wiki/Dynamic_programming" title="Dynamic programming">dynamic programming</a> or <a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoization</a>.</p>
+<p>A recursive function definition has one or more <i>base cases</i>, meaning input(s) for which the function produces a result <a href="http://en.m.wikipedia.org/wiki/Trivial_%28mathematics%29" title="Trivial (mathematics)" class="mw-redirect">trivially</a> (without recurring), and one or more <i>recursive cases</i>, meaning input(s) for which the program recurs (calls itself). For example, the <a href="http://en.m.wikipedia.org/wiki/Factorial" title="Factorial">factorial</a> function can be defined recursively by the equations <img class="tex" alt="0! = 1" src="Recursion_%28computer_science%29_files/c57a4bc902063579fb424e5020d2a8da.png"> and, for all <img class="tex" alt="n &gt; 0" src="Recursion_%28computer_science%29_files/3a17f57d9af78403b7ac2dd5f82c2d3c.png">, <img class="tex" alt="n! = n(n - 1)!" src="Recursion_%28computer_science%29_files/a359f54bf40673a2567d8f3f6206a31a.png">.
+ Neither equation by itself constitutes a complete definition; the first
+ is the base case, and the second is the recursive case.</p>
+<p>The job of the recursive cases can be seen as breaking down complex 
+inputs into simpler ones. In a properly designed recursive function, 
+with each recursive call, the input problem must be simplified in such a
+ way that eventually the base case must be reached. (Functions that are 
+not intended to terminate under normal circumstances—for example, some <a href="http://en.m.wikipedia.org/wiki/Daemon_%28computer_software%29" title="Daemon (computer software)" class="mw-redirect">system and server processes</a> -- are an exception to this.) Neglecting to write a base case, or testing for it incorrectly, can cause an <a href="http://en.m.wikipedia.org/wiki/Infinite_loop" title="Infinite loop">infinite loop</a>.</p>
+<p>For some functions (such as one that computes the <a href="http://en.m.wikipedia.org/wiki/Series_%28mathematics%29" title="Series (mathematics)">series</a> for e = 1+1/1!+1/2!+1/3!...) there is not an obvious base case implied by the input data; for these one may add a <a href="http://en.m.wikipedia.org/wiki/Parameter" title="Parameter">parameter</a>
+ (such as the number of terms to be added, in our series example) to 
+provide a 'stopping criterion' that establishes the base case.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Structural_versus_generative_recursion">Structural versus generative recursion</span></h2><div class="content_block" id="content_3">
+<p>Some authors classify recursion as either "structural" or 
+"generative". The distinction is related to where a recursive procedure 
+gets the data that it works on, and how it processes that data:</p>
+<blockquote>
+<p>[Functions that consume structured data] typically decompose their 
+arguments into their immediate structural components and then process 
+those components. If one of the immediate components belongs to the same
+ class of data as the input, the function is recursive. For that reason,
+ we refer to these functions as (STRUCTURALLY) RECURSIVE FUNCTIONS.<sup id="cite_ref-Felleisen_HtDP_2001_3-0" class="reference"><a href="#cite_note-Felleisen_HtDP_2001-3"><span>[</span>4<span>]</span></a></sup></p>
+</blockquote>
+<p>Thus, the defining characteristic of a structurally recursive 
+function is that the argument to each recursive call is the content of a
+ field of the original input. Structural recursion includes nearly all 
+tree traversals, including XML processing, binary tree creation and 
+search, et cetera. By considering the algebraic structure of the natural
+ numbers (that is, a natural number is either zero or the successor of a
+ natural number), functions such as factorial may also be regarded as 
+structural recursion.</p>
+<p>Generative recursion is the alternative:</p>
+<blockquote>
+<p>Many well-known recursive algorithms generate an entirely new piece of data from the given data and recur on it. <a href="http://en.m.wikipedia.org/wiki/How_to_design_programs" title="How to design programs" class="mw-redirect">HtDP (How To Design Programs)</a> refers to this kind as generative recursion. Examples of generative recursion include: <a href="http://en.m.wikipedia.org/wiki/Euclidean_algorithm" title="Euclidean algorithm">gcd</a>, <a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">quicksort</a>, <a href="http://en.m.wikipedia.org/wiki/Binary_search" title="Binary search" class="mw-redirect">binary search</a>, <a href="http://en.m.wikipedia.org/wiki/Mergesort" title="Mergesort" class="mw-redirect">mergesort</a>, <a href="http://en.m.wikipedia.org/wiki/Newton%27s_method" title="Newton's method">Newton's method</a>, <a href="http://en.m.wikipedia.org/wiki/Fractal" title="Fractal">fractals</a>, and <span class="new" title="Adaptive integration (page does not exist)">adaptive integration</span>.<sup id="cite_ref-Felleisen_2002_108_4-0" class="reference"><a href="#cite_note-Felleisen_2002_108-4"><span>[</span>5<span>]</span></a></sup></p>
+</blockquote>
+<p>This distinction is important in <a href="http://en.m.wikipedia.org/wiki/Termination_analysis#Termination_proof" title="Termination analysis">proving termination</a> of a function. All structurally recursive functions on finite (<a href="http://en.m.wikipedia.org/wiki/Inductive_data_type" title="Inductive data type">inductively defined</a>) data structures can easily be shown to terminate, via <a href="http://en.m.wikipedia.org/wiki/Structural_induction" title="Structural induction">structural induction</a>:
+ intuitively, each recursive call receives a smaller piece of input 
+data, until a base case is reached. Generatively recursive functions, in
+ contrast, do not necessarily feed smaller input to their recursive 
+calls, so proof of their termination is not necessarily as simple, and 
+avoiding <a href="http://en.m.wikipedia.org/wiki/Infinite_loops" title="Infinite loops" class="mw-redirect">infinite loops</a> requires greater care.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Recursive_programs">Recursive programs</span></h2><div class="content_block" id="content_4">
+<h3> <span class="mw-headline" id="Recursive_procedures">Recursive procedures</span>
+</h3>
+<h4> <span class="mw-headline" id="Factorial">Factorial</span>
+</h4>
+<p>A classic example of a recursive procedure is the function used to calculate the <a href="http://en.m.wikipedia.org/wiki/Factorial" title="Factorial">factorial</a> of a <a href="http://en.m.wikipedia.org/wiki/Natural_number" title="Natural number">natural number</a>:</p>
+<dl>
+<dd><img class="tex" alt=" \operatorname{fact}(n) =
+ \begin{cases}
+ 1 &amp; \mbox{if } n = 0 \\
+ n \cdot \operatorname{fact}(n-1) &amp; \mbox{if } n &gt; 0 \\
+ \end{cases}
+" src="Recursion_%28computer_science%29_files/8074054c8cd2495086dfb3a80bc6c188.png"></dd>
+</dl>
+<table class="wikitable">
+<tbody><tr>
+<th>
+<a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">Pseudocode</a> (recursive):</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> factorial is:<br><b>input</b>: integer <i>n</i> such that <i>n</i> &gt;= 0<br><b>output</b>: [<i>n</i> × (<i>n</i>-1) × (<i>n</i>-2) × … × 1]
+<br>    1. if <i>n</i> is 0, <b>return</b> 1
+    2. otherwise, <b>return</b> [ <i>n</i> × factorial(<i>n</i>-1) ]
+<br><b>end</b> factorial
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>The function can also be written as a <a href="http://en.m.wikipedia.org/wiki/Recurrence_relation" title="Recurrence relation">recurrence relation</a>:</p>
+<dl>
+<dd><img class="tex" alt="b_n = nb_{n-1}" src="Recursion_%28computer_science%29_files/cbc97488eed53a3f6ec8194fe0dcef97.png"></dd>
+<dd><img class="tex" alt="b_0 = 1" src="Recursion_%28computer_science%29_files/e3197e7cb90b9adbfe56604d091e4600.png"></dd>
+</dl>
+<p>This evaluation of the recurrence relation demonstrates the 
+computation that would be performed in evaluating the pseudocode above:</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Computing the recurrence relation for n = 4:</th>
+</tr>
+<tr>
+<td>
+<pre>b<sub>4</sub>           = 4 * b<sub>3</sub><br>             = 4 * 3 * b<sub>2</sub>
+             = 4 * 3 * 2 * b<sub>1</sub>
+             = 4 * 3 * 2 * 1 * b<sub>0</sub>
+             = 4 * 3 * 2 * 1 * 1
+             = 4 * 3 * 2 * 1
+             = 4 * 3 * 2
+             = 4 * 6
+             = 24
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>This factorial function can also be described without using recursion
+ by making use of the typical looping constructs found in imperative 
+programming languages:</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Pseudocode (iterative):</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> factorial is:<br><b>input</b>: integer <i>n</i> such that <i>n</i> &gt;= 0<br><b>output</b>: [<i>n</i> × (<i>n</i>-1) × (<i>n</i>-2) × … × 1]
+<br>    1. <b>create</b> new variable called <i>running_total</i> with a value of 1
+<br>    2. <b>begin</b> loop
+          1. if <i>n</i> is 0, <b>exit</b> loop
+          2. <b>set</b> <i>running_total</i> to (<i>running_total</i> × <i>n</i>)
+          3. <b>decrement</b> <i>n</i>
+          4. <b>repeat</b> loop
+<br>    3. <b>return</b> <i>running_total</i>
+<br><b>end</b> factorial
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>The imperative code above is equivalent to this mathematical definition using an accumulator variable <span class="texhtml"><var>t</var></span><i>:</i></p>
+<dl>
+<dd><img class="tex" alt="
+\begin{array}{rcl}
+\operatorname{fact}(n) &amp; = &amp; \operatorname{fact_{acc}}(n, 1) \\
+\operatorname{fact_{acc}}(n, t) &amp; = &amp;
+ \begin{cases}
+ t &amp; \mbox{if } n = 0 \\
+ \operatorname{fact_{acc}}(n-1, nt) &amp; \mbox{if } n &gt; 0 \\
+ \end{cases}
+\end{array}
+" src="Recursion_%28computer_science%29_files/04728e4a64b7928ad6cd846aa106af95.png"></dd>
+</dl>
+<p>The definition above translates straightforwardly to <a href="http://en.m.wikipedia.org/wiki/Functional_programming_language" title="Functional programming language" class="mw-redirect">functional programming languages</a> such as <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a>; this is an example of iteration implemented recursively.</p>
+<h4> <span class="mw-headline" id="Fibonacci">Fibonacci</span>
+</h4>
+<p>Another well known mathematical recursive function is one that computes the <a href="http://en.m.wikipedia.org/wiki/Fibonacci_number" title="Fibonacci number">Fibonacci numbers</a>: <img class="tex" alt=" \operatorname{fib}(n) =
+ \begin{cases}
+ 0 &amp; \mbox{if } n = 0 \\
+ 1 &amp; \mbox{if } n = 1 \\
+ \operatorname{fib}(n-1) + \operatorname{fib}(n-2) &amp; \mbox{if } n &gt;= 2  \\
+ \end{cases}
+" src="Recursion_%28computer_science%29_files/649e0916236c15cf5b768a0339612dac.png"></p>
+<table class="wikitable">
+<tbody><tr>
+<th><a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">Pseudocode</a></th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> fib is:
+<b>input</b>: integer n such that n &gt;= 0
+<br>    1. if n is 0, <b>return</b> 0
+    2. if n is 1, <b>return</b> 1
+    3. otherwise, <b>return</b> [ fib(n-1) + fib(n-2) ]
+<br><b>end</b> fib
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>C language implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> fib<span class="br0">(</span><span class="kw4">int</span> n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span><span class="br0">(</span>n <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="br0">)</span>
+                <span class="kw1">return</span> n<span class="sy0">;</span>
+ 
+        <span class="kw1">return</span> fib<span class="br0">(</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> fib<span class="br0">(</span>n<span class="sy0">-</span><span class="nu0">2</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Java language implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java source-java">
+<pre class="de1">    <span class="co3">/**
+     * Recursively calculate the kth Fibonacci number.
+     *
+     * @param k indicates which (positive) Fibonacci number to compute.
+     * @return the kth Fibonacci number.
+     */</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">int</span> fib<span class="br0">(</span><span class="kw4">int</span> k<span class="br0">)</span> <span class="br0">{</span>
+ 
+        <span class="co1">// Base Cases:</span>
+        <span class="co1">//   If k == 0 then fib(k) = 0.</span>
+        <span class="co1">//   If k == 1 then fib(k) = 1.</span>
+        <span class="kw1">if</span> <span class="br0">(</span>k <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="kw1">return</span> k<span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="co1">// Recursive Case:</span>
+        <span class="co1">//   If k &gt;= 2 then fib(k) = fib(k-1) + fib(k-2).</span>
+        <span class="kw1">return</span> fib<span class="br0">(</span>k<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> fib<span class="br0">(</span>k<span class="sy0">-</span><span class="nu0">2</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Python language implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1"><span class="kw1">def</span> fib<span class="br0">(</span>n<span class="br0">)</span>:
+    <span class="kw1">if</span> n <span class="sy0">&lt;</span> <span class="nu0">2</span>:
+        <span class="kw1">return</span> n
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> fib<span class="br0">(</span>n-<span class="nu0">1</span><span class="br0">)</span> + fib<span class="br0">(</span>n-<span class="nu0">2</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>Scheme language implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="scheme source-scheme">
+<pre class="de1"><span class="br0">(</span><span class="kw1">define</span> <span class="br0">(</span>fib n<span class="br0">)</span>
+    <span class="br0">(</span><span class="kw1">if</span> <span class="br0">(</span><span class="sy0">&lt;</span> n <span class="nu0">2</span><span class="br0">)</span>
+        n
+        <span class="br0">(</span><span class="sy0">+</span> <span class="br0">(</span>fib <span class="br0">(</span><span class="sy0">-</span> n <span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">(</span>fib <span class="br0">(</span> <span class="sy0">-</span> n <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>JavaScript language implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="javascript source-javascript">
+<pre class="de1"><span class="kw2">function</span> fib <span class="br0">(</span>n<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span>n<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">&lt;=</span> <span class="nu0">2</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        <span class="kw1">return</span> fib<span class="br0">(</span>n <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> fib<span class="br0">(</span>n <span class="sy0">-</span> <span class="nu0">2</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Common Lisp implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="lisp source-lisp">
+<pre class="de1"><span class="br0">(</span><span class="kw1">defun</span> fib <span class="br0">(</span>n<span class="br0">)</span>
+  <span class="br0">(</span><span class="kw1">cond</span> <span class="br0">(</span><span class="br0">(</span><span class="sy0">=</span> n <span class="nu0">0</span><span class="br0">)</span> <span class="nu0">0</span><span class="br0">)</span>
+        <span class="br0">(</span><span class="br0">(</span><span class="sy0">=</span> n <span class="nu0">1</span><span class="br0">)</span> <span class="nu0">1</span><span class="br0">)</span>
+        <span class="br0">(</span>t <span class="br0">(</span>+ <span class="br0">(</span>fib <span class="br0">(</span>- n <span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span>
+              <span class="br0">(</span>fib <span class="br0">(</span>- n <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p>Perl implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw2">sub</span> fib <span class="br0">{</span>
+    <span class="kw1">my</span> <span class="br0">(</span><span class="re0">$n</span><span class="br0">)</span> <span class="sy0">=</span> <span class="co5">@_</span><span class="sy0">;</span>
+    <span class="br0">(</span><span class="re0">$n</span> <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="br0">)</span> <span class="sy0">?</span> <span class="re0">$n</span> <span class="sy0">:</span> fib<span class="br0">(</span><span class="re0">$n</span> <span class="sy0">-</span> <span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> fib<span class="br0">(</span><span class="re0">$n</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Ruby implementation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="ruby source-ruby">
+<pre class="de1"><span class="kw1">def</span> fib<span class="br0">(</span>n<span class="br0">)</span>
+  n <span class="sy0">&lt;</span> <span class="nu0">2</span> ? n : fib<span class="br0">(</span>n <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> fib<span class="br0">(</span>n <span class="sy0">-</span> <span class="nu0">2</span><span class="br0">)</span>
+<span class="kw1">end</span>
+</pre>
+</div>
+</div>
+<p><a href="http://en.m.wikipedia.org/wiki/Recurrence_relation" title="Recurrence relation">Recurrence relation</a> for Fibonacci:<br>
+b<sub>n</sub> = b<sub>n-1</sub> + b<sub>n-2</sub><br>
+b<sub>1</sub> = 1, b<sub>0</sub> = 0</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Computing the recurrence relation for n = 4:</th>
+</tr>
+<tr>
+<td>
+<pre>  b<sub>4</sub>            = b<sub>3</sub> + b<sub>2</sub>
+                = b<sub>2</sub> + b<sub>1</sub> + b<sub>1</sub> + b<sub>0</sub>
+                = b<sub>1</sub> + b<sub>0</sub> + 1 + 1 + 0
+                = 1 + 0 + 1 + 1 + 0
+                = 3
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>This Fibonacci algorithm is a particularly poor example of recursion,
+ because each time the function is executed on a number greater than 
+one, it makes two function calls to itself, leading to an exponential 
+number of calls (and thus exponential <a href="http://en.m.wikipedia.org/wiki/Time_complexity" title="Time complexity">time complexity</a>) in total.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup> The following alternative approach uses two accumulator variables <code>TwoBack</code> and <code>OneBack</code> to "remember" the previous two Fibonacci numbers constructed, and so avoids the exponential time cost:</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Pseudocode</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> fib is:
+<b>input</b>: integer Times such that Times &gt;= 0, relative to TwoBack and OneBack
+             long TwoBack such that TwoBack = fib(x)
+             long OneBack such that OneBack = fib(x)
+<br>    1. if Times is 0, <b>return</b> TwoBack
+    2. if Times is 1, <b>return</b> OneBack
+    3. if Times is 2, <b>return</b> TwoBack + OneBack
+    4. otherwise, <b>return</b> [ fib(Times-1, OneBack, TwoBack + OneBack) ]
+<br><b>end</b> fib
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>To obtain the tenth number in the Fib. sequence, one must perform 
+Fib(10,0,1). Where 0 is considered TwoNumbers back and 1 is considered 
+OneNumber back. As can be seen in this approach, no trees are being 
+created, therefore the efficiency is much greater, being a linear 
+recursion. The recursion in condition 4, shows that OneNumber back 
+becomes TwoNumbers back, and the new OneNumber back is calculated, 
+simply decrementing the Times on each recursion.</p>
+<p>Implemented in the Java or the C# programming language:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java source-java">
+<pre class="de1"><span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">long</span> fibonacciOf<span class="br0">(</span><span class="kw4">int</span> times, <span class="kw4">long</span> twoNumbersBack, <span class="kw4">long</span> oneNumberBack<span class="br0">)</span> <span class="br0">{</span>
+ 
+    <span class="kw1">if</span> <span class="br0">(</span>times <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span> <span class="br0">{</span>                            <span class="co1">// Used only for fibonacciOf(0, 0, 1)</span>
+        <span class="kw1">return</span> twoNumbersBack<span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>times <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>                     <span class="co1">// Used only for fibonacciOf(1, 0, 1)</span>
+        <span class="kw1">return</span> oneNumberBack<span class="sy0">;</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>times <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">)</span> <span class="br0">{</span>                     <span class="co1">// When the 0 and 1 clauses are included,</span>
+        <span class="kw1">return</span> oneNumberBack <span class="sy0">+</span> twoNumbersBack<span class="sy0">;</span>   <span class="co1">// this clause merely stops one additional</span>
+    <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>                                     <span class="co1">// recursion from occurring</span>
+        <span class="kw1">return</span> fibonacciOf<span class="br0">(</span>times <span class="sy0">-</span> <span class="nu0">1</span>, oneNumberBack, oneNumberBack <span class="sy0">+</span> twoNumbersBack<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h4> <span class="mw-headline" id="Greatest_common_divisor">Greatest common divisor</span>
+</h4>
+<p>Another famous recursive function is the <a href="http://en.m.wikipedia.org/wiki/Euclidean_algorithm" title="Euclidean algorithm">Euclidean algorithm</a>, used to compute the <a href="http://en.m.wikipedia.org/wiki/Greatest_common_divisor" title="Greatest common divisor">greatest common divisor</a> of two integers. Function definition<i>:</i></p>
+<dl>
+<dd><img class="tex" alt=" \gcd(x,y) =
+ \begin{cases}
+ x &amp; \mbox{if } y = 0 \\
+ \gcd(y, \operatorname{remainder}(x,y)) &amp; \mbox{if } x \ge y \mbox{ and } y &gt; 0 \\
+ \end{cases}
+" src="Recursion_%28computer_science%29_files/11a35174ff0022b97e39114f5f57e1fc.png"></dd>
+</dl>
+<table class="wikitable">
+<tbody><tr>
+<th>
+<a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">Pseudocode</a> (recursive):</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> gcd is:
+<b>input</b>: integer <i>x</i>, integer <i>y</i> such that <i>x</i> &gt;= <i>y</i> and <i>y</i> &gt;= 0
+<br>    1. if <i>y</i> is 0, <b>return</b> <i>x</i>
+    2. otherwise, <b>return</b> [ gcd( <i>y</i>, (remainder of <i>x</i>/<i>y</i>) ) ]
+<br><b>end</b> gcd
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p><i>Recurrence relation for greatest common divisor</i>, where <img class="tex" alt="x&nbsp;% y" src="Recursion_%28computer_science%29_files/ac64a1c27fa8763d123ddf67912bdbd5.png"> expresses the remainder of <img class="tex" alt="x / y" src="Recursion_%28computer_science%29_files/5c31a2fad817e4698c5e6a27fc0bf191.png">:</p>
+<dl>
+<dd><img class="tex" alt="\gcd(x,y) = \gcd(y, x&nbsp;% y)" src="Recursion_%28computer_science%29_files/1728d48f73bdcd941d3c899112c95fed.png"></dd>
+<dd><img class="tex" alt="\gcd(x,0) = x" src="Recursion_%28computer_science%29_files/17bc051f008dd3671c46698c06b1fd3f.png"></dd>
+</dl>
+<table class="wikitable">
+<tbody><tr>
+<th>Computing the recurrence relation for x = 27 and y = 9:</th>
+</tr>
+<tr>
+<td>
+<pre>gcd(27, 9)   = gcd(9, 27 % 9)
+             = gcd(9, 0)
+             = 9
+</pre>
+</td>
+</tr>
+<tr>
+<th>Computing the recurrence relation for x = 259 and y = 111:</th>
+</tr>
+<tr>
+<td>
+<pre>gcd(259, 111)   = gcd(111, 259 % 111)
+                = gcd(111, 37)
+                = gcd(37, 0)
+                = 37
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>The recursive program above is <a href="http://en.m.wikipedia.org/wiki/Tail-recursive" title="Tail-recursive" class="mw-redirect">tail-recursive</a>;
+ it is equivalent to an iterative algorithm, and the computation shown 
+above shows the steps of evaluation that would be performed by a 
+language that eliminates tail calls. Below is a version of the same 
+algorithm using explicit iteration, suitable for a language that does 
+not eliminate tail calls. By maintaining its state entirely in the 
+variables <i>x</i> and <i>y</i> and using a looping construct, the program avoids making recursive calls and growing the call stack.</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Pseudocode (iterative):</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> gcd is:<br><b>input</b>: integer <i>x</i>, integer <i>y</i> such that <i>x</i> &gt;= <i>y</i> and <i>y</i> &gt;= 0
+<br>    1. <b>create</b> new variable called <i>remainder</i>
+<br>    2. <b>begin</b> loop
+          1. if <i>y</i> is zero, <b>exit</b> loop
+          2. <b>set</b> <i>remainder</i> to the remainder of x/y
+          3. <b>set</b> x to y
+          4. <b>set</b> y to <i>remainder</i>
+          5. <b>repeat</b> loop
+<br>    3. <b>return</b> <i>x</i>
+<br><b>end</b> gcd
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p>The iterative algorithm requires a temporary variable, and even given
+ knowledge of the Euclidean algorithm it is more difficult to understand
+ the process by simple inspection, although the two algorithms are very 
+similar in their steps.</p>
+<h4> <span class="mw-headline" id="Towers_of_Hanoi">Towers of Hanoi</span>
+</h4>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Towers_of_Hanoi" title="Towers of Hanoi" class="mw-redirect">Towers of Hanoi</a>
+</div>
+<p>For a full discussion of this problem's description, history and solution see the main article or one of the many references.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup><sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup>
+ Simply put the problem is this: given three pegs, one with a set of N 
+disks of increasing size, determine the minimum (optimal) number of 
+steps it takes to move all the disks from their initial position to 
+another peg without placing a larger disk on top of a smaller one.</p>
+<p><i>Function definition</i>:</p>
+<dl>
+<dd><img class="tex" alt=" \operatorname{hanoi}(n) =
+ \begin{cases}
+ 1 &amp; \mbox{if } n = 1 \\
+ 2\cdot\operatorname{hanoi}(n-1) + 1 &amp; \mbox{if } n &gt; 1\\
+ \end{cases}
+" src="Recursion_%28computer_science%29_files/86372d4710c0760289be4efe2de04111.png"></dd>
+</dl>
+<p><i>Recurrence relation for hanoi</i>:</p>
+<dl>
+<dd><img class="tex" alt="h_n = 2h_{n-1}+1" src="Recursion_%28computer_science%29_files/c40e37bba77bb38ac13a8c1f54dcbbca.png"></dd>
+<dd><img class="tex" alt="h_1 = 1" src="Recursion_%28computer_science%29_files/a93d41a0c44eeec5c4344925717b4de5.png"></dd>
+</dl>
+<table class="wikitable">
+<tbody><tr>
+<th>Computing the recurrence relation for n = 4:</th>
+</tr>
+<tr>
+<td>
+<pre>hanoi(4)     = 2*hanoi(3) + 1
+             = 2*(2*hanoi(2) + 1) + 1
+             = 2*(2*(2*hanoi(1) + 1) + 1) + 1
+             = 2*(2*(2*1 + 1) + 1) + 1
+             = 2*(2*(3) + 1) + 1
+             = 2*(7) + 1
+             = 15
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p><br>
+Example Implementations:</p>
+<table class="wikitable">
+<tbody><tr>
+<th>
+<a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">Pseudocode</a> (recursive):</th>
+</tr>
+<tr>
+<td>
+<pre><b>function</b> hanoi is:<br><b>input</b>: integer <i>n</i>, such that <i>n</i> &gt;= <i>1</i>
+<br>    1. <b>if</b> n is 1 <b>then return</b> 1
+<br>    2. <b>return</b> [2 * [<b>call</b> hanoi(n-1)] + 1]
+<br><b>end</b> hanoi
+</pre>
+</td>
+</tr>
+</tbody></table>
+<p><br>
+Although not all recursive functions have an explicit solution, the 
+Tower of Hanoi sequence can be reduced to an explicit formula.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup></p>
+<table class="wikitable">
+<tbody><tr>
+<th>An explicit formula for Towers of Hanoi:</th>
+</tr>
+<tr>
+<td>
+<pre>h<sub>1</sub> = 1   = 2<sup>1</sup> - 1
+h<sub>2</sub> = 3   = 2<sup>2</sup> - 1
+h<sub>3</sub> = 7   = 2<sup>3</sup> - 1
+h<sub>4</sub> = 15  = 2<sup>4</sup> - 1
+h<sub>5</sub> = 31  = 2<sup>5</sup> - 1
+h<sub>6</sub> = 63  = 2<sup>6</sup> - 1
+h<sub>7</sub> = 127 = 2<sup>7</sup> - 1
+</pre>
+<pre>In general:
+h<sub>n</sub> = 2<sup>n</sup> - 1, for all n &gt;= 1
+</pre>
+</td>
+</tr>
+</tbody></table>
+<h4> <span class="mw-headline" id="Binary_search">Binary search</span>
+</h4>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Binary_search" title="Binary search" class="mw-redirect">binary search</a>
+ algorithm is a method of searching an ordered array for a single 
+element by cutting the array in half with each pass. The trick is to 
+pick a midpoint near the center of the array, compare the data at that 
+point with the data being searched and then responding to one of three 
+possible conditions: the data is found at the midpoint, the data at the 
+midpoint is greater than the data being searched for, or the data at the
+ midpoint is less than the data being searched for.</p>
+<p>Recursion is used in this algorithm because with each pass a new 
+array is created by cutting the old one in half. The binary search 
+procedure is then called recursively, this time on the new (and smaller)
+ array. Typically the array's size is adjusted by manipulating a 
+beginning and ending index. The algorithm exhibits a logarithmic order 
+of growth because it essentially divides the problem domain in half with
+ each pass.</p>
+<p>Example implementation of binary search in C:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"> <span class="coMULTI">/*
+  Call binary_search with proper initial conditions.
+ 
+  INPUT:
+    data is an array of integers SORTED in ASCENDING order,
+    toFind is the integer to search for,
+    count is the total number of elements in the array
+ 
+  OUTPUT:
+    result of binary_search
+ 
+ */</span>
+ <span class="kw4">int</span> search<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>data<span class="sy0">,</span> <span class="kw4">int</span> toFind<span class="sy0">,</span> <span class="kw4">int</span> count<span class="br0">)</span>
+ <span class="br0">{</span>
+    <span class="co1">//  Start = 0 (beginning index)</span>
+    <span class="co1">//  End = count - 1 (top index)</span>
+    <span class="kw1">return</span> binary_search<span class="br0">(</span>data<span class="sy0">,</span> toFind<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> count<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+ <span class="br0">}</span>
+ 
+ <span class="coMULTI">/*
+   Binary Search Algorithm.
+ 
+   INPUT:
+        data is a array of integers SORTED in ASCENDING order,
+        toFind is the integer to search for,
+        start is the minimum array index,
+        end is the maximum array index
+   OUTPUT:
+        position of the integer toFind within array data,
+        -1 if not found
+ */</span>
+ <span class="kw4">int</span> binary_search<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>data<span class="sy0">,</span> <span class="kw4">int</span> toFind<span class="sy0">,</span> <span class="kw4">int</span> start<span class="sy0">,</span> <span class="kw4">int</span> end<span class="br0">)</span>
+ <span class="br0">{</span>
+    <span class="co1">//Get the midpoint.</span>
+    <span class="kw4">int</span> mid <span class="sy0">=</span> start <span class="sy0">+</span> <span class="br0">(</span>end <span class="sy0">-</span> start<span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span>   <span class="co1">//Integer division</span>
+ 
+    <span class="co1">//Stop condition.</span>
+    <span class="kw1">if</span> <span class="br0">(</span>start <span class="sy0">&gt;</span> end<span class="br0">)</span>
+       <span class="kw1">return</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>data<span class="br0">[</span>mid<span class="br0">]</span> <span class="sy0">==</span> toFind<span class="br0">)</span>        <span class="co1">//Found?</span>
+       <span class="kw1">return</span> mid<span class="sy0">;</span>
+    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>data<span class="br0">[</span>mid<span class="br0">]</span> <span class="sy0">&gt;</span> toFind<span class="br0">)</span>         <span class="co1">//Data is greater than toFind, search lower half</span>
+       <span class="kw1">return</span> binary_search<span class="br0">(</span>data<span class="sy0">,</span> toFind<span class="sy0">,</span> start<span class="sy0">,</span> mid<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">else</span>                                 <span class="co1">//Data is less than toFind, search upper half</span>
+       <span class="kw1">return</span> binary_search<span class="br0">(</span>data<span class="sy0">,</span> toFind<span class="sy0">,</span> mid<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">,</span> end<span class="br0">)</span><span class="sy0">;</span>
+ <span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Recursive_data_structures_.28structural_recursion.29">Recursive data structures (structural recursion)</span>
+</h3>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Recursive_data_type" title="Recursive data type">Recursive data type</a>
+</div>
+<p>An important application of recursion in computer science is in 
+defining dynamic data structures such as Lists and Trees. Recursive data
+ structures can dynamically grow to a theoretically infinite size in 
+response to runtime requirements; in contrast, a static array's size 
+requirements must be set at compile time.</p>
+<blockquote>
+<p>"Recursive algorithms are particularly appropriate when the 
+underlying problem or the data to be treated are defined in recursive 
+terms." <sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup></p>
+</blockquote>
+<p>The examples in this section illustrate what is known as "structural 
+recursion". This term refers to the fact that the recursive procedures 
+are acting on data that is defined recursively.</p>
+<blockquote>
+<p>As long as a programmer derives the template from a data definition, 
+functions employ structural recursion. That is, the recursions in a 
+function's body consume some immediate piece of a given compound value.<sup id="cite_ref-Felleisen_2002_108_4-1" class="reference"><a href="#cite_note-Felleisen_2002_108-4"><span>[</span>5<span>]</span></a></sup></p>
+</blockquote>
+<h4> <span class="mw-headline" id="Linked_lists">Linked lists</span>
+</h4>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">Linked list</a>
+</div>
+<p>Below is a simple definition of a linked list node. Notice especially
+ how the node is defined in terms of itself. The "next" element of <i>struct node</i> is a pointer to another <i>struct node</i>, effectively creating a list type.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">struct</span> node
+<span class="br0">{</span>
+  <span class="kw4">int</span> data<span class="sy0">;</span>           <span class="co1">// some integer data</span>
+  <span class="kw4">struct</span> node <span class="sy0">*</span>next<span class="sy0">;</span>  <span class="co1">// pointer to another struct node</span>
+<span class="br0">}</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>Because the <i>struct node</i> data structure is defined recursively,
+ procedures that operate on them can be implemented naturally as a 
+recursive procedure. The <i>list_print</i> procedure defined below walks
+ down the list until the list is empty (or NULL). For each node it 
+prints the data element (an integer). In the C implementation, the list 
+remains unchanged by the <i>list_print</i> procedure.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> list_print<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>list<span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw1">if</span> <span class="br0">(</span>list <span class="sy0">!=</span> NULL<span class="br0">)</span>               <span class="co1">// base case</span>
+    <span class="br0">{</span>
+       <span class="kw3">printf</span> <span class="br0">(</span><span class="st0">"%d "</span><span class="sy0">,</span> list<span class="sy0">-&gt;</span>data<span class="br0">)</span><span class="sy0">;</span>  <span class="co1">// print integer data followed by a space</span>
+       list_print <span class="br0">(</span>list<span class="sy0">-&gt;</span>next<span class="br0">)</span><span class="sy0">;</span>     <span class="co1">// recursive call on the next node</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h4> <span class="mw-headline" id="Binary_trees">Binary trees</span>
+</h4>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">Binary tree</a>
+</div>
+<p>Below is a simple definition for a binary tree node. Like the node 
+for linked lists, it is defined in terms of itself, recursively. There 
+are two self-referential pointers: left (pointing to the left sub-tree) 
+and right (pointing to the right sub-tree).</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">struct</span> node
+<span class="br0">{</span>
+  <span class="kw4">int</span> data<span class="sy0">;</span>            <span class="co1">// some integer data</span>
+  <span class="kw4">struct</span> node <span class="sy0">*</span>left<span class="sy0">;</span>   <span class="co1">// pointer to the left subtree</span>
+  <span class="kw4">struct</span> node <span class="sy0">*</span>right<span class="sy0">;</span>  <span class="co1">// point to the right subtree</span>
+<span class="br0">}</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>Operations on the tree can be implemented using recursion. Note that 
+because there are two self-referencing pointers (left and right), tree 
+operations may require two recursive calls:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">// Test if tree_node contains i; return 1 if so, 0 if not.</span>
+<span class="kw4">int</span> tree_contains<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>tree_node<span class="sy0">,</span> <span class="kw4">int</span> i<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>tree_node <span class="sy0">==</span> NULL<span class="br0">)</span>
+                <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>  <span class="co1">// base case</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>tree_node<span class="sy0">-&gt;</span>data <span class="sy0">==</span> i<span class="br0">)</span>
+                <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> tree_contains<span class="br0">(</span>tree_node<span class="sy0">-&gt;</span>left<span class="sy0">,</span> i<span class="br0">)</span> <span class="sy0">||</span> tree_contains<span class="br0">(</span>tree_node<span class="sy0">-&gt;</span>right<span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>At most two recursive calls will be made for any given call to <i>tree_contains</i> as defined above.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">// Inorder traversal:</span>
+<span class="kw4">void</span> tree_print<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>tree_node<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>tree_node <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="br0">{</span>               <span class="co1">// base case</span>
+                tree_print<span class="br0">(</span>tree_node<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="sy0">;</span>   <span class="co1">// go left</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"%d "</span><span class="sy0">,</span> tree_node<span class="sy0">-&gt;</span>n<span class="br0">)</span><span class="sy0">;</span>   <span class="co1">// print the integer followed by a space</span>
+                tree_print<span class="br0">(</span>tree_node<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="sy0">;</span>  <span class="co1">// go right</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>The above example illustrates an <a href="http://en.m.wikipedia.org/wiki/Tree_traversal" title="Tree traversal">in-order traversal</a> of the binary tree. A <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree</a> is a special case of the binary tree where the data elements of each node are in order.</p>
+<h4> <span class="mw-headline" id="Filesystem_traversal">Filesystem traversal</span>
+</h4>
+<p>Since the number of files in a <a href="http://en.m.wikipedia.org/wiki/Filesystem" title="Filesystem" class="mw-redirect">filesystem</a> may vary, <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursion</a> is the only practical way to traverse and thus enumerate its contents. Traversing a filesystem is very similar to that of <a href="http://en.m.wikipedia.org/wiki/Tree_traversal" title="Tree traversal">tree traversal</a>,
+ therefore the concepts behind tree traversal are applicable to 
+traversing a filesystem. More specifically, the code below would be an 
+example of a preorder traversal of a filesystem.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java source-java">
+<pre class="de1"><span class="kw1">import</span> <span class="co2">java.io.*</span><span class="sy0">;</span>
+ 
+<span class="kw1">public</span> <span class="kw1">class</span> FileSystem <span class="br0">{</span>
+ 
+        <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">(</span><span class="kw3">String</span> <span class="br0">[</span><span class="br0">]</span> args<span class="br0">)</span> <span class="br0">{</span>
+                traverse <span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+ 
+        <span class="co3">/**
+         * Obtains the filesystem roots
+         * Proceeds with the recurisve filesystem traversal
+         */</span>
+        <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">void</span> traverse <span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+                <span class="kw3">File</span> <span class="br0">[</span><span class="br0">]</span> fs <span class="sy0">=</span> <span class="kw3">File</span>.<span class="me1">listRoots</span> <span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> fs.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+                        <span class="kw1">if</span> <span class="br0">(</span>fs<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">isDirectory</span> <span class="br0">(</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> fs<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">canRead</span> <span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                                rtraverse <span class="br0">(</span>fs<span class="br0">[</span>i<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                <span class="br0">}</span>
+        <span class="br0">}</span>
+ 
+        <span class="co3">/**
+         * Recursively traverse a given directory
+         *
+         * @param fd indicates the starting point of traversal
+         */</span>
+        <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">void</span> rtraverse <span class="br0">(</span><span class="kw3">File</span> fd<span class="br0">)</span> <span class="br0">{</span>
+                <span class="kw3">File</span> <span class="br0">[</span><span class="br0">]</span> fss <span class="sy0">=</span> fd.<span class="me1">listFiles</span> <span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+ 
+                <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> fss.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span> <span class="br0">{</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span> <span class="br0">(</span>fss<span class="br0">[</span>i<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">(</span>fss<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">isDirectory</span> <span class="br0">(</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> fss<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">canRead</span> <span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                                rtraverse <span class="br0">(</span>fss<span class="br0">[</span>i<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                <span class="br0">}</span>
+        <span class="br0">}</span>
+ 
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p><br>
+This code blends the lines, at least somewhat, between recursion and <a href="http://en.m.wikipedia.org/wiki/Iteration" title="Iteration">iteration</a>. It is, essentially, a recursive implementation, which is the best way to traverse a <a href="http://en.m.wikipedia.org/wiki/Filesystem" title="Filesystem" class="mw-redirect">filesystem</a>.
+ It is also an example of direct and indirect recursion. "rtraverse" is 
+purely a direct example; "traverse" is the indirect, which calls 
+"rtraverse." This example needs no "base case" scenario due to the fact 
+that there will always be some fixed number of files and/or directories 
+in a given filesystem.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Recursion_versus_iteration">Recursion versus iteration</span></h2><div class="content_block" id="content_5">
+<h3> <span class="mw-headline" id="Expressive_power">Expressive power</span>
+</h3>
+<p>Most <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a>
+ in use today allow the direct specification of recursive functions and 
+procedures. When such a function is called, the program's <a href="http://en.m.wikipedia.org/wiki/Runtime_environment" title="Runtime environment" class="mw-redirect">runtime environment</a> keeps track of the various instances of the function (often using a <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a>,
+ although other methods may be used). Every recursive function can be 
+transformed into an iterative function by replacing recursive calls with
+ <a href="http://en.m.wikipedia.org/wiki/Control_operator#Loops" title="Control operator" class="mw-redirect">iterative control constructs</a> and simulating the call stack with a <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a> explicitly managed by the program.<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>11<span>]</span></a></sup><sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup></p>
+<p>Conversely, all iterative functions and procedures that can be evaluated by a computer (see <a href="http://en.m.wikipedia.org/wiki/Turing_completeness" title="Turing completeness">Turing completeness</a>) can be expressed in terms of recursive functions; iterative control constructs such as <a href="http://en.m.wikipedia.org/wiki/While_loop" title="While loop">while loops</a> and <a href="http://en.m.wikipedia.org/wiki/Do_loop" title="Do loop" class="mw-redirect">do loops</a> routinely are rewritten in recursive form in <a href="http://en.m.wikipedia.org/wiki/Functional_language" title="Functional language" class="mw-redirect">functional languages</a>.<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>13<span>]</span></a></sup><sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>14<span>]</span></a></sup> However, in practice this rewriting depends on <a href="http://en.m.wikipedia.org/wiki/Tail_call_elimination" title="Tail call elimination" class="mw-redirect">tail call elimination</a>, which is not a feature of all languages. <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a>, <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>, and <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> are notable mainstream languages in which all function calls, including <a href="http://en.m.wikipedia.org/wiki/Tail_call" title="Tail call">tail calls</a>,
+ cause stack allocation that would not occur with the use of looping 
+constructs; in these languages, a working iterative program rewritten in
+ recursive form may <a href="http://en.m.wikipedia.org/wiki/Stack_overflow" title="Stack overflow">overflow the call stack</a>.</p>
+<h3> <span class="mw-headline" id="Performance_issues">Performance issues</span>
+</h3>
+<p>In languages (such as <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> and <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>)
+ that favor iterative looping constructs, there is usually significant 
+time and space cost associated with recursive programs, due to the 
+overhead required to manage the stack and the relative slowness of 
+function calls; in <a href="http://en.m.wikipedia.org/wiki/Functional_languages" title="Functional languages" class="mw-redirect">functional languages</a>, a function call (particularly a <a href="http://en.m.wikipedia.org/wiki/Tail_call" title="Tail call">tail call</a>) is typically a very fast operation, and the difference is usually less noticeable.</p>
+<p>As a concrete example, the difference in performance between 
+recursive and iterative implementations of the "factorial" example above
+ depends highly on the language used. In languages where looping 
+constructs are preferred, the iterative version may be as much as 
+several orders of magnitude faster than the recursive one. In functional
+ languages, the overall time difference of the two implementations may 
+be negligible; in fact, the cost of multiplying the larger numbers first
+ rather than the smaller numbers (which the iterative version given here
+ happens to do) may overwhelm any time saved by choosing iteration.</p>
+<h3> <span class="mw-headline" id="Other_considerations">Other considerations</span>
+</h3>
+<p>In some programming languages, the stack space available to a thread 
+is much less than the space available in the heap, and recursive 
+algorithms tend to require more stack space than iterative algorithms. 
+Consequently, these languages sometimes place a limit on the depth of 
+recursion to avoid stack overflows. (<a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> is one such language.<sup id="cite_ref-14" class="reference"><a href="#cite_note-14"><span>[</span>15<span>]</span></a></sup>) Note the caveat below regarding the special case of <a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">tail recursion</a>.</p>
+<p>There are some types of problems whose solutions are inherently 
+recursive, because of prior state they need to track. One example is <a href="http://en.m.wikipedia.org/wiki/Tree_traversal" title="Tree traversal">tree traversal</a>; others include the <a href="http://en.m.wikipedia.org/wiki/Ackermann_function" title="Ackermann function">Ackermann function</a>, <a href="http://en.m.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first search</a>, and <a href="http://en.m.wikipedia.org/wiki/Divide-and-conquer_algorithm" title="Divide-and-conquer algorithm" class="mw-redirect">divide-and-conquer algorithms</a> such as <a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a>. All of these algorithms can be implemented iteratively with the help of an explicit <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a>,
+ but the programmer effort involved in managing the stack, and the 
+complexity of the resulting program, arguably outweigh any advantages of
+ the iterative solution.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Tail-recursive_functions">Tail-recursive functions</span></h2><div class="content_block" id="content_6">
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">Tail recursion</a>
+</div>
+<p>Tail-recursive functions are functions in which all recursive calls are <a href="http://en.m.wikipedia.org/wiki/Tail_call" title="Tail call">tail calls</a>
+ and hence do not build up any deferred operations. For example, the gcd
+ function (shown again below) is tail-recursive. In contrast, the 
+factorial function (also below) is <b>not</b> tail-recursive; because 
+its recursive call is not in tail position, it builds up deferred 
+multiplication operations that must be performed after the final 
+recursive call completes. With a <a href="http://en.m.wikipedia.org/wiki/Compiler" title="Compiler">compiler</a> or <a href="http://en.m.wikipedia.org/wiki/Interpreter" title="Interpreter" class="mw-redirect">interpreter</a> that treats tail-recursive calls as <a href="http://en.m.wikipedia.org/wiki/Goto" title="Goto">jumps</a>
+ rather than function calls, a tail-recursive function such as gcd will 
+execute using constant space. Thus the program is essentially iterative,
+ equivalent to using imperative language control structures like the 
+"for" and "while" loops.</p>
+<table class="wikitable">
+<tbody><tr>
+<th>
+<a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">Tail recursion</a>:</th>
+<th>Augmenting recursion:</th>
+</tr>
+<tr>
+<td>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">//INPUT: Integers x, y such that x &gt;= y and y &gt; 0</span>
+<span class="kw4">int</span> gcd<span class="br0">(</span><span class="kw4">int</span> x<span class="sy0">,</span> <span class="kw4">int</span> y<span class="br0">)</span>
+<span class="br0">{</span>
+  <span class="kw1">if</span> <span class="br0">(</span>y <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span>
+     <span class="kw1">return</span> x<span class="sy0">;</span>
+  <span class="kw1">else</span>
+     <span class="kw1">return</span> gcd<span class="br0">(</span>y<span class="sy0">,</span> x <span class="sy0">%</span> y<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</td>
+<td>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">//INPUT: n is an Integer such that n &gt;= 1</span>
+<span class="kw4">int</span> fact<span class="br0">(</span><span class="kw4">int</span> n<span class="br0">)</span>
+<span class="br0">{</span>
+   <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">)</span>
+      <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+   <span class="kw1">else</span>
+      <span class="kw1">return</span> n <span class="sy0">*</span> fact<span class="br0">(</span>n <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p>The significance of tail recursion is that when making a 
+tail-recursive call, the caller's return position need not be saved on 
+the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a>;
+ when the recursive call returns, it will branch directly on the 
+previously saved return position. Therefore, on compilers that support 
+tail-recursion optimization, tail recursion saves both space and time.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Order_of_execution">Order of execution</span></h2><div class="content_block" id="content_7">
+<p>In a recursive function, the position in which additional statements 
+(i.e., statements other than the recursive call itself) are placed is 
+important. In the simple case of a function calling itself only once, a 
+statement placed before the recursive call will be executed first in the
+ outermost <a href="http://en.m.wikipedia.org/wiki/Call_stack#Structure" title="Call stack">stack frame</a>, while a statement placed after the recursive call will be executed first in the innermost stack frame. Consider this example:</p>
+<h3> <span class="mw-headline" id="Function_1">Function 1</span>
+</h3>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> g   <span class="co1">//global variable//</span>
+main<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+<span class="kw4">static</span> <span class="kw4">int</span> ms<span class="sy0">;</span>
+<span class="kw4">int</span> ml<span class="sy0">;</span>
+  <span class="sy0">++</span>g<span class="sy0">;</span>
+  ml<span class="sy0">=++</span>ms<span class="sy0">;</span>
+<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"%d%d%d"</span><span class="sy0">,</span>g<span class="sy0">,</span>ms<span class="sy0">,</span>ml<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">(</span>ml<span class="sy0">&lt;=</span><span class="nu0">2</span><span class="br0">)</span>
+main<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"%d%D%D"</span><span class="sy0">,</span>g<span class="sy0">,</span>ms<span class="sy0">,</span>ml<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p><a href="http://en.m.wikipedia.org/wiki/File:RecursiveFunction1_execution.png" class="image"><img alt="RecursiveFunction1 execution.png" src="Recursion_%28computer_science%29_files/RecursiveFunction1_execution.png" width="349" height="151"></a></p>
+<h3> <span class="mw-headline" id="Function_2_with_swapped_lines">Function 2 with swapped lines</span>
+</h3>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> recursiveFunction<span class="br0">(</span><span class="kw4">int</span> num<span class="br0">)</span> <span class="br0">{</span>
+   <span class="kw1">if</span> <span class="br0">(</span>num <span class="sy0">&lt;</span> <span class="nu0">4</span><span class="br0">)</span>
+      recursiveFunction<span class="br0">(</span>num <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+   <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"%d<span class="es1">\n</span>"</span><span class="sy0">,</span> num<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p><a href="http://en.m.wikipedia.org/wiki/File:RecursiveFunction2_execution.png" class="image"><img alt="RecursiveFunction2 execution.png" src="Recursion_%28computer_science%29_files/RecursiveFunction2_execution.png" width="349" height="143"></a></p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Direct_and_indirect_recursion">Direct and indirect recursion</span></h2><div class="content_block" id="content_8">
+<p>Most of the examples presented here demonstrate <i>direct</i> recursion, in which a function calls itself. <i>Indirect</i>
+ recursion occurs when a function is called not by itself but by another
+ function that it called (either directly or indirectly). "Chains" of 
+three or more functions are possible; for example, function 1 calls 
+function 2, function 2 calls function 3, and function 3 calls function 1
+ again.</p>
+<p>Often, "indirect recursion" is called <a href="http://en.m.wikipedia.org/wiki/Mutual_recursion" title="Mutual recursion">mutual recursion</a>.</p>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_9">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Ackermann_function" title="Ackermann function">Ackermann function</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Anonymous_recursion" title="Anonymous recursion" class="mw-redirect">Anonymous recursion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Corecursion" title="Corecursion">Corecursion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">Functional programming</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Kleene%E2%80%93Rosser_paradox" title="Kleene–Rosser paradox">Kleene–Rosser paradox</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/McCarthy_91_function" title="McCarthy 91 function">McCarthy 91 function</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">Memoization</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Mutual_recursion" title="Mutual recursion">Mutual recursion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/%CE%9C-recursive_function" title="Μ-recursive function">μ-recursive function</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Primitive_recursive_function" title="Primitive recursive function">Primitive recursive function</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">Recursion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sierpi%C5%84ski_curve" title="Sierpiński curve">Sierpiński curve</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tak_%28function%29" title="Tak (function)">Takeuchi function</a></li>
+</ul>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="Notes_and_references">Notes and references</span></h2><div class="content_block" id="content_10">
+<div class="reflist references-column-count references-column-count-2" style="-moz-column-count: 2; -webkit-column-count: 2; column-count: 2; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation book">Graham, Ronald; Donald Knuth, Oren Patashnik (1990). <a rel="nofollow" class="external text" href="http://www-cs-faculty.stanford.edu/%7Eknuth/gkp.html"><i>Concrete Mathematics</i></a>. Chapter 1: Recurrent Problems<span class="printonly">. <a rel="nofollow" class="external free" href="http://www-cs-faculty.stanford.edu/%7Eknuth/gkp.html">http://www-cs-faculty.stanford.edu/~knuth/gkp.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Concrete+Mathematics&amp;rft.aulast=Graham&amp;rft.aufirst=Ronald&amp;rft.au=Graham%2C%26%2332%3BRonald&amp;rft.date=1990&amp;rft.pages=Chapter+1%3A+Recurrent+Problems&amp;rft_id=http%3A%2F%2Fwww-cs-faculty.stanford.edu%2F%7Eknuth%2Fgkp.html&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation book">Epp, Susanna (1995). <i>Discrete Mathematics with Applications</i> (2nd ed.). p.&nbsp;427.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Discrete+Mathematics+with+Applications&amp;rft.aulast=Epp&amp;rft.aufirst=Susanna&amp;rft.au=Epp%2C%26%2332%3BSusanna&amp;rft.date=1995&amp;rft.pages=p.%26nbsp%3B427&amp;rft.edition=2nd&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation book">Wirth, Niklaus (1976). <i>Algorithms + Data Structures = Programs</i>. Prentice-Hall. p.&nbsp;126.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Algorithms+%2B+Data+Structures+%3D+Programs&amp;rft.aulast=Wirth&amp;rft.aufirst=Niklaus&amp;rft.au=Wirth%2C%26%2332%3BNiklaus&amp;rft.date=1976&amp;rft.pages=p.%26nbsp%3B126&amp;rft.pub=Prentice-Hall&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Felleisen_HtDP_2001-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Felleisen_HtDP_2001_3-0">^</a></b></span> <span class="reference-text"><span class="citation book">Felleisen, Matthias; Robert Bruce Findler, Matthew Flatt, Shriram Krishnamurthi (2001). <a rel="nofollow" class="external text" href="http://www.htdp.org/2003-09-26/Book/curriculum-Z-H-31.html"><i>How to Design Programs: An Introduction to Computing and Programming</i></a>. Cambridge, MASS: MIT Press. p.&nbsp;art V "Generative Recursion"<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.htdp.org/2003-09-26/Book/curriculum-Z-H-31.html">http://www.htdp.org/2003-09-26/Book/curriculum-Z-H-31.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=How+to+Design+Programs%3A+An+Introduction+to+Computing+and+Programming&amp;rft.aulast=Felleisen&amp;rft.aufirst=Matthias&amp;rft.au=Felleisen%2C%26%2332%3BMatthias&amp;rft.date=2001&amp;rft.pages=p.%26nbsp%3Bart+V+%22Generative+Recursion%22&amp;rft.place=Cambridge%2C+MASS&amp;rft.pub=MIT+Press&amp;rft_id=http%3A%2F%2Fwww.htdp.org%2F2003-09-26%2FBook%2Fcurriculum-Z-H-31.html&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Felleisen_2002_108-4">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Felleisen_2002_108_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Felleisen_2002_108_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation book">Felleisen, Matthias (2002). "Developing Interactive Web Programs". In Jeuring, Johan. <i>Advanced Functional Programming: 4th International School</i>. Oxford, UK: Springer. p.&nbsp;108</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Developing+Interactive+Web+Programs&amp;rft.atitle=Advanced+Functional+Programming%3A+4th+International+School&amp;rft.aulast=Felleisen&amp;rft.aufirst=Matthias&amp;rft.au=Felleisen%2C%26%2332%3BMatthias&amp;rft.date=2002&amp;rft.pages=p.%26nbsp%3B108&amp;rft.place=Oxford%2C+UK&amp;rft.pub=Springer&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation book">Abelson, Harold; Gerald Jay Sussman (1996). <a rel="nofollow" class="external text" href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2"><i>Structure and Interpretation of Computer Programs</i></a>. Section 1.2.2<span class="printonly">. <a rel="nofollow" class="external free" href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2">http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Structure+and+Interpretation+of+Computer+Programs&amp;rft.aulast=Abelson&amp;rft.aufirst=Harold&amp;rft.au=Abelson%2C%26%2332%3BHarold&amp;rft.date=1996&amp;rft.pages=Section+1.2.2&amp;rft_id=http%3A%2F%2Fmitpress.mit.edu%2Fsicp%2Ffull-text%2Fbook%2Fbook-Z-H-11.html%23%25_sec_1.2.2&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation book">Graham, Ronald; Donald Knuth, Oren Patashnik (1990). <a rel="nofollow" class="external text" href="http://www-cs-faculty.stanford.edu/%7Eknuth/gkp.html"><i>Concrete Mathematics</i></a>. Chapter 1, Section 1.1: The Tower of Hanoi<span class="printonly">. <a rel="nofollow" class="external free" href="http://www-cs-faculty.stanford.edu/%7Eknuth/gkp.html">http://www-cs-faculty.stanford.edu/~knuth/gkp.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Concrete+Mathematics&amp;rft.aulast=Graham&amp;rft.aufirst=Ronald&amp;rft.au=Graham%2C%26%2332%3BRonald&amp;rft.date=1990&amp;rft.pages=Chapter+1%2C+Section+1.1%3A+The+Tower+of+Hanoi&amp;rft_id=http%3A%2F%2Fwww-cs-faculty.stanford.edu%2F%7Eknuth%2Fgkp.html&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><span class="citation book">Epp, Susanna (1995). <i>Discrete Mathematics with Applications</i> (2nd ed.). pp.&nbsp;427–430: The Tower of Hanoi.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Discrete+Mathematics+with+Applications&amp;rft.aulast=Epp&amp;rft.aufirst=Susanna&amp;rft.au=Epp%2C%26%2332%3BSusanna&amp;rft.date=1995&amp;rft.pages=pp.%26nbsp%3B427%E2%80%93430%3A+The+Tower+of+Hanoi&amp;rft.edition=2nd&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text"><span class="citation book">Epp, Susanna (1995). <i>Discrete Mathematics with Applications</i> (2nd ed.). pp.&nbsp;447–448: An Explicit Formula for the Tower of Hanoi Sequence.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Discrete+Mathematics+with+Applications&amp;rft.aulast=Epp&amp;rft.aufirst=Susanna&amp;rft.au=Epp%2C%26%2332%3BSusanna&amp;rft.date=1995&amp;rft.pages=pp.%26nbsp%3B447%E2%80%93448%3A+An+Explicit+Formula+for+the+Tower+of+Hanoi+Sequence&amp;rft.edition=2nd&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><span class="citation book">Wirth, Niklaus (1976). <i>Algorithms + Data Structures = Programs</i>. Prentice-Hall. p.&nbsp;127.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Algorithms+%2B+Data+Structures+%3D+Programs&amp;rft.aulast=Wirth&amp;rft.aufirst=Niklaus&amp;rft.au=Wirth%2C%26%2332%3BNiklaus&amp;rft.date=1976&amp;rft.pages=p.%26nbsp%3B127&amp;rft.pub=Prentice-Hall&amp;rfr_id=info:sid/en.wikipedia.org:Recursion_(computer_science)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.saasblogs.com/2006/09/15/how-to-rewrite-standard-recursion-through-a-state-stack-amp-iteration/">http://www.saasblogs.com/2006/09/15/how-to-rewrite-standard-recursion-through-a-state-stack-amp-iteration/</a></span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.refactoring.com/catalog/replaceRecursionWithIteration.html">http://www.refactoring.com/catalog/replaceRecursionWithIteration.html</a></span>
+</li>
+<li id="cite_note-12">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.ccs.neu.edu/home/shivers/papers/loop.pdf">http://www.ccs.neu.edu/home/shivers/papers/loop.pdf</a></span>
+</li>
+<li id="cite_note-13">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://lambda-the-ultimate.org/node/1014">http://lambda-the-ultimate.org/node/1014</a></span>
+</li>
+<li id="cite_note-14">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-14">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://docs.python.org/library/sys.html">http://docs.python.org/library/sys.html</a></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_11">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://mitpress.mit.edu/sicp/full-text/book/book.html">Harold Abelson and Gerald Sussman: "Structure and Interpretation Of Computer Programs"</a></li>
+<li><a rel="nofollow" class="external text" href="http://www-128.ibm.com/developerworks/linux/library/l-recurs.html">IBM DeveloperWorks: "Mastering Recursive Programming"</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/%7Edst/LispBook/">David S. Touretzky: "Common Lisp: A Gentle Introduction to Symbolic Computation"</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.htdp.org/2003-09-26/Book/">Matthias Felleisen: "How To Design Programs: An Introduction to Computing and Programming"</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.duke.edu/%7Eola/ap/recurrence.html">Duke University: "Big-Oh for Recursive Functions: Recurrence Relations"</a></li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Recursion_%28computer_science%29&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Recursion+%28computer+science%29&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Recursion_%28computer_science%29&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Recursion+%28computer+science%29&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Recursion_%28computer_science%29_files/load_002.php" type="text/javascript"></script>
+<script src="Recursion_%28computer_science%29_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

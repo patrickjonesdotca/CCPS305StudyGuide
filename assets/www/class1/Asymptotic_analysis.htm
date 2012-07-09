@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Asymptotic analysis - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Asymptotic_analysis_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 5 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Asymptotic_analysis">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Asymptotic_analysis_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Asymptotic_analysis_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Asymptotic_analysis_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Asymptotic_analysis" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Asymptotische_Analyse">Deutsch</option><option value="//es.m.wikipedia.org/wiki/An%C3%A1lisis_asint%C3%B3tico">español</option><option value="//nl.m.wikipedia.org/wiki/Asymptotische_analyse">Nederlands</option><option value="//pt.m.wikipedia.org/wiki/An%C3%A1lise_assint%C3%B3tica">português</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Asymptotic analysis</h1>			
+<div class="dablink">This article is about the comparison of functions as inputs approach infinity.  For asymptotes in geometry, see <a href="http://en.m.wikipedia.org/wiki/Asymptotic_curve" title="Asymptotic curve">asymptotic curve</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Mathematical_analysis" title="Mathematical analysis">mathematical analysis</a>, <b>asymptotic analysis</b> is a method of describing <a href="http://en.m.wikipedia.org/wiki/Limit_%28mathematics%29" title="Limit (mathematics)">limiting</a> behavior. The methodology has applications across science. Examples are</p>
+<ul>
+<li>in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a> in the <a href="http://en.m.wikipedia.org/wiki/Analysis_of_algorithms" title="Analysis of algorithms">analysis of algorithms</a>, considering the performance of algorithms when applied to very large input datasets.</li>
+<li>the behavior of <a href="http://en.m.wikipedia.org/wiki/Physical_system" title="Physical system">physical systems</a> when they are very large.</li>
+<li>in <a href="http://en.m.wikipedia.org/wiki/Accident_analysis" title="Accident analysis">accident analysis</a> when identifying the causation of crash through count modeling with large number of crash counts in a given time and space.</li>
+</ul>
+<p>The simplest example is, when considering a function <i>f</i>(<i>n</i>), there is a need to describe its properties when <i>n</i> becomes very large. Thus, if <i>f</i>(<i>n</i>) = <i>n</i><sup>2</sup>+3<i>n</i>, the term 3<i>n</i> becomes insignificant compared to <i>n</i><sup>2</sup> when <i>n</i> is very large. The function "<i>f</i>(<i>n</i>) is said to be asymptotically equivalent to <i>n</i><sup>2</sup> as <i>n</i> → ∞", and this is written symbolically as <i>f</i>(<i>n</i>) ~ <i>n</i><sup>2</sup>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Definition">Definition</span></h2><div class="content_block" id="content_1">
+<p>Formally, given complex-valued functions <i>f</i> and <i>g</i> of a natural number variable <i>n</i>, one writes</p>
+<dl>
+<dd><img class="tex" alt="f \sim g \quad (\text{as } n\to\infty)" src="Asymptotic_analysis_files/67ea2b4b9b24ad88bc6155215bb8ed66.png"></dd>
+</dl>
+<p>to express the fact, stated terms of <a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Little-o_notation" title="Big O notation">little-o notation</a>, that</p>
+<dl>
+<dd><img class="tex" alt="f(n) = g(n) + o(g(n))\quad(\text{as }n\to\infty),\," src="Asymptotic_analysis_files/23fefb2eed966ff3615e3cd61d56c4b6.png"></dd>
+</dl>
+<p>or equivalently</p>
+<dl>
+<dd><img class="tex" alt="f(n) = (1+o(1))g(n)\quad(\text{as }n\to\infty)." src="Asymptotic_analysis_files/40889af8196d8dcfdbf826c76d8f0c96.png"></dd>
+</dl>
+<p>Explicitly this means that for every positive constant <i>ε</i> there exists a constant <i>N</i> such that</p>
+<dl>
+<dd>
+<img class="tex" alt="|f(n)-g(n)|\leq\epsilon|g(n)|\qquad\text{for all }n\geq N~" src="Asymptotic_analysis_files/3b9863dffcb586780ed3ccf421d8d2d8.png">.</dd>
+</dl>
+<p>Unless <i>g</i>(<i>n</i>) is infinitely often zero (which would make the limit below undefined), this statement is also equivalent to</p>
+<dl>
+<dd><img class="tex" alt="\lim_{n\to\infty} \frac{f(n)}{g(n)} = 1." src="Asymptotic_analysis_files/6fb037933df6ec39a4adc0742956416a.png"></dd>
+</dl>
+<p>This relation is an equivalence relation on the set of functions of <i>n</i>. The equivalence class of <i>f</i> informally consists of all functions <i>g</i> which are approximately equal to <i>f</i> in a relative sense, in the limit.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Asymptotic_expansion">Asymptotic expansion</span></h2><div class="content_block" id="content_2">
+<p>An <a href="http://en.m.wikipedia.org/wiki/Asymptotic_expansion" title="Asymptotic expansion">asymptotic expansion</a> of a function <i>f</i>(<i>x</i>) is in practice an expression of that function in terms of a <a href="http://en.m.wikipedia.org/wiki/Series_%28mathematics%29" title="Series (mathematics)">series</a>, the <a href="http://en.m.wikipedia.org/wiki/Partial_sum" title="Partial sum" class="mw-redirect">partial sums</a> of which do not necessarily converge, but such that taking any initial partial sum provides an asymptotic formula for <i>f</i>. The idea is that successive terms provide a more and more accurate description of the order of growth of <i>f</i>. An example is <a href="http://en.m.wikipedia.org/wiki/Stirling%27s_approximation" title="Stirling's approximation">Stirling's approximation</a>.</p>
+<p>In symbols, it means we have</p>
+<dl>
+<dd><img class="tex" alt="f \sim g_1" src="Asymptotic_analysis_files/9516a3c3eabda0610ee7f35544046614.png"></dd>
+</dl>
+<p>but also</p>
+<dl>
+<dd><img class="tex" alt="f \sim g_1 + g_2" src="Asymptotic_analysis_files/0e53795d9465d7955eac67af56fea3a2.png"></dd>
+</dl>
+<p>and</p>
+<dl>
+<dd><img class="tex" alt="f \sim g_1 + \cdots +  g_k" src="Asymptotic_analysis_files/e56cf60655e930221e8462b2dfed5d79.png"></dd>
+</dl>
+<p>for each <i>fixed</i> <i>k</i>, while some limit is taken, usually with the requirement that <i>g</i><sub><i>k</i>+1</sub> = o(<i>g<sub>k</sub></i>), which means the (<i>g<sub>k</sub></i>) form an <a href="http://en.m.wikipedia.org/wiki/Asymptotic_scale" title="Asymptotic scale" class="mw-redirect">asymptotic scale</a>. The requirement that the successive sums improve the approximation may then be expressed as <img class="tex" alt="f - (g_1 + \cdots + g_k) = o(g_k)." src="Asymptotic_analysis_files/7dc8d9eea6e9ca61e08591d019bf70f7.png"></p>
+<p>In case the asymptotic expansion does not converge, for any 
+particular value of the argument there will be a particular partial sum 
+which provides the best approximation and adding additional terms will 
+decrease the accuracy. However, this optimal partial sum will usually 
+have more terms as the argument approaches the limit value.</p>
+<p>Asymptotic expansions typically arise in the approximation of certain integrals (<a href="http://en.m.wikipedia.org/wiki/Laplace%27s_method" title="Laplace's method">Laplace's method</a>, <a href="http://en.m.wikipedia.org/wiki/Saddle-point_method" title="Saddle-point method" class="mw-redirect">saddle-point method</a>, <a href="http://en.m.wikipedia.org/wiki/Method_of_steepest_descent" title="Method of steepest descent">method of steepest descent</a>) or in the approximation of probability distributions (<a href="http://en.m.wikipedia.org/wiki/Edgeworth_series" title="Edgeworth series">Edgeworth series</a>). The famous <a href="http://en.m.wikipedia.org/wiki/Feynman_graphs" title="Feynman graphs" class="mw-redirect">Feynman graphs</a> in <a href="http://en.m.wikipedia.org/wiki/Quantum_field_theory" title="Quantum field theory">quantum field theory</a> are another example of asymptotic expansions which often do not converge.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Use_in_applied_mathematics">Use in applied mathematics</span></h2><div class="content_block" id="content_3">
+<p>Asymptotic analysis is a key tool for exploring the <a href="http://en.m.wikipedia.org/wiki/Ordinary_differential_equation" title="Ordinary differential equation">ordinary</a> and <a href="http://en.m.wikipedia.org/wiki/Partial_differential_equation" title="Partial differential equation">partial</a> differential equations which arise in the <a href="http://en.m.wikipedia.org/wiki/Mathematical_model" title="Mathematical model">mathematical modelling</a> of real-world phenomena.<sup id="cite_ref-Howison_0-0" class="reference"><a href="#cite_note-Howison-0"><span>[</span>1<span>]</span></a></sup> An illustrative example is the derivation of the <a href="http://en.m.wikipedia.org/wiki/Boundary_layer#Boundary_layer_equations" title="Boundary layer">boundary layer equations</a> from the full <a href="http://en.m.wikipedia.org/wiki/Navier-Stokes_equations" title="Navier-Stokes equations" class="mw-redirect">Navier-Stokes equations</a> governing fluid flow. In many cases, the asymptotic expansion is in power of a small parameter, <img class="tex" alt="\epsilon" src="Asymptotic_analysis_files/c50b9e82e318d4c163e4b1b060f7daf5.png">: in the boundary layer case, this is the <a href="http://en.m.wikipedia.org/wiki/Dimensional_analysis" title="Dimensional analysis">nondimensional</a>
+ ratio of the boundary layer thickness to a typical lengthscale of the 
+problem. Indeed, applications of asymptotic analysis in mathematical 
+modelling often<sup id="cite_ref-Howison_0-1" class="reference"><a href="#cite_note-Howison-0"><span>[</span>1<span>]</span></a></sup>
+ centre around a nondimensional parameter which has been shown, or 
+assumed, to be small through a consideration of the scales of the 
+problem at hand.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Method_of_dominant_balance">Method of dominant balance</span></h2><div class="content_block" id="content_4">
+<p>The method of dominant balance is used to determine the asymptotic behavior of solutions to an <a href="http://en.m.wikipedia.org/wiki/Ordinary_differential_equation" title="Ordinary differential equation">ODE</a>
+ without solving it. The process is iterative in that the result 
+obtained by performing the method once can be used as input when the 
+method is repeated, to obtain as many terms in the <a href="http://en.m.wikipedia.org/wiki/Asymptotic_expansion" title="Asymptotic expansion">asymptotic expansion</a> as desired.</p>
+<p>The process is as follows:</p>
+<p>1. Assume that the asymptotic behavior has the form</p>
+<dl>
+<dd>
+<dl>
+<dd>
+<img class="tex" alt="y(x) \sim e^{S(x)}\," src="Asymptotic_analysis_files/163637784383b0ddffc9cb0a58617973.png">.</dd>
+</dl>
+</dd>
+</dl>
+<p>2. Make a clever guess as to which terms in the ODE may be negligible in the limit we are interested in.</p>
+<p>3. Drop those terms and solve the resulting ODE.</p>
+<p>4. Check that the solution is consistent with step 2. If this is the 
+case, then we have the controlling factor of the asymptotic behavior. 
+Otherwise, we need to try dropping different terms in step 2.</p>
+<p>5. Repeat the process using our result as the first term of the solution.</p>
+<h3> <span class="mw-headline" id="Example">Example</span>
+</h3>
+<p>Consider this second order ODE:</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="xy''+(c-x)y'-ay=0\," src="Asymptotic_analysis_files/16b3b302a249f8ae3d2e20cdc10b7879.png"></dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd>where c and a are arbitrary constants.</dd>
+</dl>
+</dd>
+</dl>
+<p>This differential equation cannot be solved exactly. However, it may be useful to know how the solutions behave for large x.</p>
+<p>We start by assuming <img class="tex" alt="y\sim e^{S(x)}\," src="Asymptotic_analysis_files/bb383e55059ee6961887afb725fb9e81.png"> as <img class="tex" alt="x\rightarrow \infty" src="Asymptotic_analysis_files/24ce3ddd88d39e1052cb8262ed701be2.png">.
+ We do this with the benefit of hindsight, to make things quicker. Since
+ we only care about the behavior of y in the large x limit, we set y 
+equal to <img class="tex" alt="e^{S(x)}\," src="Asymptotic_analysis_files/6935b56b09fab1f8cfb1c805ce1caea5.png">, and re-express the ODE in terms of S(x):</p>
+<dl>
+<dd>
+<dl>
+<dd>
+<img class="tex" alt="xS''+xS'^2+(c-x)S'-a=0\," src="Asymptotic_analysis_files/3a6ee645a8dfb8d1b96e293824fe6021.png">, or</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="S''+S'^2+\left(\frac{c}{x}-1\right)S'-\frac{a}{x}=0\," src="Asymptotic_analysis_files/a50b1072e25e304bab1b4c2f982deae2.png"></dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd>where we have used the <a href="http://en.m.wikipedia.org/wiki/Product_rule" title="Product rule">product rule</a> and <a href="http://en.m.wikipedia.org/wiki/Chain_rule" title="Chain rule">chain rule</a> to find the derivatives of y.</dd>
+</dl>
+</dd>
+</dl>
+<p>Now let us suppose that a solution to this new ODE satisfies</p>
+<dl>
+<dd>
+<dl>
+<dd>
+<img class="tex" alt="S'^2\sim S'\," src="Asymptotic_analysis_files/4f92a854a631ac6a363a0928054f550f.png"> as <img class="tex" alt="x\to\infty" src="Asymptotic_analysis_files/75181abcb29e3d1ce73a8a52e26b7010.png">
+</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd>
+<img class="tex" alt="S'',\frac{c}{x}S',\frac{a}{x}=o(S'^2),o(S')\," src="Asymptotic_analysis_files/a78d33aeaba4f1a7bc5f3f800072cd00.png"> as <img class="tex" alt="x\to\infty" src="Asymptotic_analysis_files/75181abcb29e3d1ce73a8a52e26b7010.png">
+</dd>
+</dl>
+</dd>
+</dl>
+<p>We get the dominant asymptotic behaviour by setting</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="S_0'^2=S_0'\," src="Asymptotic_analysis_files/1fc684d6b87c63040e66c36f4e1d1322.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>If <img class="tex" alt="S_0" src="Asymptotic_analysis_files/18c5f9700e93ac23c1ca12fe82793464.png">
+ satisfies the above asymptotic conditions, then everything is 
+consistent. The terms we dropped will indeed have been negligible with 
+respect to the ones we kept. <img class="tex" alt="S_0" src="Asymptotic_analysis_files/18c5f9700e93ac23c1ca12fe82793464.png">
+ is not a solution to the ODE for S, but it represents the dominant 
+asymptotic behaviour, which is what we are interested in. Let us check 
+that this choice for <img class="tex" alt="S_0" src="Asymptotic_analysis_files/18c5f9700e93ac23c1ca12fe82793464.png"> is consistent:</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="S_0'=1\," src="Asymptotic_analysis_files/9e766e774d2af5c3ef730fa1ca29fc5e.png"></dd>
+<dd><img class="tex" alt="S_0'^2=1\," src="Asymptotic_analysis_files/26cff157e28f469fda67a922003891fe.png"></dd>
+<dd><img class="tex" alt="S_0''=0=o(S_0')\," src="Asymptotic_analysis_files/c497d05739dd97286aaadbf62d294f17.png"></dd>
+<dd><img class="tex" alt="\frac{c}{x}S_0'=\frac{c}{x}=o(S_0')\," src="Asymptotic_analysis_files/7f5eecdb6c75e144dab50c908750160f.png"></dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="\frac{a}{x}=o(S_0')\," src="Asymptotic_analysis_files/a76dc69709be551db598b9f85b4688f6.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>Everything is indeed consistent. Thus we find the dominant asymptotic behaviour of a solution to our ODE:</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="S_0=x\," src="Asymptotic_analysis_files/7f78c5e724239f0a146e21b0581ecffd.png"></dd>
+<dd><img class="tex" alt="y\sim e^x\," src="Asymptotic_analysis_files/9c1e38539b3d4b6fc00d3def43c8670f.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>By convention, the asymptotic series is written as:</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="y\sim Ax^p e^{\lambda x^r}\left(1+\frac{u_1}{x}+\frac{u_2}{x^2}\cdots\right)\," src="Asymptotic_analysis_files/1d3974c0605f5a8a3433c589fb5ce7d6.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>so to get at least the first term of this series we have to do another step to see if there is a power of x out the front.</p>
+<p>We proceed by making an <a href="http://en.m.wikipedia.org/wiki/Ansatz" title="Ansatz">ansatz</a> that we can write</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="S(x)=S_0(x)+C(x)\," src="Asymptotic_analysis_files/577e4944e624d2cefc4500cde23a0757.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>and then attempt to find asymptotic solutions for C(x). Substituting into the ODE for S(x) we find</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="C''+C'^2+C'+\frac{c}{x}C'+\frac{c-a}{x}=0\," src="Asymptotic_analysis_files/e8193bd314ac0bc4ffb47bdac73c6378.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>Repeating the same process as before, we keep C' and (c-a)/x and find that</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="C_0=\log x^{a-c}\," src="Asymptotic_analysis_files/8728eb820dd52374f546a4e3858188b8.png"></dd>
+</dl>
+</dd>
+</dl>
+<p>The leading asymptotic behaviour is therefore</p>
+<dl>
+<dd>
+<dl>
+<dd><img class="tex" alt="y\sim x^{a-c}e^x\," src="Asymptotic_analysis_files/de5e8b8259048d1d1618a1192751d98b.png"></dd>
+</dl>
+</dd>
+</dl>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_5">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Asymptotic_computational_complexity" title="Asymptotic computational complexity">Asymptotic computational complexity</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Asymptotic_theory" title="Asymptotic theory">Asymptotic theory</a></li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_6">
+<ol class="references">
+<li id="cite_note-Howison-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Howison_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Howison_0-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">S. Howison, <i>Practical Applied Mathematics</i>, Cambridge University Press, Cambridge, 2005. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0521603692" class="internal mw-magiclink-isbn">ISBN 0-521-60369-2</a></span>
+</li>
+</ol>
+<ul>
+<li>J. P. Boyd, "The Devil's Invention: asymptotic, superasymptotic and hyperasymptotic series", <i>Acta Applicandae Mathematicae</i>, 56: 1-98 (1999). <a rel="nofollow" class="external text" href="http://www-personal.umich.edu/%7Ejpboyd/boydactaapplicreview.pdf">Preprint</a>.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Asymptotic_analysis&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Asymptotic+analysis&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Asymptotic_analysis&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Asymptotic+analysis&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Asymptotic_analysis_files/load_002.php" type="text/javascript"></script>
+<script src="Asymptotic_analysis_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

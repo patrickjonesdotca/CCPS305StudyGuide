@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Program optimization - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Optimization_%28computer_science%29_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 13 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Program_optimization">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Optimization_%28computer_science%29_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Optimization_%28computer_science%29_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Optimization_%28computer_science%29_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Optimization_(computer_science)" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Optimalizace_(informatika)">česky</option><option value="//da.m.wikipedia.org/wiki/Optimering_(datalogi)">dansk</option><option value="//es.m.wikipedia.org/wiki/Optimizaci%C3%B3n_de_software">español</option><option value="//fr.m.wikipedia.org/wiki/Optimisation_de_code">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%B5%9C%EC%A0%81%ED%99%94_(%EC%A0%95%EB%B3%B4_%EA%B3%B5%ED%95%99)">한국어</option><option value="//hr.m.wikipedia.org/wiki/Optimizacija_(ra%C4%8Dunarstvo)">hrvatski</option><option value="//it.m.wikipedia.org/wiki/Ottimizzazione_(informatica)">italiano</option><option value="//kk.m.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%D0%BD%D1%8B_%D0%BE%D2%A3%D1%82%D0%B0%D0%B9%D0%BB%D0%B0%D0%BD%D0%B4%D1%8B%D1%80%D1%83">Қазақша</option><option value="//ja.m.wikipedia.org/wiki/%E6%9C%80%E9%81%A9%E5%8C%96_(%E6%83%85%E5%A0%B1%E5%B7%A5%E5%AD%A6)">日本語</option><option value="//pl.m.wikipedia.org/wiki/Optymalizacja_oprogramowania">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)">русский</option><option value="//simple.m.wikipedia.org/wiki/Optimization_(computer_science)">Simple English</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Program optimization</h1>			
+<div class="dablink">For algorithms to solve other optimization problems, see <a href="http://en.m.wikipedia.org/wiki/Optimization_%28mathematics%29" title="Optimization (mathematics)" class="mw-redirect">Optimization (mathematics)</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <b>program optimization</b> or <b>software optimization</b> is the process of modifying a software system to make some aspect of it work more <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">efficiently</a> or use fewer resources.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> In general, a <a href="http://en.m.wikipedia.org/wiki/Computer_program" title="Computer program">computer program</a> may be optimized so that it executes more rapidly, or is capable of operating with less <a href="http://en.m.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">memory storage</a> or other resources, or draw less power.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="General">General</span></h2><div class="content_block" id="content_1">
+<p>Although the word "optimization" shares the same root as "optimal", 
+it is rare for the process of optimization to produce a truly optimal 
+system. The optimized system will typically only be optimal in one 
+application or for one audience. One might reduce the amount of time 
+that a program takes to perform some task at the price of making it 
+consume more memory. In an application where memory space is at a 
+premium, one might deliberately choose a slower <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> in order to use less memory. Often there is no "one size fits all" design which works well in all cases, so <a href="http://en.m.wikipedia.org/wiki/Engineer" title="Engineer">engineers</a> make <a href="http://en.m.wikipedia.org/wiki/Trade-off" title="Trade-off">trade-offs</a>
+ to optimize the attributes of greatest interest. Additionally, the 
+effort required to make a piece of software completely optimal&nbsp;— 
+incapable of any further improvement&nbsp;— is almost always more than 
+is reasonable for the benefits that would be accrued; so the process of 
+optimization may be halted before a completely optimal solution has been
+ reached. Fortunately, it is often the case that the greatest 
+improvements come early in the process.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id=".22Levels.22_of_optimization">"Levels" of optimization</span></h2><div class="content_block" id="content_2">
+<p>Optimization can occur at a number of "levels":</p>
+<ul>
+<li><b>Design level</b></li>
+</ul>
+<p>At the highest level, the design may be optimized to make best use of
+ the available resources. The implementation of this design will benefit
+ from a good choice of <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">efficient algorithms</a>
+ and the implementation of these algorithms will benefit from writing 
+good quality code. The architectural design of a system overwhelmingly 
+affects its performance. The choice of <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a>
+ affects efficiency more than any other item of the design and, since 
+the choice of algorithm usually is the first thing that must be decided,
+ arguments against early or "premature optimization" may be hard to 
+justify.</p>
+<p>In some cases, however, optimization relies on using more elaborate 
+algorithms, making use of "special cases" and special "tricks" and 
+performing complex trade-offs. A "fully optimized" program might be more
+ difficult to comprehend and hence may contain more <a href="http://en.m.wikipedia.org/wiki/Software_bug" title="Software bug">faults</a> than unoptimized versions.</p>
+<ul>
+<li><b>Source code level</b></li>
+</ul>
+<p>Avoiding poor quality coding can also improve performance, by 
+avoiding obvious "slowdowns". After that, however, some optimizations 
+are possible that actually decrease maintainability. Some, but not all, 
+optimizations can nowadays be performed by <a href="http://en.m.wikipedia.org/wiki/Optimizing_compiler" title="Optimizing compiler" class="mw-redirect">optimizing compilers</a>.</p>
+<ul>
+<li><b>Compile level</b></li>
+</ul>
+<p>Use of an <a href="http://en.m.wikipedia.org/wiki/Optimizing_compiler" title="Optimizing compiler" class="mw-redirect">optimizing compiler</a> tends to ensure that the <a href="http://en.m.wikipedia.org/wiki/Executable_program" title="Executable program" class="mw-redirect">executable program</a> is optimized at least as much as the compiler can predict.</p>
+<ul>
+<li><b>Assembly level</b></li>
+</ul>
+<p>At the lowest level, writing code using an <a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly language</a>,
+ designed for a particular hardware platform can produce the most 
+efficient and compact code if the programmer takes advantage of the full
+ repertoire of <a href="http://en.m.wikipedia.org/wiki/Machine_instruction" title="Machine instruction" class="mw-redirect">machine instructions</a>. Many <a href="http://en.m.wikipedia.org/wiki/Operating_system" title="Operating system">operating systems</a>
+ used on embedded systems have been traditionally written in assembler 
+code for this reason. Programs (other than very small programs) are 
+seldom written from start to finish in assembly due to the time and cost
+ involved. Most are compiled down from a high level language to assembly
+ and hand optimized from there. When efficiency and size are less 
+important large parts may be written in a high-level language.</p>
+<p>With more modern <a href="http://en.m.wikipedia.org/wiki/Optimizing_compiler" title="Optimizing compiler" class="mw-redirect">optimizing compilers</a> and the greater complexity of recent <a href="http://en.m.wikipedia.org/wiki/CPU" title="CPU" class="mw-redirect">CPUs</a>,
+ it is more difficult to write code that is optimized better than the 
+compiler itself generates, and few projects need resort to this 
+"ultimate" optimization step.</p>
+<p>However, a large amount of code written today is still compiled with 
+the intent to run on the greatest percentage of machines possible. As a 
+consequence, programmers and compilers don't always take advantage of 
+the more efficient instructions provided by newer CPUs or quirks of 
+older models. Additionally, assembly code tuned for a particular 
+processor without using such instructions might still be suboptimal on a
+ different processor, expecting a different tuning of the code.</p>
+<ul>
+<li><b>Run time</b></li>
+</ul>
+<p><a href="http://en.m.wikipedia.org/wiki/Just-in-time_compilation" title="Just-in-time compilation">Just-in-time</a> compilers and assembler programmers may be able to perform <a href="http://en.m.wikipedia.org/wiki/Run_time_%28program_lifecycle_phase%29" title="Run time (program lifecycle phase)">run time</a>
+ optimization exceeding the capability of static compilers by 
+dynamically adjusting parameters according to the actual input or other 
+factors.</p>
+<h3> <span class="mw-headline" id="Platform_dependent_and_independent_optimizations">Platform dependent and independent optimizations</span>
+</h3>
+<p>Code optimization can be also broadly categorized as <a href="http://en.m.wikipedia.org/wiki/Computer_platform" title="Computer platform" class="mw-redirect">platform</a>-dependent
+ and platform-independent techniques. While the latter ones are 
+effective on most or all platforms, platform-dependent techniques use 
+specific properties of one platform, or rely on parameters depending on 
+the single platform or even on the single processor. Writing or 
+producing different versions of the same code for different processors 
+might therefore be needed. For instance, in the case of compile-level 
+optimization, platform-independent techniques are generic techniques 
+(such as loop unrolling, reduction in function calls, memory efficient 
+routines, reduction in conditions, etc.), that impact most CPU 
+architectures in a similar way. Generally, these serve to reduce the 
+total <a href="http://en.m.wikipedia.org/wiki/Instruction_path_length" title="Instruction path length">instruction path length</a>
+ required to complete the program and/or reduce total memory usage 
+during the process. On the other hand, platform-dependent techniques 
+involve instruction scheduling, instruction-level parallelism, 
+data-level parallelism, cache optimization techniques (i.e., parameters 
+that differ among various platforms) and the optimal instruction 
+scheduling might be different even on different processors of the same 
+architecture.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Different_algorithms">Different algorithms</span></h2><div class="content_block" id="content_3">
+<p>Computational tasks can be performed in several different ways with varying efficiency. For example, consider the following <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> code snippet whose intention is to obtain the sum of all integers from 1 to N:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> i<span class="sy0">,</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">(</span>i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span> i <span class="sy0">&lt;=</span> N<span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+  sum <span class="sy0">+=</span> i<span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"sum: %d<span class="es1">\n</span>"</span><span class="sy0">,</span> sum<span class="br0">)</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>This code can (assuming no <a href="http://en.m.wikipedia.org/wiki/Arithmetic_overflow" title="Arithmetic overflow">arithmetic overflow</a>) be rewritten using a mathematical formula like:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> sum <span class="sy0">=</span> N <span class="sy0">*</span> <span class="br0">(</span><span class="nu0">1</span> <span class="sy0">+</span> N<span class="br0">)</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">;</span>
+<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"sum: %d<span class="es1">\n</span>"</span><span class="sy0">,</span> sum<span class="br0">)</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>The optimization, sometimes performed automatically by an optimizing compiler, is to select a method (<a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a>) that is more computationally efficient, while retaining the same functionality. See <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">algorithmic efficiency</a>
+ for a discussion of some of these techniques. However, a significant 
+improvement in performance can often be achieved by removing extraneous 
+functionality.</p>
+<p>Optimization is not always an obvious or intuitive process. In the 
+example above, the "optimized" version might actually be slower than the
+ original version if N were sufficiently small and the particular 
+hardware happens to be much faster at performing addition and <a href="http://en.m.wikipedia.org/wiki/Loop_%28computing%29#Loops" title="Loop (computing)" class="mw-redirect">looping</a> operations than multiplication and division.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Trade-offs"><span id="Trade-offs">Trade-offs</span></span></h2><div class="content_block" id="content_4">
+<p>Optimization will generally focus on improving just one or two 
+aspects of performance: execution time, memory usage, disk space, 
+bandwidth, power consumption or some other resource. This will usually 
+require a trade-off&nbsp;— where one factor is optimized at the expense 
+of others. For example, increasing the size of <a href="http://en.m.wikipedia.org/wiki/Cache_%28computing%29" title="Cache (computing)">cache</a>
+ improves runtime performance, but also increases the memory 
+consumption. Other common trade-offs include code clarity and 
+conciseness.</p>
+<p>There are instances where the programmer performing the optimization 
+must decide to make the software better for some operations but at the 
+cost of making other operations less efficient. These trade-offs may 
+sometimes be of a non-technical nature&nbsp;— such as when a competitor 
+has published a <a href="http://en.m.wikipedia.org/wiki/Benchmark_%28computing%29" title="Benchmark (computing)">benchmark</a>
+ result that must be beaten in order to improve commercial success but 
+comes perhaps with the burden of making normal usage of the software 
+less efficient. Such changes are sometimes jokingly referred to as <i>pessimizations</i>.</p>
+<p>In some cases, a snippet of code can become so optimized as to be 
+obfuscated. This can lead to difficulty in maintaining the code.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Bottlenecks">Bottlenecks</span></h2><div class="content_block" id="content_5">
+<p>Optimization may include finding a <a href="http://en.m.wikipedia.org/wiki/Bottleneck_%28engineering%29" title="Bottleneck (engineering)" class="mw-redirect">bottleneck</a>, a critical part of the code that is the primary consumer of the needed resource&nbsp;— sometimes known as a <a href="http://en.m.wikipedia.org/wiki/Hot_spot_%28computer_science%29" title="Hot spot (computer science)" class="mw-redirect">hot spot</a>. Often, the <a href="http://en.m.wikipedia.org/wiki/Pareto_principle" title="Pareto principle">Pareto principle</a> is applied. i.e., 20% of the code is responsible for 80% of the results.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from January 2009">citation needed</span></a></i>]</sup></p>
+<p>In computer science, the <a href="http://en.m.wikipedia.org/wiki/Pareto_principle" title="Pareto principle">Pareto principle</a>
+ can be applied to resource optimization by observing that 80% of the 
+resources are typically used by 20% of the operations. In software 
+engineering, it is often a better approximation that 90% of the 
+execution time of a computer program is spent executing 10% of the code 
+(known as the 90/10 law in this context).</p>
+<p>More complex algorithms and data structures perform well with many 
+items, while simple algorithms are more suitable for small amounts of 
+data&nbsp;— the setup, initialization time, and constant factors of the 
+more complex algorithm can outweigh the benefit.</p>
+<p>In some cases, adding more <a href="http://en.m.wikipedia.org/wiki/Main_memory" title="Main memory" class="mw-redirect">memory</a>
+ can help to make a program run faster. For example, a filtering program
+ will commonly read each line and filter and output that line 
+immediately. This only uses enough memory for one line, but performance 
+is typically poor. Performance can be greatly improved by reading the 
+entire file then writing the filtered result, though this uses much more
+ memory. Caching the result is similarly effective, though also 
+requiring larger memory use.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="When_to_optimize">When to optimize</span></h2><div class="content_block" id="content_6">
+<p>Optimization can reduce <a href="http://en.m.wikipedia.org/wiki/Readability" title="Readability">readability</a> and add code that is used only to improve the <a href="http://en.m.wikipedia.org/wiki/Computer_performance" title="Computer performance">performance</a>.
+ This may complicate programs or systems, making them harder to maintain
+ and debug. As a result, optimization or performance tuning is often 
+performed at the end of the <a href="http://en.m.wikipedia.org/wiki/Development_stage" title="Development stage" class="mw-redirect">development stage</a>.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> made the following two statements on optimization:</p>
+<blockquote>
+<p>"We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil"<sup id="cite_ref-autogenerated268_1-0" class="reference"><a href="#cite_note-autogenerated268-1"><span>[</span>2<span>]</span></a></sup></p>
+</blockquote>
+<dl>
+<dd>(He also attributed the quote to <a href="http://en.m.wikipedia.org/wiki/Tony_Hoare" title="Tony Hoare">Tony Hoare</a> several years later,<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> although this might have been an error as Hoare disclaims having coined the phrase.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup>)</dd>
+</dl>
+<blockquote>
+<p>"In established engineering disciplines a 12&nbsp;% improvement, 
+easily obtained, is never considered marginal and I believe the same 
+viewpoint should prevail in software engineering"<sup id="cite_ref-autogenerated268_1-1" class="reference"><a href="#cite_note-autogenerated268-1"><span>[</span>2<span>]</span></a></sup></p>
+</blockquote>
+<p>"Premature optimization" is a phrase used to describe a situation 
+where a programmer lets performance considerations affect the design of a
+ piece of code. This can result in a design that is not as clean as it 
+could have been or code that is incorrect, because the code is 
+complicated by the optimization and the programmer is distracted by 
+optimizing.</p>
+<p>When deciding whether to optimize a specific part of the program, <a href="http://en.m.wikipedia.org/wiki/Amdahl%27s_Law" title="Amdahl's Law" class="mw-redirect">Amdahl's Law</a>
+ should always be considered: the impact on the overall program depends 
+very much on how much time is actually spent in that specific part, 
+which is not always clear from looking at the code without a <a href="http://en.m.wikipedia.org/wiki/Performance_analysis" title="Performance analysis" class="mw-redirect">performance analysis</a>.</p>
+<p>A better approach is therefore to design first, code from the design and then <a href="http://en.m.wikipedia.org/wiki/Performance_analysis" title="Performance analysis" class="mw-redirect">profile</a>/<a href="http://en.m.wikipedia.org/wiki/Benchmark_%28computing%29" title="Benchmark (computing)">benchmark</a>
+ the resulting code to see which parts should be optimized. A simple and
+ elegant design is often easier to optimize at this stage, and profiling
+ may reveal unexpected performance problems that would not have been 
+addressed by premature optimization.</p>
+<p>In practice, it is often necessary to keep performance goals in mind 
+when first designing software, but the programmer balances the goals of 
+design and optimization.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Macros">Macros</span></h2><div class="content_block" id="content_7">
+<p>Optimization during code development using <a href="http://en.m.wikipedia.org/wiki/Macro_%28computer_science%29" title="Macro (computer science)">macros</a> takes on different forms in different languages.</p>
+<p>In some procedural languages, such as <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> and <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, macros are implemented using token substitution. Nowadays, <a href="http://en.m.wikipedia.org/wiki/Inline_function" title="Inline function">inline functions</a> can be used as a <a href="http://en.m.wikipedia.org/wiki/Type_safe" title="Type safe" class="mw-redirect">type safe</a>
+ alternative in many cases. In both cases, the inlined function body can
+ then undergo further compile-time optimizations by the compiler, 
+including <a href="http://en.m.wikipedia.org/wiki/Constant_folding" title="Constant folding">constant folding</a>, which may move some computations to compile time.</p>
+<p>In many <a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">functional programming</a>
+ languages macros are implemented using parse-time substitution of parse
+ trees/abstract syntax trees, which it is claimed makes them safer to 
+use. Since in many cases interpretation is used, that is one way to 
+ensure that such computations are only performed at parse-time, and 
+sometimes the only way.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Lisp_programming_language" title="Lisp programming language" class="mw-redirect">Lisp</a> originated this style of macro,<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from September 2008">citation needed</span></a></i>]</sup> and such macros are often called "Lisp-like macros." A similar effect can be achieved by using <a href="http://en.m.wikipedia.org/wiki/Template_metaprogramming" title="Template metaprogramming">template metaprogramming</a> in <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>.</p>
+<p>In both cases, work is moved to compile-time. The difference between <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> macros on one side, and Lisp-like macros and <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> <a href="http://en.m.wikipedia.org/wiki/Template_metaprogramming" title="Template metaprogramming">template metaprogramming</a>
+ on the other side, is that the latter tools allow performing arbitrary 
+computations at compile-time/parse-time, while expansion of <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> macros does not perform any computation, and relies on the optimizer ability to perform it. Additionally, <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> macros do not directly support <a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">recursion</a> or <a href="http://en.m.wikipedia.org/wiki/Iteration" title="Iteration">iteration</a>, so are not <a href="http://en.m.wikipedia.org/wiki/Turing_complete" title="Turing complete" class="mw-redirect">Turing complete</a>.</p>
+<p>As with any optimization, however, it is often difficult to predict 
+where such tools will have the most impact before a project is complete.</p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Automated_and_manual_optimization">Automated and manual optimization</span></h2><div class="content_block" id="content_8">
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Compiler_optimization" title="Compiler optimization">Compiler optimization</a>
+</div>
+<p><i>See also <a href="http://en.m.wikipedia.org/wiki/Category:Compiler_optimizations" title="Category:Compiler optimizations">Category:Compiler optimizations</a></i></p>
+<p>Optimization can be automated by compilers or performed by 
+programmers. Gains are usually limited for local optimization, and 
+larger for global optimizations. Usually, the most powerful optimization
+ is to find a superior <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a>.</p>
+<p>Optimizing a whole system is usually undertaken by programmers 
+because it is too complex for automated optimizers. In this situation, 
+programmers or system administrators explicitly change code so that the 
+overall system performs better. Although it can produce better 
+efficiency, it is far more expensive than automated optimizations.</p>
+<p>Use a <a href="http://en.m.wikipedia.org/wiki/Profiler_%28computer_science%29" title="Profiler (computer science)" class="mw-redirect">profiler</a> (or <a href="http://en.m.wikipedia.org/wiki/Performance_analysis" title="Performance analysis" class="mw-redirect">performance analyzer</a>) to find the sections of the program that are taking the most resources&nbsp;— the <i>bottleneck</i>. Programmers sometimes believe they have a clear idea of where the bottleneck is, but intuition is frequently wrong.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from May 2012">citation needed</span></a></i>]</sup> Optimizing an unimportant piece of code will typically do little to help the overall performance.</p>
+<p>When the bottleneck is localized, optimization usually starts with a 
+rethinking of the algorithm used in the program. More often than not, a 
+particular algorithm can be specifically tailored to a particular 
+problem, yielding better performance than a generic algorithm. For 
+example, the task of sorting a huge list of items is usually done with a
+ <a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">quicksort</a>
+ routine, which is one of the most efficient generic algorithms. But if 
+some characteristic of the items is exploitable (for example, they are 
+already arranged in some particular order), a different method can be 
+used, or even a custom-made sort routine.</p>
+<p>After the programmer is reasonably sure that the best algorithm is 
+selected, code optimization can start. Loops can be unrolled (for lower 
+loop overhead, although this can often lead to <i>lower</i> speed if it overloads the <a href="http://en.m.wikipedia.org/wiki/CPU_cache" title="CPU cache">CPU cache</a>), data types as small as possible can be used, integer arithmetic can be used instead of floating-point, and so on. (See <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">algorithmic efficiency</a> article for these and other techniques.)</p>
+<p>Performance bottlenecks can be due to language limitations rather 
+than algorithms or data structures used in the program. Sometimes, a 
+critical part of the program can be re-written in a different <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming language</a> that gives more direct access to the underlying machine. For example, it is common for very <a href="http://en.m.wikipedia.org/wiki/High-level_programming_language" title="High-level programming language">high-level</a> languages like <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> to have modules written in <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> for greater speed. Programs already written in C can have modules written in <a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly</a>. Programs written in <a href="http://en.m.wikipedia.org/wiki/D_programming_language" title="D programming language" class="mw-redirect">D</a> can use the <a href="http://en.m.wikipedia.org/wiki/Inline_assembler" title="Inline assembler">inline assembler</a>.</p>
+<p>Rewriting sections "pays off" in these circumstances because of a general "<a href="http://en.m.wikipedia.org/wiki/Rule_of_thumb" title="Rule of thumb">rule of thumb</a>" known as the <a href="http://en.m.wikipedia.org/wiki/90/10_law" title="90/10 law" class="mw-redirect">90/10 law</a>,
+ which states that 90% of the time is spent in 10% of the code, and only
+ 10% of the time in the remaining 90% of the code. So, putting 
+intellectual effort into optimizing just a small part of the program can
+ have a huge effect on the overall speed&nbsp;— if the correct part(s) 
+can be located.</p>
+<p>Manual optimization sometimes has the side effect of undermining 
+readability. Thus code optimizations should be carefully documented 
+(preferably using in-line comments), and their effect on future 
+development evaluated.</p>
+<p>The program that performs an automated optimization is called an <b>optimizer</b>.
+ Most optimizers are embedded in compilers and operate during 
+compilation. Optimizers can often tailor the generated code to specific 
+processors.</p>
+<p>Today, automated optimizations are almost exclusively limited to <a href="http://en.m.wikipedia.org/wiki/Compiler_optimization" title="Compiler optimization">compiler optimization</a>.
+ However, because compiler optimizations are usually limited to a fixed 
+set of rather general optimizations, there is considerable demand for 
+optimizers which can accept descriptions of problem and 
+language-specific optimizations, allowing an engineer to specify custom 
+optimizations. Tools that accept descriptions of optimizations are 
+called <a href="http://en.m.wikipedia.org/wiki/Program_transformation" title="Program transformation">program transformation</a> systems and are beginning to be applied to real software systems such as C++.</p>
+<p>Some high-level languages (<a href="http://en.m.wikipedia.org/wiki/Eiffel_%28programming_language%29" title="Eiffel (programming language)">Eiffel</a>, <a href="http://en.m.wikipedia.org/wiki/Esterel" title="Esterel">Esterel</a>) optimize their programs by using an <a href="http://en.m.wikipedia.org/wiki/Intermediate_language" title="Intermediate language">intermediate language</a>.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Grid_computing" title="Grid computing">Grid computing</a> or <a href="http://en.m.wikipedia.org/wiki/Distributed_computing" title="Distributed computing">distributed computing</a> aims to optimize the whole system, by moving tasks from computers with high usage to computers with idle time.</p>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="Time_taken_for_optimization">Time taken for optimization</span></h2><div class="content_block" id="content_9">
+<p>Sometimes, the time taken to undertake optimization in itself may be an issue.</p>
+<p>Optimizing existing code usually does not add new features, and worse, it might add new <a href="http://en.m.wikipedia.org/wiki/Software_bug" title="Software bug">bugs</a>
+ in previously working code (as any change might). Because manually 
+optimized code might sometimes have less "readability" than unoptimized 
+code, optimization might impact maintainability of it as well. 
+Optimization comes at a price and it is important to be sure that the 
+investment is worthwhile.</p>
+<p>An automatic optimizer (or <a href="http://en.m.wikipedia.org/wiki/Optimizing_compiler" title="Optimizing compiler" class="mw-redirect">optimizing compiler</a>,
+ a program that performs code optimization) may itself have to be 
+optimized, either to further improve the efficiency of its target 
+programs or else speed up its own operation. A compilation performed 
+with optimization "turned on" usually takes longer, although this is 
+usually only a problem when programs are quite large.</p>
+<p>In particular, for <a href="http://en.m.wikipedia.org/wiki/Just-in-time_compiler" title="Just-in-time compiler" class="mw-redirect">just-in-time compilers</a> the performance of the <a href="http://en.m.wikipedia.org/wiki/Run_time_environment" title="Run time environment" class="mw-redirect">run time</a> compile component, executing together with its target code, is the key to improving overall execution speed.</p>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="Quotes">Quotes</span></h2><div class="content_block" id="content_10">
+<ul>
+<li>
+<i>"The order in which the operations shall be performed in every 
+particular case is a very interesting and curious question, on which our
+ space does not permit us fully to enter. In almost every computation a 
+great variety of arrangements for the succession of the processes is 
+possible, and various considerations must influence the selection 
+amongst them for the purposes of a Calculating Engine. One essential 
+object is to choose that arrangement which shall tend to reduce to a 
+minimum the time necessary for completing the calculation."</i>&nbsp;— <a href="http://en.m.wikipedia.org/wiki/Ada_Byron%27s_notes_on_the_analytical_engine" title="Ada Byron's notes on the analytical engine" class="mw-redirect">Ada Byron's notes on the analytical engine</a> 1842.</li>
+<li>
+<i>"More computing sins are committed in the name of efficiency (without
+ necessarily achieving it) than for any other single reason&nbsp;— 
+including blind stupidity."</i>&nbsp;— <a href="http://en.m.wikipedia.org/wiki/W.A._Wulf" title="W.A. Wulf" class="mw-redirect">W.A. Wulf</a>
+</li>
+<li>
+<i>"We should forget about small efficiencies, say about 97% of the 
+time: premature optimization is the root of all evil. Yet we should not 
+pass up our opportunities in that critical 3%. A good programmer will 
+not be lulled into complacency by such reasoning, he will be wise to 
+look carefully at the critical code; but only after that code has been 
+identified"</i><sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup>&nbsp;— <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>
+</li>
+<li>
+<i>"Bottlenecks occur in surprising places, so don't try to second guess
+ and put in a speed hack until you have proven that's where the 
+bottleneck is."</i>&nbsp;— <a href="http://en.m.wikipedia.org/wiki/Rob_Pike" title="Rob Pike">Rob Pike</a>
+</li>
+<li>
+<i>"The First Rule of Program Optimization: Don't do it. The Second Rule
+ of Program Optimization (for experts only!): Don't do it yet."</i>&nbsp;— <a href="http://en.m.wikipedia.org/wiki/Michael_A._Jackson" title="Michael A. Jackson">Michael A. Jackson</a>
+</li>
+</ul>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_11">
+<div style="-moz-column-count:3; column-count:3;">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Michael_Abrash" title="Michael Abrash">Abrash Assembly Language Optimization</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">Algorithmic efficiency</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Abstract_interpretation" title="Abstract interpretation">Abstract interpretation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cache_%28computing%29" title="Cache (computing)">Cache (computing)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Control_flow_graph" title="Control flow graph">Control flow graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lazy_evaluation" title="Lazy evaluation">Lazy evaluation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Loop_optimization" title="Loop optimization">Loop optimization</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Low_level_virtual_machine" title="Low level virtual machine" class="mw-redirect">Low level virtual machine</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">Memoization</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Memory_locality" title="Memory locality" class="mw-redirect">Memory locality</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Performance_analysis" title="Performance analysis" class="mw-redirect">Performance analysis</a> (profiling)</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Performance_tuning" title="Performance tuning">Performance tuning</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Queueing_theory" title="Queueing theory">Queueing theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Computer_simulation" title="Computer simulation">Simulation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Speculative_execution" title="Speculative execution">Speculative execution</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SSA_form" title="SSA form" class="mw-redirect">SSA form</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Worst-case_execution_time" title="Worst-case execution time">Worst-case execution time</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Advanced_System_Optimizer" title="Advanced System Optimizer">Advanced System Optimizer</a></li>
+</ul>
+</div>
+</div><a id="anchor_11" href="#section_11" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_12"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_12">
+<div class="refbegin" style="">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Jon_Bentley" title="Jon Bentley">Jon Bentley</a>: <i>Writing Efficient Programs</i>, <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0139702512" class="internal mw-magiclink-isbn">ISBN 0-13-970251-2</a>.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>: <i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i>
+</li>
+</ul>
+</div>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Robert Sedgewick</a>, <i>Algorithms‎</i>, 1984, p. 84</span>
+</li>
+<li id="cite_note-autogenerated268-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-autogenerated268_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-autogenerated268_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Knuth, Donald. <a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.6084&amp;rep=rep1&amp;type=pdf"><i>Structured Programming with go to Statements</i></a>, ACM Journal <b>Computing Surveys</b>, Vol 6, No. 4, Dec. 1974. p.268.</span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><i>The Errors of Tex</i>, in <i>Software—Practice &amp; Experience</i>, Volume 19, Issue 7 (July 1989), pp. 607–685, reprinted in his book Literate Programming (p. 276)</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://hans.gerwitz.com/2004/08/12/premature-optimization-is-the-root-of-all-evil.html">Tony Hoare, a 2004 email</a></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a>: <a rel="nofollow" class="external text" href="http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">Structured Programming with Goto Statements</a>. <i>Computing Surveys</i> <b>6</b>:4 (1974), 261–301.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_12" href="#section_12" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_13"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_13">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Optimization_%28computer_science%29_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">Wikibooks has a book on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Optimizing_Code_for_Speed">Optimizing Code for Speed</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.agner.org/optimize/optimizing_cpp.pdf">Optimizing software in C++</a></li>
+<li><a rel="nofollow" class="external text" href="http://web.archive.org/web/20080729033434/http://www.abarnett.demon.co.uk/tutorial.html">C optimization tutorial</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.research.scea.com/research/pdfs/GDC2003_Memory_Optimization_18Mar03.pdf">Memory optimization</a> by Christer Ericson</li>
+<li><a rel="nofollow" class="external text" href="http://www.agner.org/optimize/">Optimization manuals for the x86 and x86-64 family microprocessors</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ece.cmu.edu/%7Efranzf/papers/gttse07.pdf">How To Write Fast Numerical Code: A Small Introduction</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.arizona.edu/solar/">Software Optimization at Link-time And Run-time</a></li>
+<li>Article "<a rel="nofollow" class="external text" href="http://doi.ieeecomputersociety.org/10.1109/2.348001">A Plea for Lean Software</a>" by <a href="http://en.m.wikipedia.org/wiki/Niklaus_Wirth" title="Niklaus Wirth">Niklaus Wirth</a>
+</li>
+<li><a rel="nofollow" class="external text" href="http://c2.com/cgi/wiki?CategoryOptimization">Description from the Portland Pattern Repository</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.daemon.be/maarten/ipperf.html">Performance tuning of Computer Networks</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.thinkingparallel.com/2006/08/07/my-views-on-high-level-optimization/">An article describing high-level optimization</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://people.redhat.com/drepper/cpumemory.pdf">"What Every Programmer Should Know About Memory"</a> by Ulrich Drepper&nbsp;— explains the structure of modern memory subsystems and suggests how to utilize them efficiently</li>
+<li>
+<a rel="nofollow" class="external text" href="http://icl.cs.utk.edu/%7Emucci/latest/pubs/Notur2009-new.pdf">"Linux Multicore Performance Analysis and Optimization in a Nutshell"</a>, presentation slides by Philip Mucci.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Optimization_%28computer_science%29&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Program+optimization&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Optimization_%28computer_science%29&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Program+optimization&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Optimization_%28computer_science%29_files/load_002.php" type="text/javascript"></script>
+<script src="Optimization_%28computer_science%29_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

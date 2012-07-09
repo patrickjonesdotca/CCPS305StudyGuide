@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Spaghetti stack - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Spaghetti_stack_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 3 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Spaghetti_stack">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Spaghetti_stack_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Spaghetti_stack_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Spaghetti_stack_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Spaghetti_stack" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/In-Tree">Deutsch</option><option value="//fr.m.wikipedia.org/wiki/Pile_spaghetti">français</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Spaghetti stack</h1>			
+<div class="thumb tright">
+<div class="thumbinner" style="width:122px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Spaghettistack.svg" class="image"><img alt="" src="Spaghetti_stack_files/120px-Spaghettistack.png" class="thumbimage" width="120" height="277"></a>
+<div class="thumbcaption">
+
+Spaghetti stack with an '"active" stack frame highlighted</div>
+</div>
+</div>
+<p>A <b>spaghetti stack</b> (also called a <b>cactus stack</b>, <b><a href="http://en.m.wikipedia.org/wiki/Saguaro" title="Saguaro">saguaro</a> stack</b> or <b>in-tree</b>) in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a> is an N-ary <a href="http://en.m.wikipedia.org/wiki/Tree_data_structure" title="Tree data structure" class="mw-redirect">tree data structure</a> in which <a href="http://en.m.wikipedia.org/wiki/Child_node" title="Child node" class="mw-redirect">child nodes</a> have pointers to the <a href="http://en.m.wikipedia.org/wiki/Parent_node" title="Parent node" class="mw-redirect">parent nodes</a> (but not vice-versa). When a list of nodes is traversed from a leaf node to the <a href="http://en.m.wikipedia.org/wiki/Root_node" title="Root node" class="mw-redirect">root node</a> by chasing these parent <a href="http://en.m.wikipedia.org/wiki/Pointer_%28computer_programming%29" title="Pointer (computer programming)">pointers</a>, the structure looks like a <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked list</a> <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a>.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup>
+ It can be analogized to a linked list having one and only parent 
+pointer called "next" or "link", and ignoring that each parent may have 
+other children (which are not accessible anyway since there are no 
+downward pointers).</p>
+<p>Spaghetti stack structures arise in situations when records are 
+dynamically pushed and popped onto a stack as execution progresses, but 
+references to the popped records remain in use.</p>
+<p>For example, a <a href="http://en.m.wikipedia.org/wiki/Compiler" title="Compiler">compiler</a> for a language such as <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> creates a spaghetti stack as it opens and closes <a href="http://en.m.wikipedia.org/wiki/Symbol_table" title="Symbol table">symbol tables</a> representing block <a href="http://en.m.wikipedia.org/wiki/Scope_%28computer_science%29" title="Scope (computer science)">scopes</a>.
+ When a new block scope is opened, a symbol table is pushed onto a 
+stack. When the closing curly brace is encountered, the scope is closed 
+and the symbol table is popped. But that symbol table is remembered, 
+rather than destroyed. And of course it remembers its higher level 
+"parent" symbol table and so on. Thus when the compiler is later 
+performing translations over the <a href="http://en.m.wikipedia.org/wiki/Abstract_syntax_tree" title="Abstract syntax tree">abstract syntax tree</a>,
+ for any given expression, it can fetch the symbol table representing 
+that expression's environment and can resolve references to identifiers.
+ If the expression refers to a variable X, it is first sought after in 
+the leaf symbol table representing the inner-most lexical scope, then in
+ the parent and so on.</p>
+<p>A similar data structure appears in disjoint-set forests, a type of <a href="http://en.m.wikipedia.org/wiki/Disjoint-set_data_structure" title="Disjoint-set data structure">disjoint-set data structure</a>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Use_in_programming_language_runtimes">Use in programming language runtimes</span></h2><div class="content_block" id="content_1">
+<p>The term <i>spaghetti stack</i> is closely associated with implementations of <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a> that support <a href="http://en.m.wikipedia.org/wiki/Continuation" title="Continuation">continuations</a>. Spaghetti stacks are used to implement the actual <a href="http://en.m.wikipedia.org/wiki/Run-time_stack" title="Run-time stack" class="mw-redirect">run-time stack</a>
+ containing variable bindings and other environmental features. When 
+continuations must be supported, a function's local variables cannot be 
+destroyed when that function returns: a saved continuation may later 
+re-enter into that function, and will expect not only the variables 
+there to be intact, but it will also expect the entire stack to be 
+there, so it can return again! To resolve this problem, <a href="http://en.m.wikipedia.org/wiki/Stack_frame" title="Stack frame" class="mw-redirect">stack frames</a> can be <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">dynamically allocated</a> in a spaghetti stack structure, and simply left behind to be <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collected</a> when no continuations refer to them any longer. This type of structure also solves both the upward and downward <a href="http://en.m.wikipedia.org/wiki/Funarg_problem" title="Funarg problem">funarg problems</a>, so first-class lexical <a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">closures</a> are readily implemented in that substrate also.</p>
+<p>Examples of languages that use spaghetti stacks are:</p>
+<ul>
+<li>Languages having first-class continuations such as <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> and <a href="http://en.m.wikipedia.org/wiki/Standard_ML_of_New_Jersey" title="Standard ML of New Jersey">Standard ML of New Jersey</a>
+</li>
+<li>Languages where the execution stack can be inspected and modified at runtime such as <a href="http://en.m.wikipedia.org/wiki/Smalltalk" title="Smalltalk">Smalltalk</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Felix_%28programming_language%29" title="Felix (programming language)">Felix</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Rust_%28programming_language%29" title="Rust (programming language)">Rust</a></li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_2">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Persistent_data_structure" title="Persistent data structure">Persistent data structure</a></li>
+</ul>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_3">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation book">Machinery, Sponsored (1988). <i>Proceedings of the 1988 Acm Conference on Lisp and Functional Programming</i>. New York: ACM Press. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-89791-273-0" title="Special:BookSources/978-0-89791-273-0">978-0-89791-273-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Proceedings+of+the+1988+Acm+Conference+on+Lisp+and+Functional+Programming&amp;rft.aulast=Machinery&amp;rft.aufirst=Sponsored&amp;rft.au=Machinery%2C%26%2332%3BSponsored&amp;rft.date=1988&amp;rft.place=New+York&amp;rft.pub=ACM+Press&amp;rft.isbn=978-0-89791-273-0&amp;rfr_id=info:sid/en.wikipedia.org:Spaghetti_stack"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+
+
+
+
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Spaghetti_stack&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Spaghetti+stack&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Spaghetti_stack&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Spaghetti+stack&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Spaghetti_stack_files/load_002.php" type="text/javascript"></script>
+<script src="Spaghetti_stack_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

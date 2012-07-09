@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Funarg problem - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Funarg_problem_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 3 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Funarg_problem">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Funarg_problem_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Funarg_problem_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Funarg_problem_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Funarg_problem" selected="selected">English</option><option value="//el.m.wikipedia.org/wiki/%CE%A0%CF%81%CF%8C%CE%B2%CE%BB%CE%B7%CE%BC%CE%B1_Funarg">Ελληνικά</option><option value="//ru.m.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_%D1%84%D1%83%D0%BD%D0%B0%D1%80%D0%B3%D0%B0">русский</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Funarg problem</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, the <b>funarg problem</b> refers to the difficulty in implementing <a href="http://en.m.wikipedia.org/wiki/First-class_function" title="First-class function">first-class functions</a> (<a href="http://en.m.wikipedia.org/wiki/Function_%28programming%29" title="Function (programming)" class="mw-redirect">functions</a> as <a href="http://en.m.wikipedia.org/wiki/First-class_object" title="First-class object" class="mw-redirect">first-class objects</a>) in <a href="http://en.m.wikipedia.org/wiki/Stack-oriented_programming_language" title="Stack-oriented programming language">stack-based programming language</a> implementations.</p>
+<p>The difficulty only arises if the body of a <a href="http://en.m.wikipedia.org/wiki/Nested_function" title="Nested function">nested function</a>
+ refers directly (i.e., not via argument passing) to identifiers defined
+ in the environment in which the function is defined, but not in the 
+environment of the function call.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> To summarize the discussion below, two standard resolutions are to either forbid such references or to create <a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">closures</a>.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup></p>
+<p>There are two subtly different versions of the funarg problem. The <b>upwards funarg problem</b> arises from returning (or otherwise transmitting "upwards") a function from a function call. The <b>downwards funarg problem</b> arises from passing a function as a parameter to another function call.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Upwards_funarg_problem">Upwards funarg problem</span></h2><div class="content_block" id="content_1">
+<p>When one function calls another during a typical program's execution, the local state of the caller (including <a href="http://en.m.wikipedia.org/wiki/Parameter_%28computer_science%29" title="Parameter (computer science)" class="mw-redirect">parameters</a> and <a href="http://en.m.wikipedia.org/wiki/Local_variable" title="Local variable">local variables</a>)
+ must be preserved in order for execution to proceed after the callee 
+returns. In most compiled programs, this local state is stored on the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a> in a data structure called an <a href="http://en.m.wikipedia.org/wiki/Call_stack#Structure" title="Call stack">activation record</a> or <i>stack frame</i>.
+ This stack frame is pushed, or allocated, when a function is called, 
+and popped, or deallocated, when the function returns. The upwards 
+funarg problem arises when the calling function refers to the 
+called/exited function's state after that function has returned. 
+Therefore, the activation record containing the called function's state 
+variables must not be deallocated when the function returns, violating 
+the <a href="http://en.m.wikipedia.org/wiki/Stack-based_memory_allocation" title="Stack-based memory allocation">stack-based function call paradigm</a>.</p>
+<p>One solution to the upwards funarg problem is to simply allocate all activation records from the <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation#Heap-based_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">heap</a> instead of the stack, and rely on some form of <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collection</a> or <a href="http://en.m.wikipedia.org/wiki/Reference_counting" title="Reference counting">reference counting</a>
+ to deallocate the activation records when they are no longer needed. 
+Managing activation records on the heap is much less efficient than on 
+the stack, so this strategy may significantly degrade performance. 
+Moreover, because most functions in typical programs do not create 
+upwards funargs, much of this overhead is unnecessary.</p>
+<p>Some efficiency-minded compilers employ a hybrid approach in which 
+the activation records for a function are allocated from the stack if 
+the compiler is able to deduce, through <a href="http://en.m.wikipedia.org/wiki/Static_program_analysis" title="Static program analysis">static program analysis</a>, that the function creates no upwards funargs. Otherwise, the activation records are allocated from the heap.</p>
+<p>Another solution is to simply copy the value of the variables into 
+the closure at the time the closure is created. This will cause a 
+different behavior in the case of mutable variables, because the state 
+will no longer be shared between closures. But if it is known that the 
+variables are constant, then this approach will be equivalent. The <a href="http://en.m.wikipedia.org/wiki/ML_%28programming_language%29" title="ML (programming language)">ML</a> languages take this approach since variables in those languages are bound to values -- i.e. variables cannot be changed. <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>
+ also takes this approach with respect to anonymous classes, in that it 
+only allows one to refer to variables in the enclosing scope that are <code>final</code> (i.e. constant).</p>
+<p>Some languages allow the programmer to explicitly choose between the two behaviors. <a href="http://en.m.wikipedia.org/wiki/PHP" title="PHP">PHP</a> 5.3's anonymous functions allow one to specify variables to include in the closure using the <code>use ()</code>
+ clause; if the variable is listed by reference, it includes a reference
+ to the original variable; otherwise, it makes a copy. In Apple's <a href="http://en.m.wikipedia.org/wiki/Blocks_%28C_language_extension%29" title="Blocks (C language extension)">Blocks</a> anonymous functions, the upwards funarg problem is solved by requiring one to use <code>Block_copy()</code> when returning the block to a higher context, and <code>Block_copy()</code>
+ copies normal variables from the stack into a separate copy in the 
+closure; if one wants to share the state between closures, the variable 
+must be declared with the <code>__block</code> modifier, in which case that variable is allocated on the heap.</p>
+<h3> <span class="mw-headline" id="Example">Example</span>
+</h3>
+<p>The following <a href="http://en.m.wikipedia.org/wiki/Haskell_%28programming_language%29" title="Haskell (programming language)">Haskell</a>-inspired <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a> defines <a href="http://en.m.wikipedia.org/wiki/Function_composition_%28computer_science%29" title="Function composition (computer science)">function composition</a>:</p>
+<pre>compose f g = λx → f (g x)
+</pre>
+<p><code><a href="http://en.m.wikipedia.org/wiki/Lambda_calculus" title="Lambda calculus">λ</a></code> is the operator for constructing a new function, which -- in this case -- has one argument, <code><i>x</i></code>, and returns the result of first applying <code><i>g</i></code> to <code><i>x</i></code> then applying <code><i>f</i></code> to that. This λ function carries the functions <code><i>f</i></code> and <code><i>g</i></code> (or pointers to them) as internal state.</p>
+<p>The problem in this case exists if the compose function allocates the parameter variables <code><i>f</i></code> and <code><i>g</i></code> on the stack. When <code><i>compose</i></code> returns, the stack frame containing <code><i>f</i></code> and <code><i>g</i></code> is discarded. When the internal function <code><i>λx</i></code> attempts to access <code><i>g</i></code>, it will access a discarded memory area.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Downwards_funarg_problem">Downwards funarg problem</span></h2><div class="content_block" id="content_2">
+<p>A downwards funarg may also refer to a function's state when that 
+function is not actually executing. However, because, by definition, the
+ existence of a downwards funarg is contained in the execution of the 
+function that creates it, the activation record for the function can 
+usually still be stored on the stack. Nonetheless, the existence of 
+downwards funargs implies a tree structure of <a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">closures</a> and activation records that can complicate human and machine reasoning about the program state.</p>
+<p>The downwards funarg problem complicates the efficient compilation of <a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">tail recursion</a> and code written in <a href="http://en.m.wikipedia.org/wiki/Continuation-passing_style" title="Continuation-passing style">continuation-passing style</a>.
+ In these special cases, the intent of the programmer is (usually) that 
+the function run in limited stack space, so the "faster" behavior may 
+actually be undesirable.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Practical_implications">Practical implications</span></h2><div class="content_block" id="content_3">
+<p>Historically, the upwards funarg problem has proven to be the more difficult. For example, the <a href="http://en.m.wikipedia.org/wiki/Pascal_programming_language" title="Pascal programming language" class="mw-redirect">Pascal programming language</a>
+ allows functions to be passed as arguments but not returned as results;
+ thus implementations of Pascal are required to address the downwards 
+funarg problem but not the upwards one. The <a href="http://en.m.wikipedia.org/wiki/Oberon_programming_language" title="Oberon programming language" class="mw-redirect">Oberon programming language</a>
+ (a descendant of Pascal) allows functions both as parameters and return
+ values but the assigned function may not be a nested function. The <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C programming language</a>
+ historically avoids the main difficulty of the funarg problem by not 
+allowing function definitions to be nested; because the environment of 
+every function is the same, containing just the statically-allocated 
+global variables and functions, a pointer to a function's code describes
+ the function completely. <a href="http://en.m.wikipedia.org/wiki/Apple,_Inc." title="Apple, Inc." class="mw-redirect">Apple</a>
+ has proposed and implemented a closure syntax for C that solves the 
+upwards funarg problem by dynamically moving closures from the stack to 
+the heap as necessary. The <a href="http://en.m.wikipedia.org/wiki/Java_programming_language" title="Java programming language" class="mw-redirect">Java programming language</a> deals with it by requiring that context used by nested functions in anonymous inner classes be declared <a href="http://en.m.wikipedia.org/wiki/Final_%28Java%29" title="Final (Java)">final</a>. <a href="http://en.m.wikipedia.org/wiki/C_Sharp_%28programming_language%29" title="C Sharp (programming language)">C#</a> has lambdas (closures) that encapsulates a function pointer and related variables.</p>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Functional_language" title="Functional language" class="mw-redirect">functional languages</a>, functions are first-class values and can be passed anywhere. Thus, implementations of <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> or <a href="http://en.m.wikipedia.org/wiki/SML_programming_language" title="SML programming language" class="mw-redirect">SML</a> must address both the upwards and downwards funarg problems. This is usually accomplished by representing function values as <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">heap-allocated</a> closures, as previously described. The <a href="http://en.m.wikipedia.org/wiki/OCaml" title="OCaml">Objective Caml</a> compiler employs a hybrid technique (based on <a href="http://en.m.wikipedia.org/wiki/Program_analysis_%28computer_science%29" title="Program analysis (computer science)" class="mw-redirect">program analysis</a>) to maximize efficiency<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from April 2011">citation needed</span></a></i>]</sup>.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_4">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Activation_record" title="Activation record" class="mw-redirect">Activation record</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">Closure (computer science)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">Functional programming</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lambda_calculus" title="Lambda calculus">Lambda calculus</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Man_or_boy_test" title="Man or boy test">Man or boy test</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Name_binding" title="Name binding">Name binding</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Referential_transparency_%28computer_science%29" title="Referential transparency (computer science)">Referential transparency</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scope_%28programming%29" title="Scope (programming)" class="mw-redirect">Scope (programming)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_stack" title="Spaghetti stack">Spaghetti stack</a></li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://portal.acm.org/citation.cfm?id=1093411"><i>The function of FUNCTION in LISP or why the FUNARG problem should be called the environment problem</i>, by Joel Moses, in: ACM SIGSAM Bulletin 17 (July 1970), pp. 13-27</a></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://portal.acm.org/citation.cfm?id=1093420.1093422"><i>A proposed solution to the FUNARG problem</i>, by Erik Sandewall, in: ACM SIGSAM Bulletin 17 (Jan. 1971), pp. 29-42</a></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_6">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.soe.ucsc.edu/classes/cmps203/Winter11/09-lambda.ppt.pdf">Bindings, Procedures, Functions, Functional Programming, and the Lambda Calculus</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Joel_Moses" title="Joel Moses">Joel Moses</a>. <a rel="nofollow" class="external text" href="http://dspace.mit.edu/handle/1721.1/5854">"The Function of FUNCTION in LISP, or Why the FUNARG Problem Should be Called the Environment Problem"</a>. MIT AI Memo 199, 1970.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Andrew_Appel" title="Andrew Appel">Andrew W. Appel</a>, Zhong Shao. An Empirical and Analytic Study of Stack vs. Heap Cost for Languages with Closures. <a rel="nofollow" class="external text" href="ftp://ftp.cs.princeton.edu/techreports/1994/450.ps.gz">Princeton CS Tech Report TR-450-94</a>, 1994.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Funarg_problem&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Funarg+problem&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Funarg_problem&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Funarg+problem&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Funarg_problem_files/load_002.php" type="text/javascript"></script>
+<script src="Funarg_problem_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

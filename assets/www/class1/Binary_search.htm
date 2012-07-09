@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Binary search algorithm - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Binary_search_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 32 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Binary_search_algorithm">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Binary_search_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Binary_search_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Binary_search_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Binary_search" selected="selected">English</option><option value="//ar.m.wikipedia.org/wiki/%D8%AF%D9%8A%D9%83%D9%88%D8%AA%D9%88%D9%85%D9%8A%D8%A9">العربية</option><option value="//bs.m.wikipedia.org/wiki/Binarno_pretra%C5%BEivanje">bosanski</option><option value="//cs.m.wikipedia.org/wiki/Bin%C3%A1rn%C3%AD_vyhled%C3%A1v%C3%A1n%C3%AD">česky</option><option value="//de.m.wikipedia.org/wiki/Bin%C3%A4re_Suche">Deutsch</option><option value="//el.m.wikipedia.org/wiki/%CE%94%CF%85%CE%B1%CE%B4%CE%B9%CE%BA%CE%AE_%CE%B1%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7">Ελληνικά</option><option value="//fa.m.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%D8%AC%D8%B3%D8%AA%D8%AC%D9%88%DB%8C_%D8%AF%D9%88%D8%AF%D9%88%DB%8C%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Dichotomie">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%9D%B4%EC%A7%84_%EA%B2%80%EC%83%89_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">한국어</option><option value="//hi.m.wikipedia.org/wiki/%E0%A4%A6%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0%E0%A5%80_%E0%A4%96%E0%A5%8B%E0%A4%9C_%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A3%E0%A4%BE%E0%A4%B2%E0%A5%80">हिन्दी</option><option value="//id.m.wikipedia.org/wiki/Pencarian_biner">Bahasa Indonesia</option><option value="//ia.m.wikipedia.org/wiki/Recerca_binari">interlingua</option><option value="//it.m.wikipedia.org/wiki/Ricerca_dicotomica">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%97%D7%99%D7%A4%D7%95%D7%A9_%D7%91%D7%99%D7%A0%D7%90%D7%A8%D7%99">עברית</option><option value="//mk.m.wikipedia.org/wiki/%D0%91%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D0%BE_%D0%BF%D1%80%D0%B5%D0%B1%D0%B0%D1%80%D1%83%D0%B2%D0%B0%D1%9A%D0%B5">македонски</option><option value="//ne.m.wikipedia.org/wiki/%E0%A4%AC%E0%A4%BE%E0%A4%87%E0%A4%A8%E0%A4%B0%E0%A4%BF_%E0%A4%B8%E0%A4%B0%E0%A5%8D%E0%A4%9A">नेपाली</option><option value="//ja.m.wikipedia.org/wiki/%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2">日本語</option><option value="//no.m.wikipedia.org/wiki/Bin%C3%A6rs%C3%B8k">‪norsk (bokmål)‬</option><option value="//pl.m.wikipedia.org/wiki/Wyszukiwanie_binarne">polski</option><option value="//pt.m.wikipedia.org/wiki/Pesquisa_bin%C3%A1ria">português</option><option value="//ro.m.wikipedia.org/wiki/C%C4%83utare_binar%C4%83">română</option><option value="//ru.m.wikipedia.org/wiki/%D0%94%D0%B2%D0%BE%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D0%B8%D1%81%D0%BA">русский</option><option value="//sk.m.wikipedia.org/wiki/Bin%C3%A1rne_vyh%C4%BEad%C3%A1vanie">slovenčina</option><option value="//sl.m.wikipedia.org/wiki/Binarno_iskanje">slovenščina</option><option value="//sr.m.wikipedia.org/wiki/%D0%91%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D0%B0_%D0%BF%D1%80%D0%B5%D1%82%D1%80%D0%B0%D0%B3%D0%B0">српски / srpski</option><option value="//fi.m.wikipedia.org/wiki/Puolitushaku">suomi</option><option value="//sv.m.wikipedia.org/wiki/Bin%C3%A4rs%C3%B6kning">svenska</option><option value="//tr.m.wikipedia.org/wiki/%C4%B0kili_arama_algoritmas%C4%B1">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%94%D0%B2%D1%96%D0%B9%D0%BA%D0%BE%D0%B2%D0%B8%D0%B9_%D0%BF%D0%BE%D1%88%D1%83%D0%BA">українська</option><option value="//vi.m.wikipedia.org/wiki/T%C3%ACm_ki%E1%BA%BFm_nh%E1%BB%8B_ph%C3%A2n">Tiếng Việt</option><option value="//zh-yue.m.wikipedia.org/wiki/%E5%B0%8D%E5%88%86%E6%AA%A2%E7%B4%A2">粵語</option><option value="//zh.m.wikipedia.org/wiki/%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Binary search algorithm</h1>			
+<table class="metadata plainlinks ambox ambox-style ambox-Cleanup" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Binary_search_files/40px-Edit-clear.png" width="40" height="40"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article <b>may require <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Cleanup" title="Wikipedia:Cleanup">cleanup</a> to meet Wikipedia's <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Manual_of_Style" title="Wikipedia:Manual of Style">quality standards</a></b>. <span class="hide-when-compact">No <a href="http://en.m.wikipedia.org/wiki/Template:Cleanup/doc" title="Template:Cleanup/doc">cleanup reason</a> has been specified. Please help <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Binary_search_algorithm&amp;action=edit">improve this article</a> if you can.</span> <small><i>(April 2011)</i></small> </span></td>
+</tr></tbody></table>
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Binary search algorithm</caption>
+<tbody><tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">Search algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Orders_of_common_functions" title="Big O notation"><i>O</i>(log <i>n</i>)</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Orders_of_common_functions" title="Big O notation"><i>O</i>(1)</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Orders_of_common_functions" title="Big O notation"><i>O</i>(log <i>n</i>)</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Orders_of_common_functions" title="Big O notation"><i>O</i>(1)</a></td>
+</tr>
+</tbody></table>
+<div class="dablink">This article is about searching a finite sorted array.  For searching continuous function values, see <a href="http://en.m.wikipedia.org/wiki/Bisection_method" title="Bisection method">bisection method</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>binary search</b> or <b>half-interval search</b> <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> finds the position of a specified value (the input "key") within a <a href="http://en.m.wikipedia.org/wiki/Sorted_array" title="Sorted array">sorted array</a>.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup>
+ In each step, the algorithm compares the input key value with the key 
+value of the middle element of the array. If the keys match, then a 
+matching element has been found so its index, or position, is returned. 
+Otherwise, if the sought key is less than the middle element's key, then
+ the algorithm repeats its action on the sub-array to the left of the 
+middle element or, if the input key is greater, on the sub-array to the 
+right. If the remaining array to be searched is reduced to zero, then 
+the key cannot be found in the array and a special "Not found" 
+indication is returned.</p>
+<p>A binary search halves the number of items to check with each iteration, so locating an item (or determining its absence) takes <a href="http://en.m.wikipedia.org/wiki/Logarithmic_time" title="Logarithmic time" class="mw-redirect">logarithmic time</a>. A binary search is a <a href="http://en.m.wikipedia.org/wiki/Dichotomic_search" title="Dichotomic search">dichotomic</a> <a href="http://en.m.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">divide and conquer</a> <a href="http://en.m.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search algorithm</a>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Overview">Overview</span></h2><div class="content_block" id="content_1">
+<p>Searching a sorted collection is a common task. A dictionary is a 
+sorted list of word definitions. Given a word, one can find its 
+definition. A telephone book is a sorted list of people's names, 
+addresses, and telephone numbers. Knowing someone's name allows one to 
+quickly find their telephone number and address.</p>
+<p>If the list to be searched contains more than a few items (a dozen, 
+say) a binary search will require far fewer comparisons than a <a href="http://en.m.wikipedia.org/wiki/Linear_search" title="Linear search">linear search</a>, but it imposes the requirement that the list be sorted. Similarly, a <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash search</a>
+ can be faster than a binary search but imposes still greater 
+requirements. If the contents of the array are modified between 
+searches, maintaining these requirements may take more time than the 
+searches! And if it is known that some items will be searched for <i>much</i> more often than others, <i>and</i> it can be arranged that these items are at the start of the list, then a linear search may be the best.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Examples">Examples</span></h2><div class="content_block" id="content_2">
+<h3> <span class="mw-headline" id="Number_guessing_game">Number guessing game</span>
+</h3>
+<p>This rather simple game begins something like "I'm thinking of an 
+integer between forty and sixty inclusive, and to your guesses I'll 
+respond 'High', 'Low', or 'Yes!' as might be the case." Supposing that <i>N</i> is the number of possible values (here, twenty-one as "inclusive" was stated), then at most <img class="tex" alt="\lceil\log_2 N\rceil" src="Binary_search_files/09e4fd8229e9ee576b4e8e6339c5e59f.png">
+ questions are required to determine the number, since each question 
+halves the search space. Note that one less question (iteration) is 
+required than for the general algorithm, since the number is already 
+constrained to be within a particular range.</p>
+<p>Even if the number to guess can be arbitrarily large, in which case there is no upper bound <i>N</i>, The number can be found in at most <img class="tex" alt="2\lceil \log_2 k \rceil" src="Binary_search_files/1ce4822393603b990eb9f15a52191e92.png"> steps (where k is the (unknown) selected number) by first finding an upper bound by repeated doubling.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from August 2009">citation needed</span></a></i>]</sup> For example, if the number were 11, the following sequence of guesses could be used to find it: 1, 2, 4, 8, 16, 12, 10, 11</p>
+<p>One could also extend the method to include negative numbers; for 
+example the following guesses could be used to find −13: 0, −1, −2, −4, 
+−8, −16, −12, −14, −13.</p>
+<h3> <span class="mw-headline" id="Word_lists">Word lists</span>
+</h3>
+<p>People typically use a mixture of the binary search and <a href="http://en.m.wikipedia.org/wiki/Interpolation_search" title="Interpolation search">interpolative search</a> algorithms when searching a <a href="http://en.m.wikipedia.org/wiki/Telephone_book" title="Telephone book" class="mw-redirect">telephone book</a>,
+ after the initial guess we exploit the fact that the entries are sorted
+ and can rapidly find the required entry. For example when searching for
+ Smith, if Rogers and Thomas have been found, one can flip to a page 
+about halfway between the previous guesses. If this shows Samson, it can
+ be concluded that Smith is somewhere between the Samson and Thomas 
+pages so these can be divided.</p>
+<h3> <span class="mw-headline" id="Applications_to_complexity_theory">Applications to complexity theory</span>
+</h3>
+<p>Even if we do not know a fixed range the number <i>k</i> falls in, we can still determine its value by asking <img class="tex" alt="2\lceil\log_2k\rceil" src="Binary_search_files/1ce4822393603b990eb9f15a52191e92.png"> simple yes/no questions of the form "Is <i>k</i> greater than <i>x</i>?" for some number <i>x</i>. As a simple consequence of this, if you can answer the question "Is this integer property <i>k</i>
+ greater than a given value?" in some amount of time then you can find 
+the value of that property in the same amount of time with an added 
+factor of <img class="tex" alt="\log_2 k" src="Binary_search_files/a7bf52f2342c237e54c0e37eb748db03.png">. This is called a <i><a href="http://en.m.wikipedia.org/wiki/Reduction_%28complexity%29" title="Reduction (complexity)">reduction</a></i>, and it is because of this kind of reduction that most complexity theorists concentrate on <a href="http://en.m.wikipedia.org/wiki/Decision_problem" title="Decision problem">decision problems</a>, algorithms that produce a simple yes/no answer.</p>
+<p>For example, suppose we could answer "Does this <i>n</i> x <i>n</i> matrix have <a href="http://en.m.wikipedia.org/wiki/Permanent" title="Permanent">permanent</a> larger than <i>k</i>?" in O(<i>n<sup>2</sup></i>) time. Then, by using binary search, we could find the (ceiling of the) permanent itself in O(<i>n<sup>2</sup></i> log <i>p</i>) time, where <i>p</i> is the value of the permanent. Notice that <i>p</i> is not the size of the input, but the <i>value</i> of the output; given a matrix whose maximum item (in absolute value) is <i>m</i>, <i>p</i> is bounded by <img class="tex" alt="m n n!" src="Binary_search_files/d1d6e57856332bda48471e91b9b4a4bd.png">. Hence log <i>p</i> = O(<i>n</i> log <i>n</i> + log <i>m</i>). A binary search could find the permanent in O(<i>n</i><sup>3</sup> log <i>n</i> + <i>n</i><sup>2</sup> log <i>m</i>).</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Algorithm">Algorithm</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Recursive">Recursive</span>
+</h3>
+<p>A straightforward implementation of binary search is <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursive</a>.
+ The initial call uses the indices of the entire array to be searched. 
+The procedure then calculates an index midway between the two indices, 
+determines which of the two subarrays to search, and then does a 
+recursive call to search that subarray. Each of the calls is <a href="http://en.m.wikipedia.org/wiki/Tail_recursive" title="Tail recursive" class="mw-redirect">tail recursive</a>, so a compiler need not make a new stack frame for each call. The variables <code>imin</code> and <code>imax</code> are the lowest and highest inclusive indices that are searched.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> binary_search<span class="br0">(</span><span class="kw4">int</span> A<span class="br0">[</span><span class="br0">]</span><span class="sy0">,</span> <span class="kw4">int</span> key<span class="sy0">,</span> <span class="kw4">int</span> imin<span class="sy0">,</span> <span class="kw4">int</span> imax<span class="br0">)</span>
+<span class="br0">{</span>
+  <span class="co1">// test if array is empty</span>
+  <span class="kw1">if</span> <span class="br0">(</span>imax <span class="sy0">&lt;</span> imin<span class="br0">)</span><span class="sy0">:</span>
+    <span class="co1">// set is empty, so return value showing not found</span>
+    <span class="kw1">return</span> KEY_NOT_FOUND<span class="sy0">;</span>
+  <span class="kw1">else</span>
+    <span class="br0">{</span>
+      <span class="co1">// calculate midpoint to cut set in half</span>
+      <span class="kw4">int</span> imid <span class="sy0">=</span> midpoint<span class="br0">(</span>imin<span class="sy0">,</span> imax<span class="br0">)</span><span class="sy0">;</span>
+ 
+      <span class="co1">// three-way comparison</span>
+      <span class="kw1">if</span> <span class="br0">(</span>A<span class="br0">[</span>imid<span class="br0">]</span> <span class="sy0">&gt;</span> key<span class="br0">)</span><span class="sy0">:</span>
+        <span class="co1">// key is in lower subset</span>
+        <span class="kw1">return</span> binary_search<span class="br0">(</span>A<span class="sy0">,</span> key<span class="sy0">,</span> imin<span class="sy0">,</span> imid<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+      <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>A<span class="br0">[</span>imid<span class="br0">]</span> <span class="sy0">&lt;</span> key<span class="br0">)</span><span class="sy0">:</span>
+        <span class="co1">// key is in upper subset</span>
+        <span class="kw1">return</span> binary_search<span class="br0">(</span>A<span class="sy0">,</span> key<span class="sy0">,</span> imid<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">,</span> imax<span class="br0">)</span><span class="sy0">;</span>
+      <span class="kw1">else</span><span class="sy0">:</span>
+        <span class="co1">// key has been found</span>
+        <span class="kw1">return</span> imid<span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>It is invoked with initial <code>imin</code> and <code>imax</code> values of <code>0</code> and <code>N-1</code> for a zero based array.</p>
+<p>The number type "int" shown in the code has an influence on how the 
+midpoint calculation can be implemented correctly. With unlimited 
+numbers, the midpoint can be calculated as <code>"(imin + imax) / 2"</code>.
+ In practical programming, however, the calculation is often performed 
+with numbers of a limited range, and then the intermediate result <code>"(imin + imax)"</code> might overflow. With limited numbers, the midpoint can be calculated correctly as <code>"imin + ((imax - imin) / 2)"</code>.</p>
+<h3> <span class="mw-headline" id="Iterative">Iterative</span>
+</h3>
+<p>The binary search algorithm can also be expressed iteratively with two index limits that progressively narrow the search range.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> binary_search<span class="br0">(</span><span class="kw4">int</span> A<span class="br0">[</span><span class="br0">]</span><span class="sy0">,</span> <span class="kw4">int</span> key<span class="sy0">,</span> <span class="kw4">int</span> imin<span class="sy0">,</span> <span class="kw4">int</span> imax<span class="br0">)</span>
+<span class="br0">{</span>
+  <span class="co1">// continue searching while [imin,imax] is not empty</span>
+  <span class="kw1">while</span> <span class="br0">(</span>imax <span class="sy0">&gt;=</span> imin<span class="br0">)</span>
+    <span class="br0">{</span>
+      <span class="coMULTI">/* calculate the midpoint for roughly equal partition */</span>
+      <span class="kw4">int</span> imid <span class="sy0">=</span> midpoint<span class="br0">(</span>imin<span class="sy0">,</span> imax<span class="br0">)</span><span class="sy0">;</span>
+ 
+      <span class="co1">// determine which subarray to search</span>
+      <span class="kw1">if</span>      <span class="br0">(</span>A<span class="br0">[</span>imid<span class="br0">]</span> <span class="sy0">&lt;</span>  key<span class="br0">)</span>
+        <span class="co1">// change min index to search upper subarray</span>
+        imin <span class="sy0">=</span> imid <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>A<span class="br0">[</span>imid<span class="br0">]</span> <span class="sy0">&gt;</span> key <span class="br0">)</span>
+        <span class="co1">// change max index to search lower subarray</span>
+        imax <span class="sy0">=</span> imid <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="kw1">else</span>
+        <span class="co1">// key found at index imid</span>
+        <span class="kw1">return</span> imid<span class="sy0">;</span>
+  <span class="br0">}</span>
+  <span class="co1">// key not found</span>
+  <span class="kw1">return</span> KEY_NOT_FOUND<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Deferred_detection_of_equality">Deferred detection of equality</span>
+</h3>
+<p>The above iterative and recursive versions take three paths based on 
+the key comparison: one path for less than, one path for greater than, 
+and one path for equality. (There are two conditional branches.) The 
+path for equality is taken only when the record is finally matched, so 
+it is rarely taken. That branch path can be moved outside the search 
+loop in the deferred test for equality version of the algorithm. The 
+following algorithm uses only one conditional branch per iteration.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">// inclusive indices</span>
+<span class="co1">//   0 &lt;= imin when using truncate toward zero divide</span>
+<span class="co1">//     imid = (imin+imax)/2;</span>
+<span class="co1">//   imin unrestricted when using truncate toward minus infinity divide</span>
+<span class="co1">//     imid = (imin+imax)&gt;&gt;1; or</span>
+<span class="co1">//     imid = (int)floor((imin+imax)/2.0);</span>
+<span class="kw4">int</span> binary_search<span class="br0">(</span><span class="kw4">int</span> A<span class="br0">[</span><span class="br0">]</span><span class="sy0">,</span> <span class="kw4">int</span> key<span class="sy0">,</span> <span class="kw4">int</span> imin<span class="sy0">,</span> <span class="kw4">int</span> imax<span class="br0">)</span>
+<span class="br0">{</span>
+  <span class="co1">// continually narrow search until just one element remains</span>
+  <span class="kw1">while</span> <span class="br0">(</span>imin <span class="sy0">&lt;</span> imax<span class="br0">)</span>
+    <span class="br0">{</span>
+      <span class="kw4">int</span> imid <span class="sy0">=</span> midpoint<span class="br0">(</span>imin<span class="sy0">,</span> imax<span class="br0">)</span><span class="sy0">;</span>
+ 
+      <span class="co1">// code must guarantee the interval is reduced at each iteration</span>
+      <span class="kw3">assert</span><span class="br0">(</span>imid <span class="sy0">&lt;</span> imax<span class="br0">)</span><span class="sy0">;</span>
+      <span class="co1">// note: 0 &lt;= imin &lt; imax implies imid will always be less than imax</span>
+ 
+      <span class="co1">// reduce the search</span>
+      <span class="kw1">if</span> <span class="br0">(</span>A<span class="br0">[</span>imid<span class="br0">]</span> <span class="sy0">&lt;</span> key<span class="br0">)</span>
+        imin <span class="sy0">=</span> imid <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="kw1">else</span>
+        imax <span class="sy0">=</span> imid<span class="sy0">;</span>
+    <span class="br0">}</span>
+  <span class="co1">// At exit of while:</span>
+  <span class="co1">//   if A[] is empty, then imax &lt; imin</span>
+  <span class="co1">//   otherwise imax == imin</span>
+ 
+  <span class="co1">// deferred test for equality</span>
+  <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>imax <span class="sy0">==</span> imin<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>A<span class="br0">[</span>imin<span class="br0">]</span> <span class="sy0">==</span> key<span class="br0">)</span><span class="br0">)</span>
+    <span class="kw1">return</span> imin<span class="sy0">;</span>
+  <span class="kw1">else</span>
+    <span class="kw1">return</span> KEY_NOT_FOUND<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>The deferred detection approach foregoes the possibility of early 
+termination on discovery of a match, so the search will take about log<sub>2</sub>(<i>N</i>) iterations. On average, a <i>successful</i>
+ early termination search will not save many iterations. For large 
+arrays that are a power of 2, the savings is about two iterations. Half 
+the time, a match is found with one iteration left to go; one quarter 
+the time with two iterations left, one eighth with three iterations, and
+ so forth. The infinite series sum is 2.</p>
+<p>The deferred detection algorithm has the advantage that if the keys 
+are not unique, it returns the smallest index (the starting index) of 
+the region where elements have the search key. The early termination 
+version would return the first match it found, and that match might be 
+anywhere in region of equal keys.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Performance">Performance</span></h2><div class="content_block" id="content_4">
+<p>With each test that fails to find a match at the probed position, the
+ search is continued with one or other of the two sub-intervals, each at
+ most half the size. More precisely, if the number of items, <i>N</i>, is odd then both sub-intervals will contain (<i>N</i>&nbsp;-&nbsp;1)/2 elements, while if <i>N</i> is even then the two sub-intervals contain <i>N</i>/2&nbsp;-&nbsp;1 and <i>N</i>/2 elements.</p>
+<p>If the original number of items is <i>N</i> then after the first iteration there will be at most <i>N</i>/2 items remaining, then at most <i>N</i>/4 items, at most <i>N</i>/8
+ items, and so on. In the worst case, when the value is not in the list,
+ the algorithm must continue iterating until the span has been made 
+empty; this will have taken at most ⌊<a href="http://en.m.wikipedia.org/wiki/Binary_logarithm" title="Binary logarithm">log<sub>2</sub></a>(<i>N</i>)&nbsp;+&nbsp;1⌋ iterations, where the ⌊&nbsp;⌋ notation denotes the <a href="http://en.m.wikipedia.org/wiki/Floor_function" title="Floor function" class="mw-redirect">floor function</a> that rounds its argument down to an integer. This <a href="http://en.m.wikipedia.org/wiki/Worst_case_analysis" title="Worst case analysis" class="mw-redirect">worst case analysis</a> is tight: for any <i>N</i> there exists a query that takes exactly ⌊<a href="http://en.m.wikipedia.org/wiki/Binary_logarithm" title="Binary logarithm">log<sub>2</sub></a>(<i>N</i>)&nbsp;+&nbsp;1⌋ iterations. When compared to <a href="http://en.m.wikipedia.org/wiki/Linear_search" title="Linear search">linear search</a>, whose worst-case behaviour is <i>N</i> iterations, we see that binary search is substantially faster as <i>N</i>
+ grows large. For example, to search a list of one million items takes 
+as many as one million iterations with linear search, but never more 
+than twenty iterations with binary search. However, a binary search can 
+only be performed if the list is in sorted order.</p>
+<h3> <span class="mw-headline" id="Average_performance">Average performance</span>
+</h3>
+<p><img class="tex" alt="\log_2(N) - 1" src="Binary_search_files/53efd558b6fb6e77bdfec7630842f3ff.png"> is the expected number of probes in an average successful search, and the worst case is <img class="tex" alt="\log_2(N)" src="Binary_search_files/e3a12fe6154a784eec36b2c56dcafc55.png">, just one more probe.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from October 2011">citation needed</span></a></i>]</sup> If the list is empty, no probes at all are made. Thus binary search is a <a href="http://en.m.wikipedia.org/wiki/Logarithmic_algorithm" title="Logarithmic algorithm" class="mw-redirect">logarithmic algorithm</a> and executes in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">O(<img class="tex" alt="\log N" src="Binary_search_files/e28e4a7a696eb600b22afb350ee13065.png">)</a> time. In most cases it is considerably faster than a <a href="http://en.m.wikipedia.org/wiki/Linear_search" title="Linear search">linear search</a>. It can be implemented using <a href="http://en.m.wikipedia.org/wiki/Iteration" title="Iteration">iteration</a>, or <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursion</a>.
+ In some languages it is more elegantly expressed recursively; however, 
+in some C-based languages tail recursion is not eliminated and the 
+recursive version requires more stack space.</p>
+<p>Binary search can interact poorly with the memory hierarchy (i.e. <a href="http://en.m.wikipedia.org/wiki/Cache_%28computing%29" title="Cache (computing)">caching</a>),
+ because of its random-access nature. For in-memory searching, if the 
+span to be searched is small, a linear search may have superior 
+performance simply because it exhibits better locality of reference. For
+ external searching, care must be taken or each of the first several 
+probes will lead to a disk seek. A common method is to abandon binary 
+searching for linear searching as soon as the size of the remaining span
+ falls below a small value such as 8 or 16 or even more in recent 
+computers. The exact value depends entirely on the machine running the 
+algorithm.</p>
+<p>Notice that for multiple searches <i>with a fixed value for N</i>, then (with the appropriate regard for integer division), the first iteration always selects the middle element at <i>N</i>/2, and the second always selects either <i>N</i>/4 or 3<i>N</i>/4,
+ and so on. Thus if the array's key values are in some sort of slow 
+storage (on a disc file, in virtual memory, not in the cpu's on-chip 
+memory), keeping those three keys in a local array for a special 
+preliminary search will avoid accessing widely separated memory. 
+Escalating to seven or fifteen such values will allow further levels at 
+not much cost in storage. On the other hand, if the searches are 
+frequent and not separated by much other activity, the computer's 
+various storage control features will more or less automatically promote
+ frequently accessed elements into faster storage.</p>
+<p>When multiple binary searches are to be performed for the same key in related lists, <a href="http://en.m.wikipedia.org/wiki/Fractional_cascading" title="Fractional cascading">fractional cascading</a> can be used to speed up successive searches after the first one.</p>
+<p>Even though in theory binary search is almost always faster than 
+linear search, in practice even on medium sized arrays (around 100 items
+ or less) it might be infeasible to ever use binary search. On larger 
+arrays, it only makes sense to binary search if the number of searches 
+is large enough, because the initial time to sort the array is 
+comparable to many linear searches <sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup></p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Variations">Variations</span></h2><div class="content_block" id="content_5">
+<p>There are many, and they are easily confused. Also, using a binary search within a sorting method is debatable.</p>
+<h3> <span class="mw-headline" id="Exclusive_or_inclusive_bounds">Exclusive or inclusive bounds</span>
+</h3>
+<p>The most significant differences are between the "exclusive" and 
+"inclusive" forms of the bounds. In the "exclusive" bound form the span 
+to be searched is <i>(L + 1)</i> to <i>(R − 1)</i>, and this may seem clumsy when the span to be searched could be described in the "inclusive" form, as <i>L</i> to <i>R</i>.
+ Although the details differ the two forms are equivalent as can be seen
+ by transforming one version into the other. The inclusive bound form 
+can be attained by replacing all appearances of "L" by "(L − 1)" and "R"
+ by "(R + 1)" then rearranging. Thus, the initialisation of <i>L:=0</i> becomes <i>(L − 1):=0</i> or <i>L:=1</i>, and <i>R:=N + 1</i> becomes <i>(R + 1):=N + 1</i> or <i>R:=N</i>. So far so good, but note now that the changes to L and R are no longer simply transferring the value of <i>p</i> to <i>L</i> or <i>R</i> as appropriate but now must be <i>(R + 1):=p</i> or <i>R:=p − 1</i>, and <i>(L − 1):=p</i> or <i>L:=p + 1</i>.</p>
+<p>Thus, the gain of a simpler initialisation, done once, is lost by a 
+more complex calculation, and which is done for every iteration. If that
+ is not enough, the test for an empty span is more complex also, as 
+compared to the simplicity of checking that the value of <i>p</i> is zero. Nevertheless, the inclusive bound form is found in many publications, such as <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>. <i>The Art of Computer Programming</i>, Volume 3: <i>Sorting and Searching</i>, Third Edition.</p>
+<p>Another common variation uses inclusive bounds for the left bound, 
+but exclusive bounds for the right bound. This is derived from the fact 
+that the bounds in a language with zero-based arrays can be simply 
+initialized to 0 and the size of the array, respectively. This mirrors 
+the way array slices are represented in some programming languages.</p>
+<h3> <span class="mw-headline" id="Midpoint_and_width">Midpoint and width</span>
+</h3>
+<p>An entirely different variation involves abandoning the <i>L</i> and <i>R</i> pointers in favour of a current position <i>p</i> and a width <i>w</i> where at each iteration, <i>p</i> is adjusted by + or − <i>w</i> and <i>w</i>
+ is halved. Professor Knuth remarks "It is possible to do this, but only
+ if extreme care is paid to the details" – Section 6.2.1, page 414 of <i>The Art of Computer Programming</i>, Volume 3: <i>Sorting and Searching</i>, Third Edition, outlines an algorithm, with the further remark "Simpler approaches are doomed to failure!"</p>
+<h3> <span class="mw-headline" id="Search_domain">Search domain</span>
+</h3>
+<p>There is no particular requirement that the array being searched has the bounds 1 to <i>N</i>. It is possible to search a specified range, elements <i>first</i> to <i>last</i> instead of 1 to <i>N</i>. All that is necessary is that the initialisation of the bounds be <i>L:=first − 1</i> and <i>R:=last + 1</i>, then all proceeds as before.</p>
+<p>The elements of the list are not necessarily all unique. If one 
+searches for a value that occurs multiple times in the list, the index 
+returned will be of the first-encountered equal element, and this will 
+not necessarily be that of the first, last, or middle element of the run
+ of equal-key elements but will depend on the positions of the values. 
+Modifying the list even in seemingly unrelated ways such as adding 
+elements elsewhere in the list may change the result.</p>
+<p>If the location of the first and/or last equal element needs to be 
+determined, this can be done efficiently with a variant of the binary 
+search algorithms which perform only one inequality test per iteration.</p>
+<h3> <span class="mw-headline" id="Noisy_search">Noisy search</span>
+</h3>
+<p>Several algorithms closely related to or extending binary search exist. For instance, <b>noisy binary search</b>
+ solves the same class of projects as regular binary search, with the 
+added complexity that any given test can return a false value at random.
+ (Usually, the number of such erroneous results are bounded in some way,
+ either in the form of an average error rate, or in the total number of 
+errors allowed per element in the search space.) Optimal algorithms for 
+several classes of noisy binary search problems have been known since 
+the late seventies, and more recently, optimal algorithms for noisy 
+binary search in quantum computers (where several elements can be tested
+ at the same time) have been discovered.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Implementation_issues">Implementation issues</span></h2><div class="content_block" id="content_6">
+<blockquote>
+<p>Although the basic idea of binary search is comparatively straightforward, the details can be surprisingly tricky… — Professor <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a><sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+</blockquote>
+<p>When <a href="http://en.m.wikipedia.org/wiki/Jon_Bentley" title="Jon Bentley">Jon Bentley</a>
+ assigned it as a problem in a course for professional programmers, he 
+found that an astounding ninety percent failed to code a binary search 
+correctly after several hours of working on it,<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup> and another study shows that accurate code for it is only found in five out of twenty textbooks.<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup> Furthermore, Bentley's own implementation of binary search, published in his 1986 book <i>Programming Pearls</i>, contains an error that remained undetected for over twenty years.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup></p>
+<h3> <span class="mw-headline" id="Arithmetic">Arithmetic</span>
+</h3>
+<p>In a practical implementation, the variables used to represent the 
+indices will be of finite size, hence only capable of representing a 
+finite range of values. For example, 32-bit <a href="http://en.m.wikipedia.org/wiki/Signedness" title="Signedness">unsigned integers</a>
+ can only hold values from 0 to 4294967295. Most binary search 
+algorithms use 32-bit signed integers, which can only hold values from 
+-2147483648 to 2147483647. If the binary search algorithm is to operate 
+on large arrays, this has two implications:</p>
+<ul>
+<li>The values <code>first − 1</code> and <code>last + 1</code> must 
+both be representable within the finite bounds of the chosen integer 
+type . Therefore, continuing the 32-bit unsigned example, the largest 
+value that <code>last</code> may take is +429496729<b>4</b>, not +429496729<b>5</b>. A problem exists even for the "inclusive" form of the method, as if <code>x &gt; A(4294967295).Key</code>, then on the final iteration the algorithm will attempt to store 4294967296 into <code>L</code> and fail. Equivalent issues apply to the lower limit, where <code>first − 1</code> could become negative as when the first element of the array is at index zero.</li>
+<li>If the midpoint of the span is calculated as <code>p&nbsp;:= (L + R)/2</code>, then the value <code>(L + R)</code> will exceed the number range if <code>last</code>
+ is greater than (for unsigned) 4294967295/2 or (for signed) 
+2147483647/2 and the search wanders toward the upper end of the search 
+space. This can be avoided by performing the calculation as <code>p&nbsp;:= (R - L)/2 + L</code>. When the problem arises for signed integers, a more efficient alternative is by performing the calculation as <code>p&nbsp;:= (R + L) &gt;&gt;&gt; 1</code>, where <code>&gt;&gt;&gt;</code> denotes the right <a href="http://en.m.wikipedia.org/wiki/Logical_shift" title="Logical shift">logical shift</a> operator. For example, this bug existed in Java SDK at <code>Arrays.binarySearch()</code> from 1.2 to 5.0 and fixed in 6.0.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup>
+</li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Language_support">Language support</span></h2><div class="content_block" id="content_7">
+<p>Many standard libraries provide a way to do a binary search:</p>
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> provides algorithm function <tt>bsearch</tt> in its standard library.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>'s <a href="http://en.m.wikipedia.org/wiki/Standard_Template_Library" title="Standard Template Library">STL</a> provides <a href="http://en.m.wikipedia.org/wiki/Algorithm_function" title="Algorithm function" class="mw-redirect">algorithm functions</a> <code>binary_search</code>, <code>lower_bound</code> and <code>upper_bound</code>.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a> offers a set of <a href="http://en.m.wikipedia.org/wiki/Function_overloading" title="Function overloading">overloaded</a> <code>binarySearch()</code> static methods in the classes <code><a rel="nofollow" class="external text" href="http://download.oracle.com/javase/7/docs/api/java/util/Arrays.html">Arrays</a></code> and <code><a rel="nofollow" class="external text" href="http://download.oracle.com/javase/7/docs/api/java/util/Collections.html">Collections</a></code> in the standard <code>java.util</code> package for performing binary searches on Java arrays and on <code>List</code>s, respectively. They must be arrays of primitives, or the arrays or Lists must be of a type that implements the <code>Comparable</code> interface, or you must specify a custom <code>Comparator</code> object.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Microsoft" title="Microsoft">Microsoft</a>'s <a href="http://en.m.wikipedia.org/wiki/.NET_Framework" title=".NET Framework">.NET Framework</a> 2.0 offers static <a href="http://en.m.wikipedia.org/wiki/Generic_programming" title="Generic programming">generic</a> versions of the binary search algorithm in its collection base classes. An example would be <code>System.Array</code>'s method <code>BinarySearch&lt;T&gt;(T[] array, T value).</code>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> provides the <code><a rel="nofollow" class="external text" href="http://docs.python.org/library/bisect.html">bisect</a></code> module.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/COBOL" title="COBOL">COBOL</a> can perform binary search on internal tables using the <code>SEARCH ALL</code> statement.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a> can perform a generic binary search using the <a href="http://en.m.wikipedia.org/wiki/CPAN" title="CPAN">CPAN</a> module Search::Binary.<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>11<span>]</span></a></sup>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Go_%28programming_language%29" title="Go (programming language)">Go</a>'s <code>sort</code> standard library package contains functions <code>Search</code>, <code>SearchInts</code>, <code>SearchFloat64s</code>, and <code>SearchStrings</code>,
+ which implement general binary search, as well as specific 
+implementations for searching slices of integers, floating-point 
+numbers, and strings, respectively.<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup>
+</li>
+<li>For <a href="http://en.m.wikipedia.org/wiki/Objective-C" title="Objective-C">Objective-C</a>, the <a href="http://en.m.wikipedia.org/wiki/Cocoa_%28API%29" title="Cocoa (API)">Cocoa</a> framework provides the <a rel="nofollow" class="external text" href="http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/NSArray.html#//apple_ref/occ/instm/NSArray/indexOfObject:inSortedRange:options:usingComparator:">NSArray -indexOfObject:inSortedRange:options:usingComparator:</a> method in Mac OS X 10.6+. Apple's <a href="http://en.m.wikipedia.org/wiki/Core_Foundation" title="Core Foundation">Core Foundation</a> C framework also contains a <a rel="nofollow" class="external text" href="http://developer.apple.com/library/mac/documentation/CoreFoundation/Reference/CFArrayRef/Reference/reference.html#//apple_ref/c/func/CFArrayBSearchValues">CFArrayBSearchValues()</a> function.</li>
+</ul>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_8">
+<div class="noprint tright portal" style="border:solid #aaa 1px; margin:0.5em 0 0.5em 0.5em;">
+<table style="background: none repeat scroll 0% 0% rgb(249, 249, 249); font-size: 85%; line-height: 110%; max-width: 175px;"><tbody><tr>
+<td style="text-align: center;"><a href="http://en.m.wikipedia.org/wiki/File:Internet_map_1024.jpg" class="image"><img alt="Portal icon" src="Binary_search_files/28px-Internet_map_1024.jpg" width="28" height="28"></a></td>
+<td style="padding: 0pt 0.2em; vertical-align: middle; font-style: italic; font-weight: bold;"><a href="http://en.m.wikipedia.org/wiki/Portal:Computer_science" title="Portal:Computer science">Computer science  portal</a></td>
+</tr></tbody></table>
+</div>
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Interpolation_search" title="Interpolation search">Interpolation search</a>, similar method with better average complexity</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Index_%28database%29" title="Index (database)" class="mw-redirect">Index (information technology)</a>, very fast 'lookup' using an index to directly select an entry</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Branch_table" title="Branch table">Branch table</a>, alternative indexed 'lookup' method for decision making</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">Self-balancing binary search tree</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Run-time_analysis" title="Run-time analysis" class="mw-redirect">Run-time analysis</a>, illustrating binary search method on machines of differing speeds</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Bisection_method" title="Bisection method">Bisection method</a>, the same idea used to solve equations in the real numbers</li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_9">
+<div class="reflist references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Cormen, Thomas H.</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Leiserson, Charles E.</a>, <a href="http://en.m.wikipedia.org/wiki/Ron_Rivest" title="Ron Rivest">Rivest, Ronald L.</a> (1990). <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (1st ed.). MIT Press and McGraw-Hill. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-03141-8" title="Special:BookSources/0-262-03141-8">0-262-03141-8</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=Cormen&amp;rft.aufirst=Thomas+H.&amp;rft.au=Cormen%2C%26%2332%3BThomas+H.&amp;rft.date=1990&amp;rft.edition=1st&amp;rft.pub=MIT+Press+and+McGraw-Hill&amp;rft.isbn=0-262-03141-8&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation mathworld" id="Reference-Mathworld-Binary_Search"><a href="http://en.m.wikipedia.org/wiki/Eric_W._Weisstein" title="Eric W. Weisstein">Weisstein, Eric W.</a>, "<a rel="nofollow" class="external text" href="http://mathworld.wolfram.com/BinarySearch.html">Binary Search</a>" from <a href="http://en.m.wikipedia.org/wiki/MathWorld" title="MathWorld">MathWorld</a>.</span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFPressFlanneryTeukolskyVetterling1988">Press, William H.; Flannery, Brian P.; Teukolsky, Saul A.; Vetterling, William T. (1988), <i>Numerical Recipes in C: The Art of Scientific Computing</i>, Cambridge University Press, pp.&nbsp;98–99, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-521-35465-X" title="Special:BookSources/0-521-35465-X">0-521-35465-X</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Numerical+Recipes+in+C%3A+The+Art+of+Scientific+Computing&amp;rft.aulast=Press&amp;rft.aufirst=William+H.&amp;rft.au=Press%2C%26%2332%3BWilliam+H.&amp;rft.au=Flannery%2C%26%2332%3BBrian+P.&amp;rft.au=Teukolsky%2C%26%2332%3BSaul+A.&amp;rft.au=Vetterling%2C%26%2332%3BWilliam+T.&amp;rft.date=1988&amp;rft.pages=pp.%26nbsp%3B98%26ndash%3B99&amp;rft.pub=Cambridge+University+Press&amp;rft.isbn=0-521-35465-X&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFWirth1983"><a href="http://en.m.wikipedia.org/wiki/Niklaus_Wirth" title="Niklaus Wirth">Wirth, Niklaus</a> (1983), <i>Programming in Modula-2</i>, p.&nbsp;35</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Programming+in+Modula-2&amp;rft.aulast=Wirth&amp;rft.aufirst=Niklaus&amp;rft.au=Wirth%2C%26%2332%3BNiklaus&amp;rft.date=1983&amp;rft.pages=p.%26nbsp%3B35&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><span class="citation web">Horvath, Adam (February 5, 2012). <a rel="nofollow" class="external text" href="http://blog.teamleadnet.com/2012/02/quicksort-binary-search-and-linear.html">"Binary search and linear search performance on the .NET and Mono platform"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://blog.teamleadnet.com/2012/02/quicksort-binary-search-and-linear.html">http://blog.teamleadnet.com/2012/02/quicksort-binary-search-and-linear.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Binary+search+and+linear+search+performance+on+the+.NET+and+Mono+platform&amp;rft.atitle=&amp;rft.aulast=Horvath&amp;rft.aufirst=Adam&amp;rft.au=Horvath%2C%26%2332%3BAdam&amp;rft.date=February+5%2C+2012&amp;rft_id=http%3A%2F%2Fblog.teamleadnet.com%2F2012%2F02%2Fquicksort-binary-search-and-linear.html&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a> (1997). "Section 6.2.1: Searching an Ordered Table". <i>Sorting and Searching</i>. <a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a>. <b>3</b> (3rd ed.). <a href="http://en.m.wikipedia.org/wiki/Addison-Wesley" title="Addison-Wesley">Addison-Wesley</a>. pp.&nbsp;409–426. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89685-0" title="Special:BookSources/0-201-89685-0">0-201-89685-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Section+6.2.1%3A+Searching+an+Ordered+Table&amp;rft.atitle=Sorting+and+Searching&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald&amp;rft.au=Knuth%2C%26%2332%3BDonald&amp;rft.date=1997&amp;rft.series=%5B%5BThe+Art+of+Computer+Programming%5D%5D&amp;rft.volume=3&amp;rft.pages=pp.%26nbsp%3B409%E2%80%93426&amp;rft.edition=3rd&amp;rft.pub=%5B%5BAddison-Wesley%5D%5D&amp;rft.isbn=0-201-89685-0&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Jon_Bentley" title="Jon Bentley">Bentley, Jon</a> (2000) [1986]. <i>Programming Pearls</i> (2nd edition ed.). <a href="http://en.m.wikipedia.org/wiki/Addison-Wesley" title="Addison-Wesley">Addison-Wesley</a>. p.&nbsp;341. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-65788-0" title="Special:BookSources/0-201-65788-0">0-201-65788-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Programming+Pearls&amp;rft.aulast=Bentley&amp;rft.aufirst=Jon&amp;rft.au=Bentley%2C%26%2332%3BJon&amp;rft.date=2000&amp;rft.pages=p.%26nbsp%3B341&amp;rft.edition=2nd+edition&amp;rft.pub=%5B%5BAddison-Wesley%5D%5D&amp;rft.isbn=0-201-65788-0&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><span class="citation Journal">Pattis, Richard E. (1988). "Textbook errors in binary searching". <i><a href="http://en.m.wikipedia.org/wiki/SIGCSE" title="SIGCSE">SIGCSE</a> Bulletin</i> <b>20</b>: 190–194. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F52965.53012">10.1145/52965.53012</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Textbook+errors+in+binary+searching&amp;rft.jtitle=%5B%5BSIGCSE%5D%5D+Bulletin&amp;rft.aulast=Pattis&amp;rft.aufirst=Richard+E.&amp;rft.au=Pattis%2C%26%2332%3BRichard+E.&amp;rft.date=1988&amp;rft.volume=20&amp;rft.pages=190%E2%80%93194&amp;rft_id=info:doi/10.1145%2F52965.53012&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span> cited at <span class="citation book">Kruse, Robert (1998). <i>Data Structures and Program Design in C++</i>. <a href="http://en.m.wikipedia.org/wiki/Prentice_Hall" title="Prentice Hall">Prentice Hall</a>. p.&nbsp;280. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-13-768995-0" title="Special:BookSources/0-13-768995-0">0-13-768995-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Data+Structures+and+Program+Design+in+C%2B%2B&amp;rft.aulast=Kruse&amp;rft.aufirst=Robert&amp;rft.au=Kruse%2C%26%2332%3BRobert&amp;rft.date=1998&amp;rft.pages=p.%26nbsp%3B280&amp;rft.pub=%5B%5BPrentice+Hall%5D%5D&amp;rft.isbn=0-13-768995-0&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text"><span class="citation web">Bloch, Joshua (June 2, 2006) [Updated 17 Feb 2008]. <a rel="nofollow" class="external text" href="http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html">"Extra, Extra – Read All About It: Nearly All Binary Searches and Mergesorts are Broken"</a>. <i>Google Research Blog</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html">http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Extra%2C+Extra+%E2%80%93+Read+All+About+It%3A+Nearly+All+Binary+Searches+and+Mergesorts+are+Broken&amp;rft.atitle=Google+Research+Blog&amp;rft.aulast=Bloch&amp;rft.aufirst=Joshua&amp;rft.au=Bloch%2C%26%2332%3BJoshua&amp;rft.date=June+2%2C+2006&amp;rft_id=http%3A%2F%2Fgoogleresearch.blogspot.com%2F2006%2F06%2Fextra-extra-read-all-about-it-nearly.html&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5045582">"Bug ID: 5045582 (coll) binarySearch() fails for size larger than 1&lt;&lt;30"</a>. <i>Java Bug Database</i>. <a href="http://en.m.wikipedia.org/wiki/Oracle_Corporation" title="Oracle Corporation">Oracle</a>. 11 May 2004<span class="printonly">. <a rel="nofollow" class="external free" href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5045582">http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5045582</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Bug+ID%3A+5045582+%28coll%29+binarySearch%28%29+fails+for+size+larger+than+1%3C%3C30&amp;rft.atitle=Java+Bug+Database&amp;rft.date=11+May+2004&amp;rft.pub=%5B%5BOracle+Corporation%7COracle%5D%5D&amp;rft_id=http%3A%2F%2Fbugs.sun.com%2Fbugdatabase%2Fview_bug.do%3Fbug_id%3D5045582&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://search.cpan.org/%7Erant/Search-Binary-0.95/Binary.pm">"Search::Binary"</a>. <a href="http://en.m.wikipedia.org/wiki/CPAN" title="CPAN">CPAN</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://search.cpan.org/%7Erant/Search-Binary-0.95/Binary.pm">http://search.cpan.org/~rant/Search-Binary-0.95/Binary.pm</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Search%3A%3ABinary&amp;rft.atitle=&amp;rft.pub=%5B%5BCPAN%5D%5D&amp;rft_id=http%3A%2F%2Fsearch.cpan.org%2F%7Erant%2FSearch-Binary-0.95%2FBinary.pm&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://golang.org/pkg/sort/">"Package sort"</a>. <i>The Go Programming Language</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://golang.org/pkg/sort/">http://golang.org/pkg/sort/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Package+sort&amp;rft.atitle=The+Go+Programming+Language&amp;rft_id=http%3A%2F%2Fgolang.org%2Fpkg%2Fsort%2F&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+<h3> <span class="mw-headline" id="Other_sources">Other sources</span>
+</h3>
+<ul>
+<li>Kruse, Robert L.: "Data Structures and Program Design in C++", Prentice-Hall, 1999, <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0137689950" class="internal mw-magiclink-isbn">ISBN 0-13-768995-0</a>, page 280.</li>
+<li>
+<span class="citation web">van Gasteren, Netty; Feijen, Wim (1995). <a rel="nofollow" class="external text" href="http://www.mathmeth.com/wf/files/wf2xx/wf214.pdf">"The Binary Search Revisited"</a> (PDF). <i>AvG127/WF214</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.mathmeth.com/wf/files/wf2xx/wf214.pdf">http://www.mathmeth.com/wf/files/wf2xx/wf214.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=The+Binary+Search+Revisited&amp;rft.atitle=AvG127%2FWF214&amp;rft.aulast=van+Gasteren&amp;rft.aufirst=Netty&amp;rft.au=van+Gasteren%2C%26%2332%3BNetty&amp;rft.au=Feijen%2C%26%2332%3BWim&amp;rft.date=1995&amp;rft_id=http%3A%2F%2Fwww.mathmeth.com%2Fwf%2Ffiles%2Fwf2xx%2Fwf214.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Binary_search_algorithm"><span style="display: none;">&nbsp;</span></span> (investigates the foundations of the binary search, debunking the myth that it applies only to sorted arrays)</li>
+</ul>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_10">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Binary_search_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation">Algorithm implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation/Search/Binary_search">Binary search</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/binarySearch.html">NIST Dictionary of Algorithms and Data Structures: binary search</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.codecodex.com/wiki/Binary_search">Binary search implemented in 12 languages</a></li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Binary_search&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Binary+search+algorithm&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Binary_search&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Binary+search+algorithm&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Binary_search_files/load_002.php" type="text/javascript"></script>
+<script src="Binary_search_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>
