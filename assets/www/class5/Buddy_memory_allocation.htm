@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Buddy memory allocation - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Buddy_memory_allocation_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 6 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Buddy_memory_allocation">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Buddy_memory_allocation_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Buddy_memory_allocation_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Buddy_memory_allocation_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Buddy_memory_allocation" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Buddy-Speicherverwaltung">Deutsch</option><option value="//ko.m.wikipedia.org/wiki/%EB%B2%84%EB%94%94_%EB%A9%94%EB%AA%A8%EB%A6%AC_%ED%95%A0%EB%8B%B9">한국어</option><option value="//it.m.wikipedia.org/wiki/Buddy_memory_allocation">italiano</option><option value="//pl.m.wikipedia.org/wiki/Algorytm_bli%C5%BAniak%C3%B3w">polski</option><option value="//pt.m.wikipedia.org/wiki/Buddy_memory_allocation">português</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Buddy memory allocation</h1>			
+<p>The <b>buddy memory allocation</b> technique is a <a href="http://en.m.wikipedia.org/wiki/Memory_allocation" title="Memory allocation" class="mw-redirect">memory allocation</a>
+ algorithm that divides memory into partitions to try to satisfy a 
+memory request as suitably as possible. This system makes use of 
+splitting memory into halves to try to give a best-fit. According to <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>, the buddy system was invented in 1963 by <a href="http://en.m.wikipedia.org/wiki/Harry_Markowitz" title="Harry Markowitz">Harry Markowitz</a>, who won the 1990 <a href="http://en.m.wikipedia.org/wiki/Nobel_Memorial_Prize_in_Economics" title="Nobel Memorial Prize in Economics" class="mw-redirect">Nobel Memorial Prize in Economics</a>, and was first described by <a href="http://en.m.wikipedia.org/wiki/Ken_Knowlton" title="Ken Knowlton">Kenneth C. Knowlton</a> (published 1965).<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> Compared to the more complex memory allocation techniques that some modern <a href="http://en.m.wikipedia.org/wiki/Operating_systems" title="Operating systems" class="mw-redirect">operating systems</a> use, buddy memory allocation is relatively easy to implement. It supports limited but efficient splitting and <a href="http://en.m.wikipedia.org/wiki/Coalescing_%28computer_science%29" title="Coalescing (computer science)">coalescing of memory blocks</a>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="How_it_works">How it works</span></h2><div class="content_block" id="content_1">
+<p>There are various forms of the buddy system, but binary buddies, in 
+which each block is subdivided into two smaller blocks, are the simplest
+ and most common variety. Every memory block in this system has an <i>order</i>, where the order is an integer ranging from 0 to a specified upper limit. The blocks in each order have sizes proportional to 2<sup>order</sup>,
+ so that each block is exactly twice the size of blocks that are one 
+order lower. Power-of-two block sizes make address computation simple, 
+because all buddies are aligned on memory address boundaries that are 
+powers of two. When a larger block is split, it is divided into two 
+smaller blocks, and each smaller block becomes a unique buddy to the 
+other. A split block can only be merged with its unique buddy block, 
+which then reforms the larger block they were split from.</p>
+<p>Starting off, the size of the smallest possible block is determined, 
+i.e. the smallest memory block that can be allocated. In most cases, 
+this size is imposed by the hardware itself when paged memory is used, 
+since pages have a certain minimal size such as 4 kilobytes. However, a 
+lower limit independent of hardware limitations may also be desirable, 
+so that the overhead of storing used and free memory locations is 
+minimized. If no lower limit existed at all, and many programs requested
+ small blocks of memory like 1K or less, the system would waste a lot of
+ space relative to the size of the blocks simply to keep track of which 
+blocks are allocated and unallocated. Typically the lower limit would be
+ small enough to minimize wasted space, but large enough to avoid 
+excessive overhead. The smallest block size is then taken as the size of
+ an order-0 block, so that all higher orders are expressed as 
+power-of-two multiples of this size.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Programmer" title="Programmer">programmer</a>
+ then has to decide on, or to write code to obtain, the highest possible
+ order that can fit in the remaining available memory space. Since the 
+total available memory in a given computer system may not be a 
+power-of-two multiple of the minimum block size, the largest block size 
+may not span the entire memory of the system. For instance, if the 
+system had 2000K of physical memory and the individual memory pages were
+ 4K each, the upper limit on the order would be 8, since 2<sup>8</sup> 
+(256 pages, 1024K) is the biggest block that will fit in memory. 
+Consequently it is impossible to allocate the entire physical memory in a
+ single chunk; the remaining 976K of memory would have to be allocated 
+in smaller blocks.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="In_practice">In practice</span></h2><div class="content_block" id="content_2">
+<p>The following is an example of what happens when a program makes 
+requests for memory. Let's say in this system, the smallest possible 
+block is 64 kilobytes in size, and the upper limit for the order is 4, 
+which results in a largest possible allocatable block, 2<sup>4</sup> times 64K = 1024K in size. The following shows a possible state of the system after various memory requests.</p>
+<table class="wikitable" width="100%">
+<tbody><tr>
+<th>Step</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+<th>64K</th>
+</tr>
+<tr>
+<td>1</td>
+<td colspan="16">2<sup>4</sup>
+</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>2<sup>0</sup>
+</td>
+<td>2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td>2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td>2<sup>0</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 255, 51);">B: 2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 255, 51);">B: 2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>5.1</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 255, 51);">B: 2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 255, 51);">B: 2<sup>1</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 0, 51);">D: 2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2" style="background-color: rgb(153, 0, 51);">D: 2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>7.1</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td style="background-color: rgb(204, 255, 255);">A: 2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2<sup>0</sup>
+</td>
+<td style="background-color: rgb(255, 0, 51);">C: 2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>9.1</td>
+<td>2<sup>0</sup>
+</td>
+<td>2<sup>0</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="2">2<sup>1</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>9.3</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="4">2<sup>2</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>9.4</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+<td colspan="8">2<sup>3</sup>
+</td>
+</tr>
+<tr>
+<td>9.5</td>
+<td colspan="16">2<sup>4</sup>
+</td>
+</tr>
+</tbody></table>
+<p>This allocation could have occurred in the following manner</p>
+<ol>
+<li>The initial situation.</li>
+<li>Program A requests memory 34K, order 0.
+<ol>
+<li>No order 0 blocks are available, so an order 4 block is split, creating two order 3 blocks.</li>
+<li>Still no order 0 blocks available, so the first order 3 block is split, creating two order 2 blocks.</li>
+<li>Still no order 0 blocks available, so the first order 2 block is split, creating two order 1 blocks.</li>
+<li>Still no order 0 blocks available, so the first order 1 block is split, creating two order 0 blocks.</li>
+<li>Now an order 0 block is available, so it is allocated to A.</li>
+</ol>
+</li>
+<li>Program B requests memory 66K, order 1. An order 1 block is available, so it is allocated to B.</li>
+<li>Program C requests memory 35K, order 0. An order 0 block is available, so it is allocated to C.</li>
+<li>Program D requests memory 67K, order 1.
+<ol>
+<li>No order 1 blocks are available, so an order 2 block is split, creating two order 1 blocks.</li>
+<li>Now an order 1 block is available, so it is allocated to D.</li>
+</ol>
+</li>
+<li>Program B releases its memory, freeing one order 1 block.</li>
+<li>Program D releases its memory.
+<ol>
+<li>One order 1 block is freed.</li>
+<li>Since the buddy block of the newly freed block is also free, the two are merged into one order 2 block.</li>
+</ol>
+</li>
+<li>Program A releases its memory, freeing one order 0 block.</li>
+<li>Program C releases its memory.
+<ol>
+<li>One order 0 block is freed.</li>
+<li>Since the buddy block of the newly freed block is also free, the two are merged into one order 1 block.</li>
+<li>Since the buddy block of the newly formed order 1 block is also free, the two are merged into one order 2 block.</li>
+<li>Since the buddy block of the newly formed order 2 block is also free, the two are merged into one order 3 block.</li>
+<li>Since the buddy block of the newly formed order 3 block is also free, the two are merged into one order 4 block.</li>
+</ol>
+</li>
+</ol>
+<p>As you can see, what happens when a memory request is made is as follows:</p>
+<ul>
+<li>If memory is to be allocated</li>
+</ul>
+<ol>
+<li>Look for a memory slot of a suitable size (the minimal 2<sup>k</sup> block that is larger or equal to that of the requested memory)
+<ol>
+<li>If it is found, it is allocated to the program</li>
+<li>If not, it tries to make a suitable memory slot. The system does so by trying the following:
+<ol>
+<li>Split a free memory slot larger than the requested memory size into half</li>
+<li>If the lower limit is reached, then allocate that amount of memory</li>
+<li>Go back to step 1 (look for a memory slot of a suitable size)</li>
+<li>Repeat this process until a suitable memory slot is found</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>If memory is to be freed</li>
+</ul>
+<ol>
+<li>Free the block of memory</li>
+<li>Look at the neighboring block - is it free too?</li>
+<li>If it is, combine the two, and go back to step 2 and repeat this 
+process until either the upper limit is reached (all memory is freed), 
+or until a non-free neighbour block is encountered</li>
+</ol>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Implementation_and_efficiency">Implementation and efficiency</span></h2><div class="content_block" id="content_3">
+<p>In comparison to other simpler techniques such as dynamic allocation, the buddy memory system has little <a href="http://en.m.wikipedia.org/wiki/Fragmentation_%28computer%29#External_fragmentation" title="Fragmentation (computer)" class="mw-redirect">external fragmentation</a>, and allows for <a href="http://en.m.wikipedia.org/wiki/Compaction" title="Compaction">compaction</a>
+ of memory with little overhead. The buddy method of freeing memory is 
+fast, with the maximal number of compactions required equal to log<sub>2</sub>(highest order). Typically the buddy memory allocation system is implemented with the use of a <a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">binary tree</a> to represent used or unused split memory blocks. The "buddy" of each block can be found with an <a href="http://en.m.wikipedia.org/wiki/Exclusive_OR" title="Exclusive OR" class="mw-redirect">exclusive OR</a> of the block's address and the block's size.</p>
+<p>However, there still exists the problem of <a href="http://en.m.wikipedia.org/wiki/Fragmentation_%28computer%29#Internal_fragmentation" title="Fragmentation (computer)" class="mw-redirect">internal fragmentation</a>
+ — memory wasted because the memory requested is a little larger than a 
+small block, but a lot smaller than a large block. Because of the way 
+the buddy memory allocation technique works, a program that requests 66K
+ of memory would be allocated 128K, which results in a waste of 62K of 
+memory. This problem can be solved by <a href="http://en.m.wikipedia.org/wiki/Slab_allocation" title="Slab allocation">slab allocation</a>, which may be layered on top of the more coarse buddy allocator to provide more fine-grained allocation.</p>
+<p>One version of the buddy allocation algorithm was described in detail by Donald Knuth in volume 1 of <i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i>.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> The <a href="http://en.m.wikipedia.org/wiki/Linux_kernel" title="Linux kernel">Linux kernel</a>
+ also uses the buddy system, with further modifications to minimise 
+external fragmentation, along with various other allocators to manage 
+the memory within blocks.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_4">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Memory_pool" title="Memory pool">Memory pool</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stack-based_memory_allocation" title="Stack-based memory allocation">Stack-based memory allocation</a></li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">Kenneth C. Knowlton. A Fast storage allocator. <a href="http://en.m.wikipedia.org/wiki/Communications_of_the_ACM" title="Communications of the ACM">Communications of the ACM</a> 8(10):623-625, Oct 1965. <i>also</i> Kenneth C Knowlton. A programmer's description of L6. <a href="http://en.m.wikipedia.org/wiki/Communications_of_the_ACM" title="Communications of the ACM">Communications of the ACM</a>, 9(8):616-625, Aug. 1966 [see also&nbsp;: Google books <a rel="nofollow" class="external autonumber" href="http://books.google.com/books?id=0uHME7EfjQEC&amp;printsec=frontcover#PPA84,M1">[1]</a> page 85]</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a> (1997). <i>Fundamental Algorithms</i>. <a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a>. <b>1</b> (Second ed.). Reading, Massachusetts: Addison-Wesley. pp.&nbsp;435–455. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89683-4" title="Special:BookSources/0-201-89683-4">0-201-89683-4</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Fundamental+Algorithms&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald&amp;rft.au=Knuth%2C%26%2332%3BDonald&amp;rft.date=1997&amp;rft.series=%5B%5BThe+Art+of+Computer+Programming%5D%5D&amp;rft.volume=1&amp;rft.pages=pp.%26nbsp%3B435%E2%80%93455&amp;rft.edition=Second&amp;rft.place=Reading%2C+Massachusetts&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-89683-4&amp;rfr_id=info:sid/en.wikipedia.org:Buddy_memory_allocation"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation book">Mauerer, Wolfgang (October 2008). <i>Professional Linux Kernel Architecture</i>. <a href="http://en.m.wikipedia.org/wiki/Wrox_Press" title="Wrox Press">Wrox Press</a>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-470-34343-2" title="Special:BookSources/978-0-470-34343-2">978-0-470-34343-2</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Professional+Linux+Kernel+Architecture&amp;rft.aulast=Mauerer&amp;rft.aufirst=Wolfgang&amp;rft.au=Mauerer%2C%26%2332%3BWolfgang&amp;rft.date=October+2008&amp;rft.pub=%5B%5BWrox+Press%5D%5D&amp;rft.isbn=978-0-470-34343-2&amp;rfr_id=info:sid/en.wikipedia.org:Buddy_memory_allocation"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Buddy_memory_allocation&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Buddy+memory+allocation&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Buddy_memory_allocation&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Buddy+memory+allocation&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Buddy_memory_allocation_files/load_002.php" type="text/javascript"></script>
+<script src="Buddy_memory_allocation_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Tombstone (programming) - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Tombstone_%28programming%29_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 1 language","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Tombstone_%28programming%29">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Tombstone_%28programming%29_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Tombstone_%28programming%29_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Tombstone_%28programming%29_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+			<br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Tombstone (programming)</h1>			
+<table class="metadata plainlinks ambox ambox-content ambox-Refimprove" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Tombstone_%28programming%29_files/50px-Question_book-new.png" width="50" height="39"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article <b>needs additional <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">citations</a> for <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>. <span class="hide-when-compact">Please help <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Tombstone_%28programming%29&amp;action=edit">improve this article</a> by adding citations to <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Identifying_reliable_sources" title="Wikipedia:Identifying reliable sources">reliable sources</a>. Unsourced material may be <a href="http://en.m.wikipedia.org/wiki/Template:Citation_needed" title="Template:Citation needed">challenged</a> and <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence" title="Wikipedia:Verifiability">removed</a>.</span> <small><i>(April 2007)</i></small> </span></td>
+</tr></tbody></table>
+<p><b>Tombstones</b> are a mechanism to detect <a href="http://en.m.wikipedia.org/wiki/Dangling_pointer" title="Dangling pointer">dangling pointers</a> that can appear in certain computer <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a>, e.&nbsp;g. <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a>, <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> and <a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly languages</a>, and to act as a containment to their dangerous effects.</p>
+<p>A tombstone is a structure that acts as an intermediary between a <a href="http://en.m.wikipedia.org/wiki/Pointer_%28computer_programming%29" title="Pointer (computer programming)">pointer</a> and the <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">heap-dynamic</a> data in <a href="http://en.m.wikipedia.org/wiki/Random_access_memory" title="Random access memory" class="mw-redirect">memory</a>. The pointer – sometimes called the <a href="http://en.m.wikipedia.org/wiki/Handle_%28computing%29" title="Handle (computing)">handle</a>
+ – points only at tombstones and never to the memory that holds the 
+actual value. When the data is deallocated, the tombstone is set to a <a href="http://en.m.wikipedia.org/wiki/Null_pointer" title="Null pointer" class="mw-redirect">null</a>
+ (or, more generally, to a value that is illegal for a pointer in the 
+given runtime environment), indicating that the variable no longer 
+exists. This prevents the use of invalid pointers, which would otherwise
+ access the memory area that once belonged to the now deallocated 
+variable, although it may already contain other data, in turn leading to
+ corruption of in-memory data. Depending on the <a href="http://en.m.wikipedia.org/wiki/Operating_system" title="Operating system">operating system</a>, the <a href="http://en.m.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">CPU</a> can automatically detect such an invalid access (e.&nbsp;g. for the null value: a <i>null pointer dereference error</i>). This supports in analyzing the actual reason, a programming error, in <a href="http://en.m.wikipedia.org/wiki/Debugging" title="Debugging">debugging</a>, and it can also be used to abort the program in production use, to prevent it from continuing with invalid data structures.</p>
+<p>In more generalized terms, a tombstone can be understood as a marker for "this data is no longer here". For example in <a href="http://en.m.wikipedia.org/wiki/Filesystems" title="Filesystems" class="mw-redirect">filesystems</a> it may be efficient when deleting files to mark them as "dead" instead of immediately reclaiming all their data blocks.</p>
+<p>The downsides of using tombstones include a <a href="http://en.m.wikipedia.org/wiki/Computational_overhead" title="Computational overhead" class="mw-redirect">computational overhead</a>
+ and additional memory consumption: extra processing is necessary to 
+follow the path from the pointer to data through the tombstone, and 
+extra memory is necessary to retain tombstones for every pointer 
+throughout the program. One other problem is that all the code – that 
+needs to work with the pointers in question – needs to be implemented to
+ use the tombstone mechanism.</p>
+<p>No popular programming language currently uses tombstones. However, 
+built–in support by the programming language or the compiler is not 
+necessary to use them.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_1">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Locks-and-keys" title="Locks-and-keys">Locks-and-keys</a></li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_2">
+<p><br></p>
+<table class="metadata plainlinks stub" style="background: none repeat scroll 0% 0% transparent;"><tbody><tr>
+<td><a href="http://en.m.wikipedia.org/wiki/File:HelloWorld.svg" class="image"><img alt="Stub icon" src="Tombstone_%28programming%29_files/50px-HelloWorld.png" width="50" height="25"></a></td>
+<td>
+<i>This <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming language</a>-related article is a <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Stub" title="Wikipedia:Stub">stub</a>. You can help Wikipedia by <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Tombstone_%28programming%29&amp;action=edit">expanding it</a>.</i>
+<div class="noprint plainlinks hlist navbar mini" style="position: absolute; right: 15px; display: none;">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Prog-lang-stub" title="Template:Prog-lang-stub"><span title="View this template" style="">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Prog-lang-stub" title="Template talk:Prog-lang-stub"><span title="Discuss this template" style="">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Prog-lang-stub&amp;action=edit"><span title="Edit this template" style="">e</span></a></li>
+</ul>
+</div>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Tombstone_%28programming%29&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Tombstone+%28programming%29&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Tombstone_%28programming%29&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Tombstone+%28programming%29&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Tombstone_%28programming%29_files/load_002.php" type="text/javascript"></script>
+<script src="Tombstone_%28programming%29_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

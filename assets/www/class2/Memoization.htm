@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Memoization - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Memoization_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 10 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Memoization">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Memoization_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Memoization_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Memoization_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Memoization" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Memoisation">Deutsch</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D9%85%D9%88%DB%8C%D8%B2">فارسی</option><option value="//fr.m.wikipedia.org/wiki/M%C3%A9moization">français</option><option value="//ko.m.wikipedia.org/wiki/%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98">한국어</option><option value="//it.m.wikipedia.org/wiki/Memoizzazione">italiano</option><option value="//nl.m.wikipedia.org/wiki/Memoization">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%A1%E3%83%A2%E5%8C%96">日本語</option><option value="//ru.m.wikipedia.org/wiki/%D0%9C%D0%B5%D0%BC%D0%BE%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F">русский</option><option value="//sv.m.wikipedia.org/wiki/Memoisation">svenska</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Memoization</h1>			
+<div class="dablink">Not to be confused with <a href="http://en.m.wikipedia.org/wiki/Memorization" title="Memorization">Memorization</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computing" title="Computing">computing</a>, <b>memoization</b> is an <a href="http://en.m.wikipedia.org/wiki/Optimization_%28computer_science%29" title="Optimization (computer science)" class="mw-redirect">optimization</a> technique used primarily to speed up <a href="http://en.m.wikipedia.org/wiki/Computer_programs" title="Computer programs" class="mw-redirect">computer programs</a> by having <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">function calls</a>
+ avoid repeating the calculation of results for previously processed 
+inputs. Memoization has also been used in other contexts (and for 
+purposes other than speed gains), such as in simple <a href="http://en.m.wikipedia.org/wiki/Mutual_recursion" title="Mutual recursion">mutually recursive</a> descent parsing<sup id="cite_ref-Norvig1991_0-0" class="reference"><a href="#cite_note-Norvig1991-0"><span>[</span>1<span>]</span></a></sup> in a general <a href="http://en.m.wikipedia.org/wiki/Top-down_parsing" title="Top-down parsing">top-down</a> <a href="http://en.m.wikipedia.org/wiki/Parsing" title="Parsing">parsing</a> algorithm<sup id="cite_ref-FrostHafizCallaghan2007_1-0" class="reference"><a href="#cite_note-FrostHafizCallaghan2007-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-FrostHafizCallaghan2008_2-0" class="reference"><a href="#cite_note-FrostHafizCallaghan2008-2"><span>[</span>3<span>]</span></a></sup> that accommodates ambiguity and <a href="http://en.m.wikipedia.org/wiki/Left_recursion" title="Left recursion">left recursion</a> in polynomial time and space. Although related to <a href="http://en.m.wikipedia.org/wiki/Cache_%28computing%29" title="Cache (computing)">caching</a>, memoization refers to a specific case of this optimization, distinguishing it from forms of caching such as <a href="http://en.m.wikipedia.org/wiki/Buffer_%28computer_science%29" title="Buffer (computer science)" class="mw-redirect">buffering</a> or <a href="http://en.m.wikipedia.org/wiki/Page_replacement_algorithm" title="Page replacement algorithm">page replacement</a>. In the context of some <a href="http://en.m.wikipedia.org/wiki/Logic_programming" title="Logic programming">logic programming</a> languages, memoization is also known as <a href="http://en.m.wikipedia.org/wiki/Prolog#Tabling" title="Prolog">tabling</a>;<sup id="cite_ref-Warren1999_3-0" class="reference"><a href="#cite_note-Warren1999-3"><span>[</span>4<span>]</span></a></sup> see also <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup table</a>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Etymology">Etymology</span></h2><div class="content_block" id="content_1">
+<p>The term <i>memoization</i> was coined by <a href="http://en.m.wikipedia.org/wiki/Donald_Michie" title="Donald Michie">Donald Michie</a> in 1968<sup id="cite_ref-Michie1968_4-0" class="reference"><a href="#cite_note-Michie1968-4"><span>[</span>5<span>]</span></a></sup> and is derived from the <a href="http://en.m.wikipedia.org/wiki/Latin" title="Latin">Latin</a> word <i><a href="http://en.m.wikipedia.org/wiki/Memorandum" title="Memorandum">memorandum</a></i> (<i>to be remembered</i>), and thus carries the meaning of <i>turning [the results of] a function into something to be remembered.</i> While <i>memoization</i> might be confused with <i><a href="http://en.m.wikipedia.org/wiki/Memorization" title="Memorization">memorization</a></i> (because of the shared <a href="http://en.m.wikipedia.org/wiki/Cognate" title="Cognate">cognate</a>), memoization has a specialized meaning in computing.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Overview">Overview</span></h2><div class="content_block" id="content_2">
+<p>A memoized function "remembers" the results corresponding to some set
+ of specific inputs. Subsequent calls with remembered inputs return the 
+remembered result rather than recalculating it, thus eliminating the 
+primary cost of a call with given parameters from all but the first call
+ made to the function with those parameters. The set of remembered 
+associations may be a fixed-size set controlled by a replacement 
+algorithm or a fixed set, depending on the nature of the function and 
+its use. A function can only be memoized if it is <a href="http://en.m.wikipedia.org/wiki/Referential_transparency_%28computer_science%29" title="Referential transparency (computer science)">referentially transparent</a>;
+ that is, only if calling the function has exactly the same effect as 
+replacing that function call with its return value. (Special case 
+exceptions to this restriction exist, however.) While related to <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup tables</a>, since memoization often uses such tables in its implementation, memoization populates its cache of results transparently <a href="http://en.m.wikipedia.org/wiki/On_the_fly" title="On the fly">on the fly</a>, as needed, rather than in advance.</p>
+<p>Memoization is a means of lowering a function's <i>time</i> cost in exchange for <i>space</i> cost; that is, memoized functions become optimized for <i>speed</i> in exchange for a higher use of <a href="http://en.m.wikipedia.org/wiki/Computer_memory" title="Computer memory">computer memory</a> <i>space</i>. The time/space "cost" of <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithms</a> has a specific name in computing: <i><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">computational complexity</a></i>. All functions have a computational complexity in <i>time</i> (i.e. they take time to execute) and in <i>space</i>.</p>
+<p>Although a <a href="http://en.m.wikipedia.org/wiki/Trade-off" title="Trade-off">trade-off</a>
+ occurs (i.e., space used is speed gained), this differs from some other
+ optimizations that involve time-space trade-off, such as <a href="http://en.m.wikipedia.org/wiki/Strength_reduction" title="Strength reduction">strength reduction</a>, in that memoization is a <a href="http://en.m.wikipedia.org/wiki/Run_time_%28program_lifecycle_phase%29" title="Run time (program lifecycle phase)">run-time</a> rather than <a href="http://en.m.wikipedia.org/wiki/Compile-time" title="Compile-time" class="mw-redirect">compile-time</a>
+ optimization. Moreover, strength reduction potentially replaces a 
+costly operation such as multiplication with a less costly operation 
+such as addition, and the results in savings can be highly <a href="http://en.m.wikipedia.org/wiki/Machine-dependent" title="Machine-dependent" class="mw-redirect">machine-dependent</a>, non-portable across machines, whereas memoization is a more machine-independent, <a href="http://en.m.wikipedia.org/wiki/Cross-platform" title="Cross-platform">cross-platform</a> strategy.</p>
+<p>Consider the following <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a> function to calculate the <a href="http://en.m.wikipedia.org/wiki/Factorial" title="Factorial">factorial</a> of <i>n</i>:</p>
+<pre>function factorial (<i>n</i> is a non-negative integer)
+    if <i>n</i> is 0 then
+        return 1 [<i>by the convention that</i> <b>0! = 1</b>]
+    else   
+        return factorial(<i>n</i> – 1) times <i>n</i> [<i>recursively invoke factorial</i> 
+                                        <i>with the parameter 1 less than n</i>]
+    end if
+end function
+</pre>
+<p>For every <a href="http://en.m.wikipedia.org/wiki/Integer" title="Integer">integer</a> <i>n</i> such that <tt><i>n</i>≥0</tt>, the final result of the function <code>factorial</code> is <a href="http://en.m.wikipedia.org/wiki/Invariant_%28computer_science%29" title="Invariant (computer science)">invariant</a>; if invoked as <code><i>x</i> = factorial(3)</code>, the result is such that <i>x</i> will <i>always</i> be assigned the value 6. A non-memoized version of the above, given the nature of the <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursive</a> <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> involved, would require <i>n + 1</i> invocations of <code>factorial</code>
+ to arrive at a result, and each of these invocations, in turn, has an 
+associated cost in the time it takes the function to return the value 
+computed. Depending on the machine, this cost might be the sum of:</p>
+<ol>
+<li>The cost to set up the functional call stack frame.</li>
+<li>The cost to compare <i>n</i> to 0.</li>
+<li>The cost to subtract 1 from <i>n</i>.</li>
+<li>The cost to set up the recursive call stack frame. (As above.)</li>
+<li>The cost to multiply the result of the recursive call to <code>factorial</code> by <i>n</i>.</li>
+<li>The cost to store the return result so that it may be used by the calling context.</li>
+</ol>
+<p>In a non-memoized implementation, <i>every</i> top-level call to <code>factorial</code> includes the cumulative cost of steps 2 through 6 proportional to the initial value of <i>n</i>.</p>
+<p>A memoized version of the <code>factorial</code> function follows:</p>
+<pre>function factorial (<i>n</i> is a non-negative integer)
+    if <i>n</i> is 0 then
+        return 1 [<i>by the convention that</i> <b>0! = 1</b>]
+    else if <i>n</i> is in <i>lookup-table</i> then
+        return <i>lookup-table-value-for-n</i>
+    else
+        let x = factorial(n – 1) times <i>n</i> [<i>recursively invoke factorial</i>
+                                         <i>with the parameter 1 less than n</i>]
+        store <i>x</i> in <i>lookup-table</i> in the <i>n</i><sup>th</sup> slot [<i>remember the result of n! for later</i>]
+        return x
+    end if
+end function
+</pre>
+<p>In this particular example, if <code>factorial</code> is first 
+invoked with 5, and then invoked later with any value less than or equal
+ to five, those return values will also have been memoized, since <code>factorial</code> will have been called recursively with the values 5, 4, 3, 2, 1, and 0, and the return values for <i>each</i>
+ of those will have been stored. If it is then called with a number 
+greater than 5, such as 7, only 2 recursive calls will be made (7 and 
+6), and the value for 5! will have been stored from the previous call. 
+In this way, memoization allows a function to become more time-efficient
+ the more often it is called, thus resulting in eventual overall <b>speed up</b>.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Some_other_considerations">Some other considerations</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Automatic_memoization">Automatic memoization</span>
+</h3>
+<p>While memoization may be added to functions <i>internally</i> and <i>explicitly</i> by a <a href="http://en.m.wikipedia.org/wiki/Computer_programmer" title="Computer programmer" class="mw-redirect">computer programmer</a> in much the same way the above memoized version of <code>factorial</code> is implemented, <a href="http://en.m.wikipedia.org/wiki/Referential_transparency_%28computer_science%29" title="Referential transparency (computer science)">referentially transparent</a> functions may also be automatically memoized <i>externally</i>.<sup id="cite_ref-Norvig1991_0-1" class="reference"><a href="#cite_note-Norvig1991-0"><span>[</span>1<span>]</span></a></sup> The techniques employed by <a href="http://en.m.wikipedia.org/wiki/Peter_Norvig" title="Peter Norvig">Peter Norvig</a> have application not only in <a href="http://en.m.wikipedia.org/wiki/Common_Lisp" title="Common Lisp">Common Lisp</a> (the language in which his paper demonstrated automatic memoization), but in various other <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a>. Applications of automatic memoization have also been formally explored in the study of <a href="http://en.m.wikipedia.org/wiki/Term_rewriting" title="Term rewriting" class="mw-redirect">term rewriting</a><sup id="cite_ref-Hoffman1992_5-0" class="reference"><a href="#cite_note-Hoffman1992-5"><span>[</span>6<span>]</span></a></sup> and <a href="http://en.m.wikipedia.org/wiki/Artificial_intelligence" title="Artificial intelligence">artificial intelligence</a>.<sup id="cite_ref-MayfieldEtAl1995_6-0" class="reference"><a href="#cite_note-MayfieldEtAl1995-6"><span>[</span>7<span>]</span></a></sup></p>
+<p>In programming languages where functions are <a href="http://en.m.wikipedia.org/wiki/First-class_object" title="First-class object" class="mw-redirect">first-class objects</a> (such as <a href="http://en.m.wikipedia.org/wiki/Lua_%28programming_language%29" title="Lua (programming language)">Lua</a>, <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a>, or <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a> <a rel="nofollow" class="external autonumber" href="http://perl.plover.com/MiniMemoize/memoize.html">[1]</a>), automatic memoization can be implemented by replacing (at <a href="http://en.m.wikipedia.org/wiki/Run_time_%28program_lifecycle_phase%29" title="Run time (program lifecycle phase)">run-time</a>)
+ a function with its calculated value once a value has been calculated 
+for a given set of parameters. The function that does this 
+value-for-function-object replacement can generically wrap any 
+referentially transparent function. Consider the following <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a> (where it is assumed that functions are first-class values):</p>
+<pre>  function memoized-call (<i>F</i> is a function object parameter)
+     if <i>F</i> has no attached array <i>values</i> then
+        allocate an <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a> called <i>values</i>;
+        attach <i>values</i> to <i>F</i>;
+     end if;
+ 
+     if <i>F</i>.<i>values[arguments]</i> is empty then
+        <i>F</i>.<i>values[arguments]</i> = <i>F</i>(arguments);
+     end if;
+ 
+     return F.<i>values[arguments]</i>;     
+  end function
+</pre>
+<p>In order to call an automatically memoized version of <code>factorial</code> using the above strategy, rather than calling <code>factorial</code> directly, code invokes <code>memoized-call(factorial(<i>n</i>))</code>.
+ Each such call first checks to see if a holder array has been allocated
+ to store results, and if not, attaches that array. If no entry exists 
+at the position <code>values[arguments]</code> (where <code>arguments</code> are used as the key of the associative array), a <i>real</i> call is made to <code>factorial</code> with the supplied arguments. Finally, the entry in the array at the key position is returned to the caller.</p>
+<p>The above strategy requires <i>explicit</i> wrapping at each call to a function that is to be memoized. In those languages that allow <a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">closures</a>, memoization can be effected <i>implicitly</i> by a <a href="http://en.m.wikipedia.org/wiki/Function_object" title="Function object">functor</a> factory that returns a wrapped memoized function object. In pseudocode, this can be expressed as follows:</p>
+<pre> function construct-memoized-functor (<i>F</i> is a function object parameter)
+    allocate a function object called <i>memoized-version</i>;
+ 
+    let memoized-version(arguments) be
+       if <i>self</i> has no attached array values then [<i><b>self</b> is a reference to <a href="http://en.m.wikipedia.org/wiki/This_%28computer_science%29" title="This (computer science)" class="mw-redirect">this</a> object</i>]
+          allocate an associative array called <i>values</i>;
+          attach <i>values</i> to <i>self</i>;
+       end if;
+
+       if self.<i>values[arguments]</i> is empty then
+          self.<i>values[arguments]</i> = <i>F</i>(arguments);
+       end if;
+
+       return self.<i>values[arguments]</i>;     
+    end let;
+ 
+    return <i>memoized-version</i>;
+ end function
+</pre>
+<p>Rather than call <code>factorial</code>, a new function object <code>memfact</code> is created as follows:</p>
+<pre> memfact = construct-memoized-functor(factorial)
+</pre>
+<p>The above example assumes that the function <code>factorial</code> has already been defined <i>before</i> the call to <code>construct-memoized-functor</code> is made. From this point forward, <code>memfact(<i>n</i>)</code> is called whenever the factorial of <i>n</i> is desired. In languages such as <a href="http://en.m.wikipedia.org/wiki/Lua_%28programming_language%29" title="Lua (programming language)">Lua</a>,
+ more sophisticated techniques exist which allow a function to be 
+replaced by a new function with the same name, which would permit:</p>
+<pre> factorial = construct-memoized-functor(factorial)
+</pre>
+<p>Essentially, such techniques involve attaching the <i>original function object</i>
+ to the created functor and forwarding calls to the original function 
+being memoized via an alias when a call to the actual function is 
+required (to avoid endless <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursion</a>), as illustrated below:</p>
+<pre>function construct-memoized-functor (<i>F</i> is a function object parameter)
+    allocate a function object called <i>memoized-version</i>;
+ 
+    let <i>memoized-version</i>(arguments) be
+       if <i>self</i> has no attached array values then [<i><b>self</b> is a reference to <a href="http://en.m.wikipedia.org/wiki/This_%28computer_science%29" title="This (computer science)" class="mw-redirect">this</a> object</i>]
+          allocate an associative array called <i>values</i>;
+          attach <i>values</i> to <i>self</i>;
+          allocate a new function object called <i>alias</i>;
+          attach <i>alias</i> to <i>self</i>; [<i>for later ability to invoke <b>F</b> indirectly</i>]
+          self.<i>alias</i> = <i>F</i>;
+       end if;
+
+       if self.<i>values[arguments]</i> is empty then
+          self.<i>values[arguments]</i> = self.<i>alias</i>(arguments); [<i><b>not</b> a direct call to <b>F</b></i>]
+       end if;
+
+       return self.<i>values[arguments]</i>;     
+    end let;
+ 
+    return <i>memoized-version</i>;
+ end function
+</pre>
+<p>(Note: Some of the steps shown above may be implicitly managed by the
+ implementation language and are provided for illustration.)</p>
+<h3> <span class="mw-headline" id="Parsers">Parsers</span>
+</h3>
+<p>When a <a href="http://en.m.wikipedia.org/wiki/Top-down_parsing" title="Top-down parsing">top-down parser</a> tries to parse an <a href="http://en.m.wikipedia.org/wiki/Ambiguous" title="Ambiguous" class="mw-redirect">ambiguous</a> input with respect to an ambiguous <a href="http://en.m.wikipedia.org/wiki/Context-free_grammar" title="Context-free grammar">context-free grammar</a>
+ (CFG), it may need an exponential number of steps (with respect to the 
+length of the input) to try all alternatives of the CFG in order to 
+produce all possible parse trees. This eventually would require 
+exponential memory space. Memoization was explored as a <a href="http://en.m.wikipedia.org/wiki/Parsing" title="Parsing">parsing</a> strategy in 1991 by <a href="http://en.m.wikipedia.org/wiki/Peter_Norvig" title="Peter Norvig">Norvig</a>, who demonstrated that an algorithm similar to the use of <a href="http://en.m.wikipedia.org/wiki/Dynamic_programming" title="Dynamic programming">dynamic programming</a> and state-sets in <a href="http://en.m.wikipedia.org/wiki/Earley_parser" title="Earley parser">Earley's algorithm</a> (1970), and tables in the <a href="http://en.m.wikipedia.org/wiki/CYK_algorithm" title="CYK algorithm">CYK algorithm</a> of Cocke, Younger and Kasami, could be generated by introducing automatic memoization to a simple <a href="http://en.m.wikipedia.org/wiki/Backtracking" title="Backtracking">backtracking</a> <a href="http://en.m.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive descent parser">recursive descent parser</a> to solve the problem of exponential time complexity.<sup id="cite_ref-Norvig1991_0-2" class="reference"><a href="#cite_note-Norvig1991-0"><span>[</span>1<span>]</span></a></sup>
+ The basic idea in Norvig’s approach is that when a parser is applied to
+ the input, the result is stored in a memotable for subsequent reuse if 
+the same parser is ever reapplied to the same input. Richard Frost also 
+used memoization to reduce the exponential time complexity of <a href="http://en.m.wikipedia.org/wiki/Parser_Combinator" title="Parser Combinator" class="mw-redirect">parser combinators</a>, which can be viewed as “Purely Functional Top-Down Backtracking” parsing technique.<sup id="cite_ref-Frost1996_7-0" class="reference"><a href="#cite_note-Frost1996-7"><span>[</span>8<span>]</span></a></sup>
+ He showed that basic memoized parser combinators can be used as 
+building blocks to construct complex parsers as executable 
+specifications of CFGs.<sup id="cite_ref-Frost1994_8-0" class="reference"><a href="#cite_note-Frost1994-8"><span>[</span>9<span>]</span></a></sup><sup id="cite_ref-Frost2003_9-0" class="reference"><a href="#cite_note-Frost2003-9"><span>[</span>10<span>]</span></a></sup> It was again explored in the context of parsing in 1995 by Johnson and Dörre.<sup id="cite_ref-Johnson1995_10-0" class="reference"><a href="#cite_note-Johnson1995-10"><span>[</span>11<span>]</span></a></sup><sup id="cite_ref-Johnson.26Dorre_11-0" class="reference"><a href="#cite_note-Johnson.26Dorre-11"><span>[</span>12<span>]</span></a></sup> In 2002, it was examined in considerable depth by Ford in the form called <a href="http://en.m.wikipedia.org/wiki/Packrat_parser" title="Packrat parser" class="mw-redirect">packrat parsing</a>.<sup id="cite_ref-Ford2002_12-0" class="reference"><a href="#cite_note-Ford2002-12"><span>[</span>13<span>]</span></a></sup></p>
+<p>In 2007, Frost, Hafiz and Callaghan<sup id="cite_ref-FrostHafizCallaghan2007_1-1" class="reference"><a href="#cite_note-FrostHafizCallaghan2007-1"><span>[</span>2<span>]</span></a></sup>
+ described a top-down parsing algorithm that uses memoization for 
+refraining redundant computations to accommodate any form of ambiguous 
+CFG in <a href="http://en.m.wikipedia.org/wiki/Polynomial" title="Polynomial">polynomial</a> time (<a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Θ</a>(n<sup>4</sup>) for <a href="http://en.m.wikipedia.org/wiki/Left_recursion" title="Left recursion">left-recursive</a> grammars and <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Θ</a>(n<sup>3</sup>)
+ for non left-recursive grammars). Their top-down parsing algorithm also
+ requires polynomial space for potentially exponential ambiguous parse 
+trees by 'compact representation' and 'local ambiguities grouping'. 
+Their compact representation is comparable with Tomita’s compact 
+representation of <a href="http://en.m.wikipedia.org/wiki/Bottom-up_parsing" title="Bottom-up parsing">bottom-up parsing</a>.<sup id="cite_ref-Tomita1985_13-0" class="reference"><a href="#cite_note-Tomita1985-13"><span>[</span>14<span>]</span></a></sup>
+ Their use of memoization is not only limited to retrieving the 
+previously computed results when a parser is applied to a same input 
+position repeatedly (which is essential for polynomial time 
+requirement); it is specialized to perform the following additional 
+tasks:</p>
+<ul>
+<li>The memoization process (which could be viewed as a ‘wrapper’ around any parser execution) accommodates an ever-growing <b>direct left-recursive</b> parse by imposing depth restrictions with respect to input length and current input position.</li>
+<li>The algorithm’s memo-table ‘lookup’ procedure also determines the 
+reusability of a saved result by comparing the saved result’s 
+computational context with the parser’s current context. This contextual
+ comparison is the key to accommodate <b>indirect (or hidden) left-recursion</b>.</li>
+<li>When performing a successful lookup in a memotable, instead of 
+returning the complete result-set, the process only returns the 
+references of the actual result and eventually speeds up the overall 
+computation.</li>
+<li>During updating the memotable, the memoization process groups the 
+(potentially exponential) ambiguous results and ensures the polynomial 
+space requirement.</li>
+</ul>
+<p>Frost, Hafiz and Callaghan also described the implementation of the algorithm in PADL’08<sup id="cite_ref-FrostHafizCallaghan2008_2-1" class="reference"><a href="#cite_note-FrostHafizCallaghan2008-2"><span>[</span>3<span>]</span></a></sup> as a set of <a href="http://en.m.wikipedia.org/wiki/Higher-order_function" title="Higher-order function">higher-order functions</a> (called <a href="http://en.m.wikipedia.org/wiki/Parser_combinators" title="Parser combinators" class="mw-redirect">parser combinators</a>) in <a href="http://en.m.wikipedia.org/wiki/Haskell_%28programming_language%29" title="Haskell (programming language)">Haskell</a>,
+ which enables the construction of directly executable specifications of
+ CFGs as language processors. The importance of their polynomial 
+algorithm’s power to accommodate ‘any form of ambiguous CFG’ with 
+top-down parsing is vital with respect to the syntax and semantics 
+analysis during <a href="http://en.m.wikipedia.org/wiki/Natural_language_processing" title="Natural language processing">natural language processing</a>. The <a rel="nofollow" class="external text" href="http://www.cs.uwindsor.ca/%7Ehafiz/proHome.html">X-SAIGA</a> site has more about the algorithm and implementation details.</p>
+<p>While Norvig increased the <i>power</i> of the parser through 
+memoization, the augmented parser was still as time complex as Earley's 
+algorithm, which demonstrates a case of the use of memoization for 
+something other than speed optimization. Johnson and Dörre<sup id="cite_ref-Johnson.26Dorre_11-1" class="reference"><a href="#cite_note-Johnson.26Dorre-11"><span>[</span>12<span>]</span></a></sup>
+ demonstrate another such non-speed related application of memoization: 
+the use of memoization to delay linguistic constraint resolution to a 
+point in a parse where sufficient information has been accumulated to 
+resolve those constraints. By contrast, in the speed optimization 
+application of memoization, Ford demonstrated that memoization could 
+guarantee that <a href="http://en.m.wikipedia.org/wiki/Parsing_expression_grammar" title="Parsing expression grammar">parsing expression grammars</a> could parse in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">linear</a> time even those <a href="http://en.m.wikipedia.org/wiki/Formal_language" title="Formal language">languages</a> that resulted in worst-case backtracking behavior.<sup id="cite_ref-Ford2002_12-1" class="reference"><a href="#cite_note-Ford2002-12"><span>[</span>13<span>]</span></a></sup></p>
+<p>Consider the following <a href="http://en.m.wikipedia.org/wiki/Formal_grammar" title="Formal grammar">grammar</a>:</p>
+<pre> S → (A <b>c</b>) | (B <b>d</b>)
+ A → X (<b>a</b>|<b>b</b>)
+ B → X <b>b</b>
+ X → <b>x</b> [X]
+</pre>
+<p>(Notation note: In the above example, the production S → (A <b>c</b>) | (B <b>d</b>) reads: "An <i>S</i> is either an <i>A</i> followed by a <b>c</b> or a <i>B</i> followed by a <b>d</b>." The production X → <b>x</b> [X] reads "An <i>X</i> is an <b>x</b> followed by an optional <i>X</i>.")</p>
+<p>This grammar generates one of the following three variations of <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">string</a>: <i>xac</i>, <i>xbc</i>, or <i>xbd</i> (where <i>x</i> here is understood to mean <i>one or more</i> x<i>'s</i>.) Next, consider how this grammar, used as a parse specification, might effect a top-down, left-right parse of the string <i>xxxxxbd</i>:</p>
+<dl>
+<dd>The rule <i>A</i> will recognize <i>xxxxxb</i> (by first descending into <i>X</i> to recognize one <i>x</i>, and again descending into <i>X</i> until all the <i>x</i>'s are consumed, and then recognizing the <i>b</i>), and then return to <i>S</i>, and fail to recognize a <i>c</i>. The next clause of <i>S</i> will then descend into B, which in turn <b>again descends into <i>X</i></b> and recognizes the <i>x</i>'s by means of many recursive calls to <i>X</i>, and then a <i>b</i>, and returns to <i>S</i> and finally recognizes a <i>d</i>.</dd>
+</dl>
+<p>The key concept here is inherent in the phrase <b>again descends into <i>X</i></b>. The process of looking forward, failing, backing up, and then retrying the next alternative is known in parsing as <a href="http://en.m.wikipedia.org/wiki/Backtracking" title="Backtracking">backtracking</a>, and it is primarily backtracking that presents opportunities for memoization in parsing. Consider a function <code>RuleAcceptsSomeInput(Rule, Position, Input)</code>, where the parameters are as follows:</p>
+<ul>
+<li>
+<code>Rule</code> is the name of the rule under consideration.</li>
+<li>
+<code>Position</code> is the offset currently under consideration in the input.</li>
+<li>
+<code>Input</code> is the input under consideration.</li>
+</ul>
+<p>Let the return value of the function <code>RuleAcceptsSomeInput</code> be the length of the input accepted by <code>Rule</code>,
+ or 0 if that rule does not accept any input at that offset in the 
+string. In a backtracking scenario with such memoization, the parsing 
+process is as follows:</p>
+<dl>
+<dd>When the rule <i>A</i> descends into <i>X</i> at offset 0, it memoizes the length 5 against that position and the rule <i>X</i>. After having failed at <i>d</i>, <i>B</i> then, rather than descending again into <i>X</i>, queries the position 0 against rule <i>X</i> in the memoization engine, and is returned a length of 5, thus saving having to actually descend again into <i>X</i>, and carries on <i>as if</i> it had descended into <i>X</i> as many times as before.</dd>
+</dl>
+<p>In the above example, one or <i>many</i> descents into <i>X</i> may occur, allowing for strings such as <i>xxxxxxxxxxxxxxxxbd</i>. In fact, there may be <i>any number</i> of <i>x</i>'s before the <i>b</i>. While the call to S must recursively descend into X as many times as there are <i>x</i>'s, <i>B</i> will never have to descend into X at all, since the return value of <code>RuleAcceptsSomeInput(<i>X</i>, 0, <i>xxxxxxxxxxxxxxxxbd</i>)</code> will be 16 (in this particular case).</p>
+<p>Those parsers that make use of <a href="http://en.m.wikipedia.org/wiki/Syntactic_predicate" title="Syntactic predicate">syntactic predicates</a> are also able to memoize the results of predicate parses, as well, thereby reducing such constructions as:</p>
+<pre> S → (A)? A
+ A → /* some rule */
+</pre>
+<p>to one descent into <i>A</i>.</p>
+<p>If a parser builds a <a href="http://en.m.wikipedia.org/wiki/Parse_tree" title="Parse tree">parse tree</a> during a parse, it must memoize not only the <i>length</i>
+ of the input that matches at some offset against a given rule, but also
+ must store the sub-tree that is generated by that rule at that offset 
+in the input, since subsequent calls to the rule by the parser will not 
+actually descend and rebuild that tree. For the same reason, memoized 
+parser algorithms that generate calls to external code (sometimes called
+ a <a href="http://en.m.wikipedia.org/wiki/Semantic_action_routine" title="Semantic action routine" class="mw-redirect">semantic action routine</a>) when a rule matches must use some scheme to ensure that such rules are invoked in a predictable order.</p>
+<p>Since, for any given backtracking or syntactic predicate capable parser not every grammar will <i>need</i>
+ backtracking or predicate checks, the overhead of storing each rule's 
+parse results against every offset in the input (and storing the parse 
+tree if the parsing process does that implicitly) may actually <i>slow down</i> a parser. This effect can be mitigated by explicit selection of those rules the parser will memoize.<sup id="cite_ref-AcarEtAl2003_14-0" class="reference"><a href="#cite_note-AcarEtAl2003-14"><span>[</span>15<span>]</span></a></sup></p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_4">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a> – more information on algorithm complexity</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Strength_reduction" title="Strength reduction">Strength reduction</a> – a <a href="http://en.m.wikipedia.org/wiki/Compiler" title="Compiler">compiler</a> optimization that replaces a costly operation with an equivalent, less costly one</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Partial_evaluation" title="Partial evaluation">Partial evaluation</a> – a related technique for automatic program optimization</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Lazy_evaluation" title="Lazy evaluation">Lazy evaluation</a> – shares some concepts with memoization</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">Lookup table</a> – a key <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> used in memoization</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Flyweight_pattern" title="Flyweight pattern">Flyweight pattern</a> – an object programming <a href="http://en.m.wikipedia.org/wiki/Design_pattern_%28computer_science%29" title="Design pattern (computer science)" class="mw-redirect">design pattern</a>, that also uses a kind of memoization</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Director_string" title="Director string">Director string</a> - rapidly locating free variables in expressions</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Dynamic_programming" title="Dynamic programming">Dynamic programming</a> – some applications of memoizing techniques</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Hashlife" title="Hashlife">Hashlife</a> – a memoizing technique to speed up the computation of <a href="http://en.m.wikipedia.org/wiki/Cellular_automata" title="Cellular automata" class="mw-redirect">cellular automata</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Higher-Order_Perl" title="Higher-Order Perl">Higher-Order Perl</a> – a free book by Mark Jason Dominus contains an entire chapter on implementing memoization, along with some background</li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-Norvig1991-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Norvig1991_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Norvig1991_0-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-Norvig1991_0-2"><sup><i><b>c</b></i></sup></a></span> <span class="reference-text">Norvig, Peter, "Techniques for Automatic Memoization with Applications to Context-Free Parsing," <i>Computational Linguistics</i>, Vol. 17 No. 1, pp. 91–98, March 1991.</span>
+</li>
+<li id="cite_note-FrostHafizCallaghan2007-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-FrostHafizCallaghan2007_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-FrostHafizCallaghan2007_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Frost,
+ Richard, Hafiz, Rahmatullah, and Callaghan, Paul. " Modular and 
+Efficient Top-Down Parsing for Ambiguous Left-Recursive Grammars." <i>10th International Workshop on Parsing Technologies (IWPT), ACL-SIGPARSE</i> , Pages: 109 – 120, June 2007, Prague.</span>
+</li>
+<li id="cite_note-FrostHafizCallaghan2008-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-FrostHafizCallaghan2008_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-FrostHafizCallaghan2008_2-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Frost, Richard, Hafiz, Rahmatullah, and Callaghan, Paul. " Parser Combinators for Ambiguous Left-Recursive Grammars." <i>10th International Symposium on Practical Aspects of Declarative Languages (PADL), ACM-SIGPLAN</i> , Volume 4902/2008, Pages: 167–181, January 2008, San Francisco.</span>
+</li>
+<li id="cite_note-Warren1999-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Warren1999_3-0">^</a></b></span> <span class="reference-text">Warren, David. "<a rel="nofollow" class="external text" href="http://www.cs.sunysb.edu/%7Ewarren/xsbbook/node14.html">Tabling and Datalog Programming</a>". Accessed 29 May 2009.</span>
+</li>
+<li id="cite_note-Michie1968-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Michie1968_4-0">^</a></b></span> <span class="reference-text">Michie, Donald, "Memo Functions and Machine Learning," <i>Nature</i>, No. 218, pp. 19–22, 1968.</span>
+</li>
+<li id="cite_note-Hoffman1992-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Hoffman1992_5-0">^</a></b></span> <span class="reference-text">Hoffman, Berthold, "Term Rewriting with Sharing and Memoïzation," <i>Algebraic and Logic Programming: Third International Conference, Proceedings</i>, H. Kirchner and G. Levi (eds.), pp. 128–142, Volterra, Italy, 2–4 September 1992.</span>
+</li>
+<li id="cite_note-MayfieldEtAl1995-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-MayfieldEtAl1995_6-0">^</a></b></span> <span class="reference-text">Mayfield, James, <i>et al.</i>, <i>Using Automatic Memoization as a Software Engineering Tool in Real-World AI Systems</i>, TBD, 1995.</span>
+</li>
+<li id="cite_note-Frost1996-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Frost1996_7-0">^</a></b></span> <span class="reference-text">Frost,
+ Richard. and Szydlowski, Barbara. "Memoizing Purely Functional Top-Down
+ Backtracking Language Processors. " "Sci. Comput. Program. " 1996 – 
+27(3): 263–288.</span>
+</li>
+<li id="cite_note-Frost1994-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Frost1994_8-0">^</a></b></span> <span class="reference-text">Frost,
+ Richard. "Using Memoization to Achieve Polynomial Complexity of Purely 
+Functional Executable Specifications of Non-Deterministic Top-Down 
+Parsers. " "SIGPLAN Notices" 29(4): 23–30.</span>
+</li>
+<li id="cite_note-Frost2003-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Frost2003_9-0">^</a></b></span> <span class="reference-text">Frost,
+ Richard. "Monadic Memoization towards Correctness-Preserving Reduction 
+of Search. " "Canadian Conference on AI 2003." p 66-80.</span>
+</li>
+<li id="cite_note-Johnson1995-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Johnson1995_10-0">^</a></b></span> <span class="reference-text">Johnson, Mark, "Memoization of Top-Down Parsing,” <i>Computational Linguistics</i>, Vol. 21 No. 3, pp. 405–417, September 1995.</span>
+</li>
+<li id="cite_note-Johnson.26Dorre-11">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Johnson.26Dorre_11-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Johnson.26Dorre_11-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Johnson, Mark &amp; Dörre, Jochen, "Memoization of Coroutined Constraints," <i>Proceedings of the 33rd Annual Meeting of the Association for Computational Linguistics</i>, Cambridge, Massachusetts, 1995.</span>
+</li>
+<li id="cite_note-Ford2002-12">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Ford2002_12-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Ford2002_12-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Ford, Bryan, <i>Packrat Parsing: a Practical Linear-Time Algorithm with Backtracking</i>, Master’s thesis, Massachusetts Institute of Technology, September, 2002.</span>
+</li>
+<li id="cite_note-Tomita1985-13">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Tomita1985_13-0">^</a></b></span> <span class="reference-text">Tomita, Masaru. “Efficient Parsing for Natural Language.” <i>Kluwer, Boston, MA</i>, 1985.</span>
+</li>
+<li id="cite_note-AcarEtAl2003-14">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-AcarEtAl2003_14-0">^</a></b></span> <span class="reference-text">Acar, Umut A. A. <i>et al.</i>, "Selective Memoization," <i>Proceedings of the 30th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages</i>, New Orleans, Louisiana, pp. 14–25, 15–17 January 2003.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_6">
+<dl>
+<dt>Examples of memoization in various programming languages</dt>
+</dl>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://groovy.codehaus.org/api/groovy/lang/Closure.html#memoize%28%29">groovy.lang.Closure#memoize()</a> – Memoize is a <a href="http://en.m.wikipedia.org/wiki/Groovy" title="Groovy">Groovy</a> 1.8 language feature.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cliki.net/memoize">Memoize</a> – Memoize is a small library, written by Tim Bradshaw, for performing memoization in <a href="http://en.m.wikipedia.org/wiki/Common_Lisp" title="Common Lisp">Common Lisp</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.stanford.edu/%7Epgbovine/incpy.html">IncPy</a> – A custom <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> interpreter that performs automatic memoization (with no required user annotations)</li>
+<li>Dave Herman's <a rel="nofollow" class="external text" href="http://planet.racket-lang.org/display.ss?package=memoize.plt&amp;owner=dherman">Macros for defining memoized procedures</a> in <a href="http://en.m.wikipedia.org/wiki/Racket_%28programming_language%29" title="Racket (programming language)">Racket</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://search.cpan.org/dist/Memoize/Memoize.pm">Memoize.pm</a> – a <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a> <a href="http://en.m.wikipedia.org/wiki/Perl_module" title="Perl module">module</a> that implements memoized functions.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.onjava.com/pub/a/onjava/2003/08/20/memoization.html">Java memoization</a> – an example in Java using dynamic proxy classes to create a generic memoization pattern.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://apl.jhu.edu/%7Epaulmac/c++-memoization.html">Memoization in C++</a> – although <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> doesn't support <a href="http://en.m.wikipedia.org/wiki/First-class_function" title="First-class function">first-class functions</a>, here is a toolkit that supports automated memoization (via pre-processing).</li>
+<li>
+<a rel="nofollow" class="external text" href="http://sourceforge.net/projects/c-memo/">C-Memo</a> – Generic memoization library for C, implemented using pre-processor function wrapper macros.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.tek271.com/software/java/memoizer">Tek271 Memoizer</a> – Open source Java memoizer using annotations and pluggable cache implementations.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://raa.ruby-lang.org/project/memoize/">memoize</a> – A <a href="http://en.m.wikipedia.org/wiki/Ruby_programming_language" title="Ruby programming language" class="mw-redirect">Ruby</a> module that implements memoized methods.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52201">Python memoization</a> – A <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> example of memoization.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://martin.jambon.free.fr/309/pa_memo.ml.html">OCaml memoization</a> – Implemented as a <a href="http://en.m.wikipedia.org/wiki/Camlp4" title="Camlp4">Camlp4</a> syntax extension.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://lua-users.org/wiki/FuncTables">Memoization in Lua</a> – Two example implementations of a general memoize function in <a href="http://en.m.wikipedia.org/wiki/Lua_%28programming_language%29" title="Lua (programming language)">Lua</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://web.ift.uib.no/%7Eszhorvat/mmatricks.php">Memoization in Mathematica</a> – Memoization and limited memoization in <a href="http://en.m.wikipedia.org/wiki/Mathematica" title="Mathematica">Mathematica</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://talideon.com/weblog/2005/07/javascript-memoization.cfm">Memoization in Javascript</a> – Extending the Function prototype in <a href="http://en.m.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://odhyan.com/blog/2010/09/caching-in-javascript-yui-cache/">Memoization in Javascript</a> – Examples of memoization in javascript using own caching mechanism and using the YUI library</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cs.uwindsor.ca/%7Ehafiz/proHome.html">X-SAIGA</a>
+ – eXecutable SpecificAtIons of GrAmmars. Contains publications related 
+to top-down parsing algorithm that supports left-recursion and ambiguity
+ in polynomial time and space.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://codeimmersion.i3ci.hampshire.edu/2009/10/09/memoization/">Memoization in Scheme</a> – A <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a> example of memoization on a class webpage.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://code.google.com/p/clache/">Memoization in Combinatory Logic</a> – A web service to reduce <a href="http://en.m.wikipedia.org/wiki/Combinatory_Logic" title="Combinatory Logic" class="mw-redirect">Combinatory Logic</a> while memoizing every step in a database.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://code.google.com/p/mbcache/">MbCache</a> – Cache method results in <a href="http://en.m.wikipedia.org/wiki/.NET_Framework" title=".NET Framework">.NET</a>.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Memoization&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Memoization&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Memoization&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Memoization&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Memoization_files/load_002.php" type="text/javascript"></script>
+<script src="Memoization_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

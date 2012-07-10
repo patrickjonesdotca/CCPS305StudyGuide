@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Pointer (computer programming) - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Pointer_%28computer_programming%29_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 31 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Pointer_%28computer_programming%29">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Pointer_%28computer_programming%29_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Pointer_%28computer_programming%29_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Pointer_%28computer_programming%29_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Pointer_(computer_programming)" selected="selected">English</option><option value="//ar.m.wikipedia.org/wiki/%D9%85%D8%A4%D8%B4%D8%B1_(%D9%84%D8%BA%D8%A7%D8%AA_%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D8%A9)">العربية</option><option value="//bg.m.wikipedia.org/wiki/%D0%A3%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8%D1%80%D0%B0%D0%BD%D0%B5)">български</option><option value="//ca.m.wikipedia.org/wiki/Punter_(programaci%C3%B3)">català</option><option value="//cs.m.wikipedia.org/wiki/Ukazatel_(programov%C3%A1n%C3%AD)">česky</option><option value="//de.m.wikipedia.org/wiki/Zeiger_(Informatik)">Deutsch</option><option value="//et.m.wikipedia.org/wiki/Viit_(informaatika)">eesti</option><option value="//el.m.wikipedia.org/wiki/%CE%94%CE%B5%CE%AF%CE%BA%CF%84%CE%B7%CF%82_(%CF%80%CE%BB%CE%B7%CF%81%CE%BF%CF%86%CE%BF%CF%81%CE%B9%CE%BA%CE%AE)">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Puntero_(inform%C3%A1tica)">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%A7%D8%B4%D8%A7%D8%B1%D9%87%E2%80%8C%DA%AF%D8%B1">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Pointeur_(programmation)">français</option><option value="//ko.m.wikipedia.org/wiki/%ED%8F%AC%EC%9D%B8%ED%84%B0_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)">한국어</option><option value="//is.m.wikipedia.org/wiki/Bendir">íslenska</option><option value="//it.m.wikipedia.org/wiki/Puntatore_(programmazione)">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%9E%D7%A6%D7%91%D7%99%D7%A2">עברית</option><option value="//kk.m.wikipedia.org/wiki/%D0%9D%D2%B1%D1%81%D2%9B%D0%B0%D2%93%D1%8B%D1%88">Қазақша</option><option value="//ky.m.wikipedia.org/wiki/%D0%9A%D3%A9%D1%80%D1%81%D3%A9%D1%82%D0%BA%D2%AF%D1%87">Кыргызча</option><option value="//ms.m.wikipedia.org/wiki/Penuding_(pengkomputeran)">Bahasa Melayu</option><option value="//nl.m.wikipedia.org/wiki/Pointer_(programmeerconcept)">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)">日本語</option><option value="//pl.m.wikipedia.org/wiki/Zmienna_wska%C5%BAnikowa">polski</option><option value="//pt.m.wikipedia.org/wiki/Ponteiro_(programa%C3%A7%C3%A3o)">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%A3%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C_(%D1%82%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85)">русский</option><option value="//sk.m.wikipedia.org/wiki/Ukazovate%C4%BE_(informatika)">slovenčina</option><option value="//sr.m.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BA%D0%B0%D0%B7%D0%B8%D0%B2%D0%B0%D1%87_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8%D1%80%D0%B0%D1%9A%D0%B5)">српски / srpski</option><option value="//fi.m.wikipedia.org/wiki/Osoitin_(ohjelmointi)">suomi</option><option value="//sv.m.wikipedia.org/wiki/Datatyp#Pekare_och_referenstyper">svenska</option><option value="//ta.m.wikipedia.org/wiki/%E0%AE%9A%E0%AF%81%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81_(%E0%AE%A8%E0%AE%BF%E0%AE%B0%E0%AE%B2%E0%AE%BE%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%AE%E0%AF%8D)">தமிழ்</option><option value="//tr.m.wikipedia.org/wiki/%C4%B0%C5%9Faret%C3%A7iler">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%92%D0%BA%D0%B0%D0%B7%D1%96%D0%B2%D0%BD%D0%B8%D0%BA">українська</option><option value="//zh.m.wikipedia.org/wiki/%E6%8C%87%E9%92%88_(%E4%BF%A1%E6%81%AF%E5%AD%A6)">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Pointer (computer programming)</h1>			
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Pointers.svg" class="image"><img alt="" src="Pointer_%28computer_programming%29_files/220px-Pointers.png" class="thumbimage" width="220" height="244"></a>
+<div class="thumbcaption">
+
+Pointer <i>a</i> pointing to the memory address associated with variable <i>b</i>. Note that in this particular diagram, the computing architecture uses the same <a href="http://en.m.wikipedia.org/wiki/Address_space" title="Address space">address space</a> and <a href="#Formal_description">data primitive</a> for both pointers and non-pointers; this need not be the case.</div>
+</div>
+</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>pointer</b> is a <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming language</a> <a href="http://en.m.wikipedia.org/wiki/Data_type" title="Data type">data type</a> whose value refers directly to (or "<b>points</b> to") another value stored elsewhere in the <a href="http://en.m.wikipedia.org/wiki/Computer_memory" title="Computer memory">computer memory</a> using its <a href="http://en.m.wikipedia.org/wiki/Memory_address" title="Memory address">address</a>. For <a href="http://en.m.wikipedia.org/wiki/High-level_programming_language" title="High-level programming language">high-level programming languages</a>, pointers effectively take the place of <a href="http://en.m.wikipedia.org/wiki/General_purpose_register" title="General purpose register" class="mw-redirect">general purpose registers</a> in low-level languages such as <a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly language</a> or <a href="http://en.m.wikipedia.org/wiki/Machine_code" title="Machine code">machine code</a>, but may be in available <a href="http://en.m.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">memory</a>. A pointer <i>references</i> a location in memory, and obtaining the value at the location a pointer refers to is known as <i>dereferencing</i> the pointer. A pointer is a simple, more concrete implementation of the more abstract <i><a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">reference</a></i>
+ data type. Several languages support some type of pointer, although 
+some have more restrictions on their use than others. As an analogy, a 
+page number in a book's index could be considered a pointer to the 
+corresponding page; dereferencing such a pointer would be done by 
+flipping to the page with the given page number.</p>
+<p>Pointers to data significantly improve performance for repetitive operations such as traversing <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29#String_processing_algorithms" title="String (computer science)">strings</a>, <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup tables</a>, <a href="http://en.m.wikipedia.org/wiki/Control_table" title="Control table">control tables</a> and <a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">tree</a>
+ structures. In particular, it is often much cheaper in time and space 
+to copy and dereference pointers than it is to copy and access the data 
+to which the pointers point.</p>
+<p>Pointers are also used to hold the addresses of entry points for <a href="http://en.m.wikipedia.org/wiki/System_call" title="System call">called</a> subroutines in <a href="http://en.m.wikipedia.org/wiki/Procedural_programming" title="Procedural programming">procedural programming</a> and for <a href="http://en.m.wikipedia.org/wiki/Dynamic_link_library#Explicit_run-time_linking" title="Dynamic link library" class="mw-redirect">run-time linking to dynamic link libraries (DLLs)</a>. In <a href="http://en.m.wikipedia.org/wiki/Object-oriented_programming" title="Object-oriented programming">object-oriented programming</a>, <a href="http://en.m.wikipedia.org/wiki/Function_pointer" title="Function pointer">pointers to functions</a> are used for <a href="http://en.m.wikipedia.org/wiki/Name_binding" title="Name binding">binding</a> <a href="http://en.m.wikipedia.org/wiki/Method_%28computer_science%29" title="Method (computer science)" class="mw-redirect">methods</a>, often using what are called <a href="http://en.m.wikipedia.org/wiki/Virtual_method_table" title="Virtual method table">virtual method tables</a>.</p>
+<p>While "pointer" has been used to refer to references in general, it 
+more properly applies to data structures whose interface explicitly 
+allows the pointer to be manipulated (arithmetically via <i>pointer arithmetic</i>) as a memory address, as opposed to a <a href="http://en.m.wikipedia.org/wiki/Magic_cookie" title="Magic cookie">magic cookie</a> or <a href="http://en.m.wikipedia.org/wiki/Capability-based_security" title="Capability-based security">capability</a> where this is not possible.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from May 2009">citation needed</span></a></i>]</sup>
+ Because pointers allow both protected and unprotected access to memory 
+addresses, there are risks associated with using them particularly in 
+the latter case. Primitive pointers are often stored in a format similar
+ to an <a href="http://en.m.wikipedia.org/wiki/Integer" title="Integer">integer</a>;
+ however, attempting to dereference or "look up" a pointer whose value 
+was never a valid memory address would cause a program to crash. To 
+alleviate this potential problem, as a matter of <a href="http://en.m.wikipedia.org/wiki/Type_safety" title="Type safety">type safety</a>,
+ pointers are considered a separate type parameterized by the type of 
+data they point to, even if the underlying representation is an integer.
+ Other measures may also be taken.<sup class="noprint Inline-Template" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Avoid_weasel_words" title="Wikipedia:Avoid weasel words" class="mw-redirect"><span title="The material in the vicinity of this tag may use weasel words or too-vague attribution. from October 2011">which?</span></a></i>]</sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Formal_description">Formal description</span></h2><div class="content_block" id="content_1">
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a pointer is a kind of <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">reference</a>.</p>
+<p>A <i>data primitive</i> (or just <i>primitive</i>) is any datum that can be read from or written to <a href="http://en.m.wikipedia.org/wiki/Computer_memory" title="Computer memory">computer memory</a> using one memory access (for instance, both a <i><a href="http://en.m.wikipedia.org/wiki/Byte" title="Byte">byte</a></i> and <i><a href="http://en.m.wikipedia.org/wiki/Word_%28data_type%29" title="Word (data type)" class="mw-redirect">word</a></i> are primitives).</p>
+<p>A <i>data aggregate</i> (or just <i>aggregate</i>) is a group of primitives that are <a href="http://en.m.wikipedia.org/wiki/Logical_address" title="Logical address">logically</a>
+ contiguous in memory and that are viewed collectively as one datum (for
+ instance, an aggregate could be 3 logically contiguous bytes, the 
+values of which represent the 3 coordinates of a point in space); when 
+an aggregate is entirely composed of the same type of primitive, the 
+aggregate may be called an <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure"><i>array</i></a>; in a sense, a multi-byte <i>word</i> primitive is an array of bytes, and some programs use words in this way.</p>
+<p>In the context of these definitions, a <i>byte</i> is the smallest primitive; each <a href="http://en.m.wikipedia.org/wiki/Memory_address" title="Memory address">memory address</a> specifies a different byte. The memory address of the first byte of a datum is considered the memory address (or <i>base memory address</i>) of the entire datum.</p>
+<p>A <i>memory pointer</i> (or just <i>pointer</i>) is a primitive, the value of which is intended to be used as a memory address; it is said that <i>a pointer points to a memory address</i>. It is also said that <i>a pointer points to a datum [in memory]</i> when the pointer's value is the datum's memory address.</p>
+<p>More generally, a pointer is a kind of <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">reference</a>, and it is said that <i>a pointer references a datum stored somewhere in memory</i>; to obtain that datum is <i>to dereference the pointer</i>.
+ The feature that separates pointers from other kinds of reference is 
+that a pointer's value is meant to be interpreted as a memory address, 
+which is a rather low-level concept.</p>
+<p>References serve as a level of indirection: a pointer's value 
+determines which memory address (that is, which datum) is to be used in a
+ calculation. Because indirection is a fundamental aspect of algorithms,
+ pointers are often expressed as a fundamental <a href="http://en.m.wikipedia.org/wiki/Data_type" title="Data type">data type</a> in <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a>; in <a href="http://en.m.wikipedia.org/wiki/Type_system#Static_typing" title="Type system">statically</a> (or <a href="http://en.m.wikipedia.org/wiki/Strongly_typed_programming_language" title="Strongly typed programming language" class="mw-redirect">strongly</a>) typed programming languages, the <a href="http://en.m.wikipedia.org/wiki/Type_system" title="Type system">type</a> of a pointer determines the type of the datum to which the pointer points.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Use_in_data_structures">Use in data structures</span></h2><div class="content_block" id="content_2">
+<p>When setting up <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structures</a> like <a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">lists</a>, <a href="http://en.m.wikipedia.org/wiki/Queue_%28data_structure%29" title="Queue (data structure)" class="mw-redirect">queues</a>
+ and trees, it is necessary to have pointers to help manage how the 
+structure is implemented and controlled. Typical examples of pointers 
+are start pointers, end pointers, and <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a> pointers. These pointers can either be <b>absolute</b> (the actual <a href="http://en.m.wikipedia.org/wiki/Physical_address" title="Physical address">physical address</a> or a <a href="http://en.m.wikipedia.org/wiki/Virtual_address" title="Virtual address" class="mw-redirect">virtual address</a> in <a href="http://en.m.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">virtual memory</a>) or <b>relative</b> (an <a href="http://en.m.wikipedia.org/wiki/Offset_%28computer_science%29" title="Offset (computer science)">offset</a>
+ from an absolute start address ("base") that typically uses fewer bits 
+than a full address, but will usually require one additional arithmetic 
+operation to resolve).</p>
+<p>A two-byte offset, containing a 16-bit, unsigned integer, can be used
+ to provide relative addressing for up to 64 kilobytes of a data 
+structure. This can easily be extended to 128K, 256K or 512K if the 
+address pointed to is forced to be on a half-word, word or double-word 
+boundary (but, requiring an additional "shift left" <a href="http://en.m.wikipedia.org/wiki/Bitwise_operation" title="Bitwise operation">bitwise operation</a>—by
+ 1,2 or 3 bits—in order to adjust the offset by a factor of 2,3 or 4, 
+before its addition to the base address). Generally, though, such 
+schemes are a lot of trouble, and for convenience to the programmer a <i>flat address space</i> is preferred.</p>
+<p>A one byte offset, such as the hexadecimal <a href="http://en.m.wikipedia.org/wiki/ASCII" title="ASCII">ASCII</a>
+ value of a character (e.g. X'29') can be used to point to an 
+alternative integer value (or index) in an array (e.g. X'01'). In this 
+way, characters can be very efficiently translated from '<a href="http://en.m.wikipedia.org/wiki/Raw_data" title="Raw data">raw data</a>' to a usable sequential <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">index</a> and then to an absolute address without a <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup table</a>.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Use_in_control_tables">Use in control tables</span></h2><div class="content_block" id="content_3">
+<p><a href="http://en.m.wikipedia.org/wiki/Control_table" title="Control table">Control tables</a>, that are used to control <a href="http://en.m.wikipedia.org/wiki/Program_flow" title="Program flow" class="mw-redirect">program flow</a>,
+ usually make extensive use of pointers. The pointers, usually embedded 
+in a table entry, may, for instance, be used to hold the entry points to
+ <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">subroutines</a>
+ to be executed, based on certain conditions defined in the same table 
+entry. The pointers can however be simply indexes to other separate, but
+ associated, tables comprising an array of the actual addresses or the 
+addresses themselves (depending upon the programming language constructs
+ available). They can also be used to point (back) to earlier table 
+entries (as in loop processing) or forward to skip some table entries 
+(as in a <a href="http://en.m.wikipedia.org/wiki/Switch_statement" title="Switch statement">switch</a>
+ or "early" exit from a loop). For this latter purpose, the "pointer" 
+may simply be the table entry number itself and can be transformed into 
+an actual address by simple arithmetic.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Architectural_roots">Architectural roots</span></h2><div class="content_block" id="content_4">
+<p>Pointers are a very thin <a href="http://en.m.wikipedia.org/wiki/Abstraction_%28computer_science%29" title="Abstraction (computer science)">abstraction</a> on top of the addressing capabilities provided by most modern <a href="http://en.m.wikipedia.org/wiki/Software_architecture" title="Software architecture">architectures</a>. In the simplest scheme, an <i><a href="http://en.m.wikipedia.org/wiki/Memory_address" title="Memory address">address</a></i>, or a numeric <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">index</a>, is assigned to each unit of memory in the system, where the unit is typically either a <a href="http://en.m.wikipedia.org/wiki/Byte" title="Byte">byte</a> or a <a href="http://en.m.wikipedia.org/wiki/Word_%28data_type%29" title="Word (data type)" class="mw-redirect">word</a>, effectively transforming all of memory into a very large <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a>.
+ Then, if we have an address, the system provides an operation to 
+retrieve the value stored in the memory unit at that address (usually 
+utilizing the machine's <a href="http://en.m.wikipedia.org/wiki/General_purpose_register" title="General purpose register" class="mw-redirect">general purpose registers</a>).</p>
+<p>In the usual case, a pointer is large enough to hold more addresses 
+than there are units of memory in the system. This introduces the 
+possibility that a program may attempt to access an address which 
+corresponds to no unit of memory, either because not enough memory is 
+installed (i.e. beyond the range of available memory) or the 
+architecture does not support such addresses. The first case may, in 
+certain platforms such as the <a href="http://en.m.wikipedia.org/wiki/X86" title="X86">Intel x86</a> architecture, be called a <a href="http://en.m.wikipedia.org/wiki/Segmentation_fault" title="Segmentation fault">segmentation fault</a> (segfault). The second case is possible in the current implementation of <a href="http://en.m.wikipedia.org/wiki/X86-64" title="X86-64">AMD64</a>,
+ where pointers are 64 bit long and addresses only extend to 48 bits. 
+There, pointers must conform to certain rules (canonical addresses), so 
+if a noncanonical pointer is dereferenced, the processor raises a <a href="http://en.m.wikipedia.org/wiki/General_protection_fault" title="General protection fault">general protection fault</a>.</p>
+<p>On the other hand, some systems have more units of memory than there are addresses. In this case, a more complex scheme such as <a href="http://en.m.wikipedia.org/wiki/Memory_segmentation" title="Memory segmentation">memory segmentation</a> or <a href="http://en.m.wikipedia.org/wiki/Paging" title="Paging">paging</a>
+ is employed to use different parts of the memory at different times. 
+The last incarnations of the x86 architecture support up to 36 bits of 
+physical memory addresses, which were mapped to the 32-bit linear 
+address space through the <a href="http://en.m.wikipedia.org/wiki/Physical_Address_Extension" title="Physical Address Extension">PAE</a>
+ paging mechanism. Thus, only 1/16 of the possible total memory may be 
+accessed at a time. Another example in the same computer family was the 
+16-bit <a href="http://en.m.wikipedia.org/wiki/Protected_mode" title="Protected mode">protected mode</a> of the <a href="http://en.m.wikipedia.org/wiki/80286" title="80286" class="mw-redirect">80286</a>
+ processor, which, though supporting only 16 MiB of physical memory, 
+could access up to 1 GiB of virtual memory, but the combination of 
+16-bit address and segment registers made accessing more than 64 KiB in 
+one data structure cumbersome. Some restrictions of ANSI pointer 
+arithmetic may have been due to the segmented memory models of this 
+processor family.</p>
+<p>In order to provide a consistent interface, some architectures provide <a href="http://en.m.wikipedia.org/wiki/Memory-mapped_I/O" title="Memory-mapped I/O">memory-mapped I/O</a>, which allows some addresses to refer to units of memory while others refer to <a href="http://en.m.wikipedia.org/wiki/Device_register" title="Device register">device registers</a>
+ of other devices in the computer. There are analogous concepts such as 
+file offsets, array indices, and remote object references that serve 
+some of the same purposes as addresses for other types of objects.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Uses">Uses</span></h2><div class="content_block" id="content_5">
+<p>Pointers are directly supported without restrictions in languages such as <a href="http://en.m.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a>, <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a>, <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, <a href="http://en.m.wikipedia.org/wiki/Pascal_programming_language" title="Pascal programming language" class="mw-redirect">Pascal</a>, and most <a href="http://en.m.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly languages</a>. They are primarily used for constructing <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">references</a>, which in turn are fundamental to constructing nearly all <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structures</a>, as well as in passing data between different parts of a program.</p>
+<p>In functional programming languages that rely heavily on lists, 
+pointers and references are managed abstractly by the language using 
+internal constructs like <a href="http://en.m.wikipedia.org/wiki/Cons" title="Cons">cons</a>.</p>
+<p>When dealing with arrays, the critical <a href="http://en.m.wikipedia.org/wiki/Lookup_table" title="Lookup table">lookup</a> operation typically involves a stage called <i>address calculation</i>
+ which involves constructing a pointer to the desired data element in 
+the array. If the data elements in the array have lengths that are 
+divisible by powers of two, this arithmetic is usually much more <a href="http://en.m.wikipedia.org/wiki/Algorithmic_efficiency" title="Algorithmic efficiency">efficient</a>.
+ Padding is frequently used as a mechanism for ensuring this is the 
+case, despite the increased memory requirement. In other data 
+structures, such as <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked lists</a>, pointers are used as references to explicitly tie one piece of the structure to another.</p>
+<p>Pointers are used to pass parameters by reference. This is useful if 
+the programmer wants a function's modifications to a parameter to be 
+visible to the function's caller. This is also useful for returning 
+multiple values from a function.</p>
+<p>Pointers can also be used to <a href="http://en.m.wikipedia.org/wiki/Memory_allocation" title="Memory allocation" class="mw-redirect">allocate</a>
+ and deallocate dynamic variables and arrays in memory. Since a variable
+ will often become redundant after it has served its purpose, it is a 
+waste of memory to keep it, and therefore it is good practice to 
+deallocate it (using the original pointer reference) when it is no 
+longer needed. Failure to do so may result in a <i><a href="http://en.m.wikipedia.org/wiki/Memory_leak" title="Memory leak">memory leak</a></i>
+ (where available free memory gradually, or in severe cases rapidly, 
+diminishes because of an accumulation of numerous redundant memory 
+blocks).</p>
+<h3> <span class="mw-headline" id="C_pointers">C pointers</span>
+</h3>
+<p>The basic syntax to define a pointer is:<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> <span class="sy0">*</span>ptr<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>This declares <code>ptr</code> as the identifier of an object of the following type:</p>
+<ul>
+<li>pointer that points to an object of type <code>int</code>
+</li>
+</ul>
+<p>This is usually stated more succinctly as '<code>ptr</code> is a pointer to <code>int</code>.'</p>
+<p>Because the C language does not specify an implicit initialization for objects of automatic storage duration,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> care should often be taken to ensure that the address to which <code>ptr</code> points is valid; this is why it is sometimes suggested that a pointer be explicitly initialized to the <a href="#Null_pointer">null pointer</a> value, which is traditionally specified in C with the standardized macro <code>NULL</code>:<sup id="cite_ref-c-NULL_2-0" class="reference"><a href="#cite_note-c-NULL-2"><span>[</span>3<span>]</span></a></sup></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> <span class="sy0">*</span>ptr <span class="sy0">=</span> NULL<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>Dereferencing a null pointer in C produces undefined behavior,<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup> which could be catastrophic. However, most implementations<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from July 2011">citation needed</span></a></i>]</sup> simply halt execution of the program in question, usually with a segmentation fault.</p>
+<p>However, initializing pointers unnecessarily could hinder program analyses, thereby hiding bugs.</p>
+<p>In any case, once a pointer has been declared, the next logical step is for it to point at something:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="kw4">int</span> <span class="sy0">*</span>ptr <span class="sy0">=</span> NULL<span class="sy0">;</span>
+ 
+ptr <span class="sy0">=</span> <span class="sy0">&amp;</span>a<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>This assigns the value of <code>ptr</code> to be the address of <code>a</code>. For example, if <code>a</code> is stored at memory location of 0x8130 then the value of <code>ptr</code> will be 0x8130 after the assignment. To dereference the pointer, an asterisk is used again:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="sy0">*</span>ptr <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>This means take the contents of <code>ptr</code> (which is 0x8130), "locate" that address in memory and set its value to 8. If <code>a</code> is later accessed again, its new value will be 8.</p>
+<p>This example may be more clear if memory is examined directly. Assume that <code>a</code> is located at address 0x8130 in memory and <code>ptr</code>
+ at 0x8134; also assume this is a 32-bit machine such that an int is 
+32-bits wide. The following is what would be in memory after the 
+following code snippet is executed:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="kw4">int</span> <span class="sy0">*</span>ptr <span class="sy0">=</span> NULL<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<table class="wikitable">
+<tbody><tr>
+<th>Address</th>
+<th>Contents</th>
+</tr>
+<tr>
+<td><b>0x8130</b></td>
+<td>0x00000005</td>
+</tr>
+<tr>
+<td><b>0x8134</b></td>
+<td>0x00000000</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+<p>(The NULL pointer shown here is 0x00000000.) By assigning the address of <code>a</code> to <code>ptr</code>:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"> ptr <span class="sy0">=</span> <span class="sy0">&amp;</span>a<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>yields the following memory values:</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tbody><tr>
+<th>Address</th>
+<th>Contents</th>
+</tr>
+<tr>
+<td><b>0x8130</b></td>
+<td>0x00000005</td>
+</tr>
+<tr>
+<td><b>0x8134</b></td>
+<td>0x00008130</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+<p>Then by dereferencing <code>ptr</code> by coding:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"> <span class="sy0">*</span>ptr <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>the computer will take the contents of <code>ptr</code> (which is 0x8130), 'locate' that address, and assign 8 to that location yielding the following memory:</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tbody><tr>
+<th>Address</th>
+<th>Contents</th>
+</tr>
+<tr>
+<td><b>0x8130</b></td>
+<td>0x00000008</td>
+</tr>
+<tr>
+<td><b>0x8134</b></td>
+<td>0x00008130</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+<p>Clearly, accessing <code>a</code> will yield the value of 8 because the previous instruction modified the contents of <code>a</code> by way of the pointer <code>ptr</code>.</p>
+<h3> <span class="mw-headline" id="C_arrays">C arrays</span>
+</h3>
+<p>In C, array indexing is formally defined in terms of pointer arithmetic; that is, the language specification requires that <code>array[i]</code> be equivalent to <code>*(array + i)</code>.<sup id="cite_ref-Plauger1992_4-0" class="reference"><a href="#cite_note-Plauger1992-4"><span>[</span>5<span>]</span></a></sup> Thus in C, arrays can be thought of as pointers to consecutive areas of memory (with no gaps),<sup id="cite_ref-Plauger1992_4-1" class="reference"><a href="#cite_note-Plauger1992-4"><span>[</span>5<span>]</span></a></sup> and the syntax for accessing arrays is identical for that which can be used to dereference pointers. For example, an array <code>array</code> can be declared and used in the following manner:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> array<span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span><span class="sy0">;</span>      <span class="coMULTI">/* Declares 5 contiguous (per Plauger Standard C 1992) integers */</span>
+<span class="kw4">int</span> <span class="sy0">*</span>ptr <span class="sy0">=</span> array<span class="sy0">;</span>  <span class="coMULTI">/* Arrays can be used as pointers */</span>
+ptr<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>        <span class="coMULTI">/* Pointers can be indexed with array syntax */</span>
+<span class="sy0">*</span><span class="br0">(</span>array <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>  <span class="coMULTI">/* Arrays can be dereferenced with pointer syntax */</span>
+<span class="sy0">*</span><span class="br0">(</span><span class="nu0">1</span> <span class="sy0">+</span> array<span class="br0">)</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>  <span class="coMULTI">/* Pointer addition is commutative */</span>
+<span class="nu0">2</span><span class="br0">[</span>array<span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>      <span class="coMULTI">/* Subscript operator is commutative */</span>
+</pre>
+</div>
+</div>
+<p>This allocates a block of five integers and names the block <code>array</code>, which acts as a pointer to the block. Another common use of pointers is to point to dynamically allocated memory from <a href="http://en.m.wikipedia.org/wiki/Malloc" title="Malloc" class="mw-redirect">malloc</a> which returns a consecutive block of memory of no less than the requested size that can be used as an array.</p>
+<p>While most operators on arrays and pointers are equivalent, it is important to note that the <code><a href="http://en.m.wikipedia.org/wiki/Sizeof#Using_sizeof_with_arrays" title="Sizeof">sizeof</a></code> operator will differ. In this example, <code>sizeof(array)</code> will evaluate to <code>5*sizeof(int)</code> (the size of the array), while <code>sizeof(ptr)</code> will evaluate to <code>sizeof(int*)</code>, the size of the pointer itself.</p>
+<p>Default values of an array can be declared like:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> array<span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">}</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>If you assume that <code>array</code> is located in memory starting at address 0x1000 on a 32-bit <a href="http://en.m.wikipedia.org/wiki/Endianness#Little-endian" title="Endianness">little-endian</a> machine then memory will contain the following (values are in <a href="http://en.m.wikipedia.org/wiki/Hexadecimal" title="Hexadecimal">hexadecimal</a>, like the addresses):</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tbody><tr>
+<td></td>
+<td><b>0</b></td>
+<td><b>1</b></td>
+<td><b>2</b></td>
+<td><b>3</b></td>
+</tr>
+<tr>
+<td><b>1000</b></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><b>1004</b></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><b>1008</b></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><b>100C</b></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><b>1010</b></td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+<p>Represented here are five integers: 2, 4, 3, 1, and 5. These five 
+integers occupy 32 bits (4 bytes) each with the least-significant byte 
+stored first (this is a little-endian <a href="http://en.m.wikipedia.org/wiki/CPU_architecture" title="CPU architecture" class="mw-redirect">CPU architecture</a>) and are stored consecutively starting at address 0x1000.</p>
+<p>The syntax for C with pointers is:</p>
+<ul>
+<li>
+<code>array</code> means 0x1000</li>
+<li>
+<code>array+1</code> means 0x1004 (note that the "+1" really means to add one times the size of an <code>int</code> (4 bytes) not literally "plus one")</li>
+<li>
+<code>*array</code> means to dereference the contents of <code>array</code>. Considering the contents as a memory address (0x1000), look up the value at that location (0x0002).</li>
+<li>
+<code>array[i]</code> means element number <code>i</code>, 0-based, of <code>array</code> which is translated into <code>*(array + i)</code>
+</li>
+</ul>
+<p>The last example is how to access the contents of <code>array</code>. Breaking it down:</p>
+<ul>
+<li>
+<code>array + i</code> is the memory location of the (i+1)<sup>th</sup> element of <code>array</code>
+</li>
+<li>
+<code>*(array + i)</code> takes that memory address and dereferences it to access the value.</li>
+</ul>
+<p>E.g. <code>array[3]</code> is synonymous with <code>*(array+3)</code>, meaning <code>*(0x1000 + 3*sizeof(int))</code>, which says "dereference the value stored at <code>0x100C</code>", in this case <code>0x0001</code>.</p>
+<h3> <span class="mw-headline" id="C_linked_list">C linked list</span>
+</h3>
+<p>Below is an example definition of a <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked list</a> in C.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="coMULTI">/* the empty linked list is represented by NULL
+ * or some other sentinel value */</span>
+<span class="co2">#define EMPTY_LIST  NULL</span>
+ 
+<span class="kw4">struct</span> link <span class="br0">{</span>
+    <span class="kw4">void</span>        <span class="sy0">*</span>data<span class="sy0">;</span>  <span class="coMULTI">/* data of this link */</span>
+    <span class="kw4">struct</span> link <span class="sy0">*</span>next<span class="sy0">;</span>  <span class="coMULTI">/* next link; EMPTY_LIST if there is none */</span>
+<span class="br0">}</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>Note that this pointer-recursive definition is essentially the same as the reference-recursive definition from the <a href="http://en.m.wikipedia.org/wiki/Haskell_%28programming_language%29" title="Haskell (programming language)">Haskell programming language</a>:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="haskell source-haskell">
+<pre class="de1"> <span class="kw1">data</span> Link a <span class="sy0">=</span> Nil
+             <span class="sy0">|</span> Cons a <span class="br0">(</span>Link a<span class="br0">)</span>
+</pre>
+</div>
+</div>
+<p><code>Nil</code> is the empty list, and <code>Cons a (Link a)</code> is a <a href="http://en.m.wikipedia.org/wiki/Cons" title="Cons">cons</a> cell of type <code>a</code> with another link also of type <code>a</code>.</p>
+<p>The definition with references, however, is type-checked and does not
+ use potentially confusing signal values. For this reason, data 
+structures in C are usually dealt with via <a href="http://en.m.wikipedia.org/wiki/Wrapper_function" title="Wrapper function">wrapper functions</a>, which are carefully checked for correctness.</p>
+<h3> <span class="mw-headline" id="Pass-by-address_using_pointers">Pass-by-address using pointers</span>
+</h3>
+<p>Pointers can be used to pass variables by their address, allowing their value to be changed. For example consider the following <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> code:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="coMULTI">/* a copy of the int n is changed */</span>
+<span class="kw4">void</span> not_alter<span class="br0">(</span><span class="kw4">int</span> n<span class="br0">)</span> <span class="br0">{</span>
+    n <span class="sy0">=</span> <span class="nu0">360</span><span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="coMULTI">/* the actual variable passed (by address) is changed */</span>
+<span class="kw4">void</span> alter<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>n<span class="br0">)</span> <span class="br0">{</span>
+    <span class="sy0">*</span>n <span class="sy0">=</span> <span class="nu0">120</span><span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="kw4">void</span> func<span class="br0">(</span><span class="kw4">void</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">24</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/*pass x's address as the argument*/</span>
+    alter<span class="br0">(</span><span class="sy0">&amp;</span>x<span class="br0">)</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* x is now equal to 120 */</span>
+ 
+    not_alter<span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* x is still equal to 120 */</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Dynamic_memory_allocation">Dynamic memory allocation</span>
+</h3>
+<p>Pointers are used to store and manage the addresses of <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">dynamically allocated</a>
+ blocks of memory. Such blocks are used to store data objects or arrays 
+of objects. Most structured and object-oriented languages provide an 
+area of memory, called the <i>heap</i> or <i>free store</i>, from which objects are dynamically allocated.</p>
+<p>The example C code below illustrates how structure objects are dynamically allocated and referenced. The <a href="http://en.m.wikipedia.org/wiki/Standard_C_library" title="Standard C library" class="mw-redirect">standard C library</a> provides the function <a href="http://en.m.wikipedia.org/wiki/Malloc" title="Malloc" class="mw-redirect"><code>malloc()</code></a>
+ for allocating memory blocks from the heap. It takes the size of an 
+object to allocate as a parameter and returns a pointer to a newly 
+allocated block of memory suitable for storing the object, or it returns
+ a null pointer if the allocation failed.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="coMULTI">/* Parts inventory item */</span>
+<span class="kw4">struct</span> Item <span class="br0">{</span>
+    <span class="kw4">int</span>         id<span class="sy0">;</span>     <span class="coMULTI">/* Part number */</span>
+    <span class="kw4">char</span> <span class="sy0">*</span>      name<span class="sy0">;</span>   <span class="coMULTI">/* Part name   */</span>
+    <span class="kw4">float</span>       cost<span class="sy0">;</span>   <span class="coMULTI">/* Cost        */</span>
+<span class="br0">}</span><span class="sy0">;</span>
+ 
+<span class="coMULTI">/* Allocate and initialize a new Item object */</span>
+<span class="kw4">struct</span> Item <span class="sy0">*</span> make_item<span class="br0">(</span><span class="kw4">const</span> <span class="kw4">char</span> <span class="sy0">*</span>name<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">struct</span> Item <span class="sy0">*</span> item<span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* Allocate a block of memory for a new Item object */</span>
+    item <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> Item<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">(</span>item <span class="sy0">==</span> NULL<span class="br0">)</span>
+        <span class="kw1">return</span> NULL<span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* Initialize the members of the new Item */</span>
+    <span class="kw3">memset</span><span class="br0">(</span>item<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> Item<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+    item<span class="sy0">-&gt;</span>id <span class="sy0">=</span>   <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+    item<span class="sy0">-&gt;</span>name <span class="sy0">=</span> NULL<span class="sy0">;</span>
+    item<span class="sy0">-&gt;</span>cost <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* Save a copy of the name in the new Item */</span>
+    item<span class="sy0">-&gt;</span>name <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw3">strlen</span><span class="br0">(</span>name<span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">(</span>item<span class="sy0">-&gt;</span>name <span class="sy0">==</span> NULL<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw3">free</span><span class="br0">(</span>item<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">return</span> NULL<span class="sy0">;</span>
+    <span class="br0">}</span>
+    <span class="kw3">strcpy</span><span class="br0">(</span>item<span class="sy0">-&gt;</span>name<span class="sy0">,</span> name<span class="br0">)</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* Return the newly created Item object */</span>
+    <span class="kw1">return</span> item<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>The code below illustrates how memory objects are dynamically 
+deallocated, i.e., returned to the heap or free store. The standard C 
+library provides the function <a href="http://en.m.wikipedia.org/wiki/Free%28%29" title="Free()" class="mw-redirect"><code>free()</code></a> for deallocating a previously allocated memory block and returning it back to the heap.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="coMULTI">/* Deallocate an Item object */</span>
+<span class="kw4">void</span> destroy_item<span class="br0">(</span><span class="kw4">struct</span> Item <span class="sy0">*</span>item<span class="br0">)</span> <span class="br0">{</span>
+    <span class="coMULTI">/* Check for a null object pointer */</span>
+    <span class="kw1">if</span> <span class="br0">(</span>item <span class="sy0">==</span> NULL<span class="br0">)</span>
+        <span class="kw1">return</span><span class="sy0">;</span>
+ 
+    <span class="coMULTI">/* Deallocate the name string saved within the Item */</span>
+    <span class="kw1">if</span> <span class="br0">(</span>item<span class="sy0">-&gt;</span>name <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw3">free</span><span class="br0">(</span>item<span class="sy0">-&gt;</span>name<span class="br0">)</span><span class="sy0">;</span>
+        item<span class="sy0">-&gt;</span>name <span class="sy0">=</span> NULL<span class="sy0">;</span>
+    <span class="br0">}</span>
+ 
+    <span class="coMULTI">/* Deallocate the Item object itself */</span>
+    <span class="kw3">free</span><span class="br0">(</span>item<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Memory-mapped_hardware">Memory-mapped hardware</span>
+</h3>
+<p>On some computing architectures, pointers can be used to directly manipulate memory or memory-mapped devices.</p>
+<p>Assigning addresses to pointers is an invaluable tool when programming <a href="http://en.m.wikipedia.org/wiki/Microcontrollers" title="Microcontrollers" class="mw-redirect">microcontrollers</a>. Below is a simple example declaring a pointer of type int and initialising it to a <a href="http://en.m.wikipedia.org/wiki/Hexadecimal" title="Hexadecimal">hexadecimal</a> address in this example the constant <code>0x7FFF</code>:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> <span class="sy0">*</span>hardware_address <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span><span class="br0">)</span><span class="nu12">0x7FFF</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>In the mid 80s, using the <a href="http://en.m.wikipedia.org/wiki/BIOS" title="BIOS">BIOS</a> to access the video capabilities of PCs was slow. Applications that were display-intensive typically used to access <a href="http://en.m.wikipedia.org/wiki/Color_Graphics_Adapter" title="Color Graphics Adapter">CGA</a> video memory directly by casting the <a href="http://en.m.wikipedia.org/wiki/Hexadecimal" title="Hexadecimal">hexadecimal</a> constant <code>0xB8000</code> to a pointer to an array of 80 unsigned 16-bit int values. Each value consisted of an <a href="http://en.m.wikipedia.org/wiki/ASCII" title="ASCII">ASCII</a>
+ code in the low byte, and a colour in the high byte. Thus, to put the 
+letter 'A' at row 5, column 2 in bright white on blue, one would write 
+code like the following:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co2">#define VID ((unsigned short (*)[80])0xB8000)</span>
+ 
+<span class="kw4">void</span> foo<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    VID<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu12">0x1F00</span> <span class="sy0">|</span> <span class="st0">'A'</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Typed_pointers_and_casting">Typed pointers and casting</span></h2><div class="content_block" id="content_6">
+<p>In many languages, pointers have the additional restriction that the object they point to has a specific <a href="http://en.m.wikipedia.org/wiki/Datatype" title="Datatype" class="mw-redirect">type</a>. For example, a pointer may be declared to point to an <a href="http://en.m.wikipedia.org/wiki/Integer" title="Integer">integer</a>; the language will then attempt to prevent the programmer from pointing it to objects which are not integers, such as <a href="http://en.m.wikipedia.org/wiki/Floating-point_number" title="Floating-point number" class="mw-redirect">floating-point numbers</a>, eliminating some errors.</p>
+<p>For example, in C</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> <span class="sy0">*</span>money<span class="sy0">;</span>
+<span class="kw4">char</span> <span class="sy0">*</span>bags<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p><code>money</code> would be an integer pointer and <code>bags</code> would be a char pointer. The following would yield a compiler warning of "assignment from incompatible pointer type" under <a href="http://en.m.wikipedia.org/wiki/GNU_Compiler_Collection" title="GNU Compiler Collection">GCC</a></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1">bags <span class="sy0">=</span> money<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>because <code>money</code> and <code>bags</code> were declared with 
+different types. To suppress the compiler warning, it must be made 
+explicit that you do indeed wish to make the assignment by <a href="http://en.m.wikipedia.org/wiki/Typecasting_%28programming%29" title="Typecasting (programming)" class="mw-redirect">typecasting</a> it</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1">bags <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">char</span> <span class="sy0">*</span><span class="br0">)</span>money<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>which says to cast the integer pointer of <code>money</code> to a char pointer and assign to <code>bags</code>.</p>
+<p>A 2005 draft of the C standard requires that casting a pointer 
+derived from one type to one of another type should maintain the 
+alignment correctness for both types (6.3.2.3 Pointers, par. 7):<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">char</span> <span class="sy0">*</span>external_buffer <span class="sy0">=</span> <span class="st0">"abcdef"</span><span class="sy0">;</span>
+<span class="kw4">int</span> <span class="sy0">*</span>internal_data<span class="sy0">;</span>
+ 
+internal_data <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span><span class="br0">)</span>external_buffer<span class="sy0">;</span>  <span class="co1">// UNDEFINED BEHAVIOUR if "the resulting pointer</span>
+                                         <span class="co1">// is not correctly aligned"</span>
+</pre>
+</div>
+</div>
+<p>In languages that allow pointer arithmetic, arithmetic on pointers 
+takes into account the size of the type. For example, adding an integer 
+number to a pointer produces another pointer that points to an address 
+that is higher by that number times the size of the type. This allows us
+ to easily compute the address of elements of an array of a given type, 
+as was shown in the C arrays example above. When a pointer of one type 
+is cast to another type of a different size, the programmer should 
+expect that pointer arithmetic will be calculated differently. In C, for
+ example, if the <code>money</code> array starts at 0x2000 and <code>sizeof(int)</code> is 4 bytes whereas <code>sizeof(char)</code> is 1 bytes, then <code>(money+1)</code> will point to 0x2004 but <code>(bags+1)</code> will point to 0x2001. Other risks of casting include loss of data when "wide" data is written to "narrow" locations (e.g. <code>bags[0]=65537;</code>), unexpected results when <a href="http://en.m.wikipedia.org/wiki/Bitwise_operation#Bit_shifts" title="Bitwise operation">bit-shifting</a> values, and comparison problems, especially with signed vs unsigned values.</p>
+<p>Although it is impossible in general to determine at compile-time which casts are safe, some languages store <a href="http://en.m.wikipedia.org/wiki/Run-time_type_information" title="Run-time type information">run-time type information</a>
+ which can be used to confirm that these dangerous casts are valid at 
+runtime. Other languages merely accept a conservative approximation of 
+safe casts, or none at all.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Making_pointers_safer">Making pointers safer</span></h2><div class="content_block" id="content_7">
+<p>Because a pointer allows a program to attempt to access an object 
+that may not be defined, pointers can be the source of a variety of <a href="http://en.m.wikipedia.org/wiki/Software_bug" title="Software bug">programming errors</a>.
+ However, the usefulness of pointers is so great that it can be 
+difficult to perform programming tasks without them. Consequently, many 
+languages have created constructs designed to provide some of the useful
+ features of pointers without some of their <a href="http://en.m.wikipedia.org/wiki/Anti-pattern" title="Anti-pattern">pitfalls</a>.</p>
+<p>One major problem with pointers is that as long as they can be 
+directly manipulated as a number, they can be made to point to unused 
+addresses or to data which is being used for other purposes. Many 
+languages, including most <a href="http://en.m.wikipedia.org/wiki/Functional_programming_language" title="Functional programming language" class="mw-redirect">functional programming languages</a> and recent <a href="http://en.m.wikipedia.org/wiki/Imperative_languages" title="Imperative languages" class="mw-redirect">imperative languages</a> like <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>, replace pointers with a more opaque type of reference, typically referred to as simply a <i>reference</i>, which can only be used to refer to objects and not <a href="http://en.m.wikipedia.org/wiki/Pointer_arithmetic" title="Pointer arithmetic" class="mw-redirect">manipulated as numbers</a>, preventing this type of error. Array indexing is handled as a special case.</p>
+<p>A pointer which does not have any address assigned to it is called a <a href="http://en.m.wikipedia.org/wiki/Wild_pointer" title="Wild pointer" class="mw-redirect">wild pointer</a>.
+ Any attempt to use such uninitialized pointers can cause unexpected 
+behavior, either because the initial value is not a valid address, or 
+because using it may damage other parts of the program. The result is 
+often a <a href="http://en.m.wikipedia.org/wiki/Segmentation_fault" title="Segmentation fault">segmentation fault</a>, <a href="http://en.m.wikipedia.org/wiki/Storage_violation" title="Storage violation">storage violation</a> or <a href="http://en.m.wikipedia.org/wiki/Wild_branch" title="Wild branch">wild branch</a> (if used as a function pointer or branch address).</p>
+<p>In systems with explicit memory allocation, it is possible to create a <a href="http://en.m.wikipedia.org/wiki/Dangling_pointer" title="Dangling pointer">dangling pointer</a>
+ by deallocating the memory region it points into. This type of pointer 
+is dangerous and subtle because a deallocated memory region may contain 
+the same data as it did before it was deallocated but may be then 
+reallocated and overwritten by unrelated code, unknown to the earlier 
+code. Languages with <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collection</a> prevent this type of error because deallocation is performed automatically when there are no more references in scope.</p>
+<p>Some languages, like <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, support <a href="http://en.m.wikipedia.org/wiki/Smart_pointer" title="Smart pointer">smart pointers</a>, which use a simple form of <a href="http://en.m.wikipedia.org/wiki/Reference_counting" title="Reference counting">reference counting</a>
+ to help track allocation of dynamic memory in addition to acting as a 
+reference. In the absence of reference cycles, where an object refers to
+ itself indirectly through a sequence of smart pointers, these eliminate
+ the possibility of dangling pointers and memory leaks. <a href="http://en.m.wikipedia.org/wiki/Borland_Delphi" title="Borland Delphi" class="mw-redirect">Delphi</a> strings support reference counting natively.</p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Null_pointer">Null pointer</span></h2><div class="content_block" id="content_8">
+<p>A <b><a href="http://en.wiktionary.org/wiki/null" class="extiw" title="wikt:null">null</a> pointer</b>
+ has a value reserved for indicating that the pointer does not refer to a
+ valid object. Null pointers are routinely used to represent conditions 
+such as the end of a <a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">list</a> of unknown length or the failure to perform some action; this use of null pointers can be compared to <a href="http://en.m.wikipedia.org/wiki/Nullable_type" title="Nullable type">nullable types</a> and to the <i>Nothing</i> value in an <a href="http://en.m.wikipedia.org/wiki/Option_type" title="Option type">option type</a>.</p>
+<p>Null pointers are often considered similar to null values in <a href="http://en.m.wikipedia.org/wiki/Relational_database" title="Relational database">relational databases</a>,
+ but they have somewhat different semantics. Null pointer in most 
+programming languages means "no value", while null value in relational 
+database means "unknown value". This leads to important difference in 
+practice: two null pointers are considered equal in most programming 
+languages, but two null values in relational database are not (since 
+they represent unknown values, it is unknown whether they are equal).</p>
+<p>In some programming language environments (at least one proprietary Lisp implementation, for example),<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from September 2011">citation needed</span></a></i>]</sup> the value used as the null pointer (called <code>nil</code>
+ in Lisp) may actually be a pointer to a block of internal data useful 
+to the implementation (but not explicitly reachable from user programs),
+ thus allowing the same register to be used as a useful constant and a 
+quick way of accessing implementation internals. This is known as the <i><code>nil</code> vector</i>.</p>
+<p>In C, two null pointers of any type are guaranteed to compare equal.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup> The macro <code>NULL</code> is defined as an implementation-defined null pointer constant,<sup id="cite_ref-c-NULL_2-1" class="reference"><a href="#cite_note-c-NULL-2"><span>[</span>3<span>]</span></a></sup> which in C99 can be portably expressed as the integer value <code>0</code> converted implicitly or explicitly to the type <code>void*</code>.<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup>
+ Note, though, that the physical address zero is often directly 
+accessible by hardware (for instance, it is directly accessible in x86 <a href="http://en.m.wikipedia.org/wiki/Real_mode" title="Real mode">real mode</a>,
+ and it is where the interrupt table is stored), but modern operating 
+systems usually map virtual address spaces in such a way that accessing 
+address zero is forbidden.</p>
+<p>In C++, while the <code>NULL</code> macro was inherited from C, the integer literal for zero has been traditionally preferred to represent a null pointer constant.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup> However, C++11 has introduced an explicit <a href="http://en.m.wikipedia.org/wiki/C%2B%2B11#Null_pointer_constant" title="C++11"><code>nullptr</code> constant</a> to be used instead.</p>
+<p>A null pointer should not be confused with an uninitialized pointer: A
+ null pointer is guaranteed to compare unequal to any pointer that 
+points to a valid object. However, depending on the language and 
+implementation, an uninitialized pointer has either an indeterminate 
+(random or meaningless) value or a specific value that is not 
+necessarily any kind of null pointer constant.</p>
+<p>The null reference was invented by <a href="http://en.m.wikipedia.org/wiki/C.A.R._Hoare" title="C.A.R. Hoare" class="mw-redirect">C.A.R. Hoare</a> in 1965 as part of the <a href="http://en.m.wikipedia.org/wiki/Algol_W" title="Algol W" class="mw-redirect">Algol W</a> language. Hoare later (2009) described his invention as a "billion-dollar mistake":<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup><sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>11<span>]</span></a></sup></p>
+<blockquote class="templatequote">
+<div class="Bug6200">I call it my billion-dollar mistake. It was the 
+invention of the null reference in 1965. At that time, I was designing 
+the first comprehensive type system for references in an object oriented
+ language (<a href="http://en.m.wikipedia.org/wiki/ALGOL_W" title="ALGOL W">ALGOL W</a>).
+ My goal was to ensure that all use of references should be absolutely 
+safe, with checking performed automatically by the compiler. But I 
+couldn't resist the temptation to put in a null reference, simply 
+because it was so easy to implement. This has led to innumerable errors,
+ vulnerabilities, and system crashes, which have probably caused a 
+billion dollars of pain and damage in the last forty years.</div>
+</blockquote>
+<p>Because a null pointer does not point to a meaningful object, an 
+attempt to dereference a null pointer usually causes a run-time error:</p>
+<ul>
+<li>In C, the behavior of dereferencing a null pointer is undefined.<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup> Many implementations cause such code to result in the program being halted with a <a href="http://en.m.wikipedia.org/wiki/Segmentation_fault" title="Segmentation fault">segmentation fault</a>,
+ because the null pointer representation is chosen to be an address that
+ is never allocated by the system for storing objects. However, this 
+behavior is not universal.</li>
+<li>In Java, access to a null reference triggers a <code><a rel="nofollow" class="external text" href="http://download.oracle.com/javase/7/docs/api/java/lang/NullPointerException.html">NullPointerException</a></code>, which can be caught by error handling code, but the preferred practice is to ensure that such exceptions never occur.</li>
+<li>In <a href="http://en.m.wikipedia.org/wiki/Objective-C" title="Objective-C">Objective-C</a>, messages may be sent to a <code>nil</code>
+ object (which is essentially a null pointer) without causing the 
+program to be interrupted; the message is simply ignored, and the return
+ value (if any) is <code>nil</code> or <code>0</code>, depending on the type.<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>13<span>]</span></a></sup>
+</li>
+</ul>
+<p>In languages with a <a href="http://en.m.wikipedia.org/wiki/Tagged_architecture" title="Tagged architecture">tagged architecture</a>, a possibly null pointer can be replaced with a <a href="http://en.m.wikipedia.org/wiki/Tagged_union" title="Tagged union">tagged union</a> which enforces explicit handling of the exceptional case; in fact, a possibly null pointer can be seen as a <a href="http://en.m.wikipedia.org/wiki/Tagged_pointer" title="Tagged pointer">tagged pointer</a> with a computed tag.</p>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="Autorelative_pointer">Autorelative pointer</span></h2><div class="content_block" id="content_9">
+<p>The term <i>autorelative</i> pointer may refer to a pointer whose 
+value is interpreted as an offset from the address of the pointer 
+itself; thus, if a data structure, <img class="tex" alt="M" src="Pointer_%28computer_programming%29_files/69691c7bdcc3ce6d5d8a1361f22d04ac.png">, has an autorelative pointer member, <img class="tex" alt="p" src="Pointer_%28computer_programming%29_files/83878c91171338902e0fe0fb97a8c47a.png">, that points to some portion of <img class="tex" alt="M" src="Pointer_%28computer_programming%29_files/69691c7bdcc3ce6d5d8a1361f22d04ac.png"> itself, then <img class="tex" alt="M" src="Pointer_%28computer_programming%29_files/69691c7bdcc3ce6d5d8a1361f22d04ac.png"> may be relocated in memory without having to update the value of <img class="tex" alt="p" src="Pointer_%28computer_programming%29_files/83878c91171338902e0fe0fb97a8c47a.png">.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>14<span>]</span></a></sup></p>
+<p>The cited patent also uses the term <i>self-relative</i> pointer to mean the same thing. However, the meaning of that term has been used in other ways:</p>
+<ul>
+<li>It is often used to mean an offset from the address of a structure rather than from the address of the pointer itself.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from September 2011">citation needed</span></a></i>]</sup>
+</li>
+<li>It has been used to mean a pointer containing its own address, which
+ can be useful for reconstructing in any arbitrary region of memory a 
+collection of data structures that point to each other.<sup id="cite_ref-14" class="reference"><a href="#cite_note-14"><span>[</span>15<span>]</span></a></sup>
+</li>
+</ul>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="Based_pointer">Based pointer</span></h2><div class="content_block" id="content_10">
+<p>A <b>based pointer</b> is a pointer whose value is an offset from the
+ value of another pointer. This can be used to store and load blocks of 
+data, assigning the address of the beginning of the block to the base 
+pointer.<sup id="cite_ref-15" class="reference"><a href="#cite_note-15"><span>[</span>16<span>]</span></a></sup></p>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="Multiple_indirection">Multiple indirection</span></h2><div class="content_block" id="content_11">
+<p>In some languages, a pointer can reference another pointer, requiring
+ multiple dereference operations to get to the original value. While 
+each level of indirection may add a performance cost, it is sometimes 
+necessary in order to provide correct behavior for complex <a href="http://en.m.wikipedia.org/wiki/Data_structures" title="Data structures" class="mw-redirect">data structures</a>. For example, in C it is typical to define a <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked list</a> in terms of an element that contains a pointer to the next element of the list:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">struct</span> element
+<span class="br0">{</span>
+    <span class="kw4">struct</span> element <span class="sy0">*</span> next<span class="sy0">;</span>
+    <span class="kw4">int</span>              value<span class="sy0">;</span>
+<span class="br0">}</span><span class="sy0">;</span>
+ 
+<span class="kw4">struct</span> element <span class="sy0">*</span> head <span class="sy0">=</span> NULL<span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>This implementation uses a pointer to the first element in the list 
+as a surrogate for the entire list. If a new value is added to the 
+beginning of the list, <code>head</code> has to be changed to point to 
+the new element. Since C arguments are always passed by value, using 
+double indirection allows the insertion to be implemented correctly, and
+ has the desirable side-effect of eliminating special case code to deal 
+with insertions at the front of the list:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co1">// Given a sorted list at *head, insert the element item at the first</span>
+<span class="co1">// location where all earlier elements have lesser or equal value.</span>
+<span class="kw4">void</span> insert<span class="br0">(</span><span class="kw4">struct</span> element <span class="sy0">**</span>head<span class="sy0">,</span> <span class="kw4">struct</span> element <span class="sy0">*</span>item<span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw4">struct</span> element <span class="sy0">**</span> p<span class="sy0">;</span>  <span class="co1">// p points to a pointer to an element</span>
+ 
+    <span class="kw1">for</span> <span class="br0">(</span>p <span class="sy0">=</span> head<span class="sy0">;</span> <span class="sy0">*</span>p <span class="sy0">!=</span> NULL<span class="sy0">;</span> p <span class="sy0">=</span> <span class="sy0">&amp;</span><span class="br0">(</span><span class="sy0">*</span>p<span class="br0">)</span><span class="sy0">-&gt;</span>next<span class="br0">)</span>
+    <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>item<span class="sy0">-&gt;</span>value <span class="sy0">&lt;=</span> <span class="br0">(</span><span class="sy0">*</span>p<span class="br0">)</span><span class="sy0">-&gt;</span>value<span class="br0">)</span>
+            <span class="kw2">break</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+    item<span class="sy0">-&gt;</span>next <span class="sy0">=</span> <span class="sy0">*</span>p<span class="sy0">;</span>
+    <span class="sy0">*</span>p <span class="sy0">=</span> item<span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="co1">// Caller does this:</span>
+insert<span class="br0">(</span><span class="sy0">&amp;</span>head<span class="sy0">,</span> item<span class="br0">)</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>In this case, if the value of <code>item</code> is less than that of <code>head</code>, the caller's <code>head</code> is properly updated to the address of the new item.</p>
+</div><a id="anchor_11" href="#section_11" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_12"><button>Show</button><span id="Wild_pointers">Wild pointers</span></h2><div class="content_block" id="content_12">
+<p>A <b>wild pointer</b> is a pointer that has not been initialized 
+(that is, a wild pointer has not had any address assigned to it) and may
+ make a program crash or behave oddly. In the <a href="http://en.m.wikipedia.org/wiki/Pascal_programming_language" title="Pascal programming language" class="mw-redirect">Pascal</a> or <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C programming languages</a>, pointers that are not specifically initialized may point to unpredictable addresses in memory.</p>
+<p>The following example code shows a wild pointer:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> func<span class="br0">(</span><span class="kw4">void</span><span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw4">char</span> <span class="sy0">*</span>p1 <span class="sy0">=</span> <span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">char</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* (undefined) value of some place on the heap */</span>
+    <span class="kw4">char</span> <span class="sy0">*</span>p2<span class="sy0">;</span>       <span class="coMULTI">/* wild (uninitialized) pointer */</span>
+    <span class="sy0">*</span>p1 <span class="sy0">=</span> <span class="st0">'a'</span><span class="sy0">;</span>      <span class="coMULTI">/* This is OK, assuming malloc() has not returned NULL. */</span>
+    <span class="sy0">*</span>p2 <span class="sy0">=</span> <span class="st0">'b'</span><span class="sy0">;</span>      <span class="coMULTI">/* This invokes undefined behavior */</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Here, <code>p2</code> may point to anywhere in memory, so performing the assignment <code>*p2 = 'b'</code> can corrupt an unknown area of memory or trigger a <a href="http://en.m.wikipedia.org/wiki/Segmentation_fault" title="Segmentation fault">segmentation fault</a>.</p>
+</div><a id="anchor_12" href="#section_12" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_13"><button>Show</button><span id="Wild_branch">Wild branch</span></h2><div class="content_block" id="content_13">
+<p>Where a pointer is used as the address of the entry point to a program or start of a <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">subroutine</a> and is also either uninitialized or corrupted, if a call or <a href="http://en.m.wikipedia.org/wiki/Unconditional_branch" title="Unconditional branch" class="mw-redirect">jump</a> is nevertheless made to this address, a "<a href="http://en.m.wikipedia.org/wiki/Wild_branch" title="Wild branch">wild branch</a>"
+ is said to have occurred. The consequences are usually unpredictable 
+and the error may present itself in several different ways depending 
+upon whether or not the pointer is a "valid" address and whether or not 
+there is (coincidentally) a valid instruction (opcode) at that address. 
+The detection of a wild branch can present one of the most difficult and
+ frustrating debugging exercises since much of the evidence may already 
+have been destroyed beforehand or by execution of one or more 
+inappropriate instructions at the branch location. If available, an <a href="http://en.m.wikipedia.org/wiki/Instruction_set_simulator" title="Instruction set simulator">instruction set simulator</a> can usually not only detect a wild branch before it takes effect, but also provide a complete or partial trace of its history.</p>
+</div><a id="anchor_13" href="#section_13" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_14"><button>Show</button><span id="Simulation_using_an_array_index">Simulation using an array index</span></h2><div class="content_block" id="content_14">
+<p>It is possible to simulate pointer behavior using an index to an (normally one-dimensional) array.</p>
+<p>Primarily for languages which do not support pointers explicitly but <i>do</i> support arrays, the <a href="http://en.m.wikipedia.org/wiki/Array_data_type" title="Array data type">array</a>
+ can be thought of and processed as if it were the entire memory range 
+(within the scope of the particular array) and any index to it can be 
+thought of as equivalent to a <a href="http://en.m.wikipedia.org/wiki/General_purpose_register" title="General purpose register" class="mw-redirect">general purpose register</a>
+ in assembly language (that points to the individual bytes but whose 
+actual value is relative to the start of the array, not its absolute 
+address in memory). Assuming the array is, say, a contiguous 16 <a href="http://en.m.wikipedia.org/wiki/Megabyte" title="Megabyte">megabyte</a> character <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a>, individual bytes (or a <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">string</a>
+ of contiguous bytes within the array) can be directly addressed and 
+manipulated using the name of the array with a 31 bit unsigned <a href="http://en.m.wikipedia.org/wiki/Integer" title="Integer">integer</a> as the simulated pointer (this is quite similar to the <i>C arrays</i>
+ example shown above). Pointer arithmetic can be simulated by adding or 
+subtracting from the index, with minimal additional overhead compared to
+ genuine pointer arithmetic.</p>
+<p>It is even theoretically possible, using the above technique, together with a suitable <a href="http://en.m.wikipedia.org/wiki/Instruction_set_simulator" title="Instruction set simulator">instruction set simulator</a> to simulate <i>any</i> <a href="http://en.m.wikipedia.org/wiki/Machine_code" title="Machine code">machine code</a> or the intermediate (<a href="http://en.m.wikipedia.org/wiki/Byte_code" title="Byte code" class="mw-redirect">byte code</a>) of <i>any</i> processor/language in another language that does not support pointers at all (for example <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a> / <a href="http://en.m.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a>). To achieve this, the <a href="http://en.m.wikipedia.org/wiki/Binary_numeral_system" title="Binary numeral system">binary</a>
+ code can initially be loaded into contiguous bytes of the array for the
+ simulator to "read", interpret and action entirely within the memory 
+contained of the same array. If necessary, to completely avoid <a href="http://en.m.wikipedia.org/wiki/Buffer_overflow" title="Buffer overflow">buffer overflow</a> problems, <a href="http://en.m.wikipedia.org/wiki/Bounds_checking" title="Bounds checking">bounds checking</a> can usually be actioned for the compiler (or if not, hand coded in the simulator).</p>
+</div><a id="anchor_14" href="#section_14" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_15"><button>Show</button><span id="Quotations">Quotations</span></h2><div class="content_block" id="content_15">
+<table style="border-collapse: collapse; border-style: none; background-color: transparent;" class="cquote2" align="center">
+<tbody><tr>
+<td style="color: rgb(178, 183, 242); font-size: 40px; font-family: serif; font-weight: bold; text-align: left; padding: 10px;" valign="top" width="20">“</td>
+<td style="padding: 4px 10px;" valign="top">I do consider <a href="http://en.m.wikipedia.org/wiki/Assignment_%28computer_science%29" title="Assignment (computer science)">assignment statements</a> and pointer variables to be among computer science's most valuable treasures.</td>
+<td style="color: rgb(178, 183, 242); font-size: 40px; font-family: serif; font-weight: bold; text-align: right; padding: 10px;" valign="bottom" width="20">”</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td valign="top">
+<div style="line-height:1em;text-align: right"><cite style="font-style:normal;">— <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> (<a href="http://en.m.wikipedia.org/wiki/Stanford_University" title="Stanford University">Stanford</a> <a href="http://en.m.wikipedia.org/wiki/Emeritus" title="Emeritus">Professor Emeritus</a> of the Art of Computer Programming), <i>Structured Programming with go to Statements</i><sup id="cite_ref-16" class="reference"><a href="#cite_note-16"><span>[</span>17<span>]</span></a></sup></cite></div>
+</td>
+</tr>
+</tbody></table>
+</div><a id="anchor_15" href="#section_15" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_16"><button>Show</button><span id="Support_in_various_programming_languages">Support in various programming languages</span></h2><div class="content_block" id="content_16">
+<h3> <span class="mw-headline" id="Ada">Ada</span>
+</h3>
+<p><a href="http://en.m.wikipedia.org/wiki/Ada_programming_language" title="Ada programming language" class="mw-redirect">Ada</a>
+ is a strongly typed language where all pointers are typed and only safe
+ type conversions are permitted. All pointers are by default initialized
+ to <code>null</code>, and any attempt to access data through a <code>null</code> pointer causes an <a href="http://en.m.wikipedia.org/wiki/Exception_handling" title="Exception handling">exception</a> to be raised. Pointers in Ada are called <i><span class="new" title="Access type (page does not exist)">access types</span></i>.
+ Ada&nbsp;83 did not permit arithmetic on access types (although many 
+compiler vendors provided for it as a non-standard feature), but 
+Ada&nbsp;95 supports “safe” arithmetic on access types via the package <code>System.Storage_Elements</code>.</p>
+<h3> <span class="mw-headline" id="BASIC">BASIC</span>
+</h3>
+<p>Several old versions of <a href="http://en.m.wikipedia.org/wiki/BASIC" title="BASIC">BASIC</a>
+ had support for STRPTR() to return the address of a string, and for 
+VARPTR() to return the address of a variable. Visual Basic 5 also had 
+support for OBJPTR() to return the address of an object interface, and 
+for an ADDRESSOF operator to return the address of a function. The types
+ of all of these are integers, but their values are equivalent to those 
+held by pointer types.</p>
+<p>Newer dialects of <a href="http://en.m.wikipedia.org/wiki/BASIC" title="BASIC">BASIC</a>, such as <a href="http://en.m.wikipedia.org/wiki/FreeBASIC" title="FreeBASIC">FreeBASIC</a> or <a href="http://en.m.wikipedia.org/wiki/BlitzMax" title="BlitzMax" class="mw-redirect">BlitzMax</a>, have exhaustive pointer implementations, however. In FreeBASIC, arithmetic on <code>ANY</code> pointers (equivalent to C's <code>void*</code>) are treated as though the <code>ANY</code> pointer was a byte width. <code>ANY</code> pointers cannot be dereferenced, as in C. Also, casting between <code>ANY</code> and any other type's pointers will not generate any warnings.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="freebasic source-freebasic">
+<pre class="de1"><span class="kw1">dim</span> <span class="kw1">as</span> <span class="kw1">integer</span> f = <span class="nu0">257</span>
+<span class="kw1">dim</span> <span class="kw1">as</span> any <span class="kw1">ptr</span> g = @f
+<span class="kw1">dim</span> <span class="kw1">as</span> <span class="kw1">integer</span> <span class="kw1">ptr</span> i = g
+assert<span class="br0">(</span>*i = <span class="nu0">257</span><span class="br0">)</span>
+assert<span class="br0">(</span> <span class="br0">(</span>g + <span class="nu0">4</span><span class="br0">)</span> = <span class="br0">(</span>@f + <span class="nu0">1</span><span class="br0">)</span> <span class="br0">)</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="C_and_C.2B.2B">C and C++</span>
+</h3>
+<p>In <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> and <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> pointers are variables that store addresses and can be <i>null</i>.
+ Each pointer has a type it points to, but one can freely cast between 
+pointer types (but not between a function pointer and non-function 
+pointer type). A special pointer type called the “void pointer” allows 
+pointing to any (non-function) variable type, but is limited by the fact
+ that it cannot be dereferenced directly. The address itself can often 
+be directly manipulated by casting a pointer to and from an integral 
+type of sufficient size, though the results are implementation-defined 
+and may indeed cause undefined behavior; while earlier C standards did 
+not have an integral type that was guaranteed to be large enough, <a href="http://en.m.wikipedia.org/wiki/C99" title="C99">C99</a> specifies the <code>uintptr_t</code> <i>typedef name</i> defined in <code><a href="http://en.m.wikipedia.org/wiki/Stdint.h#Integers_wide_enough_to_hold_pointers" title="Stdint.h" class="mw-redirect">&lt;stdint.h&gt;</a></code>, but an implementation need not provide it.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> 
+fully supports C pointers and C typecasting. It also supports a new 
+group of typecasting operators to help catch some unintended dangerous 
+casts at compile-time. The <a href="http://en.m.wikipedia.org/wiki/C%2B%2B_standard_library" title="C++ standard library" class="mw-redirect">C++ standard library</a> also provides <code><a href="http://en.m.wikipedia.org/wiki/Auto_ptr" title="Auto ptr">auto ptr</a></code>, a sort of <a href="http://en.m.wikipedia.org/wiki/Smart_pointer" title="Smart pointer">smart pointer</a>
+ which can be used in some situations as a safe alternative to primitive
+ C pointers. C++ also supports another form of reference, quite 
+different from a pointer, called simply a <i><a href="http://en.m.wikipedia.org/wiki/Reference_%28C%2B%2B%29" title="Reference (C++)">reference</a></i> or <i>reference type</i>.</p>
+<p><b>Pointer arithmetic</b>, that is, the ability to modify a pointer's
+ target address with arithmetic operations (as well as magnitude 
+comparisons), is restricted by the language standard to remain within 
+the bounds of a single array object (or just after it), though many 
+non-segmented architectures will allow for more lenient arithmetic. 
+Adding or subtracting from a pointer moves it by a multiple of the size 
+of the <a href="http://en.m.wikipedia.org/wiki/Datatype" title="Datatype" class="mw-redirect">datatype</a>
+ it points to. For example, adding 1 to a pointer to 4-byte integer 
+values will increment the pointer by 4. This has the effect of 
+incrementing the pointer to point at the next element in a contiguous 
+array of integers—which is often the intended result. Pointer arithmetic
+ cannot be performed on <code>void</code> pointers because the <a href="http://en.m.wikipedia.org/wiki/Void_type" title="Void type">void type</a> has no size, and thus the pointed address can not be added to, although <a href="http://en.m.wikipedia.org/wiki/GNU_Compiler_Collection" title="GNU Compiler Collection">gcc</a> and other compilers will perform byte arithmetic on <code>void*</code> as a non-standard extension. For working "directly" with bytes they usually cast pointers to <code>BYTE*</code>, or <code>unsigned char*</code> if <code>BYTE</code> is not defined in the standard library used.</p>
+<p>Pointer arithmetic provides the programmer with a single way of 
+dealing with different types: adding and subtracting the number of 
+elements required instead of the actual offset in bytes. (though the <code>char</code> pointer, <code>char</code>
+ being defined as always having a size of one byte, allows the element 
+offset of pointer arithmetic to in practice be equal to a byte offset) 
+In particular, the C definition explicitly declares that the syntax <code>a[n]</code>, which is the <code>n</code>-th element of the array <code>a</code>, is equivalent to <code>*(a+n)</code>, which is the content of the element pointed by <code>a+n</code>. This implies that <code>n[a]</code> is equivalent to <code>a[n]</code>, and one can write, e.g., <code>a[3]</code> or <code>3[a]</code> equally well to access the fourth element of an array <code>a</code>.</p>
+<p>While powerful, pointer arithmetic can be a source of <a href="http://en.m.wikipedia.org/wiki/Computer_bug" title="Computer bug">computer bugs</a>. It tends to confuse novice <a href="http://en.m.wikipedia.org/wiki/Programmer" title="Programmer">programmers</a>,
+ forcing them into different contexts: an expression can be an ordinary 
+arithmetic one or a pointer arithmetic one, and sometimes it is easy to 
+mistake one for the other. In response to this, many modern high-level 
+computer languages (for example <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>) do not permit direct access to memory using addresses. Also, the safe C dialect <a href="http://en.m.wikipedia.org/wiki/Cyclone_programming_language" title="Cyclone programming language" class="mw-redirect">Cyclone</a> addresses many of the issues with pointers. See <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29#Pointers" title="C (programming language)">C programming language</a> for more criticism.</p>
+<p><b>The <code>void</code> pointer</b>, or <b><code>void*</code></b>, is supported in ANSI C and C++ as a generic pointer type. A pointer to <code>void</code>
+ can store an address to any non-function data type, and, in C, is 
+implicitly converted to any other pointer type on assignment, but it 
+must be explicitly cast if dereferenced inline. <a href="http://en.m.wikipedia.org/wiki/The_C_Programming_Language_%28book%29" title="The C Programming Language (book)" class="mw-redirect">K&amp;R</a> C used <code>char*</code> for the “type-agnostic pointer” purpose (before ANSI C).</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+<span class="kw4">void</span><span class="sy0">*</span> q <span class="sy0">=</span> <span class="sy0">&amp;</span>x<span class="sy0">;</span>
+<span class="kw4">int</span><span class="sy0">*</span> p <span class="sy0">=</span> q<span class="sy0">;</span>  <span class="coMULTI">/* void* implicitly converted to int*: valid C, but not C++ */</span>
+<span class="kw4">int</span> i <span class="sy0">=</span> <span class="sy0">*</span>p<span class="sy0">;</span>
+<span class="kw4">int</span> j <span class="sy0">=</span> <span class="sy0">*</span><span class="br0">(</span><span class="kw4">int</span><span class="sy0">*</span><span class="br0">)</span>q<span class="sy0">;</span> <span class="coMULTI">/* when dereferencing inline, there is no implicit conversion */</span>
+</pre>
+</div>
+</div>
+<p>C++ does not allow the implicit conversion of <code>void*</code> to 
+other pointer types, not even in assignments. This was a design decision
+ to avoid careless and even unintended casts, though most compilers only
+ output warnings, not errors, when encountering other ill casts.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="cpp source-cpp">
+<pre class="de1"><span class="kw4">int</span> x <span class="sy1">=</span> <span class="nu0">4</span><span class="sy4">;</span>
+<span class="kw4">void</span><span class="sy2">*</span> q <span class="sy1">=</span> <span class="sy3">&amp;</span>x<span class="sy4">;</span>
+<span class="co1">// int* p = q; This fails in C++: there is no implicit conversion from void*</span>
+<span class="kw4">int</span><span class="sy2">*</span> a <span class="sy1">=</span> <span class="br0">(</span><span class="kw4">int</span><span class="sy2">*</span><span class="br0">)</span>q<span class="sy4">;</span> <span class="co1">// C-style cast</span>
+<span class="kw4">int</span><span class="sy2">*</span> b <span class="sy1">=</span> <span class="kw2">static_cast</span><span class="sy1">&lt;</span><span class="kw4">int</span><span class="sy2">*</span><span class="sy1">&gt;</span><span class="br0">(</span>q<span class="br0">)</span><span class="sy4">;</span> <span class="co1">// C++ cast</span>
+</pre>
+</div>
+</div>
+<p>In C++, there is no <code>void&amp;</code> (reference to void) to complement <code>void*</code>
+ (pointer to void), because references behave like aliases to the 
+variables they point to, and there can never be a variable whose type is
+ <code>void</code>.</p>
+<h3> <span class="mw-headline" id="C.23">C#</span>
+</h3>
+<p>In the <a href="http://en.m.wikipedia.org/wiki/C_Sharp_%28programming_language%29" title="C Sharp (programming language)">C# programming language</a>, pointers are supported only under certain conditions: any block of code including pointers must be marked with the <code>unsafe</code>
+ keyword. Such blocks usually require higher security permissions than 
+pointerless code to be allowed to run. The syntax is essentially the 
+same as in C++, and the address pointed can be either <a href="http://en.m.wikipedia.org/wiki/Managed_code" title="Managed code">managed</a> or <a href="http://en.m.wikipedia.org/wiki/Managed_code" title="Managed code">unmanaged</a> memory. However, pointers to managed memory (any pointer to a managed object) must be declared using the <code>fixed</code> keyword, which prevents the <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collector</a>
+ from moving the pointed object as part of memory management while the 
+pointer is in scope, thus keeping the pointer address valid.</p>
+<p>An exception to this is from using the <code>IntPtr</code> structure, which is a safe managed equivalent to <code>int*</code>, and does not require unsafe code. This type is often returned when using methods from the <code>System.Runtime.InteropServices</code>, for example:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="csharp source-csharp">
+<pre class="de1"><span class="co1">// Get 16 bytes of memory from the process's unmanaged memory</span>
+IntPtr pointer <span class="sy0">=</span> <span class="kw5">System.<span class="me1">Runtime</span><span class="sy0">.</span><span class="me1">InteropServices</span></span><span class="sy0">.</span><span class="me1">Marshal</span><span class="sy0">.</span><span class="me1">AllocHGlobal</span><span class="br0">(</span><span class="nu0">16</span><span class="br0">)</span><span class="sy0">;</span>
+ 
+<span class="co1">// Do something with the allocated memory</span>
+ 
+<span class="co1">// Free the allocated memory</span>
+<span class="kw5">System.<span class="me1">Runtime</span><span class="sy0">.</span><span class="me1">InteropServices</span></span><span class="sy0">.</span><span class="me1">Marshal</span><span class="sy0">.</span><span class="me1">FreeHGlobal</span><span class="br0">(</span>pointer<span class="br0">)</span><span class="sy0">;</span>
+</pre>
+</div>
+</div>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Microsoft_.NET" title="Microsoft .NET" class="mw-redirect">.NET</a> framework includes many classes and methods in the <code>System</code> and <code>System.Runtime.InteropServices</code> namespaces (such as the <code>Marshal</code> class) which convert .NET types (for example, <code>System.String</code>) to and from many <a href="http://en.m.wikipedia.org/wiki/Managed_code" title="Managed code">unmanaged</a> types and pointers (for example, <code>LPWSTR</code> or <code>void *</code>) to allow communication with <a href="http://en.m.wikipedia.org/wiki/Managed_code" title="Managed code">unmanaged code</a>.</p>
+<h3> <span class="mw-headline" id="COBOL">COBOL</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/COBOL" title="COBOL">COBOL</a> programming language supports pointers to variables. Primitive or group (record) data objects declared within the <code>LINKAGE</code> <code>SECTION</code>
+ of a program are inherently pointer-based, with space for the address 
+of the data object (typically a single memory word) allocated as the 
+actual (implicit hidden) data item. In program source code, these 
+variables are used just like any other <code>WORKING-STORAGE</code> variable, but their contents are implicitly accessed indirectly through their pointers.</p>
+<p>Memory space for each pointed-to data object is typically <a href="http://en.m.wikipedia.org/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation" class="mw-redirect">allocated dynamically</a> using external <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine"><code>CALL</code></a> statements or via embedded extended language constructs such as <a href="http://en.m.wikipedia.org/wiki/CICS" title="CICS"><code>EXEC</code> <code>CICS</code></a> or <a href="http://en.m.wikipedia.org/wiki/SQL" title="SQL"><code>EXEC</code> <code>SQL</code></a> statements.</p>
+<p>Extended versions of COBOL also provide pointer variables declared with <code>USAGE</code> <code>IS</code> <code>POINTER</code> clauses. The values of such pointer variables are established and modified using <code>SET</code> and <code>SET</code> <code>ADDRESS</code> statements.</p>
+<p>Some extended versions of COBOL also provide <code>PROCEDURE-POINTER</code> variables, which are capable of storing the <a href="http://en.m.wikipedia.org/wiki/Function_pointer" title="Function pointer">addresses of executable code</a>.</p>
+<h3> <span class="mw-headline" id="PL.2FI">PL/I</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a> language provides full support for pointers to all data types (including pointers to structures), <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursion</a>, <a href="http://en.m.wikipedia.org/wiki/Computer_multitasking" title="Computer multitasking">multitasking</a>, string handling, and extensive built-in <a href="http://en.m.wikipedia.org/wiki/Function_%28computer_science%29" title="Function (computer science)" class="mw-redirect">functions</a>. PL/I was quite a leap forward compared to the programming languages of its time.</p>
+<h3> <span class="mw-headline" id="D">D</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/D_programming_language" title="D programming language" class="mw-redirect">D programming language</a> is a derivative of C and C++ which fully supports C pointers and C typecasting.</p>
+<h3> <span class="mw-headline" id="Eiffel">Eiffel</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Eiffel_%28language%29" title="Eiffel (language)" class="mw-redirect">Eiffel object-oriented language</a> supports pointers in the form of <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">references</a>, which are typed and do not allow any form of pointer arithmetic. The <a href="http://en.m.wikipedia.org/wiki/Ecma_International" title="Ecma International">ECMA</a> standard for Eiffel includes an "attached type" mechanism that claims to guarantee <a href="http://en.m.wikipedia.org/wiki/Void_safety" title="Void safety">void safety</a>.</p>
+<h3> <span class="mw-headline" id="Fortran">Fortran</span>
+</h3>
+<p><a href="http://en.m.wikipedia.org/wiki/Fortran" title="Fortran">Fortran-90</a>
+ introduced a strongly typed pointer capability. Fortran pointers 
+contain more than just a simple memory address. They also encapsulate 
+the lower and upper bounds of array dimensions, strides (for example, to
+ support arbitrary array sections), and other metadata. An <i>association operator</i>, <code>=&gt;</code> is used to associate a <code>POINTER</code> to a variable which has a <code>TARGET</code> attribute. The Fortran-90 <code>ALLOCATE</code>
+ statement may also be used to associate a pointer to a block of memory.
+ For example, the following code might be used to define and create a 
+linked list structure:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="fortran source-fortran">
+<pre class="de1"><span class="kw3">type</span> real_list_t
+  <span class="kw3">real</span> <span class="sy0">::</span> <span class="me2">sample_data</span><span class="br0">(</span><span class="nu0">100</span><span class="br0">)</span>
+  <span class="kw3">type</span> <span class="br0">(</span>real_list_t<span class="br0">)</span>, <span class="kw3">pointer</span> <span class="sy0">::</span> <span class="me2">next</span> <span class="sy0">=</span>&gt; null <span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span> <span class="kw3">type</span>
+ 
+<span class="kw3">type</span> <span class="br0">(</span>real_list_t<span class="br0">)</span>, <span class="kw3">target</span> <span class="sy0">::</span> <span class="me2">my_real_list</span>
+<span class="kw3">type</span> <span class="br0">(</span>real_list_t<span class="br0">)</span>, <span class="kw3">pointer</span> <span class="sy0">::</span> <span class="me2">real_list_temp</span>
+ 
+real_list_temp <span class="sy0">=</span>&gt; my_real_list
+<span class="kw1">do</span>
+  read <span class="br0">(</span><span class="nu0">1</span>,<span class="kw1">iostat</span><span class="sy0">=</span>ioerr<span class="br0">)</span> real_list_temp<span class="sy0">%</span>sample_data
+  <span class="kw1">if</span> <span class="br0">(</span>ioerr <span class="sy0">/=</span> <span class="nu0">0</span><span class="br0">)</span> <span class="kw1">exit</span>
+  <span class="kw1">allocate</span> <span class="br0">(</span>real_list_temp<span class="sy0">%</span>next<span class="br0">)</span>
+  real_list_temp <span class="sy0">=</span>&gt; real_list_temp<span class="sy0">%</span>next
+<span class="kw1">end</span> <span class="kw1">do</span>
+</pre>
+</div>
+</div>
+<p>Fortran-2003 adds support for procedure pointers. Also, as part of the <i>C Interoperability</i> feature, Fortran-2003 supports intrinsic functions for converting C-style pointers into Fortran pointers and back.</p>
+<h3> <span class="mw-headline" id="Go">Go</span>
+</h3>
+<p><a href="http://en.m.wikipedia.org/wiki/Go_%28programming_language%29" title="Go (programming language)">Go</a>
+ has pointers. Its declaration syntax is equivalent to that of C, but 
+written the other way around, ending with the type. Unlike C, Go has 
+garbage collection, and disallows pointer arithmetic. Reference types, 
+like in C++, do not exist. Some built-in types, like maps and channels, 
+are boxed (i.e. internally they are pointers to mutable structures), and
+ are initialized using the <code>make</code> function. As a different (than reference types) approach to unified syntax between pointers and non-pointers, the arrow (<code>-&gt;</code>)
+ operator has been dropped—it is possible to use the dot operator 
+directly on a pointer to a data type to access a field or method of the 
+dereferenced value, as if the dot operator were used on the underlying 
+data type. This, however, only works with 1 level of indirection.</p>
+<h3> <span class="mw-headline" id="Java">Java</span>
+</h3>
+<p>Unlike <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a>, <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, or <a href="http://en.m.wikipedia.org/wiki/Pascal_%28programming_language%29" title="Pascal (programming language)">Pascal</a>, there is no explicit representation of pointers in <a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>. Instead, more complex data structures like <a href="http://en.m.wikipedia.org/wiki/Object-oriented_programming" title="Object-oriented programming">objects</a> and <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">arrays</a> are implemented using <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">references</a>.
+ The language does not provide any explicit pointer manipulation 
+operators. It is still possible for code to attempt to dereference a 
+null reference (null pointer), however, which results in a run-time <a href="http://en.m.wikipedia.org/wiki/Exception_handling" title="Exception handling">exception</a> being thrown. The space occupied by unreferenced memory objects is recovered automatically by <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collection</a> at run-time.<sup id="cite_ref-17" class="reference"><a href="#cite_note-17"><span>[</span>18<span>]</span></a></sup></p>
+<h3> <span class="mw-headline" id="Modula-2">Modula-2</span>
+</h3>
+<p>Pointers are implemented very much as in Pascal, as are <code>VAR</code> parameters in procedure calls. <a href="http://en.m.wikipedia.org/wiki/Modula-2" title="Modula-2">Modula-2</a> is even more strongly typed than Pascal, with fewer ways to escape the type system. Some of the variants of Modula-2 (such as <a href="http://en.m.wikipedia.org/wiki/Modula-3" title="Modula-3">Modula-3</a>) include garbage collection.</p>
+<h3> <span class="mw-headline" id="Oberon">Oberon</span>
+</h3>
+<p>Much as with Modula-2, pointers are available. There are still fewer ways to evade the type system and so <a href="http://en.m.wikipedia.org/wiki/Oberon_%28programming_language%29" title="Oberon (programming language)">Oberon</a> and its variants are still safer with respect to pointers than Modula-2 or its variants. As with <a href="http://en.m.wikipedia.org/wiki/Modula-3" title="Modula-3">Modula-3</a>, garbage collection is a part of the language specification.</p>
+<h3> <span class="mw-headline" id="Pascal">Pascal</span>
+</h3>
+<p>Unlike many languages that feature pointers, standard <a href="http://en.m.wikipedia.org/wiki/ISO" title="ISO" class="mw-redirect">ISO</a> <a href="http://en.m.wikipedia.org/wiki/Pascal_%28programming_language%29" title="Pascal (programming language)">Pascal</a>
+ only allows pointers to reference dynamically created variables that 
+are anonymous and does not allow them to reference standard static or 
+local variables.<sup id="cite_ref-18" class="reference"><a href="#cite_note-18"><span>[</span>19<span>]</span></a></sup>
+ It does not have pointer arithmetic. Pointers also must have an 
+associated type and a pointer to one type is not compatible with a 
+pointer to another type (e.g. a pointer to a char is not compatible with
+ a pointer to an integer). This helps eliminate the type security issues
+ inherent with other pointer implementations, particularly those used 
+for <a href="http://en.m.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a> or <a href="http://en.m.wikipedia.org/wiki/C_%28Programming_Language%29" title="C (Programming Language)" class="mw-redirect">C</a>. It also removes some risks caused by <a href="http://en.m.wikipedia.org/wiki/Dangling_pointers" title="Dangling pointers" class="mw-redirect">dangling pointers</a>, but the ability to dynamically let go of referenced space by using the <code>dispose</code> standard procedure (which has the same effect as the <code>free</code> library function found in <a href="http://en.m.wikipedia.org/wiki/C_%28Programming_Language%29" title="C (Programming Language)" class="mw-redirect">C</a>) means that the risk of dangling pointers has not been entirely eliminated.<sup id="cite_ref-19" class="reference"><a href="#cite_note-19"><span>[</span>20<span>]</span></a></sup></p>
+<p>However, in some commercial and open source Pascal (or derivatives) compiler implementations —like <a href="http://en.m.wikipedia.org/wiki/Free_Pascal" title="Free Pascal">Free Pascal</a>,<sup id="cite_ref-20" class="reference"><a href="#cite_note-20"><span>[</span>21<span>]</span></a></sup><a href="http://en.m.wikipedia.org/wiki/Turbo_Pascal" title="Turbo Pascal">Turbo Pascal</a> or the <a href="http://en.m.wikipedia.org/wiki/Object_Pascal" title="Object Pascal">Object Pascal</a> in <a href="http://en.m.wikipedia.org/wiki/Embarcadero_Delphi" title="Embarcadero Delphi">Embarcadero Delphi</a>—
+ a pointer is allowed to reference standard static or local variables 
+and can be cast from one pointer type to another. Moreover pointer 
+arithmetic is unrestricted: adding or subtracting from a pointer moves 
+it by that number of bytes in either direction, but using the <code>Inc</code> or <code>Dec</code> standard procedures with it moves the pointer by the size of the <a href="http://en.m.wikipedia.org/wiki/Datatype" title="Datatype" class="mw-redirect">datatype</a> it is <i>declared</i> to point to.</p>
+<h3> <span class="mw-headline" id="Perl">Perl</span>
+</h3>
+<p><a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a> 
+supports pointers, although rarely used, in the form of the pack and 
+unpack functions. These are intended only for simple interactions with 
+compiled OS libraries. In all other cases, Perl uses <a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">references</a>, which are typed and do not allow any form of pointer arithmetic. They are used to construct complex data structures.<sup id="cite_ref-21" class="reference"><a href="#cite_note-21"><span>[</span>22<span>]</span></a></sup></p>
+</div><a id="anchor_16" href="#section_16" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_17"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_17">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Address_constant" title="Address constant">Address constant</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bounded_pointer" title="Bounded pointer">Bounded pointer</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Buffer_overflow" title="Buffer overflow">Buffer overflow</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Function_pointer" title="Function pointer">Function pointer</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hazard_pointer" title="Hazard pointer">Hazard pointer</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Opaque_pointer" title="Opaque pointer">Opaque pointer</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pointer_swizzling" title="Pointer swizzling">Pointer swizzling</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">Reference (computer science)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Static_code_analysis" title="Static code analysis" class="mw-redirect">Static code analysis</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Storage_violation" title="Storage violation">Storage violation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Variable_%28programming%29" title="Variable (programming)" class="mw-redirect">Variable (programming)</a></li>
+</ul>
+</div><a id="anchor_17" href="#section_17" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_18"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_18">
+<div class="reflist references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.7.5.1, paragraph 1.</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.7.8, paragraph 10.</span>
+</li>
+<li id="cite_note-c-NULL-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-c-NULL_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-c-NULL_2-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 7.17, paragraph 3: <i>NULL... which expands to an implementation-defined null pointer constant...</i></span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.5.3.2, paragraph 4, footnote 87: <i>If
+ an invalid value has been assigned to the pointer, the behavior of the 
+unary * operator is undefined... Among the invalid values for 
+dereferencing a pointer by the unary * operator are a null pointer...</i></span>
+</li>
+<li id="cite_note-Plauger1992-4">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Plauger1992_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Plauger1992_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/P._J._Plauger" title="P. J. Plauger">Plauger, P J</a>; Brodie, Jim (1992). <i>ANSI and ISO Standard C Programmer's Reference</i>. Redmond, WA: Microsoft Press. pp.&nbsp;108, 51. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/1-55615-359-7" title="Special:BookSources/1-55615-359-7">1-55615-359-7</a>. "An array type does not contain additional holes because all other types pack tightly when composed into arrays <i>[at page 51]</i>"</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=ANSI+and+ISO+Standard+C+Programmer%27s+Reference&amp;rft.aulast=Plauger&amp;rft.aufirst=P+J&amp;rft.au=Plauger%2C%26%2332%3BP+J&amp;rft.date=1992&amp;rft.pages=pp.%26nbsp%3B108%2C+51&amp;rft.place=Redmond%2C+WA&amp;rft.pub=Microsoft+Press&amp;rft.isbn=1-55615-359-7&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf">WG14 N1124</a>, <a rel="nofollow" class="external text" href="http://www.open-std.org/jtc1/sc22/wg14/www/standards.html">C – Approved standards: ISO/IEC 9899 – Programming languages – C</a>, 2005-05-06.</span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.3.2.3, paragraph 4.</span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.3.2.3, paragraph 3.</span>
+</li>
+<li id="cite_note-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Bjarne_Stroustrup" title="Bjarne Stroustrup">Stroustrup, Bjarne</a> (March 2001). "Chapter 5: Pointers, Arrays, and Structures: 5.1.1: Zero". <i><a href="http://en.m.wikipedia.org/wiki/The_C%2B%2B_Programming_Language" title="The C++ Programming Language">The C++ Programming Language</a></i> (14th printing of 3rd ed.). United States and Canada: Addison–Wesley. p.&nbsp;88. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-88954-4" title="Special:BookSources/0-201-88954-4">0-201-88954-4</a>. "In C, it has been popular to define a macro <code>NULL</code> to represent the zero pointer. Because of C++'s tighter type checking, the use of plain 0, rather than any suggested <code>NULL</code> macro, leads to fewer problems. If you feel you must define <code>NULL</code>. use</span></span>
+<dl>
+<dd><span class="reference-text"><code>const int NULL = 0;</code></span></dd>
+</dl>
+<span class="reference-text">The <code>const</code> qualifier (§5.4) prevents accidental redefinition of <code>NULL</code> and ensures that <code>NULL</code> can be used where a constant is required."</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Chapter+5%3A+Pointers%2C+Arrays%2C+and+Structures%3A+5.1.1%3A+Zero&amp;rft.atitle=%5B%5BThe+C%2B%2B+Programming+Language%5D%5D&amp;rft.aulast=Stroustrup&amp;rft.aufirst=Bjarne&amp;rft.au=Stroustrup%2C%26%2332%3BBjarne&amp;rft.date=March+2001&amp;rft.pages=p.%26nbsp%3B88&amp;rft.edition=14th+printing+of+3rd&amp;rft.place=United+States+and+Canada&amp;rft.pub=Addison%E2%80%93Wesley&amp;rft.isbn=0-201-88954-4&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li id="cite_note-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><span class="citation web">Tony Hoare (2009). <a rel="nofollow" class="external text" href="http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake">"Null References: The Billion Dollar Mistake"</a>. QCon London<span class="printonly">. <a rel="nofollow" class="external free" href="http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake">http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Null+References%3A+The+Billion+Dollar+Mistake&amp;rft.atitle=&amp;rft.aulast=Tony+Hoare&amp;rft.au=Tony+Hoare&amp;rft.date=2009&amp;rft.place=QCon+London&amp;rft_id=http%3A%2F%2Fqconlondon.com%2Flondon-2009%2Fpresentation%2FNull%2BReferences%3A%2BThe%2BBillion%2BDollar%2BMistake&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><span class="citation web"><a href="http://en.m.wikipedia.org/wiki/Tony_Hoare" title="Tony Hoare">Tony Hoare</a> (2009-08-25). <a rel="nofollow" class="external text" href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">"Null References: The Billion Dollar Mistake"</a>. InfoQ.com<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Null+References%3A+The+Billion+Dollar+Mistake&amp;rft.atitle=&amp;rft.aulast=%5B%5BTony+Hoare%5D%5D&amp;rft.au=%5B%5BTony+Hoare%5D%5D&amp;rft.date=2009-08-25&amp;rft.pub=InfoQ.com&amp;rft_id=http%3A%2F%2Fwww.infoq.com%2Fpresentations%2FNull-References-The-Billion-Dollar-Mistake-Tony-Hoare&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><a href="#c-std">ISO/IEC 9899</a>, clause 6.5.3.2, paragraph 4.</span>
+</li>
+<li id="cite_note-12">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><i>The Objective-C 2.0 Programming Language</i>, <a rel="nofollow" class="external text" href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocObjectsClasses.html#//apple_ref/doc/uid/TP30001163-CH11-SW7">section "Sending Messages to nil"</a>.</span>
+</li>
+<li id="cite_note-13">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text"><span class="citation patent" id="CITEREFSteiner.2C_Robert_C._.28Broomfield.2C_CO.292003"><a rel="nofollow" class="external text" href="http://worldwide.espacenet.com/textdoc?DB=EPODOC&amp;IDX=us6625718">us patent 6625718</a>,
+ Steiner, Robert C. (Broomfield, CO), "Pointers that are relative to 
+their own present locations", issued 2003-09-23,  assigned to Avaya 
+Technology Corp. (Basking Ridge, NJ)</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Apatent&amp;rft.number=6625718&amp;rft.cc=us&amp;rft.title=Pointers+that+are+relative+to+their+own+present+locations&amp;rft.inventor=Steiner%2C+Robert+C.+%28Broomfield%2C+CO%29&amp;rft.assignee=Avaya+Technology+Corp.+%28Basking+Ridge%2C+NJ%29&amp;rft.date=2003-09-23&amp;rft.appldate=1998-02-05"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-14">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-14">^</a></b></span> <span class="reference-text"><span class="citation patent" id="CITEREFNagy.2C_Michael_.28Tampa.2C_FL.292000"><a rel="nofollow" class="external text" href="http://worldwide.espacenet.com/textdoc?DB=EPODOC&amp;IDX=us6115721">us patent 6115721</a>,
+ Nagy, Michael (Tampa, FL), "System and method for database save and 
+restore using self-pointers", issued 2000-09-05,  assigned to IBM 
+(Armonk, NY)</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Apatent&amp;rft.number=6115721&amp;rft.cc=us&amp;rft.title=System+and+method+for+database+save+and+restore+using+self-pointers&amp;rft.inventor=Nagy%2C+Michael+%28Tampa%2C+FL%29&amp;rft.assignee=IBM+%28Armonk%2C+NY%29&amp;rft.date=2000-09-05&amp;rft.appldate=1998-06-23"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-15">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-15">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/57a97k4e.aspx">Based Pointers</a></span>
+</li>
+<li id="cite_note-16">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-16">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> (1974). <a rel="nofollow" class="external text" href="http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">"Structured Programming with go to Statements"</a>. <i>Computing Surveys</i> <b>6</b> (4): 261–301. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F356635.356640">10.1145/356635.356640</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Structured+Programming+with+go+to+Statements&amp;rft.jtitle=Computing+Surveys&amp;rft.aulast=%5B%5BDonald+Knuth%5D%5D&amp;rft.au=%5B%5BDonald+Knuth%5D%5D&amp;rft.date=1974&amp;rft.volume=6&amp;rft.issue=4&amp;rft.pages=261%E2%80%93301&amp;rft_id=info:doi/10.1145%2F356635.356640&amp;rft_id=http%3A%2F%2Fpplab.snu.ac.kr%2Fcourses%2Fadv_pl05%2Fpapers%2Fp261-knuth.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-17">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-17">^</a></b></span> <span class="reference-text">Nick Parlante, <a rel="nofollow" class="external autonumber" href="http://cslibrary.stanford.edu/102/PointersAndMemory.pdf#%22Pointers%20and%20Memory%22">[1]</a>, <a rel="nofollow" class="external text" href="http://cslibrary.stanford.edu/#">Stanford Computer Science Education Library</a>, pp. 9–10 (2000).</span>
+</li>
+<li id="cite_note-18">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-18">^</a></b></span> <span class="reference-text">ISO 7185 Pascal Standard (unofficial copy), section <a rel="nofollow" class="external text" href="http://standardpascal.org/iso7185.html#6.4.4%20Pointer-types">6.4.4 Pointer-types</a> and subsequent.</span>
+</li>
+<li id="cite_note-19">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-19">^</a></b></span> <span class="reference-text">J. Welsh, W. J. Sneeringer, and C. A. R. Hoare, "Ambiguities and Insecurities in Pascal," <i>Software Practice and Experience 7</i>, pp. 685–696 (1977)</span>
+</li>
+<li id="cite_note-20">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-20">^</a></b></span> <span class="reference-text">Free Pascal Language Reference guide, section <a rel="nofollow" class="external text" href="http://www.freepascal.org/docs-html/ref/refse15.html#x43-490003.4">3.4 Pointers</a></span>
+</li>
+<li id="cite_note-21">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-21">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://perldoc.perl.org/perlref.html#Making-References">// Making References (Perl References and nested data structures)</a></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_18" href="#section_18" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_19"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_19">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Pointer_%28computer_programming%29_files/40px-Wikiversity-logo.png" width="40" height="32"></td>
+<td class="mbox-text" style="">Wikiversity has learning materials about <i><b><a class="external text" href="http://en.wikiversity.org/wiki/Pointers">Pointers</a></b></i>
+</td>
+</tr></tbody></table>
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Pointer_%28computer_programming%29_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/C_Programming">C Programming</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/C_Programming/Pointers">Pointers</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://cslibrary.stanford.edu/">Pointers and Memory</a> Introduction to pointers – Stanford Computer Science Education Library</li>
+<li>
+<a rel="nofollow" class="external text" href="http://0pointer.de/">0pointer.de</a> A terse list of minimum length source codes that dereference a null pointer in several different programming languages</li>
+<li><a rel="nofollow" class="external text" href="http://publications.gbdirect.co.uk/c_book/chapter5/pointers.html">"The C book" – containing pointer examples in ANSI C</a></li>
+<li>
+<span class="citation book" id="c-std">Joint Technical Committe ISO/IEC JTC 1, Subcommittee SC 22, Working Group WG 14 (2007-09-08) (Committe Draft). <a rel="nofollow" class="external text" href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf"><i>International Standard ISO/IEC 9899</i></a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf">http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=International+Standard+ISO%2FIEC+9899&amp;rft.aulast=Joint+Technical+Committe+ISO%2FIEC+JTC+1%2C+Subcommittee+SC+22%2C+Working+Group+WG+14&amp;rft.au=Joint+Technical+Committe+ISO%2FIEC+JTC+1%2C+Subcommittee+SC+22%2C+Working+Group+WG+14&amp;rft.date=2007-09-08&amp;rft_id=http%3A%2F%2Fwww.open-std.org%2Fjtc1%2Fsc22%2FWG14%2Fwww%2Fdocs%2Fn1256.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Pointer_(computer_programming)"><span style="display: none;">&nbsp;</span></span>.</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Data_types" title="Template:Data types"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Data_types" title="Template talk:Data types"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Data_types&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Data_type" title="Data type">Data types</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Uninterpreted</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bit" title="Bit">Bit</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Byte" title="Byte">Byte</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_numeral_system" title="Ternary numeral system">Trit</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_numeral_system#Tryte" title="Ternary numeral system">Tryte</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Word_%28computer_architecture%29" title="Word (computer architecture)">Word</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Numeric</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Integer_%28computer_science%29" title="Integer (computer science)">Integer</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Signedness" title="Signedness">signedness</a></li>
+</ul>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fixed-point_arithmetic" title="Fixed-point arithmetic">Fixed-point</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Floating_point" title="Floating point">Floating-point</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Rational_data_type" title="Rational data type">Rational</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Complex_data_type" title="Complex data type">Complex</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Arbitrary-precision_arithmetic" title="Arbitrary-precision arithmetic">Bignum</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interval_arithmetic" title="Interval arithmetic">Interval</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Decimal_data_type" title="Decimal data type">Decimal</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Plain_text" title="Plain text">Text</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Character_%28computing%29" title="Character (computing)">Character</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">String</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Null-terminated_string" title="Null-terminated string">null-terminated</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><strong class="selflink">Pointer</strong></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Memory_address" title="Memory address">Address</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Physical_address" title="Physical address">physical</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Virtual_address_space" title="Virtual address space">virtual</a></li>
+</ul>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Reference_%28computer_science%29" title="Reference (computer science)">Reference</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Composite_data_type" title="Composite data type">Composite</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Algebraic_data_type" title="Algebraic data type">Algebraic data type</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Generalized_algebraic_data_type" title="Generalized algebraic data type">generalized</a></li>
+</ul>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Array_data_type" title="Array data type">Array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">Associative array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Class_%28computer_programming%29" title="Class (computer programming)">Class</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">List</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Object_%28computer_science%29" title="Object (computer science)">Object</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Option_type" title="Option type">Option type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Product_type" title="Product type">Product</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Record_%28computer_science%29" title="Record (computer science)">Record</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29" title="Set (computer science)" class="mw-redirect">Set</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Union_%28computer_science%29" title="Union (computer science)">Union</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Tagged_union" title="Tagged union">tagged</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Boolean_data_type" title="Boolean data type">Boolean</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bottom_type" title="Bottom type">Bottom type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Container_%28data_structure%29" title="Container (data structure)" class="mw-redirect">Collection</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Enumerated_type" title="Enumerated type">Enumerated type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Exception_handling" title="Exception handling">Exception</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Function_type" title="Function type">Function type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Opaque_data_type" title="Opaque data type">Opaque data type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Recursive_data_type" title="Recursive data type">Recursive data type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Semaphore_%28programming%29" title="Semaphore (programming)">Semaphore</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stream_%28computing%29" title="Stream (computing)">Stream</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Top_type" title="Top type">Top type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Type_class" title="Type class">Type class</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Unit_type" title="Unit type">Unit type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Void_type" title="Void type">Void</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Related topics</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Abstract_data_type" title="Abstract data type">Abstract data type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">Data structure</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interface_%28computer_science%29" title="Interface (computer science)" class="mw-redirect">Interface</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Kind_%28type_theory%29" title="Kind (type theory)">Kind</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Primitive_data_type" title="Primitive data type">Primitive data type</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Subtype_polymorphism" title="Subtype polymorphism">Subtyping</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Template_%28programming%29" title="Template (programming)" class="mw-redirect">Template</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Type_constructor" title="Type constructor">Type constructor</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Type_conversion" title="Type conversion">Type conversion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Parametric_polymorphism" title="Parametric polymorphism">Parametric polymorphism</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Nulls" title="Template:Nulls"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><span class="new" title="Template talk:Nulls (page does not exist)">t</span></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Nulls&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.wiktionary.org/wiki/Null" class="extiw" title="wikt:Null">Nulls</a> in <a href="http://en.m.wikipedia.org/wiki/Computing" title="Computing">computing</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<a href="http://en.m.wikipedia.org/wiki/Null_character" title="Null character">Null character</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki//dev/null" title="/dev/null">Null device</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Null_function" title="Null function">Null function</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Null_Object_pattern" title="Null Object pattern">Null Object pattern</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Pointer_%28computer_programming%29#Null_pointer" title="Pointer (computer programming)">Null pointer</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Null_%28SQL%29" title="Null (SQL)">Null in SQL</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Empty_string" title="Empty string">Null string</a>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" style="" colspan="2">
+<div>
+<i>See also:</i> <a href="http://en.m.wikipedia.org/wiki/Null_coalescing_operator" title="Null coalescing operator">Null coalescing operator</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Nullable_type" title="Nullable type">Nullable type</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Undefined_value" title="Undefined value">Undefined value</a>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Pointer_%28computer_programming%29&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Pointer+%28computer+programming%29&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Pointer_%28computer_programming%29&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Pointer+%28computer+programming%29&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Pointer_%28computer_programming%29_files/load_002.php" type="text/javascript"></script>
+<script src="Pointer_%28computer_programming%29_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

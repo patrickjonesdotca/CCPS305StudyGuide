@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Dancing Links - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Dancing_Links_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 2 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Dancing_Links">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Dancing_Links_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Dancing_Links_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Dancing_Links_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Dancing_Links" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Tanz_der_Kanten">Deutsch</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Dancing Links</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <b>Dancing Links</b>, also known as <b>DLX</b>, is the technique suggested by <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> to efficiently implement his <a href="http://en.m.wikipedia.org/wiki/Algorithm_X" title="Algorithm X" class="mw-redirect">Algorithm X</a>.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> Algorithm X is a <a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">recursive</a>, <a href="http://en.m.wikipedia.org/wiki/Nondeterministic_algorithm" title="Nondeterministic algorithm">nondeterministic</a>, <a href="http://en.m.wikipedia.org/wiki/Depth-first" title="Depth-first" class="mw-redirect">depth-first</a>, <a href="http://en.m.wikipedia.org/wiki/Backtracking" title="Backtracking">backtracking</a> <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that finds all solutions to the <a href="http://en.m.wikipedia.org/wiki/Exact_cover" title="Exact cover">exact cover</a> problem. Some of the better-known exact cover problems include <a href="http://en.m.wikipedia.org/wiki/Tessellation" title="Tessellation">tiling</a>, the <a href="http://en.m.wikipedia.org/wiki/Eight_queens_puzzle" title="Eight queens puzzle"><i>n</i> queens problem</a>, and <a href="http://en.m.wikipedia.org/wiki/Sudoku" title="Sudoku">Sudoku</a>.</p>
+<p>The name <i>Dancing Links</i> comes from the way the algorithm works,
+ as iterations of the algorithm cause the links to "dance" with partner 
+links so as to resemble an "exquisitely choreographed dance." Knuth 
+credits Hiroshi Hitotsumatsu and Kōhei Noshita with having invented the 
+idea in 1979,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> but it is his paper which has popularized it.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Implementation">Implementation</span></h2><div class="content_block" id="content_1">
+<p>As the remainder of this article discusses the details of an 
+implementation technique for Algorithm X, the reader is strongly 
+encouraged to read the <a href="http://en.m.wikipedia.org/wiki/Algorithm_X" title="Algorithm X" class="mw-redirect">Algorithm X</a> article first.</p>
+<h3> <span class="mw-headline" id="Main_ideas">Main ideas</span>
+</h3>
+<p>The idea of DLX is based on the observation that in a circular <a href="http://en.m.wikipedia.org/wiki/Doubly_linked_list" title="Doubly linked list">doubly linked list</a> of nodes,</p>
+<pre>x.left.right ← x.right;
+x.right.left ← x.left;
+</pre>
+<p>will remove node <i>x</i> from the list, while</p>
+<pre>x.left.right ← x;
+x.right.left ← x;
+</pre>
+<p>will restore <i>x'</i>s position in the list, assuming that x.right 
+and x.left have been left unmodified.. This works regardless of the 
+number of elements in the list, even if that number is 1.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth</a>
+ observed that a naive implementation of his Algorithm X would spend an 
+inordinate amount of time searching for 1's. When selecting a column, 
+the entire matrix had to be searched for 1's. When selecting a row, an 
+entire column had to be searched for 1's. After selecting a row, that 
+row and a number of columns had to be searched for 1's. To improve this 
+search time from <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">complexity</a> O(n) to O(1), Knuth implemented a <a href="http://en.m.wikipedia.org/wiki/Sparse_matrix" title="Sparse matrix">sparse matrix</a> where only 1's are stored.</p>
+<p>At all times, each node in the matrix will point to the adjacent 
+nodes to the left and right (1's in the same row), above and below (1's 
+in the same column), and the header for its column (described below). 
+Each row and column in the matrix will consist of a circular doubly 
+linked list of nodes.</p>
+<h3> <span class="mw-headline" id="Header">Header</span>
+</h3>
+<p>Each column will have a special node known as the "column header," 
+which will be included in the column list, and will form a special row 
+("control row") consisting of all the columns which still exist in the 
+matrix.</p>
+<p>Finally, each column header may optionally track the number of nodes 
+in its column, so that locating a column with the lowest number of nodes
+ is of <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">complexity</a> O(<i>n</i>) rather than O(<i>n</i>×<i>m</i>) where <i>n</i> is the number of columns and <i>m</i>
+ is the number of rows. Selecting a column with a low node count is a 
+heuristic which improves performance in some cases, but is not essential
+ to the algorithm.</p>
+<h3> <span class="mw-headline" id="Exploring">Exploring</span>
+</h3>
+<p>In Algorithm X, rows and columns are regularly eliminated from and 
+restored to the matrix. Eliminations are determined by selecting a 
+column and a row in that column. If a selected column doesn't have any 
+rows, the current matrix is unsolvable and must be backtracked. When an 
+elimination occurs, all columns for which the selected row contains a 1 
+are removed, along with all rows (including the selected row) that 
+contain a 1 in any of the removed columns. The columns are removed 
+because they have been filled, and the rows are removed because they 
+conflict with the selected row. To remove a single column, first remove 
+the selected column's header. Next, for each row where the selected 
+column contains a 1, traverse the row and remove it from other columns 
+(this makes those rows inaccessible and is how conflicts are prevented).
+ Repeat this column removal for each column where the selected row 
+contains a 1. This order ensures that any removed node is removed 
+exactly once and in a predictable order, so it can be backtracked 
+appropriately. If the resulting matrix has no columns, then they have 
+all been filled and the selected rows form the solution.</p>
+<h3> <span class="mw-headline" id="Backtracking">Backtracking</span>
+</h3>
+<p>To backtrack, the above process must be reversed using the second 
+algorithm stated above. One requirement of using that algorithm is that 
+backtracking must be done as an exact reversal of eliminations. Knuth's 
+paper gives a clear picture of these relationships and how the node 
+removal and reinsertion works, and provides a slight relaxation of this 
+limitation.</p>
+<h3> <span class="mw-headline" id="Optional_constraints">Optional constraints</span>
+</h3>
+<p>It is also possible to solve one-cover problems in which a particular
+ constraint is optional, but can be satisfied no more than once. Dancing
+ Links accommodates these with primary columns which must be filled and 
+secondary columns which are optional. This alters the algorithm's 
+solution test from a matrix having no columns to a matrix having no 
+primary columns, but doesn't require any further changes. Knuth 
+discusses optional constraints as applied to the <a href="http://en.m.wikipedia.org/wiki/Eight_queens_puzzle" title="Eight queens puzzle"><i>n</i> queens problem</a>.
+ The chessboard diagonals represent optional constraints, as some 
+diagonals may not be occupied. If a diagonal is occupied, it can be 
+occupied only once.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_2">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a> (2000). <a rel="nofollow" class="external text" href="http://www-cs-faculty.stanford.edu/%7Euno/papers/dancing-color.ps.gz">"Dancing links"</a>. <i>Millenial Perspectives in Computer Science</i>. P159 <b>187</b>. <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/cs/0011047">cs/0011047</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www-cs-faculty.stanford.edu/%7Euno/papers/dancing-color.ps.gz">http://www-cs-faculty.stanford.edu/~uno/papers/dancing-color.ps.gz</a></span><span class="reference-accessdate">. Retrieved 2006-07-11</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Dancing+links&amp;rft.jtitle=Millenial+Perspectives+in+Computer+Science&amp;rft.aulast=%5B%5BDonald+Knuth%7CKnuth%2C+Donald%5D%5D&amp;rft.au=%5B%5BDonald+Knuth%7CKnuth%2C+Donald%5D%5D&amp;rft.date=2000&amp;rft.series=P159&amp;rft.volume=187&amp;rft_id=info:arxiv/cs%2F0011047&amp;rft_id=http%3A%2F%2Fwww-cs-faculty.stanford.edu%2F%7Euno%2Fpapers%2Fdancing-color.ps.gz&amp;rfr_id=info:sid/en.wikipedia.org:Dancing_Links"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation Journal">Hitotumatu, Hirosi; Noshita, Kohei (1979). "A Technique for Implementing Backtrack Algorithms and its Application". <i>Information Processing Letters</i> <b>8</b> (4): 174–175. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2F0020-0190%2879%2990016-4">10.1016/0020-0190(79)90016-4</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Technique+for+Implementing+Backtrack+Algorithms+and+its+Application&amp;rft.jtitle=Information+Processing+Letters&amp;rft.aulast=Hitotumatu&amp;rft.aufirst=Hirosi&amp;rft.au=Hitotumatu%2C%26%2332%3BHirosi&amp;rft.au=Noshita%2C%26%2332%3BKohei&amp;rft.date=1979&amp;rft.volume=8&amp;rft.issue=4&amp;rft.pages=174%E2%80%93175&amp;rft_id=info:doi/10.1016%2F0020-0190%2879%2990016-4&amp;rfr_id=info:sid/en.wikipedia.org:Dancing_Links"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_3">
+<ul>
+<li>A <a rel="nofollow" class="external text" href="http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/examples/dancing/package-summary.html">distributed Dancing Links</a> implementation as a <a href="http://en.m.wikipedia.org/wiki/Hadoop" title="Hadoop" class="mw-redirect">Hadoop</a> <a href="http://en.m.wikipedia.org/wiki/MapReduce" title="MapReduce">MapReduce</a> example</li>
+<li>An <a rel="nofollow" class="external text" href="http://cgi.cse.unsw.edu.au/%7Exche635/dlx_sodoku/">informal tutorial</a> on solving <a href="http://en.m.wikipedia.org/wiki/Sudoku" title="Sudoku">sudoku</a> with example in C.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://cheeso.members.winisp.net/srcview.aspx?dir=Sudoku&amp;file=ExactCover.cs">C# implementation of an Exact Cover solver</a> - uses Algorithm X and the Dancing Links trick.</li>
+</ul>
+<p><br></p>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Donald_Knuth_navbox" title="Template:Donald Knuth navbox"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Donald_Knuth_navbox" title="Template talk:Donald Knuth navbox"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Donald_Knuth_navbox&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Publications</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i></li>
+<li>"<a href="http://en.m.wikipedia.org/wiki/The_Complexity_of_Songs" title="The Complexity of Songs">The Complexity of Songs</a>"</li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Computers_and_Typesetting" title="Computers and Typesetting">Computers and Typesetting</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Concrete_Mathematics" title="Concrete Mathematics">Concrete Mathematics</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Surreal_Numbers_%28book%29" title="Surreal Numbers (book)" class="mw-redirect">Surreal Numbers</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Things_a_Computer_Scientist_Rarely_Talks_About" title="Things a Computer Scientist Rarely Talks About">Things a Computer Scientist Rarely Talks About</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Selected_papers_series_of_Knuth" title="Selected papers series of Knuth">Selected papers series</a></i></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Software" title="Software">Software</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/TeX" title="TeX"><span class="texhtml"><span style="font-family:cmr10, LMRoman10-Regular, Times, serif;">T<span style="text-transform:uppercase; vertical-align:-0.5ex; margin-left:-0.1667em; margin-right:-0.125em;">e</span>X</span></span></a></li>
+<li>MIXAL (<a href="http://en.m.wikipedia.org/wiki/MIX" title="MIX">MIX</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/MMIX" title="MMIX">MMIX</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/GNU_MIX_Development_Kit" title="GNU MIX Development Kit">GNU MDK</a>)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Font" title="Font">Fonts</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AMS_Euler" title="AMS Euler">AMS Euler</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Computer_Modern" title="Computer Modern">Computer Modern</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metafont" title="Metafont">Metafont</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Literate_programming" title="Literate programming">Literate programming</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/WEB" title="WEB">WEB</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/CWEB" title="CWEB">CWEB</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">Algorithms</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%27s_Algorithm_X" title="Knuth's Algorithm X">Knuth's Algorithm X</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%E2%80%93Bendix_completion_algorithm" title="Knuth–Bendix completion algorithm">Knuth–Bendix completion algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm" title="Knuth–Morris–Pratt algorithm">Knuth–Morris–Pratt algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" title="Fisher–Yates shuffle">Knuth shuffle</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Robinson%E2%80%93Schensted%E2%80%93Knuth_correspondence" title="Robinson–Schensted–Knuth correspondence">Robinson–Schensted–Knuth correspondence</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Trabb_Pardo%E2%80%93Knuth_algorithm" title="Trabb Pardo–Knuth algorithm">Trabb Pardo–Knuth algorithm</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><strong class="selflink">Dancing Links</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth_reward_check" title="Knuth reward check">Knuth reward check</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Knuth_Prize" title="Knuth Prize">Knuth Prize</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Man_or_boy_test" title="Man or boy test">Man or boy test</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quater-imaginary_base" title="Quater-imaginary base">Quater-imaginary base</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/-yllion" title="-yllion">-yllion</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Potrzebie#Unit_System" title="Potrzebie">Potrzebie system of weights and measures</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Dancing_Links&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Dancing+Links&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Dancing_Links&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Dancing+Links&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Dancing_Links_files/load_002.php" type="text/javascript"></script>
+<script src="Dancing_Links_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Trie - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Trie_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 16 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Trie">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Trie_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Trie_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Trie_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Trie" selected="selected">English</option><option value="//ca.m.wikipedia.org/wiki/Trie">català</option><option value="//cs.m.wikipedia.org/wiki/Trie">česky</option><option value="//de.m.wikipedia.org/wiki/Trie">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Trie">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%AF%D8%B1%D8%AE%D8%AA_%D9%BE%DB%8C%D8%B4%D9%88%D9%86%D8%AF%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Trie_(informatique)">français</option><option value="//gl.m.wikipedia.org/wiki/Trie">galego</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%82%A4%E6%9C%A8">日本語</option><option value="//pl.m.wikipedia.org/wiki/Drzewo_trie">polski</option><option value="//pt.m.wikipedia.org/wiki/Trie">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%84%D0%B8%D0%BA%D1%81%D0%BD%D0%BE%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">русский</option><option value="//th.m.wikipedia.org/wiki/Trie">ไทย</option><option value="//uk.m.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%84%D1%96%D0%BA%D1%81%D0%BD%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">українська</option><option value="//vi.m.wikipedia.org/wiki/Trie">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/Trie">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Trie</h1>			
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Trie_example.svg" class="image"><img alt="" src="Trie_files/250px-Trie_example.png" class="thumbimage" width="250" height="234"></a>
+<div class="thumbcaption">
+
+A trie for keys "A", "to", "tea", "ted", "ten", "i", "in", and "inn".</div>
+</div>
+</div>
+<div class="dablink">This article is about a tree data structure. For the French commune, see <a href="http://en.m.wikipedia.org/wiki/Trie-sur-Ba%C3%AFse" title="Trie-sur-Baïse">Trie-sur-Baïse</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>trie</b>, or <b>prefix tree</b>, is an <a href="http://en.m.wikipedia.org/wiki/Ordered_tree_data_structure" title="Ordered tree data structure" class="mw-redirect">ordered tree</a> <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to store an <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a> where the keys are usually <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">strings</a>. Unlike a <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>,
+ no node in the tree stores the key associated with that node; instead, 
+its position in the tree defines the key with which it is associated. 
+All the descendants of a node have a common <a href="http://en.m.wikipedia.org/wiki/Prefix" title="Prefix">prefix</a> of the string associated with that node, and the root is associated with the <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">empty string</a>. Values are normally not associated with every node, only with leaves and some inner nodes that correspond to keys of interest.</p>
+<p>The term trie comes from re<b>trie</b>val. Following the <a href="http://en.m.wikipedia.org/wiki/Etymology" title="Etymology">etymology</a>, the inventor, <a href="http://en.m.wikipedia.org/wiki/Edward_Fredkin" title="Edward Fredkin">Edward Fredkin</a>, pronounces it <span class="nowrap"><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English" title="Wikipedia:IPA for English">/</a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="/ˈ/ primary stress follows" style="border-bottom:1px dotted">ˈ</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="'t' in 'tie'" style="border-bottom:1px dotted">t</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="'r' in 'rye'" style="border-bottom:1px dotted">r</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="/iː/ long 'e' in 'bead'" style="border-bottom:1px dotted">iː</span></a></span><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English" title="Wikipedia:IPA for English">/</a></span></span> "tree".<sup id="cite_ref-DADS_0-0" class="reference"><a href="#cite_note-DADS-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-Liang1983_1-0" class="reference"><a href="#cite_note-Liang1983-1"><span>[</span>2<span>]</span></a></sup> However, it is pronounced <span class="nowrap"><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English" title="Wikipedia:IPA for English">/</a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="/ˈ/ primary stress follows" style="border-bottom:1px dotted">ˈ</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="'t' in 'tie'" style="border-bottom:1px dotted">t</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="'r' in 'rye'" style="border-bottom:1px dotted">r</span></a></span><span class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key" title="Wikipedia:IPA for English"><span title="/aɪ/ long 'i' in 'bide'" style="border-bottom:1px dotted">aɪ</span></a></span><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="http://en.m.wikipedia.org/wiki/Wikipedia:IPA_for_English" title="Wikipedia:IPA for English">/</a></span></span> "try" by other authors.<sup id="cite_ref-DADS_0-1" class="reference"><a href="#cite_note-DADS-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-Liang1983_1-1" class="reference"><a href="#cite_note-Liang1983-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-KnuthVol3_2-0" class="reference"><a href="#cite_note-KnuthVol3-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>In the example shown, keys are listed in the nodes and values below 
+them. Each complete English word has an arbitrary integer value 
+associated with it. A trie can be seen as a <a href="http://en.m.wikipedia.org/wiki/Deterministic_finite_automaton" title="Deterministic finite automaton">deterministic finite automaton</a>, although the symbol on each edge is often implicit in the order of the branches.</p>
+<p>It is not necessary for keys to be explicitly stored in nodes. (In 
+the figure, words are shown only to illustrate how the trie works.)</p>
+<p>Though it is most common, tries need not be keyed by character 
+strings. The same algorithms can easily be adapted to serve similar 
+functions of ordered lists of any construct, e.g., permutations on a 
+list of digits or shapes. In particular, a <b>bitwise trie</b> is keyed on the individual bits making up a short, fixed size of bits such as an integer number or pointer to memory.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Advantages_relative_to_other_search_algorithms">Advantages relative to other search algorithms</span></h2><div class="content_block" id="content_1">
+<ul class="gallery">
+<li class="gallerycaption">A series of graphs showing how different algorithms scale with number of items</li>
+<li class="gallerybox" style="width: 435px">
+<div style="width: 435px">
+<div class="thumb" style="width: 430px;">
+<div style="margin:15px auto;"><a href="http://en.m.wikipedia.org/wiki/File:BitwiseTreesScaling.png" class="image"><img alt="" src="Trie_files/396px-BitwiseTreesScaling.png" width="396" height="240"></a></div>
+</div>
+<div class="gallerytext">
+<p><b>Behavior of Fredkin-style tries as a function of size</b><br>
+(in this case, nedtries, which is an <b>in-place</b> implementation, and therefore has a much steeper curve than a dynamic memory based trie implementation)<br><br></p>
+</div>
+</div>
+</li>
+<li class="gallerybox" style="width: 435px">
+<div style="width: 435px">
+<div class="thumb" style="width: 430px;">
+<div style="margin:15px auto;"><a href="http://en.m.wikipedia.org/wiki/File:RedBlackTreesScaling.png" class="image"><img alt="" src="Trie_files/396px-RedBlackTreesScaling.png" width="396" height="240"></a></div>
+</div>
+<div class="gallerytext">
+<p><b>Behavior of red-black trees as a function of size</b><br>
+(in this case, the BSD rbtree.h, which shows classic O(log N) behaviour)<br><br></p>
+</div>
+</div>
+</li>
+<li class="gallerybox" style="width: 435px">
+<div style="width: 435px">
+<div class="thumb" style="width: 430px;">
+<div style="margin:15px auto;"><a href="http://en.m.wikipedia.org/wiki/File:HashTableScaling.png" class="image"><img alt="" src="Trie_files/396px-HashTableScaling.png" width="396" height="240"></a></div>
+</div>
+<div class="gallerytext">
+<p><b>Behavior of hash tables as a function of size</b><br>
+(in this case, uthash, which when averaged shows classic O(1) behaviour)<br><br></p>
+</div>
+</div>
+</li>
+</ul>
+<p>Unlike most other algorithms, tries have the peculiar feature that 
+the code path, and hence the time required, is almost identical for 
+insert, delete, and find operations. As a result, for situations where 
+code is inserting, deleting and finding in equal measure, tries can 
+handily beat <a href="http://en.m.wikipedia.org/wiki/Binary_search_trees" title="Binary search trees" class="mw-redirect">binary search trees</a>, as well as provide a better basis for the CPU's instruction and branch caches.</p>
+<p>The following are the main advantages of tries over <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search trees</a> (BSTs):</p>
+<ul>
+<li>Looking up keys is faster. Looking up a key of length <i>m</i> takes worst case <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(<i>m</i>) time. A BST performs O(<a href="http://en.m.wikipedia.org/wiki/Logarithm" title="Logarithm">log</a>(<i>n</i>)) comparisons of keys, where <i>n</i>
+ is the number of elements in the tree, because lookups depend on the 
+depth of the tree, which is logarithmic in the number of keys if the 
+tree is balanced. Hence in the worst case, a BST takes O(<i>m</i> log <i>n</i>) time. Moreover, in the worst case log(<i>n</i>) will approach <i>m</i>. Also, the simple operations tries use during lookup, such as array indexing using a character, are fast on real machines.</li>
+<li>Tries are more space-efficient when they contain a large number of 
+short keys, since nodes are shared between keys with common initial 
+subsequences.</li>
+<li>Tries facilitate <a href="http://en.m.wikipedia.org/wiki/Longest_prefix_match" title="Longest prefix match">longest-prefix matching</a>.</li>
+<li>The number of internal nodes from root to leaf equals the length of the key. Balancing the tree is therefore of no concern.</li>
+</ul>
+<p>The following are the main advantages of tries over <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>:</p>
+<ul>
+<li>Tries support ordered iteration, whereas iteration over a hash table will result in a <a href="http://en.m.wikipedia.org/wiki/Pseudorandom" title="Pseudorandom" class="mw-redirect">pseudorandom</a>
+ order given by the hash function (and further affected by the order of 
+hash collisions, which is determined by the implementation).</li>
+<li>Tries facilitate <a href="http://en.m.wikipedia.org/wiki/Longest_prefix_match" title="Longest prefix match">longest-prefix matching</a>,
+ but hashing does not, as a consequence of the above. Performing such a 
+"closest fit" find can, depending on implementation, be as quick as an 
+exact find.</li>
+<li>Tries tend to be faster on average at insertion than hash tables 
+because hash tables must rebuild their index when it becomes full - a 
+very expensive operation. Tries therefore have much better bounded 
+worst-case time costs, which is important for latency-sensitive 
+programs.</li>
+<li>Since no hash function is used, tries are generally faster than hash tables for small keys.</li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_2">
+<h3> <span class="mw-headline" id="As_replacement_of_other_data_structures">As replacement of other data structures</span>
+</h3>
+<p>As mentioned, a trie has a number of advantages over binary search trees.<sup id="cite_ref-trieoverbinary_3-0" class="reference"><a href="#cite_note-trieoverbinary-3"><span>[</span>4<span>]</span></a></sup> A trie can also be used to replace a <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash table</a>, over which it has the following advantages:</p>
+<ul>
+<li>Looking up data in a trie is faster in the worst case, O(m) time, 
+compared to an imperfect hash table. An imperfect hash table can have 
+key collisions. A key collision is the hash function mapping of 
+different keys to the same position in a hash table. The worst-case 
+lookup speed in an imperfect hash table is <a href="http://en.m.wikipedia.org/wiki/Hash_table#Chaining" title="Hash table">O(N)</a> time, but far more typically is O(1), with O(m) time spent evaluating the hash.</li>
+<li>There are no collisions of different keys in a trie.</li>
+<li>Buckets in a trie which are analogous to hash table buckets that 
+store key collisions are necessary only if a single key is associated 
+with more than one value.</li>
+<li>There is no need to provide a hash function or to change hash functions as more keys are added to a trie.</li>
+<li>A trie can provide an alphabetical ordering of the entries by key.</li>
+</ul>
+<p>Tries do have some drawbacks as well:</p>
+<ul>
+<li>Tries can be slower in some cases than hash tables for looking up 
+data, especially if the data is directly accessed on a hard disk drive 
+or some other secondary storage device where the random-access time is 
+high compared to main memory.<sup id="cite_ref-triememory_4-0" class="reference"><a href="#cite_note-triememory-4"><span>[</span>5<span>]</span></a></sup>
+</li>
+<li>Some keys, such as floating point numbers, can lead to long chains 
+and prefixes that are not particularly meaningful. Nevertheless a 
+bitwise trie can handle standard IEEE single and double format floating 
+point numbers.</li>
+</ul>
+<h3> <span class="mw-headline" id="Dictionary_representation">Dictionary representation</span>
+</h3>
+<p>A common application of a trie is storing a dictionary, such as one found on a <a href="http://en.m.wikipedia.org/wiki/Mobile_telephone" title="Mobile telephone" class="mw-redirect">mobile telephone</a>.
+ Such applications take advantage of a trie's ability to quickly search 
+for, insert, and delete entries; however, if storing dictionary words is
+ all that is required (i.e. storage of information auxiliary to each 
+word is not required), a minimal <a href="http://en.m.wikipedia.org/wiki/Acyclic_deterministic_finite_automaton" title="Acyclic deterministic finite automaton" class="mw-redirect">acyclic deterministic finite automaton</a>
+ would use less space than a trie. This is because an acyclic 
+deterministic finite automaton can compress identical branches from the 
+trie which correspond to the same suffixes (or parts) of different words
+ being stored.</p>
+<p>Tries are also well suited for implementing approximate matching algorithms, including those used in <a href="http://en.m.wikipedia.org/wiki/Spell_checking" title="Spell checking" class="mw-redirect">spell checking</a> and <a href="http://en.m.wikipedia.org/wiki/Hyphenation" title="Hyphenation">hyphenation</a><sup id="cite_ref-Liang1983_1-2" class="reference"><a href="#cite_note-Liang1983-1"><span>[</span>2<span>]</span></a></sup> software.</p>
+<h3> <span class="mw-headline" id="Algorithms">Algorithms</span>
+</h3>
+<p>We can describe trie lookup (and membership) easily. Given a 
+recursive trie type, storing an optional value at each node, and a list 
+of children tries, indexed by the next character, (here, represented as a
+ <a href="http://en.m.wikipedia.org/wiki/Haskell_%28programming_language%29" title="Haskell (programming language)">Haskell</a> data type):</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="haskell source-haskell">
+<pre class="de1"> <span class="kw1">data</span> Trie a <span class="sy0">=</span>
+      Trie <span class="br0">{</span> value    <span class="sy0">::</span> <span class="kw4">Maybe</span> a
+           <span class="sy0">,</span> children <span class="sy0">::</span> <span class="br0">[</span><span class="br0">(</span><span class="kw4">Char</span><span class="sy0">,</span>Trie a<span class="br0">)</span><span class="br0">]</span> <span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>We can look up a value in the trie as follows:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="haskell source-haskell">
+<pre class="de1">    find <span class="sy0">::</span> <span class="kw4">String</span> <span class="sy0">-&gt;</span> Trie a <span class="sy0">-&gt;</span> <span class="kw4">Maybe</span> a
+    find <span class="br0">[</span><span class="br0">]</span>     t <span class="sy0">=</span> value t
+    find <span class="br0">(</span>k:ks<span class="br0">)</span> t <span class="sy0">=</span> <span class="kw1">case</span> <span class="kw3">lookup</span> k <span class="br0">(</span>children t<span class="br0">)</span> <span class="kw1">of</span>
+                        Nothing  <span class="sy0">-&gt;</span> Nothing
+                        Just t'  <span class="sy0">-&gt;</span> find ks t'
+</pre>
+</div>
+</div>
+<p>In an imperative style, and assuming an appropriate data type in place, we can describe the same algorithm in <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python</a> (here, specifically for testing membership). Note that <code>children</code> is map of a node's children; and we say that a "terminal" node is one which contains a valid word.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1"><span class="kw1">def</span> find<span class="br0">(</span>node<span class="sy0">,</span> key<span class="br0">)</span>:
+    <span class="kw1">for</span> char <span class="kw1">in</span> key:
+        <span class="kw1">if</span> char <span class="kw1">not</span> <span class="kw1">in</span> node.<span class="me1">children</span>:
+            <span class="kw1">return</span> <span class="kw2">None</span>
+        <span class="kw1">else</span>:
+            node <span class="sy0">=</span> node.<span class="me1">children</span><span class="br0">[</span>char<span class="br0">]</span>
+    <span class="kw1">return</span> node.<span class="me1">value</span>
+</pre>
+</div>
+</div>
+<p>A simple Ruby version:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="ruby source-ruby">
+<pre class="de1"><span class="kw1">class</span> Trie
+  <span class="kw1">def</span> initialize
+    <span class="re1">@root</span> = <span class="kw4">Hash</span>.<span class="me1">new</span>
+  <span class="kw1">end</span>
+ 
+  <span class="kw1">def</span> build<span class="br0">(</span>str<span class="br0">)</span> 
+    node = <span class="re1">@root</span>    
+    str.<span class="me1">each_char</span> <span class="kw1">do</span> <span class="sy0">|</span>ch<span class="sy0">|</span>
+      node<span class="br0">[</span>ch<span class="br0">]</span> <span class="sy0">||</span>= <span class="kw4">Hash</span>.<span class="me1">new</span>
+      node = node<span class="br0">[</span>ch<span class="br0">]</span>
+    <span class="kw1">end</span>
+    node<span class="br0">[</span>:<span class="kw1">end</span><span class="br0">]</span> = <span class="kw2">true</span>
+  <span class="kw1">end</span>
+ 
+  <span class="kw1">def</span> find<span class="br0">(</span>str<span class="br0">)</span> 
+    node = <span class="re1">@root</span>
+    str.<span class="me1">each_char</span> <span class="kw1">do</span> <span class="sy0">|</span>ch<span class="sy0">|</span>
+      <span class="kw2">return</span> <span class="kw2">nil</span> <span class="kw1">unless</span> node = node<span class="br0">[</span>ch<span class="br0">]</span>
+    <span class="kw1">end</span>
+    node<span class="br0">[</span>:<span class="kw1">end</span><span class="br0">]</span> <span class="sy0">&amp;&amp;</span> <span class="kw2">true</span>
+  <span class="kw1">end</span>
+<span class="kw1">end</span>
+</pre>
+</div>
+</div>
+<p>A compiling Java version:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java source-java">
+<pre class="de1"><span class="kw1">public</span> <span class="kw1">class</span> MinimalExample<span class="br0">{</span>
+    <span class="kw1">private</span> <span class="kw1">interface</span> Node <span class="br0">{</span>
+        <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> Node EMPTY_NODE <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+            @Override <span class="kw1">public</span> <span class="kw3">String</span> getValue<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span> <span class="kw1">return</span> <span class="st0">""</span><span class="sy0">;</span> <span class="br0">}</span>
+            @Override <span class="kw1">public</span> <span class="kw4">boolean</span> containsChildValue<span class="br0">(</span><span class="kw4">char</span> c<span class="br0">)</span> <span class="br0">{</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span> <span class="br0">}</span>
+            @Override <span class="kw1">public</span> Node getChild<span class="br0">(</span><span class="kw4">char</span> c<span class="br0">)</span> <span class="br0">{</span> <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span> <span class="br0">}</span>
+        <span class="br0">}</span><span class="sy0">;</span>
+        <span class="kw1">public</span> <span class="kw3">String</span> getValue<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">public</span> <span class="kw4">boolean</span> containsChildValue<span class="br0">(</span><span class="kw4">char</span> c<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">public</span> Node getChild<span class="br0">(</span><span class="kw4">char</span> c<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+ 
+    <span class="kw1">public</span> Node findValue<span class="br0">(</span>Node startNode, <span class="kw3">String</span> value<span class="br0">)</span> <span class="br0">{</span>
+        Node current <span class="sy0">=</span> startNode<span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">char</span> c <span class="sy0">:</span> value.<span class="me1">toCharArray</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="kw1">if</span> <span class="br0">(</span>current.<span class="me1">containsChildValue</span><span class="br0">(</span>c<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                current <span class="sy0">=</span> current.<span class="me1">getChild</span><span class="br0">(</span>c<span class="br0">)</span><span class="sy0">;</span>
+            <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+                current <span class="sy0">=</span> Node.<span class="me1">EMPTY_NODE</span><span class="sy0">;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">}</span>
+        <span class="br0">}</span>
+        <span class="kw1">return</span> current<span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Sorting">Sorting</span>
+</h3>
+<p>Lexicographic sorting of a set of keys can be accomplished with a simple trie-based algorithm as follows:</p>
+<ul>
+<li>Insert all keys in a trie.</li>
+<li>Output all keys in the trie by means of <a href="http://en.m.wikipedia.org/wiki/Pre-order_traversal" title="Pre-order traversal" class="mw-redirect">pre-order traversal</a>, which results in output that is in <a href="http://en.m.wikipedia.org/wiki/Lexicographic_order" title="Lexicographic order" class="mw-redirect">lexicographically</a> increasing order. <a href="http://en.m.wikipedia.org/wiki/Pre-order_traversal" title="Pre-order traversal" class="mw-redirect">Pre-order traversal</a> is a kind of <a href="http://en.m.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first traversal</a>. <a href="http://en.m.wikipedia.org/wiki/In-order_traversal" title="In-order traversal" class="mw-redirect">In-order traversal</a> is another kind of <a href="http://en.m.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first traversal</a> that is more appropriate for outputting the values that are in a <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a> rather than a trie.</li>
+</ul>
+<p>This algorithm is a form of <a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">radix sort</a>.</p>
+<p>A trie forms the fundamental data structure of <a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a>, currently (2007) the fastest known, memory/cache-based, string sorting algorithm.<sup id="cite_ref-cachestringsort_5-0" class="reference"><a href="#cite_note-cachestringsort-5"><span>[</span>6<span>]</span></a></sup></p>
+<p>A <a href="http://en.m.wikipedia.org/wiki/Parallel_algorithm" title="Parallel algorithm">parallel algorithm</a> for sorting N keys based on tries is <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(1)
+ if there are N processors and the lengths of the keys have a constant 
+upper bound. There is the potential that the keys might collide by 
+having common prefixes or by being identical to one another, reducing or
+ eliminating the speed advantage of having multiple processors operating
+ in parallel.</p>
+<h3> <span class="mw-headline" id="Full_text_search">Full text search</span>
+</h3>
+<p>A special kind of trie, called a <a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">suffix tree</a>, can be used to index all suffixes in a text in order to carry out fast full text searches.</p>
+<h3> <span class="mw-headline" id="Bitwise_tries">Bitwise tries</span>
+</h3>
+<p>Bitwise tries are much the same as a normal character based trie 
+except that individual bits are used to traverse what effectively 
+becomes a form of binary tree. Generally, implementations use a special 
+CPU instruction to very quickly find the first set bit in a fixed length
+ key (e.g. GCC's __builtin_clz() intrinsic). This value is then used to 
+index a 32 or 64 entry table which points to the first item in the 
+bitwise trie with that number of leading zero bits. The search then 
+proceeds by testing each subsequent bit in the key and choosing child[0]
+ or child[1] appropriately until the item is found.</p>
+<p>Although this process might sound slow, it is very cache-local and 
+highly parallelizable due to the lack of register dependencies and 
+therefore in fact has excellent performance on modern out-of-order 
+execution CPUs. A <a href="http://en.m.wikipedia.org/wiki/Red-black_tree" title="Red-black tree" class="mw-redirect">red-black tree</a> for example performs much better on paper, but is highly cache-unfriendly and causes multiple pipeline and <a href="http://en.m.wikipedia.org/wiki/Translation_lookaside_buffer" title="Translation lookaside buffer">TLB</a>
+ stalls on modern CPUs which makes that algorithm bound by memory 
+latency rather than CPU speed. In comparison, a bitwise trie rarely 
+accesses memory and when it does it does so only to read, thus avoiding 
+SMP cache coherency overhead, and hence is becoming increasingly the 
+algorithm of choice for code which does a lot of insertions and 
+deletions such as memory allocators (e.g. recent versions of the famous <a href="http://en.m.wikipedia.org/wiki/Malloc#dlmalloc" title="Malloc" class="mw-redirect">Doug Lea's allocator (dlmalloc) and its descendents</a>).</p>
+<p>A reference implementation of bitwise tries in C and C++ useful for further study can be found at <a rel="nofollow" class="external free" href="http://www.nedprod.com/programs/portable/nedtries/">http://www.nedprod.com/programs/portable/nedtries/</a>.</p>
+<h3> <span class="mw-headline" id="Compressing_tries">Compressing tries</span>
+</h3>
+<p>When the trie is mostly static, i.e. all insertions or deletions of 
+keys from a prefilled trie are disabled and only lookups are needed, and
+ when the trie nodes are not keyed by node specific data (or if the 
+node's data is common) it is possible to compress the trie 
+representation by merging the common branches.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup>
+ This application is typically used for compressing lookup tables when 
+the total set of stored keys is very sparse within their representation 
+space.</p>
+<p>For example it may be used to represent sparse <a href="http://en.m.wikipedia.org/wiki/Bitset" title="Bitset" class="mw-redirect">bitsets</a>
+ (i.e. subsets of a much fixed enumerable larger set) using a trie keyed
+ by the bit element position within the full set, with the key created 
+from the string of bits needed to encode the integral position of each 
+element. The trie will then have a very degenerate form with many 
+missing branches, and compression becomes possible by storing the leaf 
+nodes (set segments with fixed length) and combining them after 
+detecting the repetition of common patterns or by filling the unused 
+gaps.</p>
+<p>Such compression is also typically used in the implementation of the various fast lookup tables needed to retrieve <a href="http://en.m.wikipedia.org/wiki/Unicode" title="Unicode">Unicode</a>
+ character properties (for example to represent case mapping tables, or 
+lookup tables containing the combination of base and combining 
+characters needed to support Unicode normalization). For such 
+application, the representation is similar to transforming a very large 
+unidimensional sparse table into a multidimensional matrix, and then 
+using the coordinates in the hyper-matrix as the string key of an 
+uncompressed trie. The compression will then consist of detecting and 
+merging the common columns within the hyper-matrix to compress the last 
+dimension in the key; each dimension of the hypermatrix stores the start
+ position within a storage vector of the next dimension for each 
+coordinate value, and the resulting vector is itself compressible when 
+it is also sparse, so each dimension (associated to a layer level in the
+ trie) is compressed separately.</p>
+<p>Some implementations do support such data compression within dynamic 
+sparse tries and allow insertions and deletions in compressed tries, but
+ generally this has a significant cost when compressed segments need to 
+be split or merged, and some tradeoff has to be made between the 
+smallest size of the compressed trie and the speed of updates, by 
+limiting the range of global lookups for comparing the common branches 
+in the sparse trie.</p>
+<p>The result of such compression may look similar to trying to transform the trie into a <a href="http://en.m.wikipedia.org/wiki/Directed_acyclic_graph" title="Directed acyclic graph">directed acyclic graph</a>
+ (DAG), because the reverse transform from a DAG to a trie is obvious 
+and always possible, however it is constrained by the form of the key 
+chosen to index the nodes.</p>
+<p>Another compression approach is to "unravel" the data structure into a single byte array.<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup>
+ This approach eliminates the need for node pointers which reduces the 
+memory requirements substantially and makes memory mapping possible 
+which allows the virtual memory manager to load the data into memory 
+very efficiently.</p>
+<p>Another compression approach is to "pack" the trie.<sup id="cite_ref-Liang1983_1-3" class="reference"><a href="#cite_note-Liang1983-1"><span>[</span>2<span>]</span></a></sup> Liang describes a space-efficient implementation of a sparse packed trie applied to <a href="http://en.m.wikipedia.org/wiki/Hyphenation" title="Hyphenation">hyphenation</a>, in which the descendants of each node may be interleaved in memory.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_3">
+<div class="column-count column-count-3" style="-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Directed_acyclic_word_graph" title="Directed acyclic word graph">Directed acyclic word graph</a> (aka DAWG)</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_search_tries" title="Ternary search tries" class="mw-redirect">Ternary search tries</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Acyclic_deterministic_finite_automata" title="Acyclic deterministic finite automata" class="mw-redirect">Acyclic deterministic finite automata</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_trie" title="Hash trie">Hash trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Deterministic_finite_automata" title="Deterministic finite automata" class="mw-redirect">Deterministic finite automata</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Judy_array" title="Judy array">Judy array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">Search algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Extendible_hashing" title="Extendible hashing">Extendible hashing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_array_mapped_trie" title="Hash array mapped trie">Hash array mapped trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Prefix_Hash_Tree" title="Prefix Hash Tree" class="mw-redirect">Prefix Hash Tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lule%C3%A5_algorithm" title="Luleå algorithm">Luleå algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Huffman_coding" title="Huffman coding">Huffman coding</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ctrie" title="Ctrie">Ctrie</a></li>
+</ul>
+</div>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_4">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/trie.html">NIST's Dictionary of Algorithms and Data Structures: Trie</a></li>
+<li><a rel="nofollow" class="external text" href="http://blog.ivank.net/trie-in-as3.html">Trie implementation and visualisation in flash</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.csse.monash.edu.au/%7Elloyd/tildeAlgDS/Tree/Trie/">Tries</a> by Lloyd Allison</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.topcoder.com/tc?module=Static&amp;d1=tutorials&amp;d2=usingTries">Using Tries</a> Topcoder tutorial</li>
+<li><a rel="nofollow" class="external text" href="http://linux.thai.net/%7Ethep/datrie/datrie.html">An Implementation of Double-Array Trie</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://tom.biodome.org/briandais.html">de la Briandais Tree</a><sup class="noprint Inline-Template"><span title="&nbsp;since February 2012" style="white-space: nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Link_rot" title="Wikipedia:Link rot">dead link</a></i>]</span></sup>
+</li>
+<li><a rel="nofollow" class="external text" href="http://groups.google.com/group/comp.lang.lisp/browse_thread/thread/01e485291d150938/9aacb626fa26c516">Discussing a trie implementation in Lisp</a></li>
+<li><a rel="nofollow" class="external text" href="http://serverkit.org/apiref-wip/node59.html">ServerKit "parse trees" implement a form of Trie in C</a></li>
+<li><a rel="nofollow" class="external text" href="http://kb.pyground.com/2011/05/trie-data-structure.html">A simple implementation of Trie in Python</a></li>
+<li><a rel="nofollow" class="external text" href="http://scanty-evidence-1.heroku.com/past/2010/5/10/ruby_trie/">A Trie implemented in Ruby</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.nedprod.com/programs/portable/nedtries/">A reference implementation of bitwise tries in C and C++</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.superliminal.com/sources/TrieMap.java.html">A reference implementation in Java</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.technicalypto.com/2010/04/trie-in-java.html">A quick tutorial on TRIE in Java and C++</a></li>
+<li><a rel="nofollow" class="external text" href="http://code.google.com/p/judyarray">A compact C implementation of Judy Tries</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://search.cpan.org/%7Ehammond/data-trie-0.01/Trie.pm">Data::Trie</a> and <a rel="nofollow" class="external text" href="http://search.cpan.org/%7Eavif/Tree-Trie-1.7/Trie.pm">Tree::Trie</a> <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a> implementations.</li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<ol class="references">
+<li id="cite_note-DADS-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-DADS_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-DADS_0-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation web">Black, Paul E. (2009-11-16). <a rel="nofollow" class="external text" href="http://www.webcitation.org/5pqUULy24">"trie"</a>. <i>Dictionary of Algorithms and Data Structures</i>. <a href="http://en.m.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology" title="National Institute of Standards and Technology">National Institute of Standards and Technology</a>. Archived from <a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/trie.html">the original</a> on 2010-05-19<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.webcitation.org/5pqUULy24">http://www.webcitation.org/5pqUULy24</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=trie&amp;rft.atitle=Dictionary+of+Algorithms+and+Data+Structures&amp;rft.aulast=Black&amp;rft.aufirst=Paul+E.&amp;rft.au=Black%2C%26%2332%3BPaul+E.&amp;rft.date=2009-11-16&amp;rft.pub=%5B%5BNational+Institute+of+Standards+and+Technology%5D%5D&amp;rft_id=http%3A%2F%2Fwww.webcitation.org%2F5pqUULy24&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Liang1983-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Liang1983_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Liang1983_1-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-Liang1983_1-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-Liang1983_1-3"><sup><i><b>d</b></i></sup></a></span> <span class="reference-text"><span class="citation thesis">Franklin Mark Liang (1983). <a rel="nofollow" class="external text" href="http://www.webcitation.org/5pqOfzlIA"><i>Word Hy-phen-a-tion By Com-put-er</i></a> (Doctor of Philosophy thesis). Stanford University. Archived from <a rel="nofollow" class="external text" href="http://www.tug.org/docs/liang/liang-thesis.pdf">the original</a> on 2010-05-19<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.webcitation.org/5pqOfzlIA">http://www.webcitation.org/5pqOfzlIA</a></span><span class="reference-accessdate">. Retrieved 2010-03-28</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Word+Hy-phen-a-tion+By+Com-put-er&amp;rft.aulast=Franklin+Mark+Liang&amp;rft.au=Franklin+Mark+Liang&amp;rft.date=1983&amp;rft.pub=Stanford+University&amp;rft_id=http%3A%2F%2Fwww.webcitation.org%2F5pqOfzlIA&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-KnuthVol3-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-KnuthVol3_2-0">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a> (1997). "6.3: Digital Searching". <i>The Art of Computer Programming Volume 3: Sorting and Searching</i> (2nd ed.). Addison-Wesley. p.&nbsp;492. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89685-0" title="Special:BookSources/0-201-89685-0">0-201-89685-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=6.3%3A+Digital+Searching&amp;rft.atitle=The+Art+of+Computer+Programming+Volume+3%3A+Sorting+and+Searching&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald&amp;rft.au=Knuth%2C%26%2332%3BDonald&amp;rft.date=1997&amp;rft.pages=p.%26nbsp%3B492&amp;rft.edition=2nd&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-89685-0&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-trieoverbinary-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-trieoverbinary_3-0">^</a></b></span> <span class="reference-text"><span class="citation Journal">Bentley, Jon; <a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Sedgewick, Robert</a> (1998-04-01). <a rel="nofollow" class="external text" href="http://web.archive.org/web/20080623071352/http://www.ddj.com/windows/184410528">"Ternary Search Trees"</a>. <i><a href="http://en.m.wikipedia.org/wiki/Dr._Dobb%27s_Journal" title="Dr. Dobb's Journal">Dr. Dobb's Journal</a></i> (Dr Dobb's). Archived from <a rel="nofollow" class="external text" href="http://www.ddj.com/windows/184410528">the original</a> on 2008-06-23<span class="printonly">. <a rel="nofollow" class="external free" href="http://web.archive.org/web/20080623071352/http://www.ddj.com/windows/184410528">http://web.archive.org/web/20080623071352/http://www.ddj.com/windows/184410528</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Ternary+Search+Trees&amp;rft.jtitle=%5B%5BDr.+Dobb%27s+Journal%5D%5D&amp;rft.aulast=Bentley&amp;rft.aufirst=Jon&amp;rft.au=Bentley%2C%26%2332%3BJon&amp;rft.au=Sedgewick%2C%26%2332%3BRobert&amp;rft.date=1998-04-01&amp;rft.pub=Dr+Dobb%27s&amp;rft_id=http%3A%2F%2Fweb.archive.org%2Fweb%2F20080623071352%2Fhttp%3A%2F%2Fwww.ddj.com%2Fwindows%2F184410528&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-triememory-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-triememory_4-0">^</a></b></span> <span class="reference-text"><span class="citation Journal"><a href="http://en.m.wikipedia.org/wiki/Edward_Fredkin" title="Edward Fredkin">Edward Fredkin</a> (1960). "Trie Memory". <i>Communications of the ACM</i> <b>3</b> (9): 490–499. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F367390.367400">10.1145/367390.367400</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Trie+Memory&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Edward+Fredkin&amp;rft.au=Edward+Fredkin&amp;rft.date=1960&amp;rft.volume=3&amp;rft.issue=9&amp;rft.pages=490%E2%80%93499&amp;rft_id=info:doi/10.1145%2F367390.367400&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-cachestringsort-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-cachestringsort_5-0">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://www.cs.mu.oz.au/%7Ersinha/papers/SinhaRingZobel-2006.pdf">"Cache-Efficient String Sorting Using Copying"</a> (PDF)<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.cs.mu.oz.au/%7Ersinha/papers/SinhaRingZobel-2006.pdf">http://www.cs.mu.oz.au/~rsinha/papers/SinhaRingZobel-2006.pdf</a></span><span class="reference-accessdate">. Retrieved 2008-11-15</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Cache-Efficient+String+Sorting+Using+Copying&amp;rft.atitle=&amp;rft_id=http%3A%2F%2Fwww.cs.mu.oz.au%2F%7Ersinha%2Fpapers%2FSinhaRingZobel-2006.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation Journal">Jan Daciuk, Stoyan Mihov, Bruce W. Watson, Richard E. Watson (2000). <a rel="nofollow" class="external text" href="http://www.mitpressjournals.org/doi/abs/10.1162/089120100561601">"Incremental Construction of Minimal Acyclic Finite-State Automata"</a>. <i>Computational Linguistics</i> (Association for Computational Linguistics) <b>26</b>: 3. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1162%2F089120100561601">10.1162/089120100561601</a>. Archived from <a rel="nofollow" class="external text" href="http://www.pg.gda.pl/%7Ejandac/daciuk98.ps.gz">the original</a> on 2006-03-13<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.mitpressjournals.org/doi/abs/10.1162/089120100561601">http://www.mitpressjournals.org/doi/abs/10.1162/089120100561601</a></span><span class="reference-accessdate">. Retrieved 2009-05-28</span>.
+ "This paper presents a method for direct building of minimal acyclic 
+finite states automaton which recognizes a given finite list of words in
+ lexicographical order. Our approach is to construct a minimal automaton
+ in a single phase by adding new strings one by one and minimizing the 
+resulting automaton on-the-fly"</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Incremental+Construction+of+Minimal+Acyclic+Finite-State+Automata&amp;rft.jtitle=Computational+Linguistics&amp;rft.aulast=Jan+Daciuk%2C+Stoyan+Mihov%2C+Bruce+W.+Watson%2C+Richard+E.+Watson&amp;rft.au=Jan+Daciuk%2C+Stoyan+Mihov%2C+Bruce+W.+Watson%2C+Richard+E.+Watson&amp;rft.date=2000&amp;rft.volume=26&amp;rft.pages=3&amp;rft.pub=Association+for+Computational+Linguistics&amp;rft_id=info:doi/10.1162%2F089120100561601&amp;rft_id=http%3A%2F%2Fwww.mitpressjournals.org%2Fdoi%2Fabs%2F10.1162%2F089120100561601&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><span class="citation web">Ulrich Germann, Eric Joanis, Samuel Larkin (2009). <a rel="nofollow" class="external text" href="http://www.aclweb.org/anthology/W/W09/W09-1505.pdf">"Tightly packed tries: how to fit large models into memory, and make them load fast, too"</a> (PDF). <i>ACL
+ Workshops: Proceedings of the Workshop on Software Engineering, 
+Testing, and Quality Assurance for Natural Language Processing</i>. Association for Computational Linguistics. pp.&nbsp;31–39<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.aclweb.org/anthology/W/W09/W09-1505.pdf">http://www.aclweb.org/anthology/W/W09/W09-1505.pdf</a></span>.
+ "We present Tightly Packed Tries (TPTs), a compact implementation of 
+read-only, compressed trie structures with fast on-demand paging and 
+short load times. We demonstrate the benefits of TPTs for storing n-gram
+ back-off language models and phrase tables for <a href="http://en.m.wikipedia.org/wiki/Statistical_machine_translation" title="Statistical machine translation">statistical machine translation</a>.
+ Encoded as TPTs, these databases require less space than flat text file
+ representations of the same data compressed with the gzip utility. At 
+the same time, they can be mapped into memory quickly and be searched 
+directly in time linear in the length of the key, without the need to 
+decompress the entire file. The overhead for local decompression during 
+search is marginal."</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Tightly+packed+tries%3A+how+to+fit+large+models+into+memory%2C+and+make+them+load+fast%2C+too&amp;rft.atitle=ACL+Workshops%3A+Proceedings+of+the+Workshop+on+Software+Engineering%2C+Testing%2C+and+Quality+Assurance+for+Natural+Language+Processing&amp;rft.aulast=Ulrich+Germann%2C+Eric+Joanis%2C+Samuel+Larkin&amp;rft.au=Ulrich+Germann%2C+Eric+Joanis%2C+Samuel+Larkin&amp;rft.date=2009&amp;rft.pages=pp.%26nbsp%3B31%E2%80%9339&amp;rft.pub=Association+for+Computational+Linguistics&amp;rft_id=http%3A%2F%2Fwww.aclweb.org%2Fanthology%2FW%2FW09%2FW09-1505.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+<ul>
+<li>
+<span class="citation Journal">de la Briandais, R. (1959). "File Searching Using Variable Length Keys". <i>Proceedings of the Western Joint Computer Conference</i>: 295–298.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=File+Searching+Using+Variable+Length+Keys&amp;rft.jtitle=Proceedings+of+the+Western+Joint+Computer+Conference&amp;rft.aulast=de+la+Briandais&amp;rft.aufirst=R.&amp;rft.au=de+la+Briandais%2C%26%2332%3BR.&amp;rft.date=1959&amp;rft.pages=295%E2%80%93298&amp;rfr_id=info:sid/en.wikipedia.org:Trie"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:CS_trees" title="Template:CS trees"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:CS_trees" title="Template talk:CS trees"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:CS_trees&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Trees</a> in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">Binary trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree (BST)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree" title="Cartesian tree">Cartesian tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Top_tree" title="Top tree">Top tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">Self-balancing binary search trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AA_tree" title="AA tree">AA tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/LLRB_tree" title="LLRB tree" class="mw-redirect">LLRB tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Red%E2%80%93black_tree" title="Red–black tree">Red–black tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Splay_tree" title="Splay tree">Splay tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Treap" title="Treap">Treap</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/B%2B_tree" title="B+ tree">B+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B*-tree" title="B*-tree" class="mw-redirect">B*-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bx-tree" title="Bx-tree">B<small><sup>x</sup></small>-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UB-tree" title="UB-tree">UB-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3-4_tree" title="2-3-4 tree">2-3-4 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/%28a,b%29-tree" title="(a,b)-tree">(a,b)-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dancing_tree" title="Dancing tree">Dancing tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Htree" title="Htree">Htree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><strong class="selflink">Tries</strong></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">Suffix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_search_tree" title="Ternary search tree">Ternary search tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-fast_trie" title="X-fast trie">X-fast trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Y-fast_trie" title="Y-fast trie">Y-fast trie</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Binary_space_partitioning" title="Binary space partitioning">Binary space partitioning (BSP)</a> trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Quadtree" title="Quadtree">Quadtree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Octree" title="Octree">Octree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/K-d_tree" title="K-d tree"><i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Implicit_k-d_tree" title="Implicit k-d tree">Implicit <i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Vp-tree" title="Vp-tree">vp-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Non-binary trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Exponential_tree" title="Exponential tree">Exponential tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fusion_tree" title="Fusion tree">Fusion tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interval_tree" title="Interval tree">Interval tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/PQ_tree" title="PQ tree">PQ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Range_tree" title="Range tree">Range tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SPQR_tree" title="SPQR tree">SPQR tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Van_Emde_Boas_tree" title="Van Emde Boas tree">Van Emde Boas tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Spatial_index" title="Spatial index" class="mw-redirect">Spatial</a> data partitioning trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/R-tree" title="R-tree">R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R%2B_tree" title="R+ tree">R+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R*_tree" title="R* tree">R* tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-tree" title="X-tree">X-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/M-tree" title="M-tree">M-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Segment_tree" title="Segment tree">Segment tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hilbert_R-tree" title="Hilbert R-tree">Hilbert R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Priority_R-tree" title="Priority R-tree">Priority R-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">Heap</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_tree" title="Hash tree">Hash tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Finger_tree" title="Finger tree">Finger tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metric_tree" title="Metric tree">Metric tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cover_tree" title="Cover tree">Cover tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/BK-tree" title="BK-tree">BK-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Doubly_chained_tree" title="Doubly chained tree">Doubly chained tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/IDistance" title="IDistance">iDistance</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Link-cut_tree" title="Link-cut tree" class="mw-redirect">Link-cut tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fenwick_tree" title="Fenwick tree">Fenwick tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Trie&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Trie&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Trie&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Trie&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Trie_files/load_002.php" type="text/javascript"></script>
+<script src="Trie_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

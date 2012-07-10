@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Dynamic programming - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Dynamic_programming_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 26 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Dynamic_programming">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Dynamic_programming_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Dynamic_programming_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Dynamic_programming_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Dynamic_programming" selected="selected">English</option><option value="//ca.m.wikipedia.org/wiki/Programaci%C3%B3_din%C3%A0mica">català</option><option value="//cs.m.wikipedia.org/wiki/Dynamick%C3%A9_programov%C3%A1n%C3%AD">česky</option><option value="//de.m.wikipedia.org/wiki/Dynamische_Programmierung">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Programaci%C3%B3n_din%C3%A1mica">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87%E2%80%8C%D8%B1%DB%8C%D8%B2%DB%8C_%D9%BE%D9%88%DB%8C%D8%A7">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Programmation_dynamique">français</option><option value="//gl.m.wikipedia.org/wiki/Programaci%C3%B3n_din%C3%A1mica_(computaci%C3%B3n)">galego</option><option value="//ko.m.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95">한국어</option><option value="//hy.m.wikipedia.org/wiki/%D4%B4%D5%AB%D5%B6%D5%A1%D5%B4%D5%AB%D5%AF_%D5%AE%D6%80%D5%A1%D5%A3%D6%80%D5%A1%D5%BE%D5%B8%D6%80%D5%B8%D6%82%D5%B4">Հայերեն</option><option value="//hi.m.wikipedia.org/wiki/%E0%A4%A1%E0%A4%BE%E0%A4%87%E0%A4%A8%E0%A5%88%E0%A4%AE%E0%A4%BF%E0%A4%95_%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A5%8B%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%AE%E0%A4%BF%E0%A4%82%E0%A4%97">हिन्दी</option><option value="//it.m.wikipedia.org/wiki/Programmazione_dinamica">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%AA%D7%9B%D7%A0%D7%95%D7%9F_%D7%93%D7%99%D7%A0%D7%9E%D7%99">עברית</option><option value="//lt.m.wikipedia.org/wiki/Dinaminis_programavimas">lietuvių</option><option value="//ml.m.wikipedia.org/wiki/%E0%B4%A1%E0%B5%88%E0%B4%A8%E0%B4%BE%E0%B4%AE%E0%B4%BF%E0%B4%95%E0%B5%8D_%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B5%8B%E0%B4%97%E0%B5%8D%E0%B4%B0%E0%B4%BE%E0%B4%AE%E0%B4%BF%E0%B4%99%E0%B5%8D">മലയാളം</option><option value="//ja.m.wikipedia.org/wiki/%E5%8B%95%E7%9A%84%E8%A8%88%E7%94%BB%E6%B3%95">日本語</option><option value="//pl.m.wikipedia.org/wiki/Programowanie_dynamiczne">polski</option><option value="//pt.m.wikipedia.org/wiki/Programa%C3%A7%C3%A3o_din%C3%A2mica">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">русский</option><option value="//sl.m.wikipedia.org/wiki/Dinami%C4%8Dno_programiranje">slovenščina</option><option value="//sr.m.wikipedia.org/wiki/%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%BA%D0%BE_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8%D1%80%D0%B0%D1%9A%D0%B5">српски / srpski</option><option value="//sh.m.wikipedia.org/wiki/Dinami%C4%8Dko_programiranje">srpskohrvatski / српскохрватски</option><option value="//sv.m.wikipedia.org/wiki/Dynamisk_programmering">svenska</option><option value="//uk.m.wikipedia.org/wiki/%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D1%96%D1%87%D0%BD%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F">українська</option><option value="//vi.m.wikipedia.org/wiki/Quy_ho%E1%BA%A1ch_%C4%91%E1%BB%99ng">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Dynamic programming</h1>			
+<div class="dablink">For the programming paradigm, see <a href="http://en.m.wikipedia.org/wiki/Dynamic_programming_language" title="Dynamic programming language">Dynamic programming language</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <b>dynamic programming</b>
+ is a method for solving complex problems by breaking them down into 
+simpler subproblems. It is applicable to problems exhibiting the 
+properties of <a href="http://en.m.wikipedia.org/wiki/Overlapping_subproblem" title="Overlapping subproblem" class="mw-redirect">overlapping subproblems</a> which are only slightly smaller<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> and <a href="http://en.m.wikipedia.org/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a> (described below). When applicable, the method takes far less time than naive methods.</p>
+<p>The key idea behind dynamic programming is quite simple. In general, 
+to solve a given problem, we need to solve different parts of the 
+problem (subproblems), then combine the solutions of the subproblems to 
+reach an overall solution. Often, many of these subproblems are really 
+the same. The dynamic programming approach seeks to solve each 
+subproblem only once, thus reducing the number of computations: once the
+ solution to a given subproblem has been computed, it is stored or "<a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memo-ized</a>":
+ the next time the same solution is needed, it is simply looked up. This
+ approach is especially useful when the number of repeating subproblems <a href="http://en.m.wikipedia.org/wiki/Exponential_growth" title="Exponential growth">grows exponentially</a> as a function of the size of the input.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="History">History</span></h2><div class="content_block" id="content_1">
+<p>The term <i>dynamic programming</i> was originally used in the 1940s by <a href="http://en.m.wikipedia.org/wiki/Richard_Bellman" title="Richard Bellman" class="mw-redirect">Richard Bellman</a>
+ to describe the process of solving problems where one needs to find the
+ best decisions one after another. By 1953, he refined this to the 
+modern meaning, referring specifically to nesting smaller decision 
+problems inside larger decisions,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> and the field was thereafter recognized by the <a href="http://en.m.wikipedia.org/wiki/IEEE" title="IEEE" class="mw-redirect">IEEE</a> as a <a href="http://en.m.wikipedia.org/wiki/Systems_analysis" title="Systems analysis">systems analysis</a> and <a href="http://en.m.wikipedia.org/wiki/Engineering" title="Engineering">engineering</a> topic. Bellman's contribution is remembered in the name of the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a>, a central result of dynamic programming which restates an optimization problem in <a href="http://en.m.wikipedia.org/wiki/Recursion_%28computer_science%29" title="Recursion (computer science)">recursive</a> form.</p>
+<p>The word <i>dynamic</i> was chosen by Bellman to capture the time-varying aspect of the problems, and because it sounded impressive.<sup id="cite_ref-Eddy_2-0" class="reference"><a href="#cite_note-Eddy-2"><span>[</span>3<span>]</span></a></sup> The word <i>programming</i> referred to the use of the method to find an optimal <i>program</i>, in the sense of a military schedule for training or logistics. This usage is the same as that in the phrases <i><a href="http://en.m.wikipedia.org/wiki/Linear_programming" title="Linear programming">linear programming</a></i> and <i>mathematical programming</i>, a synonym for <a href="http://en.m.wikipedia.org/wiki/Mathematical_optimization" title="Mathematical optimization">mathematical optimization</a>.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup></p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Overview">Overview</span></h2><div class="content_block" id="content_2">
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Shortest_path_optimal_substructure.png" class="image"><img alt="" src="Dynamic_programming_files/Shortest_path_optimal_substructure.png" class="thumbimage" width="200" height="107"></a>
+<div class="thumbcaption">
+
+<b>Figure 1.</b> Finding the shortest path in a graph using optimal 
+substructure; a straight line indicates a single edge; a wavy line 
+indicates a shortest path between the two vertices it connects (other 
+nodes on these paths are not shown); the bold line is the overall 
+shortest path from start to goal.</div>
+</div>
+</div>
+<p>Dynamic programming is both a mathematical optimization method and a 
+computer programming method. In both contexts it refers to simplifying a
+ complicated problem by breaking it down into simpler subproblems in a <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursive</a>
+ manner. While some decision problems cannot be taken apart this way, 
+decisions that span several points in time do often break apart 
+recursively; Bellman called this the "<a href="http://en.m.wikipedia.org/wiki/Bellman_equation#Bellman.27s_Principle_of_Optimality" title="Bellman equation">Principle of Optimality</a>". Likewise, in computer science, a problem that can be broken down recursively is said to have <a href="http://en.m.wikipedia.org/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a>.</p>
+<p>If subproblems can be nested recursively inside larger problems, so 
+that dynamic programming methods are applicable, then there is a 
+relation between the value of the larger problem and the values of the 
+subproblems.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup> In the optimization literature this relationship is called the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a>.</p>
+<h3> <span class="mw-headline" id="Dynamic_programming_in_mathematical_optimization">Dynamic programming in mathematical optimization</span>
+</h3>
+<p>In terms of <a href="http://en.m.wikipedia.org/wiki/Mathematical_optimization" title="Mathematical optimization">mathematical optimization</a>,
+ dynamic programming usually refers to simplifying a decision by 
+breaking it down into a sequence of decision steps over time. This is 
+done by defining a sequence of <b>value functions</b> <i>V</i><sub>1</sub>, <i>V</i><sub>2</sub>, ..., <i>V</i><sub><i>n</i></sub>, with an argument <i>y</i> representing the <b><a href="http://en.m.wikipedia.org/wiki/State_variable" title="State variable">state</a></b> of the system at times <i>i</i> from 1 to <i>n</i>. The definition of <i>V</i><sub><i>n</i></sub>(<i>y</i>) is the value obtained in state <i>y</i> at the last time <i>n</i>. The values <i>V</i><sub><i>i</i></sub> at earlier times <i>i</i>&nbsp;=&nbsp;<i>n</i>&nbsp;−1,&nbsp;<i>n</i>&nbsp;−&nbsp;2,&nbsp;...,&nbsp;2,&nbsp;1 can be found by working backwards, using a <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursive</a> relationship called the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a>. For <i>i</i>&nbsp;=&nbsp;2,&nbsp;...,&nbsp;<i>n</i>, <i>V</i><sub><i>i</i>−1</sub> at any state <i>y</i> is calculated from <i>V</i><sub><i>i</i></sub> by maximizing a simple function (usually the sum) of the gain from decision <i>i</i>&nbsp;−&nbsp;1 and the function <i>V</i><sub><i>i</i></sub> at the new state of the system if this decision is made. Since <i>V</i><sub><i>i</i></sub> has already been calculated for the needed states, the above operation yields <i>V</i><sub><i>i</i>−1</sub> for those states. Finally, <i>V</i><sub>1</sub>
+ at the initial state of the system is the value of the optimal 
+solution. The optimal values of the decision variables can be recovered,
+ one by one, by tracking back the calculations already performed.</p>
+<h3> <span class="mw-headline" id="Dynamic_programming_in_computer_programming">Dynamic programming in computer programming</span>
+</h3>
+<p>There are two key attributes that a problem must have in order for dynamic programming to be applicable: <a href="http://en.m.wikipedia.org/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a> and <a href="http://en.m.wikipedia.org/wiki/Overlapping_subproblem" title="Overlapping subproblem" class="mw-redirect">overlapping subproblems</a>. However, when the overlapping problems are much smaller than the original problem, the strategy is called "<a href="http://en.m.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">divide and conquer</a>" rather than "dynamic programming". This is why <a href="http://en.m.wikipedia.org/wiki/Mergesort" title="Mergesort" class="mw-redirect">mergesort</a>, <a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">quicksort</a>, and finding all matches of a <a href="http://en.m.wikipedia.org/wiki/Regular_expression" title="Regular expression">regular expression</a> are not classified as dynamic programming problems.</p>
+<p><i>Optimal substructure</i> means that the solution to a given 
+optimization problem can be obtained by the combination of optimal 
+solutions to its subproblems. Consequently, the first step towards 
+devising a dynamic programming solution is to check whether the problem 
+exhibits such optimal substructure. Such optimal substructures are 
+usually described by means of <a href="http://en.m.wikipedia.org/wiki/Recursion" title="Recursion">recursion</a>. For example, given a graph <i>G=(V,E)</i>, the shortest path <i>p</i> from a vertex <i>u</i> to a vertex <i>v</i> exhibits optimal substructure: take any intermediate vertex <i>w</i> on this shortest path <i>p</i>. If <i>p</i> is truly the shortest path, then the path <i>p<sub>1</sub></i> from <i>u</i> to <i>w</i> and <i>p<sub>2</sub></i> from <i>w</i> to <i>v</i> are indeed the shortest paths between the corresponding vertices (by the simple cut-and-paste argument described in <a href="http://en.m.wikipedia.org/wiki/CLRS" title="CLRS" class="mw-redirect">CLRS</a>). Hence, one can easily formulate the solution for finding shortest paths in a recursive manner, which is what the <a href="http://en.m.wikipedia.org/wiki/Bellman-Ford_algorithm" title="Bellman-Ford algorithm" class="mw-redirect">Bellman-Ford algorithm</a> or the <a href="http://en.m.wikipedia.org/wiki/Floyd-Warshall_algorithm" title="Floyd-Warshall algorithm" class="mw-redirect">Floyd-Warshall algorithm</a> does.</p>
+<p><i>Overlapping</i> subproblems means that the space of subproblems 
+must be small, that is, any recursive algorithm solving the problem 
+should solve the same subproblems over and over, rather than generating 
+new subproblems. For example, consider the recursive formulation for 
+generating the Fibonacci series: <i>F</i><sub><i>i</i></sub> = <i>F</i><sub><i>i</i>−1</sub> + <i>F</i><sub><i>i</i>−2</sub>, with base case <i>F</i><sub>1</sub>&nbsp;=&nbsp;<i>F</i><sub>2</sub>&nbsp;=&nbsp;1. Then <i>F</i><sub>43</sub> =&nbsp;<i>F</i><sub>42</sub>&nbsp;+&nbsp;<i>F</i><sub>41</sub>, and <i>F</i><sub>42</sub> =&nbsp;<i>F</i><sub>41</sub>&nbsp;+&nbsp;<i>F</i><sub>40</sub>. Now <i>F</i><sub>41</sub> is being solved in the recursive subtrees of both <i>F</i><sub>43</sub> as well as <i>F</i><sub>42</sub>.
+ Even though the total number of subproblems is actually small (only 43 
+of them), we end up solving the same problems over and over if we adopt a
+ naive recursive solution such as this. Dynamic programming takes 
+account of this fact and solves each subproblem only once. Note that the
+ subproblems must be only <i>slightly</i> smaller (typically taken to mean a constant additive factor<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from June 2009">citation needed</span></a></i>]</sup>)
+ than the larger problem; when they are a multiplicative factor smaller 
+the problem is no longer classified as dynamic programming.</p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:110px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Fibonacci_dynamic_programming.svg" class="image"><img alt="" src="Dynamic_programming_files/108px-Fibonacci_dynamic_programming.png" class="thumbimage" width="108" height="149"></a>
+<div class="thumbcaption">
+
+<b>Figure 2.</b> The subproblem graph for the Fibonacci sequence. The fact that it is not a <a href="http://en.m.wikipedia.org/wiki/Tree_structure" title="Tree structure">tree</a> indicates overlapping subproblems.</div>
+</div>
+</div>
+<p>This can be achieved in either of two ways:<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from May 2009">citation needed</span></a></i>]</sup></p>
+<ul>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Top-down" title="Top-down" class="mw-redirect">Top-down approach</a></i>:
+ This is the direct fall-out of the recursive formulation of any 
+problem. If the solution to any problem can be formulated recursively 
+using the solution to its subproblems, and if its subproblems are 
+overlapping, then one can easily <a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoize</a>
+ or store the solutions to the subproblems in a table. Whenever we 
+attempt to solve a new subproblem, we first check the table to see if it
+ is already solved. If a solution has been recorded, we can use it 
+directly, otherwise we solve the subproblem and add its solution to the 
+table.</li>
+</ul>
+<ul>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Top-down_and_bottom-up_design" title="Top-down and bottom-up design">Bottom-up approach</a></i>:
+ Once we formulate the solution to a problem recursively as in terms of 
+its subproblems, we can try reformulating the problem in a bottom-up 
+fashion: try solving the subproblems first and use their solutions to 
+build-on and arrive at solutions to bigger subproblems. This is also 
+usually done in a tabular form by iteratively generating solutions to 
+bigger and bigger subproblems by using the solutions to small 
+subproblems. For example, if we already know the values of <i>F</i><sub>41</sub> and <i>F</i><sub>40</sub>, we can directly calculate the value of <i>F</i><sub>42</sub>.</li>
+</ul>
+<p>Some <a href="http://en.m.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a> can automatically <a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoize</a> the result of a function call with a particular set of arguments, in order to speed up <a href="http://en.m.wikipedia.org/wiki/Call-by-name" title="Call-by-name" class="mw-redirect">call-by-name</a> evaluation (this mechanism is referred to as <i><a href="http://en.m.wikipedia.org/wiki/Evaluation_strategy#Call_by_need" title="Evaluation strategy">call-by-need</a></i>). Some languages make it possible portably (e.g. <a href="http://en.m.wikipedia.org/wiki/Scheme_%28programming_language%29" title="Scheme (programming language)">Scheme</a>, <a href="http://en.m.wikipedia.org/wiki/Common_Lisp" title="Common Lisp">Common Lisp</a> or <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a>), some need special extensions (e.g. <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, see<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>). Some languages have automatic <a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoization</a> built in, such as tabled <a href="http://en.m.wikipedia.org/wiki/Prolog" title="Prolog">Prolog</a> and <a href="http://en.m.wikipedia.org/wiki/J_%28programming_language%29" title="J (programming language)">J</a>, which supports memoization with the <i>M.</i> adverb<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup>. In any case, this is only possible for a <a href="http://en.m.wikipedia.org/wiki/Referential_transparency_%28computer_science%29" title="Referential transparency (computer science)">referentially transparent</a> function.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Example:_Mathematical_optimization">Example: Mathematical optimization</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Optimal_consumption_and_saving">Optimal consumption and saving</span>
+</h3>
+<p>A mathematical optimization problem that is often used in teaching 
+dynamic programming to economists (because it can be solved by hand<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup>) concerns a consumer who lives over the periods <img class="tex" alt="t=0,1,2,\ldots,T" src="Dynamic_programming_files/bc0e1f05b08ca470081d33ae8cbde327.png"> and must decide how much to consume and how much to save in each period.</p>
+<p>Let <img class="tex" alt="c_t" src="Dynamic_programming_files/cd40b468a6890fe609be337d815300a3.png"> be consumption in period <img class="tex" alt="t" src="Dynamic_programming_files/e358efa489f58062f10dd7316b65649e.png">, and assume consumption yields <a href="http://en.m.wikipedia.org/wiki/Utility" title="Utility">utility</a> <img class="tex" alt="u(c_t)=\ln(c_t)" src="Dynamic_programming_files/0b25698f7471ee130c0babad0eec74ed.png"> as long as the consumer lives. Assume the consumer is impatient, so that he <a href="http://en.m.wikipedia.org/wiki/Discounting" title="Discounting">discounts</a> future utility by a factor <img class="tex" alt="b" src="Dynamic_programming_files/92eb5ffee6ae2fec3ad71c777531578f.png"> each period, where <img class="tex" alt="0&lt;b&lt;1" src="Dynamic_programming_files/5f375c9915350da438317c968dd1e8ab.png">. Let <img class="tex" alt="k_t" src="Dynamic_programming_files/652d7a1af66d26760cb13c43d511c0ce.png"> be <a href="http://en.m.wikipedia.org/wiki/Capital_%28economics%29" title="Capital (economics)">capital</a> in period <img class="tex" alt="t" src="Dynamic_programming_files/e358efa489f58062f10dd7316b65649e.png">. Assume initial capital is a given amount <img class="tex" alt="k_0&gt;0" src="Dynamic_programming_files/079b86f8cb1ef5fe124d7d345fa0a072.png">, and suppose that this period's capital and consumption determine next period's capital as <img class="tex" alt="k_{t+1}=Ak^a_t - c_t" src="Dynamic_programming_files/5824104beb9f4e21b8d2f5a878a4a17c.png">, where <img class="tex" alt="A" src="Dynamic_programming_files/7fc56270e7a70fa81a5935b72eacbe29.png"> is a positive constant and <img class="tex" alt="0&lt;a&lt;1" src="Dynamic_programming_files/81ab5a0b5746d911e1d8f16c92f80df1.png">. Assume capital cannot be negative. Then the consumer's decision problem can be written as follows:</p>
+<dl>
+<dd>
+<img class="tex" alt="\max \sum_{t=0}^T b^t \ln(c_t)" src="Dynamic_programming_files/e1e91344e5a884e698ac1159492a1762.png"> subject to <img class="tex" alt="k_{t+1}=Ak^a_t - c_t \geq 0" src="Dynamic_programming_files/222e74fffdf4776b45219ff2d7ff247a.png"> for all <img class="tex" alt="t=0,1,2,\ldots,T" src="Dynamic_programming_files/bc0e1f05b08ca470081d33ae8cbde327.png">
+</dd>
+</dl>
+<p>Written this way, the problem looks complicated, because it involves solving for all the choice variables <img class="tex" alt="c_0, c_1, c_2, \ldots , c_T" src="Dynamic_programming_files/b41b1a36661b18441a11fa76b091e81e.png"> and <img class="tex" alt="k_1, k_2, k_3, \ldots , k_{T+1}" src="Dynamic_programming_files/12d84e364cc6aa717e36b74b689e9cfc.png"> simultaneously. (Note that <img class="tex" alt="k_0" src="Dynamic_programming_files/c14cdd1e05d2963ab7eea7d63e9f6de5.png"> is not a choice variable—the consumer's initial capital is taken as given.)</p>
+<p>The dynamic programming approach to solving this problem involves 
+breaking it apart into a sequence of smaller decisions. To do so, we 
+define a sequence of <i>value functions</i> <img class="tex" alt="V_t(k)" src="Dynamic_programming_files/c039b9327ca881e6bb7e63cd0418f27c.png">, for <img class="tex" alt="t=0,1,2,\ldots,T,T+1" src="Dynamic_programming_files/5905d253ef8fe0153effe0257f6f51ce.png"> which represent the value of having any amount of capital <img class="tex" alt="k" src="Dynamic_programming_files/8ce4b16b22b58894aa86c421e8759df3.png"> at each time <img class="tex" alt="t" src="Dynamic_programming_files/e358efa489f58062f10dd7316b65649e.png">. Note that <img class="tex" alt="V_{T+1}(k)=0" src="Dynamic_programming_files/e3e12a5a3f1bb777948c540ebf0ff5cc.png">, that is, there is (by assumption) no utility from having capital after death.</p>
+<p>The value of any quantity of capital at any previous time can be calculated by <a href="http://en.m.wikipedia.org/wiki/Backward_induction" title="Backward induction">backward induction</a> using the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a>. In this problem, for each <img class="tex" alt="t=0,1,2,\ldots,T" src="Dynamic_programming_files/bc0e1f05b08ca470081d33ae8cbde327.png">, the Bellman equation is</p>
+<dl>
+<dd><img class="tex" alt="V_t(k_t) \, = \, \max \left( \ln(c_t) + b V_{t+1}(k_{t+1}) \right)\text{ subject to }k_{t+1}=Ak^a_t - c_t \geq 0" src="Dynamic_programming_files/54310172f24562871bffb05a3b2f7976.png"></dd>
+</dl>
+<p>This problem is much simpler than the one we wrote down before, because it involves only two decision variables, <img class="tex" alt="c_t" src="Dynamic_programming_files/cd40b468a6890fe609be337d815300a3.png"> and <img class="tex" alt="k_{t+1}" src="Dynamic_programming_files/83d765279b1d89fca9bcf5d29df3d387.png">. Intuitively, instead of choosing his whole lifetime plan at birth, the consumer can take things one step at a time. At time <img class="tex" alt="t" src="Dynamic_programming_files/e358efa489f58062f10dd7316b65649e.png">, his current capital <img class="tex" alt="k_t" src="Dynamic_programming_files/652d7a1af66d26760cb13c43d511c0ce.png"> is given, and he only needs to choose current consumption <img class="tex" alt="c_t" src="Dynamic_programming_files/cd40b468a6890fe609be337d815300a3.png"> and saving <img class="tex" alt="k_{t+1}" src="Dynamic_programming_files/83d765279b1d89fca9bcf5d29df3d387.png">.</p>
+<p>To actually solve this problem, we work backwards. For simplicity, the current level of capital is denoted as <img class="tex" alt="k" src="Dynamic_programming_files/8ce4b16b22b58894aa86c421e8759df3.png">. <img class="tex" alt="V_{T+1}(k)" src="Dynamic_programming_files/2d46f7b298174c4128b86086131f3e53.png"> is already known, so using the Bellman equation once we can calculate <img class="tex" alt="V_T(k)" src="Dynamic_programming_files/fa44677f98e15f02b8c9684ad3678aa2.png">, and so on until we get to <img class="tex" alt="V_0(k)" src="Dynamic_programming_files/7499f25f954af128fa0ab176585f2923.png">, which is the <i>value</i> of the initial decision problem for the whole lifetime. In other words, once we know <img class="tex" alt="V_{T-j+1}(k)" src="Dynamic_programming_files/b03a5971716bd5d11f855976596adb7b.png">, we can calculate <img class="tex" alt="V_{T-j}(k)" src="Dynamic_programming_files/05252a27188e9553226320d4b90da51d.png">, which is the maximum of <img class="tex" alt="\ln(c_{T-j}) + b V_{T-j+1}(Ak^a-c_{T-j})" src="Dynamic_programming_files/7fe01710d49db59dff25e07a79bb6316.png">, where <img class="tex" alt="c_{T-j}" src="Dynamic_programming_files/9d0a2e9bd22359c41fd3426337c3ddab.png"> is the choice variable and <img class="tex" alt="Ak^a-c_{T-j} \ge 0" src="Dynamic_programming_files/01652dac79c60b4a7ab650367f27eb3f.png">.</p>
+<p>Working backwards, it can be shown that the value function at time <img class="tex" alt="t=T-j" src="Dynamic_programming_files/a35261ee9ef208c53c378b896e0acf76.png"> is</p>
+<dl>
+<dd><img class="tex" alt="V_{T-j}(k) \, = \, a \sum_{i=0}^j a^ib^i \ln k + v_{T-j}" src="Dynamic_programming_files/1c8d35497ab8ef6011c79c28fff0ea41.png"></dd>
+</dl>
+<p>where each <img class="tex" alt="v_{T-j}" src="Dynamic_programming_files/ab95bc81b1e2fa81d7afad939c7d82ff.png"> is a constant, and the optimal amount to consume at time <img class="tex" alt="t=T-j" src="Dynamic_programming_files/a35261ee9ef208c53c378b896e0acf76.png"> is</p>
+<dl>
+<dd><img class="tex" alt="c_{T-j}(k) \, = \, \frac{1}{\sum_{i=0}^j a^ib^i} Ak^a" src="Dynamic_programming_files/2d0189d847ae4f4b129eb334393f29c7.png"></dd>
+</dl>
+<p>which can be simplified to</p>
+<dl>
+<dd>
+<img class="tex" alt="c_{T}(k) \, = \, Ak^a" src="Dynamic_programming_files/bb5cd814405c25734ebd7ed0583c7845.png">, and <img class="tex" alt="c_{T-1}(k) \, = \, \frac{Ak^a}{1+ab}" src="Dynamic_programming_files/9a88a6962bbddae17dd28b1567717088.png">, and <img class="tex" alt="c_{T-2}(k) \, = \, \frac{Ak^a}{1+ab+a^2b^2}" src="Dynamic_programming_files/c202995e839d98fa9deb0df6493a2d6b.png">, etc.</dd>
+</dl>
+<p>We see that it is optimal to consume a larger fraction of current 
+wealth as one gets older, finally consuming all remaining wealth in 
+period <img class="tex" alt="T" src="Dynamic_programming_files/b9ece18c950afbfa6b0fdbfa4ff731d3.png">, the last period of life.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Examples:_Computer_algorithms">Examples: Computer algorithms</span></h2><div class="content_block" id="content_4">
+<h3> <span class="mw-headline" id="Dijkstra.27s_algorithm_for_the_shortest_path_problem">Dijkstra's algorithm for the shortest path problem</span>
+</h3>
+<p>From a dynamic programming point of view, <a href="http://en.m.wikipedia.org/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra's algorithm</a> for the <a href="http://en.m.wikipedia.org/wiki/Shortest_path_problem" title="Shortest path problem">shortest path problem</a>
+ is a successive approximation scheme that solves the dynamic 
+programming functional equation for the shortest path problem by the <b>Reaching</b> method.<sup id="cite_ref-sniedovich_06_8-0" class="reference"><a href="#cite_note-sniedovich_06-8"><span>[</span>9<span>]</span></a></sup><sup id="cite_ref-denardo_03_9-0" class="reference"><a href="#cite_note-denardo_03-9"><span>[</span>10<span>]</span></a></sup><sup id="cite_ref-sniedovich_10_10-0" class="reference"><a href="#cite_note-sniedovich_10-10"><span>[</span>11<span>]</span></a></sup></p>
+<p>In fact, Dijkstra's explanation of the logic behind the algorithm,<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup> namely</p>
+<blockquote class="templatequote">
+<div class="Bug6200">
+<p><b>Problem 2.</b> Find the path of minimum total length between two given nodes <img class="tex" alt="P" src="Dynamic_programming_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> and <img class="tex" alt="Q" src="Dynamic_programming_files/f09564c9ca56850d4cd6b3319e541aee.png">.</p>
+<p>We use the fact that, if <img class="tex" alt="R" src="Dynamic_programming_files/e1e1d3d40573127e9ee0480caf1283d6.png"> is a node on the minimal path from <img class="tex" alt="P" src="Dynamic_programming_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> to <img class="tex" alt="Q" src="Dynamic_programming_files/f09564c9ca56850d4cd6b3319e541aee.png">, knowledge of the latter implies the knowledge of the minimal path from <img class="tex" alt="P" src="Dynamic_programming_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> to <img class="tex" alt="R" src="Dynamic_programming_files/e1e1d3d40573127e9ee0480caf1283d6.png">.</p>
+</div>
+</blockquote>
+<p>is a paraphrasing of <a href="http://en.m.wikipedia.org/wiki/Richard_Bellman" title="Richard Bellman" class="mw-redirect">Bellman's</a> famous <a href="http://en.m.wikipedia.org/wiki/Principle_of_Optimality" title="Principle of Optimality" class="mw-redirect">Principle of Optimality</a> in the context of the <a href="http://en.m.wikipedia.org/wiki/Shortest_path_problem" title="Shortest path problem">shortest path problem</a>.</p>
+<h3> <span class="mw-headline" id="Fibonacci_sequence">Fibonacci sequence</span>
+</h3>
+<p>Here is a naïve implementation of a function finding the <i>n</i>th member of the <a href="http://en.m.wikipedia.org/wiki/Fibonacci_sequence" title="Fibonacci sequence" class="mw-redirect">Fibonacci sequence</a>, based directly on the mathematical definition:</p>
+<pre>   <b>function</b> fib(n)
+       <b>if</b> n = 0 <b>return</b> 0
+       <b>if</b> n = 1 <b>return</b> 1
+       <b>return</b> fib(n − 1) + fib(n − 2)
+</pre>
+<p>Notice that if we call, say, <code>fib(5)</code>, we produce a call tree that calls the function on the same value many different times:</p>
+<ol>
+<li><code>fib(5)</code></li>
+<li><code>fib(4) + fib(3)</code></li>
+<li><code>(fib(3) + fib(2)) + (fib(2) + fib(1))</code></li>
+<li><code>((fib(2) + fib(1)) + (fib(1) + fib(0))) + ((fib(1) + fib(0)) + fib(1))</code></li>
+<li><code>(((fib(1) + fib(0)) + fib(1)) + (fib(1) + fib(0))) + ((fib(1) + fib(0)) + fib(1))</code></li>
+</ol>
+<p>In particular, <code>fib(2)</code> was calculated three times from scratch. In larger examples, many more values of <code>fib</code>, or <i>subproblems</i>, are recalculated, leading to an exponential time algorithm.</p>
+<p>Now, suppose we have a simple <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">map</a> object, <i>m</i>, which maps each value of <code>fib</code>
+ that has already been calculated to its result, and we modify our 
+function to use it and update it. The resulting function requires only <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(<i>n</i>) time instead of exponential time:</p>
+<pre>   <b>var</b> m := <b>map</b>(0 → 0, 1 → 1)
+   <b>function</b> fib(n)
+       <b>if</b> <b>map</b> m <b>does not contain key</b> n
+           m[n] := fib(n − 1) + fib(n − 2)
+       <b>return</b> m[n]
+</pre>
+<p>This technique of saving values that have already been calculated is called <i><a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoization</a></i>; this is the top-down approach, since we first break the problem into subproblems and then calculate and store values.</p>
+<p>In the <b>bottom-up</b> approach we calculate the smaller values of <code>fib</code> first, then build larger values from them. This method also uses O(<i>n</i>)
+ time since it contains a loop that repeats n − 1 times, however it only
+ takes constant (O(1)) space, in contrast to the top-down approach which
+ requires O(<i>n</i>) space to store the map.</p>
+<pre>   <b>function</b> fib(n)
+       <b>var</b> previousFib := 0, currentFib := 1
+       <b>if</b> n = 0
+           <b>return</b> 0
+       <b>else </b>repeat<b> n − 1 </b>times<b>  //loop is skipped if n=1</b>
+           <b>var</b> newFib := previousFib + currentFib
+           previousFib := currentFib
+           currentFib  := newFib
+       <b>return</b> currentFib
+</pre>
+<p>In both these examples, we only calculate <code>fib(2)</code> one time, and then use it to calculate both <code>fib(4)</code> and <code>fib(3)</code>, instead of computing it every time either of them is evaluated.</p>
+<p>Note that the above method actually takes <img class="tex" alt="\Omega(n^2)" src="Dynamic_programming_files/030573389a70338bd19a9707c16f31a4.png"> time for large n because addition of two integers with <img class="tex" alt="\Omega(n)" src="Dynamic_programming_files/21497996e331495f03b63c43249905d5.png"> bits each takes <img class="tex" alt="\Omega(n)" src="Dynamic_programming_files/21497996e331495f03b63c43249905d5.png"> time. (The <i>n</i><sup>th</sup> fibonacci number has <img class="tex" alt="\Omega(n)" src="Dynamic_programming_files/21497996e331495f03b63c43249905d5.png"> bits.) Also, there is a closed form for the Fibonacci sequence, <a href="http://en.m.wikipedia.org/wiki/Jacques_Philippe_Marie_Binet#Binet.27s_Fibonacci_number_formula" title="Jacques Philippe Marie Binet">known as Binet's formula</a>, from which the <img class="tex" alt="n" src="Dynamic_programming_files/7b8b965ad4bca0e41ab51de7b31363a1.png">-th term can be <a href="http://en.m.wikipedia.org/wiki/Computational_complexity_of_mathematical_operations" title="Computational complexity of mathematical operations">computed</a> in approximately <img class="tex" alt="O(n(\log n)^2)" src="Dynamic_programming_files/30290b6347fa316778ba522f8fdad4fa.png"> time, which is more efficient than the above dynamic programming technique. However, the simple recurrence directly gives <a href="http://en.m.wikipedia.org/wiki/Fibonacci_sequence#Matrix_form" title="Fibonacci sequence" class="mw-redirect">the matrix form</a> that leads to an approximately <img class="tex" alt="O(n\log n)" src="Dynamic_programming_files/f49341ab621f12e8cb93d0146ea51d34.png"> algorithm by fast matrix exponentiation.</p>
+<h3> <span class="mw-headline" id="A_type_of_balanced_0.E2.80.931_matrix">A type of balanced 0–1 matrix</span>
+</h3>
+<p>Consider the problem of assigning values, either zero or one, to the positions of an <span class="texhtml"><var>n</var> × <var>n</var></span> matrix, with <span class="texhtml"><var>n</var></span> even, so that each row and each column contains exactly <span class="texhtml"><var>n</var> / 2</span> zeros and <span class="texhtml"><var>n</var> / 2</span> ones. We ask how many different assignments there are for a given <img class="tex" alt="n" src="Dynamic_programming_files/7b8b965ad4bca0e41ab51de7b31363a1.png">. For example, when <span class="texhtml"><var>n</var> = 4</span>, four possible solutions are</p>
+<dl>
+<dd><img class="tex" alt="\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix} \text{ and } \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0
+\end{bmatrix} \text{ and } \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix} \text{ and } \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}." src="Dynamic_programming_files/e4fbcb148237d846e902f0c525960423.png"></dd>
+</dl>
+<p>There are at least three possible approaches: <a href="http://en.m.wikipedia.org/wiki/Brute-force_search" title="Brute-force search">brute force</a>, <a href="http://en.m.wikipedia.org/wiki/Backtracking" title="Backtracking">backtracking</a>, and dynamic programming.</p>
+<p>Brute force consists of checking all assignments of zeros and ones and counting those that have balanced rows and columns (<img class="tex" alt="n/2" src="Dynamic_programming_files/a2f070a31330443ceb0dcf352fe50035.png"> zeros and <img class="tex" alt="n/2" src="Dynamic_programming_files/a2f070a31330443ceb0dcf352fe50035.png"> ones). As there are <img class="tex" alt="\tbinom{n}{n/2}^n" src="Dynamic_programming_files/5cc722999e6cf0cfbfbf39bb8b37aeb6.png"> possible assignments, this strategy is not practical except maybe up to <img class="tex" alt="n=6" src="Dynamic_programming_files/f713080e186baab15f88c1f6008ceb50.png">.</p>
+<p>Backtracking for this problem consists of choosing some order of the 
+matrix elements and recursively placing ones or zeros, while checking 
+that in every row and column the number of elements that have not been 
+assigned plus the number of ones or zeros are both at least <i>n&nbsp;/&nbsp;2</i>. While more sophisticated than brute force, this approach will visit every solution once, making it impractical for <i>n</i> larger than six, since the number of solutions is already 116963796250 for <i>n&nbsp;=&nbsp;8</i>, as we shall see.</p>
+<p>Dynamic programming makes it possible to count the number of 
+solutions without visiting them all. Imagine backtracking values for the
+ first row – what information would we require about the remaining rows,
+ in order to be able to accurately count the solutions obtained for each
+ first row values? We consider <span class="texhtml"><var>k</var> × <var>n</var></span> boards, where <span class="texhtml">1 ≤ <var>k</var> ≤ <var>n</var></span>, whose <img class="tex" alt="k" src="Dynamic_programming_files/8ce4b16b22b58894aa86c421e8759df3.png"> rows contain <img class="tex" alt="n/2" src="Dynamic_programming_files/a2f070a31330443ceb0dcf352fe50035.png"> zeros and <img class="tex" alt="n/2" src="Dynamic_programming_files/a2f070a31330443ceb0dcf352fe50035.png"> ones. The function <i>f</i> to which <a href="http://en.m.wikipedia.org/wiki/Memoization" title="Memoization">memoization</a> is applied maps vectors of <i>n</i>
+ pairs of integers to the number of admissible boards (solutions). There
+ is one pair for each column and its two components indicate 
+respectively the number of ones and zeros that have yet to be placed in 
+that column. We seek the value of <img class="tex" alt=" f((n/2, n/2), (n/2, n/2), \ldots (n/2, n/2)) " src="Dynamic_programming_files/93505e9c476c4d69d348d3c60d7ec3ab.png"> (<img class="tex" alt="n" src="Dynamic_programming_files/7b8b965ad4bca0e41ab51de7b31363a1.png"> arguments or one vector of <img class="tex" alt="n" src="Dynamic_programming_files/7b8b965ad4bca0e41ab51de7b31363a1.png"> elements). The process of subproblem creation involves iterating over every one of <img class="tex" alt="\tbinom{n}{n/2}" src="Dynamic_programming_files/4f4e7d6f84db56345d27a0ed627e092c.png">
+ possible assignments for the top row of the board, and going through 
+every column, subtracting one from the appropriate element of the pair 
+for that column, depending on whether the assignment for the top row 
+contained a zero or a one at that position. If any one of the results is
+ negative, then the assignment is invalid and does not contribute to the
+ set of solutions (recursion stops). Otherwise, we have an assignment 
+for the top row of the <span class="texhtml"><var>k</var> × <var>n</var></span> board and recursively compute the number of solutions to the remaining <span class="texhtml">(<var>k</var> − 1) × <var>n</var></span>
+ board, adding the numbers of solutions for every admissible assignment 
+of the top row and returning the sum, which is being memoized. The base 
+case is the trivial subproblem, which occurs for a <span class="texhtml">1 × <var>n</var></span> board. The number of solutions for this board is either zero or one, depending on whether the vector is a permutation of <span class="texhtml"><var>n</var> / 2</span> <img class="tex" alt="(0, 1)" src="Dynamic_programming_files/b6dbc33006b907f2db1855810abfce98.png"> and <span class="texhtml"><var>n</var> / 2</span> <img class="tex" alt="(1, 0)" src="Dynamic_programming_files/ec6014ffc3d92709aa6a4fea11bb3788.png"> pairs or not.</p>
+<p>For example, in the two boards shown above the sequences of vectors would be</p>
+<pre width="80">((2, 2) (2, 2) (2, 2) (2, 2))       ((2, 2) (2, 2) (2, 2) (2, 2))     k = 4
+  0      1      0      1              0      0      1      1
+
+((1, 2) (2, 1) (1, 2) (2, 1))       ((1, 2) (1, 2) (2, 1) (2, 1))     k = 3
+  1      0      1      0              0      0      1      1
+
+((1, 1) (1, 1) (1, 1) (1, 1))       ((0, 2) (0, 2) (2, 0) (2, 0))     k = 2
+  0      1      0      1              1      1      0      0
+
+((0, 1) (1, 0) (0, 1) (1, 0))       ((0, 1) (0, 1) (1, 0) (1, 0))     k = 1
+  1      0      1      0              1      1      0      0
+
+((0, 0) (0, 0) (0, 0) (0, 0))       ((0, 0) (0, 0), (0, 0) (0, 0))
+</pre>
+<p>The number of solutions (sequence <span class="nowrap"><a href="http://oeis.org/A058527" class="extiw" title="oeis:A058527">A058527</a></span> in <a href="http://en.m.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences" title="On-Line Encyclopedia of Integer Sequences">OEIS</a>) is</p>
+<dl>
+<dd><img class="tex" alt=" 1,\, 2,\,  90,\, 297200,\, 116963796250,\, 6736218287430460752, \ldots " src="Dynamic_programming_files/4718cef60654a8981bb5112a91eed6ba.png"></dd>
+</dl>
+<p>Links to the MAPLE implementation of the dynamic programming approach may be found among the <a href="http://en.m.wikipedia.org/wiki/Dynamic_programming#External_links" title="Dynamic programming">external links</a>.</p>
+<h3> <span class="mw-headline" id="Checkerboard">Checkerboard</span>
+</h3>
+<p>Consider a <a href="http://en.m.wikipedia.org/wiki/Checkerboard" title="Checkerboard">checkerboard</a> with <i>n</i> × <i>n</i> squares and a cost-function <i>c</i>(<i>i</i>, <i>j</i>) which returns a cost associated with square <i>i</i>, <i>j</i> (<i>i</i> being the row, <i>j</i> being the column). For instance (on a 5 × 5 checkerboard),</p>
+<table class="wikitable" style="text-align: center;">
+<tbody><tr>
+<th>5</th>
+<td>6</td>
+<td>7</td>
+<td>4</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<th>4</th>
+<td>7</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3</td>
+<td>5</td>
+<td>7</td>
+<td>8</td>
+<td>2</td>
+</tr>
+<tr>
+<th>2</th>
+<td>–</td>
+<td>6</td>
+<td>7</td>
+<td>0</td>
+<td>–</td>
+</tr>
+<tr>
+<th>1</th>
+<td>–</td>
+<td>–</td>
+<td>*5*</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<th width="15"></th>
+<th style="width: 15px;">1</th>
+<th style="width: 15px;">2</th>
+<th style="width: 15px;">3</th>
+<th style="width: 15px;">4</th>
+<th style="width: 15px;">5</th>
+</tr>
+</tbody></table>
+<p>Thus <i>c</i>(1, 3) = 5</p>
+<p>Let us say you had a checker that could start at any square on the 
+first rank (i.e., row) and you wanted to know the shortest path (sum of 
+the costs of the visited squares are at a minimum) to get to the last 
+rank, assuming the checker could move only diagonally left forward, 
+diagonally right forward, or straight forward. That is, a checker on 
+(1,3) can move to (2,2), (2,3) or (2,4).</p>
+<table class="wikitable" style="text-align: center;">
+<tbody><tr>
+<th>5</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>4</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>3</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>2</th>
+<td></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+</tr>
+<tr>
+<th>1</th>
+<td></td>
+<td></td>
+<td>o</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th width="15"></th>
+<th style="width: 15px;">1</th>
+<th style="width: 15px;">2</th>
+<th style="width: 15px;">3</th>
+<th style="width: 15px;">4</th>
+<th style="width: 15px;">5</th>
+</tr>
+</tbody></table>
+<p>This problem exhibits <b>optimal substructure</b>. That is, the solution to the entire problem relies on solutions to subproblems. Let us define a function <i>q</i>(<i>i</i>, <i>j</i>) as</p>
+<dl>
+<dd>
+<i>q</i>(<i>i</i>, <i>j</i>) = the minimum cost to reach square (<i>i</i>, <i>j</i>)</dd>
+</dl>
+<p>If we can find the values of this function for all the squares at rank <i>n</i>, we pick the minimum and follow that path backwards to get the shortest path.</p>
+<p>Note that <i>q</i>(<i>i</i>, <i>j</i>) is equal to the minimum cost 
+to get to any of the three squares below it (since those are the only 
+squares that can reach it) plus <i>c</i>(<i>i</i>, <i>j</i>). For instance:</p>
+<table class="wikitable" style="text-align: center;">
+<tbody><tr>
+<th>5</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>4</th>
+<td></td>
+<td></td>
+<td>A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>3</th>
+<td></td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td></td>
+</tr>
+<tr>
+<th>2</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>1</th>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th width="15"></th>
+<th style="width: 15px;">1</th>
+<th style="width: 15px;">2</th>
+<th style="width: 15px;">3</th>
+<th style="width: 15px;">4</th>
+<th style="width: 15px;">5</th>
+</tr>
+</tbody></table>
+<dl>
+<dd><img class="tex" alt="q(A) = \min(q(B),q(C),q(D))+c(A) \, " src="Dynamic_programming_files/fa62f1359b418790672367e58be83898.png"></dd>
+</dl>
+<p>Now, let us define <i>q</i>(<i>i</i>, <i>j</i>) in somewhat more general terms:</p>
+<dl>
+<dd><img class="tex" alt="q(i,j)=\begin{cases} \infty &amp; j &lt; 1 \text{ or }j &gt; n \\ c(i, j) &amp; i = 1 \\ \min(q(i-1, j-1), q(i-1, j), q(i-1, j+1)) + c(i,j) &amp; \text{otherwise.}\end{cases}" src="Dynamic_programming_files/98a3c9e3c93fa5d4c49a5d3f10703616.png"></dd>
+</dl>
+<p>The first line of this equation is there to make the recursive 
+property simpler (when dealing with the edges, so we need only one 
+recursion). The second line says what happens in the last rank, to 
+provide a base case. The third line, the recursion, is the important 
+part. It is similar to the A,B,C,D example. From this definition we can 
+make a straightforward recursive code for <i>q</i>(<i>i</i>, <i>j</i>). In the following pseudocode, <i>n</i> is the size of the board, <code>c(i, j)</code> is the cost-function, and <code>min()</code> returns the minimum of a number of values:</p>
+<pre><b>function</b> minCost(i, j)
+    <b>if</b> j &lt; 1 <b>or</b> j &gt; n
+        <b>return</b> infinity
+    <b>else if</b> i = 1
+        <b>return</b> c(i, j)
+    <b>else</b>
+        <b>return</b> <b>min</b>( minCost(i-1, j-1), minCost(i-1, j), minCost(i-1, j+1) ) + c(i, j)
+</pre>
+<p>It should be noted that this function only computes the path-cost, 
+not the actual path. We will get to the path soon. This, like the 
+Fibonacci-numbers example, is horribly slow since it spends mountains of
+ time recomputing the same shortest paths over and over. However, we can
+ compute it much faster in a bottom-up fashion if we store path-costs in
+ a two-dimensional array <code>q[i, j]</code> rather than using a function. This avoids recomputation; before computing the cost of a path, we check the array <code>q[i, j]</code> to see if the path cost is already there.</p>
+<p>We also need to know what the actual shortest path is. To do this, we use another array <code>p[i, j]</code>, a <i>predecessor array</i>. This array implicitly stores the path to any square <i>s</i> by storing the previous node on the shortest path to <i>s</i>, i.e. the predecessor. To reconstruct the path, we lookup the predecessor of <i>s</i>,
+ then the predecessor of that square, then the predecessor of that 
+square, and so on, until we reach the starting square. Consider the 
+following code:</p>
+<pre> <b>function</b> computeShortestPathArrays()
+     <b>for</b> x <b>from</b> 1 <b>to</b> n
+         q[1, x] := c(1, x)
+     <b>for</b> y <b>from</b> 1 <b>to</b> n
+         q[y, 0]     := infinity
+         q[y, n + 1] := infinity
+     <b>for</b> y <b>from</b> 2 <b>to</b> n
+         <b>for</b> x <b>from</b> 1 <b>to</b> n
+             m := min(q[y-1, x-1], q[y-1, x], q[y-1, x+1])
+             q[y, x] := m + c(y, x)
+             <b>if</b> m = q[y-1, x-1]
+                 p[y, x] := -1
+             <b>else if</b> m = q[y-1, x]
+                 p[y, x] :=  0
+             <b>else</b>
+                 p[y, x] :=  1
+</pre>
+<p>Now the rest is a simple matter of finding the minimum and printing it.</p>
+<pre> <b>function</b> computeShortestPath()
+     computeShortestPathArrays()
+     minIndex := 1
+     min := q[n, 1]
+     <b>for</b> i <b>from</b> 2 <b>to</b> n
+         <b>if</b> q[n, i] &lt; min
+             minIndex := i
+             min := q[n, i]
+     printPath(n, minIndex)
+</pre>
+<pre> <b>function</b> printPath(y, x)
+     <b>print</b>(x)
+     <b>print</b>("&lt;-")
+     <b>if</b> y = 2
+         <b>print</b>(x + p[y, x])
+     <b>else</b>
+         printPath(y-1, x + p[y, x])
+</pre>
+<h3> <span class="mw-headline" id="Sequence_alignment">Sequence alignment</span>
+</h3>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Genetics" title="Genetics">genetics</a>, <a href="http://en.m.wikipedia.org/wiki/Sequence_alignment" title="Sequence alignment">sequence alignment</a> is an important application where dynamic programming is essential.<sup id="cite_ref-Eddy_2-1" class="reference"><a href="#cite_note-Eddy-2"><span>[</span>3<span>]</span></a></sup>
+ Typically, the problem consists of transforming one sequence into 
+another using edit operations that replace, insert, or remove an 
+element. Each operation has an associated cost, and the goal is to find 
+the <a href="http://en.m.wikipedia.org/wiki/Edit_distance" title="Edit distance">sequence of edits with the lowest total cost</a>.</p>
+<p>The problem can be stated naturally as a recursion, a sequence A is optimally edited into a sequence B by either:</p>
+<ol>
+<li>inserting the first character of B, and performing an optimal alignment of A and the tail of B</li>
+<li>deleting the first character of A, and performing the optimal alignment of the tail of A and B</li>
+<li>replacing the first character of A with the first character of B, and performing optimal alignments of the tails of A and B.</li>
+</ol>
+<p>The partial alignments can be tabulated in a matrix, where cell (i,j)
+ contains the cost of the optimal alignment of A[1..i] to B[1..j]. The 
+cost in cell (i,j) can be calculated by adding the cost of the relevant 
+operations to the cost of its neighboring cells, and selecting the 
+optimum.</p>
+<p>Different variants exist, see <a href="http://en.m.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm" title="Smith–Waterman algorithm">Smith–Waterman algorithm</a> and <a href="http://en.m.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm" title="Needleman–Wunsch algorithm">Needleman–Wunsch algorithm</a>.</p>
+<p><br clear="all"></p>
+<h3> <span class="mw-headline" id="Tower_of_Hanoi_puzzle">Tower of Hanoi puzzle</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:302px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Tower_of_Hanoi.jpeg" class="image"><img alt="" src="Dynamic_programming_files/300px-Tower_of_Hanoi.jpg" class="thumbimage" width="300" height="132"></a>
+<div class="thumbcaption">
+
+A model set of the Towers of Hanoi (with 8 disks)</div>
+</div>
+</div>
+<div class="thumb tright">
+<div class="thumbinner" style="width:302px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Tower_of_Hanoi_4.gif" class="image"><img alt="" src="Dynamic_programming_files/300px-Tower_of_Hanoi_4.gif" class="thumbimage" width="300" height="117"></a>
+<div class="thumbcaption">
+
+An animated solution of the <b>Tower of Hanoi</b> puzzle for <i>T(4,3)</i>.</div>
+</div>
+</div>
+<p>The <b><a href="http://en.m.wikipedia.org/wiki/Tower_of_Hanoi" title="Tower of Hanoi">Tower of Hanoi</a></b> or <b>Towers of <a href="http://en.m.wikipedia.org/wiki/Hanoi" title="Hanoi">Hanoi</a></b> is a <a href="http://en.m.wikipedia.org/wiki/Mathematical_game" title="Mathematical game">mathematical game</a> or <a href="http://en.m.wikipedia.org/wiki/Puzzle" title="Puzzle">puzzle</a>.
+ It consists of three rods, and a number of disks of different sizes 
+which can slide onto any rod. The puzzle starts with the disks in a neat
+ stack in ascending order of size on one rod, the smallest at the top, 
+thus making a conical shape.</p>
+<p>The objective of the puzzle is to move the entire stack to another rod, obeying the following rules:</p>
+<ul>
+<li>Only one disk may be moved at a time.</li>
+<li>Each move consists of taking the upper disk from one of the rods and
+ sliding it onto another rod, on top of the other disks that may already
+ be present on that rod.</li>
+<li>No disk may be placed on top of a smaller disk.</li>
+</ul>
+<p>The dynamic programming solution consists of solving the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">functional equation</a></p>
+<dl>
+<dd>S(n,h,t) = S(n-1,h, not(h,t))&nbsp;; S(1,h,t)&nbsp;; S(n-1,not(h,t),t)</dd>
+</dl>
+<p>where n denotes the number of disks to be moved, h denotes the home 
+rod, t denotes the target rod, not(h,t) denotes the third rod (neither h
+ nor t), ";" denotes concatenation, and</p>
+<dl>
+<dd>S(n, h, t)&nbsp;:= solution to a problem consisting of n disks that are to be moved from rod h to rod t.</dd>
+</dl>
+<p>Note that for n=1 the problem is trivial, namely S(1,h,t) = "move a disk from rod h to rod t" (there is only one disk left).</p>
+<p>The number of moves required by this solution is 2<sup><i>n</i></sup>&nbsp;−&nbsp;1. If the objective is to <b>maximize</b> the number of moves (without cycling) then the dynamic programming <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">functional equation</a> is slightly more complicated and 3<sup><i>n</i></sup>&nbsp;−&nbsp;1 moves are required.<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>13<span>]</span></a></sup><br clear="all"></p>
+<h3> <span class="mw-headline" id="Egg_dropping_puzzle">Egg dropping puzzle</span>
+</h3>
+<p>The following is a description of the instance of this famous <a href="http://en.m.wikipedia.org/wiki/Puzzle" title="Puzzle">puzzle</a> involving n=2 eggs and a building with H=36 floors:<sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>14<span>]</span></a></sup></p>
+<dl>
+<dd>Suppose that we wish to know which stories in a 36-story building 
+are safe to drop eggs from, and which will cause the eggs to break on 
+landing. We make a few assumptions:
+<ul>
+<li>An egg that survives a fall can be used again.</li>
+<li>A broken egg must be discarded.</li>
+<li>The effect of a fall is the same for all eggs.</li>
+<li>If an egg breaks when dropped, then it would break if dropped from a higher window.</li>
+<li>If an egg survives a fall then it would survive a shorter fall.</li>
+<li>It is not ruled out that the first-floor windows break eggs, nor is 
+it ruled out that the 36th-floor windows do not cause an egg to break.</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd>If only one egg is available and we wish to be sure of obtaining the
+ right result, the experiment can be carried out in only one way. Drop 
+the egg from the first-floor window; if it survives, drop it from the 
+second floor window. Continue upward until it breaks. In the worst case,
+ this method may require 36 droppings. Suppose 2 eggs are available. 
+What is the least number of egg-droppings that is guaranteed to work in 
+all cases?</dd>
+</dl>
+<p>To derive a dynamic programming <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">functional equation</a> for this puzzle, let the <b>state</b> of the dynamic programming model be a pair s = (n,k), where</p>
+<dl>
+<dd>
+<i>n</i> = number of test eggs available, <i>n</i> = 0, 1, 2, 3, ..., <i>N</i>&nbsp;−&nbsp;1.</dd>
+<dd>
+<i>k</i> = number of (consecutive) floors yet to be tested, <i>k</i> = 0, 1, 2, ..., <i>H</i>&nbsp;−&nbsp;1.</dd>
+</dl>
+<p>For instance, <i>s</i> = (2,6) indicates that two test eggs are 
+available and 6 (consecutive) floors are yet to be tested. The initial 
+state of the process is <i>s</i> = (<i>N</i>,<i>H</i>) where <i>N</i> 
+denotes the number of test eggs available at the commencement of the 
+experiment. The process terminates either when there are no more test 
+eggs (<i>n</i> = 0) or when <i>k</i> = 0, whichever occurs first. If termination occurs at state <i>s</i> = (0,<i>k</i>) and <i>k</i>&nbsp;&gt;&nbsp;0, then the test failed.</p>
+<p>Now, let</p>
+<dl>
+<dd>
+<i>W</i>(<i>n</i>,<i>k</i>)&nbsp;:= minimum number of trials required to
+ identify the value of the critical floor under the Worst Case Scenario 
+given that the process is in state <i>s</i> = (<i>n</i>,<i>k</i>).</dd>
+</dl>
+<p>Then it can be shown that<sup id="cite_ref-sniedovich_03_14-0" class="reference"><a href="#cite_note-sniedovich_03-14"><span>[</span>15<span>]</span></a></sup></p>
+<dl>
+<dd>
+<i>W</i>(<i>n</i>,<i>k</i>) = 1 + min{max(<i>W</i>(<i>n</i> − 1, <i>x</i> − 1), <i>W</i>(<i>n</i>,<i>k</i> − <i>x</i>)): <i>x</i> in {1, 2, ..., <i>k</i>}}, <i>n</i> = 2, ..., <i>N</i>; <i>k</i> = 2, 3, 4, ..., <i>H</i>
+</dd>
+</dl>
+<p>with <i>W</i>(<i>n</i>,1) = 1 for all <i>n</i>&nbsp;&gt;&nbsp;0 and <i>W</i>(1,<i>k</i>) = <i>k</i> for all&nbsp;<i>k</i>. It is easy to solve this equation iteratively by systematically increasing the values of <i>n</i> and&nbsp;<i>k</i>.</p>
+<p>An <a rel="nofollow" class="external text" href="http://archive.ite.journal.informs.org/Vol4No1/Sniedovich/index.php">interactive online facility</a>
+ is available for experimentation with this model as well as with other 
+versions of this puzzle (e.g. when the objective is to minimize the <b>expected value</b> of the number of trials.<sup id="cite_ref-sniedovich_03_14-1" class="reference"><a href="#cite_note-sniedovich_03-14"><span>[</span>15<span>]</span></a></sup></p>
+<p><br></p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Algorithms_that_use_dynamic_programming">Algorithms that use dynamic programming</span></h2><div class="content_block" id="content_5">
+<ul>
+<li>Recurrent solutions to <a href="http://en.m.wikipedia.org/wiki/Lattice_models" title="Lattice models" class="mw-redirect">Lattice models</a> for protein-DNA binding</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Backward_induction" title="Backward induction">Backward induction</a> as a solution method for finite-horizon <a href="http://en.m.wikipedia.org/wiki/Discrete-time" title="Discrete-time" class="mw-redirect">discrete-time</a> dynamic optimization problems</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Method_of_undetermined_coefficients" title="Method of undetermined coefficients">Method of undetermined coefficients</a> can be used to solve the <a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a> in infinite-horizon, discrete-time, <a href="http://en.m.wikipedia.org/wiki/Discounting" title="Discounting">discounted</a>, <a href="http://en.m.wikipedia.org/wiki/Time-invariant_system" title="Time-invariant system">time-invariant</a> dynamic optimization problems</li>
+<li>Many <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">string</a> algorithms including <a href="http://en.m.wikipedia.org/wiki/Longest_common_subsequence_problem" title="Longest common subsequence problem">longest common subsequence</a>, <a href="http://en.m.wikipedia.org/wiki/Longest_increasing_subsequence_problem" title="Longest increasing subsequence problem" class="mw-redirect">longest increasing subsequence</a>, <a href="http://en.m.wikipedia.org/wiki/Longest_common_substring_problem" title="Longest common substring problem">longest common substring</a>, <a href="http://en.m.wikipedia.org/wiki/Levenshtein_distance" title="Levenshtein distance">Levenshtein distance</a> (edit distance).</li>
+<li>Many algorithmic problems on <a href="http://en.m.wikipedia.org/wiki/Undirected_graph" title="Undirected graph" class="mw-redirect">graphs</a> can be solved efficiently for graphs of bounded <a href="http://en.m.wikipedia.org/wiki/Treewidth" title="Treewidth" class="mw-redirect">treewidth</a> or bounded <a href="http://en.m.wikipedia.org/wiki/Clique-width" title="Clique-width">clique-width</a> by using dynamic programming on a <a href="http://en.m.wikipedia.org/wiki/Tree_decomposition" title="Tree decomposition">tree decomposition</a> of the graph.</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/CYK_algorithm" title="CYK algorithm">Cocke–Younger–Kasami (CYK) algorithm</a> which determines whether and how a given string can be generated by a given <a href="http://en.m.wikipedia.org/wiki/Context-free_grammar" title="Context-free grammar">context-free grammar</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Word_wrap" title="Word wrap">Knuth's word wrapping algorithm</a> that minimizes raggedness when word wrapping text</li>
+<li>The use of <a href="http://en.m.wikipedia.org/wiki/Transposition_table" title="Transposition table">transposition tables</a> and <a href="http://en.m.wikipedia.org/wiki/Refutation_table" title="Refutation table" class="mw-redirect">refutation tables</a> in <a href="http://en.m.wikipedia.org/wiki/Computer_chess" title="Computer chess">computer chess</a>
+</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Viterbi_algorithm" title="Viterbi algorithm">Viterbi algorithm</a> (used for <a href="http://en.m.wikipedia.org/wiki/Hidden_Markov_model" title="Hidden Markov model">hidden Markov models</a>)</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Earley_algorithm" title="Earley algorithm" class="mw-redirect">Earley algorithm</a> (a type of <a href="http://en.m.wikipedia.org/wiki/Chart_parser" title="Chart parser">chart parser</a>)</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm" title="Needleman–Wunsch algorithm">Needleman–Wunsch</a> and other algorithms used in <a href="http://en.m.wikipedia.org/wiki/Bioinformatics" title="Bioinformatics">bioinformatics</a>, including <a href="http://en.m.wikipedia.org/wiki/Sequence_alignment" title="Sequence alignment">sequence alignment</a>, <a href="http://en.m.wikipedia.org/wiki/Structural_alignment" title="Structural alignment">structural alignment</a>, <a href="http://en.m.wikipedia.org/wiki/RNA_structure" title="RNA structure" class="mw-redirect">RNA structure prediction</a>.</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" title="Floyd–Warshall algorithm">Floyd's All-Pairs shortest path algorithm</a></li>
+<li>Optimizing the order for <a href="http://en.m.wikipedia.org/wiki/Chain_matrix_multiplication" title="Chain matrix multiplication" class="mw-redirect">chain matrix multiplication</a>
+</li>
+<li>Pseudopolynomial time algorithms for the <a href="http://en.m.wikipedia.org/wiki/Subset_sum_problem" title="Subset sum problem">Subset Sum</a> and <a href="http://en.m.wikipedia.org/wiki/Knapsack_problem" title="Knapsack problem">Knapsack</a> and <a href="http://en.m.wikipedia.org/wiki/Partition_problem" title="Partition problem">Partition problem</a> Problems</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Dynamic_time_warping" title="Dynamic time warping">dynamic time warping</a> algorithm for computing the global distance between two time series</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Patricia_Selinger" title="Patricia Selinger">Selinger</a> (a.k.a. <a href="http://en.m.wikipedia.org/wiki/IBM_System_R" title="IBM System R">System R</a>) algorithm for relational database query optimization</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/De_Boor_algorithm" title="De Boor algorithm" class="mw-redirect">De Boor algorithm</a> for evaluating B-spline curves</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Duckworth%E2%80%93Lewis_method" title="Duckworth–Lewis method">Duckworth–Lewis method</a> for resolving the problem when games of cricket are interrupted</li>
+<li>The Value Iteration method for solving <a href="http://en.m.wikipedia.org/wiki/Markov_decision_process" title="Markov decision process">Markov decision processes</a>
+</li>
+<li>Some graphic image edge following selection methods such as the "magnet" selection tool in <a href="http://en.m.wikipedia.org/wiki/Photoshop" title="Photoshop" class="mw-redirect">Photoshop</a>
+</li>
+<li>Some methods for solving <a href="http://en.m.wikipedia.org/wiki/Interval_scheduling" title="Interval scheduling">interval scheduling</a> problems</li>
+<li>Some methods for solving <a href="http://en.m.wikipedia.org/wiki/Word_wrap" title="Word wrap">word wrap</a> problems</li>
+<li>Some methods for solving the <a href="http://en.m.wikipedia.org/wiki/Travelling_salesman_problem" title="Travelling salesman problem">travelling salesman problem</a>, either exactly (in <a href="http://en.m.wikipedia.org/wiki/Exponential_time" title="Exponential time" class="mw-redirect">exponential time</a>) or approximately (e.g. via the <a href="http://en.m.wikipedia.org/wiki/Bitonic_tour" title="Bitonic tour">bitonic tour</a>)</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Recursive_least_squares" title="Recursive least squares" class="mw-redirect">Recursive least squares</a> method</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Beat_%28music%29" title="Beat (music)">Beat</a> tracking in <a href="http://en.m.wikipedia.org/wiki/Music_Information_Retrieval" title="Music Information Retrieval" class="mw-redirect">Music Information Retrieval</a>.</li>
+<li>Adaptive Critic training strategy for <a href="http://en.m.wikipedia.org/wiki/Artificial_neural_networks" title="Artificial neural networks" class="mw-redirect">artificial neural networks</a>
+</li>
+<li>Stereo algorithms for solving the <a href="http://en.m.wikipedia.org/wiki/Correspondence_problem" title="Correspondence problem">Correspondence problem</a> used in stereo vision.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Seam_carving" title="Seam carving">Seam carving</a> (content aware image resizing)</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm" title="Bellman–Ford algorithm">Bellman–Ford algorithm</a> for finding the shortest distance in a graph.</li>
+<li>Some approximate solution methods for the <a href="http://en.m.wikipedia.org/wiki/Linear_search_problem" title="Linear search problem">linear search problem</a>.</li>
+<li>Kadane's algorithm for the <a href="http://en.m.wikipedia.org/wiki/Maximum_subarray_problem" title="Maximum subarray problem">Maximum subarray problem</a>.</li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_6">
+<div class="noprint tright portal" style="border:solid #aaa 1px; margin:0.5em 0 0.5em 0.5em;">
+<table style="background: none repeat scroll 0% 0% rgb(249, 249, 249); font-size: 85%; line-height: 110%; max-width: 175px;"><tbody><tr>
+<td style="text-align: center;"><a href="http://en.m.wikipedia.org/wiki/File:Internet_map_1024.jpg" class="image"><img alt="Portal icon" src="Dynamic_programming_files/28px-Internet_map_1024.jpg" width="28" height="28"></a></td>
+<td style="padding: 0pt 0.2em; vertical-align: middle; font-style: italic; font-weight: bold;"><a href="http://en.m.wikipedia.org/wiki/Portal:Computer_science" title="Portal:Computer science">Computer science  portal</a></td>
+</tr></tbody></table>
+</div>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bellman_equation" title="Bellman equation">Bellman equation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Convexity_in_economics" title="Convexity in economics">Convexity in economics</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">Divide and conquer algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Greedy_algorithm" title="Greedy algorithm">Greedy algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Markov_Decision_Process" title="Markov Decision Process" class="mw-redirect">Markov Decision Process</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Non-convexity_%28economics%29" title="Non-convexity (economics)">Non-convexity (economics)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stochastic_programming" title="Stochastic programming">Stochastic programming</a></li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_7">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani, '<b>Algorithms'</b>, p 173, available at <a rel="nofollow" class="external free" href="http://www.cs.berkeley.edu/%7Evazirani/algorithms.html">http://www.cs.berkeley.edu/~vazirani/algorithms.html</a></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.wu-wien.ac.at/usr/h99c/h9951826/bellman_dynprog.pdf">http://www.wu-wien.ac.at/usr/h99c/h9951826/bellman_dynprog.pdf</a></span>
+</li>
+<li id="cite_note-Eddy-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Eddy_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Eddy_2-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Eddy, S. R., What is dynamic programming?, Nature Biotechnology, 22, 909–910 (2004).</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text">Nocedal, J.; Wright, S. J.: Numerical Optimization, page 9, Springer, 2006..</span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text">Cormen,
+ T. H.; Leiserson, C. E.; Rivest, R. L.; Stein, C. (2001), Introduction 
+to Algorithms (2nd ed.), MIT Press &amp; McGraw–Hill, <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a> . pp. 327–8.</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.apl.jhu.edu/%7Epaulmac/c++-memoization.html">http://www.apl.jhu.edu/~paulmac/c++-memoization.html</a></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://www.jsoftware.com/help/dictionary/dmcapdot.htm">"M. Memo"</a>. <i>J Vocabulary</i>. J Software<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.jsoftware.com/help/dictionary/dmcapdot.htm">http://www.jsoftware.com/help/dictionary/dmcapdot.htm</a></span><span class="reference-accessdate">. Retrieved 28 October 2011</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=M.+Memo&amp;rft.atitle=J+Vocabulary&amp;rft.pub=J+Software&amp;rft_id=http%3A%2F%2Fwww.jsoftware.com%2Fhelp%2Fdictionary%2Fdmcapdot.htm&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text">Stokey et al., 1989, Chap. 1</span>
+</li>
+<li id="cite_note-sniedovich_06-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-sniedovich_06_8-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFSniedovich2006">Sniedovich, M. (2006), <a rel="nofollow" class="external text" href="http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf">"Dijkstra’s algorithm revisited: the dynamic programming connexion"</a> (<a href="http://en.m.wikipedia.org/wiki/PDF" title="PDF" class="mw-redirect">PDF</a>), <i>Journal of Control and Cybernetics</i> <b>35</b> (3): 599–620<span class="printonly">, <a rel="nofollow" class="external free" href="http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf">http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Dijkstra%E2%80%99s+algorithm+revisited%3A+the+dynamic+programming+connexion&amp;rft.jtitle=Journal+of+Control+and+Cybernetics&amp;rft.aulast=Sniedovich&amp;rft.aufirst=M.&amp;rft.au=Sniedovich%2C%26%2332%3BM.&amp;rft.date=2006&amp;rft.volume=35&amp;rft.issue=3&amp;rft.pages=599%E2%80%93620&amp;rft_id=http%3A%2F%2Fmatwbn.icm.edu.pl%2Fksiazki%2Fcc%2Fcc35%2Fcc3536.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span> <a rel="nofollow" class="external text" href="http://www.ifors.ms.unimelb.edu.au/tutorial/dijkstra_new/index.html">Online version of the paper with interactive computational modules.</a></span>
+</li>
+<li id="cite_note-denardo_03-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-denardo_03_9-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFDenardo2003">Denardo, E.V. (2003), <i>Dynamic Programming: Models and Applications</i>, Mineola, NY: <a href="http://en.m.wikipedia.org/wiki/Dover_Publications" title="Dover Publications">Dover Publications</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-486-42810-9" title="Special:BookSources/978-0-486-42810-9">978-0-486-42810-9</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming%3A+Models+and+Applications&amp;rft.aulast=Denardo&amp;rft.aufirst=E.V.&amp;rft.au=Denardo%2C%26%2332%3BE.V.&amp;rft.date=2003&amp;rft.place=Mineola%2C+NY&amp;rft.pub=%5B%5BDover+Publications%5D%5D&amp;rft.isbn=978-0-486-42810-9&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-sniedovich_10-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-sniedovich_10_10-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFSniedovich2010">Sniedovich, M. (2010), <i>Dynamic Programming: Foundations and Principles</i>, <a href="http://en.m.wikipedia.org/wiki/Taylor_%26_Francis" title="Taylor &amp; Francis">Taylor &amp; Francis</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-8247-4099-3" title="Special:BookSources/978-0-8247-4099-3">978-0-8247-4099-3</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming%3A+Foundations+and+Principles&amp;rft.aulast=Sniedovich&amp;rft.aufirst=M.&amp;rft.au=Sniedovich%2C%26%2332%3BM.&amp;rft.date=2010&amp;rft.pub=%5B%5BTaylor+%26+Francis%5D%5D&amp;rft.isbn=978-0-8247-4099-3&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><a href="#CITEREFDijkstra1959">Dijkstra 1959</a>, p.&nbsp;270</span>
+</li>
+<li id="cite_note-12">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFMoshe_Sniedovich2002">Moshe Sniedovich (2002), <a rel="nofollow" class="external text" href="http://archive.ite.journal.informs.org/Vol3No1/Sniedovich/">"OR/MS Games: 2. The Towers of Hanoi Problem,"</a>, <i>INFORMS Transactions on Education</i> <b>3(1)</b>: 34–51<span class="printonly">, <a rel="nofollow" class="external free" href="http://archive.ite.journal.informs.org/Vol3No1/Sniedovich/">http://archive.ite.journal.informs.org/Vol3No1/Sniedovich/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=OR%2FMS+Games%3A+2.+The+Towers+of+Hanoi+Problem%2C&amp;rft.jtitle=INFORMS+Transactions+on+Education&amp;rft.aulast=Moshe+Sniedovich&amp;rft.au=Moshe+Sniedovich&amp;rft.date=2002&amp;rft.volume=3%281%29&amp;rft.pages=34%E2%80%9351&amp;rft_id=http%3A%2F%2Farchive.ite.journal.informs.org%2FVol3No1%2FSniedovich%2F&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-13">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text">Konhauser J.D.E., Velleman, D., and Wagon, S. (1996). <a rel="nofollow" class="external text" href="http://www.cambridge.org/uk/catalogue/catalogue.asp?isbn=9780883853252">Which way did the Bicycle Go?</a> Dolciani Mathematical Expositions – No 18. <a href="http://en.m.wikipedia.org/wiki/The_Mathematical_Association_of_America" title="The Mathematical Association of America" class="mw-redirect">The Mathematical Association of America</a>.</span>
+</li>
+<li id="cite_note-sniedovich_03-14">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-sniedovich_03_14-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-sniedovich_03_14-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">Sniedovich, M. (2003). <a rel="nofollow" class="external text" href="http://archive.ite.journal.informs.org/Vol4No1/Sniedovich/index.php">The joy of egg-dropping in Braunschweig and Hong Kong</a>. INFORMS Transactions on Education, 4(1) 48–64.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Further_reading">Further reading</span></h2><div class="content_block" id="content_8">
+<ul>
+<li>
+<span class="citation" id="CITEREFAddaCooper2003">Adda, Jerome; Cooper, Russell (2003), <a rel="nofollow" class="external text" href="http://www.eco.utexas.edu/%7Ecooper/dynprog/dynprog1.html"><i>Dynamic Economics</i></a>, MIT Press<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.eco.utexas.edu/%7Ecooper/dynprog/dynprog1.html">http://www.eco.utexas.edu/~cooper/dynprog/dynprog1.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Economics&amp;rft.aulast=Adda&amp;rft.aufirst=Jerome&amp;rft.au=Adda%2C%26%2332%3BJerome&amp;rft.au=Cooper%2C%26%2332%3BRussell&amp;rft.date=2003&amp;rft.pub=MIT+Press&amp;rft_id=http%3A%2F%2Fwww.eco.utexas.edu%2F%7Ecooper%2Fdynprog%2Fdynprog1.html&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>. An accessible introduction to dynamic programming in economics. The link contains sample programs.</li>
+<li>
+<span class="citation" id="CITEREFBellman1954"><a href="http://en.m.wikipedia.org/wiki/Richard_Bellman" title="Richard Bellman" class="mw-redirect">Bellman, Richard</a> (1954), "The theory of dynamic programming", <i><a href="http://en.m.wikipedia.org/wiki/Bulletin_of_the_American_Mathematical_Society" title="Bulletin of the American Mathematical Society">Bulletin of the American Mathematical Society</a></i> <b>60</b>: 503–516, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1090%2FS0002-9904-1954-09848-8">10.1090/S0002-9904-1954-09848-8</a>, <a href="http://en.m.wikipedia.org/wiki/Mathematical_Reviews" title="Mathematical Reviews">MR</a>&nbsp;<a rel="nofollow" class="external text" href="http://www.ams.org/mathscinet-getitem?mr=0067459">0067459</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=The+theory+of+dynamic+programming&amp;rft.jtitle=%5B%5BBulletin+of+the+American+Mathematical+Society%5D%5D&amp;rft.aulast=Bellman&amp;rft.aufirst=Richard&amp;rft.au=Bellman%2C%26%2332%3BRichard&amp;rft.date=1954&amp;rft.volume=60&amp;rft.pages=503%E2%80%93516&amp;rft_id=info:doi/10.1090%2FS0002-9904-1954-09848-8&amp;rft.mr=0067459&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>. Includes an extensive bibliography of the literature in the area, up to the year 1954.</li>
+<li>
+<span class="citation" id="CITEREFBellman1957"><a href="http://en.m.wikipedia.org/wiki/Richard_Bellman" title="Richard Bellman" class="mw-redirect">Bellman, Richard</a> (1957), <i>Dynamic Programming</i>, Princeton University Press</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming&amp;rft.aulast=Bellman&amp;rft.aufirst=Richard&amp;rft.au=Bellman%2C%26%2332%3BRichard&amp;rft.date=1957&amp;rft.pub=Princeton+University+Press&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>. Dover paperback edition (2003), <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0486428095" class="internal mw-magiclink-isbn">ISBN 0-486-42809-5</a>.</li>
+<li>
+<span class="citation" id="CITEREFBertsekas2000">Bertsekas, D. P. (2000), <i>Dynamic Programming and Optimal Control</i> (2nd ed.), Athena Scientific, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/1-886529-09-4" title="Special:BookSources/1-886529-09-4">1-886529-09-4</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming+and+Optimal+Control&amp;rft.aulast=Bertsekas&amp;rft.aufirst=D.+P.&amp;rft.au=Bertsekas%2C%26%2332%3BD.+P.&amp;rft.date=2000&amp;rft.edition=2nd&amp;rft.pub=Athena+Scientific&amp;rft.isbn=1-886529-09-4&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>. In two volumes.</li>
+<li>
+<span class="citation" id="CITEREFCormenLeisersonRivestStein2001"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Cormen, Thomas H.</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Leiserson, Charles E.</a>; <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Rivest, Ronald L.</a>; <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Stein, Clifford</a> (2001), <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (2nd ed.), MIT Press &amp; McGraw-Hill, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-03293-7" title="Special:BookSources/0-262-03293-7">0-262-03293-7</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=Cormen&amp;rft.aufirst=Thomas+H.&amp;rft.au=Cormen%2C%26%2332%3BThomas+H.&amp;rft.au=Leiserson%2C%26%2332%3BCharles+E.&amp;rft.au=Rivest%2C%26%2332%3BRonald+L.&amp;rft.au=Stein%2C%26%2332%3BClifford&amp;rft.date=2001&amp;rft.edition=2nd&amp;rft.pub=MIT+Press+%26+McGraw-Hill&amp;rft.isbn=0-262-03293-7&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>. Especially pp.&nbsp;323–69.</li>
+<li>
+<span class="citation" id="CITEREFDreyfusLaw1977">Dreyfus, Stuart E.; Law, Averill M. (1977), <i>The art and theory of dynamic programming</i>, Academic Press, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-12-221860-6" title="Special:BookSources/978-0-12-221860-6">978-0-12-221860-6</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+art+and+theory+of+dynamic+programming&amp;rft.aulast=Dreyfus&amp;rft.aufirst=Stuart+E.&amp;rft.au=Dreyfus%2C%26%2332%3BStuart+E.&amp;rft.au=Law%2C%26%2332%3BAverill+M.&amp;rft.date=1977&amp;rft.pub=Academic+Press&amp;rft.isbn=978-0-12-221860-6&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>.</li>
+<li>
+<span class="citation" id="CITEREFGiegerichMeyerSteffen2004">Giegerich, R.; Meyer, C.; Steffen, P. (2004), <a rel="nofollow" class="external text" href="http://bibiserv.techfak.uni-bielefeld.de/adp/ps/GIE-MEY-STE-2004.pdf">"A Discipline of Dynamic Programming over Sequence Data"</a>, <i>Science of Computer Programming</i> <b>51</b> (3): 215–263, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2Fj.scico.2003.12.005">10.1016/j.scico.2003.12.005</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://bibiserv.techfak.uni-bielefeld.de/adp/ps/GIE-MEY-STE-2004.pdf">http://bibiserv.techfak.uni-bielefeld.de/adp/ps/GIE-MEY-STE-2004.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Discipline+of+Dynamic+Programming+over+Sequence+Data&amp;rft.jtitle=Science+of+Computer+Programming&amp;rft.aulast=Giegerich&amp;rft.aufirst=R.&amp;rft.au=Giegerich%2C%26%2332%3BR.&amp;rft.au=Meyer%2C%26%2332%3BC.&amp;rft.au=Steffen%2C%26%2332%3BP.&amp;rft.date=2004&amp;rft.volume=51&amp;rft.issue=3&amp;rft.pages=215%E2%80%93263&amp;rft_id=info:doi/10.1016%2Fj.scico.2003.12.005&amp;rft_id=http%3A%2F%2Fbibiserv.techfak.uni-bielefeld.de%2Fadp%2Fps%2FGIE-MEY-STE-2004.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>.</li>
+<li>
+<span class="citation" id="CITEREFMeyn2007">Meyn, Sean (2007), <a rel="nofollow" class="external text" href="https://netfiles.uiuc.edu/meyn/www/spm_files/CTCN/CTCN.html"><i>Control Techniques for Complex Networks</i></a>, Cambridge University Press, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-521-88441-9" title="Special:BookSources/978-0-521-88441-9">978-0-521-88441-9</a><span class="printonly">, <a rel="nofollow" class="external free" href="https://netfiles.uiuc.edu/meyn/www/spm_files/CTCN/CTCN.html">https://netfiles.uiuc.edu/meyn/www/spm_files/CTCN/CTCN.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Control+Techniques+for+Complex+Networks&amp;rft.aulast=Meyn&amp;rft.aufirst=Sean&amp;rft.au=Meyn%2C%26%2332%3BSean&amp;rft.date=2007&amp;rft.pub=Cambridge+University+Press&amp;rft.isbn=978-0-521-88441-9&amp;rft_id=https%3A%2F%2Fnetfiles.uiuc.edu%2Fmeyn%2Fwww%2Fspm_files%2FCTCN%2FCTCN.html&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>.</li>
+<li>S. S. Sritharan, "Dynamic Programming of the Navier-Stokes 
+Equations," in Systems and Control Letters, Vol. 16, No. 4, 1991, 
+pp.&nbsp;299–307.</li>
+<li>
+<span class="citation" id="CITEREFStokeyLucasPrescott1989"><a href="http://en.m.wikipedia.org/wiki/Nancy_Stokey" title="Nancy Stokey">Stokey, Nancy</a>; <a href="http://en.m.wikipedia.org/wiki/Robert_E._Lucas" title="Robert E. Lucas" class="mw-redirect">Lucas, Robert E.</a>; <a href="http://en.m.wikipedia.org/wiki/Edward_Prescott" title="Edward Prescott" class="mw-redirect">Prescott, Edward</a> (1989), <i>Recursive Methods in Economic Dynamics</i>, Harvard Univ. Press, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-674-75096-8" title="Special:BookSources/978-0-674-75096-8">978-0-674-75096-8</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Recursive+Methods+in+Economic+Dynamics&amp;rft.aulast=Stokey&amp;rft.aufirst=Nancy&amp;rft.au=Stokey%2C%26%2332%3BNancy&amp;rft.au=Lucas%2C%26%2332%3BRobert+E.&amp;rft.au=Prescott%2C%26%2332%3BEdward&amp;rft.date=1989&amp;rft.pub=Harvard+Univ.+Press&amp;rft.isbn=978-0-674-75096-8&amp;rfr_id=info:sid/en.wikipedia.org:Dynamic_programming"><span style="display: none;">&nbsp;</span></span>.</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks hlist collapsible expanded navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="3">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Optimization_algorithms" title="Template:Optimization algorithms"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Optimization_algorithms" title="Template talk:Optimization algorithms"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Optimization_algorithms&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Mathematical_optimization" title="Mathematical optimization">Optimization</a>: <a href="http://en.m.wikipedia.org/wiki/Optimization_algorithm" title="Optimization algorithm" class="mw-redirect">Algorithms</a>, <a href="http://en.m.wikipedia.org/wiki/Iterative_method" title="Iterative method">methods</a>, and <a href="http://en.m.wikipedia.org/wiki/Heuristic_algorithm" title="Heuristic algorithm" class="mw-redirect">heuristics</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<span style="float:left;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Nonlinear_programming" title="Nonlinear programming">Unconstrained nonlinear</a>: <a href="http://en.m.wikipedia.org/wiki/Iterative_method" title="Iterative method">Methods</a> <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">calling ...</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Function_%28mathematics%29" title="Function (mathematics)">... functions</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Golden_section_search" title="Golden section search">Golden section search</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Powell%27s_method" title="Powell's method">Interpolation methods</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Line_search" title="Line search">Line search</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Successive_parabolic_interpolation" title="Successive parabolic interpolation">Successive parabolic interpolation</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">... and <a href="http://en.m.wikipedia.org/wiki/Gradient" title="Gradient">gradients</a>
+</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Local_convergence" title="Local convergence">Convergence</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Trust_region" title="Trust region">Trust region</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Wolfe_conditions" title="Wolfe conditions">Wolfe conditions</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Quasi-Newton_method" title="Quasi-Newton method">Quasi–Newton</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/BFGS_method" title="BFGS method">BFGS</a> and <a href="http://en.m.wikipedia.org/wiki/Limited-memory_BFGS" title="Limited-memory BFGS">L-BFGS</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Davidon%E2%80%93Fletcher%E2%80%93Powell_formula" title="Davidon–Fletcher–Powell formula">DFP</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SR1_formula" title="SR1 formula">Symmetric rank-one (SR1)</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Iterative_method" title="Iterative method">Other methods</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm" title="Gauss–Newton algorithm">Gauss–Newton</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gradient_descent" title="Gradient descent">Gradient</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm" title="Levenberg–Marquardt algorithm">Levenberg–Marquardt</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Nonlinear_conjugate_gradient_method" title="Nonlinear conjugate gradient method">Conjugate gradient</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">... and <a href="http://en.m.wikipedia.org/wiki/Hessian_matrix" title="Hessian matrix">Hessians</a>
+</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Newton%27s_method_in_optimization" title="Newton's method in optimization">Newton's method</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td class="navbox-image" style="width: 0%; padding: 0px 0px 0px 2px;" rowspan="9">
+<div>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:MaximumParaboloid.png" class="image" title="Optimization computes maxima and minima."><img alt="The graph of a strictly concave quadratic function is shown in blue, with its unique maximum shown as a red dot. Below the graph appears the contours of the function: The level sets are nested ellipses." src="Dynamic_programming_files/100px-MaximumParaboloid.png" width="100" height="75"></a></div>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<span style="float:left;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Nonlinear_programming" title="Nonlinear programming">Constrained nonlinear</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="">General</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Barrier_function" title="Barrier function">Barrier methods</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Penalty_method" title="Penalty method">Penalty methods</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Differentiable</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Augmented_Lagrangian_method" title="Augmented Lagrangian method">Augmented Lagrangian methods</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sequential_quadratic_programming" title="Sequential quadratic programming">Sequential quadratic programming</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Successive_linear_programming" title="Successive linear programming">Successive linear programming</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<span style="float:left;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Convex_optimization" title="Convex optimization">Convex optimization</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Convex_minimization" title="Convex minimization" class="mw-redirect">Convex minimization</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Cutting-plane_method" title="Cutting-plane method">Cutting-plane method</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Frank%E2%80%93Wolfe_algorithm" title="Frank–Wolfe algorithm">Reduced gradient (Frank–Wolfe)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Subgradient_method" title="Subgradient method">Subgradient method</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Linear_programming" title="Linear programming">Linear</a> and<br><a href="http://en.m.wikipedia.org/wiki/Quadratic_programming" title="Quadratic programming">quadratic</a>
+</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Linear_programming#Interior_point" title="Linear programming">Interior point</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Ellipsoid_method" title="Ellipsoid method">Ellipsoid algorithm of Khachiyan</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Karmarkar%27s_algorithm" title="Karmarkar's algorithm">Projective algorithm of Karmarkar</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Matroid" title="Matroid">Basis-</a><a href="http://en.m.wikipedia.org/wiki/Exchange_algorithm" title="Exchange algorithm" class="mw-redirect">Exchange</a>
+</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Simplex_algorithm" title="Simplex algorithm">Simplex algorithm of Dantzig</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Criss-cross_algorithm" title="Criss-cross algorithm">Criss-cross algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lemke%27s_algorithm" title="Lemke's algorithm">Principal pivoting algorithm of Lemke</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible uncollapsed navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<span style="float:left;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Combinatorial_optimization" title="Combinatorial optimization">Combinatorial</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="">Paradigms</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Approximation_algorithm" title="Approximation algorithm">Approximation algorithm</a></li>
+<li><strong class="selflink">Dynamic programming</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Greedy_algorithm" title="Greedy algorithm">Greedy algorithm</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Integer_programming" title="Integer programming">Integer programming</a>
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Branch_and_bound" title="Branch and bound">Branch &amp; bound</a> or <a href="http://en.m.wikipedia.org/wiki/Branch_and_cut" title="Branch and cut">cut</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Graph_algorithm" title="Graph algorithm" class="mw-redirect">Graph algorithms</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Minimum_spanning_tree" title="Minimum spanning tree">Minimum spanning tree</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm" title="Bellman–Ford algorithm">Bellman–Ford</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" title="Floyd–Warshall algorithm">Floyd–Warshall</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Johnson%27s_algorithm" title="Johnson's algorithm">Johnson</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Kruskal%27s_algorithm" title="Kruskal's algorithm">Kruskal</a></li>
+</ul>
+</div>
+</td>
+</tr></tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Flow_network" title="Flow network">Network flows</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Dinic%27s_algorithm" title="Dinic's algorithm">Dinic</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Edmonds%E2%80%93Karp_algorithm" title="Edmonds–Karp algorithm">Edmonds–Karp</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm" title="Ford–Fulkerson algorithm">Ford–Fulkerson</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Push-relabel_maximum_flow_algorithm" title="Push-relabel maximum flow algorithm">Push-relabel maximum flow</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<span style="float:left;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Metaheuristic" title="Metaheuristic">Metaheuristics</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Evolutionary_algorithm" title="Evolutionary algorithm">Evolutionary algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hill_climbing" title="Hill climbing">Hill climbing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Local_search_%28optimization%29" title="Local search (optimization)">Local search</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Simulated_annealing" title="Simulated annealing">Simulated annealing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tabu_search" title="Tabu search">Tabu search</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" style="" colspan="3">
+<div>
+<ul>
+<li>
+<b>Categories</b>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Category:Optimization_algorithms_and_methods" title="Category:Optimization algorithms and methods">Algorithms and methods</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Category:Heuristic_algorithms" title="Category:Heuristic algorithms">Heuristics</a></li>
+</ul>
+</li>
+<li><b><a href="http://en.m.wikipedia.org/wiki/Comparison_of_optimization_software" title="Comparison of optimization software">Software</a></b></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_9">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://20bits.com/articles/introduction-to-dynamic-programming/">An Introduction to Dynamic Programming</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.dyna.org/">Dyna</a>, a declarative programming language for dynamic programming algorithms</li>
+<li>Wagner, David B., 1995, "<a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/268391.html">Dynamic Programming.</a>" An introductory article on dynamic programming in <a href="http://en.m.wikipedia.org/wiki/Mathematica" title="Mathematica">Mathematica</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cse.ohio-state.edu/%7Egurari/course/cis680/cis680Ch21.html">Ohio State University: CIS 680: class notes on dynamic programming</a>, by Eitan M. Gurari</li>
+<li><a rel="nofollow" class="external text" href="http://mat.gsia.cmu.edu/classes/dynamic/dynamic.html">A Tutorial on Dynamic programming</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://ocw.mit.edu/OcwWeb/Electrical-Engineering-and-Computer-Science/6-046JFall-2005/VideoLectures/detail/embed15.htm">MIT course on algorithms</a> – Includes a video lecture on DP along with lecture notes</li>
+<li><a rel="nofollow" class="external text" href="http://www.csse.monash.edu.au/%7Elloyd/tildeAlgDS/Dynamic">More DP Notes</a></li>
+<li>King, Ian, 2002 (1987), "<a rel="nofollow" class="external text" href="http://researchspace.auckland.ac.nz/bitstream/handle/2292/190/230.pdf">A Simple Introduction to Dynamic Programming in Macroeconomic Models.</a>" An introduction to dynamic programming as an important tool in economic theory.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.topcoder.com/tc?module=Static&amp;d1=tutorials&amp;d2=dynProg">Dynamic Programming: from novice to advanced</a> A TopCoder.com article by Dumitru on Dynamic Programming</li>
+<li>
+<a rel="nofollow" class="external text" href="http://bibiserv.techfak.uni-bielefeld.de/adp/">Algebraic Dynamic Programming</a> – a formalized framework for dynamic programming, including an <a rel="nofollow" class="external text" href="http://bibiserv.techfak.uni-bielefeld.de/dpcourse">entry-level course</a> to DP, University of Bielefeld</li>
+<li>Dreyfus, Stuart, "<a rel="nofollow" class="external text" href="http://www.eng.tau.ac.il/%7Eami/cd/or50/1526-5463-2002-50-01-0048.pdf">Richard Bellman on the birth of Dynamic Programming.</a>"</li>
+<li><a rel="nofollow" class="external text" href="http://www.avatar.se/lectures/molbioinfo2001/dynprog/dynamic.html">Dynamic programming tutorial</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cambridge.org/resources/0521882672/7934_kaeslin_dynpro_new.pdf">A Gentle Introduction to Dynamic Programming and the Viterbi Algorithm</a></li>
+<li>Tabled Prolog <a rel="nofollow" class="external text" href="http://www.probp.com/">BProlog</a> and <a rel="nofollow" class="external text" href="http://xsb.sourceforge.net/">XSB</a>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://ifors.org/tutorial/category/dynamic-programming/">Online interactive dynamic programming modules</a>
+ including, shortest path, traveling salesman, knapsack, false coin, egg
+ dropping, bridge and torch, replacement, chained matrix products, and 
+critical path problem.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Dynamic_programming&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Dynamic+programming&amp;mobiletoken=dc83e2c6ae93b1fadc6882196f529c1b" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Dynamic_programming&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Dynamic+programming&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Dynamic_programming_files/load_002.php" type="text/javascript"></script>
+<script src="Dynamic_programming_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>
