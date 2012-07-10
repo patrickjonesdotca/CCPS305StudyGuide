@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Binary decision diagram - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Binary_decision_diagram_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 7 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Binary_decision_diagram">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Binary_decision_diagram_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Binary_decision_diagram_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Binary_decision_diagram_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Binary_decision_diagram" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Bin%C3%A4res_Entscheidungsdiagramm">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Diagrama_de_decisi%C3%B3n_binario">español</option><option value="//fr.m.wikipedia.org/wiki/Diagramme_de_d%C3%A9cision_binaire">français</option><option value="//nl.m.wikipedia.org/wiki/Binair_beslissingsdiagram">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E4%BA%8C%E5%88%86%E6%B1%BA%E5%AE%9A%E5%9B%B3">日本語</option><option value="//ru.m.wikipedia.org/wiki/%D0%91%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D0%B0%D1%8F_%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B9">русский</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Binary decision diagram</h1>			
+<p>In the field of <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>binary decision diagram</b> (<b>BDD</b>) or <b>branching program</b>, like a <a href="http://en.m.wikipedia.org/wiki/Negation_normal_form" title="Negation normal form">negation normal form</a> (NNF) or a <a href="http://en.m.wikipedia.org/wiki/Propositional_directed_acyclic_graph" title="Propositional directed acyclic graph">propositional directed acyclic graph</a> (PDAG), is a <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to represent a <a href="http://en.m.wikipedia.org/wiki/Boolean_function" title="Boolean function">Boolean function</a>. On a more abstract level, BDDs can be considered as a <a href="http://en.m.wikipedia.org/wiki/Data_compression" title="Data compression">compressed</a> representation of <a href="http://en.m.wikipedia.org/wiki/Set_%28mathematics%29" title="Set (mathematics)">sets</a>
+ or relations. Unlike other compressed representations, operations are 
+performed directly on the compressed representation, i.e. without 
+decompression.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Definition">Definition</span></h2><div class="content_block" id="content_1">
+<p>A Boolean function can be represented as a rooted, directed, acyclic <a href="http://en.m.wikipedia.org/wiki/Graph_theory" title="Graph theory">graph</a>,
+ which consists of several decision nodes and terminal nodes. There are 
+two types of terminal nodes called 0-terminal and 1-terminal. Each 
+decision node <img class="tex" alt="N" src="Binary_decision_diagram_files/8d9c307cb7f3c4a32822a51922d1ceaa.png"> is labeled by a Boolean variable <img class="tex" alt="V_N" src="Binary_decision_diagram_files/55846f92e6e9adb81558dc48b4c0f7dc.png"> and has two <a href="http://en.m.wikipedia.org/wiki/Child_node" title="Child node" class="mw-redirect">child nodes</a> called low child and high child. The edge from node <img class="tex" alt="V_N" src="Binary_decision_diagram_files/55846f92e6e9adb81558dc48b4c0f7dc.png"> to a low (or high) child represents an assignment of <img class="tex" alt="V_N" src="Binary_decision_diagram_files/55846f92e6e9adb81558dc48b4c0f7dc.png"> to 0 (resp. 1). Such a <b>BDD</b>
+ is called 'ordered' if different variables appear in the same order on 
+all paths from the root. A BDD is said to be 'reduced' if the following 
+two rules have been applied to its graph:</p>
+<ul>
+<li>Merge any <a href="http://en.m.wikipedia.org/wiki/Graph_isomorphism" title="Graph isomorphism">isomorphic</a> subgraphs.</li>
+<li>Eliminate any node whose two children are <a href="http://en.m.wikipedia.org/wiki/Graph_isomorphism" title="Graph isomorphism">isomorphic</a>.</li>
+</ul>
+<p>In popular usage, the term <b>BDD</b> almost always refers to <b>Reduced Ordered Binary Decision Diagram</b> (<b>ROBDD</b>
+ in the literature, used when the ordering and reduction aspects need to
+ be emphasized). The advantage of an ROBDD is that it is canonical 
+(unique) for a particular function and variable order.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> This property makes it useful in <a href="http://en.m.wikipedia.org/wiki/Functional_equivalence" title="Functional equivalence" class="mw-redirect">functional equivalence</a> checking and other operations like functional technology mapping.</p>
+<p>A path from the root node to the 1-terminal represents a (possibly 
+partial) variable assignment for which the represented Boolean function 
+is true. As the path descends to a low (or high) child child from a 
+node, then that node's variable is assigned to 0 (resp. 1).</p>
+<h3> <span class="mw-headline" id="Example">Example</span>
+</h3>
+<p>The left figure below shows a binary <a href="http://en.m.wikipedia.org/wiki/Decision_tree" title="Decision tree">decision <i>tree</i></a> (the reduction rules are not applied), and a <a href="http://en.m.wikipedia.org/wiki/Truth_table" title="Truth table">truth table</a>,
+ each representing the function f (x1, x2, x3). In the tree on the left,
+ the value of the function can be determined for a given variable 
+assignment by following a path down the graph to a terminal. In the 
+figures below, dotted lines represent edges to a low child, while solid 
+lines represent edges to a high child. Therefore, to find (x1=0, x2=1, 
+x3=1), begin at x1, traverse down the dotted line to x2 (since x1 has an
+ assignment to 0), then down two solid lines (since x2 and x3 each have 
+an assignment to one). This leads to the terminal 1, which is the value 
+of f (x1=0, x2=1, x3=1).</p>
+<p>The binary decision <i>tree</i> of the left figure can be transformed into a binary decision <i>diagram</i> by maximally reducing it according to the two reduction rules. The resulting <b>BDD</b> is shown in the right figure.</p>
+<table align="center"><tbody><tr>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:548px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BDD.png" class="image"><img alt="" src="Binary_decision_diagram_files/546px-BDD.png" class="thumbimage" width="546" height="241"></a>
+<div class="thumbcaption">
+
+Binary decision tree and truth table for the function <img class="tex" alt="f(x_1, x_2, x_3)=\bar{x_1} \bar{x_2} \bar{x_3} + x_1 x_2 + x_2 x_3" src="Binary_decision_diagram_files/2b1cee20ffe3ba8ef46a1ab6058cc682.png">
+</div>
+</div>
+</div>
+</td>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:191px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BDD_simple.svg" class="image"><img alt="" src="Binary_decision_diagram_files/189px-BDD_simple.png" class="thumbimage" width="189" height="241"></a>
+<div class="thumbcaption">
+
+BDD for the function f</div>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="History">History</span></h2><div class="content_block" id="content_2">
+<p>The basic idea from which the data structure was created is the <a href="http://en.m.wikipedia.org/wiki/Shannon_expansion" title="Shannon expansion" class="mw-redirect">Shannon expansion</a>. A <a href="http://en.m.wikipedia.org/wiki/Switching_function" title="Switching function" class="mw-redirect">switching function</a> is split into two sub-functions (cofactors) by assigning one variable (cf. <i>if-then-else normal form</i>). If such a sub-function is considered as a sub-tree, it can be represented by a <i>binary decision tree</i>. Binary decision diagrams (BDD) were introduced by Lee,<sup id="cite_ref-Lee_1-0" class="reference"><a href="#cite_note-Lee-1"><span>[</span>2<span>]</span></a></sup> and further studied and made known by Akers<sup id="cite_ref-Akers_2-0" class="reference"><a href="#cite_note-Akers-2"><span>[</span>3<span>]</span></a></sup> and Boute.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup></p>
+<p>The full potential for efficient algorithms based on the data structure was investigated by <a href="http://en.m.wikipedia.org/wiki/Randal_Bryant" title="Randal Bryant">Randal Bryant</a> at <a href="http://en.m.wikipedia.org/wiki/Carnegie_Mellon_University" title="Carnegie Mellon University">Carnegie Mellon University</a>:
+ his key extensions were to use a fixed variable ordering (for canonical
+ representation) and shared sub-graphs (for compression). Applying these
+ two concepts results in an efficient data structure and algorithms for 
+the representation of sets and relations.<sup id="cite_ref-Bryant-1986_4-0" class="reference"><a href="#cite_note-Bryant-1986-4"><span>[</span>5<span>]</span></a></sup><sup id="cite_ref-Bryant-1992_5-0" class="reference"><a href="#cite_note-Bryant-1992-5"><span>[</span>6<span>]</span></a></sup> By extending the sharing to several BDDs, i.e. one sub-graph is used by several BDDs, the data structure <i>Shared Reduced Ordered Binary Decision Diagram</i> is defined.<sup id="cite_ref-Brace_6-0" class="reference"><a href="#cite_note-Brace-6"><span>[</span>7<span>]</span></a></sup> The notion of a BDD is now generally used to refer to that particular data structure.</p>
+<p>In his video lecture <a rel="nofollow" class="external text" href="http://myvideos.stanford.edu/player/slplayer.aspx?coll=ea60314a-53b3-4be2-8552-dcf190ca0c0b&amp;co=18bcd3a8-965a-4a63-a516-a1ad74af1119&amp;o=true">Fun With Binary Decision Diagrams (BDDs)</a>, <a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>
+ calls BDDs "one of the only really fundamental data structures that 
+came out in the last twenty-five years" and mentions that Bryant's 1986 
+paper was for some time one of the most-cited papers in computer 
+science.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_3">
+<p>BDDs are extensively used in <a href="http://en.m.wikipedia.org/wiki/Computer_Aided_Design" title="Computer Aided Design" class="mw-redirect">CAD</a> software to synthesize circuits (<a href="http://en.m.wikipedia.org/wiki/Logic_synthesis" title="Logic synthesis">logic synthesis</a>) and in <a href="http://en.m.wikipedia.org/wiki/Formal_verification" title="Formal verification">formal verification</a>. There are several lesser known applications of BDD, including <a href="http://en.m.wikipedia.org/wiki/Fault_tree" title="Fault tree" class="mw-redirect">Fault tree</a> analysis, <a href="http://en.m.wikipedia.org/wiki/Bayesian_probability" title="Bayesian probability">Bayesian</a> Reasoning and Product Configuration<sup id="cite_ref-Jensen_7-0" class="reference"><a href="#cite_note-Jensen-7"><span>[</span>8<span>]</span></a></sup><sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from June 2010">citation needed</span></a></i>]</sup>.</p>
+<p>Every arbitrary BDD (even if it is not reduced or ordered) can be directly implemented by replacing each node with a 2 to 1 <a href="http://en.m.wikipedia.org/wiki/Multiplexer#Digital_multiplexers" title="Multiplexer">multiplexer</a>; each multiplexer can be directly implemented by a 4-LUT in a <a href="http://en.m.wikipedia.org/wiki/FPGA" title="FPGA" class="mw-redirect">FPGA</a>. It is not so simple to convert from an arbitrary network of logic gates to a BDD<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from March 2008">citation needed</span></a></i>]</sup> (unlike the <a href="http://en.m.wikipedia.org/wiki/And-inverter_graph" title="And-inverter graph">and-inverter graph</a>).</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Variable_ordering">Variable ordering</span></h2><div class="content_block" id="content_4">
+<p>The size of the BDD is determined both by the function being 
+represented and the chosen ordering of the variables. There exist 
+Boolean functions <img class="tex" alt="f(x_1,\ldots, x_{n})" src="Binary_decision_diagram_files/7a7d557dae4e7f9e34c98015d8ac96e9.png">
+ for which depending upon the ordering of the variables we would end up 
+getting a graph whose number of nodes would be linear (in&nbsp;<i>n</i>) at the best and exponential at the worst case (eg, a ripple carry adder). Let us consider the Boolean function <img class="tex" alt="f(x_1,\ldots, x_{2n}) = x_1x_2 + x_3x_4 + \cdots + x_{2n-1}x_{2n}." src="Binary_decision_diagram_files/0bf86f7b2180f8299a2dd2d20a7cfec1.png"> Using the variable ordering <img class="tex" alt="x_1 &lt; x_3 &lt; \cdots &lt; x_{2n-1} &lt; x_2 &lt; x_4 &lt; \cdots &lt; x_{2n}" src="Binary_decision_diagram_files/936be1e4fa2dd097c8a4e6aad348db8f.png">, the BDD needs 2<sup><i>n</i>+1</sup> nodes to represent the function. Using the ordering <img class="tex" alt="x_1 &lt; x_2 &lt; x_3 &lt; x_4 &lt; \cdots &lt; x_{2n-1} &lt; x_{2n}" src="Binary_decision_diagram_files/f26b114e2c611235c6ea8fd00de610c4.png">, the BDD consists of 2<i>n</i>+2 nodes.</p>
+<table align="center"><tbody><tr>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:640px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BDD_Variable_Ordering_Bad.svg" class="image"><img alt="" src="Binary_decision_diagram_files/638px-BDD_Variable_Ordering_Bad.png" class="thumbimage" width="638" height="435"></a>
+<div class="thumbcaption">
+
+BDD for the function <i>ƒ</i>(<i>x</i><sub>1</sub>, ..., <i>x</i><sub>8</sub>) = <i>x</i><sub>1</sub><i>x</i><sub>2</sub> + <i>x</i><sub>3</sub><i>x</i><sub>4</sub> + <i>x</i><sub>5</sub><i>x</i><sub>6</sub> + <i>x</i><sub>7</sub><i>x</i><sub>8</sub> using bad variable ordering</div>
+</div>
+</div>
+</td>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:158px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BDD_Variable_Ordering_Good.svg" class="image"><img alt="" src="Binary_decision_diagram_files/156px-BDD_Variable_Ordering_Good.png" class="thumbimage" width="156" height="435"></a>
+<div class="thumbcaption">
+
+Good variable ordering</div>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<p>It is of crucial importance to care about variable ordering when 
+applying this data structure in practice. The problem of finding the 
+best variable ordering is <a href="http://en.m.wikipedia.org/wiki/NP-hard" title="NP-hard">NP-hard</a>.<sup id="cite_ref-Bollig_8-0" class="reference"><a href="#cite_note-Bollig-8"><span>[</span>9<span>]</span></a></sup> For any constant <i>c</i>&nbsp;&gt;&nbsp;1
+ it is even NP-hard to compute a variable ordering resulting in an OBDD 
+with a size that is at most c times larger than an optimal one.<sup id="cite_ref-Sieling_9-0" class="reference"><a href="#cite_note-Sieling-9"><span>[</span>10<span>]</span></a></sup> However there exist efficient heuristics to tackle the problem.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from August 2009">citation needed</span></a></i>]</sup></p>
+<p>There are functions for which the graph size is always exponential — 
+independent of variable ordering. This holds e. g. for the 
+multiplication function (an indication<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from March 2007">citation needed</span></a></i>]</sup> as to the apparent complexity of <a href="http://en.m.wikipedia.org/wiki/Factorization" title="Factorization">factorization</a> ).</p>
+<p>Researchers have of late suggested refinements on the BDD data structure giving way to a number of related graphs, such as BMD (<a href="http://en.m.wikipedia.org/wiki/Binary_Moment_Diagrams" title="Binary Moment Diagrams" class="mw-redirect">Binary Moment Diagrams</a>), ZDD (<a href="http://en.m.wikipedia.org/wiki/Zero_Suppressed_Decision_Diagram" title="Zero Suppressed Decision Diagram" class="mw-redirect">Zero Suppressed Decision Diagram</a>), FDD (<span class="new" title="Free Binary Decision Diagrams (page does not exist)">Free Binary Decision Diagrams</span>), PDD (<span class="new" title="Parity decision Diagrams (page does not exist)">Parity decision Diagrams</span>), and MTBDDs (Multiple terminal BDDs).</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Logical_operations_on_BDDs">Logical operations on BDDs</span></h2><div class="content_block" id="content_5">
+<p>Many logical operations on BDDs can be implemented by polynomial-time graph manipulation algorithms.</p>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Logical_conjunction" title="Logical conjunction">conjunction</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Logical_disjunction" title="Logical disjunction">disjunction</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Negation" title="Negation">negation</a></li>
+<li>existential abstraction</li>
+<li>universal abstraction</li>
+</ul>
+<p>However, repeating these operations several times, for example 
+forming the conjunction or disjunction of a set of BDDs, may in the 
+worst case result in an exponentially big BDD. This is because any of 
+the preceding operations for two BDDs may result in a BDD with a size 
+proportional to the product of the BDDs' sizes, and consequently for 
+several BDDs the size may be exponential.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_6">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Boolean_satisfiability_problem" title="Boolean satisfiability problem">Boolean satisfiability problem</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/L/poly" title="L/poly">L/poly</a>, a <a href="http://en.m.wikipedia.org/wiki/Complexity_class" title="Complexity class">complexity class</a> that captures the complexity of problems with polynomially sized BDDs</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Model_checking" title="Model checking">Model checking</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li>
+<span class="new" title="Binary key (page does not exist)">Binary key</span> – a method of species identification in biology using binary trees</li>
+<li><a href="http://en.m.wikipedia.org/wiki/NC_%28complexity%29#Barrington.27s_theorem" title="NC (complexity)">Barrington's theorem</a></li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_7">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">Graph-Based Algorithms for Boolean Function Manipulation, Randal E. Bryant, 1986</span>
+</li>
+<li id="cite_note-Lee-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Lee_1-0">^</a></b></span> <span class="reference-text">C. Y. Lee. "Representation of Switching Circuits by Binary-Decision Programs". Bell Systems Technical Journal, 38:985–999, 1959.</span>
+</li>
+<li id="cite_note-Akers-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Akers_2-0">^</a></b></span> <span class="reference-text">Sheldon B. Akers. <a rel="nofollow" class="external text" href="http://ieeexplore.ieee.org/search/wrapper.jsp?arnumber=1675141">Binary Decision Diagrams</a>, IEEE Transactions on Computers, C-27(6):509–516, June 1978.</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text">Raymond T. Boute, "The Binary Decision Machine as a programmable controller". <a href="http://en.m.wikipedia.org/wiki/EUROMICRO" title="EUROMICRO">EUROMICRO</a> Newsletter, Vol. 1(2):16–22, January 1976.</span>
+</li>
+<li id="cite_note-Bryant-1986-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Bryant-1986_4-0">^</a></b></span> <span class="reference-text">Randal E. Bryant. "<a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/%7Ebryant/pubdir/ieeetc86.ps">Graph-Based Algorithms for Boolean Function Manipulation</a>". IEEE Transactions on Computers, C-35(8):677–691, 1986.</span>
+</li>
+<li id="cite_note-Bryant-1992-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Bryant-1992_5-0">^</a></b></span> <span class="reference-text">R. E. Bryant, "<a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/%7Ebryant/pubdir/acmcs92.ps">Symbolic Boolean Manipulation with Ordered Binary Decision Diagrams"</a>, ACM Computing Surveys, Vol. 24, No. 3 (September, 1992), pp. 293–318.</span>
+</li>
+<li id="cite_note-Brace-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Brace_6-0">^</a></b></span> <span class="reference-text">Karl S. Brace, Richard L. Rudell and Randal E. Bryant. "<a rel="nofollow" class="external text" href="http://portal.acm.org/citation.cfm?id=123222&amp;coll=portal&amp;dl=ACM">Efficient Implementation of a BDD Package"</a>. In Proceedings of the 27th ACM/IEEE Design Automation Conference (DAC 1990), pages 40–45. IEEE Computer Society Press, 1990.</span>
+</li>
+<li id="cite_note-Jensen-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Jensen_7-0">^</a></b></span> <span class="reference-text">R.M. Jensen. <a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/%7Erunej/data/papers/JSW04.pdf">"CLab: A C+ + library for fast backtrack-free interactive product configuration"</a>. Proceedings of the Tenth International Conference on Principles and Practice of Constraint Programming, 2004.</span>
+</li>
+<li id="cite_note-Bollig-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Bollig_8-0">^</a></b></span> <span class="reference-text">Beate Bollig, Ingo Wegener. <a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109/12.537122">Improving the Variable Ordering of OBDDs Is NP-Complete</a>, IEEE Transactions on Computers, 45(9):993–1002, September 1996.</span>
+</li>
+<li id="cite_note-Sieling-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Sieling_9-0">^</a></b></span> <span class="reference-text">Detlef Sieling. "The nonapproximability of OBDD minimization." Information and Computation 172, 103–138. 2002.</span>
+</li>
+</ol>
+<ul>
+<li>R. Ubar, "Test Generation for Digital Circuits Using Alternative 
+Graphs (in Russian)", in Proc. Tallinn Technical University, 1976, 
+No.409, Tallinn Technical University, Tallinn, Estonia, pp.&nbsp;75–81.</li>
+</ul>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Further_reading">Further reading</span></h2><div class="content_block" id="content_8">
+<ul>
+<li>D. E. Knuth, "The Art of Computer Programming Volume 4, Fascicle 1: 
+Bitwise tricks &amp; techniques; Binary Decision Diagrams" 
+(Addison–Wesley Professional, March 27, 2009) viii+260pp, <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0321580508" class="internal mw-magiclink-isbn">ISBN 0-321-58050-8</a>. <a rel="nofollow" class="external text" href="http://www-cs-faculty.stanford.edu/%7Eknuth/fasc1b.ps.gz">Draft of Fascicle 1b</a> available for download.</li>
+<li>H. R. Andersen "<a rel="nofollow" class="external text" href="http://www.configit.com/fileadmin/Configit/Documents/bdd-eap.pdf">An Introduction to Binary Decision Diagrams</a>," Lecture Notes, 1999, IT University of Copenhagen.</li>
+<li>Ch. Meinel, T. Theobald, "<a rel="nofollow" class="external text" href="http://www.hpi.uni-potsdam.de/fileadmin/hpi/FG_ITS/books/OBDD-Book.pdf">Algorithms and Data Structures in VLSI-Design: OBDD – Foundations and Applications"</a>, Springer-Verlag, Berlin, Heidelberg, New York, 1998. Complete textbook available for download.</li>
+<li>
+<span class="citation book">Rüdiger Ebendt; Görschwin Fey; Rolf Drechsler (2005). <i>Advanced BDD optimization</i>. Springer. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-387-25453-1" title="Special:BookSources/978-0-387-25453-1">978-0-387-25453-1</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Advanced+BDD+optimization&amp;rft.aulast=R%C3%BCdiger+Ebendt&amp;rft.au=R%C3%BCdiger+Ebendt&amp;rft.au=G%C3%B6rschwin+Fey&amp;rft.au=Rolf+Drechsler&amp;rft.date=2005&amp;rft.pub=Springer&amp;rft.isbn=978-0-387-25453-1&amp;rfr_id=info:sid/en.wikipedia.org:Binary_decision_diagram"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Bernd Becker; Rolf Drechsler (1998). <i>Binary Decision Diagrams: Theory and Implementation</i>. Springer. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-1-4419-5047-5" title="Special:BookSources/978-1-4419-5047-5">978-1-4419-5047-5</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Binary+Decision+Diagrams%3A+Theory+and+Implementation&amp;rft.aulast=Bernd+Becker&amp;rft.au=Bernd+Becker&amp;rft.au=Rolf+Drechsler&amp;rft.date=1998&amp;rft.pub=Springer&amp;rft.isbn=978-1-4419-5047-5&amp;rfr_id=info:sid/en.wikipedia.org:Binary_decision_diagram"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_9">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Binary_decision_diagram_files/30px-Commons-logo.png" width="30" height="40"></td>
+<td class="mbox-text" style="">Wikimedia Commons has media related to: <i><b><a class="external text" href="http://commons.wikimedia.org/wiki/Category:Binary_decision_diagrams">Binary decision diagrams</a></b></i>
+</td>
+</tr></tbody></table>
+<p><b>Available OBDD Packages</b></p>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://fmv.jku.at/abcd/">ABCD</a>: The ABCD package by Armin Biere, Johannes Kepler Universität, Linz.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www-2.cs.cmu.edu/%7Emodelcheck/bdd.html">CMU BDD</a>, BDD package, Carnegie Mellon University, Pittsburgh</li>
+<li>
+<a rel="nofollow" class="external text" href="http://vlsi.colorado.edu/%7Efabio/CUDD/">CUDD</a>: BDD package, University of Colorado, Boulder</li>
+<li><a rel="nofollow" class="external text" href="http://www.technical-recipes.com/category/binary-decision-diagrams/">Installing CUDD in Windows/Visual Studio environments.</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://lms.uni-mb.si/biddy/">Biddy</a>: multi-platform academic BDD package, University of Maribor, Slovenia</li>
+<li>
+<a rel="nofollow" class="external text" href="http://javabdd.sourceforge.net/">JavaBDD</a>, a Java port of BuDDy that also interfaces to CUDD, CAL, and JDD</li>
+<li>The Berkeley <a rel="nofollow" class="external text" href="http://embedded.eecs.berkeley.edu/Research/cal_bdd/">CAL</a> package which does breadth-first manipulation</li>
+<li>A. Costa <a rel="nofollow" class="external text" href="http://www.dei.isep.ipp.pt/%7Eacc/bfunc/">BFunc</a>, includes a BDD boolean logic simplifier supporting up to 32 inputs / 32 outputs (independently)</li>
+<li>
+<a rel="nofollow" class="external text" href="http://ddd.lip6.fr/">DDD</a>: A C++ library with support for integer valued and hierarchical decision diagrams.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.jossowski.de/projects/jinc/jinc.html">JINC</a>: A C++ library developed at University of Bonn, Germany, supporting several BDD variants and multi-threading.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Binary_decision_diagram&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Binary+decision+diagram&amp;mobiletoken=44b631bd2a1b95c70cf02e86710b5830" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Binary_decision_diagram&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Binary+decision+diagram&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Binary_decision_diagram_files/load_002.php" type="text/javascript"></script>
+<script src="Binary_decision_diagram_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

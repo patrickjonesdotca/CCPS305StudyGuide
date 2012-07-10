@@ -31,7 +31,7 @@ public class StudyGuideActivity extends ListActivity {
 	String[] class4 = {"Dancing_links", "Disjoin_set_data_structure", "Doubled_ended_queue", "Linked_list", "Memory_pool",
 			"Queue_(data_structure)", "Stack_(data_structure)"
 	};
-	String[] class5 = {"Binomial_heap", "Buddy_memory_allocation", "Cycle_detection", "Dynamic_memory_allocation",
+	String[] class5 = {"Binary_decision_diagram", "Binomial_heap", "Buddy_memory_allocation", "Cycle_detection", "Dynamic_memory_allocation",
 			"Fragmentation_(computer)", "Rope_(computer_science)", "Tombstone_(programming)", "Trie"
 	};
 	HashMap<Integer, String[]> hp = new HashMap<Integer, String[]>();
