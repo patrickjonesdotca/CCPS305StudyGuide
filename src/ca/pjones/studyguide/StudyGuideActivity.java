@@ -18,13 +18,13 @@ public class StudyGuideActivity extends ListActivity {
 	String[] lastSelected;
 	int lastClassNum;
 	String[] classes = {"class1", "class2", "class3", "class4", "class5", "class7", "class8", "class9", "class10", "class11"};
-	String[] class1 = {"Algorithm", "Asymptotic_analysis", "Big_O_notation", "Binary_search", "Boyer–Moore_string_search_algorithm", 
+	String[] class1 = {"Algorithm", "Asymptotic_analysis", "Big_O_notation", "Binary_search", "Boyer_Moore_string_search_algorithm", 
 			"Closure_(computer_science)", "Data_structure", "Funarg_problem", "Generator_(computer_science)", "Inline_expansion",
-			"Interpolation_search", "Knuth–Morris–Pratt_algorithm", "Loop_invariant", "Optimization_(computer_science)", 
-			"Rabin–Karp_string_search_algorithm", "Recursion_(computer_science)", "Spaghetti_stack", "String_matching",
+			"Interpolation_search", "Knuth_Morris_Pratt_algorithm", "Loop_invariant", "Optimization_(computer_science)", 
+			"Rabin_Karp_string_search_algorithm", "Recursion_(computer_science)", "Spaghetti_stack", "String_matching",
 			"Tail_recursion"
 	};
-	String[] class2 = {"Divide_and_conquer_algorithm", "Memoization", "Dynamic_programming", "Backtracking", "Look_ahead", "Greedy_algorithm" };
+	String[] class2 = {"Divide_and_conquer_algorithm", "Memoization", "Dynamic_programming", "Backtracking", "Look_ahead_(backtracking)", "Greedy_algorithm" };
 	String[] class3 = {"Buffer_overflow", "Dangling_pointer", "Free_list", "Function_pointer", "Garbage_collection_(computer_science)",
 			"Malloc", "Memory_leak", "Opaque_pointer", "Pointer_(computer_programming)", "Reference_counting", "Smart_pointer"
 	};
