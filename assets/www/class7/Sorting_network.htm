@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Sorting network - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Sorting_network_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 6 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Sorting_network">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Sorting_network_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Sorting_network_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Sorting_network_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Sorting_network" selected="selected">English</option><option value="//da.m.wikipedia.org/wiki/Sorteringsnetv%C3%A6rk">dansk</option><option value="//fa.m.wikipedia.org/wiki/%D8%B4%D8%A8%DA%A9%D9%87%E2%80%8C%D9%87%D8%A7%DB%8C_%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C">فارسی</option><option value="//ja.m.wikipedia.org/wiki/%E3%82%BD%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF">日本語</option><option value="//pl.m.wikipedia.org/wiki/Sie%C4%87_sortuj%C4%85ca">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%A1%D0%B5%D1%82%D1%8C_%D1%81%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8">русский</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Sorting network</h1>			
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;">
+<a href="http://en.m.wikipedia.org/wiki/File:SimpleSortingNetwork2.svg" class="image"><img alt="" src="Sorting_network_files/250px-SimpleSortingNetwork2.png" class="thumbimage" width="250" height="156"></a>
+<div class="thumbcaption">
+
+A simple sorting network consisting of four wires and five connectors</div>
+</div>
+</div>
+<p>A <b>sorting network</b> is an abstract mathematical model of a 
+network of wires and comparator modules that is used to sort a sequence 
+of numbers. Each comparator connects two wires and sorts the values by 
+outputting the smaller value to one wire, and the larger to the other. 
+The main difference between sorting networks and comparison <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithms" title="Sorting algorithms" class="mw-redirect">sorting algorithms</a>
+ is that the sequence of comparisons is set in advance, regardless of 
+the outcome of previous comparisons. This independence of comparison 
+sequences is useful for parallel execution of the algorithms. Despite 
+the simplicity of the model, sorting network theory is surprisingly deep
+ and complex.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Introduction">Introduction</span></h2><div class="content_block" id="content_1">
+<div class="thumb tright">
+<div class="thumbinner" style="width:152px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Sorting-network-comparator-demonstration.svg" class="image"><img alt="" src="Sorting_network_files/150px-Sorting-network-comparator-demonstration.png" class="thumbimage" width="150" height="193"></a>
+<div class="thumbcaption">
+
+Demonstration of a comparator in a sorting network.</div>
+</div>
+</div>
+<p>A sorting network consists of two items: comparators and wires. Each 
+wire carries with it a value, and each comparator takes two wires as 
+input and output. When two values enter a comparator, the comparator 
+emits the lower value from the top wire, and the higher value from the 
+bottom wire. A network of wires and comparators that will correctly sort
+ all possible inputs into ascending order is called a sorting network.</p>
+<p>The full operation of a simple sorting network is shown below. It is 
+easy to see why this sorting network will correctly sort the inputs; 
+note that the first four comparators will "sink" the largest value to 
+the bottom and "float" the smallest value to the top. The final 
+comparator simply sorts out the middle two wires.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/File:SimpleSortingNetworkFullOperation.svg" class="image"><img alt="SimpleSortingNetworkFullOperation.svg" src="Sorting_network_files/650px-SimpleSortingNetworkFullOperation.png" width="650" height="203"></a></p>
+<h3> <span class="mw-headline" id="Insertion_and_Selection_networks">Insertion and Selection networks</span>
+</h3>
+<p>We can easily construct a network of any size recursively using the 
+principles of insertion and selection. Assuming we have a sorting 
+network of size <i>n</i>, we can construct a network of size <span class="nowrap"><i>n</i> + 1</span> by "inserting" an additional number into the already sorted subnet (using the principle behind <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion sort</a>).
+ We can also accomplish the same thing by first "selecting" the lowest 
+value from the inputs and then sort the remaining values recursively 
+(using the principle behind <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a>).</p>
+<table><tbody><tr>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Recursive-bubble-sorting-network.svg" class="image"><img alt="" src="Sorting_network_files/250px-Recursive-bubble-sorting-network.png" class="thumbimage" width="250" height="208"></a>
+<div class="thumbcaption">
+
+A sorting network constructed recursively that first sinks the largest 
+value to the bottom and then sorts the remaining wires. Based on <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a>
+</div>
+</div>
+</div>
+</td>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Recursive-insertion-sorting-network.svg" class="image"><img alt="" src="Sorting_network_files/250px-Recursive-insertion-sorting-network.png" class="thumbimage" width="250" height="208"></a>
+<div class="thumbcaption">
+
+A sorting network constructed recursively that first sorts the first n wires, and then inserts the remaining value. Based on <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion sort</a>
+</div>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<p>The structure of these two sorting networks are very similar. A 
+construction of the two different variants, which collapses together 
+comparators that can be performed simultaneously shows that, in fact, 
+they are identical.</p>
+<table><tbody><tr>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Six-wire-bubble-sorting-network.svg" class="image"><img alt="" src="Sorting_network_files/200px-Six-wire-bubble-sorting-network.png" class="thumbimage" width="200" height="187"></a>
+<div class="thumbcaption">
+
+Bubble sorting network</div>
+</div>
+</div>
+</td>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Six-wire-insertion-sorting-network.svg" class="image"><img alt="" src="Sorting_network_files/200px-Six-wire-insertion-sorting-network.png" class="thumbimage" width="200" height="187"></a>
+<div class="thumbcaption">
+
+Insertion sorting network</div>
+</div>
+</div>
+</td>
+<td>
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Six-wire-pyramid-sorting-network.svg" class="image"><img alt="" src="Sorting_network_files/200px-Six-wire-pyramid-sorting-network.png" class="thumbimage" width="200" height="187"></a>
+<div class="thumbcaption">
+
+When allowing for parallel comparators, bubble sort and insertion sort are identical</div>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<h3> <span class="mw-headline" id="Efficient_networks">Efficient networks</span>
+</h3>
+<p>The insertion network has a large depth of O(<i>n</i>) making it impractical. There are simple networks which achieve depth O((log&nbsp;<i>n</i>)<sup>2</sup>) (hence size <span class="nowrap">O(<i>n</i> (log <i>n</i>)<sup>2</sup>)),</span> such as <a href="http://en.m.wikipedia.org/wiki/Batcher_odd-even_mergesort" title="Batcher odd-even mergesort" class="mw-redirect">Batcher odd-even mergesort</a>, <a href="http://en.m.wikipedia.org/wiki/Bitonic_sort" title="Bitonic sort" class="mw-redirect">bitonic sort</a>, <a href="http://en.m.wikipedia.org/wiki/Shell_sort" title="Shell sort" class="mw-redirect">Shell sort</a>, and the <a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a>. These networks are often used in practice.</p>
+<h3> <span class="mw-headline" id="Zero-one_principle">Zero-one principle</span>
+</h3>
+<p>While it is easy to prove the validity of some sorting networks (like
+ the insertion/bubble sorter), it is not always so easy. There are <i>n</i>! permutations of numbers in an <i>n</i>-wire network, and to test all of them would take a significant amount of time, especially when <i>n</i> is large. The number of test cases can be reduced significantly, to 2<sup><i>n</i></sup>, using the so-called zero-one principle. While still exponential, this will be much smaller than <i>n</i>! for even modest <i>n</i>.</p>
+<p>The zero-one principle states that a sorting network is valid if it can sort all 2<sup><i>n</i></sup>
+ sequences of 0s and 1s. This not only drastically cuts down on the 
+number of tests needed to ascertain the validity of a network, it is of 
+great use in creating many constructions of sorting networks as well. 
+The principle has been proven by a special case of the <span class="new" title="Bouricius's Theorem (page does not exist)">Bouricius's Theorem</span> in 1954 by <span class="new" title="W. G. Bouricius (page does not exist)">W. G. Bouricius</span>.</p>
+<h3> <span class="mw-headline" id="Complexity_of_testing_sorting_networks">Complexity of testing sorting networks</span>
+</h3>
+<p>Sadly, it is unlikely that significant further improvements can be made for testing general sorting networks, unless <a href="http://en.m.wikipedia.org/wiki/P_vs_NP" title="P vs NP" class="mw-redirect">P=NP</a>. This is because the problem of testing whether a candidate network is a sorting network is known to be <a href="http://en.m.wikipedia.org/wiki/Co-NP" title="Co-NP">co-NP</a>-complete<sup id="cite_ref-parberry_0-0" class="reference"><a href="#cite_note-parberry-0"><span>[</span>1<span>]</span></a></sup>.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Optimal_sorting">Optimal sorting</span></h2><div class="content_block" id="content_2">
+<p>The efficiency of a sorting network can be measured by its total size
+ (the number of comparators used), or by its depth (the maximum number 
+of comparators along any path from an input to an output). The 
+asymptotically best known sorting network, called <i>AKS network</i> after its discoverers <a href="http://en.m.wikipedia.org/wiki/Mikl%C3%B3s_Ajtai" title="Miklós Ajtai">Ajtai</a>, <a href="http://en.m.wikipedia.org/wiki/J%C3%A1nos_Koml%C3%B3s_%28mathematician%29" title="János Komlós (mathematician)">Komlós</a>, and <a href="http://en.m.wikipedia.org/wiki/Endre_Szemer%C3%A9di" title="Endre Szemerédi">Szemerédi</a>, achieves depth O(log&nbsp;<i>n</i>) and size <span class="nowrap">O(<i>n</i> log <i>n</i>)</span> for <i>n</i> inputs, which is <a href="http://en.m.wikipedia.org/wiki/Asymptotically_optimal" title="Asymptotically optimal" class="mw-redirect">asymptotically optimal</a>. A simplified version of the AKS network was described by <a href="http://en.m.wikipedia.org/wiki/Michael_S._Paterson" title="Michael S. Paterson" class="mw-redirect">Paterson</a>.
+ While an important theoretical discovery, the AKS network has little or
+ no practical application because of the large linear constants hidden 
+by the <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">Big-O notation</a>. These are partly due to a construction of an <a href="http://en.m.wikipedia.org/wiki/Expander_graph" title="Expander graph">expander graph</a>. Finding sorting networks with size <span class="nowrap"><i>cn</i> log <i>n</i></span> for small <i>c</i> remains a fundamental open problem.</p>
+<p>Some important progress in designing optimal sorting network is done using <a href="http://en.m.wikipedia.org/wiki/Genetic_algorithm" title="Genetic algorithm">genetic algorithm</a> technique as well. (M. Mitchell, 1998)</p>
+<p>For 1 to 8 inputs optimal sorting networks are known. They have 
+respectively 0, 1, 3, 5, 9, 12, 16 and 19 comparators (Knuth, 1997). The
+ optimal depths for up to 10 inputs are known and they are respectively 
+0, 1, 3, 3, 5, 5, 6, 6, 7, 7.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_3">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-parberry-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-parberry_0-0">^</a></b></span> <span class="reference-text"><span class="citation Journal">Parberry, Ian (1991). "On the Computational Complexity of Optimal Sorting Network Verification". <i>PARLE
+ '91: Parallel Architectures and Languages Europe, Volume I: Parallel 
+Architectures and Algorithms, Eindhoven, The Netherlands, June 10-13, 
+1991, Proceedings</i>: 252–269.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+Computational+Complexity+of+Optimal+Sorting+Network+Verification&amp;rft.jtitle=PARLE+%2791%3A+Parallel+Architectures+and+Languages+Europe%2C++++++++++++++++Volume+I%3A+Parallel+Architectures+and+Algorithms%2C+Eindhoven%2C++++++++++++++++The+Netherlands%2C+June+10-13%2C+1991%2C+Proceedings&amp;rft.aulast=Parberry&amp;rft.aufirst=Ian&amp;rft.au=Parberry%2C%26%2332%3BIan&amp;rft.date=1991&amp;rft.pages=252%E2%80%93269&amp;rfr_id=info:sid/en.wikipedia.org:Sorting_network"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+<ul>
+<li>O. Angel, A.E. Holroyd, D. Romik, B. Virag, <i><a rel="nofollow" class="external text" href="http://arxiv.org/abs/math/0609538">Random Sorting Networks</a></i>, Adv. in Math., 215(2):839–868, 2007.</li>
+<li>K.E. Batcher, <i><a rel="nofollow" class="external text" href="http://www.cs.kent.edu/%7Ebatcher/sort.ps">Sorting networks and their applications</a></i>, Proceedings of the AFIPS Spring Joint Computer Conference 32, 307–314 (1968).</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, and <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. MIT Press and McGraw-Hill, 1990. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a>. Chapter 27: Sorting Networks, pp.704–724.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">D.E. Knuth</a>. <i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i>, Volume 3: <i>Sorting and Searching</i>, Third Edition. Addison-Wesley, 1997. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0201896850" class="internal mw-magiclink-isbn">ISBN 0-201-89685-0</a>. Section 5.3.4: Networks for Sorting, pp. 219–247.</li>
+<li>
+<span class="citation" id="CITEREFAjtaiKoml.C3.B3sSzemer.C3.A9di1983"><a href="http://en.m.wikipedia.org/wiki/Mikl%C3%B3s_Ajtai" title="Miklós Ajtai">Ajtai, M.</a>; <a href="http://en.m.wikipedia.org/wiki/J%C3%A1nos_Koml%C3%B3s_%28mathematician%29" title="János Komlós (mathematician)">Komlós, J.</a>; <a href="http://en.m.wikipedia.org/wiki/Endre_Szemer%C3%A9di" title="Endre Szemerédi">Szemerédi, E.</a> (1983), "An O(n log n) sorting network", <i>Proceedings of the 15th Annual ACM Symposium on Theory of Computing</i>, pp.&nbsp;1–9, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F800061.808726">10.1145/800061.808726</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-89791-099-0" title="Special:BookSources/0-89791-099-0">0-89791-099-0</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+O%28n+log+n%29+sorting+network&amp;rft.atitle=Proceedings+of+the+15th+Annual+ACM+Symposium+on+Theory+of+Computing&amp;rft.aulast=Ajtai&amp;rft.aufirst=M.&amp;rft.au=Ajtai%2C%26%2332%3BM.&amp;rft.au=Koml%C3%B3s%2C%26%2332%3BJ.&amp;rft.au=Szemer%C3%A9di%2C%26%2332%3BE.&amp;rft.date=1983&amp;rft.pages=pp.%26nbsp%3B1%E2%80%939&amp;rft_id=info:doi/10.1145%2F800061.808726&amp;rft.isbn=0-89791-099-0&amp;rfr_id=info:sid/en.wikipedia.org:Sorting_network"><span style="display: none;">&nbsp;</span></span>.</li>
+<li>M. S. Paterson, <i>Improved sorting networks with O</i>(log <i>N</i>) <i>depth</i>, Algorithmica 5 (1990), no. 1, pp. 75–92, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF01840378">10.1007/BF01840378</a>.</li>
+<li>M. Mitchell, <i>An Introduction to Genetic Algorithms</i>, The MIT Press, 1998. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262631857" class="internal mw-magiclink-isbn">ISBN 0-262-63185-7</a>. Chapter 1: Overview, pp. 21–27</li>
+</ul>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_4">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/networks/sortieren.htm">Sorting Networks</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.uky.edu/%7Elewis/essays/algorithms/sortnets/sort-net.html">Sorting Networks</a></li>
+<li><a rel="nofollow" class="external text" href="http://pages.ripco.net/%7Ejgamble/nw.html">List of Sorting Networks</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.brandeis.edu/%7Ehugues/sorting_networks.html">Sorting networks and the END algorithm</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><strong class="selflink">Sorting network</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Sorting_network&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Sorting+network&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Sorting_network&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Sorting+network&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Sorting_network_files/load_002.php" type="text/javascript"></script>
+<script src="Sorting_network_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

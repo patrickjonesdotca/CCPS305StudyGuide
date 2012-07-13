@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="jsEnabled page-loading" dir="ltr" lang="en"><head>
+		<title>Timsort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Timsort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 5 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Timsort">
+	</head>
+	<body class="mobile">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Timsort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Timsort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Timsort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Timsort" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Timsort">Deutsch</option><option value="//it.m.wikipedia.org/wiki/Timsort">italiano</option><option value="//pt.m.wikipedia.org/wiki/Timsort">português</option><option value="//ru.m.wikipedia.org/wiki/Timsort">русский</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Timsort</h1>			
+<table class="metadata plainlinks ambox ambox-style ambox-Copy_edit" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Timsort_files/36px-Acap.png" width="36" height="40"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article <b>may require <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Basic_copyediting" title="Wikipedia:Basic copyediting">copy editing</a> for grammar, style, cohesion, tone, or spelling</b>. <span class="hide-when-compact">You can assist by <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Timsort&amp;action=edit">editing it</a>.</span> <small><i>(November 2011)</i></small> </span></td>
+</tr></tbody></table>
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Timsort</caption>
+<tbody><tr class="">
+<td colspan="2" class="" style="text-align: center;">
+<a href="http://en.m.wikipedia.org/wiki/File:Timsort-edited.png" class="image"><img alt="Timsort-edited.png" src="Timsort_files/220px-Timsort-edited.png" width="220" height="73"></a><br><span style="">A visual representation of timsort.</span>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style="">
+<img class="tex" alt="O(n\log n)" src="Timsort_files/f49341ab621f12e8cb93d0146ea51d34.png"><sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n)" src="Timsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n\log n)" src="Timsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style=""><img class="tex" alt="O(n)" src="Timsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"></td>
+</tr>
+</tbody></table>
+<p><b>Timsort</b> is a hybrid <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>, derived from <a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">merge sort</a> and <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion sort</a>, designed to perform well on many kinds of real-world data. It was invented by Tim Peters in 2002 for use in the <a href="http://en.m.wikipedia.org/wiki/Python_%28programming_language%29" title="Python (programming language)">Python programming language</a>. The <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a>
+ finds subsets of the data that are already ordered, and uses the 
+subsets to sort the data more efficiently. This is done by merging an 
+identified subset, called a run, with existing runs until certain 
+criteria are fulfilled. Timsort has been Python's standard sorting 
+algorithm since version 2.3. It is now also used to sort arrays in <a href="http://en.m.wikipedia.org/wiki/Java_7" title="Java 7" class="mw-redirect">Java SE 7</a>,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> and on the <a href="http://en.m.wikipedia.org/wiki/Android_%28operating_system%29" title="Android (operating system)">Android platform</a>.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><span id="Operation">Operation</span></h2><div class="content_block" id="content_1">
+<p>Timsort was designed to take advantage of partial orderings that 
+already exist in most real-world data. Timsort operates by finding runs,
+ subsets of at least two elements, in the data. Runs can be either 
+non-descending (each element is equal to or greater than its 
+predecessor) or strictly descending (each element is lower than its 
+predecessor). If it is descending, it must be strictly descending, since
+ descending runs are later reversed by a simple swap of elements from 
+both ends converging in the middle. This method is <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">stable</a>
+ if the elements are present in a strictly descending order. After 
+obtaining such a run in the given array, timsort processes it, and then 
+continues its search for the next run.</p>
+<h3> <span class="mw-headline" id="Minrun">Minrun</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:282px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Selection_of_minrun_by_timsort.png" class="image"><img alt="" src="Timsort_files/280px-Selection_of_minrun_by_timsort.png" class="thumbimage" width="280" height="131"></a>
+<div class="thumbcaption">
+
+Timsort algorithm searches for such ordered sequences, minruns, to perform its sort</div>
+</div>
+</div>
+<p>A natural run is a sub-array that is already ordered. Natural runs in
+ real-world data may be of varied lengths. Timsort chooses a sorting 
+technique depending on the length of the run. For example, if the run 
+length is smaller than a certain value, insertion sort is used. Thus it 
+is termed as an adaptive sort.<sup id="cite_ref-python_timsort_3-0" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup></p>
+<p>The size of the run is checked against the minimum run size. The minimum run size (minrun) depends on the size of the <a href="http://en.m.wikipedia.org/wiki/Array_data_type" title="Array data type">array</a>.
+ For an array of fewer than 64 elements, the minrun is the size of the 
+array, making Timsort essentially an insertion sort. For larger arrays, a
+ number, referred to as minrun, is chosen from the range 32 to 65, such 
+that the size of the array, divided by the minimum run size, is equal 
+to, or slightly smaller than, a power of two. The final algorithm for 
+this simply takes the six most significant bits of the size of the 
+array, adds one if any of the remaining bits are set, and uses that 
+result as the minrun. This algorithm works for all cases, including the 
+one in which the size of the array is smaller than 64.<sup id="cite_ref-python_timsort_3-1" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup></p>
+<h3> <span class="mw-headline" id="Insertion_Sort">Insertion Sort</span>
+</h3>
+<p>When an array is random, a natural run will most likely contain less 
+than minrun elements. In this case, an appropriate number of succeeding 
+elements are selected, and insertion sort is used to increase the size 
+of the run to minrun size. Thus, most runs in a random array are, or 
+become, minrun in length. This results in balanced merges, which 
+provides an efficient way to proceed. It also results in a reasonable 
+number of function calls in the implementation of the sort.<sup id="cite_ref-drmaciver_4-0" class="reference"><a href="#cite_note-drmaciver-4"><span>[</span>5<span>]</span></a></sup></p>
+<h3> <span class="mw-headline" id="Merge_Memory">Merge Memory</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:282px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Representation_of_stack_for_merge_memory_in_Timsort.svg" class="image"><img alt="" src="Timsort_files/280px-Representation_of_stack_for_merge_memory_in_Timsort.png" class="thumbimage" width="280" height="145"></a>
+<div class="thumbcaption">
+
+The minruns are inserted in a <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a>.
+ If X &lt; Y + Z then X and Y are merged and then inserted into a stack.
+ In this way, merging is continued until all arrays satisfy a) X &gt; Y +
+ Z and b) Y &gt; Z</div>
+</div>
+</div>
+<p>Once run lengths are optimized, the runs are merged. The principle of
+ Timsort implies that it will be merged by a specific technique that 
+will ensure the highest efficiency. When a run is found, the algorithm 
+pushes its base address and length on a stack. A function is then called
+ which determines whether the run should be merged with previous runs. 
+Timsort does not merge non-consecutive runs because doing this would 
+cause the element common to all three runs to become out of order with 
+respect to the middle run.</p>
+<p>Thus, merging is always done on two consecutive runs. For this, the 
+three top-most runs in the stack which are unsorted are considered. If, 
+say, X, Y, Z represent the lengths of the three uppermost runs in the 
+stack, the algorithm merges the runs so that ultimately the following 
+two rules are satisfied:</p>
+<ol type="i">
+<li>X &gt; Y + Z</li>
+<li>Y &gt; Z<sup id="cite_ref-python_timsort_3-2" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup>
+</li>
+</ol>
+<p>For example, if the first of the two rules is not satisfied by the 
+current run status, that is, if X &lt; Y + Z, then, Y is merged with the
+ smaller of X and Z. The merging continues until both the rules are 
+satisfied. Then the algorithm goes on to determine the next run.<sup id="cite_ref-drmaciver_4-1" class="reference"><a href="#cite_note-drmaciver-4"><span>[</span>5<span>]</span></a></sup></p>
+<p>The rules above aim at maintaining run lengths as close to each other
+ as possible to ensure balanced merges, which are more efficient. At the
+ same time only a small number of runs may be remembered, as the stack 
+is of a specific size. The algorithm also tries to exploit the fresh 
+occurrence of the runs to be merged, in <a href="http://en.m.wikipedia.org/wiki/CPU_cache" title="CPU cache">cache memory</a>. Thus a compromise is attained between delaying merging, and exploiting fresh occurrence in cache memory.</p>
+<h3> <span class="mw-headline" id="Merging_Procedure">Merging Procedure</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:282px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Merging_procedure_for_timsort.svg" class="image"><img alt="" src="Timsort_files/280px-Merging_procedure_for_timsort.png" class="thumbimage" width="280" height="141"></a>
+<div class="thumbcaption">
+
+Algorithm creates a temporary memory equal to size of smaller array. 
+Then, it shifts elements in (say if X is smaller) X to the temporary 
+memory and then sorts and fills elements in final order into combined 
+space of X and Y</div>
+</div>
+</div>
+<p>Merging two adjacent runs is done with the help of temporary memory. 
+The temporary memory is of the size of the minimum of the two runs. The 
+algorithm copies the smaller of the two runs into this temporary memory 
+and then uses the original memory (of the smaller run) and the memory of
+ the other run to store the final run after sorting.</p>
+<p>A simple merge algorithm is then run left to right or right to left 
+depending on which run is smaller, on the temporary memory and original 
+memory of the larger run, the final sorted run being stored in the 
+original memory of the two initial runs. In order to make this more 
+efficient, Timsort searches for appropriate positions for the starting 
+element of one array in the other using an adaptation of <a href="http://en.m.wikipedia.org/wiki/Binary_search" title="Binary search" class="mw-redirect">binary search</a>.</p>
+<p>Say, for example, two runs A and B are to be merged, with A as the 
+smaller run. In this case a binary search is conducted in order to find 
+the position in A where the first element of B will fit. Note that A and
+ B are already sorted individually. Therefore, when such an appropriate 
+position is found, the algorithm can ignore elements before that 
+position in A while inserting (after comparing) elements of B. 
+Similarly, the algorithm also looks for the position which the last 
+element of A needs to take in B. The elements in B after this position 
+can also be ignored for the merging. This preliminary searching may not 
+prove efficient in the case of random data, however it is found to be 
+highly efficient in other situations and is hence included.</p>
+<h3> <span class="mw-headline" id="Galloping_Mode">Galloping Mode</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:282px;">
+<a href="http://en.m.wikipedia.org/wiki/File:One-one_merging_timsort.svg" class="image"><img alt="" src="Timsort_files/280px-One-one_merging_timsort.png" class="thumbimage" width="280" height="218"></a>
+<div class="thumbcaption">
+
+Elements (pointed to by blue arrow) are compared and the smaller element
+ is moved to its final position (pointed to by red arrow).</div>
+</div>
+</div>
+<p>Generally the merge occurs in what is called the ‘one pair at a time’
+ mode, where respective elements of both runs are compared. In the case 
+where function merge_lo is invoked, that is, when the algorithm merges 
+left-to-right, the smaller of the two is brought to a merge area. A 
+count of the number of times the final element appears in a given run is
+ recorded. When this value reaches a certain threshold, MIN_GALLOP, the 
+merge switches to what is called the ‘galloping mode’. In this mode we 
+use the previously mentioned adaptation of binary search to identify 
+where the first element of the smaller array must be placed in the 
+larger array and vice-versa. Thus the entire set of elements, in one 
+array, occurring before this location can be moved to the merge area as a
+ group and the other way round. This is possible as we have both the 
+runs to be merged, ordered individually. The galloping mode is entered 
+only when it is the most optimum method for the merge; this is decided 
+by the value of min-gallop. Min-gallop is a variable initialized to 
+MIN_GALLOP. However the functions merge-lo and merge-hi increment the 
+value of the variable, if galloping is not efficient, and decrement it 
+if it is. If too many consecutive elements come from different runs, 
+galloping mode is exited.<sup id="cite_ref-python_timsort_3-3" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup></p>
+<p>When in galloping mode, the algorithm searches for the first element 
+of one array in the other. This is done by comparing that first element 
+(initial element) with the zeroth element of the other array, then the 
+first, the third and so on, that is (2<sup>k</sup> - 1)th element, so as
+ to get a range of elements between which the initial element will lie. 
+This provides a shorter range to conduct binary search on, thus 
+increasing efficiency. Galloping proves to be more efficient except in 
+cases with especially long runs, but random data usually has shorter 
+runs. Also, in cases where galloping is found to be less efficient as 
+compared to <a href="http://en.m.wikipedia.org/wiki/Binary_search_algorithm" title="Binary search algorithm">binary search</a>, galloping mode is exited from.</p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:282px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Copy_galloping_mode_timsort%282%29.svg" class="image"><img alt="" src="Timsort_files/280px-Copy_galloping_mode_timsort2.png" class="thumbimage" width="280" height="210"></a>
+<div class="thumbcaption">
+
+All red elements are smaller than blue (here, 21). Thus they can be moved in a chunk to the final array.</div>
+</div>
+</div>
+<p>However it is found that galloping is not always efficient. One 
+reason is due to excessive function calls. Function calls are expensive 
+and thus when they are large in number, they hamper program efficiency. 
+Further there are cases where galloping mode requires a larger number of
+ comparisons than a simple <a href="http://en.m.wikipedia.org/wiki/Linear_search" title="Linear search">linear search</a>
+ (one at a time search). While for the first few cases both modes may 
+require the same number of comparisons, over time galloping mode 
+requires 33% more comparisons than linear search to arrive at the same 
+results. Moreover all comparisons in galloping mode are done by <a href="http://en.m.wikipedia.org/wiki/Function_call" title="Function call" class="mw-redirect">function calls</a>.</p>
+<p>Also, it is seen that galloping is beneficial only when the initial 
+element is not one of the first seven elements of the other run. This 
+also results in MIN_GALLOP being set to 7. To avoid the drawbacks of 
+galloping mode, the merging functions adjust the value of min-gallop. If
+ the element is from the array currently under consideration (that is, 
+the array which has been returning the elements consecutively for a 
+while), the value of min-gallop is reduced by one. Otherwise, the value 
+is incremented by one, thus discouraging entry back to galloping mode. 
+When this is done, in the case of random data, the value of min-gallop 
+becomes so large, that the entry back to galloping mode never takes 
+place.</p>
+<p>In the case where merge-hi is used (that is, merging is done 
+right-to-left), galloping needs to start from the right end of the data,
+ that is the last element. Galloping from the beginning also gives the 
+required results, but makes more comparisons than required. Thus, the 
+algorithm for galloping includes the use of a variable which gives the 
+index at which galloping should begin. Thus the algorithm can enter 
+galloping mode at any index and continue thereon as mentioned above, as 
+in, it will check at the next index which is offset by 1, 3, 7,...., (2<sup>k</sup> - 1).. and so on from the current index. In the case of merge-hi, the offsets to the index will be -1, -3, -7,....<sup id="cite_ref-python_timsort_3-4" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup></p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><span id="Performance">Performance</span></h2><div class="content_block" id="content_2">
+<p>According to <a href="http://en.m.wikipedia.org/wiki/Information_theory" title="Information theory">information theory</a>, no <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a> can perform better than <img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"> comparisons in the average case. On real-world data, Timsort often requires far fewer than <img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"> comparisons, because it takes advantage of the fact that sublists of the data may already be in order.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>
+ In case of random data, there are no partially ordered subarrays to 
+take advantage of. In this case, timsort approaches the theoretical 
+limit of <img class="tex" alt="\log(n!)" src="Timsort_files/5efbbf289fee44d7097c8c76e555d58b.png">, which is in <img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png">.<sup id="cite_ref-python_timsort_3-5" class="reference"><a href="#cite_note-python_timsort-3"><span>[</span>4<span>]</span></a></sup></p>
+<p>The following table compares the time complexity of timsort with other comparison sorts.</p>
+<table class="wikitable" style="width: 75%; height: 225px;">
+<tbody><tr>
+<th></th>
+<th>Timsort</th>
+<th>Merge sort</th>
+<th>Quicksort</th>
+<th>Insertion sort</th>
+<th>Selection sort</th>
+<th>Smoothsort</th>
+</tr>
+<tr>
+<th>Best Case</th>
+<td><img class="tex" alt="\Omega(n)" src="Timsort_files/21497996e331495f03b63c43249905d5.png"></td>
+<td><img class="tex" alt="\Omega(n \log n)" src="Timsort_files/78add393ec39e99ef3939718516505be.png"></td>
+<td><img class="tex" alt="\Omega(n \log n)" src="Timsort_files/78add393ec39e99ef3939718516505be.png"></td>
+<td><img class="tex" alt="\Omega(n)" src="Timsort_files/21497996e331495f03b63c43249905d5.png"></td>
+<td><img class="tex" alt="\Omega(n^2)" src="Timsort_files/030573389a70338bd19a9707c16f31a4.png"></td>
+<td><img class="tex" alt="\Omega(n)" src="Timsort_files/21497996e331495f03b63c43249905d5.png"></td>
+</tr>
+<tr>
+<th>Average Case</th>
+<td><img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"></td>
+<td><img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"></td>
+<td><img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"></td>
+<td><img class="tex" alt="\Theta(n^2)" src="Timsort_files/9049033798429002ac7616421dbae646.png"></td>
+<td><img class="tex" alt="\Theta(n^2)" src="Timsort_files/9049033798429002ac7616421dbae646.png"></td>
+<td><img class="tex" alt="\Theta(n \log n)" src="Timsort_files/f296a521bff060cd02c3ef6ee7931dd7.png"></td>
+</tr>
+<tr>
+<th>Worst Case</th>
+<td><img class="tex" alt="O(n \log n)" src="Timsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+<td><img class="tex" alt="O(n \log n)" src="Timsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+<td><img class="tex" alt="O(n^2)" src="Timsort_files/189317b4b935a745fcfaf95940d2b4f0.png"></td>
+<td><img class="tex" alt="O(n^2)" src="Timsort_files/189317b4b935a745fcfaf95940d2b4f0.png"></td>
+<td><img class="tex" alt="O(n^2)" src="Timsort_files/189317b4b935a745fcfaf95940d2b4f0.png"></td>
+<td><img class="tex" alt="O(n \log n)" src="Timsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+</tr>
+</tbody></table>
+<p>The following table provides a comparison of the space complexities 
+of the various sorting techniques. Note that for merge sort, the <i>worst case</i> space complexity is usually <img class="tex" alt="O(n)" src="Timsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png">.</p>
+<table class="wikitable" style="width: 75%; height: 100px;">
+<tbody><tr>
+<th></th>
+<th>Timsort</th>
+<th><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></th>
+</tr>
+<tr>
+<th>Space Complexity</th>
+<td><img class="tex" alt="n" src="Timsort_files/7b8b965ad4bca0e41ab51de7b31363a1.png"></td>
+<td><img class="tex" alt="n" src="Timsort_files/7b8b965ad4bca0e41ab51de7b31363a1.png"></td>
+<td><img class="tex" alt="\log n" src="Timsort_files/0d2e858bd7f89eed5461e5637d6e0a50.png"></td>
+<td><img class="tex" alt="1" src="Timsort_files/c4ca4238a0b923820dcc509a6f75849b.png"></td>
+<td><img class="tex" alt="1" src="Timsort_files/c4ca4238a0b923820dcc509a6f75849b.png"></td>
+<td><img class="tex" alt="1" src="Timsort_files/c4ca4238a0b923820dcc509a6f75849b.png"></td>
+</tr>
+</tbody></table>
+<p>Note, however, that the space complexity of both Timsort and merge sort can be reduced to <img class="tex" alt="\log n" src="Timsort_files/0d2e858bd7f89eed5461e5637d6e0a50.png"> at the cost of speed (see in-place merge sort).</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><span id="References">References</span></h2><div class="content_block" id="content_3">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation web">Peters, Tim. <a rel="nofollow" class="external text" href="http://mail.python.org/pipermail/python-dev/2002-July/026837.html">"[Python-Dev] Sorting"</a>. <i>Python Developers Mailinglist</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://mail.python.org/pipermail/python-dev/2002-July/026837.html">http://mail.python.org/pipermail/python-dev/2002-July/026837.html</a></span><span class="reference-accessdate">. Retrieved 24 Feb 2011</span>.
+ "[Timsort] also has good aspects: It's stable (items that compare equal
+ retain their relative order, so, e.g., if you sort first on zip code, 
+and a second time on name, people with the same name still appear in 
+order of increasing zip code; this is important in apps that, e.g., 
+refine the results of queries based on user input). ... It has no bad 
+cases (O(N log N) is worst case; N-1 compares is best)."</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=[Python-Dev]+Sorting&amp;rft.atitle=Python+Developers+Mailinglist&amp;rft.aulast=Peters&amp;rft.aufirst=Tim&amp;rft.au=Peters%2C%26%2332%3BTim&amp;rft_id=http%3A%2F%2Fmail.python.org%2Fpipermail%2Fpython-dev%2F2002-July%2F026837.html&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation web">jjb. <a rel="nofollow" class="external text" href="http://hg.openjdk.java.net/jdk7/tl/jdk/rev/bfd7abda8f79">"Commit 6804124: Replace "modified mergesort" in java.util.Arrays.sort with timsort"</a>. <i>Java Development Kit 7 Hg repo</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://hg.openjdk.java.net/jdk7/tl/jdk/rev/bfd7abda8f79">http://hg.openjdk.java.net/jdk7/tl/jdk/rev/bfd7abda8f79</a></span><span class="reference-accessdate">. Retrieved 24 Feb 2011</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Commit+6804124%3A+Replace+%22modified+mergesort%22+in+java.util.Arrays.sort+with+timsort&amp;rft.atitle=Java+Development+Kit+7+Hg+repo&amp;rft.aulast=jjb&amp;rft.au=jjb&amp;rft_id=http%3A%2F%2Fhg.openjdk.java.net%2Fjdk7%2Ftl%2Fjdk%2Frev%2Fbfd7abda8f79&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://www.kiwidoc.com/java/l/x/android/android/5/p/java.util/c/TimSort">"Class: java.util.TimSort&lt;T&gt;"</a>. <i>Android JDK 1.5 Documentation</i><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.kiwidoc.com/java/l/x/android/android/5/p/java.util/c/TimSort">http://www.kiwidoc.com/java/l/x/android/android/5/p/java.util/c/TimSort</a></span><span class="reference-accessdate">. Retrieved 24 Feb 2011</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Class%3A+java.util.TimSort%3CT%3E&amp;rft.atitle=Android+JDK+1.5+Documentation&amp;rft_id=http%3A%2F%2Fwww.kiwidoc.com%2Fjava%2Fl%2Fx%2Fandroid%2Fandroid%2F5%2Fp%2Fjava.util%2Fc%2FTimSort&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-python_timsort-3">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-python_timsort_3-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-python_timsort_3-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-python_timsort_3-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-python_timsort_3-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-python_timsort_3-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-python_timsort_3-5"><sup><i><b>f</b></i></sup></a></span> <span class="reference-text"><span class="citation web">timsort, python. <a rel="nofollow" class="external text" href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">"python_timsort"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">http://svn.python.org/projects/python/trunk/Objects/listsort.txt</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=python_timsort&amp;rft.atitle=&amp;rft.aulast=timsort&amp;rft.aufirst=python&amp;rft.au=timsort%2C%26%2332%3Bpython&amp;rft_id=http%3A%2F%2Fsvn.python.org%2Fprojects%2Fpython%2Ftrunk%2FObjects%2Flistsort.txt&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-drmaciver-4">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-drmaciver_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-drmaciver_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation web">timsort, understanding. <a rel="nofollow" class="external text" href="http://www.drmaciver.com/2010/01/understanding-timsort-1adaptive-mergesort/">"understanding timsort"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.drmaciver.com/2010/01/understanding-timsort-1adaptive-mergesort/">http://www.drmaciver.com/2010/01/understanding-timsort-1adaptive-mergesort/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=understanding+timsort&amp;rft.atitle=&amp;rft.aulast=timsort&amp;rft.aufirst=understanding&amp;rft.au=timsort%2C%26%2332%3Bunderstanding&amp;rft_id=http%3A%2F%2Fwww.drmaciver.com%2F2010%2F01%2Funderstanding-timsort-1adaptive-mergesort%2F&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation book">Martelli, Alex (2006). <i>Python in a Nutshell (In a Nutshell (O'Reilly))</i>. O'Reilly Media, Inc.. p.&nbsp;57. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-596-10046-9" title="Special:BookSources/0-596-10046-9">0-596-10046-9</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Python+in+a+Nutshell+%28In+a+Nutshell+%28O%27Reilly%29%29&amp;rft.aulast=Martelli&amp;rft.aufirst=Alex&amp;rft.au=Martelli%2C%26%2332%3BAlex&amp;rft.date=2006&amp;rft.pages=p.%26nbsp%3B57&amp;rft.pub=O%27Reilly+Media%2C+Inc.&amp;rft.isbn=0-596-10046-9&amp;rfr_id=info:sid/en.wikipedia.org:Timsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><span id="External_links">External links</span></h2><div class="content_block" id="content_4">
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://corte.si/posts/code/timsort/index.html">Visualising Timsort</a> - the source for the image on this page.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://svn.python.org/projects/python/trunk/Objects/listobject.c">Python's listobject.c</a> - the <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> implementation of timsort for <a href="http://en.m.wikipedia.org/wiki/CPython" title="CPython">CPython</a>.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://cr.openjdk.java.net/%7Emartin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java">OpenJDK's TimSort.java</a> - the Java implementation of timsort.</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><strong class="selflink">Timsort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer">
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Timsort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Timsort" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Timsort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Timsort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Timsort_files/load_002.php" type="text/javascript"></script>
+<script src="Timsort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	</body></html>

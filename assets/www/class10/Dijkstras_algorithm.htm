@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Dijkstra's algorithm - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Dijkstra%27s_algorithm_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 36 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Dijkstra%27s_algorithm_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Dijkstra%27s_algorithm_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Dijkstra%27s_algorithm_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" selected="selected">English</option><option value="//bg.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D1%8A%D0%BC_%D0%BD%D0%B0_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D0%B0">български</option><option value="//ca.m.wikipedia.org/wiki/Algorisme_de_Dijkstra">català</option><option value="//cs.m.wikipedia.org/wiki/Dijkstr%C5%AFv_algoritmus">česky</option><option value="//de.m.wikipedia.org/wiki/Dijkstra-Algorithmus">Deutsch</option><option value="//et.m.wikipedia.org/wiki/Dijkstra_algoritm">eesti</option><option value="//el.m.wikipedia.org/wiki/%CE%91%CE%BB%CE%B3%CF%8C%CF%81%CE%B9%CE%B8%CE%BC%CE%BF%CF%82_%CF%84%CE%BF%CF%85_Dijkstra">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Algoritmo_de_Dijkstra">español</option><option value="//eu.m.wikipedia.org/wiki/Dijkstraren_algoritmo">euskara</option><option value="//fa.m.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%D8%AF%DB%8C%DA%A9%D8%B3%D8%AA%D8%B1%D8%A7">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Algorithme_de_Dijkstra">français</option><option value="//ko.m.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%81%AC%EC%8A%A4%ED%8A%B8%EB%9D%BC_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">한국어</option><option value="//hy.m.wikipedia.org/wiki/%D4%B4%D5%A5%D6%84%D5%BD%D5%BF%D6%80%D5%A1%D5%B5%D5%AB_%D5%A1%D5%AC%D5%A3%D5%B8%D6%80%D5%AB%D5%A9%D5%B4">Հայերեն</option><option value="//hr.m.wikipedia.org/wiki/Dijkstrin_algoritam">hrvatski</option><option value="//id.m.wikipedia.org/wiki/Algoritma_Dijkstra">Bahasa Indonesia</option><option value="//it.m.wikipedia.org/wiki/Algoritmo_di_Dijkstra">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%90%D7%9C%D7%92%D7%95%D7%A8%D7%99%D7%AA%D7%9D_%D7%93%D7%99%D7%99%D7%A7%D7%A1%D7%98%D7%A8%D7%94">עברית</option><option value="//lv.m.wikipedia.org/wiki/Deikstras_algoritms">latviešu</option><option value="//lt.m.wikipedia.org/wiki/Dijkstros_algoritmas">lietuvių</option><option value="//hu.m.wikipedia.org/wiki/Dijkstra-algoritmus">magyar</option><option value="//nl.m.wikipedia.org/wiki/Kortstepad-algoritme">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%80%E3%82%A4%E3%82%AF%E3%82%B9%E3%83%88%E3%83%A9%E6%B3%95">日本語</option><option value="//no.m.wikipedia.org/wiki/Dijkstras_algoritme">‪norsk (bokmål)‬</option><option value="//pl.m.wikipedia.org/wiki/Algorytm_Dijkstry">polski</option><option value="//pt.m.wikipedia.org/wiki/Algoritmo_de_Dijkstra">português</option><option value="//ro.m.wikipedia.org/wiki/Algoritmul_lui_Dijkstra">română</option><option value="//ru.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B">русский</option><option value="//sk.m.wikipedia.org/wiki/Dijkstrov_algoritmus">slovenčina</option><option value="//sl.m.wikipedia.org/wiki/Dijkstrov_algoritem">slovenščina</option><option value="//sr.m.wikipedia.org/wiki/%D0%94%D0%B0%D1%98%D0%BA%D1%81%D1%82%D1%80%D0%B8%D0%BD_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%B0%D0%BC">српски / srpski</option><option value="//fi.m.wikipedia.org/wiki/Dijkstran_algoritmi">suomi</option><option value="//sv.m.wikipedia.org/wiki/Dijkstras_algoritm">svenska</option><option value="//th.m.wikipedia.org/wiki/%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%84%E0%B8%94%E0%B8%84%E0%B9%8C%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B8%B2">ไทย</option><option value="//uk.m.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D0%B8">українська</option><option value="//vi.m.wikipedia.org/wiki/Thu%E1%BA%ADt_to%C3%A1n_Dijkstra">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E8%BF%AA%E7%A7%91%E6%96%AF%E5%BD%BB%E7%AE%97%E6%B3%95">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Dijkstra's algorithm</h1>			
+<div class="dablink">Not to be confused with <a href="http://en.m.wikipedia.org/wiki/Dykstra%27s_projection_algorithm" title="Dykstra's projection algorithm">Dykstra's projection algorithm</a>.</div>
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Dijkstra's algorithm</caption>
+<tbody><tr class="">
+<td colspan="2" class="" style="text-align: center;">
+<a href="http://en.m.wikipedia.org/wiki/File:Dijksta_Anim.gif" class="image" title="Dijkstra's algorithm runtime"><img alt="Dijkstra's algorithm runtime" src="Dijkstra%27s_algorithm_files/Dijksta_Anim.gif" width="283" height="222"></a><br><span style="">Dijkstra's algorithm runtime</span>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">Search algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Graph_%28data_structure%29" title="Graph (data structure)" class="mw-redirect">Graph</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(|E| + |V| \log|V|)" src="Dijkstra%27s_algorithm_files/8afcf9cf1e69f85b094063fd7b9e15cb.png"></td>
+</tr>
+</tbody></table>
+<table class="vertical-navbox nowraplinks plainlist" style="float: right; clear: right; background-color: rgb(249, 249, 249); border: 1px solid rgb(170, 170, 170); margin: 0pt 0pt 1em 1em; padding: 0.2em; border-spacing: 0.4em 0pt; text-align: center; line-height: 1.4em; font-size: 88%; width: 15em;" cellpadding="0" cellspacing="5">
+<tbody><tr>
+<th class="navbox-title" style="padding: 0.2em 0.4em; font-size: 145%; line-height: 1.2em;">
+<a href="http://en.m.wikipedia.org/wiki/Graph_traversal" title="Graph traversal">Graph</a> and <a href="http://en.m.wikipedia.org/wiki/Tree_traversal" title="Tree traversal">tree<br>
+search algorithms</a>
+</th>
+</tr>
+<tr>
+<td class="" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Alpha-beta_pruning" title="Alpha-beta pruning">α — β</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/A*_search_algorithm" title="A* search algorithm">A*</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B*" title="B*">B*</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Beam_search" title="Beam search">Beam</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm" title="Bellman–Ford algorithm">Bellman–Ford</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Best-first_search" title="Best-first search">Best-first</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bidirectional_search" title="Bidirectional search">Bidirectional</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Branch_and_bound" title="Branch and bound">Branch &amp; bound</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Breadth-first_search" title="Breadth-first search">BFS</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/British_Museum_algorithm" title="British Museum algorithm">British Museum</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/D*" title="D*">D*</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">DFS</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Depth-limited_search" title="Depth-limited search">Depth-limited</a></li>
+<li><strong class="selflink">Dijkstra</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Edmonds%27_algorithm" title="Edmonds' algorithm">Edmond</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" title="Floyd–Warshall algorithm">Floyd-Warshall</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hill_climbing" title="Hill climbing">Hill climbing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Iterative_deepening_depth-first_search" title="Iterative deepening depth-first search">Iterative deepening</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Kruskal%27s_algorithm" title="Kruskal's algorithm">Kruskal</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Johnson%27s_algorithm" title="Johnson's algorithm">Johnson</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lexicographic_breadth-first_search" title="Lexicographic breadth-first search">Lexicographic BFS</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Uniform-cost_search" title="Uniform-cost search">Uniform-cost</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<th class="" style="padding-top: 0.2em;">Listings</th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;">
+<ul>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Category:Graph_algorithms" title="Category:Graph algorithms">Graph algorithms</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/Category:Search_algorithms" title="Category:Search algorithms">Search algorithms</a></i></li>
+<li><i><a href="http://en.m.wikipedia.org/wiki/List_of_algorithms#Graph_algorithms" title="List of algorithms">List of graph algorithms</a></i></li>
+</ul>
+</td>
+</tr>
+<tr>
+<th class="" style="padding-top: 0.2em;">Related topics</th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Dynamic_programming" title="Dynamic programming">Dynamic programming</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Graph_traversal" title="Graph traversal">Graph traversal</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_traversal" title="Tree traversal">Tree traversal</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Search_game" title="Search game">Search games</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: right; font-size: 115%;">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Graph_search_algorithm" title="Template:Graph search algorithm"><span title="View this template" style="">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Graph_search_algorithm" title="Template talk:Graph search algorithm"><span title="Discuss this template" style="">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Graph_search_algorithm&amp;action=edit"><span title="Edit this template" style="">e</span></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p><b>Dijkstra's algorithm</b>, conceived by Dutch <a href="http://en.m.wikipedia.org/wiki/Computer_scientist" title="Computer scientist">computer scientist</a> <a href="http://en.m.wikipedia.org/wiki/Edsger_Dijkstra" title="Edsger Dijkstra" class="mw-redirect">Edsger Dijkstra</a> in 1956 and published in 1959,<sup id="cite_ref-Dijkstra_Interview_0-0" class="reference"><a href="#cite_note-Dijkstra_Interview-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> is a <a href="http://en.m.wikipedia.org/wiki/Graph_search_algorithm" title="Graph search algorithm" class="mw-redirect">graph search algorithm</a> that solves the single-source <a href="http://en.m.wikipedia.org/wiki/Shortest_path_problem" title="Shortest path problem">shortest path problem</a> for a <a href="http://en.m.wikipedia.org/wiki/Graph_%28mathematics%29" title="Graph (mathematics)">graph</a> with nonnegative <a href="http://en.m.wikipedia.org/wiki/Edge_%28graph_theory%29" title="Edge (graph theory)" class="mw-redirect">edge</a> path costs, producing a <a href="http://en.m.wikipedia.org/wiki/Shortest_path_tree" title="Shortest path tree">shortest path tree</a>. This algorithm is often used in <a href="http://en.m.wikipedia.org/wiki/Routing" title="Routing">routing</a> and as a <a href="http://en.m.wikipedia.org/wiki/Subroutine" title="Subroutine">subroutine</a> in other graph algorithms.</p>
+<p>For a given source <a href="http://en.m.wikipedia.org/wiki/Vertex_%28graph_theory%29" title="Vertex (graph theory)">vertex</a>
+ (node) in the graph, the algorithm finds the path with lowest cost 
+(i.e. the shortest path) between that vertex and every other vertex. It 
+can also be used for finding costs of shortest paths from a single 
+vertex to a single destination vertex by stopping the algorithm once the
+ shortest path to the destination vertex has been determined. For 
+example, if the vertices of the graph represent cities and edge path 
+costs represent driving distances between pairs of cities connected by a
+ direct road, Dijkstra's algorithm can be used to find the shortest 
+route between one city and all other cities. As a result, the shortest 
+path first is widely used in network <a href="http://en.m.wikipedia.org/wiki/Routing_protocol" title="Routing protocol">routing protocols</a>, most notably <a href="http://en.m.wikipedia.org/wiki/IS-IS" title="IS-IS">IS-IS</a> and <a href="http://en.m.wikipedia.org/wiki/OSPF" title="OSPF" class="mw-redirect">OSPF</a> (Open Shortest Path First).</p>
+<p>Dijkstra's original algorithm does not use a <a href="http://en.m.wikipedia.org/wiki/Min-priority_queue" title="Min-priority queue" class="mw-redirect">min-priority queue</a> and runs in <i>O</i>(|<i>V</i>|<sup>2</sup>). The idea of this algorithm is also given in (<a href="#CITEREFLeyzorekGrayJohnsonLadew1957">Leyzorek et al. 1957</a>). The implementation based on a min-priority queue implemented by a <a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci heap</a> and running in <i>O</i>(|<i>E</i>|&nbsp;+&nbsp;|<i>V</i>|&nbsp;log&nbsp;|<i>V</i>|) is due to (<a href="#CITEREFFredmanTarjan1984">Fredman &amp; Tarjan 1984</a>). This is <a href="http://en.m.wikipedia.org/wiki/Asymptotic_computational_complexity" title="Asymptotic computational complexity">asymptotically</a>
+ the fastest known single-source shortest-path algorithm for arbitrary 
+directed graphs with unbounded nonnegative weights. (For an overview of 
+earlier shortest path algorithms and later improvements and adaptations,
+ see: <a href="http://en.m.wikipedia.org/wiki/Single-source_shortest-paths_algorithms_for_directed_graphs_with_nonnegative_weights" title="Single-source shortest-paths algorithms for directed graphs with nonnegative weights" class="mw-redirect">Single-source shortest-paths algorithms for directed graphs with nonnegative weights</a>.)</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Algorithm">Algorithm</span></h2><div class="content_block" id="content_1">
+<div class="thumb tright">
+<div class="thumbinner" style="width:212px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Dijkstras_progress_animation.gif" class="image"><img alt="" src="Dijkstra%27s_algorithm_files/Dijkstras_progress_animation.gif" class="thumbimage" width="210" height="210"></a>
+<div class="thumbcaption">
+
+Illustration of Dijkstra's algorithm search for finding path from a start node to a goal node in a <a href="http://en.m.wikipedia.org/wiki/Robotics" title="Robotics">robot</a> <a href="http://en.m.wikipedia.org/wiki/Motion_planning" title="Motion planning">motion planning</a>
+ problem. Open nodes represent the "tentative" set. Filled nodes are 
+visited ones, with color representing the distance: the greener, the 
+further. Nodes in all the different directions are explored uniformly, 
+appearing as a more-or-less circular <a href="http://en.m.wikipedia.org/wiki/Wavefront" title="Wavefront">wavefront</a> as Dijkstra's algorithm uses a <a href="http://en.m.wikipedia.org/wiki/Consistent_heuristic" title="Consistent heuristic">heuristic</a> identically equal to 0.</div>
+</div>
+</div>
+<p>Let the node at which we are starting be called the <b>initial node</b>. Let the <b>distance of node Y</b> be the distance from the <b>initial node</b> to Y. Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.</p>
+<ol>
+<li>Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other nodes.</li>
+<li>Mark all nodes unvisited. Set the initial node as current. Create a set of the unvisited nodes called the <i>unvisited set</i> consisting of all the nodes except the initial node.</li>
+<li>For the current node, consider all of its unvisited neighbors and calculate their <i>tentative</i>
+ distances. For example, if the current node A is marked with a 
+tentative distance of 6, and the edge connecting it with a neighbor B 
+has length 2, then the distance to B (through A) will be 6+2=8. If this 
+distance is less than the previously recorded tentative distance of B, 
+then overwrite that distance. Even though a neighbor has been examined, 
+it is not marked as <i>visited</i> at this time, and it remains in the <i>unvisited set</i>.</li>
+<li>When we are done considering all of the neighbors of the current node, mark the current node as visited and remove it from the <i>unvisited set</i>. A visited node will never be checked again; its distance recorded now is final and minimal.</li>
+<li>If the destination node has been marked visited (when planning a 
+route between two specific nodes) or if the smallest tentative distance 
+among the nodes in the <i>unvisited set</i> is infinity (when planning a complete traversal), then stop. The algorithm has finished.</li>
+<li>Set the unvisited node marked with the smallest tentative distance as the next "current node" and go back to step 3.</li>
+</ol>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Description">Description</span></h2><div class="content_block" id="content_2">
+<dl>
+<dd><i><b>Note:</b> For ease of understanding, this discussion uses the terms <b>intersection</b>, <b>road</b> and <b>map</b> — however, formally these terms are <b>vertex</b>, <b>edge</b> and <b>graph</b>, respectively.</i></dd>
+</dl>
+<p>Suppose you want to find the shortest path between two <a href="http://en.m.wikipedia.org/wiki/Intersection_%28road%29" title="Intersection (road)">intersections</a>
+ on a city map, a starting point and a destination. The order is 
+conceptually simple: to start, mark the distance to every intersection 
+on the map with infinity. This is done not to imply there is an infinite
+ distance, but to note that that intersection has not yet been <i>visited</i>; some variants of this method simply leave the intersection unlabeled. Now, at each iteration, select a <i>current</i>
+ intersection. For the first iteration the current intersection will be 
+the starting point and the distance to it (the intersection's label) 
+will be zero. For subsequent iterations (after the first) the current 
+intersection will be the closest unvisited intersection to the starting 
+point—this will be easy to find.</p>
+<p>From the current intersection, update the distance to every unvisited
+ intersection that is directly connected to it. This is done by 
+determining the sum of the distance between an unvisited intersection 
+and the value of the current intersection, and <a href="http://en.m.wikipedia.org/wiki/Graph_labeling" title="Graph labeling">relabeling</a>
+ the unvisited intersection with this value if it is less than its 
+current value. In effect, the intersection is relabeled if the path to 
+it through the current intersection is shorter than the previously known
+ paths. To facilitate shortest path identification, in pencil, mark the 
+road with an arrow pointing to the relabeled intersection if you 
+label/relabel it, and erase all others pointing to it. After you have 
+updated the distances to each <a href="http://en.m.wikipedia.org/wiki/Neighbourhood_%28graph_theory%29" title="Neighbourhood (graph theory)">neighboring intersection</a>, mark the current intersection as <i>visited</i>
+ and select the unvisited intersection with lowest distance (from the 
+starting point) -- or lowest label—as the current intersection. Nodes 
+marked as visited are labeled with the shortest path from the starting 
+point to it and will not be revisited or returned to.</p>
+<p>Continue this process of updating the neighboring intersections with 
+the shortest distances, then marking the current intersection as visited
+ and moving onto the closest unvisited intersection until you have 
+marked the destination as visited. Once you have marked the destination 
+as visited (as is the case with any visited intersection) you have 
+determined the shortest path to it, from the starting point, and can 
+trace your way back, following the arrows in reverse.</p>
+<p>Of note is the fact that this algorithm makes no attempt to direct 
+"exploration" towards the destination as one might expect. Rather, the 
+sole consideration in determining the next "current" intersection is its
+ distance from the starting point. In some sense, this algorithm 
+"expands outward" from the starting point, iteratively considering every
+ node that is closer in terms of shortest path distance until it reaches
+ the destination. When understood in this way, it is clear how the 
+algorithm necessarily finds the shortest path, however it may also 
+reveal one of the algorithm's weaknesses: its relative slowness in some 
+topologies.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Pseudocode">Pseudocode</span></h2><div class="content_block" id="content_3">
+<p>In the following algorithm, the code <code>u&nbsp;:= vertex in <i>Q</i> with smallest dist[]</code>, searches for the vertex <code><var>u</var></code> in the vertex set <code><var>Q</var></code> that has the least <code>dist[<var>u</var>]</code> value. That vertex is removed from the set <code><var>Q</var></code> and returned to the user. <code>dist_between(<var>u</var>, <var>v</var>)</code> calculates the length between the two neighbor-nodes <code><var>u</var></code> and <code><var>v</var></code>. The variable <code><var>alt</var></code> on lines 20 &amp; 22 is the length of the path from the root node to the neighbor node <code><var>v</var></code> if it were to go through <code><var>u</var></code>. If this path is shorter than the current shortest path recorded for <code><var>v</var></code>, that current path is replaced with this <code><var>alt</var></code> path. The <code>previous</code> array is populated with a pointer to the "next-hop" node on the source graph to get the shortest route to the source.</p>
+<pre> 1  <b>function</b> Dijkstra(<i>Graph</i>, <i>source</i>):
+ 2      <b>for each</b> vertex <i>v</i> in <i>Graph</i>:                                <i>// Initializations</i>
+ 3          dist[<i>v</i>] := infinity ;                                  <i>// Unknown distance function from</i> 
+ 4                                                                 <i>// source to v</i>
+ 5          previous[<i>v</i>] := undefined ;                             <i>// Previous node in optimal path</i>
+ 6                                                                 <i>// from source</i>
+ 7      <b>end for </b>;
+ 8      dist[<i>source</i>] := 0 ;                                        <i>// Distance from source to source</i>
+ 9      <i>Q</i> := the set of all nodes in <i>Graph</i> ;                       <i>// All nodes in the graph are</i>
+10                                                                 <i>// unoptimized - thus are in Q</i>
+11      <b>while</b> <i>Q</i> <b>is not</b> empty:                                      <i>// The main loop</i>
+12          <i>u</i> := vertex in <i>Q</i> with smallest distance in dist[] ;    <i>// Start node in first case</i>
+13          <b>if</b> dist[<i>u</i>] = infinity:
+14              <b>break</b> ;                                            <i>// all remaining vertices are</i>
+15                                                                 <i>// inaccessible from source</i>
+16          <b>end if</b> ;
+17          remove <i>u</i> from <i>Q</i> ;
+18          <b>for each</b> neighbor <i>v</i> of <i>u</i>:                              <i>// where v has not yet been </i>
+19                                                                                 removed from Q.
+20              <i>alt</i> := dist[<i>u</i>] + dist_between(<i>u</i>, <i>v</i>) ;
+21              <b>if</b> <i>alt</i> &lt; dist[<i>v</i>]:                                  <i>// Relax (u,v,a)</i>
+22                  dist[<i>v</i>] := <i>alt</i> ;
+23                  previous[<i>v</i>] := <i>u</i> ;
+24                  decrease-key <i>v</i> in <i>Q</i>;                           <i>// Reorder v in the Queue</i>
+25              <b>end if</b> ;
+26          <b>end for</b> ;
+27      <b>end while</b> ;
+28      <b>return</b> dist[] ;
+29  <b>end</b> Dijkstra.
+</pre>
+<p>If we are only interested in a shortest path between vertices <code><var>source</var></code> and <code><var>target</var></code>, we can terminate the search at line 13 if <code><var>u</var> = <var>target</var></code>. Now we can read the shortest path from <code><var>source</var></code> to <code><var>target</var></code> by iteration:</p>
+<pre>1  <i>S</i> := empty sequence
+2  <i>u</i> := <i>target</i>
+3  <b>while</b> previous[<i>u</i>] is defined:
+4      insert <i>u</i> at the beginning of <i>S</i>
+5      <i>u</i> := previous[<i>u</i>]
+6  <b>end while</b> ;
+</pre>
+<p>Now sequence <code><var>S</var></code> is the list of vertices constituting one of the shortest paths from <code><var>source</var></code> to <code><var>target</var></code>, or the empty sequence if no path exists.</p>
+<p>A more general problem would be to find all the shortest paths between <code><var>source</var></code> and <code><var>target</var></code> (there might be several different ones of the same length). Then instead of storing only a single node in each entry of <code>previous[]</code> we would store all nodes satisfying the relaxation condition. For example, if both <code><var>r</var></code> and <code><var>source</var></code> connect to <code><var>target</var></code> and both of them lie on different shortest paths through <code><var>target</var></code> (because the edge cost is the same in both cases), then we would add both <code><var>r</var></code> and <code><var>source</var></code> to <code>previous[<var>target</var>]</code>. When the algorithm completes, <code>previous[]</code>
+ data structure will actually describe a graph that is a subset of the 
+original graph with some edges removed. Its key property will be that if
+ the algorithm was run with some starting node, then every path from 
+that node to any other node in the new graph will be the shortest path 
+between those nodes in the original graph, and all paths of that length 
+from the original graph will be present in the new graph. Then to 
+actually find all these short paths between two given nodes we would use
+ a path finding algorithm on the new graph, such as depth-first search.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Running_time">Running time</span></h2><div class="content_block" id="content_4">
+<p>An upper bound of the running time of Dijkstra's algorithm on a graph with edges <img class="tex" alt="E" src="Dijkstra%27s_algorithm_files/3a3ea00cfc35332cedf6e5e9a32e94da.png"> and vertices <img class="tex" alt="V" src="Dijkstra%27s_algorithm_files/5206560a306a2e085a437fd258eb57ce.png"> can be expressed as a function of <img class="tex" alt="|E|" src="Dijkstra%27s_algorithm_files/cbdcf0e203060323ebcd0079f280f4b8.png"> and <img class="tex" alt="|V|" src="Dijkstra%27s_algorithm_files/74fcb594bdd93c0f956682ae1ea013e6.png"> using <a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Graph_theory" title="Big O notation">Big-O notation</a>.</p>
+<p>For any implementation of vertex set <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png"> the running time is <img class="tex" alt="O(|E| \cdot dk_Q + |V| \cdot em_Q)" src="Dijkstra%27s_algorithm_files/9d3831112976667fa87383a71671c79d.png">, where <img class="tex" alt="dk_Q" src="Dijkstra%27s_algorithm_files/c97ad2350ff5e7bd3ed6f2b7bf155ac8.png"> and <img class="tex" alt="em_Q" src="Dijkstra%27s_algorithm_files/499adf2761f6230874f4cc9b73402a8f.png"> are times needed to perform decrease key and extract minimum operations in set <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png">, respectively.</p>
+<p>The simplest implementation of the Dijkstra's algorithm stores vertices of set <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png"> in an ordinary linked list or array, and extract minimum from <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png"> is simply a linear search through all vertices in <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png">. In this case, the running time is <img class="tex" alt="O(|E| + |V|^2) = O(|V|^2)" src="Dijkstra%27s_algorithm_files/304209ec202fce67f8973db90c2b9612.png">.</p>
+<p>For <a href="http://en.m.wikipedia.org/wiki/Sparse_graph" title="Sparse graph" class="mw-redirect">sparse graphs</a>, that is, graphs with far fewer than <img class="tex" alt="O(|V|^2)" src="Dijkstra%27s_algorithm_files/17589e5af2a8e3d48c486d30939c1268.png"> edges, Dijkstra's algorithm can be implemented more efficiently by storing the graph in the form of <a href="http://en.m.wikipedia.org/wiki/Adjacency_list" title="Adjacency list">adjacency lists</a> and using a <a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">binary heap</a>, <a href="http://en.m.wikipedia.org/wiki/Pairing_heap" title="Pairing heap">pairing heap</a>, or <a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci heap</a> as a <a href="http://en.m.wikipedia.org/wiki/Priority_queue" title="Priority queue">priority queue</a> to implement extracting minimum efficiently. With a binary heap, the algorithm requires <img class="tex" alt="O((|E| + |V|) \log |V|)" src="Dijkstra%27s_algorithm_files/069644165bc631d615d5ed8c460ee074.png">
+ time (which is dominated by O( | E | log | V | ), assuming the graph is
+ connected). To avoid O(|V|) look-up in decrease-key step on a vanilla 
+binary heap, it is necessary to maintain a supplementary index mapping 
+each vertex to the heap's index (and keep it up to date as priority 
+queue <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png"> changes), making it take only <img class="tex" alt="O(log|V|)" src="Dijkstra%27s_algorithm_files/bacfa3773553b4da56c20b2ec7d4cb39.png"> time instead. The <a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci heap</a> improves this to <img class="tex" alt="O(|E| + |V| \log|V|)" src="Dijkstra%27s_algorithm_files/8afcf9cf1e69f85b094063fd7b9e15cb.png">.</p>
+<p>Note that for <a href="http://en.m.wikipedia.org/wiki/Directed_acyclic_graph" title="Directed acyclic graph">Directed acyclic graphs</a>,
+ it is possible to find shortest paths from a given starting vertex in 
+linear time, by processing the vertices in a topological order, and 
+calculating the path length for each vertex to be the minimum length 
+obtained via any of its incoming edges.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Related_problems_and_algorithms">Related problems and algorithms</span></h2><div class="content_block" id="content_5">
+<p>The functionality of Dijkstra's original algorithm can be extended 
+with a variety of modifications. For example, sometimes it is desirable 
+to present solutions which are less than mathematically optimal. To 
+obtain a ranked list of less-than-optimal solutions, the optimal 
+solution is first calculated. A single edge appearing in the optimal 
+solution is removed from the graph, and the optimum solution to this new
+ graph is calculated. Each edge of the original solution is suppressed 
+in turn and a new shortest-path calculated. The secondary solutions are 
+then ranked and presented after the first optimal solution.</p>
+<p>Dijkstra's algorithm is usually the working principle behind <a href="http://en.m.wikipedia.org/wiki/Link-state_routing_protocol" title="Link-state routing protocol">link-state routing protocols</a>, <a href="http://en.m.wikipedia.org/wiki/OSPF" title="OSPF" class="mw-redirect">OSPF</a> and <a href="http://en.m.wikipedia.org/wiki/IS-IS" title="IS-IS">IS-IS</a> being the most common ones.</p>
+<p>Unlike Dijkstra's algorithm, the <a href="http://en.m.wikipedia.org/wiki/Bellman-Ford_algorithm" title="Bellman-Ford algorithm" class="mw-redirect">Bellman-Ford algorithm</a> can be used on graphs with negative edge weights, as long as the graph contains no <a href="http://en.m.wikipedia.org/wiki/Negative_cycle" title="Negative cycle" class="mw-redirect">negative cycle</a> reachable from the source vertex <i>s</i>.
+ (The presence of such cycles means there is no shortest path, since the
+ total weight becomes lower each time the cycle is traversed.)</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/A-star_algorithm" title="A-star algorithm" class="mw-redirect">A* algorithm</a>
+ is a generalization of Dijkstra's algorithm that cuts down on the size 
+of the subgraph that must be explored, if additional information is 
+available that provides a lower bound on the "distance" to the target. 
+This approach can be viewed from the perspective of <a href="http://en.m.wikipedia.org/wiki/Linear_programming" title="Linear programming">linear programming</a>: there is a natural <a href="http://en.m.wikipedia.org/wiki/Shortest_path_problem#Linear_programming_formulation" title="Shortest path problem">linear program for computing shortest paths</a>, and solutions to its <a href="http://en.m.wikipedia.org/wiki/Dual_linear_program" title="Dual linear program" class="mw-redirect">dual linear program</a> are feasible if and only if they form a <a href="http://en.m.wikipedia.org/wiki/Consistent_heuristic" title="Consistent heuristic">consistent heuristic</a>
+ (speaking roughly, since the sign conventions differ from place to 
+place in the literature). This feasible dual / consistent heuristic 
+defines a nonnegative <a href="http://en.m.wikipedia.org/wiki/Reduced_cost" title="Reduced cost">reduced cost</a>
+ and A* is essentially running Dijkstra's algorithm with these reduced 
+costs. If the dual satisfies the weaker condition of admissibility, then
+ A* is instead more akin to the Bellman-Ford algorithm.</p>
+<p>The process that underlies Dijkstra's algorithm is similar to the greedy process used in <a href="http://en.m.wikipedia.org/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim's algorithm</a>. Prim's purpose is to find a <a href="http://en.m.wikipedia.org/wiki/Minimum_spanning_tree" title="Minimum spanning tree">minimum spanning tree</a>
+ that connects all nodes in the graph; Dijkstra is concerned with only 
+two nodes. Prim's does not evaluate the total weight of the path from 
+the starting node, only the individual path.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Dynamic_programming_perspective">Dynamic programming perspective</span></h2><div class="content_block" id="content_6">
+<p>From a <a href="http://en.m.wikipedia.org/wiki/Dynamic_programming" title="Dynamic programming">dynamic programming</a>
+ point of view, Dijkstra's algorithm is a successive approximation 
+scheme that solves the dynamic programming functional equation for the 
+shortest path problem by the <b>Reaching</b> method.<sup id="cite_ref-sniedovich_06_3-0" class="reference"><a href="#cite_note-sniedovich_06-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-denardo_03_4-0" class="reference"><a href="#cite_note-denardo_03-4"><span>[</span>5<span>]</span></a></sup><sup id="cite_ref-sniedovich_10_5-0" class="reference"><a href="#cite_note-sniedovich_10-5"><span>[</span>6<span>]</span></a></sup></p>
+<p>In fact, Dijkstra's explanation of the logic behind the algorithm,<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup> namely</p>
+<blockquote class="templatequote">
+<div class="Bug6200">
+<p><b>Problem 2.</b> Find the path of minimum total length between two given nodes <img class="tex" alt="P" src="Dijkstra%27s_algorithm_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> and <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png">.</p>
+<p>We use the fact that, if <img class="tex" alt="R" src="Dijkstra%27s_algorithm_files/e1e1d3d40573127e9ee0480caf1283d6.png"> is a node on the minimal path from <img class="tex" alt="P" src="Dijkstra%27s_algorithm_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> to <img class="tex" alt="Q" src="Dijkstra%27s_algorithm_files/f09564c9ca56850d4cd6b3319e541aee.png">, knowledge of the latter implies the knowledge of the minimal path from <img class="tex" alt="P" src="Dijkstra%27s_algorithm_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> to <img class="tex" alt="R" src="Dijkstra%27s_algorithm_files/e1e1d3d40573127e9ee0480caf1283d6.png">.</p>
+</div>
+</blockquote>
+<p>is a paraphrasing of <a href="http://en.m.wikipedia.org/wiki/Richard_Bellman" title="Richard Bellman" class="mw-redirect">Bellman's</a> famous <a href="http://en.m.wikipedia.org/wiki/Principle_of_Optimality" title="Principle of Optimality" class="mw-redirect">Principle of Optimality</a> in the context of the shortest path problem.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_7">
+<div class="noprint tright portal" style="border:solid #aaa 1px; margin:0.5em 0 0.5em 0.5em;">
+<table style="background: none repeat scroll 0% 0% rgb(249, 249, 249); font-size: 85%; line-height: 110%; max-width: 175px;"><tbody><tr>
+<td style="text-align: center;"><a href="http://en.m.wikipedia.org/wiki/File:Internet_map_1024.jpg" class="image"><img alt="Portal icon" src="Dijkstra%27s_algorithm_files/28px-Internet_map_1024.jpg" width="28" height="28"></a></td>
+<td style="padding: 0pt 0.2em; vertical-align: middle; font-style: italic; font-weight: bold;"><a href="http://en.m.wikipedia.org/wiki/Portal:Computer_science" title="Portal:Computer science">Computer science  portal</a></td>
+</tr></tbody></table>
+</div>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Euclidean_shortest_path" title="Euclidean shortest path">Euclidean shortest path</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flood_fill" title="Flood fill">Flood fill</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Longest_path_problem" title="Longest path problem">Longest path problem</a></li>
+</ul>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_8">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-Dijkstra_Interview-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Dijkstra_Interview_0-0">^</a></b></span> <span class="reference-text"><span class="citation Journal">Dijkstra, Edsger; Thomas J. Misa, Editor (2010-08). "An Interview with Edsger W. Dijkstra". <i>Communications of the ACM</i> <b>53</b> (8): 41–47. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1787234.1787249">10.1145/1787234.1787249</a>.
+ "What is the shortest way to travel from Rotterdam to Groningen? It is 
+the algorithm for the shortest path which I designed in about 20 
+minutes. One morning I was shopping with my young fianceé, and tired, we
+ sat down on the café terrace to drink a cup of coffee and I was just 
+thinking about whether I could do this, and I then designed the 
+algorithm for the shortest path."</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=An+Interview+with+Edsger+W.+Dijkstra&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Dijkstra&amp;rft.aufirst=Edsger&amp;rft.au=Dijkstra%2C%26%2332%3BEdsger&amp;rft.date=2010-08&amp;rft.volume=53&amp;rft.issue=8&amp;rft.pages=41%E2%80%9347&amp;rft_id=info:doi/10.1145%2F1787234.1787249&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a href="#CITEREFDijkstra1959">Dijkstra 1959</a></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.boost.org/doc/libs/1_44_0/libs/graph/doc/dag_shortest_paths.html">http://www.boost.org/doc/libs/1_44_0/libs/graph/doc/dag_shortest_paths.html</a></span>
+</li>
+<li id="cite_note-sniedovich_06-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-sniedovich_06_3-0">^</a></b></span> <span class="reference-text"><span class="citation Journal">Sniedovich, M. (2006). <a rel="nofollow" class="external text" href="http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf">"Dijkstra’s algorithm revisited: the dynamic programming connexion"</a> (<a href="http://en.m.wikipedia.org/wiki/PDF" title="PDF" class="mw-redirect">PDF</a>). <i>Journal of Control and Cybernetics</i> <b>35</b> (3): 599–620<span class="printonly">. <a rel="nofollow" class="external free" href="http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf">http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Dijkstra%E2%80%99s+algorithm+revisited%3A+the+dynamic+programming+connexion&amp;rft.jtitle=Journal+of+Control+and+Cybernetics&amp;rft.aulast=Sniedovich&amp;rft.aufirst=M.&amp;rft.au=Sniedovich%2C%26%2332%3BM.&amp;rft.date=2006&amp;rft.volume=35&amp;rft.issue=3&amp;rft.pages=599%E2%80%93620&amp;rft_id=http%3A%2F%2Fmatwbn.icm.edu.pl%2Fksiazki%2Fcc%2Fcc35%2Fcc3536.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span> <a rel="nofollow" class="external text" href="http://www.ifors.ms.unimelb.edu.au/tutorial/dijkstra_new/index.html">Online version of the paper with interactive computational modules.</a></span>
+</li>
+<li id="cite_note-denardo_03-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-denardo_03_4-0">^</a></b></span> <span class="reference-text"><span class="citation book">Denardo, E.V. (2003). <i>Dynamic Programming: Models and Applications</i>. Mineola, NY: <a href="http://en.m.wikipedia.org/wiki/Dover_Publications" title="Dover Publications">Dover Publications</a>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-486-42810-9" title="Special:BookSources/978-0-486-42810-9">978-0-486-42810-9</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming%3A+Models+and+Applications&amp;rft.aulast=Denardo&amp;rft.aufirst=E.V.&amp;rft.au=Denardo%2C%26%2332%3BE.V.&amp;rft.date=2003&amp;rft.place=Mineola%2C+NY&amp;rft.pub=%5B%5BDover+Publications%5D%5D&amp;rft.isbn=978-0-486-42810-9&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-sniedovich_10-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-sniedovich_10_5-0">^</a></b></span> <span class="reference-text"><span class="citation book">Sniedovich, M. (2010). <i>Dynamic Programming: Foundations and Principles</i>. <span class="new" title="Francis &amp; Taylor (page does not exist)">Francis &amp; Taylor</span>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-8247-4099-3" title="Special:BookSources/978-0-8247-4099-3">978-0-8247-4099-3</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Dynamic+Programming%3A+Foundations+and+Principles&amp;rft.aulast=Sniedovich&amp;rft.aufirst=M.&amp;rft.au=Sniedovich%2C%26%2332%3BM.&amp;rft.date=2010&amp;rft.pub=%5B%5BFrancis+%26+Taylor%5D%5D&amp;rft.isbn=978-0-8247-4099-3&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><a href="#CITEREFDijkstra1959">Dijkstra 1959</a>, p.&nbsp;270</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_9">
+<ul>
+<li>
+<span class="citation Journal" id="CITEREFDijkstra1959"><a href="http://en.m.wikipedia.org/wiki/Edsger_W._Dijkstra" title="Edsger W. Dijkstra">Dijkstra, E. W.</a> (1959). <a rel="nofollow" class="external text" href="http://www-m3.ma.tum.de/twiki/pub/MN0506/WebHome/dijkstra.pdf">"A note on two problems in connexion with graphs"</a>. <i>Numerische Mathematik</i> <b>1</b>: 269–271. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF01386390">10.1007/BF01386390</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www-m3.ma.tum.de/twiki/pub/MN0506/WebHome/dijkstra.pdf">http://www-m3.ma.tum.de/twiki/pub/MN0506/WebHome/dijkstra.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+note+on+two+problems+in+connexion+with+graphs&amp;rft.jtitle=Numerische+Mathematik&amp;rft.aulast=Dijkstra&amp;rft.aufirst=E.+W.&amp;rft.au=Dijkstra%2C%26%2332%3BE.+W.&amp;rft.date=1959&amp;rft.volume=1&amp;rft.pages=269%E2%80%93271&amp;rft_id=info:doi/10.1007%2FBF01386390&amp;rft_id=http%3A%2F%2Fwww-m3.ma.tum.de%2Ftwiki%2Fpub%2FMN0506%2FWebHome%2Fdijkstra.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Cormen, Thomas H.</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Leiserson, Charles E.</a>; <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Rivest, Ronald L.</a>; <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Stein, Clifford</a> (2001). "Section 24.3: Dijkstra's algorithm". <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (Second ed.). <a href="http://en.m.wikipedia.org/wiki/MIT_Press" title="MIT Press">MIT Press</a> and <a href="http://en.m.wikipedia.org/wiki/McGraw-Hill" title="McGraw-Hill">McGraw-Hill</a>. pp.&nbsp;595–601. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-03293-7" title="Special:BookSources/0-262-03293-7">0-262-03293-7</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Section+24.3%3A+Dijkstra%27s+algorithm&amp;rft.atitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=Cormen&amp;rft.aufirst=Thomas+H.&amp;rft.au=Cormen%2C%26%2332%3BThomas+H.&amp;rft.au=Leiserson%2C%26%2332%3BCharles+E.&amp;rft.au=Rivest%2C%26%2332%3BRonald+L.&amp;rft.au=Stein%2C%26%2332%3BClifford&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B595%E2%80%93601&amp;rft.edition=Second&amp;rft.pub=%5B%5BMIT+Press%5D%5D+and+%5B%5BMcGraw-Hill%5D%5D&amp;rft.isbn=0-262-03293-7&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation Journal" id="CITEREFFredmanTarjan1984"><a href="http://en.m.wikipedia.org/wiki/Michael_Fredman" title="Michael Fredman">Fredman, Michael Lawrence</a>; <a href="http://en.m.wikipedia.org/wiki/Robert_Tarjan" title="Robert Tarjan">Tarjan, Robert E.</a> (1984). <a rel="nofollow" class="external text" href="http://www.computer.org/portal/web/csdl/doi/10.1109/SFCS.1984.715934">"Fibonacci heaps and their uses in improved network optimization algorithms"</a>. <i>25th Annual Symposium on Foundations of Computer Science</i> (<a href="http://en.m.wikipedia.org/wiki/IEEE" title="IEEE" class="mw-redirect">IEEE</a>): 338–346. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1984.715934">10.1109/SFCS.1984.715934</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.computer.org/portal/web/csdl/doi/10.1109/SFCS.1984.715934">http://www.computer.org/portal/web/csdl/doi/10.1109/SFCS.1984.715934</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Fibonacci+heaps+and+their+uses+in+improved+network+optimization+algorithms&amp;rft.jtitle=25th+Annual+Symposium+on+Foundations+of+Computer+Science&amp;rft.aulast=Fredman&amp;rft.aufirst=Michael+Lawrence&amp;rft.au=Fredman%2C%26%2332%3BMichael+Lawrence&amp;rft.au=Tarjan%2C%26%2332%3BRobert+E.&amp;rft.date=1984&amp;rft.pages=338%26ndash%3B346&amp;rft.pub=%5B%5BIEEE%5D%5D&amp;rft_id=info:doi/10.1109%2FSFCS.1984.715934&amp;rft_id=http%3A%2F%2Fwww.computer.org%2Fportal%2Fweb%2Fcsdl%2Fdoi%2F10.1109%2FSFCS.1984.715934&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation Journal" id="CITEREFFredmanTarjan1987"><a href="http://en.m.wikipedia.org/wiki/Michael_Fredman" title="Michael Fredman">Fredman, Michael Lawrence</a>; <a href="http://en.m.wikipedia.org/wiki/Robert_Tarjan" title="Robert Tarjan">Tarjan, Robert E.</a> (1987). <a rel="nofollow" class="external text" href="http://portal.acm.org/citation.cfm?id=28874">"Fibonacci heaps and their uses in improved network optimization algorithms"</a>. <i>Journal of the Association for Computing Machinery</i> <b>34</b> (3): 596–615. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F28869.28874">10.1145/28869.28874</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://portal.acm.org/citation.cfm?id=28874">http://portal.acm.org/citation.cfm?id=28874</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Fibonacci+heaps+and+their+uses+in+improved+network+optimization+algorithms&amp;rft.jtitle=Journal+of+the+Association+for+Computing+Machinery&amp;rft.aulast=Fredman&amp;rft.aufirst=Michael+Lawrence&amp;rft.au=Fredman%2C%26%2332%3BMichael+Lawrence&amp;rft.au=Tarjan%2C%26%2332%3BRobert+E.&amp;rft.date=1987&amp;rft.volume=34&amp;rft.issue=3&amp;rft.pages=596%26ndash%3B615&amp;rft_id=info:doi/10.1145%2F28869.28874&amp;rft_id=http%3A%2F%2Fportal.acm.org%2Fcitation.cfm%3Fid%3D28874&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation Journal">Zhan, F. Benjamin; Noon, Charles E. (February 1998). "Shortest Path Algorithms: An Evaluation Using Real Road Networks". <i><a href="http://en.m.wikipedia.org/wiki/Transportation_Science" title="Transportation Science">Transportation Science</a></i> <b>32</b> (1): 65–73. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1287%2Ftrsc.32.1.65">10.1287/trsc.32.1.65</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Shortest+Path+Algorithms%3A+An+Evaluation+Using+Real+Road+Networks&amp;rft.jtitle=%5B%5BTransportation+Science%5D%5D&amp;rft.aulast=Zhan&amp;rft.aufirst=F.+Benjamin&amp;rft.au=Zhan%2C%26%2332%3BF.+Benjamin&amp;rft.au=Noon%2C%26%2332%3BCharles+E.&amp;rft.date=February+1998&amp;rft.volume=32&amp;rft.issue=1&amp;rft.pages=65%E2%80%9373&amp;rft_id=info:doi/10.1287%2Ftrsc.32.1.65&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book" id="CITEREFLeyzorekGrayJohnsonLadew1957">Leyzorek, M.; Gray, R. S.; Johnson, A. A.; Ladew, W. C.; Meaker, Jr., S. R.; Petry, R. M.; Seitz, R. N. (1957). <i>Investigation
+ of Model Techniques — First Annual Report — 6 June 1956 — 1 July 1957 —
+ A Study of Model Techniques for Communication Systems</i>. Cleveland, Ohio: Case Institute of Technology.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Investigation+of+Model+Techniques+%26mdash%3B+First+Annual+Report+%26mdash%3B+6+June+1956+%26mdash%3B+1+July+1957+%26mdash%3B+A+Study+of+Model+Techniques+for+Communication+Systems&amp;rft.aulast=Leyzorek&amp;rft.aufirst=M.&amp;rft.au=Leyzorek%2C%26%2332%3BM.&amp;rft.au=Gray%2C%26%2332%3BR.+S.&amp;rft.au=Johnson%2C%26%2332%3BA.+A.&amp;rft.au=Ladew%2C%26%2332%3BW.+C.&amp;rft.au=Meaker%2C+Jr.%2C%26%2332%3BS.+R.&amp;rft.au=Petry%2C%26%2332%3BR.+M.&amp;rft.au=Seitz%2C%26%2332%3BR.+N.&amp;rft.date=1957&amp;rft.place=Cleveland%2C+Ohio&amp;rft.pub=Case+Institute+of+Technology&amp;rfr_id=info:sid/en.wikipedia.org:Dijkstra%27s_algorithm"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_10">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Dijkstra%27s_algorithm_files/30px-Commons-logo.png" width="30" height="40"></td>
+<td class="mbox-text" style="">Wikimedia Commons has media related to: <i><b><a class="external text" href="http://commons.wikimedia.org/wiki/Category:Dijkstra%27s_algorithm">Dijkstra's algorithm</a></b></i>
+</td>
+</tr></tbody></table>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://purl.umn.edu/107247">Oral history interview with Edsger W. Dijkstra</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_Babbage_Institute" title="Charles Babbage Institute">Charles Babbage Institute</a> University of Minnesota, Minneapolis.</li>
+<li><a rel="nofollow" class="external text" href="http://www.codeproject.com/KB/recipes/ShortestPathCalculation.aspx">Dijkstra's Algorithm in C#</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.codeproject.com/KB/recipes/FastHeapDijkstra.aspx">Fast Priority Queue Implementation of Dijkstra's Algorithm in C#</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.dgp.toronto.edu/people/JamesStewart/270/9798s/Laffra/DijkstraApplet.html">Applet by Carla Laffra of Pace University</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.sunysb.edu/%7Eskiena/combinatorica/animations/dijkstra.html">Animation of Dijkstra's algorithm</a></li>
+<li><a rel="nofollow" class="external text" href="http://students.ceid.upatras.gr/%7Epapagel/english/java_docs/minDijk.htm">Visualization of Dijkstra's Algorithm</a></li>
+<li><a rel="nofollow" class="external text" href="http://www-b2.is.tokushima-u.ac.jp/%7Eikeda/suuri/dijkstra/Dijkstra.shtml">Shortest Path Problem: Dijkstra's Algorithm</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.unf.edu/%7Ewkloster/foundations/DijkstraApplet/DijkstraApplet.htm">Dijkstra's Algorithm Applet</a></li>
+<li><a rel="nofollow" class="external text" href="http://code.google.com/p/annas/">Open Source Java Graph package with implementation of Dijkstra's Algorithm</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://algowiki.net/wiki/index.php?title=Dijkstra%27s_algorithm">Java Implementation of Dijkstra's Algorithm</a> on AlgoWiki</li>
+<li><a rel="nofollow" class="external text" href="http://quickgraph.codeplex.com/">QuickGraph, Graph Data Structures and Algorithms for .NET</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.boost.org/doc/libs/1_43_0/libs/graph/doc/dijkstra_shortest_paths.html">Implementation in Boost C++ library</a></li>
+<li><a rel="nofollow" class="external text" href="http://hansolav.net/sql/graphs.html">Implementation in T-SQL</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.stackframe.com/software/PathFinder">A Java library for path finding with Dijkstra's Algorithm and example applet</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.mathworks.com/matlabcentral/fileexchange/20025-advanced-dijkstras-minimum-path-algorithm">A MATLAB program for Dijkstra's algorithm</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.technical-recipes.com/2011/implementing-dijkstra%E2%80%99s-algorithm/">A basic C++ implementation of Dijkstra's algorithm</a></li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Dijkstra%27s_algorithm&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Dijkstra%27s+algorithm&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Dijkstra%27s_algorithm&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Dijkstra%27s+algorithm&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Dijkstra%27s_algorithm_files/load_002.php" type="text/javascript"></script>
+<script src="Dijkstra%27s_algorithm_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

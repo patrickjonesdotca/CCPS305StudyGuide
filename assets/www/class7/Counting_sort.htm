@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Counting sort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Counting_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 19 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Counting_sort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Counting_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Counting_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Counting_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Counting_sort" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Counting_sort">česky</option><option value="//de.m.wikipedia.org/wiki/Countingsort">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Ordenamiento_por_cuentas">español</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%B4%D9%85%D8%A7%D8%B1%D8%B4%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Tri_comptage">français</option><option value="//hy.m.wikipedia.org/wiki/%D5%80%D5%A1%D5%B7%D5%BE%D5%B8%D5%B2%D5%A1%D5%AF%D5%A1%D5%B6_%D5%BF%D5%A5%D5%BD%D5%A1%D5%AF%D5%A1%D5%BE%D5%B8%D6%80%D5%B8%D6%82%D5%B4">Հայերեն</option><option value="//it.m.wikipedia.org/wiki/Counting_sort">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%9E%D7%99%D7%95%D7%9F_%D7%9E%D7%A0%D7%99%D7%99%D7%94">עברית</option><option value="//ml.m.wikipedia.org/wiki/%E0%B4%95%E0%B5%97%E0%B4%A3%E0%B5%8D%E0%B4%9F%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B5%8D_%E0%B4%B8%E0%B5%8B%E0%B5%BC%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%8D">മലയാളം</option><option value="//nl.m.wikipedia.org/wiki/Counting_sort">Nederlands</option><option value="//pl.m.wikipedia.org/wiki/Sortowanie_przez_zliczanie">polski</option><option value="//pt.m.wikipedia.org/wiki/Counting_sort">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0_%D0%BF%D0%BE%D0%B4%D1%81%D1%87%D1%91%D1%82%D0%BE%D0%BC">русский</option><option value="//sk.m.wikipedia.org/wiki/Counting_sort">slovenčina</option><option value="//fi.m.wikipedia.org/wiki/Laskentalajittelu">suomi</option><option value="//tr.m.wikipedia.org/wiki/Sayarak_s%C4%B1ralama">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%BF%D1%96%D0%B4%D1%80%D0%B0%D1%85%D1%83%D0%BD%D0%BA%D0%BE%D0%BC">українська</option><option value="//zh.m.wikipedia.org/wiki/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Counting sort</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <b>counting sort</b> is an <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> for <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting</a> a collection of objects according to keys that are small <a href="http://en.m.wikipedia.org/wiki/Integer" title="Integer">integers</a>; that is, it is an <a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">integer sorting</a>
+ algorithm. It operates by counting the number of objects that have each
+ distinct key value, and using arithmetic on those counts to determine 
+the positions of each key value in the output sequence. Its running time
+ is linear in the number of items and the difference between the maximum
+ and minimum key values, so it is only suitable for use directly in 
+situations where the keys do not differ significantly more than the 
+number of items. However, it is often used as a subroutine in another 
+sorting algorithm, <a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">radix sort</a>, that can handle larger keys more efficiently.<sup id="cite_ref-clrs_0-0" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-edmonds_1-0" class="reference"><a href="#cite_note-edmonds-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-sedgewick_2-0" class="reference"><a href="#cite_note-sedgewick-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>Because counting sort uses key values as indexes into an array, it is not a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a>, and the <a href="http://en.m.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann.E2.80.93Landau_notations" title="Big O notation">Ω</a>(<i>n</i> log <i>n</i>) <a href="http://en.m.wikipedia.org/wiki/Lower_bound" title="Lower bound" class="mw-redirect">lower bound</a> for comparison sorting is inapplicable to it.<sup id="cite_ref-clrs_0-1" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a>
+ may be used for many of the same tasks as counting sort, with a similar
+ time analysis; however, compared to counting sort, bucket sort requires
+ <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked lists</a>, <a href="http://en.m.wikipedia.org/wiki/Dynamic_array" title="Dynamic array">dynamic arrays</a>
+ or a large amount of preallocated memory to hold the sets of items 
+within each bucket, whereas counting sort instead stores a single number
+ (the count of items) per bucket.<sup id="cite_ref-knuth_3-0" class="reference"><a href="#cite_note-knuth-3"><span>[</span>4<span>]</span></a></sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Input_and_output_assumptions">Input and output assumptions</span></h2><div class="content_block" id="content_1">
+<p>In the most general case, the input to counting sort consists of a <a href="http://en.m.wikipedia.org/wiki/Collection_%28computing%29" title="Collection (computing)" class="mw-redirect">collection</a> of <span class="texhtml"><var>n</var></span> items, each of which has a non-negative integer key whose maximum value is at most <span class="texhtml"><var>k</var></span>.<sup id="cite_ref-sedgewick_2-1" class="reference"><a href="#cite_note-sedgewick-2"><span>[</span>3<span>]</span></a></sup> In some descriptions of counting sort, the input to be sorted is assumed to be more simply a sequence of integers itself,<sup id="cite_ref-clrs_0-2" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup> but this simplification does not accommodate many applications of counting sort. For instance, when used as a subroutine in <a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">radix sort</a>,
+ the keys for each call to counting sort are individual digits of larger
+ item keys; it would not suffice to return only a sorted list of the key
+ digits, separated from the items.</p>
+<p>In applications such as in radix sort, a bound on the maximum key value <span class="texhtml"><var>k</var></span> will be known in advance, and can be assumed to be part of the input to the algorithm. However, if the value of <span class="texhtml"><var>k</var></span>
+ is not already known then it may be computed by an additional loop over
+ the data to determine the maximum key value that actually occurs within
+ the data.</p>
+<p>The output is an <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a> of the items, in order by their keys. Because of the application to radix sorting, it is important for counting sort to be a <a href="http://en.m.wikipedia.org/wiki/Stable_sort" title="Stable sort" class="mw-redirect">stable sort</a>:
+ if two items have the same key as each other, they should have the same
+ relative position in the output as they did in the input.<sup id="cite_ref-clrs_0-3" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-edmonds_1-1" class="reference"><a href="#cite_note-edmonds-1"><span>[</span>2<span>]</span></a></sup></p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="The_algorithm">The algorithm</span></h2><div class="content_block" id="content_2">
+<p>In summary, the algorithm loops over the items, computing a <a href="http://en.m.wikipedia.org/wiki/Histogram" title="Histogram">histogram</a> of the number of times each key occurs within the input collection. It then performs a <a href="http://en.m.wikipedia.org/wiki/Prefix_sum" title="Prefix sum">prefix sum</a>
+ computation (a second loop, over the range of possible keys) to 
+determine, for each key, the starting position in the output array of 
+the items having that key. Finally, it loops over the items again, 
+moving each item into its sorted position in the output array.<sup id="cite_ref-clrs_0-4" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-edmonds_1-2" class="reference"><a href="#cite_note-edmonds-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-sedgewick_2-2" class="reference"><a href="#cite_note-sedgewick-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>In pseudocode, this may be expressed as follows:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1"><span class="st0">''' allocate an array Count[0..k] ; initialize each array cell to zero ; THEN '''</span>
+<span class="kw1">for</span> each <span class="kw2">input</span> item x:
+    Count<span class="br0">[</span>key<span class="br0">(</span>x<span class="br0">)</span><span class="br0">]</span> <span class="sy0">=</span> Count<span class="br0">[</span>key<span class="br0">(</span>x<span class="br0">)</span><span class="br0">]</span> + <span class="nu0">1</span>
+total <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> ... <span class="me1">k</span>:
+    c <span class="sy0">=</span> Count<span class="br0">[</span>i<span class="br0">]</span>
+    Count<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> total
+    total <span class="sy0">=</span> total + c
+ 
+<span class="st0">''' allocate an output array Output[0..n-1] ; THEN '''</span>
+<span class="kw1">for</span> each <span class="kw2">input</span> item x:
+    store x <span class="kw1">in</span> Output<span class="br0">[</span>Count<span class="br0">[</span>key<span class="br0">(</span>x<span class="br0">)</span><span class="br0">]</span><span class="br0">]</span>
+    Count<span class="br0">[</span>key<span class="br0">(</span>x<span class="br0">)</span><span class="br0">]</span> <span class="sy0">=</span> Count<span class="br0">[</span>key<span class="br0">(</span>x<span class="br0">)</span><span class="br0">]</span> + <span class="nu0">1</span>
+<span class="kw1">return</span> Output
+</pre>
+</div>
+</div>
+<p>After the first for loop, <code>Count[i]</code> stores the number of items with key equal to <code>i</code>. After the second for loop, it instead stores the number of items with key less than <code>i</code>, which is the same as the first index at which an item with key <code>i</code> should be stored in the output array. Throughout the third loop, <code>Count[i]</code> always stores the next position in the output array into which an item with key <code>i</code> should be stored, so each item is moved into its correct position in the output array.<sup id="cite_ref-clrs_0-5" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-edmonds_1-3" class="reference"><a href="#cite_note-edmonds-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-sedgewick_2-3" class="reference"><a href="#cite_note-sedgewick-2"><span>[</span>3<span>]</span></a></sup> The relative order of items with equal keys is preserved here, i.e. this is a stable sort.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Analysis">Analysis</span></h2><div class="content_block" id="content_3">
+<p>Because the algorithm uses only simple for loops, without recursion 
+or subroutine calls, it is straightforward to analyze. The 
+initialization of the Count array, and the second for loop which 
+performs a prefix sum on the count array, each iterate at most <span class="texhtml"><i>k</i> + 1</span> times and therefore take <span class="texhtml"><i>O</i>(<i>k</i>)</span> time. The other two for loops, and the initialization of the output array, each take <span class="texhtml"><i>O</i>(<i>n</i>)</span> time. Therefore the time for the whole algorithm is the sum of the times for these steps, <span class="texhtml"><i>O</i>(<i>n</i> + <i>k</i>)</span>.<sup id="cite_ref-clrs_0-6" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-edmonds_1-4" class="reference"><a href="#cite_note-edmonds-1"><span>[</span>2<span>]</span></a></sup></p>
+<p>Because it uses arrays of length <span class="texhtml"><i>k</i> + 1</span> and <span class="texhtml"><var>n</var></span>, the total space usage of the algorithm is also <span class="texhtml"><i>O</i>(<i>n</i> + <i>k</i>)</span>.<sup id="cite_ref-clrs_0-7" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup>
+ For problem instances in which the maximum key value is significantly 
+smaller than the number of items, counting sort can be highly 
+space-efficient, as the only storage it uses other than its input and 
+output arrays is the Count array which uses space <span class="texhtml"><i>O</i>(<i>k</i>)</span>.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup></p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Variant_algorithms">Variant algorithms</span></h2><div class="content_block" id="content_4">
+<p>If each item to be sorted is itself an integer, and used as key as 
+well, then the second and third loops of counting sort can be combined; 
+in the second loop, instead of computing the position where items with 
+key <code>i</code> should be placed in the output, simply append <code>Count[i]</code> copies of the number <code>i</code> to the output.</p>
+<p>This algorithm may also be used to eliminate duplicate keys, by replacing the <code>Count</code> array with a <a href="http://en.m.wikipedia.org/wiki/Bit_vector" title="Bit vector" class="mw-redirect">bit vector</a> that stores a <code>one</code> for a key that is present in the input and a <code>zero</code>
+ for a key that is not present. If additionally the items are the 
+integer keys themselves, both second and third loops can be omitted 
+entirely and the bit vector will itself serve as output, representing 
+the values as offsets of the non-<code>zero</code> entries, added to the
+ range's lowest value. Thus the keys are sorted and the duplicates are 
+eliminated in this variant just by being placed into the bit array. This
+ is how the <a href="http://en.m.wikipedia.org/wiki/Sieve_of_Eratosthenes" title="Sieve of Eratosthenes">Sieve of Eratosthenes</a> works, essentially.</p>
+<p>For data in which the maximum key size is significantly smaller than the number of data items, counting sort may be <a href="http://en.m.wikipedia.org/wiki/Parallel_algorithm" title="Parallel algorithm">parallelized</a>
+ by splitting the input into subarrays of approximately equal size, 
+processing each subarray in parallel to generate a separate count array 
+for each subarray, and then merging the count arrays. When used as part 
+of a parallel radix sort algorithm, the key size (base of the radix 
+representation) should be chosen to match the size of the split 
+subarrays.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>
+ The simplicity of the counting sort algorithm and its use of the easily
+ parallelizable prefix sum primitive also make it usable in more 
+fine-grained parallel algorithms.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup></p>
+<p>As described, counting sort is not an <a href="http://en.m.wikipedia.org/wiki/In-place_algorithm" title="In-place algorithm">in-place algorithm</a>;
+ even disregarding the count array, it needs separate input and output 
+arrays. It is possible to modify the algorithm so that it places the 
+items into sorted order within the same array that was given to it as 
+the input, using only the count array as auxiliary storage; however, the
+ modified in-place version of counting sort is not stable.<sup id="cite_ref-sedgewick_2-4" class="reference"><a href="#cite_note-sedgewick-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="History">History</span></h2><div class="content_block" id="content_5">
+<p>Although radix sorting itself dates back far longer, counting sort, and its application to radix sorting, were both invented by <a href="http://en.m.wikipedia.org/wiki/Harold_H._Seward" title="Harold H. Seward">Harold H. Seward</a> in 1954.<sup id="cite_ref-clrs_0-8" class="reference"><a href="#cite_note-clrs-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-knuth_3-1" class="reference"><a href="#cite_note-knuth-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup></p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_6">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-clrs-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-clrs_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-clrs_0-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-clrs_0-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-clrs_0-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-clrs_0-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-clrs_0-5"><sup><i><b>f</b></i></sup></a> <a href="#cite_ref-clrs_0-6"><sup><i><b>g</b></i></sup></a> <a href="#cite_ref-clrs_0-7"><sup><i><b>h</b></i></sup></a> <a href="#cite_ref-clrs_0-8"><sup><i><b>i</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFCormenLeisersonRivestStein2001"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Cormen, Thomas H.</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Leiserson, Charles E.</a>; <a href="http://en.m.wikipedia.org/wiki/Ron_Rivest" title="Ron Rivest">Rivest, Ronald L.</a>; <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Stein, Clifford</a> (2001), "8.2 Counting Sort", <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (2nd ed.), <a href="http://en.m.wikipedia.org/wiki/MIT_Press" title="MIT Press">MIT Press</a> and <a href="http://en.m.wikipedia.org/wiki/McGraw-Hill" title="McGraw-Hill">McGraw-Hill</a>, pp.&nbsp;168–170, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-03293-7" title="Special:BookSources/0-262-03293-7">0-262-03293-7</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=8.2+Counting+Sort&amp;rft.atitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=Cormen&amp;rft.aufirst=Thomas+H.&amp;rft.au=Cormen%2C%26%2332%3BThomas+H.&amp;rft.au=Leiserson%2C%26%2332%3BCharles+E.&amp;rft.au=Rivest%2C%26%2332%3BRonald+L.&amp;rft.au=Stein%2C%26%2332%3BClifford&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B168%E2%80%93170&amp;rft.edition=2nd&amp;rft.pub=%5B%5BMIT+Press%5D%5D+and+%5B%5BMcGraw-Hill%5D%5D&amp;rft.isbn=0-262-03293-7&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>. See also the historical notes on page 181.</span>
+</li>
+<li id="cite_note-edmonds-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-edmonds_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-edmonds_1-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-edmonds_1-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-edmonds_1-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-edmonds_1-4"><sup><i><b>e</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFEdmonds2008">Edmonds, Jeff (2008), "5.2 Counting Sort (a Stable Sort)", <i>How to Think about Algorithms</i>, Cambridge University Press, pp.&nbsp;72–75, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-0-521-84931-9" title="Special:BookSources/978-0-521-84931-9">978-0-521-84931-9</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=5.2+Counting+Sort+%28a+Stable+Sort%29&amp;rft.atitle=How+to+Think+about+Algorithms&amp;rft.aulast=Edmonds&amp;rft.aufirst=Jeff&amp;rft.au=Edmonds%2C%26%2332%3BJeff&amp;rft.date=2008&amp;rft.pages=pp.%26nbsp%3B72%E2%80%9375&amp;rft.pub=Cambridge+University+Press&amp;rft.isbn=978-0-521-84931-9&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-sedgewick-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-sedgewick_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-sedgewick_2-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-sedgewick_2-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-sedgewick_2-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-sedgewick_2-4"><sup><i><b>e</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFSedgewick2003"><a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Sedgewick, Robert</a> (2003), "6.10 Key-Indexed Counting", <i>Algorithms in Java, Parts 1-4: Fundamentals, Data Structures, Sorting, and Searching</i> (3rd ed.), Addison-Wesley, pp.&nbsp;312–314</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=6.10+Key-Indexed+Counting&amp;rft.atitle=Algorithms+in+Java%2C+Parts+1-4%3A+Fundamentals%2C+Data+Structures%2C+Sorting%2C+and+Searching&amp;rft.aulast=Sedgewick&amp;rft.aufirst=Robert&amp;rft.au=Sedgewick%2C%26%2332%3BRobert&amp;rft.date=2003&amp;rft.pages=pp.%26nbsp%3B312%E2%80%93314&amp;rft.edition=3rd&amp;rft.pub=Addison-Wesley&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-knuth-3">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-knuth_3-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-knuth_3-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFKnuth1998"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, D. E.</a> (1998), <i>The Art of Computer Programming, Volume 3: Sorting and Searching</i> (2nd ed.), Addison-Wesley, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89685-0" title="Special:BookSources/0-201-89685-0">0-201-89685-0</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+Art+of+Computer+Programming%2C+Volume+3%3A+Sorting+and+Searching&amp;rft.aulast=Knuth&amp;rft.aufirst=D.+E.&amp;rft.au=Knuth%2C%26%2332%3BD.+E.&amp;rft.date=1998&amp;rft.edition=2nd&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-89685-0&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>. Section 5.2, Sorting by counting, pp.&nbsp;75–80, and historical notes, p.&nbsp;170.</span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFBurrisSchember1980">Burris, David S.; Schember, Kurt (1980), "Sorting sequential files with limited auxiliary storage", <i>Proceedings of the 18th annual Southeast Regional Conference</i>, New York, NY, USA: ACM, pp.&nbsp;23–31, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F503838.503855">10.1145/503838.503855</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Sorting+sequential+files+with+limited+auxiliary+storage&amp;rft.atitle=Proceedings+of+the+18th+annual+Southeast+Regional+Conference&amp;rft.aulast=Burris&amp;rft.aufirst=David+S.&amp;rft.au=Burris%2C%26%2332%3BDavid+S.&amp;rft.au=Schember%2C%26%2332%3BKurt&amp;rft.date=1980&amp;rft.pages=pp.%26nbsp%3B23%E2%80%9331&amp;rft.place=New+York%2C+NY%2C+USA&amp;rft.pub=ACM&amp;rft_id=info:doi/10.1145%2F503838.503855&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFZaghaBlelloch1991">Zagha, Marco; <a href="http://en.m.wikipedia.org/wiki/Guy_Blelloch" title="Guy Blelloch">Blelloch, Guy E.</a> (1991), "Radix sort for vector multiprocessors", <i>Proceedings of Supercomputing '91, November 18-22, 1991, Albuquerque, NM, USA</i>, IEEE Computer Society / ACM, pp.&nbsp;712–721, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F125826.126164">10.1145/125826.126164</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Radix+sort+for+vector+multiprocessors&amp;rft.atitle=Proceedings+of+Supercomputing+%2791%2C+November+18-22%2C+1991%2C+Albuquerque%2C+NM%2C+USA&amp;rft.aulast=Zagha&amp;rft.aufirst=Marco&amp;rft.au=Zagha%2C%26%2332%3BMarco&amp;rft.au=Blelloch%2C%26%2332%3BGuy+E.&amp;rft.date=1991&amp;rft.pages=pp.%26nbsp%3B712%E2%80%93721&amp;rft.pub=IEEE+Computer+Society+%2F+ACM&amp;rft_id=info:doi/10.1145%2F125826.126164&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFReif1985"><a href="http://en.m.wikipedia.org/wiki/John_Reif" title="John Reif">Reif, John H.</a> (1985), "An optimal parallel algorithm for integer sorting", <i><a href="http://en.m.wikipedia.org/wiki/Symposium_on_Foundations_of_Computer_Science" title="Symposium on Foundations of Computer Science">Proc. 26th Annual Symposium on Foundations of Computer Science (FOCS 1985)</a></i>, pp.&nbsp;496–504, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1985.9">10.1109/SFCS.1985.9</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+optimal+parallel+algorithm+for+integer+sorting&amp;rft.atitle=%5B%5BSymposium+on+Foundations+of+Computer+Science%7CProc.+26th+Annual+Symposium+on+Foundations+of+Computer+Science+%28FOCS+1985%29%5D%5D&amp;rft.aulast=Reif&amp;rft.aufirst=John+H.&amp;rft.au=Reif%2C%26%2332%3BJohn+H.&amp;rft.date=1985&amp;rft.pages=pp.%26nbsp%3B496%E2%80%93504&amp;rft_id=info:doi/10.1109%2FSFCS.1985.9&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFSeward1954">Seward, H. H. (1954), <a rel="nofollow" class="external text" href="http://bitsavers.org/pdf/mit/whirlwind/R-series/R-232_Information_Sorting_in_the_Application_of_Electronic_Digital_Computers_to_Business_Operations_May54.pdf">"2.4.6 Internal Sorting by Floating Digital Sort"</a>, <i>Information sorting in the application of electronic digital computers to business operations</i>, Master's thesis, Report R-232, <a href="http://en.m.wikipedia.org/wiki/Massachusetts_Institute_of_Technology" title="Massachusetts Institute of Technology">Massachusetts Institute of Technology</a>, Digital Computer Laboratory, pp.&nbsp;25–28<span class="printonly">, <a rel="nofollow" class="external free" href="http://bitsavers.org/pdf/mit/whirlwind/R-series/R-232_Information_Sorting_in_the_Application_of_Electronic_Digital_Computers_to_Business_Operations_May54.pdf">http://bitsavers.org/pdf/mit/whirlwind/R-series/R-232_Information_Sorting_in_the_Application_of_Electronic_Digital_Computers_to_Business_Operations_May54.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=2.4.6+Internal+Sorting+by+Floating+Digital+Sort&amp;rft.atitle=Information+sorting+in+the+application+of+electronic+digital+computers+to+business+operations&amp;rft.aulast=Seward&amp;rft.aufirst=H.+H.&amp;rft.au=Seward%2C%26%2332%3BH.+H.&amp;rft.date=1954&amp;rft.series=Master%27s+thesis%2C+Report+R-232&amp;rft.pages=pp.%26nbsp%3B25%E2%80%9328&amp;rft.pub=%5B%5BMassachusetts+Institute+of+Technology%5D%5D%2C+Digital+Computer+Laboratory&amp;rft_id=http%3A%2F%2Fbitsavers.org%2Fpdf%2Fmit%2Fwhirlwind%2FR-series%2FR-232_Information_Sorting_in_the_Application_of_Electronic_Digital_Computers_to_Business_Operations_May54.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_7">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Counting_sort_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation">Algorithm implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation/Sorting/Counting_sort">Counting sort</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.cs.usfca.edu/%7Egalles/visualization/CountingSort.html">Counting Sort html5 visualization</a></li>
+<li><a rel="nofollow" class="external text" href="http://users.cs.cf.ac.uk/C.L.Mumford/tristan/CountingSort.html">Demonstration applet from Cardiff University</a></li>
+<li><a rel="nofollow" class="external text" href="http://kks.cabal.fi/laskentalajittelu/CountingSortHaskell">Efficient Counting Sort in Haskell</a></li>
+<li>
+<span class="citation" id="CITEREFKagel2006">Kagel, Art S. (2 June 2006), <a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/countingsort.html">"counting sort"</a>, in Black, Paul E., <i>Dictionary of Algorithms and Data Structures</i>, U.S. National Institute of Standards and Technology<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.nist.gov/dads/HTML/countingsort.html">http://www.nist.gov/dads/HTML/countingsort.html</a></span><span class="reference-accessdate">, retrieved 2011-04-21</span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=counting+sort&amp;rft.atitle=Dictionary+of+Algorithms+and+Data+Structures&amp;rft.aulast=Kagel&amp;rft.aufirst=Art+S.&amp;rft.au=Kagel%2C%26%2332%3BArt+S.&amp;rft.date=2+June+2006&amp;rft.pub=U.S.+National+Institute+of+Standards+and+Technology&amp;rft_id=http%3A%2F%2Fwww.nist.gov%2Fdads%2FHTML%2Fcountingsort.html&amp;rfr_id=info:sid/en.wikipedia.org:Counting_sort"><span style="display: none;">&nbsp;</span></span>.</li>
+<li><a rel="nofollow" class="external text" href="http://www.codenlearn.com/2011/07/simple-counting-sort.html">A simple Counting Sort implementation.</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><strong class="selflink">Counting sort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Counting_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Counting+sort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Counting_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Counting+sort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Counting_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Counting_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

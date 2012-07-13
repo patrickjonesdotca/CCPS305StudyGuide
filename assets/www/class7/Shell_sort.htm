@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Shellsort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Shell_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 22 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Shellsort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Shell_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Shell_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Shell_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Shell_sort" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Shell_sort">česky</option><option value="//de.m.wikipedia.org/wiki/Shellsort">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Ordenamiento_Shell">español</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%B4%D9%84">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Tri_de_Shell">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%85%B8_%EC%A0%95%EB%A0%AC">한국어</option><option value="//hy.m.wikipedia.org/wiki/%D5%87%D5%A5%D5%AC%D5%AC%D5%AB_%D5%BF%D5%A5%D5%BD%D5%A1%D5%AF%D5%A1%D5%BE%D5%B8%D6%80%D5%B8%D6%82%D5%B4">Հայերեն</option><option value="//is.m.wikipedia.org/wiki/Skeljar%C3%B6%C3%B0un">íslenska</option><option value="//it.m.wikipedia.org/wiki/Shell_sort">italiano</option><option value="//he.m.wikipedia.org/wiki/Shell_sort">עברית</option><option value="//lt.m.wikipedia.org/wiki/%C5%A0elo_rikiavimo_algoritmas">lietuvių</option><option value="//nl.m.wikipedia.org/wiki/Shellsort">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%BD%E3%83%BC%E3%83%88">日本語</option><option value="//pl.m.wikipedia.org/wiki/Sortowanie_Shella">polski</option><option value="//pt.m.wikipedia.org/wiki/Shell_sort">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0_%D0%A8%D0%B5%D0%BB%D0%BB%D0%B0">русский</option><option value="//sl.m.wikipedia.org/wiki/Shellovo_urejanje">slovenščina</option><option value="//sv.m.wikipedia.org/wiki/Shell_sort">svenska</option><option value="//tr.m.wikipedia.org/wiki/Kabuk_s%C4%B1ralamas%C4%B1">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%A8%D0%B5%D0%BB%D0%BB%D0%B0">українська</option><option value="//zh.m.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Shellsort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Shellsort</caption>
+<tbody><tr class="">
+<td colspan="2" class="" style="text-align: center;">
+<a href="http://en.m.wikipedia.org/wiki/File:Sorting_shellsort_anim.gif" class="image" title="Step-by-step visualisation of Shellsort"><img alt="Step-by-step visualisation of Shellsort" src="Shell_sort_files/Sorting_shellsort_anim.gif" width="277" height="344"></a><br><small>Shellsort with gaps 23, 10, 4, 1 in action.</small>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style="">depends on gap sequence</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style="">depends on gap sequence</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style="">depends on gap sequence</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style="">O(1)</td>
+</tr>
+</tbody></table>
+<p><b>Shellsort</b>, also known as <b>Shell sort</b> or <b>Shell's method</b>, is an in-place <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a>. It generalizes an exchanging sort, such as <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion</a> or <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble</a>
+ sort, by starting the comparison and exchange of elements with elements
+ that are far apart before finishing with neighboring elements. Starting
+ with far apart elements can move some out-of-place elements into 
+position faster than a simple nearest neighbor exchange. <a href="http://en.m.wikipedia.org/wiki/Donald_Shell" title="Donald Shell">Donald Shell</a> published the first version of this sort in 1959.<sup id="cite_ref-Shell_0-0" class="reference"><a href="#cite_note-Shell-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> The running time of Shellsort is heavily dependent on the gap sequence it uses. For many practical variants, determining their <a href="http://en.m.wikipedia.org/wiki/Time_complexity" title="Time complexity">time complexity</a> remains an open problem.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Description">Description</span></h2><div class="content_block" id="content_1">
+<p>Shellsort is a multi-pass algorithm. Each pass is an insertion sort of the sequences consisting of every <i>h</i>-th element for a fixed gap <i>h</i> (also known as the increment). This is referred to as <i>h</i>-sorting.</p>
+<p>An example run of Shellsort with gaps 5, 3 and 1 is shown below.</p>
+<p><img class="tex" alt="
+\begin{array}{rcccccccccccc}
+    &amp;a_1&amp;a_2&amp;a_3&amp;a_4&amp;a_5&amp;a_6&amp;a_7&amp;a_8&amp;a_9&amp;a_{10}&amp;a_{11}&amp;a_{12}\\
+  \hbox{input data:}
+    &amp; 62&amp; 83&amp; 18&amp; 53&amp; 07&amp; 17&amp; 95&amp; 86&amp; 47&amp; 69&amp; 25&amp; 28\\
+  \hbox{after 5-sorting:}
+    &amp; 17&amp; 28&amp; 18&amp; 47&amp; 07&amp; 25&amp; 83&amp; 86&amp; 53&amp; 69&amp; 62&amp; 95\\
+  \hbox{after 3-sorting:}
+    &amp; 17&amp; 07&amp; 18&amp; 47&amp; 28&amp; 25&amp; 69&amp; 62&amp; 53&amp; 83&amp; 86&amp; 95\\
+  \hbox{after 1-sorting:}
+    &amp; 07&amp; 17&amp; 18&amp; 25&amp; 28&amp; 47&amp; 53&amp; 62&amp; 69&amp; 83&amp; 86&amp; 95\\
+\end{array}
+" src="Shell_sort_files/98a5e472f889c0db4a6bdae9f56ed052.png"></p>
+<p>The first pass, 5-sorting, performs insertion sort on separate subarrays (<i>a</i><sub>1</sub>, <i>a</i><sub>6</sub>, <i>a</i><sub>11</sub>), (<i>a</i><sub>2</sub>, <i>a</i><sub>7</sub>, <i>a</i><sub>12</sub>), (<i>a</i><sub>3</sub>, <i>a</i><sub>8</sub>), (<i>a</i><sub>4</sub>, <i>a</i><sub>9</sub>), (<i>a</i><sub>5</sub>, <i>a</i><sub>10</sub>). For instance, it changes the subarray (<i>a</i><sub>1</sub>, <i>a</i><sub>6</sub>, <i>a</i><sub>11</sub>) from (62, 17, 25) to (17, 25, 62). The next pass, 3-sorting, performs insertion sort on the subarrays (<i>a</i><sub>1</sub>, <i>a</i><sub>4</sub>, <i>a</i><sub>7</sub>, <i>a</i><sub>10</sub>), (<i>a</i><sub>2</sub>, <i>a</i><sub>5</sub>, <i>a</i><sub>8</sub>, <i>a</i><sub>11</sub>), (<i>a</i><sub>3</sub>, <i>a</i><sub>6</sub>, <i>a</i><sub>9</sub>, <i>a</i><sub>12</sub>). The last pass, 1-sorting, is an ordinary insertion sort of the entire array (<i>a</i><sub>1</sub>,..., <i>a</i><sub>12</sub>).</p>
+<p>As the example illustrates, the subarrays that Shellsort operates on 
+are initially short; later they are longer but almost ordered. In both 
+cases insertion sort works efficiently.</p>
+<p>Shellsort is <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">unstable</a>:
+ it may change the relative order of elements with equal values. It has 
+"natural" behavior, in that it executes faster when the input is 
+partially sorted.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Pseudocode">Pseudocode</span></h2><div class="content_block" id="content_2">
+<p>Using Marcin Ciura's gap sequence, with an inner insertion sort.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1"><span class="co1"># Sort an array a[0...n-1].</span>
+gaps <span class="sy0">=</span> <span class="br0">[</span><span class="nu0">701</span><span class="sy0">,</span> <span class="nu0">301</span><span class="sy0">,</span> <span class="nu0">132</span><span class="sy0">,</span> <span class="nu0">57</span><span class="sy0">,</span> <span class="nu0">23</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">]</span>
+ 
+foreach <span class="br0">(</span>gap <span class="kw1">in</span> gaps<span class="br0">)</span>
+    <span class="co1"># Do an insertion sort for each gap size.</span>
+    <span class="kw1">for</span> <span class="br0">(</span>i <span class="sy0">=</span> gap<span class="sy0">;</span> i <span class="sy0">&lt;</span> n<span class="sy0">;</span> i +<span class="sy0">=</span> <span class="nu0">1</span><span class="br0">)</span>
+        temp <span class="sy0">=</span> a<span class="br0">[</span>i<span class="br0">]</span>
+        <span class="kw1">for</span> <span class="br0">(</span>j <span class="sy0">=</span> i<span class="sy0">;</span> j <span class="sy0">&gt;=</span> gap <span class="kw1">and</span> a<span class="br0">[</span>j - gap<span class="br0">]</span> <span class="sy0">&gt;</span> temp<span class="sy0">;</span> j -<span class="sy0">=</span> gap<span class="br0">)</span>
+            a<span class="br0">[</span>j<span class="br0">]</span> <span class="sy0">=</span> a<span class="br0">[</span>j - gap<span class="br0">]</span>
+        a<span class="br0">[</span>j<span class="br0">]</span> <span class="sy0">=</span> temp
+</pre>
+</div>
+</div>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Gap_sequences">Gap sequences</span></h2><div class="content_block" id="content_3">
+<p>Every gap sequence that contains 1 yields a correct sort; however, 
+the properties of thus obtained versions of Shellsort may be very 
+different.</p>
+<p>The table below compares most proposed gap sequences published so 
+far. Some of them have decreasing elements that depend on the size of 
+the sorted array (<i>N</i>). Others are increasing infinite sequences, whose elements less than <i>N</i> should be used in reverse order.</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tbody><tr style="background-color: rgb(239, 239, 239);">
+<th>General term (<i>k</i> ≥ 1)</th>
+<th>Concrete gaps</th>
+<th>Worst-case<br>
+time complexity</th>
+<th>Author and year of publication</th>
+</tr>
+<tr>
+<td><img class="tex" alt="\lfloor N / 2^k \rfloor" src="Shell_sort_files/6bef1ec2760710c4fc39dcf6d01d7780.png"></td>
+<td><img class="tex" alt="\left\lfloor\frac{N}{2}\right\rfloor,
+        \left\lfloor\frac{N}{4}\right\rfloor, \ldots, 1" src="Shell_sort_files/f3ccd5a7b9aeb60ff3e34e9c21fb0741.png"></td>
+<td>
+<img class="tex" alt="\Theta(N^2)" src="Shell_sort_files/f2dc610b515c26ec1c10fcd76b90679d.png"> [when <i>N</i>=2<sup><i>p</i></sup>]</td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/Donald_Shell" title="Donald Shell">Shell</a>, 1959<sup id="cite_ref-Shell_0-1" class="reference"><a href="#cite_note-Shell-0"><span>[</span>1<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td><img class="tex" alt="2 \lfloor N / 2^{k+1} \rfloor + 1" src="Shell_sort_files/4e137a3647bdc7c6562656ebdd5e337a.png"></td>
+<td><img class="tex" alt="2 \left\lfloor\frac{N}{4}\right\rfloor + 1, \ldots, 3, 1" src="Shell_sort_files/015c4d85ce202f22eacc73be03009075.png"></td>
+<td><img class="tex" alt="\Theta(N^{3/2})" src="Shell_sort_files/3ac55acf143eb4433a38b6186e9f63f1.png"></td>
+<td>Frank &amp; Lazarus, 1960<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td><img class="tex" alt="2^k - 1" src="Shell_sort_files/80d94b5dd6c72527fcdbc7c731f20bb4.png"></td>
+<td><img class="tex" alt="1, 3, 7, 15, 31, 63, \ldots" src="Shell_sort_files/03f6261b8f8645e4fb938d629af915b4.png"></td>
+<td><img class="tex" alt="\Theta(N^{3/2})" src="Shell_sort_files/3ac55acf143eb4433a38b6186e9f63f1.png"></td>
+<td>Hibbard, 1963<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>
+<img class="tex" alt="2^k + 1" src="Shell_sort_files/aa6d71a1a60d7b8fdfb9c70884ef6168.png">, with 1 prepended</td>
+<td><img class="tex" alt="1, 3, 5, 9, 17, 33, 65, \ldots" src="Shell_sort_files/e193842ae37e3952425d9554f8c2d36d.png"></td>
+<td><img class="tex" alt="\Theta(N^{3/2})" src="Shell_sort_files/3ac55acf143eb4433a38b6186e9f63f1.png"></td>
+<td>Papernov &amp; Stasevich, 1965<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>successive numbers of the form <img class="tex" alt="2^p 3^q" src="Shell_sort_files/60e655c64b0a5b3bd2cdf0aaeafb55f5.png">
+</td>
+<td><img class="tex" alt="1, 2, 3, 4, 6, 8, 9, 12, \ldots" src="Shell_sort_files/1bbdda044adafc0eaf7109c02954c0d6.png"></td>
+<td><img class="tex" alt="\Theta(N \log^2 N)" src="Shell_sort_files/802d21494f213754c5c33ca751206272.png"></td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/Vaughan_Ronald_Pratt" title="Vaughan Ronald Pratt" class="mw-redirect">Pratt</a>, 1971<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>
+<img class="tex" alt="(3^k - 1) / 2" src="Shell_sort_files/0ab342cc50327abadeb9eacdc04b2bfb.png">, not greater than <img class="tex" alt="\lceil N / 3 \rceil" src="Shell_sort_files/e0949b228ddeba35447c3e269b0be7b4.png">
+</td>
+<td><img class="tex" alt="1, 4, 13, 40, 121, \ldots " src="Shell_sort_files/6baee0b0d38a297bdd46a5241d8a33dd.png"></td>
+<td><img class="tex" alt="\Theta(N^{3/2})" src="Shell_sort_files/3ac55acf143eb4433a38b6186e9f63f1.png"></td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth</a>, 1973<sup id="cite_ref-Knuth_6-0" class="reference"><a href="#cite_note-Knuth-6"><span>[</span>7<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>
+<img class="tex" alt="\prod
+  \limits_{\scriptscriptstyle 0\le q&lt;r\atop
+           \scriptscriptstyle q\neq(r^2+r)/2-k}a_q, \hbox{where}" src="Shell_sort_files/cd787486a5849aa632198123bdab0dc0.png"><dl>
+<dd><img class="tex" alt="r = \left\lfloor \sqrt{2k+\sqrt{2k}} \right\rfloor," src="Shell_sort_files/984c62950c9e4ca09d2182e87bfe1685.png"></dd>
+<dd><img class="tex" alt="a_q=\min\{n\in\mathbb{N}\colon n\ge(5/2)^{q+1}," src="Shell_sort_files/d66fba842b474776e3521bd28982cfe5.png"></dd>
+<dd><img class="tex" alt="\forall p\colon0\le p&lt;q\Rightarrow\gcd(a_p,n)=1\}" src="Shell_sort_files/0569088457a94c782354253e2d49c1d6.png"></dd>
+</dl>
+</td>
+<td><img class="tex" alt="1, 3, 7, 21, 48, 112, \ldots" src="Shell_sort_files/25d0a1c6a8d1cc3d75fc92c4c03740d1.png"></td>
+<td><img class="tex" alt="O(N e^\sqrt{8\ln(5/2)\ln N})" src="Shell_sort_files/a35231e5b8dda854687c5c5658867a5f.png"></td>
+<td>Incerpi &amp; <a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Sedgewick</a>, 1985<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>
+<img class="tex" alt="4^k + 3\cdot2^{k-1} + 1" src="Shell_sort_files/750d9600a742b64467c4aabc1cb82216.png">, with 1 prepended</td>
+<td><img class="tex" alt="1, 8, 23, 77, 281, \ldots" src="Shell_sort_files/c664f164e0e2863dea0a29d4871bef42.png"></td>
+<td><img class="tex" alt="O(N^{4/3})" src="Shell_sort_files/c8a6716d0b42f2d9934c524f772a6c31.png"></td>
+<td>Sedgewick, 1986<sup id="cite_ref-Sedgewick_8-0" class="reference"><a href="#cite_note-Sedgewick-8"><span>[</span>9<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td><img class="tex" alt="9(4^{k-1}-2^{k-1})+1, 4^{k+1}-6\cdot2^k+1" src="Shell_sort_files/c74d0df6ed33db34d7d27871294bac29.png"></td>
+<td><img class="tex" alt="1, 5, 19, 41, 109, \ldots" src="Shell_sort_files/fd7566331a2672148390408aad980474.png"></td>
+<td><img class="tex" alt="O(N^{4/3})" src="Shell_sort_files/c8a6716d0b42f2d9934c524f772a6c31.png"></td>
+<td>Sedgewick, 1986<sup id="cite_ref-Sedgewick_8-1" class="reference"><a href="#cite_note-Sedgewick-8"><span>[</span>9<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td><img class="tex" alt="h_k = \max\left\{\left\lfloor 5h_{k-1}/11 \right\rfloor, 1\right\}, h_0 = N" src="Shell_sort_files/fbe5bf9d2a742bf0af8a975053c94f50.png"></td>
+<td><img class="tex" alt="\left\lfloor \frac{5N}{11} \right\rfloor, \left\lfloor \frac{5}{11}\left\lfloor \frac{5N}{11} \right\rfloor\right\rfloor, \ldots, 1" src="Shell_sort_files/26d99debbb862e6420775df0885dcb1b.png"></td>
+<td>&nbsp;?</td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/Gaston_Gonnet" title="Gaston Gonnet">Gonnet</a> &amp; <a href="http://en.m.wikipedia.org/wiki/Ricardo_Baeza-Yates" title="Ricardo Baeza-Yates"><span class="nowrap">Baeza-Yates</span></a>, 1991<sup id="cite_ref-Gonnet_9-0" class="reference"><a href="#cite_note-Gonnet-9"><span>[</span>10<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td><img class="tex" alt="\left\lceil \frac{9^k-4^k}{5\cdot4^{k-1}} \right\rceil" src="Shell_sort_files/a9ab35220f222eede038468b3a9e0d9f.png"></td>
+<td><img class="tex" alt="1, 4, 9, 20, 46, 103, \ldots" src="Shell_sort_files/dbdac2683b810f42205077bfce469f60.png"></td>
+<td>&nbsp;?</td>
+<td>Tokuda, 1992<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>11<span>]</span></a></sup>
+</td>
+</tr>
+<tr>
+<td>unknown</td>
+<td><img class="tex" alt="1, 4, 10, 23, 57, 132, 301, 701" src="Shell_sort_files/6d4d3563c9eb01a6626b02da3fe2d108.png"></td>
+<td>&nbsp;?</td>
+<td>Ciura, 2001<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup>
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+<p>When the binary representation of <i>N</i> contains many consecutive zeroes, Shellsort using Shell's original gap sequence makes Θ(<i>N</i><sup>2</sup>) comparisons in the worst case. For instance, this case occurs for <i>N</i>
+ equal to a power of two when elements greater and smaller than the 
+median occupy odd and even positions respectively, since they are 
+compared only in the last pass.</p>
+<p>Although it has higher complexity than the <i>O</i>(<i>N</i>log<i>N</i>) that is optimal for comparison sorts, Pratt's version lends itself to <a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">sorting networks</a> and has the same asymptotic gate complexity as Batcher's <a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">bitonic sorter</a>.</p>
+<p>Gonnet and Baeza-Yates observed that Shellsort makes the fewest 
+comparisons on average when the ratios of successive gaps are roughly 
+equal to 2.2.<sup id="cite_ref-Gonnet_9-1" class="reference"><a href="#cite_note-Gonnet-9"><span>[</span>10<span>]</span></a></sup>
+ This is why their sequence with ratio 2.2 and Tokuda's sequence with 
+ratio 2.25 prove efficient. However, it is not known why this is so. 
+Sedgewick recommends to use gaps that have low <a href="http://en.m.wikipedia.org/wiki/Greatest_common_divisor" title="Greatest common divisor">greatest common divisors</a> or are pairwise <a href="http://en.m.wikipedia.org/wiki/Coprime" title="Coprime">coprime</a>.<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>13<span>]</span></a></sup></p>
+<p>With respect to the average number of comparisons, the best known gap
+ sequences are 1, 4, 10, 23, 57, 132, 301, 701 and similar, with gaps 
+found experimentally. Optimal gaps beyond 701 remain unknown, but good 
+results can be obtained by extending the above sequence according to the
+ recursive formula <img class="tex" alt="h_k = \lfloor 2.25 h_{k-1} \rfloor" src="Shell_sort_files/a24f62cdf909939fef2adab253a81f19.png">.</p>
+<p>Tokuda's sequence, defined by the simple formula <img class="tex" alt="h_k = \lceil h'_k \rceil" src="Shell_sort_files/b4c4e84f73ae24c2d9fbc1872bce7800.png">, where <img class="tex" alt="h'_k = 2.25 h'_{k-1} + 1" src="Shell_sort_files/8147e24bf35e241d7651eac0b3abcb18.png">, <img class="tex" alt="h'_1 = 1" src="Shell_sort_files/21a06a4895e83037c8f83d6500896583.png">, can be recommended for practical applications.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Computational_complexity">Computational complexity</span></h2><div class="content_block" id="content_4">
+<p>The following property holds: after <i>h</i><sub>2</sub>-sorting of any <i>h</i><sub>1</sub>-sorted array, the array remains <i>h</i><sub>1</sub>-sorted.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>14<span>]</span></a></sup> Every <i>h</i><sub>1</sub>-sorted and <i>h</i><sub>2</sub>-sorted array is also (<i>a</i><sub>1</sub><i>h</i><sub>1</sub>+<i>a</i><sub>2</sub><i>h</i><sub>2</sub>)-sorted, for any nonnegative integers <i>a</i><sub>1</sub> and <i>a</i><sub>2</sub>. The worst-case complexity of Shellsort is therefore connected with the <a href="http://en.m.wikipedia.org/wiki/Coin_problem" title="Coin problem">Frobenius problem</a>: for given integers <i>h</i><sub>1</sub>,..., <i>h</i><sub><i>n</i></sub> with gcd = 1, the Frobenius number <i>g</i>(<i>h</i><sub>1</sub>,..., <i>h</i><sub><i>n</i></sub>) is the greatest integer that cannot be represented as <i>a</i><sub>1</sub><i>h</i><sub>1</sub>+ ... +<i>a</i><sub><i>n</i></sub><i>h</i><sub><i>n</i></sub> with nonnegative integer <i>a</i><sub>1</sub>,..., <i>a</i><sub><i>n</i></sub>.
+ Using known formulae for Frobenius numbers, we can determine the 
+worst-case complexity of Shellsort for several classes of gap sequences.<sup id="cite_ref-14" class="reference"><a href="#cite_note-14"><span>[</span>15<span>]</span></a></sup> Proven results are shown in the above table.</p>
+<p>With respect to the average number of operations, none of proven 
+results concerns a practical gap sequence. For gaps that are powers of 
+two, Espelid computed this average as <img class="tex" alt="0.5349N\sqrt{N}-0.4387N-0.097\sqrt{N}+O(1)" src="Shell_sort_files/884f3e4f9c65a87684528438e0a3feb6.png">.<sup id="cite_ref-15" class="reference"><a href="#cite_note-15"><span>[</span>16<span>]</span></a></sup><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth</a> determined the average complexity of sorting an <i>N</i>-element array with two gaps (<i>h</i>, 1) to be <img class="tex" alt="2N^2/h + \sqrt{\pi N^3 h}" src="Shell_sort_files/45d8bdca712de7afc4de0b203d55951b.png">.<sup id="cite_ref-Knuth_6-1" class="reference"><a href="#cite_note-Knuth-6"><span>[</span>7<span>]</span></a></sup> It follows that a two-pass Shellsort with <i>h</i> = Θ(<i>N</i><sup>1/3</sup>) makes on average <i>O</i>(<i>N</i><sup>5/3</sup>) comparisons. <a href="http://en.m.wikipedia.org/wiki/Andrew_Yao" title="Andrew Yao">Yao</a> found the average complexity of a three-pass Shellsort.<sup id="cite_ref-16" class="reference"><a href="#cite_note-16"><span>[</span>17<span>]</span></a></sup> His result was refined by Janson and Knuth:<sup id="cite_ref-17" class="reference"><a href="#cite_note-17"><span>[</span>18<span>]</span></a></sup> the average number of comparisons made during a Shellsort with three gaps (<i>ch</i>, <i>cg</i>, 1), where <i>h</i> and <i>g</i> are coprime, is <img class="tex" alt="\frac{N^2}{4ch}+O(N)" src="Shell_sort_files/1e5dd7231f0f669680699e24d4b2f2f6.png"> in the first pass, <img class="tex" alt="\frac{1}{8g}\sqrt{\frac{\pi}{ch}}(h-1)N^{3/2}+O(hN)" src="Shell_sort_files/f141b411a2f2387dd8557668fc93c2fa.png"> in the second pass and <img class="tex" alt="\psi(h, g)N + \frac{1}{8}\sqrt{\frac{\pi}{c}}(c-1)N^{3/2}+O((c-1)gh^{1/2}N) + O(c^2g^3h^2)" src="Shell_sort_files/155b1abb73326c14b53022bda5d022b8.png"> in the third pass. <i>ψ</i>(<i>h</i>, <i>g</i>) in the last formula is a complicated function asymptotically equal to <img class="tex" alt="\sqrt{\frac{\pi h}{128}}g + O(g^{-1/2}h^{1/2}) + O(gh^{-1/2})" src="Shell_sort_files/1bfa6f6deb4942aec661fb031b29900c.png">. In particular, when <i>h</i> = Θ(<i>N</i><sup>7/15</sup>) and <i>g</i> = Θ(<i>h</i><sup>1/5</sup>), the average time of sorting is <i>O</i>(<i>N</i><sup>23/15</sup>).</p>
+<p>Based on experiments, it is conjectured that Shellsort with Hibbard's and Knuth's gap sequences runs in <i>O</i>(<i>N</i><sup>5/4</sup>) average time,<sup id="cite_ref-Knuth_6-2" class="reference"><a href="#cite_note-Knuth-6"><span>[</span>7<span>]</span></a></sup> and that Gonnet and Baeza-Yates's sequence requires on average 0.41<i>N</i>ln<i>N</i>(ln&nbsp;ln<i>N</i>+1/6) element moves.<sup id="cite_ref-Gonnet_9-2" class="reference"><a href="#cite_note-Gonnet-9"><span>[</span>10<span>]</span></a></sup>
+ Approximations of the average number of operations formerly put forward
+ for other sequences fail when sorted arrays contain millions of 
+elements.</p>
+<p>The graph below shows the average number of element comparisons in 
+various variants of Shellsort, divided by the theoretical lower bound, 
+i.e. log<sub>2</sub><i>N</i>!, where the sequence 1, 4, 10, 23, 57, 132, 301, 701 has been extended according to the formula <img class="tex" alt="h_k = \lfloor2.25 h_{k-1}\rfloor" src="Shell_sort_files/a24f62cdf909939fef2adab253a81f19.png">.</p>
+<div class="center">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Shell_sort_average_number_of_comparisons_%28English%29.svg" class="image"><img alt="Shell sort average number of comparisons (English).svg" src="Shell_sort_files/512px-Shell_sort_average_number_of_comparisons_English.png" width="512" height="302"></a></div>
+</div>
+<p>Applying the theory of <a href="http://en.m.wikipedia.org/wiki/Kolmogorov_complexity" title="Kolmogorov complexity">Kolmogorov complexity</a>, Jiang, Li, and <a href="http://en.m.wikipedia.org/wiki/Paul_Vitanyi" title="Paul Vitanyi">Vitányi</a> proved the following lower bounds for the order of the average number of operations in an <i>m</i>-pass Shellsort: Ω(<i>mN</i><sup>1+1/<i>m</i></sup>) when <i>m</i>≤log<sub>2</sub><i>N</i> and Ω(<i>mN</i>) when <i>m</i>&gt;log<sub>2</sub><i>N</i>.<sup id="cite_ref-18" class="reference"><a href="#cite_note-18"><span>[</span>19<span>]</span></a></sup> Therefore Shellsort has prospects of running in an average time that asymptotically grows like <i>N</i>log<i>N</i>
+ only when using gap sequences whose number of gaps grows in proportion 
+to the logarithm of the array size. It is, however, unknown whether 
+Shellsort can reach this asymptotic order of average-case complexity, 
+which is optimal for comparison sorts.</p>
+<p>The worst-case complexity of any version of Shellsort is of higher order: Plaxton, Poonen, and <a href="http://en.m.wikipedia.org/wiki/Torsten_Suel" title="Torsten Suel">Suel</a> showed that it grows at least as rapidly as Ω(<i>N</i>(log<i>N</i>/log log<i>N</i>)<sup>2</sup>).<sup id="cite_ref-19" class="reference"><a href="#cite_note-19"><span>[</span>20<span>]</span></a></sup></p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_5">
+<p>Shellsort is now rarely used in serious applications. It performs more operations and has higher <a href="http://en.m.wikipedia.org/wiki/CPU_cache#Cache_miss" title="CPU cache">cache miss ratio</a> than <a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">quicksort</a>. However, since it needs relatively short code and does not use the <a href="http://en.m.wikipedia.org/wiki/Call_stack" title="Call stack">call stack</a>, some implementations of the <a href="http://en.m.wikipedia.org/wiki/Qsort" title="Qsort" class="mw-redirect">qsort</a> function in the <a href="http://en.m.wikipedia.org/wiki/C_standard_library" title="C standard library">C standard library</a> targeted at <a href="http://en.m.wikipedia.org/wiki/Embedded_systems" title="Embedded systems" class="mw-redirect">embedded systems</a> use it instead of quicksort. Shellsort is, for example, used in the <a href="http://en.m.wikipedia.org/wiki/UClibc" title="UClibc">uClibc</a> library.<sup id="cite_ref-20" class="reference"><a href="#cite_note-20"><span>[</span>21<span>]</span></a></sup> For similar reasons, an implementation of Shellsort is present in the <a href="http://en.m.wikipedia.org/wiki/Linux_kernel" title="Linux kernel">Linux kernel</a>.<sup id="cite_ref-21" class="reference"><a href="#cite_note-21"><span>[</span>22<span>]</span></a></sup></p>
+<p>Shellsort can also serve as a sub-algorithm of <a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">introspective sort</a>,
+ to sort short subarrays and to prevent a pathological slowdown when the
+ recursion depth exceeds a given limit. This principle is employed, for 
+instance, in the <a href="http://en.m.wikipedia.org/wiki/Bzip2" title="Bzip2">bzip2</a> compressor.<sup id="cite_ref-22" class="reference"><a href="#cite_note-22"><span>[</span>23<span>]</span></a></sup></p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_6">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_7">
+<div class="reflist references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-Shell-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Shell_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Shell_0-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation Journal">Shell, D.L. (1959). <a rel="nofollow" class="external text" href="http://penguin.ewu.edu/cscd300/Topic/AdvSorting/p30-shell.pdf">"A High-Speed Sorting Procedure"</a>. <i>Communications of the ACM</i> <b>2</b> (7): 30–32. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F368370.368387">10.1145/368370.368387</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://penguin.ewu.edu/cscd300/Topic/AdvSorting/p30-shell.pdf">http://penguin.ewu.edu/cscd300/Topic/AdvSorting/p30-shell.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+High-Speed+Sorting+Procedure&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Shell&amp;rft.aufirst=D.L.&amp;rft.au=Shell%2C%26%2332%3BD.L.&amp;rft.date=1959&amp;rft.volume=2&amp;rft.issue=7&amp;rft.pages=30%E2%80%9332&amp;rft_id=info:doi/10.1145%2F368370.368387&amp;rft_id=http%3A%2F%2Fpenguin.ewu.edu%2Fcscd300%2FTopic%2FAdvSorting%2Fp30-shell.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">Some older textbooks and references call this the "Shell-Metzner" sort after <span class="new" title="Marlene Metzner Norton (la pagina non esiste)">Marlene Metzner Norton</span>, but according to Metzner, "I had nothing to do with the sort, and my name should never have been attached to it." See <span class="citation web"><a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/shellsort.html">"Shell sort"</a>. National Institute of Standards and Technology<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.nist.gov/dads/HTML/shellsort.html">http://www.nist.gov/dads/HTML/shellsort.html</a></span><span class="reference-accessdate">. Retrieved 2007-07-17</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Shell+sort&amp;rft.atitle=&amp;rft.pub=National+Institute+of+Standards+and+Technology&amp;rft_id=http%3A%2F%2Fwww.nist.gov%2Fdads%2FHTML%2Fshellsort.html&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation Journal">Frank, R.M.; Lazarus, R.B. (1960). "A High-Speed Sorting Procedure". <i>Communications of the ACM</i> <b>3</b> (1): 20–22. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F366947.366957">10.1145/366947.366957</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+High-Speed+Sorting+Procedure&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Frank&amp;rft.aufirst=R.M.&amp;rft.au=Frank%2C%26%2332%3BR.M.&amp;rft.au=Lazarus%2C%26%2332%3BR.B.&amp;rft.date=1960&amp;rft.volume=3&amp;rft.issue=1&amp;rft.pages=20%E2%80%9322&amp;rft_id=info:doi/10.1145%2F366947.366957&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><span class="citation Journal">Hibbard, Thomas N. (1963). "An Empirical Study of Minimal Storage Sorting". <i>Communications of the ACM</i> <b>6</b> (5): 206–213. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F366552.366557">10.1145/366552.366557</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=An+Empirical+Study+of+Minimal+Storage+Sorting&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Hibbard&amp;rft.aufirst=Thomas+N.&amp;rft.au=Hibbard%2C%26%2332%3BThomas+N.&amp;rft.date=1963&amp;rft.volume=6&amp;rft.issue=5&amp;rft.pages=206%E2%80%93213&amp;rft_id=info:doi/10.1145%2F366552.366557&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><span class="citation Journal">Papernov, A.A.; Stasevich, G.V. (1965). <a rel="nofollow" class="external text" href="http://www.mathnet.ru/links/83f0a81df1ec06f76d3683c6cab7d143/ppi751.pdf">"A Method of Information Sorting in Computer Memories"</a>. <i>Problems of Information Transmission</i> <b>1</b> (3): 63–75<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.mathnet.ru/links/83f0a81df1ec06f76d3683c6cab7d143/ppi751.pdf">http://www.mathnet.ru/links/83f0a81df1ec06f76d3683c6cab7d143/ppi751.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Method+of+Information+Sorting+in+Computer+Memories&amp;rft.jtitle=Problems+of+Information+Transmission&amp;rft.aulast=Papernov&amp;rft.aufirst=A.A.&amp;rft.au=Papernov%2C%26%2332%3BA.A.&amp;rft.au=Stasevich%2C%26%2332%3BG.V.&amp;rft.date=1965&amp;rft.volume=1&amp;rft.issue=3&amp;rft.pages=63%E2%80%9375&amp;rft_id=http%3A%2F%2Fwww.mathnet.ru%2Flinks%2F83f0a81df1ec06f76d3683c6cab7d143%2Fppi751.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation book">Pratt, Vaughan Ronald (1979). <i>Shellsort and Sorting Networks (Outstanding Dissertations in the Computer Sciences)</i>. Garland. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-8240-4406-1" title="Special:BookSources/0-8240-4406-1">0-8240-4406-1</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Shellsort+and+Sorting+Networks+%28Outstanding+Dissertations+in+the+Computer+Sciences%29&amp;rft.aulast=Pratt&amp;rft.aufirst=Vaughan+Ronald&amp;rft.au=Pratt%2C%26%2332%3BVaughan+Ronald&amp;rft.date=1979&amp;rft.pub=Garland&amp;rft.isbn=0-8240-4406-1&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Knuth-6">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Knuth_6-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Knuth_6-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-Knuth_6-2"><sup><i><b>c</b></i></sup></a></span> <span class="reference-text"><span class="citation book">Knuth, Donald E. (1997). "Shell's method". <i>The Art of Computer Programming. Volume 3: Sorting and Searching</i> (2nd ed.). Reading, Massachusetts: Addison-Wesley. pp.&nbsp;83–95. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89685-0" title="Special:BookSources/0-201-89685-0">0-201-89685-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Shell%27s+method&amp;rft.atitle=The+Art+of+Computer+Programming.+Volume+3%3A+Sorting+and+Searching&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald+E.&amp;rft.au=Knuth%2C%26%2332%3BDonald+E.&amp;rft.date=1997&amp;rft.pages=pp.%26nbsp%3B83%E2%80%9395&amp;rft.edition=2nd&amp;rft.place=Reading%2C+Massachusetts&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-89685-0&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><span class="citation Journal">Incerpi, Janet; Sedgewick, Robert (1985). "Improved Upper Bounds on Shellsort". <i>Journal of Computer and System Sciences</i> <b>31</b> (2): 210–224.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Improved+Upper+Bounds+on+Shellsort&amp;rft.jtitle=Journal+of+Computer+and+System+Sciences&amp;rft.aulast=Incerpi&amp;rft.aufirst=Janet&amp;rft.au=Incerpi%2C%26%2332%3BJanet&amp;rft.au=Sedgewick%2C%26%2332%3BRobert&amp;rft.date=1985&amp;rft.volume=31&amp;rft.issue=2&amp;rft.pages=210%E2%80%93224&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Sedgewick-8">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Sedgewick_8-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Sedgewick_8-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation Journal">Sedgewick, Robert (1986). "A New Upper Bound for Shellsort". <i>Journal of Algorithms</i> <b>7</b> (2): 159–173. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2F0196-6774%2886%2990001-5">10.1016/0196-6774(86)90001-5</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+New+Upper+Bound+for+Shellsort&amp;rft.jtitle=Journal+of+Algorithms&amp;rft.aulast=Sedgewick&amp;rft.aufirst=Robert&amp;rft.au=Sedgewick%2C%26%2332%3BRobert&amp;rft.date=1986&amp;rft.volume=7&amp;rft.issue=2&amp;rft.pages=159%E2%80%93173&amp;rft_id=info:doi/10.1016%2F0196-6774%2886%2990001-5&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Gonnet-9">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Gonnet_9-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Gonnet_9-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-Gonnet_9-2"><sup><i><b>c</b></i></sup></a></span> <span class="reference-text"><span class="citation book">Gonnet, Gaston H.; Baeza-Yates, Ricardo (1991). "Shellsort". <i>Handbook of Algorithms and Data Structures: In Pascal and C</i> (2nd ed.). Reading, Massachusetts: Addison-Wesley. pp.&nbsp;161–163. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-41607-7" title="Special:BookSources/0-201-41607-7">0-201-41607-7</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Shellsort&amp;rft.atitle=Handbook+of+Algorithms+and+Data+Structures%3A+In+Pascal+and+C&amp;rft.aulast=Gonnet&amp;rft.aufirst=Gaston+H.&amp;rft.au=Gonnet%2C%26%2332%3BGaston+H.&amp;rft.au=Baeza-Yates%2C%26%2332%3BRicardo&amp;rft.date=1991&amp;rft.pages=pp.%26nbsp%3B161%E2%80%93163&amp;rft.edition=2nd&amp;rft.place=Reading%2C+Massachusetts&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-41607-7&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><span class="citation book">Tokuda, Naoyuki (1992). "An Improved Shellsort". In van Leeuven, Jan. <i>Proceedings of the IFIP 12th World Computer Congress on Algorithms, Software, Architecture</i>. Amsterdam: North-Holland Publishing Co.. pp.&nbsp;449–457. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-444-89747-X" title="Special:BookSources/0-444-89747-X">0-444-89747-X</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+Improved+Shellsort&amp;rft.atitle=Proceedings+of+the+IFIP+12th+World+Computer+Congress+on+Algorithms%2C+Software%2C+Architecture&amp;rft.aulast=Tokuda&amp;rft.aufirst=Naoyuki&amp;rft.au=Tokuda%2C%26%2332%3BNaoyuki&amp;rft.date=1992&amp;rft.pages=pp.%26nbsp%3B449%E2%80%93457&amp;rft.place=Amsterdam&amp;rft.pub=North-Holland+Publishing+Co.&amp;rft.isbn=0-444-89747-X&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><span class="citation book">Ciura, Marcin (2001). <a rel="nofollow" class="external text" href="http://sun.aei.polsl.pl/%7Emciura/publikacje/shellsort.pdf">"Best Increments for the Average Case of Shellsort"</a>. In Freiwalds, Rusins. <i>Proceedings of the 13th International Symposium on Fundamentals of Computation Theory</i>. London: Springer-Verlag. pp.&nbsp;106–117. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/3-540-42487-3" title="Special:BookSources/3-540-42487-3">3-540-42487-3</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://sun.aei.polsl.pl/%7Emciura/publikacje/shellsort.pdf">http://sun.aei.polsl.pl/~mciura/publikacje/shellsort.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Best+Increments+for+the+Average+Case+of+Shellsort&amp;rft.atitle=Proceedings+of+the+13th+International+Symposium+on+Fundamentals+of+Computation+Theory&amp;rft.aulast=Ciura&amp;rft.aufirst=Marcin&amp;rft.au=Ciura%2C%26%2332%3BMarcin&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B106%E2%80%93117&amp;rft.place=London&amp;rft.pub=Springer-Verlag&amp;rft.isbn=3-540-42487-3&amp;rft_id=http%3A%2F%2Fsun.aei.polsl.pl%2F%7Emciura%2Fpublikacje%2Fshellsort.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-12">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><span class="citation book">Sedgewick, Robert (1998). "Shellsort". <i>Algorithms in C++, Parts 1-4: Fundamentals, Data Structure, Sorting, Searching</i>. Reading, Massachusetts: Addison-Wesley. pp.&nbsp;285–292. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-35088-2" title="Special:BookSources/0-201-35088-2">0-201-35088-2</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Shellsort&amp;rft.atitle=Algorithms+in+C%2B%2B%2C+Parts+1-4%3A+Fundamentals%2C+Data+Structure%2C+Sorting%2C+Searching&amp;rft.aulast=Sedgewick&amp;rft.aufirst=Robert&amp;rft.au=Sedgewick%2C%26%2332%3BRobert&amp;rft.date=1998&amp;rft.pages=pp.%26nbsp%3B285%E2%80%93292&amp;rft.place=Reading%2C+Massachusetts&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-35088-2&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-13">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text"><span class="citation Journal">Gale, David; Karp, Richard M. (1972). "A Phenomenon in the Theory of Sorting". <i>Journal of Computer and System Sciences</i> <b>6</b> (2): 103–115. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2FS0022-0000%2872%2980016-3">10.1016/S0022-0000(72)80016-3</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Phenomenon+in+the+Theory+of+Sorting&amp;rft.jtitle=Journal+of+Computer+and+System+Sciences&amp;rft.aulast=Gale&amp;rft.aufirst=David&amp;rft.au=Gale%2C%26%2332%3BDavid&amp;rft.au=Karp%2C%26%2332%3BRichard+M.&amp;rft.date=1972&amp;rft.volume=6&amp;rft.issue=2&amp;rft.pages=103%E2%80%93115&amp;rft_id=info:doi/10.1016%2FS0022-0000%2872%2980016-3&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-14">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-14">^</a></b></span> <span class="reference-text"><span class="citation Journal">Selmer, Ernst S. (1989). "On Shellsort and the Frobenius Problem". <i>BIT Numerical Mathematics</i> <b>29</b> (1): 37–40. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF01932703">10.1007/BF01932703</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+Shellsort+and+the+Frobenius+Problem&amp;rft.jtitle=BIT+Numerical+Mathematics&amp;rft.aulast=Selmer&amp;rft.aufirst=Ernst+S.&amp;rft.au=Selmer%2C%26%2332%3BErnst+S.&amp;rft.date=1989&amp;rft.volume=29&amp;rft.issue=1&amp;rft.pages=37%E2%80%9340&amp;rft_id=info:doi/10.1007%2FBF01932703&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-15">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-15">^</a></b></span> <span class="reference-text"><span class="citation Journal">Espelid, Terje O. (1973). "Analysis of a Shellsort Algorithm". <i>BIT Numerical Mathematics</i> <b>13</b> (4): 394–400. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF01933401">10.1007/BF01933401</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Analysis+of+a+Shellsort+Algorithm&amp;rft.jtitle=BIT+Numerical+Mathematics&amp;rft.aulast=Espelid&amp;rft.aufirst=Terje+O.&amp;rft.au=Espelid%2C%26%2332%3BTerje+O.&amp;rft.date=1973&amp;rft.volume=13&amp;rft.issue=4&amp;rft.pages=394%E2%80%93400&amp;rft_id=info:doi/10.1007%2FBF01933401&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-16">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-16">^</a></b></span> <span class="reference-text"><span class="citation Journal">Yao, Andrew Chi-Chih (1980). "An Analysis of (<i>h</i>, <i>k</i>, 1)-Shellsort". <i>Journal of Algorithms</i> <b>1</b> (1): 14–50. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2F0196-6774%2880%2990003-6">10.1016/0196-6774(80)90003-6</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=An+Analysis+of+%28%27%27h%27%27%2C+%27%27k%27%27%2C+1%29-Shellsort&amp;rft.jtitle=Journal+of+Algorithms&amp;rft.aulast=Yao&amp;rft.aufirst=Andrew+Chi-Chih&amp;rft.au=Yao%2C%26%2332%3BAndrew+Chi-Chih&amp;rft.date=1980&amp;rft.volume=1&amp;rft.issue=1&amp;rft.pages=14%E2%80%9350&amp;rft_id=info:doi/10.1016%2F0196-6774%2880%2990003-6&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-17">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-17">^</a></b></span> <span class="reference-text"><span class="citation Journal">Janson, Svante; Knuth, Donald E. (1997). "Shellsort with Three Increments". <i>Random Structures and Algorithms</i> <b>10</b> (1-2): 125–142. <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/cs/9608105">cs/9608105</a>. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1002%2F%28SICI%291098-2418%28199701%2F03%2910%3A1%2F2%3C125%3A%3AAID-RSA6%3E3.0.CO%3B2-X">10.1002/(SICI)1098-2418(199701/03)10:1/2&lt;125::AID-RSA6&gt;3.0.CO;2-X</a>. <a href="http://en.m.wikipedia.org/wiki/CiteSeerX" title="CiteSeerX" class="mw-redirect">CiteSeerX</a>: <span class="url"><a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.9911">10.1.1.54.9911</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Shellsort+with+Three+Increments&amp;rft.jtitle=Random+Structures+and+Algorithms&amp;rft.aulast=Janson&amp;rft.aufirst=Svante&amp;rft.au=Janson%2C%26%2332%3BSvante&amp;rft.au=Knuth%2C%26%2332%3BDonald+E.&amp;rft.date=1997&amp;rft.volume=10&amp;rft.issue=1-2&amp;rft.pages=125%E2%80%93142&amp;rft_id=info:arxiv/cs%2F9608105&amp;rft_id=info:doi/10.1002%2F%28SICI%291098-2418%28199701%2F03%2910%3A1%2F2%3C125%3A%3AAID-RSA6%3E3.0.CO%3B2-X&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-18">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-18">^</a></b></span> <span class="reference-text"><span class="citation Journal">Jiang, Tao; Li, Ming; Vitányi, Paul (2000). "A Lower Bound on the Average-Case Complexity of Shellsort". <i><a href="http://en.m.wikipedia.org/wiki/Journal_of_the_ACM" title="Journal of the ACM">Journal of the ACM</a></i> <b>47</b> (5): 905–911. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F355483.355488">10.1145/355483.355488</a>. <a href="http://en.m.wikipedia.org/wiki/CiteSeerX" title="CiteSeerX" class="mw-redirect">CiteSeerX</a>: <span class="url"><a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.6.6508">10.1.1.6.6508</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Lower+Bound+on+the+Average-Case+Complexity+of+Shellsort&amp;rft.jtitle=%5B%5BJournal+of+the+ACM%5D%5D&amp;rft.aulast=Jiang&amp;rft.aufirst=Tao&amp;rft.au=Jiang%2C%26%2332%3BTao&amp;rft.au=Li%2C%26%2332%3BMing&amp;rft.au=Vit%C3%A1nyi%2C%26%2332%3BPaul&amp;rft.date=2000&amp;rft.volume=47&amp;rft.issue=5&amp;rft.pages=905%E2%80%93911&amp;rft_id=info:doi/10.1145%2F355483.355488&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-19">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-19">^</a></b></span> <span class="reference-text"><span class="citation Journal">Plaxton, C. Greg; Poonen, Bjarne; Suel, Torsten (1992). "Improved Lower Bounds for Shellsort". <i>Annual Symposium on Foundations of Computer Science</i> <b>33</b>: 226–235. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1992.267769">10.1109/SFCS.1992.267769</a>. <a href="http://en.m.wikipedia.org/wiki/CiteSeerX" title="CiteSeerX" class="mw-redirect">CiteSeerX</a>: <span class="url"><a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.43.1393">10.1.1.43.1393</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Improved+Lower+Bounds+for+Shellsort&amp;rft.jtitle=Annual+Symposium+on+Foundations+of+Computer+Science&amp;rft.aulast=Plaxton&amp;rft.aufirst=C.+Greg&amp;rft.au=Plaxton%2C%26%2332%3BC.+Greg&amp;rft.au=Poonen%2C%26%2332%3BBjarne&amp;rft.au=Suel%2C%26%2332%3BTorsten&amp;rft.date=1992&amp;rft.volume=33&amp;rft.pages=226%E2%80%93235&amp;rft_id=info:doi/10.1109%2FSFCS.1992.267769&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-20">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-20">^</a></b></span> <span class="reference-text"><span class="citation web">Manuel Novoa III. <a rel="nofollow" class="external text" href="http://git.uclibc.org/uClibc/tree/libc/stdlib/stdlib.c#n786">"libc/stdlib/stdlib.c"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://git.uclibc.org/uClibc/tree/libc/stdlib/stdlib.c#n786">http://git.uclibc.org/uClibc/tree/libc/stdlib/stdlib.c#n786</a></span><span class="reference-accessdate">. Retrieved 2011-03-30</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=libc%2Fstdlib%2Fstdlib.c&amp;rft.atitle=&amp;rft.aulast=Manuel+Novoa+III&amp;rft.au=Manuel+Novoa+III&amp;rft_id=http%3A%2F%2Fgit.uclibc.org%2FuClibc%2Ftree%2Flibc%2Fstdlib%2Fstdlib.c%23n786&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-21">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-21">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="https://github.com/torvalds/linux/blob/master/kernel/groups.c#L105">"kernel/groups.c"</a><span class="printonly">. <a rel="nofollow" class="external free" href="https://github.com/torvalds/linux/blob/master/kernel/groups.c#L105">https://github.com/torvalds/linux/blob/master/kernel/groups.c#L105</a></span><span class="reference-accessdate">. Retrieved 2012-05-05</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=kernel%2Fgroups.c&amp;rft.atitle=&amp;rft_id=https%3A%2F%2Fgithub.com%2Ftorvalds%2Flinux%2Fblob%2Fmaster%2Fkernel%2Fgroups.c%23L105&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-22">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-22">^</a></b></span> <span class="reference-text"><span class="citation web">Julian Seward. <a rel="nofollow" class="external text" href="http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util/compress/bzip2/blocksort.c#L519">"bzip2/blocksort.c"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util/compress/bzip2/blocksort.c#L519">http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util/compress/bzip2/blocksort.c#L519</a></span><span class="reference-accessdate">. Retrieved 2011-03-30</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=bzip2%2Fblocksort.c&amp;rft.atitle=&amp;rft.aulast=Julian+Seward&amp;rft.au=Julian+Seward&amp;rft_id=http%3A%2F%2Fwww.ncbi.nlm.nih.gov%2FIEB%2FToolBox%2FCPP_DOC%2Flxr%2Fsource%2Fsrc%2Futil%2Fcompress%2Fbzip2%2Fblocksort.c%23L519&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Bibliography">Bibliography</span></h2><div class="content_block" id="content_8">
+<ul>
+<li>
+<span class="citation book">Knuth, Donald E. (1997). "Shell's method". <i>The Art of Computer Programming. Volume 3: Sorting and Searching</i> (2nd ed.). Reading, Massachusetts: Addison-Wesley. pp.&nbsp;83–95. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-89685-0" title="Special:BookSources/0-201-89685-0">0-201-89685-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Shell%27s+method&amp;rft.atitle=The+Art+of+Computer+Programming.+Volume+3%3A+Sorting+and+Searching&amp;rft.aulast=Knuth&amp;rft.aufirst=Donald+E.&amp;rft.au=Knuth%2C%26%2332%3BDonald+E.&amp;rft.date=1997&amp;rft.pages=pp.%26nbsp%3B83%E2%80%9395&amp;rft.edition=2nd&amp;rft.place=Reading%2C+Massachusetts&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-201-89685-0&amp;rfr_id=info:sid/en.wikipedia.org:Shellsort"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cs.princeton.edu/%7Ers/shell/">Analysis of Shellsort and Related Algorithms</a>, Robert Sedgewick, Fourth European Symposium on Algorithms, Barcelona, September 1996.</li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_9">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.youtube.com/watch?v=CmPA7zE8mx0">Shellsort with gaps 5, 3, 1 as a Hungarian folk dance</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><strong class="selflink">Shellsort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+<p><span id="interwiki-pl-ga"></span></p>
+
+
+
+
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Shell_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Shellsort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Shell_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Shellsort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Shell_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Shell_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

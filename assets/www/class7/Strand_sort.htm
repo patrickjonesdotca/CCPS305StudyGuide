@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Strand sort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Strand_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 5 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Strand_sort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Strand_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Strand_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Strand_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Strand_sort" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Strand_sort">česky</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%B1%D8%B4%D8%AA%D9%87%E2%80%8C%D8%A7%DB%8C">فارسی</option><option value="//pt.m.wikipedia.org/wiki/Strand_sort">português</option><option value="//tr.m.wikipedia.org/wiki/%C4%B0plik_s%C4%B1ralamas%C4%B1">Türkçe</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Strand sort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Strand sort</caption>
+<tbody><tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">Linked list</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style="">O(n²)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style="">O(n)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style="">O(n²)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style="">O(1) auxiliary</td>
+</tr>
+</tbody></table>
+<p><b>Strand sort</b> is a <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>.
+ It works by repeatedly pulling sorted sublists out of the list to be 
+sorted and merging them with a result array. Each iteration through the 
+unsorted list pulls out a series of elements which were already sorted, 
+and <a href="http://en.m.wikipedia.org/wiki/Mergesort" title="Mergesort" class="mw-redirect">merges</a> those series together.</p>
+<p>The name of the algorithm comes from the "strands" of sorted data 
+within the unsorted list which are removed one at a time. It is a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a> due to its use of comparisons when removing strands and when merging them into the sorted array.</p>
+<p>The strand sort algorithm is <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(<i>n</i><sup>2</sup>) in the average case. In the best case (a list which is already sorted) the algorithm is linear, or O(<i>n</i>). In the worst case (a list which is sorted in reverse order) the algorithm is O(<i>n</i><sup>2</sup>).</p>
+<p>Strand sort is most useful for data which is stored in a linked list,
+ due to the frequent insertions and removals of data. Using another data
+ structure, such as an array, would greatly increase the running time 
+and complexity of the algorithm due to lengthy insertions and deletions.
+ Strand sort is also useful for data which already has large amounts of 
+sorted data, because such data can be removed in a single strand.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Example">Example</span></h2><div class="content_block" id="content_1">
+<table class="wikitable">
+<tbody><tr>
+<th>Unsorted list</th>
+<th>Sublist</th>
+<th>Sorted list</th>
+</tr>
+<tr>
+<td>3 1 5 4 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1 4 2</td>
+<td>3 5</td>
+<td></td>
+</tr>
+<tr>
+<td>1 4 2</td>
+<td></td>
+<td>3 5</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1 4</td>
+<td>3 5</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>1 3 4 5</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>1 3 4 5</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1 2 3 4 5</td>
+</tr>
+</tbody></table>
+<ol>
+<li>Parse the unsorted list once, taking out any ascending (sorted) numbers.</li>
+<li>The (sorted) sublist is, for the first iteration, pushed onto the empty sorted list.</li>
+<li>Parse the unsorted list again, again taking out relatively sorted numbers.</li>
+<li>Since the sorted list is now populated, merge the sublist into the sorted list.</li>
+<li>Repeat steps 3–4 until both the unsorted list and sublist are empty.</li>
+</ol>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Algorithm">Algorithm</span></h2><div class="content_block" id="content_2">
+<p>A simple way to express strand sort in <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a> is as follows:</p>
+<pre><code><b>procedure</b> strandSort( A : list of sortable items ) <b>defined as:</b>
+  <b>while</b> length( A ) &gt; 0
+    <b>clear</b> sublist
+    sublist[ 0 ] := A[ 0 ]
+    <b>remove</b> A[ 0 ]
+    <b>for each</b> i <b>in</b> 0 <b>to</b> length( A ) - 1 <b>do:</b>
+      <b>if</b> A[ i ] &gt; sublist[ last ] <b>then</b>
+        <b>append</b> A[ i ] <b>to</b> sublist
+        <b>remove</b> A[ i ]
+      <b>end if</b>
+    <b>end for</b>
+    <b>merge</b> sublist <b>into</b> results
+  <b>end while</b>
+  <b>return</b> results
+<b>end procedure</b>
+</code>
+</pre>
+<h3> <span class="mw-headline" id="Haskell_implementation">Haskell implementation</span>
+</h3>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="ocaml source-ocaml">
+<pre class="de1">merge <span class="br0">[</span><span class="br0">]</span> l <span class="sy0">=</span> l
+merge l <span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> l
+merge l1@<span class="br0">(</span>x1<span class="sy0">:</span>r1<span class="br0">)</span> l2@<span class="br0">(</span>x2<span class="sy0">:</span>r2<span class="br0">)</span> <span class="sy0">=</span>
+    <span class="kw1">if</span> x1 <span class="sy0">&lt;</span> x2 <span class="kw1">then</span> x1<span class="sy0">:</span><span class="br0">(</span>merge r1 l2<span class="br0">)</span> <span class="kw1">else</span> x2<span class="sy0">:</span><span class="br0">(</span>merge l1 r2<span class="br0">)</span>
+ 
+ssort <span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">[</span><span class="br0">]</span>
+ssort l <span class="sy0">=</span> merge strand <span class="br0">(</span>ssort rest<span class="br0">)</span>
+    where <span class="br0">(</span>strand, rest<span class="br0">)</span> <span class="sy0">=</span> foldr extend <span class="br0">(</span><span class="br0">[</span><span class="br0">]</span>,<span class="br0">[</span><span class="br0">]</span><span class="br0">)</span> l
+          extend x <span class="br0">(</span><span class="br0">[</span><span class="br0">]</span>,r<span class="br0">)</span> <span class="sy0">=</span> <span class="br0">(</span><span class="br0">[</span>x<span class="br0">]</span>,r<span class="br0">)</span>
+          extend x <span class="br0">(</span>s<span class="sy0">:</span>ss,r<span class="br0">)</span> <span class="sy0">=</span> <span class="kw1">if</span> x <span class="sy0">&lt;=</span> s <span class="kw1">then</span> <span class="br0">(</span>x<span class="sy0">:</span>s<span class="sy0">:</span>ss,r<span class="br0">)</span> <span class="kw1">else</span> <span class="br0">(</span>s<span class="sy0">:</span>ss,x<span class="sy0">:</span>r<span class="br0">)</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="PHP_implementation">PHP implementation</span>
+</h3>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="php source-php">
+<pre class="de1"><span class="kw2">function</span> strandsort<span class="br0">(</span><span class="kw3">array</span> <span class="re0">$arr</span><span class="br0">)</span> <span class="br0">{</span>
+  <span class="re0">$result</span> <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+  <span class="kw1">while</span> <span class="br0">(</span><span class="kw3">count</span><span class="br0">(</span><span class="re0">$arr</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="re0">$sublist</span> <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="re0">$sublist</span><span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="kw3">array_shift</span><span class="br0">(</span><span class="re0">$arr</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="re0">$last</span> <span class="sy0">=</span> <span class="kw3">count</span><span class="br0">(</span><span class="re0">$sublist</span><span class="br0">)</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">foreach</span> <span class="br0">(</span><span class="re0">$arr</span> <span class="kw1">as</span> <span class="re0">$i</span> <span class="sy0">=&gt;</span> <span class="re0">$val</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">if</span> <span class="br0">(</span><span class="re0">$val</span> <span class="sy0">&gt;</span> <span class="re0">$sublist</span><span class="br0">[</span><span class="re0">$last</span><span class="br0">]</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="re0">$sublist</span><span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="re0">$val</span><span class="sy0">;</span>
+        <span class="kw3">unset</span><span class="br0">(</span><span class="re0">$arr</span><span class="br0">[</span><span class="re0">$i</span><span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="re0">$last</span><span class="sy0">++;</span>
+      <span class="br0">}</span>
+    <span class="br0">}</span>
+ 
+    <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span><span class="kw3">empty</span><span class="br0">(</span><span class="re0">$result</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">foreach</span> <span class="br0">(</span><span class="re0">$sublist</span> <span class="kw1">as</span> <span class="re0">$val</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="re0">$spliced</span> <span class="sy0">=</span> <span class="kw4">false</span><span class="sy0">;</span>
+        <span class="kw1">foreach</span> <span class="br0">(</span><span class="re0">$result</span> <span class="kw1">as</span> <span class="re0">$i</span> <span class="sy0">=&gt;</span> <span class="re0">$rval</span><span class="br0">)</span> <span class="br0">{</span>
+          <span class="kw1">if</span> <span class="br0">(</span><span class="re0">$val</span> <span class="sy0">&lt;</span> <span class="re0">$rval</span><span class="br0">)</span> <span class="br0">{</span>
+            <span class="kw3">array_splice</span><span class="br0">(</span><span class="re0">$result</span><span class="sy0">,</span> <span class="re0">$i</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="re0">$val</span><span class="br0">)</span><span class="sy0">;</span>
+            <span class="re0">$spliced</span> <span class="sy0">=</span> <span class="kw4">true</span><span class="sy0">;</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+          <span class="br0">}</span>
+        <span class="br0">}</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span><span class="re0">$spliced</span><span class="br0">)</span> <span class="br0">{</span>
+          <span class="re0">$result</span><span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="re0">$val</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+      <span class="br0">}</span>
+    <span class="br0">}</span>
+    <span class="kw1">else</span> <span class="br0">{</span>
+      <span class="re0">$result</span> <span class="sy0">=</span> <span class="re0">$sublist</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+  <span class="br0">}</span>
+ 
+  <span class="kw1">return</span> <span class="re0">$result</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<h3> <span class="mw-headline" id="Python_implementation">Python implementation</span>
+</h3>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="python source-python">
+<pre class="de1">items <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">(</span>unsorted<span class="br0">)</span>
+sortedBins <span class="sy0">=</span> <span class="br0">[</span><span class="br0">]</span>
+<span class="kw1">while</span><span class="br0">(</span> <span class="kw2">len</span><span class="br0">(</span>unsorted<span class="br0">)</span> <span class="sy0">&gt;</span> <span class="nu0">0</span> <span class="br0">)</span>:
+    highest <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">(</span><span class="st0">"-inf"</span><span class="br0">)</span>
+    newBin <span class="sy0">=</span> <span class="br0">[</span><span class="br0">]</span>
+    i <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span><span class="br0">(</span> i <span class="sy0">&lt;</span> <span class="kw2">len</span><span class="br0">(</span>unsorted<span class="br0">)</span> <span class="br0">)</span>:
+        <span class="kw1">if</span><span class="br0">(</span> unsorted<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&gt;=</span> highest <span class="br0">)</span>:
+            highest <span class="sy0">=</span> unsorted.<span class="me1">pop</span><span class="br0">(</span>i<span class="br0">)</span>
+            newBin.<span class="me1">append</span><span class="br0">(</span> highest <span class="br0">)</span>
+        <span class="kw1">else</span>:
+            i<span class="sy0">=</span>i+<span class="nu0">1</span>
+    sortedBins.<span class="me1">append</span><span class="br0">(</span>newBin<span class="br0">)</span>
+ 
+<span class="kw2">sorted</span> <span class="sy0">=</span> <span class="br0">[</span><span class="br0">]</span>
+<span class="kw1">while</span><span class="br0">(</span> <span class="kw2">len</span><span class="br0">(</span><span class="kw2">sorted</span><span class="br0">)</span> <span class="sy0">&lt;</span> items <span class="br0">)</span>:
+    lowBin <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span>sortedBins<span class="br0">)</span> <span class="br0">)</span>:
+        <span class="kw1">if</span><span class="br0">(</span> sortedBins<span class="br0">[</span>j<span class="br0">]</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">&lt;</span> sortedBins<span class="br0">[</span>lowBin<span class="br0">]</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="br0">)</span>:
+            lowBin <span class="sy0">=</span> j
+    <span class="kw2">sorted</span>.<span class="me1">append</span><span class="br0">(</span> sortedBins<span class="br0">[</span>lowBin<span class="br0">]</span>.<span class="me1">pop</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span> <span class="br0">)</span>
+    <span class="kw1">if</span><span class="br0">(</span> <span class="kw2">len</span><span class="br0">(</span>sortedBins<span class="br0">[</span>lowBin<span class="br0">]</span><span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span> <span class="br0">)</span>:
+        <span class="kw1">del</span> sortedBins<span class="br0">[</span>lowBin<span class="br0">]</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_3">
+<ul>
+<li>Paul E. Black <a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/strandSort.html">"Strand Sort"</a> from <a href="http://en.m.wikipedia.org/wiki/Dictionary_of_Algorithms_and_Data_Structures" title="Dictionary of Algorithms and Data Structures">Dictionary of Algorithms and Data Structures</a> at <a href="http://en.m.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology" title="National Institute of Standards and Technology">NIST</a>.</li>
+</ul>
+<div class="reflist" style="list-style-type: decimal;"></div>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><strong class="selflink">Strand sort</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Strand_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Strand+sort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Strand_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Strand+sort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Strand_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Strand_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

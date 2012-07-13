@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Cycle sort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Cycle_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 1 language","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Cycle_sort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Cycle_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Cycle_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Cycle_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+			<br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Cycle sort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Cycle sort</caption>
+<tbody><tr class=""><td colspan="2" class="" style="text-align: center;">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Cyclesort.png" class="image" title="Example of cycle sort sorting a list of random numbers."><img alt="Example of cycle sort sorting a list of random numbers." src="Cycle_sort_files/Cyclesort.png" width="280" height="250"></a></div>
+<br><span style="">Example of cycle sort sorting a list of random numbers.</span>
+</td></tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+    <td class="" style="">
+<a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+    <td class="" style="">
+<a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+    <td class="" style="">
+Θ(<i>n</i><sup>2</sup>)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+    <td class="" style="">
+Θ(<i>n</i><sup>2</sup>)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+    <td class="" style="">
+Θ(<i>n</i><sup>2</sup>)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+    <td class="" style="">
+Θ(<i>n</i>) total, Θ(<i>1</i>) auxiliary</td>
+</tr>
+</tbody></table>
+<p><b>Cycle sort</b> is an in-place, unstable <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>, a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a> that is theoretically optimal in terms of the total number of writes to the original <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a>, unlike any other in-place sorting algorithm. It is based on the idea that the <a href="http://en.m.wikipedia.org/wiki/Permutation" title="Permutation">permutation</a> to be sorted can be factored into <a href="http://en.m.wikipedia.org/wiki/Cycle_%28mathematics%29" title="Cycle (mathematics)">cycles</a>, which can individually be rotated to give a sorted result.
+</p>
+<p>Unlike nearly every other sort, items are <i>never</i> written 
+elsewhere in the array simply to push them out of the way of the action.
+ Each value is either written zero times, if it's already in its correct
+ position, or written one time to its correct position. This matches the
+ minimal number of overwrites required for a completed in-place sort.
+</p>
+<p>Minimizing the number of writes is useful when making writes to some huge data set is very expensive, such as with <a href="http://en.m.wikipedia.org/wiki/EEPROM" title="EEPROM">EEPROMs</a> or <a href="http://en.m.wikipedia.org/wiki/Flash_memory" title="Flash memory">Flash memory</a> where each write reduces the lifespan of the memory.
+</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Algorithm"> Algorithm </span></h2><div class="content_block" id="content_1">
+<p>The following <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> finds cycles and rotates them, giving a sorted result. Note that <b>range(<i>a</i>, <i>b</i>)</b> goes from <i><b>a</b></i> to <b><i>b</i>&nbsp;‑&nbsp;1</b>.
+</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr"><div class="python source-python"><pre class="de1"><span class="co1"># Sort an array in place and return the number of writes.</span>
+<span class="kw1">def</span> cycleSort<span class="br0">(</span><span class="kw3">array</span><span class="br0">)</span>:
+  writes <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+  <span class="co1"># Loop through the array to find cycles to rotate.</span>
+  <span class="kw1">for</span> cycleStart <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span><span class="kw3">array</span><span class="br0">)</span> - <span class="nu0">1</span><span class="br0">)</span>:
+    item <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">[</span>cycleStart<span class="br0">]</span>
+&nbsp;
+    <span class="co1"># Find where to put the item.</span>
+    pos <span class="sy0">=</span> cycleStart
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span>cycleStart + <span class="nu0">1</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span><span class="kw3">array</span><span class="br0">)</span><span class="br0">)</span>:
+      <span class="kw1">if</span> <span class="kw3">array</span><span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&lt;</span> item:
+        pos +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+    <span class="co1"># If the item is already there, this is not a cycle.</span>
+    <span class="kw1">if</span> pos <span class="sy0">==</span> cycleStart:
+      <span class="kw1">continue</span>
+&nbsp;
+    <span class="co1"># Otherwise, put the item there or right after any duplicates.</span>
+    <span class="kw1">while</span> item <span class="sy0">==</span> <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span>:
+      pos +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span><span class="sy0">,</span> item <span class="sy0">=</span> item<span class="sy0">,</span> <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span>
+    writes +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+    <span class="co1"># Rotate the rest of the cycle.</span>
+    <span class="kw1">while</span> pos <span class="sy0">!=</span> cycleStart:
+&nbsp;
+      <span class="co1"># Find where to put the item.</span>
+      pos <span class="sy0">=</span> cycleStart
+      <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">(</span>cycleStart + <span class="nu0">1</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">(</span><span class="kw3">array</span><span class="br0">)</span><span class="br0">)</span>:
+        <span class="kw1">if</span> <span class="kw3">array</span><span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&lt;</span> item:
+          pos +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+      <span class="co1"># Put the item there or right after any duplicates.</span>
+      <span class="kw1">while</span> item <span class="sy0">==</span> <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span>:
+        pos +<span class="sy0">=</span> <span class="nu0">1</span>
+      <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span><span class="sy0">,</span> item <span class="sy0">=</span> item<span class="sy0">,</span> <span class="kw3">array</span><span class="br0">[</span>pos<span class="br0">]</span>
+      writes +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+  <span class="kw1">return</span> writes</pre></div></div>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Specific-situation_optimizations"> Specific-situation optimizations </span></h2><div class="content_block" id="content_2">
+<p>When the array contains only duplicates of a relatively small number of items, a <a href="http://en.m.wikipedia.org/wiki/Time_complexity#Constant_time" title="Time complexity">constant-time</a> <a href="http://en.m.wikipedia.org/wiki/Perfect_hash_function" title="Perfect hash function">perfect hash function</a> can greatly speed up finding where to put an item<sup class="reference plainlinks nourlexpansion" id="ref_origpaper"><a href="#endnote_origpaper">1</a></sup>, turning the sort from Θ(<i>n</i><sup>2</sup>) time to Θ(<i>n</i> + <i>k</i>) time, where <i>k</i>
+ is the total number of hashes. The array ends up sorted in the order of
+ the hashes, so choosing a hash function that gives you the right 
+ordering is important.
+</p>
+<p>Before the sort, create a <a href="http://en.m.wikipedia.org/wiki/Histogram" title="Histogram">histogram</a>,
+ sorted by hash, counting the number of occurrences of each hash in the 
+array. Then create a table with the cumulative sum of each entry in the 
+histogram. The cumulative sum table will then contain the position in 
+the array of each element. The proper place of elements can then be 
+found by a constant-time hashing and cumulative sum table lookup rather 
+than a <a href="http://en.m.wikipedia.org/wiki/Linear_search" title="Linear search">linear search</a>.
+</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="External_links"> External links </span></h2><div class="content_block" id="content_3">
+<p><span class="citation wikicite" id="endnote_origpaper"><b><a href="#ref_origpaper">^</a></b></span>  <a rel="nofollow" class="external text" href="http://comjnl.oxfordjournals.org/content/33/4/365.full.pdf+html">"Cycle-Sort: A Linear Sorting Method", The Computer Journal (1990) 33 (4): 365-367.</a>
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="http://stackoverflow.com/questions/3623509/how-to-sort-an-array-using-minimum-number-of-writes/3852666#3852666">Original source of unrestricted variant</a>
+</li></ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr><td style="padding: 2px;"><table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr><th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style=""><ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul></div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a>
+</div>
+</th></tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist"><div style="padding:0em 0.25em">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a>
+</li>
+<li><strong class="selflink">Cycle sort</strong></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</div></td>
+</tr>
+<tr style="height: 2px;"><td></td></tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist"><div style="padding:0em 0.25em">
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</div></td>
+</tr>
+</tbody></table></td></tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Cycle_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Cycle+sort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Cycle_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Cycle+sort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Cycle_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Cycle_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

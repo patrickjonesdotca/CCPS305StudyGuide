@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Adjacency matrix - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Adjacency_matrix_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 23 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Adjacency_matrix">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Adjacency_matrix_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Adjacency_matrix_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Adjacency_matrix_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Adjacency_matrix" selected="selected">English</option><option value="//ca.m.wikipedia.org/wiki/Matriu_d%27adjac%C3%A8ncia">català</option><option value="//de.m.wikipedia.org/wiki/Repr%C3%A4sentation_von_Graphen_im_Computer">Deutsch</option><option value="//el.m.wikipedia.org/wiki/%CE%A0%CE%AF%CE%BD%CE%B1%CE%BA%CE%B1%CF%82_%CE%B3%CE%B5%CE%B9%CF%84%CE%BD%CE%AF%CE%B1%CF%83%CE%B7%CF%82">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Matriz_de_adyacencia">español</option><option value="//eu.m.wikipedia.org/wiki/Auzokidetasun-matrize">euskara</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%A7%D8%AA%D8%B1%DB%8C%D8%B3_%D9%85%D8%AC%D8%A7%D9%88%D8%B1%D8%AA">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Matrice_d%27adjacence">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%9D%B8%EC%A0%91_%ED%96%89%EB%A0%AC">한국어</option><option value="//it.m.wikipedia.org/wiki/Matrice_delle_adiacenze">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%9E%D7%98%D7%A8%D7%99%D7%A6%D7%AA_%D7%A9%D7%9B%D7%A0%D7%95%D7%AA">עברית</option><option value="//hu.m.wikipedia.org/wiki/Szomsz%C3%A9ds%C3%A1gi_m%C3%A1trix">magyar</option><option value="//nl.m.wikipedia.org/wiki/Bogenmatrix">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E9%9A%A3%E6%8E%A5%E8%A1%8C%E5%88%97">日本語</option><option value="//pl.m.wikipedia.org/wiki/Macierz_s%C4%85siedztwa">polski</option><option value="//pt.m.wikipedia.org/wiki/Matriz_de_adjac%C3%AAncia">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0_%D1%81%D0%BC%D0%B5%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8">русский</option><option value="//sl.m.wikipedia.org/wiki/Matrika_sosednosti">slovenščina</option><option value="//sv.m.wikipedia.org/wiki/Grannmatris">svenska</option><option value="//uk.m.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8F_%D1%81%D1%83%D0%BC%D1%96%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%96">українська</option><option value="//ur.m.wikipedia.org/wiki/%D9%85%D9%84%D9%85%D8%B3_%D9%85%D8%B5%D9%81%D9%88%D9%81%DB%81">اردو</option><option value="//vi.m.wikipedia.org/wiki/Ma_tr%E1%BA%ADn_k%E1%BB%81">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Adjacency matrix</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, an <b>adjacency matrix</b> is a means of representing which <a href="http://en.m.wikipedia.org/wiki/Vertex_%28graph_theory%29" title="Vertex (graph theory)">vertices</a> (or nodes) of a <a href="http://en.m.wikipedia.org/wiki/Graph_%28mathematics%29" title="Graph (mathematics)">graph</a> are <a href="http://en.m.wikipedia.org/wiki/Adjacent" title="Adjacent">adjacent</a> to which other vertices. Another matrix representation for a graph is the <a href="http://en.m.wikipedia.org/wiki/Incidence_matrix" title="Incidence matrix">incidence matrix</a>.</p>
+<p>Specifically, the adjacency matrix of a <a href="http://en.m.wikipedia.org/wiki/Finite_set" title="Finite set">finite</a> graph <b>G</b> on <i>n</i> vertices is the <i>n × n</i> matrix where the non-diagonal entry <i>a</i><sub><i>ij</i></sub> is the number of edges from vertex <i>i</i> to vertex <i>j</i>, and the diagonal entry <i>a</i><sub><i>ii</i></sub>, depending on the convention, is either once or twice the number of edges (loops) from vertex <i>i</i>
+ to itself. Undirected graphs often use the latter convention of 
+counting loops twice, whereas directed graphs typically use the former 
+convention. There exists a unique adjacency matrix for each isomorphism 
+class of graphs (up to permuting rows and columns), and it is not the 
+adjacency matrix of any other isomorphism class of graphs. In the 
+special case of a finite <a href="http://en.m.wikipedia.org/wiki/Simple_graph" title="Simple graph" class="mw-redirect">simple graph</a>, the adjacency matrix is a <a href="http://en.m.wikipedia.org/wiki/%280,1%29-matrix" title="(0,1)-matrix" class="mw-redirect">(0,1)-matrix</a> with zeros on its diagonal. If the graph is undirected, the adjacency matrix is <a href="http://en.m.wikipedia.org/wiki/Symmetric_matrix" title="Symmetric matrix">symmetric</a>.</p>
+<p>The relationship between a graph and the <a href="http://en.m.wikipedia.org/wiki/Eigenvalue" title="Eigenvalue" class="mw-redirect">eigenvalues</a> and <a href="http://en.m.wikipedia.org/wiki/Eigenvector" title="Eigenvector" class="mw-redirect">eigenvectors</a> of its adjacency matrix is studied in <a href="http://en.m.wikipedia.org/wiki/Spectral_graph_theory" title="Spectral graph theory">spectral graph theory</a>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Examples">Examples</span></h2><div class="content_block" id="content_1">
+<p>The convention followed here is that an adjacent edge counts 1 in the matrix for an undirected graph.</p>
+<table class="wikitable" style="text-align: center; width: 700px; height: 1100px;">
+<tbody><tr>
+<th><a href="http://en.m.wikipedia.org/wiki/Labeled_graph" title="Labeled graph" class="mw-redirect">Labeled graph</a></th>
+<th>Adjacency matrix</th>
+</tr>
+<tr>
+<td><a href="http://en.m.wikipedia.org/wiki/File:6n-graph2.svg" class="image"><img alt="6n-graph2.svg" src="Adjacency_matrix_files/200px-6n-graph2.png" width="200" height="219"></a></td>
+<td>
+<img class="tex" alt="\begin{pmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1\\
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+\end{pmatrix}" src="Adjacency_matrix_files/53e3bdee8fec62c1002ccb39c461b51e.png"><p>Coordinates are 1-6.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,5,21_%28Nauru_Petersen%29;_numbers.svg" class="image"><img alt="Symmetric group 4; Cayley graph 1,5,21 (Nauru Petersen); numbers.svg" src="Adjacency_matrix_files/250px-Symmetric_group_4_003.png" width="250" height="250"></a>
+<p><br>
+The <a href="http://en.m.wikipedia.org/wiki/Nauru_graph" title="Nauru graph">Nauru graph</a></p>
+</td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,5,21_%28adjacency_matrix%29.svg" class="image"><img alt="Symmetric group 4; Cayley graph 1,5,21 (adjacency matrix).svg" src="Adjacency_matrix_files/250px-Symmetric_group_4_004.png" width="250" height="250"></a>
+<p><br>
+Coordinates are 0-23.<br>
+White fields are zeros, colored fields are ones.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_4,9;_numbers.svg" class="image"><img alt="Symmetric group 4; Cayley graph 4,9; numbers.svg" src="Adjacency_matrix_files/250px-Symmetric_group_4_002.png" width="250" height="250"></a>
+<p><br><a href="http://en.m.wikipedia.org/wiki/Directed_graph" title="Directed graph">Directed</a> <a href="http://en.m.wikipedia.org/wiki/Cayley_graph" title="Cayley graph">Cayley graph</a> of <a href="http://en.m.wikipedia.org/wiki/Symmetric_group" title="Symmetric group">S</a><sub>4</sub></p>
+</td>
+<td>
+<a href="http://en.m.wikipedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_4,9_%28adjacency_matrix%29.svg" class="image"><img alt="Symmetric group 4; Cayley graph 4,9 (adjacency matrix).svg" src="Adjacency_matrix_files/250px-Symmetric_group_4.png" width="250" height="250"></a>
+<p><br>
+As the graph is directed,<br>
+the matrix is not <a href="http://en.m.wikipedia.org/wiki/Symmetric_matrix" title="Symmetric matrix">symmetric</a>.</p>
+</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The adjacency matrix of a <a href="http://en.m.wikipedia.org/wiki/Complete_graph" title="Complete graph">complete graph</a> is all 1's except for 0's on the diagonal.</li>
+<li>The adjacency matrix of an <a href="http://en.m.wikipedia.org/wiki/Empty_graph" title="Empty graph" class="mw-redirect">empty graph</a> is a <a href="http://en.m.wikipedia.org/wiki/Zero_matrix" title="Zero matrix">zero matrix</a>.</li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Adjacency_matrix_of_a_bipartite_graph">Adjacency matrix of a bipartite graph</span></h2><div class="content_block" id="content_2">
+<p>The adjacency matrix <i>A</i> of a <a href="http://en.m.wikipedia.org/wiki/Bipartite_graph" title="Bipartite graph">bipartite graph</a> whose parts have <i>r</i> and <i>s</i> vertices has the form</p>
+<dl>
+<dd><img class="tex" alt="A = \begin{pmatrix} O &amp; B \\ B^T &amp; O \end{pmatrix}," src="Adjacency_matrix_files/d13eb990db3bd0e9ebc0670c7a0d556c.png"></dd>
+</dl>
+<p>where <i>B</i> is an <i>r × s</i> matrix and <i>O</i> is an all-zero matrix. Clearly, the matrix <i>B</i> uniquely represents the bipartite graphs. It is sometimes called the biadjacency matrix. Formally, let <i>G</i> = (<i>U</i>, <i>V</i>, <i>E</i>) be a <a href="http://en.m.wikipedia.org/wiki/Bipartite_graph" title="Bipartite graph">bipartite graph</a> with parts <img class="tex" alt="U={u_1,..., u_r}" src="Adjacency_matrix_files/f6ccaf27db0a602943bc9d67fd020962.png"> and <img class="tex" alt="V={v_1,..., v_s}" src="Adjacency_matrix_files/b3ed7b759012dcf8c44a16618fe12d4c.png">. The <b>biadjacency matrix</b> is the <i>r</i> x <i>s</i> 0-1 matrix <i>B</i> in which <img class="tex" alt="b_{i,j} = 1" src="Adjacency_matrix_files/26b9767da6e1fd112b6943db16a9d6b9.png"><a href="http://en.m.wikipedia.org/wiki/Iff" title="Iff" class="mw-redirect">iff</a> <img class="tex" alt="(u_i, v_j) \in E" src="Adjacency_matrix_files/a3861a1ea7a19cbc10f8b800fa2fbc11.png">.</p>
+<p>If <i>G</i> is a bipartite <a href="http://en.m.wikipedia.org/wiki/Multigraph" title="Multigraph">multigraph</a> or <a href="http://en.m.wikipedia.org/wiki/Weighted_graph" title="Weighted graph" class="mw-redirect">weighted graph</a> then the elements <img class="tex" alt="b_{i,j}" src="Adjacency_matrix_files/807e0155cb45ea6188e441234f69583d.png"> are taken to be the number of edges between the vertices or the weight of the edge <img class="tex" alt="(u_i, v_j)," src="Adjacency_matrix_files/8c54cee1e2efe0cb95e1ee38726f38a9.png"> respectively.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Properties">Properties</span></h2><div class="content_block" id="content_3">
+<p>The adjacency matrix of an undirected simple graph is <a href="http://en.m.wikipedia.org/wiki/Symmetric_matrix" title="Symmetric matrix">symmetric</a>, and therefore has a complete set of <a href="http://en.m.wikipedia.org/wiki/Real_number" title="Real number">real</a> <a href="http://en.m.wikipedia.org/wiki/Eigenvalue" title="Eigenvalue" class="mw-redirect">eigenvalues</a> and an orthogonal <a href="http://en.m.wikipedia.org/wiki/Eigenvector" title="Eigenvector" class="mw-redirect">eigenvector</a> basis. The set of eigenvalues of a graph is the <b>spectrum</b> of the graph.</p>
+<p>Suppose two directed or undirected graphs <img class="tex" alt="G_1" src="Adjacency_matrix_files/668ec86dfe5be1ed6e29ff4743264698.png"> and <img class="tex" alt="G_2" src="Adjacency_matrix_files/21deb5c93cef58f00f9ba61cc69e997f.png"> with adjacency matrices <img class="tex" alt="A_1" src="Adjacency_matrix_files/e283f48f6f3d4077546b2b697c3eebad.png"> and <img class="tex" alt="A_2" src="Adjacency_matrix_files/17b99e166258f650036939b57689bdec.png"> are given. <img class="tex" alt="G_1" src="Adjacency_matrix_files/668ec86dfe5be1ed6e29ff4743264698.png"> and <img class="tex" alt="G_2" src="Adjacency_matrix_files/21deb5c93cef58f00f9ba61cc69e997f.png"> are <a href="http://en.m.wikipedia.org/wiki/Graph_isomorphism" title="Graph isomorphism">isomorphic</a> if and only if there exists a <a href="http://en.m.wikipedia.org/wiki/Permutation_matrix" title="Permutation matrix">permutation matrix</a> <img class="tex" alt="P" src="Adjacency_matrix_files/44c29edb103a2872f519ad0c9a0fdaaa.png"> such that</p>
+<dl>
+<dd><img class="tex" alt="P A_1 P^{-1} = A_2." src="Adjacency_matrix_files/d003bc5c001bfe576b4c32984cba856c.png"></dd>
+</dl>
+<p>In particular, <img class="tex" alt="A_1" src="Adjacency_matrix_files/e283f48f6f3d4077546b2b697c3eebad.png"> and <img class="tex" alt="A_2" src="Adjacency_matrix_files/17b99e166258f650036939b57689bdec.png"> are <a href="http://en.m.wikipedia.org/wiki/Similar_matrix" title="Similar matrix">similar</a> and therefore have the same <a href="http://en.m.wikipedia.org/wiki/Minimal_polynomial" title="Minimal polynomial">minimal polynomial</a>, <a href="http://en.m.wikipedia.org/wiki/Characteristic_polynomial" title="Characteristic polynomial">characteristic polynomial</a>, eigenvalues, <a href="http://en.m.wikipedia.org/wiki/Determinant" title="Determinant">determinant</a> and <a href="http://en.m.wikipedia.org/wiki/Trace_%28matrix%29" title="Trace (matrix)" class="mw-redirect">trace</a>.
+ These can therefore serve as isomorphism invariants of graphs. However,
+ two graphs may possess the same set of eigenvalues but not be 
+isomorphic. <sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup></p>
+<p>If <i>A</i> is the adjacency matrix of the directed or undirected graph <i>G</i>, then the matrix <i>A<sup>n</sup></i> (i.e., the <a href="http://en.m.wikipedia.org/wiki/Matrix_multiplication" title="Matrix multiplication">matrix product</a> of <i>n</i> copies of <i>A</i>) has an interesting interpretation: the entry in row <i>i</i> and column <i>j</i> gives the number of (directed or undirected) walks of length <i>n</i> from vertex <i>i</i> to vertex <i>j</i>. This implies, for example, that the number of triangles in an undirected graph <i>G</i> is exactly the <a href="http://en.m.wikipedia.org/wiki/Trace_%28linear_algebra%29" title="Trace (linear algebra)">trace</a> of <i>A<sup>3</sup></i> divided by 6.</p>
+<p>The main diagonal of every adjacency matrix corresponding to a graph 
+without loops has all zero entries. Note that here 'loops' means, for 
+example A-&gt;A, not 'cycles' such as A-&gt;B-&gt;A.</p>
+<p>For <img class="tex" alt="\left( d \right)" src="Adjacency_matrix_files/92a03bf0785093b952461146b82fcb8f.png"> -regular graphs, d is also an eigenvalue of A for the vector <img class="tex" alt="v=\left( 1,\dots,1 \right)" src="Adjacency_matrix_files/51d8502fdf75b3ca0cf052f18732ec42.png">, and <img class="tex" alt="G" src="Adjacency_matrix_files/dfcf28d0734569a6a693bc8194de62bf.png"> is connected if and only if the multiplicity of <img class="tex" alt="d" src="Adjacency_matrix_files/8277e0910d750195b448797616e091ad.png"> is 1. It can be shown that <img class="tex" alt="-d" src="Adjacency_matrix_files/9b017020b9d48d433ec90c548e6b5c70.png"> is also an eigenvalue of A if G is a connected <a href="http://en.m.wikipedia.org/wiki/Bipartite_graph" title="Bipartite graph">bipartite graph</a>. The above are results of <a href="http://en.m.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem" title="Perron–Frobenius theorem">Perron–Frobenius theorem</a>.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Variations">Variations</span></h2><div class="content_block" id="content_4">
+<p>An <b>(<i>a</i>, <i>b</i>, <i>c</i>)-adjacency matrix</b> <i>A</i> of a simple graph has <i>A</i><sub><i>ij</i></sub> = <i>a</i> if <i>ij</i> is an edge, <i>b</i> if it is not, and <i>c</i> on the diagonal. The <a href="http://en.m.wikipedia.org/wiki/Seidel_adjacency_matrix" title="Seidel adjacency matrix">Seidel adjacency matrix</a> is a <b>(−1,1,0)-adjacency matrix</b>. This matrix is used in studying <a href="http://en.m.wikipedia.org/wiki/Strongly_regular_graph" title="Strongly regular graph">strongly regular graphs</a> and <a href="http://en.m.wikipedia.org/wiki/Two-graph" title="Two-graph">two-graphs</a>.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup></p>
+<p>The <b><a href="http://en.m.wikipedia.org/wiki/Distance_matrix" title="Distance matrix">distance matrix</a></b> has in position (<i>i</i>,<i>j</i>) the distance between vertices <i>v<sub>i</sub></i> and <i>v<sub>j</sub></i>&nbsp;.
+ The distance is the length of a shortest path connecting the vertices. 
+Unless lengths of edges are explicitly provided, the length of a path is
+ the number of edges in it. The distance matrix resembles a high power 
+of the adjacency matrix, but instead of telling only whether or not two 
+vertices are connected (i.e., the connection matrix, which contains 
+boolean values), it gives the exact distance between them.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Data_structures">Data structures</span></h2><div class="content_block" id="content_5">
+<table class="metadata plainlinks ambox mbox-small-left ambox-content ambox-Refimprove" style=""><tbody><tr>
+<td class="mbox-image"><img alt="" src="Adjacency_matrix_files/50px-Question_book-new.png" width="50" height="39"></td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This section <b>needs additional <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">citations</a> for <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>. <small><i>(May 2012)</i></small></span></td>
+</tr></tbody></table>
+<p>For use as a <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a>, the main alternative to the adjacency matrix is the <a href="http://en.m.wikipedia.org/wiki/Adjacency_list" title="Adjacency list">adjacency list</a>. Because each entry in the adjacency matrix requires only one bit, it can be represented in a very compact way, occupying only <img class="tex" alt="{n^2} / 8" src="Adjacency_matrix_files/dbad9dfd87df10d0daa418ef92f4e8ae.png"> bytes of contiguous space, where <img class="tex" alt="n" src="Adjacency_matrix_files/7b8b965ad4bca0e41ab51de7b31363a1.png"> is the number of vertices. Besides avoiding wasted space, this compactness encourages <a href="http://en.m.wikipedia.org/wiki/Locality_of_reference" title="Locality of reference">locality of reference</a>.</p>
+<p>However, if the graph is sparse, adjacency lists require less storage
+ space, because they do not waste any space to represent edges that are <i>not</i> present. Using a naïve <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a> implementation on a 32-bit computer, an adjacency list for an undirected graph requires about <img class="tex" alt="8 e" src="Adjacency_matrix_files/435a5dc21578c61ddb60dcc68da74c15.png"> bytes of storage, where <img class="tex" alt="e" src="Adjacency_matrix_files/e1671797c52e15f763380b45e841ec32.png"> is the number of edges.</p>
+<p>Noting that a simple graph can have at most <img class="tex" alt="n^2" src="Adjacency_matrix_files/b08b1c6ec09f20907eb1d6f1392c01c6.png"> edges, allowing loops, we can let <img class="tex" alt="d = e / n^2" src="Adjacency_matrix_files/05f02c3da5e355f6657911854f8a18f0.png"> denote the <i>density</i> of the graph. Then, <img class="tex" alt="8 e &gt; n^2 / 8" src="Adjacency_matrix_files/34003650d5967fd078b1d04abc3c0cd7.png">, or the adjacency list representation occupies more space precisely when <img class="tex" alt="d &gt; 1/64" src="Adjacency_matrix_files/c293ad8fc7a36ee9ee7f7c9e6031a087.png">. Thus a graph must be sparse indeed to justify an adjacency list representation.</p>
+<p>Besides the space tradeoff, the different data structures also 
+facilitate different operations. Finding all vertices adjacent to a 
+given vertex in an adjacency list is as simple as reading the list. With
+ an adjacency matrix, an entire row must instead be scanned, which takes
+ <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">O</a>(n)
+ time. Whether there is an edge between two given vertices can be 
+determined at once with an adjacency matrix, while requiring time 
+proportional to the minimum degree of the two vertices with the 
+adjacency list.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_6">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Chris_Godsil" title="Chris Godsil">Godsil, Chris</a>; <span class="new" title="Gorden Royle (page does not exist)">Royle, Gordon</span> <i>Algebraic Graph Theory</i>, Springer (2001), <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0387952411" class="internal mw-magiclink-isbn">ISBN 0-387-95241-1</a>, p.164</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation Journal">Seidel, J. J. (1968). "Strongly Regular Graphs with (−1,1,0) Adjacency Matrix Having Eigenvalue 3". <i><span class="new" title="Linear Algebra and its Applications (page does not exist)">Lin. Alg. Appl.</span></i> <b>1</b> (2): 281–298. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2F0024-3795%2868%2990008-6">10.1016/0024-3795(68)90008-6</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Strongly+Regular+Graphs+with+%28%E2%88%921%2C1%2C0%29+Adjacency+Matrix+Having+Eigenvalue+3&amp;rft.jtitle=%5B%5BLinear+Algebra+and+its+Applications%7CLin.+Alg.+Appl.%5D%5D&amp;rft.aulast=Seidel&amp;rft.aufirst=J.+J.&amp;rft.au=Seidel%2C%26%2332%3BJ.+J.&amp;rft.date=1968&amp;rft.volume=1&amp;rft.issue=2&amp;rft.pages=281%E2%80%93298&amp;rft_id=info:doi/10.1016%2F0024-3795%2868%2990008-6&amp;rfr_id=info:sid/en.wikipedia.org:Adjacency_matrix"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Further_reading">Further reading</span></h2><div class="content_block" id="content_7">
+<ul>
+<li>
+<span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Cormen, Thomas H.</a>; <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Leiserson, Charles E.</a>; <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Rivest, Ronald L.</a>; <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Stein, Clifford</a> (2001). "Section 22.1: Representations of graphs". <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (Second ed.). MIT Press and McGraw-Hill. pp.&nbsp;527–531. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-03293-7" title="Special:BookSources/0-262-03293-7">0-262-03293-7</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Section+22.1%3A+Representations+of+graphs&amp;rft.atitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=Cormen&amp;rft.aufirst=Thomas+H.&amp;rft.au=Cormen%2C%26%2332%3BThomas+H.&amp;rft.au=Leiserson%2C%26%2332%3BCharles+E.&amp;rft.au=Rivest%2C%26%2332%3BRonald+L.&amp;rft.au=Stein%2C%26%2332%3BClifford&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B527%E2%80%93531&amp;rft.edition=Second&amp;rft.pub=MIT+Press+and+McGraw-Hill&amp;rft.isbn=0-262-03293-7&amp;rfr_id=info:sid/en.wikipedia.org:Adjacency_matrix"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Chris_Godsil" title="Chris Godsil">Godsil, Chris</a>; <a href="http://en.m.wikipedia.org/wiki/Gordon_Royle" title="Gordon Royle">Royle, Gordon</a> (2001). <i>Algebraic Graph Theory</i>. New York: Springer. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-387-95241-1" title="Special:BookSources/0-387-95241-1">0-387-95241-1</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Algebraic+Graph+Theory&amp;rft.aulast=Godsil&amp;rft.aufirst=Chris&amp;rft.au=Godsil%2C%26%2332%3BChris&amp;rft.au=Royle%2C%26%2332%3BGordon&amp;rft.date=2001&amp;rft.place=New+York&amp;rft.pub=Springer&amp;rft.isbn=0-387-95241-1&amp;rfr_id=info:sid/en.wikipedia.org:Adjacency_matrix"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_8">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Adjacency_matrix_files/30px-Commons-logo.png" width="30" height="40"></td>
+<td class="mbox-text" style="">Wikimedia Commons has media related to: <i><b><a class="external text" href="http://commons.wikimedia.org/wiki/Category:Adjacency_matrices_of_graphs">Adjacency matrices of graphs</a></b></i>
+</td>
+</tr></tbody></table>
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://www.x2d.org/java/projects/fluffschack.jnlp">Fluffschack</a> — an educational Java web start game demonstrating the relationship between adjacency matrices and graphs.</li>
+<li><a rel="nofollow" class="external text" href="http://opendatastructures.org/versions/edition-0.1d/ods-java/node60.html">Open Data Structures - Section 12.1 - AdjacencyMatrix: Representing a Graph by a Matrix</a></li>
+<li>
+<span class="citation web">McKay, Brendan. <a rel="nofollow" class="external text" href="http://cs.anu.edu.au/%7Ebdm/data/formats.txt">"Description of graph6 and sparse6 encodings"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://cs.anu.edu.au/%7Ebdm/data/formats.txt">http://cs.anu.edu.au/~bdm/data/formats.txt</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Description+of+graph6+and+sparse6+encodings&amp;rft.atitle=&amp;rft.aulast=McKay&amp;rft.aufirst=Brendan&amp;rft.au=McKay%2C%26%2332%3BBrendan&amp;rft_id=http%3A%2F%2Fcs.anu.edu.au%2F%7Ebdm%2Fdata%2Fformats.txt&amp;rfr_id=info:sid/en.wikipedia.org:Adjacency_matrix"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://cafemath.kegtux.org/mathblog/article.php?page=GoodWillHunting.php">Café math&nbsp;: Adjacency Matrices of Graphs</a>&nbsp;: Application of the adjacency matrices to the computation generating series of walks.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Adjacency_matrix&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Adjacency+matrix&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Adjacency_matrix&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Adjacency+matrix&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Adjacency_matrix_files/load_002.php" type="text/javascript"></script>
+<script src="Adjacency_matrix_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

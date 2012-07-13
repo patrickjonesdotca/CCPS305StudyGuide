@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Graph (mathematics) - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Graph_%28mathematics%29_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 42 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Graph_%28mathematics%29">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Graph_%28mathematics%29_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Graph_%28mathematics%29_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Graph_%28mathematics%29_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Graph_(mathematics)" selected="selected">English</option><option value="//ar.m.wikipedia.org/wiki/%D8%B1%D8%B3%D9%85_%D8%A8%D9%8A%D8%A7%D9%86%D9%8A">العربية</option><option value="//bn.m.wikipedia.org/wiki/%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%AB_(%E0%A6%97%E0%A6%A3%E0%A6%BF%E0%A6%A4)">বাংলা</option><option value="//bg.m.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_(%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)">български</option><option value="//ca.m.wikipedia.org/wiki/Graf">català</option><option value="//cs.m.wikipedia.org/wiki/Graf_(teorie_graf%C5%AF)">česky</option><option value="//cy.m.wikipedia.org/wiki/Graff_(mathemateg)">Cymraeg</option><option value="//de.m.wikipedia.org/wiki/Graph_(Graphentheorie)">Deutsch</option><option value="//et.m.wikipedia.org/wiki/Graaf">eesti</option><option value="//el.m.wikipedia.org/wiki/%CE%93%CF%81%CE%AC%CF%86%CE%BF%CF%82">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Grafo">español</option><option value="//eo.m.wikipedia.org/wiki/Grafeo">Esperanto</option><option value="//eu.m.wikipedia.org/wiki/Grafo">euskara</option><option value="//fa.m.wikipedia.org/wiki/%DA%AF%D8%B1%D8%A7%D9%81_(%D8%B1%DB%8C%D8%A7%D8%B6%DB%8C)">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Graphe_simple">français</option><option value="//gl.m.wikipedia.org/wiki/Grafo">galego</option><option value="//ko.m.wikipedia.org/wiki/%EA%B7%B8%EB%9E%98%ED%94%84">한국어</option><option value="//hy.m.wikipedia.org/wiki/%D4%B3%D6%80%D5%A1%D6%86%D5%B6%D5%A5%D6%80">Հայերեն</option><option value="//id.m.wikipedia.org/wiki/Graf_(matematika)">Bahasa Indonesia</option><option value="//is.m.wikipedia.org/wiki/Net_(st%C3%A6r%C3%B0fr%C3%A6%C3%B0i)">íslenska</option><option value="//it.m.wikipedia.org/wiki/Grafo">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%92%D7%A8%D7%A3_(%D7%AA%D7%95%D7%A8%D7%AA_%D7%94%D7%92%D7%A8%D7%A4%D7%99%D7%9D)">עברית</option><option value="//lt.m.wikipedia.org/wiki/Grafas_(matematika)">lietuvių</option><option value="//hu.m.wikipedia.org/wiki/Gr%C3%A1f">magyar</option><option value="//ml.m.wikipedia.org/wiki/%E0%B4%86%E0%B4%B0%E0%B5%87%E0%B4%96%E0%B4%82">മലയാളം</option><option value="//nn.m.wikipedia.org/wiki/Grafisk_framstilling">‪norsk (nynorsk)‬</option><option value="//pms.m.wikipedia.org/wiki/Graf">Piemontèis</option><option value="//pl.m.wikipedia.org/wiki/Graf_(matematyka)">polski</option><option value="//pt.m.wikipedia.org/wiki/Grafo">português</option><option value="//ro.m.wikipedia.org/wiki/Graf">română</option><option value="//ru.m.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_(%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)">русский</option><option value="//sk.m.wikipedia.org/wiki/Graf_(matematika)">slovenčina</option><option value="//sl.m.wikipedia.org/wiki/Graf_(matematika)">slovenščina</option><option value="//sr.m.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84">српски / srpski</option><option value="//fi.m.wikipedia.org/wiki/Graafi">suomi</option><option value="//sv.m.wikipedia.org/wiki/Graf_(grafteori)">svenska</option><option value="//ta.m.wikipedia.org/wiki/%E0%AE%95%E0%AF%8B%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81%E0%AE%B0%E0%AF%81_(%E0%AE%95%E0%AE%A3%E0%AE%BF%E0%AE%A4%E0%AE%AE%E0%AF%8D)">தமிழ்</option><option value="//th.m.wikipedia.org/wiki/%E0%B8%81%E0%B8%A3%E0%B8%B2%E0%B8%9F_(%E0%B8%84%E0%B8%93%E0%B8%B4%E0%B8%95%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C)">ไทย</option><option value="//uk.m.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_(%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)">українська</option><option value="//ur.m.wikipedia.org/wiki/%D9%85%D8%AE%D8%B7%D8%B7_(%D8%B1%DB%8C%D8%A7%D8%B6%DB%8C)">اردو</option><option value="//vi.m.wikipedia.org/wiki/%C4%90%E1%BB%93_th%E1%BB%8B_(l%C3%BD_thuy%E1%BA%BFt_%C4%91%E1%BB%93_th%E1%BB%8B)">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E5%9B%BE">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Graph (mathematics)</h1>			
+<div class="dablink">This article is about sets of vertices connected by edges.  For graphs of mathematical functions, see <a href="http://en.m.wikipedia.org/wiki/Graph_of_a_function" title="Graph of a function">Graph of a function</a>.  For statistical graphs, see <a href="http://en.m.wikipedia.org/wiki/Chart" title="Chart">Chart</a>.</div>
+<div class="rellink">Further information: <a href="http://en.m.wikipedia.org/wiki/Graph_theory" title="Graph theory">Graph theory</a>
+</div>
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;">
+<a href="http://en.m.wikipedia.org/wiki/File:6n-graf.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/250px-6n-graf.png" class="thumbimage" width="250" height="165"></a>
+<div class="thumbcaption">
+
+A <a href="http://en.m.wikipedia.org/wiki/Graph_drawing" title="Graph drawing">drawing</a> of a <a href="http://en.m.wikipedia.org/wiki/Labeled_graph" title="Labeled graph" class="mw-redirect">labeled graph</a> on 6 vertices and 7 edges.</div>
+</div>
+</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a>, a <b>graph</b>
+ is an abstract representation of a set of objects where some pairs of 
+the objects are connected by links. The interconnected objects are 
+represented by mathematical abstractions called <i><a href="http://en.m.wikipedia.org/wiki/Vertex_%28graph_theory%29" title="Vertex (graph theory)">vertices</a></i>, and the links that connect some pairs of vertices are called <i>edges</i>.
+ Typically, a graph is depicted in diagrammatic form as a set of dots 
+for the vertices, joined by lines or curves for the edges. Graphs are 
+one of the objects of study in <a href="http://en.m.wikipedia.org/wiki/Discrete_mathematics" title="Discrete mathematics">discrete mathematics</a>.</p>
+<p>The edges may be directed (asymmetric) or undirected (<a href="http://en.m.wikipedia.org/wiki/Symmetric_graph" title="Symmetric graph">symmetric</a>).
+ For example, if the vertices represent people at a party, and there is 
+an edge between two people if they shake hands, then this is an 
+undirected graph, because if person A shook hands with person B, then 
+person B also shook hands with person A. On the other hand, if the 
+vertices represent people at a party, and there is an edge from person A
+ to person B when person A knows of person B, then this graph is 
+directed, because knowledge of someone is not necessarily a <a href="http://en.m.wikipedia.org/wiki/Symmetric_relation" title="Symmetric relation">symmetric relation</a>
+ (that is, one person knowing another person does not necessarily imply 
+the reverse; for example, many fans may know of a celebrity, but the 
+celebrity is unlikely to know of all their fans). This latter type of 
+graph is called a <i>directed</i> graph and the edges are called <i>directed edges</i> or <i>arcs</i>.</p>
+<p>Vertices are also called <i>nodes</i> or <i>points</i>, and edges are also called <i>lines</i>. Graphs are the basic subject studied by <a href="http://en.m.wikipedia.org/wiki/Graph_theory" title="Graph theory">graph theory</a>. The word "graph" was first used in this sense by <a href="http://en.m.wikipedia.org/wiki/James_Joseph_Sylvester" title="James Joseph Sylvester">J.J. Sylvester</a> in 1878.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Definitions">Definitions</span></h2><div class="content_block" id="content_1">
+<p>Definitions in graph theory vary. The following are some of the more 
+basic ways of defining graphs and related mathematical structures.</p>
+<h3> <span class="mw-headline" id="Graph">Graph</span>
+</h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:127px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Multigraph.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/125px-Multigraph.png" class="thumbimage" width="125" height="136"></a>
+<div class="thumbcaption">
+
+A general example of a graph (actually, a <a href="http://en.m.wikipedia.org/wiki/Pseudograph" title="Pseudograph" class="mw-redirect">pseudograph</a>) with three vertices and six edges.</div>
+</div>
+</div>
+<p>In the most common sense of the term,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> a <b>graph</b> is an <a href="http://en.m.wikipedia.org/wiki/Ordered_pair" title="Ordered pair">ordered pair</a> <i>G</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>E</i>) comprising a <a href="http://en.m.wikipedia.org/wiki/Set_%28mathematics%29" title="Set (mathematics)">set</a> <i>V</i> of <b>vertices</b> or <b>nodes</b> together with a set <i>E</i> of <b>edges</b> or <b>lines</b>, which are 2-element subsets of <i>V</i> (i.e., an edge is related with two vertices, and the relation is represented as <a href="http://en.m.wikipedia.org/wiki/Unordered_pair" title="Unordered pair">unordered pair</a> of the vertices with respect to the particular edge). To avoid ambiguity, this type of graph may be described precisely as <a href="http://en.m.wikipedia.org/wiki/Graph_%28mathematics%29#Undirected_graph" title="Graph (mathematics)">undirected</a> and <a href="http://en.m.wikipedia.org/wiki/Graph_%28mathematics%29#Simple_graph" title="Graph (mathematics)">simple</a><b>.</b></p>
+<p>Other senses of <i>graph</i> stem from different conceptions of the edge set. In one more generalized notion,<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup><i>E</i> is a set together with a relation of <b>incidence</b> that associates with each edge two vertices. In another generalized notion, <i>E</i> is a <a href="http://en.m.wikipedia.org/wiki/Multiset" title="Multiset">multiset</a> of unordered pairs of (not necessarily distinct) vertices. Many authors call this type of object a <a href="http://en.m.wikipedia.org/wiki/Multigraph" title="Multigraph">multigraph</a> or pseudograph.</p>
+<p>All of these variants and others are described more fully below.</p>
+<p>The vertices belonging to an edge are called the <b>ends</b>, <b>endpoints</b>, or <b>end vertices</b> of the edge. A vertex may exist in a graph and not belong to an edge.</p>
+<p><i>V</i> and <i>E</i> are usually taken to be finite, and many of the well-known results are not true (or are rather different) for <b>infinite graphs</b> because many of the arguments fail in the <a href="http://en.m.wikipedia.org/wiki/Infinite_graph" title="Infinite graph" class="mw-redirect">infinite case</a>. The <b>order</b> of a graph is <img class="tex" alt="|V|" src="Graph_%28mathematics%29_files/74fcb594bdd93c0f956682ae1ea013e6.png"> (the number of vertices). A graph's <b>size</b> is <img class="tex" alt="|E|" src="Graph_%28mathematics%29_files/cbdcf0e203060323ebcd0079f280f4b8.png">, the number of edges. The <b>degree</b> of a vertex is the number of edges that connect to it, where an edge that connects to the vertex at both ends (a <a href="http://en.m.wikipedia.org/wiki/Loop_%28graph_theory%29" title="Loop (graph theory)">loop</a>) is counted twice.</p>
+<p>For an edge {<i>u</i>,&nbsp;<i>v</i>}, graph theorists usually use the somewhat shorter notation <i>uv</i>.<br style="clear:both;"></p>
+<h3> <span class="mw-headline" id="Adjacency_relation">Adjacency relation</span>
+</h3>
+<p>The edges <i>E</i> of an undirected graph <i>G</i> induce a symmetric binary relation ~ on <i>V</i> that is called the <b>adjacency</b> relation of <i>G</i>. Specifically, for each edge {<i>u</i>,&nbsp;<i>v</i>} the vertices <i>u</i> and <i>v</i> are said to be <b>adjacent</b> to one another, which is denoted <i>u</i>&nbsp;~&nbsp;<i>v</i>.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Types_of_graphs">Types of graphs</span></h2><div class="content_block" id="content_2">
+<h3> <span class="mw-headline" id="Distinction_in_terms_of_the_main_definition">Distinction in terms of the main definition</span>
+</h3>
+<p>As stated above, in different contexts it may be useful to define the term <i>graph</i>
+ with different degrees of generality. Whenever it is necessary to draw a
+ strict distinction, the following terms are used. Most commonly, in 
+modern texts in graph theory, unless stated otherwise, <i>graph</i> means "undirected simple finite graph" (see the definitions below).</p>
+<h4> <span class="mw-headline" id="Undirected_graph">Undirected graph</span>
+</h4>
+<div class="thumb tright">
+<div class="thumbinner" style="width:127px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Undirected.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/125px-Undirected.png" class="thumbimage" width="125" height="113"></a>
+<div class="thumbcaption">
+
+A <a href="http://en.m.wikipedia.org/wiki/Graph_%28mathematics%29#Simple_graph" title="Graph (mathematics)">simple</a> undirected graph with three vertices and three edges. Each vertex has degree two, so this is also a regular graph.</div>
+</div>
+</div>
+<p>An undirected graph is one in which edges have no orientation. The 
+edge (a, b) is identical to the edge (b, a), i.e., they are not ordered 
+pairs, but sets {<i>u</i>,&nbsp;<i>v</i>} (or 2-multisets) of vertices.</p>
+<h4> <span class="mw-headline" id="Directed_graph">Directed graph</span>
+</h4>
+<div class="thumb tleft">
+<div class="thumbinner" style="width:127px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Directed.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/125px-Directed.png" class="thumbimage" width="125" height="113"></a>
+<div class="thumbcaption">
+
+A directed graph</div>
+</div>
+</div>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Directed_graph" title="Directed graph">Directed graph</a>
+</div>
+<p>A <b>directed graph</b> or <b>digraph</b> is an ordered pair <i>D</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>A</i>) with</p>
+<ul>
+<li>
+<i>V</i> a <a href="http://en.m.wikipedia.org/wiki/Set_%28mathematics%29" title="Set (mathematics)">set</a> whose elements are called <b>vertices</b> or <b>nodes</b>, and</li>
+<li>
+<i>A</i> a set of ordered pairs of vertices, called <b>arcs</b>, <b>directed edges</b>, or <b>arrows</b>.</li>
+</ul>
+<p>An arc <i>a</i>&nbsp;=&nbsp;(<i>x</i>,&nbsp;<i>y</i>) is considered to be directed <b>from</b> <i>x</i> <b>to</b> <i>y</i>; <i>y</i> is called the <b>head</b> and <i>x</i> is called the <b>tail</b> of the arc; <i>y</i> is said to be a <b>direct successor</b> of <i>x</i>, and <i>x</i> is said to be a <b>direct predecessor</b> of <i>y</i>. If a <a href="http://en.m.wikipedia.org/wiki/Path_%28graph_theory%29" title="Path (graph theory)">path</a> leads from <i>x</i> to <i>y</i>, then <i>y</i> is said to be a <b>successor</b> of <i>x</i> and <b>reachable</b> from <i>x</i>, and <i>x</i> is said to be a <b>predecessor</b> of <i>y</i>. The arc (<i>y</i>,&nbsp;<i>x</i>) is called the arc (<i>x</i>,&nbsp;<i>y</i>) <b>inverted</b>.</p>
+<p>A directed graph <i>D</i> is called <b>symmetric</b> if, for every arc in <i>D</i>, the corresponding inverted arc also belongs to <i>D</i>. A symmetric loopless directed graph <i>D</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>A</i>) is equivalent to a simple undirected graph <i>G</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>E</i>), where the pairs of inverse arcs in <i>A</i> correspond 1-to-1 with the edges in <i>E</i>; thus the edges in <i>G</i> number |<i>E</i>| = |<i>A</i>|/2, or half the number of arcs in <i>D</i>.</p>
+<p>A variation on this definition is the <b>oriented graph</b>, in which not more than one of (<i>x</i>,&nbsp;<i>y</i>) and (<i>y</i>,&nbsp;<i>x</i>) may be arcs.</p>
+<h4> <span class="mw-headline" id="Mixed_graph">Mixed graph</span>
+</h4>
+<p>A <b>mixed graph</b> <i>G</i> is a graph in which some edges may be directed and some may be undirected. It is written as an ordered triple <i>G</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>E</i>,&nbsp;<i>A</i>) with <i>V</i>, <i>E</i>, and <i>A</i> defined as above. Directed and undirected graphs are special cases.</p>
+<h4> <span class="mw-headline" id="Multigraph">Multigraph</span>
+</h4>
+<p>A <a href="http://en.m.wikipedia.org/wiki/Loop_%28graph_theory%29" title="Loop (graph theory)">loop</a>
+ is an edge (directed or undirected) which starts and ends on the same 
+vertex; these may be permitted or not permitted according to the 
+application. In this context, an edge with two different ends is called a
+ <b>link</b>.</p>
+<p>The term "<a href="http://en.m.wikipedia.org/wiki/Multigraph" title="Multigraph">multigraph</a>" is generally understood to mean that <a href="http://en.m.wikipedia.org/wiki/Multiple_edges" title="Multiple edges">multiple edges</a> (and sometimes loops) are allowed. Where graphs are defined so as to <i>allow</i> loops and multiple edges, a multigraph is often defined to mean a graph <i>without</i> loops,<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup> however, where graphs are defined so as to <i>disallow</i> loops and multiple edges, the term is often defined to mean a "graph" which can have both multiple edges <i>and</i> loops,<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup> although many use the term "<a href="http://en.m.wikipedia.org/wiki/Pseudograph" title="Pseudograph" class="mw-redirect">pseudograph</a>" for this meaning.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+<h4> <span class="mw-headline" id="Quiver">Quiver</span>
+</h4>
+<p>A <b><a href="http://en.m.wikipedia.org/wiki/Quiver_%28mathematics%29" title="Quiver (mathematics)">quiver</a></b>
+ or "multidigraph" is a directed graph which may have more than one 
+arrow from a given source to a given target. A quiver may also have 
+directed loops.</p>
+<h4> <span class="mw-headline" id="Simple_graph">Simple graph</span>
+</h4>
+<p>As opposed to a multigraph, a simple graph is an undirected graph that has no <a href="http://en.m.wikipedia.org/wiki/Loop_%28graph_theory%29" title="Loop (graph theory)">loops</a>
+ and no more than one edge between any two different vertices. In a 
+simple graph the edges of the graph form a set (rather than a <a href="http://en.m.wikipedia.org/wiki/Multiset" title="Multiset">multiset</a>) and each edge is a <i>distinct</i> pair of vertices. In a simple graph with <i>n</i> vertices every vertex has a degree that is less than <i>n</i> (the converse, however, is not true&nbsp;— there exist non-simple graphs with <i>n</i> vertices in which every vertex has a degree smaller than <i>n</i>).</p>
+<h4> <span class="mw-headline" id="Weighted_graph">Weighted graph</span>
+</h4>
+<p>A graph is a <a href="http://en.m.wikipedia.org/wiki/Weighted_graph" title="Weighted graph" class="mw-redirect">weighted graph</a>
+ if a number (weight) is assigned to each edge. Such weights might 
+represent, for example, costs, lengths or capacities, etc. depending on 
+the problem at hand. Some authors call such a graph a network.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup></p>
+<h4> <span class="mw-headline" id="Half-edges.2C_loose_edges">Half-edges, loose edges</span>
+</h4>
+<p>In exceptional situations it is even necessary to have edges with only one end, called <b>half-edges</b>, or no ends (<b>loose edges</b>); see for example <a href="http://en.m.wikipedia.org/wiki/Signed_graph" title="Signed graph">signed graphs</a> and <a href="http://en.m.wikipedia.org/wiki/Biased_graph" title="Biased graph">biased graphs</a>.</p>
+<h3> <span class="mw-headline" id="Important_graph_classes">Important graph classes</span>
+</h3>
+<h4> <span class="mw-headline" id="Regular_graph">Regular graph</span>
+</h4>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Regular_graph" title="Regular graph">Regular graph</a>
+</div>
+<p>A regular graph is a graph where each vertex has the same number of 
+neighbors, i.e., every vertex has the same degree or valency. A regular 
+graph with vertices of degree <i>k</i> is called a <i>k</i>‑regular graph or regular graph of degree <i>k</i>.</p>
+<h4> <span class="mw-headline" id="Complete_graph">Complete graph</span>
+</h4>
+<div class="thumb tright">
+<div class="thumbinner" style="width:127px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Complete_graph_K5.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/125px-Complete_graph_K5.png" class="thumbimage" width="125" height="123"></a>
+<div class="thumbcaption">
+
+A complete graph with 5 vertices. Each vertex has an edge to every other vertex.</div>
+</div>
+</div>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Complete_graph" title="Complete graph">Complete graph</a>
+</div>
+<p>Complete graphs have the feature that each pair of vertices has an edge connecting them.</p>
+<h4> <span class="mw-headline" id="Finite_and_infinite_graphs">Finite and infinite graphs</span>
+</h4>
+<p>A finite graph is a graph <i>G</i>&nbsp;=&nbsp;(<i>V</i>,&nbsp;<i>E</i>) such that <i>V</i> and <i>E</i> are <a href="http://en.m.wikipedia.org/wiki/Finite_set" title="Finite set">finite sets</a>. An infinite graph is one with an <a href="http://en.m.wikipedia.org/wiki/Infinite_set" title="Infinite set">infinite</a> set of vertices or edges or both.</p>
+<p>Most commonly in graph theory it is implied that the graphs discussed
+ are finite. If the graphs are infinite, that is usually specifically 
+stated.</p>
+<h4> <span class="mw-headline" id="Graph_classes_in_terms_of_connectivity">Graph classes in terms of connectivity</span>
+</h4>
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Connectivity_%28graph_theory%29" title="Connectivity (graph theory)">Connectivity (graph theory)</a>
+</div>
+<p>In an undirected graph <i>G</i>, two <a href="http://en.m.wikipedia.org/wiki/Vertex_%28graph_theory%29" title="Vertex (graph theory)">vertices</a> <i>u</i> and <i>v</i> are called <b>connected</b> if <i>G</i> contains a <a href="http://en.m.wikipedia.org/wiki/Path_%28graph_theory%29" title="Path (graph theory)">path</a> from <i>u</i> to <i>v</i>. Otherwise, they are called <b>disconnected</b>. A graph is called <b>connected</b> if every pair of distinct vertices in the graph is connected; otherwise, it is called <b>disconnected</b>.</p>
+<p>A graph is called <a href="http://en.m.wikipedia.org/wiki/K-vertex-connected_graph" title="K-vertex-connected graph"><b><i>k</i>-vertex-connected</b></a> or <a href="http://en.m.wikipedia.org/wiki/K-edge-connected_graph" title="K-edge-connected graph"><b><i>k</i>-edge-connected</b></a> if no set of <i>k-1</i> vertices (respectively, edges) exists that, when removed, disconnects the graph. A <i>k</i>-vertex-connected graph is often called simply <b><i>k</i>-connected</b>.</p>
+<p>A <a href="http://en.m.wikipedia.org/wiki/Directed_graph" title="Directed graph">directed graph</a> is called <b>weakly connected</b> if replacing all of its directed edges with undirected edges produces a connected (undirected) graph. It is <b>strongly connected</b> or <b>strong</b> if it contains a directed path from <i>u</i> to <i>v</i> and a directed path from <i>v</i> to <i>u</i> for every pair of vertices <i>u</i>,&nbsp;<i>v</i>.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Properties_of_graphs">Properties of graphs</span></h2><div class="content_block" id="content_3">
+<div class="rellink boilerplate seealso">See also: <a href="http://en.m.wikipedia.org/wiki/Glossary_of_graph_theory" title="Glossary of graph theory">Glossary of graph theory</a>&nbsp;and <a href="http://en.m.wikipedia.org/wiki/Graph_property" title="Graph property">Graph property</a>
+</div>
+<p>Two edges of a graph are called <b>adjacent</b> (sometimes <b>coincident</b>) if they share a common vertex. Two arrows of a directed graph are called <b>consecutive</b> if the head of the first one is at the nock (notch end) of the second one. Similarly, two vertices are called <b>adjacent</b> if they share a common edge (<b>consecutive</b> if they are at the notch and at the head of an arrow), in which case the common edge is said to <b>join</b> the two vertices. An edge and a vertex on that edge are called <b>incident</b>.</p>
+<p>The graph with only one vertex and no edges is called the <b>trivial graph</b>. A graph with only vertices and no edges is known as an <b>edgeless graph</b>. The graph with no vertices and no edges is sometimes called the <b>null graph</b> or <b>empty graph</b>, but the terminology is not consistent and not all mathematicians allow this object.</p>
+<p>In a <b>weighted</b> graph or digraph, each edge is associated with some value, variously called its <i>cost</i>, <i>weight</i>, <i>length</i> or other term depending on the application; such graphs arise in many contexts, for example in <span class="new" title="Optimal routing problem (page does not exist)">optimal routing problems</span> such as the <a href="http://en.m.wikipedia.org/wiki/Traveling_salesman_problem" title="Traveling salesman problem" class="mw-redirect">traveling salesman problem</a>.</p>
+<p>Normally, the vertices of a graph, by their nature as elements of a set, are distinguishable. This kind of graph may be called <b>vertex-labeled</b>. However, for many questions it is better to treat vertices as indistinguishable; then the graph may be called <b>unlabeled</b>.
+ (Of course, the vertices may be still distinguishable by the properties
+ of the graph itself, e.g., by the numbers of incident edges). The same 
+remarks apply to edges, so graphs with labeled edges are called <b>edge-labeled</b> graphs. Graphs with labels attached to edges or vertices are more generally designated as <b>labeled</b>. Consequently, graphs in which vertices are indistinguishable and edges are indistinguishable are called <i>unlabeled</i>. (Note that in the literature the term <i>labeled</i> may apply to other kinds of labeling, besides that which serves only to distinguish different vertices or edges.)</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Examples">Examples</span></h2><div class="content_block" id="content_4">
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:6n-graf.svg" class="image"><img alt="" src="Graph_%28mathematics%29_files/220px-6n-graf.png" class="thumbimage" width="220" height="145"></a>
+<div class="thumbcaption">
+
+A graph with six nodes.</div>
+</div>
+</div>
+<ul>
+<li>The diagram at right is a graphic representation of the following graph:</li>
+</ul>
+<dl>
+<dd>
+<i>V</i> = {1, 2, 3, 4, 5, 6}</dd>
+<dd>
+<i>E</i> = {{1,&nbsp;2}, {1,&nbsp;5}, {2,&nbsp;3}, {2,&nbsp;5}, {3,&nbsp;4}, {4,&nbsp;5}, {4,&nbsp;6}}.</dd>
+</dl>
+<ul>
+<li>In <a href="http://en.m.wikipedia.org/wiki/Category_theory" title="Category theory">category theory</a> a <a href="http://en.m.wikipedia.org/wiki/Category_%28mathematics%29" title="Category (mathematics)">small category</a> can be represented by a directed <a href="http://en.m.wikipedia.org/wiki/Multigraph" title="Multigraph">multigraph</a> in which the objects of the category represented as vertices and the <a href="http://en.m.wikipedia.org/wiki/Morphism" title="Morphism">morphisms</a> as directed edges. Then, the <a href="http://en.m.wikipedia.org/wiki/Functor" title="Functor">functors</a> between categories induce some, but not necessarily all, of the <a href="http://en.m.wikipedia.org/wiki/Digraph_morphism" title="Digraph morphism" class="mw-redirect">digraph morphisms</a> of the graph.</li>
+<li>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, directed graphs are used to represent knowledge (e.g., <a href="http://en.m.wikipedia.org/wiki/Conceptual_graph" title="Conceptual graph">Conceptual graph</a>), <a href="http://en.m.wikipedia.org/wiki/Finite_state_machine" title="Finite state machine" class="mw-redirect">finite state machines</a>, and many other discrete structures.</li>
+<li>A <a href="http://en.m.wikipedia.org/wiki/Binary_relation" title="Binary relation">binary relation</a> <i>R</i> on a set <i>X</i> defines a directed graph. An element <i>x</i> of <i>X</i> is a direct predecessor of an element <i>y</i> of <i>X</i> iff <i>xRy</i>.</li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Important_graphs">Important graphs</span></h2><div class="content_block" id="content_5">
+<p>Basic examples are:</p>
+<ul>
+<li>In a <a href="http://en.m.wikipedia.org/wiki/Complete_graph" title="Complete graph">complete graph</a>, each pair of vertices is joined by an edge; that is, the graph contains all possible edges.</li>
+<li>In a <a href="http://en.m.wikipedia.org/wiki/Bipartite_graph" title="Bipartite graph">bipartite graph</a>, the vertex set can be <a href="http://en.m.wikipedia.org/wiki/Partition_of_a_set" title="Partition of a set">partitioned</a> into two sets, <i>W</i> and <i>X</i>, so that no two vertices in <i>W</i> are adjacent and no two vertices in <i>X</i> are adjacent. Alternatively, it is a graph with a <a href="http://en.m.wikipedia.org/wiki/Chromatic_number" title="Chromatic number" class="mw-redirect">chromatic number</a> of 2.</li>
+<li>In a <a href="http://en.m.wikipedia.org/wiki/Complete_bipartite_graph" title="Complete bipartite graph">complete bipartite graph</a>, the vertex set is the union of two disjoint sets, <i>W</i> and <i>X</i>, so that every vertex in <i>W</i> is adjacent to every vertex in <i>X</i> but there are no edges within <i>W</i> or <i>X</i>.</li>
+<li>In a <i>linear graph</i> or <a href="http://en.m.wikipedia.org/wiki/Path_graph" title="Path graph">path graph</a> of length <i>n</i>, the vertices can be listed in order, <i>v</i><sub>0</sub>, <i>v</i><sub>1</sub>, ..., <i>v</i><sub>n</sub>, so that the edges are <i>v</i><sub>i−1</sub><i>v</i><sub>i</sub> for each <i>i</i> = 1, 2, ..., <i>n</i>. If a linear graph occurs as a <a href="http://en.m.wikipedia.org/wiki/Glossary_of_graph_theory#Subgraphs" title="Glossary of graph theory">subgraph</a> of another graph, it is a <a href="http://en.m.wikipedia.org/wiki/Path_%28graph_theory%29" title="Path (graph theory)">path</a> in that graph.</li>
+<li>In a <a href="http://en.m.wikipedia.org/wiki/Cycle_graph" title="Cycle graph">cycle graph</a> of length <i>n ≥ 3</i>, vertices can be named <i>v</i><sub>1</sub>, ..., <i>v</i><sub>n</sub> so that the edges are <i>v</i><sub>i−1</sub><i>v</i><sub><i>i</i></sub> for each <i>i</i> = 2,...,<i>n</i> in addition to <i>v</i><sub>n</sub><i>v</i><sub>1</sub>. Cycle graphs can be characterized as <a href="http://en.m.wikipedia.org/wiki/Connectivity_%28graph_theory%29" title="Connectivity (graph theory)">connected</a> <a href="http://en.m.wikipedia.org/wiki/Regular_graph" title="Regular graph">2-regular</a> graphs. If a cycle graph occurs as a subgraph of another graph, it is a <i>cycle</i> or <i>circuit</i> in that graph.</li>
+<li>A <a href="http://en.m.wikipedia.org/wiki/Planar_graph" title="Planar graph">planar graph</a> is a graph whose vertices and edges can be drawn in a plane such that no two of the edges intersect (i.e., <i>embedded</i> in a plane).</li>
+<li>A <a href="http://en.m.wikipedia.org/wiki/Tree_%28graph_theory%29" title="Tree (graph theory)">tree</a> is a connected graph with no cycles.</li>
+<li>A <i>forest</i> is a graph with no cycles (i.e. the disjoint union of one or more <i>trees</i>).</li>
+</ul>
+<p>More advanced kinds of graphs are:</p>
+<ul>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Petersen_graph" title="Petersen graph">Petersen graph</a> and its generalizations</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Perfect_graph" title="Perfect graph">Perfect graphs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cograph" title="Cograph">Cographs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Chordal_graph" title="Chordal graph">Chordal graphs</a></li>
+<li>Other graphs with large <a href="http://en.m.wikipedia.org/wiki/Graph_automorphism" title="Graph automorphism">automorphism groups</a>: <a href="http://en.m.wikipedia.org/wiki/Vertex-transitive_graph" title="Vertex-transitive graph">vertex-transitive</a>, <a href="http://en.m.wikipedia.org/wiki/Arc-transitive_graph" title="Arc-transitive graph" class="mw-redirect">arc-transitive</a>, and <a href="http://en.m.wikipedia.org/wiki/Distance-transitive_graph" title="Distance-transitive graph">distance-transitive graphs</a>.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Strongly_regular_graph" title="Strongly regular graph">Strongly regular graphs</a> and their generalization <a href="http://en.m.wikipedia.org/wiki/Distance-regular_graph" title="Distance-regular graph">distance-regular graphs</a>.</li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Operations_on_graphs">Operations on graphs</span></h2><div class="content_block" id="content_6">
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Operations_on_graphs" title="Operations on graphs" class="mw-redirect">Operations on graphs</a>
+</div>
+<p>There are several operations that produce new graphs from old ones, which might be classified into the following categories:</p>
+<ul>
+<li>Elementary operations, sometimes called "editing operations" on 
+graphs, which create a new graph from the original one by a simple, 
+local change, such as addition or deletion of a vertex or an edge, 
+merging and splitting of vertices, etc.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Graph_rewriting" title="Graph rewriting">Graph rewrite operations</a> replacing the occurrence of some pattern graph within the host graph by an instance of the corresponding replacement graph.</li>
+<li>Unary operations, which create a significantly new graph from the old one. Examples:
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Line_graph" title="Line graph">Line graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dual_graph" title="Dual graph">Dual graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Complement_graph" title="Complement graph">Complement graph</a></li>
+</ul>
+</li>
+<li>Binary operations, which create new graph from two initial graphs. Examples:
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Disjoint_union_of_graphs" title="Disjoint union of graphs" class="mw-redirect">Disjoint union of graphs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_product_of_graphs" title="Cartesian product of graphs">Cartesian product of graphs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tensor_product_of_graphs" title="Tensor product of graphs">Tensor product of graphs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strong_product_of_graphs" title="Strong product of graphs">Strong product of graphs</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Lexicographic_product_of_graphs" title="Lexicographic product of graphs">Lexicographic product of graphs</a></li>
+</ul>
+</li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Generalizations">Generalizations</span></h2><div class="content_block" id="content_7">
+<p>In a <a href="http://en.m.wikipedia.org/wiki/Hypergraph" title="Hypergraph">hypergraph</a>, an edge can join more than two vertices.</p>
+<p>An undirected graph can be seen as a <a href="http://en.m.wikipedia.org/wiki/Simplicial_complex" title="Simplicial complex">simplicial complex</a> consisting of 1-<a href="http://en.m.wikipedia.org/wiki/Simplex" title="Simplex">simplices</a>
+ (the edges) and 0-simplices (the vertices). As such, complexes are 
+generalizations of graphs since they allow for higher-dimensional 
+simplices.</p>
+<p>Every graph gives rise to a <a href="http://en.m.wikipedia.org/wiki/Matroid" title="Matroid">matroid</a>.</p>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Model_theory" title="Model theory">model theory</a>, a graph is just a <a href="http://en.m.wikipedia.org/wiki/Structure_%28model_theory%29" title="Structure (model theory)" class="mw-redirect">structure</a>. But in that case, there is no limitation on the number of edges: it can be any <a href="http://en.m.wikipedia.org/wiki/Cardinal_number" title="Cardinal number">cardinal number</a>, see <a href="http://en.m.wikipedia.org/wiki/Continuous_graph" title="Continuous graph">continuous graph</a>.</p>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computational_biology" title="Computational biology">computational biology</a>, <a href="http://en.m.wikipedia.org/wiki/Power_graph_analysis" title="Power graph analysis">power graph analysis</a> introduces power graphs as an alternative representation of undirected graphs.</p>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Geographic_information_systems" title="Geographic information systems" class="mw-redirect">geographic information systems</a>, <a href="http://en.m.wikipedia.org/wiki/Geometric_networks" title="Geometric networks">geometric networks</a> are closely modeled after graphs, and borrow many concepts from <a href="http://en.m.wikipedia.org/wiki/Graph_theory" title="Graph theory">graph theory</a> to perform spatial analysis on road networks or utility grids.</p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_8">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Dual_graph" title="Dual graph">Dual graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Glossary_of_graph_theory" title="Glossary of graph theory">Glossary of graph theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hypergraph" title="Hypergraph">Hypergraph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Graph_%28data_structure%29" title="Graph (data structure)" class="mw-redirect">Graph (data structure)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Graph_database" title="Graph database">Graph database</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Graph_drawing" title="Graph drawing">Graph drawing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_of_publications_in_mathematics#Graph_theory" title="List of publications in mathematics" class="mw-redirect">Graph theory publications</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_of_graph_theory_topics" title="List of graph theory topics">List of graph theory topics</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Network_theory" title="Network theory">Network theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Webgraph" title="Webgraph">Webgraph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Conceptual_graph" title="Conceptual graph">Conceptual graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Horizontal_constraint_graph" title="Horizontal constraint graph" class="mw-redirect">Horizontal constraint graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Causal_dynamical_triangulation" title="Causal dynamical triangulation">Causal dynamical triangulation</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Sage_Math" title="Sage Math" class="mw-redirect">Sage Math</a> (software)</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/NetworkX" title="NetworkX">NetworkX</a> (software)</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Mathematica" title="Mathematica">Mathematica</a> (software)</li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_9">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation book"><span class="new" title="Jonathan L. Gross (page does not exist)">Gross, Jonathan L.</span>; <span class="new" title="Jay Yellen (page does not exist)">Yellen, Jay</span> (2004). <a rel="nofollow" class="external text" href="http://books.google.com/?id=mKkIGIea_BkC"><i>Handbook of graph theory</i></a>. <a href="http://en.m.wikipedia.org/wiki/CRC_Press" title="CRC Press">CRC Press</a>. p.&nbsp;<a rel="nofollow" class="external text" href="http://books.google.com/books?id=mKkIGIea_BkC&amp;pg=PA35&amp;lpg=PA35">35</a>. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-1-58488-090-5" title="Special:BookSources/978-1-58488-090-5">978-1-58488-090-5</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://books.google.com/?id=mKkIGIea_BkC">http://books.google.com/?id=mKkIGIea_BkC</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Handbook+of+graph+theory&amp;rft.aulast=Gross&amp;rft.aufirst=Jonathan+L.&amp;rft.au=Gross%2C%26%2332%3BJonathan+L.&amp;rft.au=Yellen%2C%26%2332%3BJay&amp;rft.date=2004&amp;rft.pages=p.%26nbsp%3B%5Bhttp%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DmKkIGIea_BkC%26pg%3DPA35%26lpg%3DPA35+35%5D&amp;rft.pub=%5B%5BCRC+Press%5D%5D&amp;rft.isbn=978-1-58488-090-5&amp;rft_id=http%3A%2F%2Fbooks.google.com%2F%3Fid%3DmKkIGIea_BkC&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">See, for instance, Iyanaga and Kawada, <b>69 J</b>, p. 234 or Biggs, p. 4.</span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text">See, for instance, Graham et al., p. 5.</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text">For example, see Balakrishnan, p. 1, Gross (2003), p. 4, and Zwillinger, p. 220.</span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text">For example, see. Bollobás, p. 7 and Diestel, p. 25.</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text">Gross (1998), p. 3, Gross (2003), p. 205, Harary, p.10, and Zwillinger, p. 220.</span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFStrang2005">Strang, Gilbert (2005), <a rel="nofollow" class="external text" href="http://books.google.com/books?vid=ISBN0030105676"><i>Linear Algebra and Its Applications</i></a> (4th ed.), Brooks Cole, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-03-010567-6" title="Special:BookSources/0-03-010567-6">0-03-010567-6</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://books.google.com/books?vid=ISBN0030105676">http://books.google.com/books?vid=ISBN0030105676</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Linear+Algebra+and+Its+Applications&amp;rft.aulast=Strang&amp;rft.aufirst=Gilbert&amp;rft.au=Strang%2C%26%2332%3BGilbert&amp;rft.date=2005&amp;rft.edition=4th&amp;rft.pub=Brooks+Cole&amp;rft.isbn=0-03-010567-6&amp;rft_id=http%3A%2F%2Fbooks.google.com%2Fbooks%3Fvid%3DISBN0030105676&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_10">
+<ul>
+<li>
+<span class="citation book">Balakrishnan, V. K. (1997-02-01). <i>Graph Theory</i> (1st ed.). McGraw-Hill. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-07-005489-4" title="Special:BookSources/0-07-005489-4">0-07-005489-4</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Graph+Theory&amp;rft.aulast=Balakrishnan&amp;rft.aufirst=V.+K.&amp;rft.au=Balakrishnan%2C%26%2332%3BV.+K.&amp;rft.date=1997-02-01&amp;rft.edition=1st&amp;rft.pub=McGraw-Hill&amp;rft.isbn=0-07-005489-4&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Claude_Berge" title="Claude Berge">Berge, Claude</a> (1958) (in French). <i>Théorie des graphes et ses applications</i>. Dunod, Paris: Collection Universitaire de Mathématiques, II. pp.&nbsp;viii+277.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Th%C3%A9orie+des+graphes+et+ses+applications&amp;rft.aulast=Berge&amp;rft.aufirst=Claude&amp;rft.au=Berge%2C%26%2332%3BClaude&amp;rft.date=1958&amp;rft.pages=pp.%26nbsp%3Bviii%2B277&amp;rft.place=Dunod%2C+Paris&amp;rft.pub=Collection+Universitaire+de+Math%C3%A9matiques%2C+II&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span> Translation: <span class="citation book">. Dover, New York: Wiley. 2001 [1962].</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=&amp;rft.date=2001&amp;rft.place=Dover%2C+New+York&amp;rft.pub=Wiley&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Biggs, Norman (1993). <i>Algebraic Graph Theory</i> (2nd ed.). Cambridge University Press. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-521-45897-8" title="Special:BookSources/0-521-45897-8">0-521-45897-8</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Algebraic+Graph+Theory&amp;rft.aulast=Biggs&amp;rft.aufirst=Norman&amp;rft.au=Biggs%2C%26%2332%3BNorman&amp;rft.date=1993&amp;rft.edition=2nd&amp;rft.pub=Cambridge+University+Press&amp;rft.isbn=0-521-45897-8&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Bollobás, Béla (2002-08-12). <i>Modern Graph Theory</i> (1st ed.). Springer. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-387-98488-7" title="Special:BookSources/0-387-98488-7">0-387-98488-7</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Modern+Graph+Theory&amp;rft.aulast=Bollob%C3%A1s&amp;rft.aufirst=B%C3%A9la&amp;rft.au=Bollob%C3%A1s%2C%26%2332%3BB%C3%A9la&amp;rft.date=2002-08-12&amp;rft.edition=1st&amp;rft.pub=Springer&amp;rft.isbn=0-387-98488-7&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Bang-Jensen, J.; Gutin, G. (2000). <a rel="nofollow" class="external text" href="http://www.cs.rhul.ac.uk/books/dbook/"><i>Digraphs: Theory, Algorithms and Applications</i></a>. Springer<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.cs.rhul.ac.uk/books/dbook/">http://www.cs.rhul.ac.uk/books/dbook/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Digraphs%3A+Theory%2C+Algorithms+and+Applications&amp;rft.aulast=Bang-Jensen&amp;rft.aufirst=J.&amp;rft.au=Bang-Jensen%2C%26%2332%3BJ.&amp;rft.date=2000&amp;rft.pub=Springer&amp;rft_id=http%3A%2F%2Fwww.cs.rhul.ac.uk%2Fbooks%2Fdbook%2F&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Diestel, Reinhard (2005). <a rel="nofollow" class="external text" href="http://diestel-graph-theory.com/GrTh.html"><i>Graph Theory</i></a> (3rd ed.). Berlin, New York: Springer-Verlag. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-3-540-26183-4" title="Special:BookSources/978-3-540-26183-4">978-3-540-26183-4</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://diestel-graph-theory.com/GrTh.html">http://diestel-graph-theory.com/GrTh.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Graph+Theory&amp;rft.aulast=Diestel&amp;rft.aufirst=Reinhard&amp;rft.au=Diestel%2C%26%2332%3BReinhard&amp;rft.date=2005&amp;rft.edition=3rd&amp;rft.place=Berlin%2C+New+York&amp;rft.pub=Springer-Verlag&amp;rft.isbn=978-3-540-26183-4&amp;rft_id=http%3A%2F%2Fdiestel-graph-theory.com%2FGrTh.html&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>.</li>
+<li>
+<span class="citation book">Graham, R.L., Grötschel, M., and Lovász, L, ed. (1995). <i>Handbook of Combinatorics</i>. MIT Press. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-07169-X" title="Special:BookSources/0-262-07169-X">0-262-07169-X</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Handbook+of+Combinatorics&amp;rft.date=1995&amp;rft.pub=MIT+Press&amp;rft.isbn=0-262-07169-X&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Gross, Jonathan L.; Yellen, Jay (1998-12-30). <i>Graph Theory and Its Applications</i>. CRC Press. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-8493-3982-0" title="Special:BookSources/0-8493-3982-0">0-8493-3982-0</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Graph+Theory+and+Its+Applications&amp;rft.aulast=Gross&amp;rft.aufirst=Jonathan+L.&amp;rft.au=Gross%2C%26%2332%3BJonathan+L.&amp;rft.date=1998-12-30&amp;rft.pub=CRC+Press&amp;rft.isbn=0-8493-3982-0&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Gross, Jonathan L., &amp; Yellen, Jay, ed. (2003-12-29). <i>Handbook of Graph Theory</i>. CRC. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/1-58488-090-2" title="Special:BookSources/1-58488-090-2">1-58488-090-2</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Handbook+of+Graph+Theory&amp;rft.date=2003-12-29&amp;rft.pub=CRC&amp;rft.isbn=1-58488-090-2&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Harary, Frank (January 1995). <i>Graph Theory</i>. Addison Wesley Publishing Company. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-201-41033-8" title="Special:BookSources/0-201-41033-8">0-201-41033-8</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Graph+Theory&amp;rft.aulast=Harary&amp;rft.aufirst=Frank&amp;rft.au=Harary%2C%26%2332%3BFrank&amp;rft.date=January+1995&amp;rft.pub=Addison+Wesley+Publishing+Company&amp;rft.isbn=0-201-41033-8&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Iyanaga, Shôkichi; Kawada, Yukiyosi (1977). <i>Encyclopedic Dictionary of Mathematics</i>. MIT Press. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-262-09016-3" title="Special:BookSources/0-262-09016-3">0-262-09016-3</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Encyclopedic+Dictionary+of+Mathematics&amp;rft.aulast=Iyanaga&amp;rft.aufirst=Sh%C3%B4kichi&amp;rft.au=Iyanaga%2C%26%2332%3BSh%C3%B4kichi&amp;rft.date=1977&amp;rft.pub=MIT+Press&amp;rft.isbn=0-262-09016-3&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation book">Zwillinger, Daniel (2002-11-27). <i>CRC Standard Mathematical Tables and Formulae</i> (31st ed.). Chapman &amp; Hall/CRC. <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/1-58488-291-3" title="Special:BookSources/1-58488-291-3">1-58488-291-3</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=CRC+Standard+Mathematical+Tables+and+Formulae&amp;rft.aulast=Zwillinger&amp;rft.aufirst=Daniel&amp;rft.au=Zwillinger%2C%26%2332%3BDaniel&amp;rft.date=2002-11-27&amp;rft.edition=31st&amp;rft.pub=Chapman+%26+Hall%2FCRC&amp;rft.isbn=1-58488-291-3&amp;rfr_id=info:sid/en.wikipedia.org:Graph_(mathematics)"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_11">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.gfredericks.com/main/sandbox/graphs">A searchable database of small connected graphs</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.visualcomplexity.com/">VisualComplexity.com</a> — A visual exploration on mapping complex networks</li>
+<li><span class="citation mathworld" id="Reference-Mathworld-Graph"><a href="http://en.m.wikipedia.org/wiki/Eric_W._Weisstein" title="Eric W. Weisstein">Weisstein, Eric W.</a>, "<a rel="nofollow" class="external text" href="http://mathworld.wolfram.com/Graph.html">Graph</a>" from <a href="http://en.m.wikipedia.org/wiki/MathWorld" title="MathWorld">MathWorld</a>.</span></li>
+<li>
+<a rel="nofollow" class="external text" href="https://sourceforge.net/projects/igv-intelligent/">Intelligent Graph Visualizer</a>
+ — IGV create and edit graph, automatically places graph, search 
+shortest path (+coloring vertices), center, degree, eccentricity, etc.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://code.google.com/p/vge2/">Visual Graph Editor 2</a> — VGE2 designed for quick and easy creation, editing and saving of graphs and analysis of problems connected with graphs.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://gianlucacosta.altervista.org/software/graphsj2/index.php">GraphsJ 2</a>
+ — GraphsJ is a didactic Java software which features an easy-to-use GUI
+ and interactively solves step-by-step many graph problems executing 
+their associated algorithms.</li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Graph_%28mathematics%29&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Graph+%28mathematics%29&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Graph_%28mathematics%29&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Graph+%28mathematics%29&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Graph_%28mathematics%29_files/load_002.php" type="text/javascript"></script>
+<script src="Graph_%28mathematics%29_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

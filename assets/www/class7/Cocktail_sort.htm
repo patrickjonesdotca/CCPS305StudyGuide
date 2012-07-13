@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Cocktail sort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Cocktail_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 17 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Cocktail_sort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Cocktail_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Cocktail_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Cocktail_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Cocktail_sort" selected="selected">English</option><option value="//zh.m.wikipedia.org/wiki/%E9%B8%A1%E5%B0%BE%E9%85%92%E6%8E%92%E5%BA%8F">中文</option><option value="//ca.m.wikipedia.org/wiki/Bubble-sort_bidireccional">català</option><option value="//cs.m.wikipedia.org/wiki/Koktejlov%C3%A9_%C5%99azen%C3%AD">česky</option><option value="//de.m.wikipedia.org/wiki/Shakersort">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Ordenamiento_de_burbuja_bidireccional">español</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%AD%D8%A8%D8%A7%D8%A8%DB%8C_%D8%AF%D9%88%D8%B3%D9%88%DB%8C%D9%87">فارسی</option><option value="//ko.m.wikipedia.org/wiki/%EC%B9%B5%ED%85%8C%EC%9D%BC_%EC%A0%95%EB%A0%AC">한국어</option><option value="//hy.m.wikipedia.org/wiki/%D4%BF%D5%B8%D5%AF%D5%BF%D5%A5%D5%B5%D5%AC%D5%A1%D5%B5%D5%AB%D5%B6_%D5%BF%D5%A5%D5%BD%D5%A1%D5%AF%D5%A1%D5%BE%D5%B8%D6%80%D5%B8%D6%82%D5%B4">Հայերեն</option><option value="//it.m.wikipedia.org/wiki/Shaker_sort">italiano</option><option value="//hu.m.wikipedia.org/wiki/Kokt%C3%A9lrendez%C3%A9s">magyar</option><option value="//ja.m.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%BC%E3%82%AB%E3%83%BC%E3%82%BD%E3%83%BC%E3%83%88">日本語</option><option value="//pl.m.wikipedia.org/wiki/Sortowanie_koktajlowe">polski</option><option value="//pt.m.wikipedia.org/wiki/Cocktail_sort">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0_%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC">русский</option><option value="//tr.m.wikipedia.org/wiki/Kokteyl_s%C4%B1ralamas%C4%B1">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%B7%D0%BC%D1%96%D1%88%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%D0%BC">українська</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Cocktail sort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Cocktail sort</caption>
+<tbody><tr class="">
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.m.wikipedia.org/wiki/File:Sorting_shaker_sort_anim.gif" class="image" title="Visualisation of shaker sort"><img alt="Visualisation of shaker sort" src="Cocktail_sort_files/Sorting_shaker_sort_anim.gif" width="277" height="257"></a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n^2)" src="Cocktail_sort_files/189317b4b935a745fcfaf95940d2b4f0.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n)" src="Cocktail_sort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n^2)" src="Cocktail_sort_files/189317b4b935a745fcfaf95940d2b4f0.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style=""><img class="tex" alt="O(1)" src="Cocktail_sort_files/5e079a28737d5dd019a3b8f6133ee55e.png"></td>
+</tr>
+</tbody></table>
+<p><b>Cocktail sort</b>, also known as <b>bidirectional bubble sort</b>, <b>cocktail shaker sort</b>, <b>shaker sort</b> (which can also refer to a variant of <a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">selection sort</a>), <b>ripple sort</b>, <b>shuffle sort</b>,<sup id="cite_ref-Duhl1986_0-0" class="reference"><a href="#cite_note-Duhl1986-0"><span>[</span>1<span>]</span></a></sup><b>shuttle sort</b> or <b>happy hour sort</b>, is a variation of <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a> that is both a <a href="http://en.m.wikipedia.org/wiki/Stable_sort" title="Stable sort" class="mw-redirect">stable</a> <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a> and a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a>. The algorithm differs from a <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a>
+ in that it sorts in both directions on each pass through the list. This
+ sorting algorithm is only marginally more difficult to implement than a
+ bubble sort, and solves the problem of <a href="http://en.m.wikipedia.org/wiki/Bubble_sort#Rabbits_and_turtles" title="Bubble sort">turtles</a> in bubble sorts.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Pseudocode">Pseudocode</span></h2><div class="content_block" id="content_1">
+<p>The simplest form of cocktail sort goes through the whole list each time:</p>
+<table style="clear: both;"><tbody><tr>
+<td></td>
+</tr></tbody></table>
+<pre><b>procedure</b> cocktailSort( A <b>:</b> list of sortable items ) <b>defined as:</b>
+  <b>do</b>
+    swapped := false
+    <b>for each</b> i <b>in</b> 0 <b>to</b> length( A ) - 2 <b>do:</b>
+      <b>if</b> A[ i ] &gt; A[ i + 1 ] <b>then</b> <span style="color:green">// test whether the two elements are in the wrong order</span>
+        swap( A[ i ], A[ i + 1 ] ) <span style="color:green">// let the two elements change places</span>
+        swapped := true
+      <b>end if</b>
+    <b>end for</b>
+    <b>if</b> swapped = false <b>then</b>
+      <span style="color:green">// we can exit the outer loop here if no swaps occurred.</span>
+      <b>break do-while loop</b>
+    <b>end if</b>
+    swapped := false
+    <b>for each</b> i <b>in</b> length( A ) - 2 <b>to</b> 0 <b>do:</b>
+      <b>if</b> A[ i ] &gt; A[ i + 1 ] <b>then</b>
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      <b>end if</b>
+    <b>end for</b>
+  <b>while</b> swapped <span style="color:green">// if no elements have been swapped, then the list is sorted</span>
+<b>end procedure</b>
+</pre>
+<p>The first rightward pass will shift the largest element to its 
+correct place at the end, and the following leftward pass will shift the
+ smallest element to its correct place at the beginning. The second 
+complete pass will shift the second largest and second smallest elements
+ to their correct places, and so on. After <i>i</i> passes, the first <i>i</i> and the last <i>i</i>
+ elements in the list are in their correct positions, and do not need to
+ be checked. By shortening the part of the list that is sorted each 
+time, the number of operations can be halved (see <a href="http://en.m.wikipedia.org/wiki/Bubble_sort#Alternative_implementations" title="Bubble sort">bubble sort</a>).</p>
+<pre><b>procedure</b> cocktailSort( A <b>:</b> list of sortable items ) <b>defined as:</b>
+  <span style="color:green">// `begin` and `end` marks the first and last index to check</span>
+  begin := -1
+  end := length( A ) - 2
+  <b>do</b>
+    swapped := false
+    <span style="color:green">// increases `begin` because the elements before `begin` are in correct order</span>
+    begin := begin + 1
+    <b>for each</b> i <b>in</b> begin <b>to</b> end <b>do:</b>
+      <b>if</b> A[ i ] &gt; A[ i + 1 ] <b>then</b>
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      <b>end if</b>
+    <b>end for</b>
+    <b>if</b> swapped = false <b>then</b>
+      <b>break do-while loop</b>
+    <b>end if</b>
+    swapped := false
+    <span style="color:green">// decreases `end` because the elements after `end` are in correct order</span>
+    end := end - 1
+    <b>for each</b> i <b>in</b> end <b>to</b> begin <b>do:</b>
+      <b>if</b> A[ i ] &gt; A[ i + 1 ] <b>then</b>
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      <b>end if</b>
+    <b>end for</b>
+  <b>while</b> swapped
+<b>end procedure</b>
+</pre>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Differences_from_bubble_sort">Differences from bubble sort</span></h2><div class="content_block" id="content_2">
+<p>Cocktail sort is a slight variation of <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a>.
+ It differs in that instead of repeatedly passing through the list from 
+bottom to top, it passes alternately from bottom to top and then from 
+top to bottom. It can achieve slightly better performance than a 
+standard bubble sort. The reason for this is that <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a> only passes through the list in one direction and therefore can only move items backward one step each iteration.</p>
+<p>An example of a list that proves this point is the list (2,3,4,5,1), 
+which would only need to go through one pass of cocktail sort to become 
+sorted, but if using an ascending <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">bubble sort</a>
+ would take four passes. However one cocktail sort pass should be 
+counted as two bubble sort passes. Typically cocktail sort is less than 
+two times faster than bubble sort.</p>
+<p>Another optimization can be that the algorithm remembers where the 
+last actual swap has been done. In the next iteration, there will be no 
+swaps beyond this limit and the algorithm has shorter passes. As the 
+Cocktail sort goes bidirectionally, the range of possible swaps, which 
+is the range to be tested, will reduce per pass, thus reducing the 
+overall running time.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Complexity">Complexity</span></h2><div class="content_block" id="content_3">
+<p>The complexity of cocktail sort in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">big O notation</a> is <img class="tex" alt="O(n^2)" src="Cocktail_sort_files/189317b4b935a745fcfaf95940d2b4f0.png"> for both the worst case and the average case, but it becomes closer to <img class="tex" alt="O(n)" src="Cocktail_sort_files/7ba55e7c64a9405a0b39a1107e90ca94.png">
+ if the list is mostly ordered before applying the sorting algorithm, 
+for example, if every element is at a position that differs at most k (k
+ ≥ 1) from the position it is going to end up in, the complexity of 
+cocktail sort becomes <img class="tex" alt="O(k*n)" src="Cocktail_sort_files/ca44d1ff4fa4177db5450c7be11b12d4.png">.</p>
+<p>Cocktail sort is also briefly discussed in the book <i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i>,
+ along with similar refinements of bubble sort. In conclusion, Knuth 
+states about bubble sort and its improvements (Knuth 1998, p.&nbsp;110):</p>
+<blockquote class="templatequote">
+<div class="Bug6200">But none of these refinements leads to an algorithm better than straight insertion [that is, <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion sort</a>]; and we already know that straight insertion isn't suitable for large&nbsp;<i>N</i>.
+ [...] In short, the bubble sort seems to have nothing to recommend it, 
+except a catchy name and the fact that it leads to some interesting 
+theoretical problems.</div>
+<div class="templatequotecite">—D. E. Knuth<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup>
+</div>
+</blockquote>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_4">
+<ol class="references">
+<li id="cite_note-Duhl1986-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Duhl1986_0-0">^</a></b></span> <span class="reference-text">Martin
+ Duhl: Die schrittweise Entwicklung und Beschreibung einer 
+Shuffle-Sort-Array Schaltung in HYPERKARL aus der Algorithmischen 
+Darstellung des BUBBLE-SORT-ALGORITHMUS, Projektarbeit, 1986, Technical 
+University of Kaiserslautern</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><i>The Art of Computer Programming</i>, Vol. 3: Sorting and Searching, Second Edition, Addison-Wesley, 1998.</span>
+</li>
+</ol>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<ul>
+<li>Paul E. Black and Bob Bockholt, <a rel="nofollow" class="external text" href="http://xlinux.nist.gov/dads/HTML/bidirectionalBubbleSort.html">"bidirectional bubble sort"</a>,
+ in Dictionary of Algorithms and Data Structures (online), Paul E. 
+Black, ed., U.S. National Institute of Standards and Technology. 24 
+August 2009. (accessed: 5 Feb 2010)</li>
+<li>R. Hartenstein: THE GRAND CHALLENGE TO REINVENT COMPUTING - A new 
+World Model of Computing; Proc. CSBC_2010, July 20–23, 2010, Belo 
+Horizonte, Brasil, <a rel="nofollow" class="external autonumber" href="http://www.inf.pucminas.br/sbc2010/anais/pdf/semish/st03_02.pdf">[1]</a>
+</li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_6">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Cocktail_sort_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation">Algorithm implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_implementation/Sorting/Cocktail_sort">Cocktail sort</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.cs.ubc.ca/%7Eharrison/Java/sorting-demo.html">Java source code and an animated demo of cocktail sort (called bi-directional bubble sort) and several other algorithms</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.sharpdeveloper.net/content/archive/2007/08/14/dot-net-data-structures-and-algorithms.aspx">.NET Implementation of cocktail sort and several other algorithms</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.hermann-gruber.com/lehre/sorting/Shaker/Shaker.html">Interactive demo of cocktail sort</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><strong class="selflink">Cocktail sort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Cocktail_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Cocktail+sort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Cocktail_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Cocktail+sort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Cocktail_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Cocktail_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none; top: 977px; bottom: auto; position: absolute;" id="mf-references"><div></div><button>close</button></div></body></html>

@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Red–black tree - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Red_black_tree_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 25 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Red%E2%80%93black_tree">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Red_black_tree_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Red_black_tree_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Red_black_tree_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Red-black_tree" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/%C4%8Cerveno-%C4%8Dern%C3%BD_strom">česky</option><option value="//de.m.wikipedia.org/wiki/Rot-Schwarz-Baum">Deutsch</option><option value="//es.m.wikipedia.org/wiki/%C3%81rbol_rojo-negro">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%AF%D8%B1%D8%AE%D8%AA_%D8%B3%D8%B1%D8%AE-%D8%B3%DB%8C%D8%A7%D9%87">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Arbre_bicolore">français</option><option value="//ko.m.wikipedia.org/wiki/%EB%A0%88%EB%93%9C-%EB%B8%94%EB%9E%99_%ED%8A%B8%EB%A6%AC">한국어</option><option value="//hr.m.wikipedia.org/wiki/Crveno-crno_stablo">hrvatski</option><option value="//hu.m.wikipedia.org/wiki/Piros-fekete_fa">magyar</option><option value="//id.m.wikipedia.org/wiki/Pohon_merah-hitam">Bahasa Indonesia</option><option value="//it.m.wikipedia.org/wiki/RB-Albero">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%A2%D7%A5_%D7%90%D7%93%D7%95%D7%9D_%D7%A9%D7%97%D7%95%D7%A8">עברית</option><option value="//lt.m.wikipedia.org/wiki/Raudonai_juodas_medis">lietuvių</option><option value="//nl.m.wikipedia.org/wiki/Rood-zwartboom">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E8%B5%A4%E9%BB%92%E6%9C%A8">日本語</option><option value="//pl.m.wikipedia.org/wiki/Drzewo_czerwono-czarne">polski</option><option value="//pt.m.wikipedia.org/wiki/%C3%81rvore_rubro-negra">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE-%D1%87%D1%91%D1%80%D0%BD%D0%BE%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">русский</option><option value="//sr.m.wikipedia.org/wiki/%D0%A6%D1%80%D0%B2%D0%B5%D0%BD%D0%BE-%D1%86%D1%80%D0%BD%D0%BE_%D1%81%D1%82%D0%B0%D0%B1%D0%BB%D0%BE">српски / srpski</option><option value="//fi.m.wikipedia.org/wiki/Punamusta_puu">suomi</option><option value="//sv.m.wikipedia.org/wiki/R%C3%B6d-svart_tr%C3%A4d">svenska</option><option value="//tr.m.wikipedia.org/wiki/K%C4%B1rm%C4%B1z%C4%B1-siyah_a%C4%9Fa%C3%A7">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A7%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%BE-%D1%87%D0%BE%D1%80%D0%BD%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">українська</option><option value="//vi.m.wikipedia.org/wiki/C%C3%A2y_%C4%91%E1%BB%8F_%C4%91en">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Red–black tree</h1>			
+<table class="infobox" style="width: 22em;">
+<tbody><tr>
+<th colspan="3" style="font-size: 125%; text-align: center;">Red–black tree</th>
+</tr>
+<tr>
+<th><a href="http://en.m.wikipedia.org/wiki/List_of_data_structures" title="List of data structures">Type</a></th>
+<td colspan="2"><a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Tree</a></td>
+</tr>
+<tr>
+<th>Invented</th>
+<td colspan="2">1972</td>
+</tr>
+<tr>
+<th>Invented by</th>
+<td colspan="2"><a href="http://en.m.wikipedia.org/wiki/Rudolf_Bayer" title="Rudolf Bayer">Rudolf Bayer</a></td>
+</tr>
+<tr>
+<th colspan="3" class="navbox-abovebelow">
+<a href="http://en.m.wikipedia.org/wiki/Time_complexity" title="Time complexity">Time complexity</a><br>
+in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">big O notation</a>
+</th>
+</tr>
+<tr>
+<td></td>
+<td>Average</td>
+<td>Worst case</td>
+</tr>
+<tr>
+<th>Space</th>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<th>Search</th>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<th>Insert</th>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<th>Delete</th>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+</tbody></table>
+<p>A <b>red–black tree</b> is a type of <a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">self-balancing binary search tree</a>, a <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> used in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, typically to implement <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">associative arrays</a>.</p>
+<p>Since it is a balanced tree, it guarantees insertion, search and delete to be <a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(log <i>n</i>) in time, where <i>n</i> is the total number of elements in the tree. <sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="History">History</span></h2><div class="content_block" id="content_1">
+<p>The original structure was invented in 1972 by <a href="http://en.m.wikipedia.org/wiki/Rudolf_Bayer" title="Rudolf Bayer">Rudolf Bayer</a><sup id="cite_ref-Bayer72_1-0" class="reference"><a href="#cite_note-Bayer72-1"><span>[</span>2<span>]</span></a></sup> and named "symmetric binary <a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-tree</a>," but acquired its modern name in a paper in 1978 by <a href="http://en.m.wikipedia.org/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Leonidas J. Guibas</a> and <a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Robert Sedgewick</a>.<sup id="cite_ref-GS78_2-0" class="reference"><a href="#cite_note-GS78-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Terminology">Terminology</span></h2><div class="content_block" id="content_2">
+<p>A red–black tree is a special type of <a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">binary tree</a>, used in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a> to organize pieces of comparable <a href="http://en.m.wikipedia.org/wiki/Data" title="Data">data</a>, such as text fragments or numbers.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Leaf_node" title="Leaf node" class="mw-redirect">leaf nodes</a>
+ of red–black trees do not contain data. These leaves need not be 
+explicit in computer memory—a null child pointer can encode the fact 
+that this child is a leaf—but it simplifies some algorithms for 
+operating on red–black trees if the leaves really are explicit nodes. To
+ save memory, sometimes a single <a href="http://en.m.wikipedia.org/wiki/Sentinel_node" title="Sentinel node">sentinel node</a> performs the role of all leaf nodes; all references from <a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29#Internal_nodes" title="Tree (data structure)">internal nodes</a> to leaf nodes then point to the sentinel node.</p>
+<p>Red–black trees, like all <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search trees</a>, allow efficient <a href="http://en.m.wikipedia.org/wiki/In-order_traversal" title="In-order traversal" class="mw-redirect">in-order traversal</a>
+ (that is: in the order Left–Root–Right) of their elements. The 
+search-time results from the traversal from root to leaf, and therefore a
+ balanced tree, having the least possible tree height, results in O(log <i>n</i>) search time.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Properties">Properties</span></h2><div class="content_block" id="content_3">
+<div class="thumb tright">
+<div class="thumbinner" style="width:502px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_example.svg" class="image"><img alt="Diagram of binary tree. The black root node has two red children and four black grandchildren. The child nodes of the grandchildren are either black nil pointers or red nodes with black nil pointers." src="Red_black_tree_files/500px-Red-black_tree_example.png" class="thumbimage" width="500" height="241"></a>
+<div class="thumbcaption">
+
+An example of a red–black tree</div>
+</div>
+</div>
+<p>A red–black tree is a <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a> where each node has a <i>color</i> attribute, the value of which is either <i>red</i> or <i>black</i>. In addition to the ordinary requirements imposed on binary search trees, the following requirements apply to red–black trees:</p>
+<ol>
+<li>A node is either red or black.</li>
+<li>The root is black. (This rule is sometimes omitted from other 
+definitions. Since the root can always be changed from red to black, but
+ not necessarily vice-versa, this rule has little effect on analysis.)</li>
+<li>All leaves (NIL) are black.</li>
+<li>Both children of every red node are black.</li>
+<li>Every <a href="http://en.m.wikipedia.org/wiki/Path_%28graph_theory%29" title="Path (graph theory)">simple path</a> from a given node to any of its descendant leaves contains the same number of black nodes.</li>
+</ol>
+<p>These constraints enforce a critical property of red–black trees: 
+that the path from the root to the furthest leaf is no more than twice 
+as long as the path from the root to the nearest leaf. The result is 
+that the tree is roughly balanced. Since operations such as inserting, 
+deleting, and finding values require worst-case time proportional to the
+ height of the tree, this theoretical upper bound on the height allows 
+red–black trees to be efficient in the worst case, unlike ordinary <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search trees</a>.</p>
+<p>To see why this is guaranteed, it suffices to consider the effect of 
+properties 4 and 5 together. For a red–black tree T, let B be the number
+ of black nodes in property 5. Therefore the shortest possible path from
+ the root of T to any leaf consists of B black nodes. Longer possible 
+paths may be constructed by inserting red nodes. However, property 4 
+makes it impossible to insert more than one consecutive red node. 
+Therefore the longest possible path consists of 2B nodes, alternating 
+black and red.</p>
+<p>The shortest possible path has all black nodes, and the longest 
+possible path alternates between red and black nodes. Since all maximal 
+paths have the same number of black nodes, by property 5, this shows 
+that no path is more than twice as long as any other path.</p>
+<p>In many of the presentations of tree data structures, it is possible 
+for a node to have only one child, and leaf nodes contain data. It is 
+possible to present red–black trees in this paradigm, but it changes 
+several of the properties and complicates the algorithms. For this 
+reason, this article uses "null leaves", which contain no data and 
+merely serve to indicate where the tree ends, as shown above. These 
+nodes are often omitted in drawings, resulting in a tree that seems to 
+contradict the above principles, but in fact does not. A consequence of 
+this is that all internal (non-leaf) nodes have two children, although 
+one or both of those children may be null leaves. Property 5 ensures 
+that a red node must have either two black null leaves or two black 
+non-leaves as children. For a black node with one null leaf child and 
+one non-null-leaf child, properties 3, 4 and 5 ensure that the 
+non-null-leaf child must be a red node with two black null leaves as 
+children.</p>
+<p>Some explain a red–black tree as a binary search tree whose edges, 
+instead of nodes, are colored in red or black, but this does not make 
+any difference. The color of a node in this article's terminology 
+corresponds to the color of the edge connecting the node to its parent, 
+except that the root node is always black (property 2) whereas the 
+corresponding edge does not exist.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Analogy_to_B-trees_of_order_4">Analogy to B-trees of order 4</span></h2><div class="content_block" id="content_4">
+<div class="thumb tright">
+<div class="thumbinner" style="width:502px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_example_%28B-tree_analogy%29.svg" class="image"><img alt="" src="Red_black_tree_files/500px-Red-black_tree_example_B-tree_analogy.png" class="thumbimage" width="500" height="179"></a>
+<div class="thumbcaption">
+
+The same red–black tree as in the example above, seen as a B-tree.</div>
+</div>
+</div>
+<p>A red–black tree is similar in structure to a <a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-tree</a>
+ of order 4, where each node can contain between 1 to 3 values and 
+(accordingly) between 2 to 4 child pointers. In such B-tree, each node 
+will contain only one value matching the value in a black node of the 
+red–black tree, with an optional value before and/or after it in the 
+same node, both matching an equivalent red node of the red–black tree.</p>
+<p>One way to see this equivalence is to "move up" the red nodes in a 
+graphical representation of the red–black tree, so that they align 
+horizontally with their parent black node, by creating together a 
+horizontal cluster. In the B-tree, or in the modified graphical 
+representation of the red–black tree, all leaf nodes are at the same 
+depth.</p>
+<p>The red–black tree is then structurally equivalent to a B-tree of 
+order 4, with a minimum fill factor of 33% of values per cluster with a 
+maximum capacity of 3 values.</p>
+<p>This B-tree type is still more general than a red–black tree though, 
+as it allows ambiguity in a red–black tree conversion—multiple red–black
+ trees can be produced from an equivalent B-tree of order 4. If a B-tree
+ cluster contains only 1 value, it is the minimum, black, and has two 
+child pointers. If a cluster contains 3 values, then the central value 
+will be black and each value stored on its sides will be red. If the 
+cluster contains two values, however, either one can become the black 
+node in the red–black tree (and the other one will be red).</p>
+<p>So the order-4 B-tree does not maintain which of the values contained
+ in each cluster is the root black tree for the whole cluster and the 
+parent of the other values in the same cluster. Despite this, the 
+operations on red–black trees are more economical in time because you 
+don't have to maintain the vector of values. It may be costly if values 
+are stored directly in each node rather than being stored by reference. 
+B-tree nodes, however, are more economical in space because you don't 
+need to store the color attribute for each node. Instead, you have to 
+know which slot in the cluster vector is used. If values are stored by 
+reference, e.g. objects, null references can be used and so the cluster 
+can be represented by a vector containing 3 slots for value pointers 
+plus 4 slots for child references in the tree. In that case, the B-tree 
+can be more compact in memory, improving data locality.</p>
+<p>The same analogy can be made with B-trees with larger orders that can
+ be structurally equivalent to a colored binary tree: you just need more
+ colors. Suppose that you add blue, then the blue–red–black tree defined
+ like red–black trees but with the additional constraint that no two 
+successive nodes in the hierarchy will be blue and all blue nodes will 
+be children of a red node, then it becomes equivalent to a B-tree whose 
+clusters will have at most 7 values in the following colors: blue, red, 
+blue, black, blue, red, blue (For each cluster, there will be at most 1 
+black node, 2 red nodes, and 4 blue nodes).</p>
+<p>For moderate volumes of values, insertions and deletions in a colored
+ binary tree are faster compared to B-trees because colored trees don't 
+attempt to maximize the fill factor of each horizontal cluster of nodes 
+(only the minimum fill factor is guaranteed in colored binary trees, 
+limiting the number of splits or junctions of clusters). B-trees will be
+ faster for performing rotations (because rotations will frequently 
+occur within the same cluster rather than with multiple separate nodes 
+in a colored binary tree). However for storing large volumes, B-trees 
+will be much faster as they will be more compact by grouping several 
+children in the same cluster where they can be accessed locally.</p>
+<p>All optimizations possible in B-trees to increase the average fill 
+factors of clusters are possible in the equivalent multicolored binary 
+tree. Notably, maximizing the average fill factor in a structurally 
+equivalent B-tree is the same as reducing the total height of the 
+multicolored tree, by increasing the number of non-black nodes. The 
+worst case occurs when all nodes in a colored binary tree are black, the
+ best case occurs when only a third of them are black (and the other two
+ thirds are red nodes).</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Applications_and_related_data_structures">Applications and related data structures</span></h2><div class="content_block" id="content_5">
+<p>Red–black trees offer worst-case guarantees for insertion time, 
+deletion time, and search time. Not only does this make them valuable in
+ time-sensitive applications such as <a href="http://en.m.wikipedia.org/wiki/Real-time_computing" title="Real-time computing">real-time applications</a>,
+ but it makes them valuable building blocks in other data structures 
+which provide worst-case guarantees; for example, many data structures 
+used in <a href="http://en.m.wikipedia.org/wiki/Computational_geometry" title="Computational geometry">computational geometry</a> can be based on red–black trees, and the <a href="http://en.m.wikipedia.org/wiki/Completely_Fair_Scheduler" title="Completely Fair Scheduler">Completely Fair Scheduler</a> used in current <a href="http://en.m.wikipedia.org/wiki/Linux" title="Linux">Linux</a> kernels uses red–black trees.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a> is another structure supporting O(log <i>n</i>)
+ search, insertion, and removal. It is more rigidly balanced than 
+red–black trees, leading to slower insertion and removal but faster 
+retrieval. This makes it attractive for data structures that may be 
+built once and loaded without reconstruction, such as language 
+dictionaries (or program dictionaries, such as the opcodes of an 
+assembler or interpreter).</p>
+<p>Red–black trees are also particularly valuable in <a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">functional programming</a>, where they are one of the most common <a href="http://en.m.wikipedia.org/wiki/Persistent_data_structure" title="Persistent data structure">persistent data structures</a>, used to construct <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">associative arrays</a> and <a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29" title="Set (computer science)" class="mw-redirect">sets</a> which can retain previous versions after mutations. The persistent version of red–black trees requires O(log <i>n</i>) space for each insertion or deletion, in addition to time.</p>
+<p>For every <a href="http://en.m.wikipedia.org/wiki/2-4_tree" title="2-4 tree" class="mw-redirect">2-4 tree</a>,
+ there are corresponding red–black trees with data elements in the same 
+order. The insertion and deletion operations on 2-4 trees are also 
+equivalent to color-flipping and rotations in red–black trees. This 
+makes 2-4 trees an important tool for understanding the logic behind 
+red–black trees, and this is why many introductory algorithm texts 
+introduce 2-4 trees just before red–black trees, even though 2-4 trees 
+are not often used in practice.</p>
+<p>In 2008, <a href="http://en.m.wikipedia.org/wiki/Robert_Sedgewick_%28computer_scientist%29" title="Robert Sedgewick (computer scientist)">Sedgewick</a> introduced a simpler version of the red–black tree called the <a href="http://en.m.wikipedia.org/wiki/Left-leaning_red-black_tree" title="Left-leaning red-black tree">left-leaning red-black tree</a><sup id="cite_ref-cs.princeton.edu_3-0" class="reference"><a href="#cite_note-cs.princeton.edu-3"><span>[</span>4<span>]</span></a></sup>
+ by eliminating a previously unspecified degree of freedom in the 
+implementation. The LLRB maintains an additional invariant that all red 
+links must lean left except during inserts and deletes. Red–black trees 
+can be made isometric to either <a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 trees</a>,<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup> or 2-4 trees,<sup id="cite_ref-cs.princeton.edu_3-1" class="reference"><a href="#cite_note-cs.princeton.edu-3"><span>[</span>4<span>]</span></a></sup>
+ for any sequence of operations. The 2-4 tree isometry was described in 
+1978 by Sedgewick. With 2-4 trees, the isometry is resolved by a "color 
+flip," corresponding to a split, in which the red color of two children 
+nodes leaves the children and moves to the parent node. The <a href="http://en.m.wikipedia.org/wiki/Tango_tree" title="Tango tree">tango tree</a>, a type of tree optimized for fast searches, usually uses red–black trees as part of its data structure.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Operations">Operations</span></h2><div class="content_block" id="content_6">
+<p>Read-only operations on a red–black tree require no modification from those used for <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search trees</a>,
+ because every red–black tree is a special case of a simple binary 
+search tree. However, the immediate result of an insertion or removal 
+may violate the properties of a red–black tree. Restoring the red–black 
+properties requires a small number (<a href="http://en.m.wikipedia.org/wiki/Big-O_notation" title="Big-O notation" class="mw-redirect">O</a>(log <i>n</i>) or <a href="http://en.m.wikipedia.org/wiki/Amortized_analysis" title="Amortized analysis">amortized O(1)</a>) of color changes (which are very quick in practice) and no more than three <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">tree rotations</a> (two for insertion). Although insert and delete operations are complicated, their times remain O(log <i>n</i>).</p>
+<h3> <span class="mw-headline" id="Insertion">Insertion</span>
+</h3>
+<p>Insertion begins by adding the node as any <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree#Insertion" title="Binary search tree">binary search tree insertion</a>
+ does and by coloring it red. Whereas in the binary search tree, we 
+always add a leaf, in the red–black tree leaves contain no information, 
+so instead we add a red interior node, with two black leaves, in place 
+of an existing black leaf.</p>
+<p>What happens next depends on the color of other nearby nodes. The term <i>uncle node</i> will be used to refer to the sibling of a node's parent, as in human family trees. Note that:</p>
+<ul>
+<li>property 3 (all leaves are black) always holds.</li>
+<li>property 4 (both children of every red node are black) is threatened
+ only by adding a red node, repainting a black node red, or a rotation.</li>
+<li>property 5 (all paths from any given node to its leaf nodes contain 
+the same number of black nodes) is threatened only by adding a black 
+node, repainting a red node black (or vice versa), or a rotation.</li>
+</ul>
+<dl>
+<dd>
+<i>Note</i>: The label <b>N</b> will be used to denote the current node 
+(colored red). At the beginning, this is the new node being inserted, 
+but the entire procedure may also be applied recursively to other nodes 
+(see case 3). <b>P</b> will denote <b>N'</b>s parent node, <b>G</b> will denote <b>N'</b>s grandparent, and <b>U</b> will denote <b>N'</b>s
+ uncle. Note that in between some cases, the roles and labels of the 
+nodes are exchanged, but in each case, every label continues to 
+represent the same node it represented at the beginning of the case. Any
+ color shown in the diagram is either assumed in its case or implied by 
+those assumptions.</dd>
+</dl>
+<p>Each case will be demonstrated with example <a href="http://en.m.wikipedia.org/wiki/C_%28programming_language%29" title="C (programming language)">C</a> code. The uncle and grandparent nodes can be found by these functions:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">struct</span> node <span class="sy0">*</span>grandparent<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">!=</span> NULL<span class="br0">)</span><span class="br0">)</span>
+                <span class="kw1">return</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> NULL<span class="sy0">;</span>
+<span class="br0">}</span>
+ 
+<span class="kw4">struct</span> node <span class="sy0">*</span>uncle<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>g <span class="sy0">=</span> grandparent<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>g <span class="sy0">==</span> NULL<span class="br0">)</span>
+                <span class="kw1">return</span> NULL<span class="sy0">;</span> <span class="co1">// No grandparent means no uncle</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">==</span> g<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                <span class="kw1">return</span> g<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> g<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p><b>Case 1:</b> The current node <b>N</b> is at the root of the tree. 
+In this case, it is repainted black to satisfy property 2 (the root is 
+black). Since this adds one black node to every path at once, property 5
+ (all paths from any given node to its leaf nodes contain the same 
+number of black nodes) is not violated.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> insert_case1<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">==</span> NULL<span class="br0">)</span>
+                n<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+        <span class="kw1">else</span>
+                insert_case2<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p><b>Case 2:</b> The current node's parent <b>P</b> is black, so 
+property 4 (both children of every red node are black) is not 
+invalidated. In this case, the tree is still valid. property 5 (all 
+paths from any given node to its leaf nodes contain the same number of 
+black nodes) is not threatened, because the current node <b>N</b> has two black leaf children, but because <b>N</b>
+ is red, the paths through each of its children have the same number of 
+black nodes as the path through the leaf it replaced, which was black, 
+and so this property remains satisfied.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> insert_case2<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span>
+                <span class="kw1">return</span><span class="sy0">;</span> <span class="coMULTI">/* Tree is still valid */</span>
+        <span class="kw1">else</span>
+                insert_case3<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<i>Note:</i> In the following cases it can be assumed that <b>N</b> has a grandparent node <b>G</b>, because its parent <b>P</b> is red, and if it were the root, it would be black. Thus, <b>N</b> also has an uncle node <b>U</b>, although it may be a leaf in cases 4 and 5.</dd>
+</dl>
+<table><tbody><tr>
+<td>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_insert_case_3.png" class="image" title="Diagram of case 3"><img alt="Diagram of case 3" src="Red_black_tree_files/Red-black_tree_insert_case_3.png" width="300" height="139"></a></div>
+<p><b>Case 3:</b> If both the parent <b>P</b> and the uncle <b>U</b> are red, then both of them can be repainted black and the grandparent <b>G</b>
+ becomes red (to maintain property 5 (all paths from any given node to 
+its leaf nodes contain the same number of black nodes)). Now, the 
+current red node <b>N</b> has a black parent. Since any path through the
+ parent or uncle must pass through the grandparent, the number of black 
+nodes on these paths has not changed. However, the grandparent <b>G</b> 
+may now violate properties 2 (The root is black) or 4 (Both children of 
+every red node are black) (property 4 possibly being violated since <b>G</b> may have a red parent). To fix this, the entire procedure is recursively performed on <b>G</b>
+ from case 1. Note that this is a tail-recursive call, so it could be 
+rewritten as a loop; since this is the only loop, and any rotations 
+occur after this loop, this proves that a constant number of rotations 
+occur.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> insert_case3<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>u <span class="sy0">=</span> uncle<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">,</span> <span class="sy0">*</span>g<span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>u <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>u<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                u<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                g <span class="sy0">=</span> grandparent<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+                g<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                insert_case1<span class="br0">(</span>g<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+                insert_case4<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<i>Note:</i> In the remaining cases, it is assumed that the parent node <b>P</b> is the left child of its parent. If it is the right child, <i>left</i> and <i>right</i> should be reversed throughout cases 4 and 5. The code samples take care of this.</dd>
+</dl>
+<table><tbody><tr>
+<td>
+<div class="floatleft"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_insert_case_4.png" class="image" title="Diagram of case 4"><img alt="Diagram of case 4" src="Red_black_tree_files/Red-black_tree_insert_case_4.png" width="283" height="138"></a></div>
+<p><b>Case 4:</b> The parent <b>P</b> is red but the uncle <b>U</b> is black; also, the current node <b>N</b> is the right child of <b>P</b>, and <b>P</b> in turn is the left child of its parent <b>G</b>. In this case, a <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">left rotation</a> that switches the roles of the current node <b>N</b> and its parent <b>P</b> can be performed; then, the former parent node <b>P</b> is dealt with using case 5 (relabeling <b>N</b> and <b>P</b>)
+ because property 4 (both children of every red node are black) is still
+ violated. The rotation causes some paths (those in the sub-tree 
+labelled "1") to pass through the node <b>N</b> where they did not before. It also causes some paths (those in the sub-tree labelled "3") not to pass through the node <b>P</b>
+ where they did before. However, both of these nodes are red, so 
+property 5 (all paths from any given node to its leaf nodes contain the 
+same number of black nodes) is not violated by the rotation. After this 
+case has been completed, property 4 (both children of every red node are
+ black) is still violated, but now we can resolve this by continuing to 
+case 5.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> insert_case4<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>g <span class="sy0">=</span> grandparent<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">==</span> g<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                rotate_left<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+                n <span class="sy0">=</span> n<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">==</span> g<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                rotate_right<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+                n <span class="sy0">=</span> n<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        <span class="br0">}</span>
+        insert_case5<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<table><tbody><tr>
+<td>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_insert_case_5.png" class="image" title="Diagram of case 5"><img alt="Diagram of case 5" src="Red_black_tree_files/Red-black_tree_insert_case_5.png" width="310" height="138"></a></div>
+<p><b>Case 5:</b> The parent <b>P</b> is red but the uncle <b>U</b> is black, the current node <b>N</b> is the left child of <b>P</b>, and <b>P</b> is the left child of its parent <b>G</b>. In this case, a <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">right rotation</a> on <b>G</b> is performed; the result is a tree where the former parent <b>P</b> is now the parent of both the current node <b>N</b> and the former grandparent <b>G</b>. <b>G</b> is known to be black, since its former child <b>P</b> could not have been red otherwise (without violating property 4). Then, the colors of <b>P</b> and <b>G</b>
+ are switched, and the resulting tree satisfies property 4 (both 
+children of every red node are black). Property 5 (all paths from any 
+given node to its leaf nodes contain the same number of black nodes) 
+also remains satisfied, since all paths that went through any of these 
+three nodes went through <b>G</b> before, and now they all go through <b>P</b>. In each case, this is the only black node of the three.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> insert_case5<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>g <span class="sy0">=</span> grandparent<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+        g<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                rotate_right<span class="br0">(</span>g<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+                rotate_left<span class="br0">(</span>g<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Note that inserting is actually <a href="http://en.m.wikipedia.org/wiki/In-place_algorithm" title="In-place algorithm">in-place</a>, since all the calls above use <a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">tail recursion</a>.</p>
+<h3> <span class="mw-headline" id="Removal">Removal</span>
+</h3>
+<p>In a regular binary search tree when deleting a node with two 
+non-leaf children, we find either the maximum element in its left 
+subtree (which is the in-order predecessor) or the minimum element in 
+its right subtree (which is the in-order successor) and move its value 
+into the node being deleted (as shown <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree#Deletion" title="Binary search tree">here</a>).
+ We then delete the node we copied the value from, which must have fewer
+ than two non-leaf children. (Non-leaf children, rather than all 
+children, are specified here because unlike normal binary search trees, 
+red–black trees have leaf nodes anywhere they can have them, so that all
+ nodes are either internal nodes with two children or leaf nodes with, 
+by definition, zero children. In effect, internal nodes having two leaf 
+children in a red–black tree are like the leaf nodes in a regular binary
+ search tree.) Because merely copying a value does not violate any 
+red–black properties, this reduces to the problem of deleting a node 
+with at most one non-leaf child. Once we have solved that problem, the 
+solution applies equally to the case where the node we originally want 
+to delete has at most one non-leaf child as to the case just considered 
+where it has two non-leaf children.</p>
+<p>Therefore, for the remainder of this discussion we address the 
+deletion of a node with at most one non-leaf child. We use the label <b>M</b> to denote the node to be deleted; <b>C</b> will denote a selected child of <b>M</b>, which we will also call "its child". If <b>M</b> does have a non-leaf child, call that its child, <b>C</b>; otherwise, choose either leaf as its child, <b>C</b>.</p>
+<p>If <b>M</b> is a red node, we simply replace it with its child <b>C</b>, which must be black by property 4. (This can only occur when <b>M</b> has two leaf children, because if the red node <b>M</b>
+ had a black non-leaf child on one side but just a leaf child on the 
+other side, then the count of black nodes on both sides would be 
+different, thus the tree would violate property 5.) All paths through 
+the deleted node will simply pass through one less red node, and both 
+the deleted node's parent and child must be black, so property 3 (all 
+leaves are black) and property 4 (both children of every red node are 
+black) still hold.</p>
+<p>Another simple case is when <b>M</b> is black and <b>C</b> is red. 
+Simply removing a black node could break Properties 4 (“Both children of
+ every red node are black”) and 5 (“All paths from any given node to its
+ leaf nodes contain the same number of black nodes”), but if we repaint <b>C</b> black, both of these properties are preserved.</p>
+<p>The complex case is when both <b>M</b> and <b>C</b> are black. (This can only occur when deleting a black node which has two leaf children, because if the black node <b>M</b>
+ had a black non-leaf child on one side but just a leaf child on the 
+other side, then the count of black nodes on both sides would be 
+different, thus the tree would had been an invalid red–black tree by 
+violation of property 5.) We begin by replacing <b>M</b> with its child <b>C</b>. We will call (or <i>label</i>—that is, <i>relabel</i>) this child (in its new position) <b>N</b>, and its sibling (its new parent's other child) <b>S</b>. (<b>S</b> was previously the sibling of <b>M</b>.) In the diagrams below, we will also use <b>P</b> for <b>N'</b>s new parent (<b>M'</b>s old parent), <b>S<sub>L</sub></b> for <b>S'</b>s left child, and <b>S<sub>R</sub></b> for <b>S'</b>s right child (<b>S</b> cannot be a leaf because if <b>N</b> is black, which we presumed, then <b>P'</b>s one subtree which includes <b>N</b> counts two black-height and thus <b>P'</b>s other subtree which includes <b>S</b> must also count two black-height, which cannot be the case if <b>S</b> is a leaf node).</p>
+<dl>
+<dd>
+<i>Note</i>: In between some cases, we exchange the roles and labels of 
+the nodes, but in each case, every label continues to represent the same
+ node it represented at the beginning of the case. Any color shown in 
+the diagram is either assumed in its case or implied by those 
+assumptions. White represents an unknown color (either red or black).</dd>
+</dl>
+<p>We will find the sibling using this function:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">struct</span> node <span class="sy0">*</span>sibling<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                <span class="kw1">return</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<i>Note</i>: In order that the tree remains well-defined, we need that 
+every null leaf remains a leaf after all transformations (that it will 
+not have any children). If the node we are deleting has a non-leaf 
+(non-null) child <b>N</b>, it is easy to see that the property is satisfied. If, on the other hand, <b>N</b> would be a null leaf, it can be verified from the diagrams (or code) for all the cases that the property is satisfied as well.</dd>
+</dl>
+<p>We can perform the steps outlined above with the following code, where the function <code>replace_node</code> substitutes <code>child</code> into <code>n</code>'s
+ place in the tree. For convenience, code in this section will assume 
+that null leaves are represented by actual node objects rather than NULL
+ (the code in the <i>Insertion</i> section works with either representation).</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_one_child<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="coMULTI">/*
+         * Precondition: n has at most one non-null child.
+         */</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>child <span class="sy0">=</span> is_leaf<span class="br0">(</span>n<span class="sy0">-&gt;</span>right<span class="br0">)</span> <span class="sy0">?</span> n<span class="sy0">-&gt;</span>left <span class="sy0">:</span> n<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+ 
+        replace_node<span class="br0">(</span>n<span class="sy0">,</span> child<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="br0">{</span>
+                <span class="kw1">if</span> <span class="br0">(</span>child<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span>
+                        child<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                <span class="kw1">else</span>
+                        delete_case1<span class="br0">(</span>child<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw3">free</span><span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<i>Note</i>: If <b>N</b> is a null leaf and we do not want to represent 
+null leaves as actual node objects, we can modify the algorithm by first
+ calling delete_case1() on its parent (the node that we delete, <code>n</code>
+ in the code above) and deleting it afterwards. We can do this because 
+the parent is black, so it behaves in the same way as a null leaf (and 
+is sometimes called a 'phantom' leaf). And we can safely delete it at 
+the end as <code>n</code> will remain a leaf after all operations, as shown above.</dd>
+</dl>
+<p>If both <b>N</b> and its original parent are black, then deleting this original parent causes paths which proceed through <b>N</b>
+ to have one fewer black node than paths that do not. As this violates 
+property 5 (all paths from any given node to its leaf nodes contain the 
+same number of black nodes), the tree must be rebalanced. There are 
+several cases to consider:</p>
+<p><b>Case 1:</b> <b>N</b> is the new root. In this case, we are done. 
+We removed one black node from every path, and the new root is black, so
+ the properties are preserved.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case1<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>n<span class="sy0">-&gt;</span>parent <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                delete_case2<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<dl>
+<dd>
+<i>Note</i>: In cases 2, 5, and 6, we assume <b>N</b> is the left child of its parent <b>P</b>. If it is the right child, <i>left</i> and <i>right</i> should be reversed throughout these three cases. Again, the code examples take both cases into account.</dd>
+</dl>
+<table><tbody><tr>
+<td>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_delete_case_2.png" class="image" title="Diagram of case 2"><img alt="Diagram of case 2" src="Red_black_tree_files/Red-black_tree_delete_case_2.png" width="298" height="136"></a></div>
+<p><b>Case 2:</b> <b>S</b> is red. In this case we reverse the colors of <b>P</b> and <b>S</b>, and then <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">rotate</a> left at <b>P</b>, turning <b>S</b> into <b>N'</b>s grandparent. Note that <b>P</b> has to be black as it had a red child. Although all paths still have the same number of black nodes, now <b>N</b>
+ has a black sibling and a red parent, so we can proceed to step 4, 5, 
+or 6. (Its new sibling is black because it was once the child of the red
+ <b>S</b>.) In later cases, we will relabel <b>N'</b>s new sibling as <b>S</b>.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case2<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s <span class="sy0">=</span> sibling<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span>s<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span> <span class="br0">{</span>
+                n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                        rotate_left<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">else</span>
+                        rotate_right<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        delete_case3<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<table><tbody><tr>
+<td>
+<div class="floatleft"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_delete_case_3.png" class="image" title="Diagram of case 3"><img alt="Diagram of case 3" src="Red_black_tree_files/Red-black_tree_delete_case_3.png" width="313" height="132"></a></div>
+<p><b>Case 3:</b> <b>P</b>, <b>S</b>, and <b>S'</b>s children are black. In this case, we simply repaint <b>S</b> red. The result is that all paths passing through <b>S</b>, which are precisely those paths <i>not</i> passing through <b>N</b>, have one less black node. Because deleting <b>N'</b>s original parent made all paths passing through <b>N</b> have one less black node, this evens things up. However, all paths through <b>P</b> now have one fewer black node than paths that do not pass through <b>P</b>,
+ so property 5 (all paths from any given node to its leaf nodes contain 
+the same number of black nodes) is still violated. To correct this, we 
+perform the rebalancing procedure on <b>P</b>, starting at case 1.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case3<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s <span class="sy0">=</span> sibling<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                delete_case1<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span>
+                delete_case4<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<table><tbody><tr>
+<td>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_delete_case_4.png" class="image" title="Diagram of case 4"><img alt="Diagram of case 4" src="Red_black_tree_files/Red-black_tree_delete_case_4.png" width="313" height="132"></a></div>
+<p><b>Case 4:</b> <b>S</b> and <b>S'</b>s children are black, but <b>P</b> is red. In this case, we simply exchange the colors of <b>S</b> and <b>P</b>. This does not affect the number of black nodes on paths going through <b>S</b>, but it does add one to the number of black nodes on paths going through <b>N</b>, making up for the deleted black node on those paths.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case4<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s <span class="sy0">=</span> sibling<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+            <span class="br0">(</span>s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span>
+                delete_case5<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<table><tbody><tr>
+<td>
+<div class="floatleft"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_delete_case_5.png" class="image" title="Diagram of case 5"><img alt="Diagram of case 5" src="Red_black_tree_files/Red-black_tree_delete_case_5.png" width="247" height="133"></a></div>
+<p><b>Case 5:</b> <b>S</b> is black, <b>S'</b>s left child is red, <b>S'</b>s right child is black, and <b>N</b> is the left child of its parent. In this case we rotate right at <b>S</b>, so that <b>S'</b>s left child becomes <b>S'</b>s parent and <b>N'</b>s new sibling. We then exchange the colors of <b>S</b> and its new parent. All paths still have the same number of black nodes, but now <b>N</b> has a black sibling whose right child is red, so we fall into case 6. Neither <b>N</b> nor its parent are affected by this transformation. (Again, for case 6, we relabel <b>N'</b>s new sibling as <b>S</b>.)</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case5<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s <span class="sy0">=</span> sibling<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        <span class="kw1">if</span>  <span class="br0">(</span>s<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="br0">{</span> <span class="coMULTI">/* this if statement is trivial,
+due to case 2 (even though case 2 changed the sibling to a sibling's child,
+the sibling's child can't be red, since no red parent can have a red child). */</span>
+<span class="coMULTI">/* the following statements just force the red to be on the left of the left of the parent,
+   or right of the right, so case six will rotate correctly. */</span>
+                <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+                    <span class="br0">(</span>s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+                    <span class="br0">(</span>s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span> <span class="coMULTI">/* this last test is trivial too due to cases 2-4. */</span>
+                        s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                        s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                        rotate_right<span class="br0">(</span>s<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+                           <span class="br0">(</span>s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">==</span> BLACK<span class="br0">)</span> <span class="sy0">&amp;&amp;</span>
+                           <span class="br0">(</span>s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">==</span> RED<span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span><span class="coMULTI">/* this last test is trivial too due to cases 2-4. */</span>
+                        s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> RED<span class="sy0">;</span>
+                        s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                        rotate_left<span class="br0">(</span>s<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+        <span class="br0">}</span>
+        delete_case6<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<table><tbody><tr>
+<td>
+<div class="floatright"><a href="http://en.m.wikipedia.org/wiki/File:Red-black_tree_delete_case_6.png" class="image" title="Diagram of case 6"><img alt="Diagram of case 6" src="Red_black_tree_files/Red-black_tree_delete_case_6.png" width="299" height="143"></a></div>
+<p><b>Case 6:</b> <b>S</b> is black, <b>S'</b>s right child is red, and <b>N</b> is the left child of its parent <b>P</b>. In this case we rotate left at <b>P</b>, so that <b>S</b> becomes the parent of <b>P</b> and <b>S'</b>s right child. We then exchange the colors of <b>P</b> and <b>S</b>, and make <b>S'</b>s
+ right child black. The subtree still has the same color at its root, so
+ Properties 4 (Both children of every red node are black) and 5 (All 
+paths from any given node to its leaf nodes contain the same number of 
+black nodes) are not violated. However, <b>N</b> now has one additional black ancestor: either <b>P</b> has become black, or it was black and <b>S</b> was added as a black grandparent. Thus, the paths passing through <b>N</b> pass through one additional black node.</p>
+<p>Meanwhile, if a path does not go through <b>N</b>, then there are two possibilities:</p>
+<ul>
+<li>It goes through <b>N'</b>s new sibling. Then, it must go through <b>S</b> and <b>P</b>,
+ both formerly and currently, as they have only exchanged colors and 
+places. Thus the path contains the same number of black nodes.</li>
+<li>It goes through <b>N'</b>s new uncle, <b>S'</b>s right child. Then, it formerly went through <b>S</b>, <b>S'</b>s parent, and <b>S'</b>s right child (which was red), but now only goes through <b>S</b>, which has assumed the color of its former parent, and <b>S'</b>s right child, which has changed from red to black (assuming <b>S'</b>s color: black). The net effect is that this path goes through the same number of black nodes.</li>
+</ul>
+<p>Either way, the number of black nodes on these paths does not change.
+ Thus, we have restored Properties 4 (Both children of every red node 
+are black) and 5 (All paths from any given node to its leaf nodes 
+contain the same number of black nodes). The white node in the diagram 
+can be either red or black, but must refer to the same color both before
+ and after the transformation.</p>
+</td>
+</tr></tbody></table>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">void</span> delete_case6<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>n<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s <span class="sy0">=</span> sibling<span class="br0">(</span>n<span class="br0">)</span><span class="sy0">;</span>
+ 
+        s<span class="sy0">-&gt;</span>color <span class="sy0">=</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color<span class="sy0">;</span>
+        n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span>n <span class="sy0">==</span> n<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span> <span class="br0">{</span>
+                s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                rotate_left<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+                s<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>color <span class="sy0">=</span> BLACK<span class="sy0">;</span>
+                rotate_right<span class="br0">(</span>n<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+<p>Again, the function calls all use <a href="http://en.m.wikipedia.org/wiki/Tail_recursion" title="Tail recursion" class="mw-redirect">tail recursion</a>, so the algorithm is <a href="http://en.m.wikipedia.org/wiki/In-place_algorithm" title="In-place algorithm">in-place</a>.
+ In the algorithm above, all cases are chained in order, except in 
+delete case 3 where it can recurse to case 1 back to the parent node: 
+this is the only case where an in-place implementation will effectively 
+loop (after only one rotation in case 3).</p>
+<p>Additionally, no tail recursion ever occurs on a child node, so the 
+tail recursion loop can only move from a child back to its successive 
+ancestors. No more than O(log <i>n</i>) loops back to case 1 will occur (where <i>n</i>
+ is the total number of nodes in the tree before deletion). If a 
+rotation occurs in case 2 (which is the only possibility of rotation 
+within the loop of cases 1–3), then the parent of the node <b>N</b> 
+becomes red after the rotation and we will exit the loop. Therefore at 
+most one rotation will occur within this loop. Since no more than two 
+additional rotations will occur after exiting the loop, at most three 
+rotations occur in total.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Proof_of_asymptotic_bounds">Proof of asymptotic bounds</span></h2><div class="content_block" id="content_7">
+<p>A red black tree which contains <i>n</i> internal nodes has a height of O(log(n)).</p>
+<p>Definitions:</p>
+<ul>
+<li>h(<i>v</i>) = height of subtree rooted at node <i>v</i>
+</li>
+<li>bh(<i>v</i>) = the number of black nodes (not counting <i>v</i> if it is black) from <i>v</i> to any leaf in the subtree (called the black-height).</li>
+</ul>
+<p><b>Lemma:</b> A subtree rooted at node <i>v</i> has at least <img class="tex" alt="2^{bh(v)}-1" src="Red_black_tree_files/094149047bf3aaa925673ef67f0880fe.png"> internal nodes.</p>
+<p>Proof of Lemma (by induction height):</p>
+<p>Basis: h(<i>v</i>) = 0</p>
+<p>If <i>v</i> has a height of zero then it must be <i>null</i>, therefore bh(<i>v</i>) = 0. So:</p>
+<dl>
+<dd><img class="tex" alt="
+2^{bh(v)}-1 = 2^{0}-1 = 1-1 = 0
+" src="Red_black_tree_files/d5506bad4c0e0a51b5984ec5036b93f7.png"></dd>
+</dl>
+<p>Inductive Step: <i>v</i> such that h(<i>v</i>) = k, has at least <img class="tex" alt="2^{bh(v)}-1" src="Red_black_tree_files/094149047bf3aaa925673ef67f0880fe.png"> internal nodes implies that <img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png"> such that h(<img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png">) = k+1 has at least <img class="tex" alt="2^{bh(v')}-1" src="Red_black_tree_files/22e196e7e9cd1662649c45ffa3fdecc1.png"> internal nodes.</p>
+<p>Since <img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png"> has h(<img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png">) &gt; 0 it is an internal node. As such it has two children each of which have a black-height of either bh(<img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png">) or bh(<img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png">)-1 (depending on whether the child is red or black, respectively). By the inductive hypothesis each child has at least <img class="tex" alt="2^{bh(v')-1}-1" src="Red_black_tree_files/eceb5c4a4cc92b4f6296d47d755ed755.png"> internal nodes, so <img class="tex" alt="v'" src="Red_black_tree_files/b3afdc4dc7644ad636e084509b04ddab.png"> has at least:</p>
+<dl>
+<dd><img class="tex" alt="
+2^{bh(v')-1}-1 + 2^{bh(v')-1}-1 + 1 = 2^{bh(v')}-1
+" src="Red_black_tree_files/507186f210e4ab42aa1b213d0ae895b6.png"></dd>
+</dl>
+<p>internal nodes.</p>
+<p>Using this lemma we can now show that the height of the tree is 
+logarithmic. Since at least half of the nodes on any path from the root 
+to a leaf are black (property 4 of a red–black tree), the black-height 
+of the root is at least h(root)/2. By the lemma we get:</p>
+<dl>
+<dd><img class="tex" alt="
+n \geq 2^{{h(\text{root}) \over 2}} - 1 \leftrightarrow \; \log_2{(n+1)} \geq {h(\text{root}) \over 2} \leftrightarrow \; h(\text{root}) \leq 2\log_2{(n+1)}.
+" src="Red_black_tree_files/e5cc954022122cf14c04b677798e49f7.png"></dd>
+</dl>
+<p>Therefore the height of the root is O(log(n)).</p>
+<h3> <span class="mw-headline" id="Insertion_complexity">Insertion complexity</span>
+</h3>
+<p>In the tree code there is only one loop where the node of the root of
+ the red–black property that we wish to restore, x, can be moved up the 
+tree by one level at each iteration.</p>
+<p>Since the original height of the tree is O(log n), there are O(log n)
+ iterations. So overall the insert routine has O(log n) complexity.</p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Parallel_algorithms">Parallel algorithms</span></h2><div class="content_block" id="content_8">
+<p>Parallel algorithms for constructing red–black trees from sorted 
+lists of items can run in constant time or O(loglog n) time, depending 
+on the computer model, if the number of processors available is 
+proportional to the number of items. Fast search, insertion, and 
+deletion parallel algorithms are also known.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_9">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_data_structure" title="Tree data structure" class="mw-redirect">Tree data structure</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">Tree rotation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Splay_tree" title="Splay tree">Splay tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-tree</a> (<a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 tree</a>, <a href="http://en.m.wikipedia.org/wiki/2-3-4_tree" title="2-3-4 tree">2-3-4 tree</a>, <a href="http://en.m.wikipedia.org/wiki/B%2B_tree" title="B+ tree">B+ tree</a>, <a href="http://en.m.wikipedia.org/wiki/B*-tree" title="B*-tree" class="mw-redirect">B*-tree</a>, <a href="http://en.m.wikipedia.org/wiki/UB-tree" title="UB-tree">UB-tree</a>)</li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_of_data_structures" title="List of data structures">List of data structures</a></li>
+</ul>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_10">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation web">John Morris. <a rel="nofollow" class="external text" href="http://www.cs.auckland.ac.nz/%7Ejmor159/PLDS210/red_black.html">"Red-Black Trees"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.cs.auckland.ac.nz/%7Ejmor159/PLDS210/red_black.html">http://www.cs.auckland.ac.nz/~jmor159/PLDS210/red_black.html</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Red-Black+Trees&amp;rft.atitle=&amp;rft.aulast=John+Morris&amp;rft.au=John+Morris&amp;rft_id=http%3A%2F%2Fwww.cs.auckland.ac.nz%2F%7Ejmor159%2FPLDS210%2Fred_black.html&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span>&gt;</span>
+</li>
+<li id="cite_note-Bayer72-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Bayer72_1-0">^</a></b></span> <span class="reference-text"><span class="citation Journal">Rudolf Bayer (1972). <a rel="nofollow" class="external text" href="http://www.springerlink.com/content/qh51m2014673513j/">"Symmetric binary B-Trees: Data structure and maintenance algorithms"</a>. <i>Acta Informatica</i> <b>1</b> (4): 290–306. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF00289509">10.1007/BF00289509</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.springerlink.com/content/qh51m2014673513j/">http://www.springerlink.com/content/qh51m2014673513j/</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Symmetric+binary+B-Trees%3A+Data+structure+and+maintenance+algorithms&amp;rft.jtitle=Acta+Informatica&amp;rft.aulast=Rudolf+Bayer&amp;rft.au=Rudolf+Bayer&amp;rft.date=1972&amp;rft.volume=1&amp;rft.issue=4&amp;rft.pages=290%E2%80%93306&amp;rft_id=info:doi/10.1007%2FBF00289509&amp;rft_id=http%3A%2F%2Fwww.springerlink.com%2Fcontent%2Fqh51m2014673513j%2F&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-GS78-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-GS78_2-0">^</a></b></span> <span class="reference-text"><span class="citation book">Leonidas J. Guibas and Robert Sedgewick (1978). <a rel="nofollow" class="external text" href="http://doi.ieeecomputersociety.org/10.1109/SFCS.1978.3">"A Dichromatic Framework for Balanced Trees"</a>. <i>Proceedings of the 19th Annual Symposium on Foundations of Computer Science</i>. pp.&nbsp;8–21. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1978.3">10.1109/SFCS.1978.3</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://doi.ieeecomputersociety.org/10.1109/SFCS.1978.3">http://doi.ieeecomputersociety.org/10.1109/SFCS.1978.3</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=A+Dichromatic+Framework+for+Balanced+Trees&amp;rft.atitle=Proceedings+of+the+19th+Annual+Symposium+on+Foundations+of+Computer+Science&amp;rft.aulast=Leonidas+J.+Guibas+and+Robert+Sedgewick&amp;rft.au=Leonidas+J.+Guibas+and+Robert+Sedgewick&amp;rft.date=1978&amp;rft.pages=pp.%26nbsp%3B8%E2%80%9321&amp;rft_id=info:doi/10.1109%2FSFCS.1978.3&amp;rft_id=http%3A%2F%2Fdoi.ieeecomputersociety.org%2F10.1109%2FSFCS.1978.3&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-cs.princeton.edu-3">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-cs.princeton.edu_3-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-cs.princeton.edu_3-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.cs.princeton.edu/%7Ers/talks/LLRB/RedBlack.pdf">http://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf</a></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://www.cs.princeton.edu/courses/archive/fall08/cos226/lectures/10BalancedTrees-2x2.pdf">http://www.cs.princeton.edu/courses/archive/fall08/cos226/lectures/10BalancedTrees-2x2.pdf</a></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation Journal">H. Park and K. Park (2001). <a rel="nofollow" class="external text" href="http://www.sciencedirect.com/science/article/pii/S0304397500002875">"Parallel algorithms for red–black trees"</a>. <i>Theoretical computer science</i> (Elsevier) <b>262</b> (1–2): 415–435. <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2FS0304-3975%2800%2900287-5">10.1016/S0304-3975(00)00287-5</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.sciencedirect.com/science/article/pii/S0304397500002875">http://www.sciencedirect.com/science/article/pii/S0304397500002875</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Parallel+algorithms+for+red%E2%80%93black+trees&amp;rft.jtitle=Theoretical+computer+science&amp;rft.aulast=H.+Park+and+K.+Park&amp;rft.au=H.+Park+and+K.+Park&amp;rft.date=2001&amp;rft.volume=262&amp;rft.issue=1%E2%80%932&amp;rft.pages=415%E2%80%93435&amp;rft.pub=Elsevier&amp;rft_id=info:doi/10.1016%2FS0304-3975%2800%2900287-5&amp;rft_id=http%3A%2F%2Fwww.sciencedirect.com%2Fscience%2Farticle%2Fpii%2FS0304397500002875&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_11">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://mathworld.wolfram.com/Red-BlackTree.html">Mathworld: Red–Black Tree</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.eli.sdsu.edu/courses/fall95/cs660/notes/RedBlackTree/RedBlack.html#RTFToC2">San Diego State University: CS 660: Red–Black tree notes</a>, by Roger Whitney</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, and <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. MIT Press and McGraw-Hill, 2001. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a> . Chapter 13: Red–Black Trees, pp.&nbsp;273–301.</li>
+<li>
+<span class="citation web">Pfaff, Ben (June 2004). <a rel="nofollow" class="external text" href="http://www.stanford.edu/%7Eblp/papers/libavl.pdf">"Performance Analysis of BSTs in System Software"</a> (PDF). <a href="http://en.m.wikipedia.org/wiki/Stanford_university" title="Stanford university" class="mw-redirect">Stanford University</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www.stanford.edu/%7Eblp/papers/libavl.pdf">http://www.stanford.edu/~blp/papers/libavl.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Performance+Analysis+of+BSTs+in+System+Software&amp;rft.atitle=&amp;rft.aulast=Pfaff&amp;rft.aufirst=Ben&amp;rft.au=Pfaff%2C%26%2332%3BBen&amp;rft.date=June+2004&amp;rft.pub=%5B%5BStanford+university%7CStanford+University%5D%5D&amp;rft_id=http%3A%2F%2Fwww.stanford.edu%2F%7Eblp%2Fpapers%2Flibavl.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation web">Okasaki, Chris. <a rel="nofollow" class="external text" href="http://www.eecs.usma.edu/webs/people/okasaki/jfp99.ps">"Red–Black Trees in a Functional Setting"</a> (PS)<span class="printonly">. <a rel="nofollow" class="external free" href="http://www.eecs.usma.edu/webs/people/okasaki/jfp99.ps">http://www.eecs.usma.edu/webs/people/okasaki/jfp99.ps</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Red%E2%80%93Black+Trees+in+a+Functional+Setting&amp;rft.atitle=&amp;rft.aulast=Okasaki&amp;rft.aufirst=Chris&amp;rft.au=Okasaki%2C%26%2332%3BChris&amp;rft_id=http%3A%2F%2Fwww.eecs.usma.edu%2Fwebs%2Fpeople%2Fokasaki%2Fjfp99.ps&amp;rfr_id=info:sid/en.wikipedia.org:Red%E2%80%93black_tree"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div><a id="anchor_11" href="#section_11" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_12"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_12">
+<ul>
+<li>In the <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> <a href="http://en.m.wikipedia.org/wiki/Standard_Template_Library" title="Standard Template Library">Standard Template Library</a>, the containers <code>std::set&lt;Value&gt;</code> and <code>std::map&lt;Key,Value&gt;</code> are typically based on red–black trees</li>
+<li><a rel="nofollow" class="external text" href="http://eternallyconfuzzled.com/tuts/datastructures/jsw_tut_rbtree.aspx">Tutorial and code for top-down Red–Black Trees</a></li>
+<li><a rel="nofollow" class="external text" href="http://github.com/fbuihuu/libtree">C code for Red–Black Trees</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.stanford.edu/%7Eblp/avl/libavl.html/Red_002dBlack-Trees.html">Red–Black Tree in GNU libavl C library by Ben Pfaff</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.mit.edu/%7Eemin/source_code/red_black_tree/index.html">Red–Black Tree C Code</a></li>
+<li><a rel="nofollow" class="external text" href="http://wiki.edinburghhacklab.com/PersistentRedBlackTreeSet">Lightweight Java implementation of Persistent Red–Black Trees</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ludvikjerabek.com/downloads.html">VBScript implementation of stack, queue, deque, and Red–Black Tree</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ece.uc.edu/%7Efranco/C321/html/RedBlack/redblack.html">Red–Black Tree Demonstration</a></li>
+<li><a rel="nofollow" class="external text" href="http://code.google.com/p/redblacktreephp/source/browse/#svn/trunk">Red–Black Tree PHP5 Code</a></li>
+<li>In Java a freely available red black tree implementation is that of <a rel="nofollow" class="external text" href="http://commons.apache.org/collections/api-release/org/apache/commons/collections/bidimap/TreeBidiMap.html">apache commons</a>
+</li>
+<li>Java's TreeSet class internally stores its elements in a red black tree: <a rel="nofollow" class="external free" href="http://java.sun.com/docs/books/tutorial/collections/interfaces/set.html">http://java.sun.com/docs/books/tutorial/collections/interfaces/set.html</a>
+</li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.princeton.edu/%7Ers/talks/LLRB/LLRB.pdf">Left Leaning Red Black Trees</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.cs.princeton.edu/%7Ers/talks/LLRB/RedBlack.pdf">Left Leaning Red Black Trees Slides</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.forth.org/novice.html">Left-Leaning Red–Black Tree in ANS-Forth by Hugh Aguilar</a> See ASSOCIATION.4TH for the LLRB tree.</li>
+<li><a rel="nofollow" class="external text" href="http://blogs.msdn.com/b/delay/archive/2009/06/02/maintaining-balance-a-versatile-red-black-tree-implementation-for-net-via-silverlight-wpf-charting.aspx">An implementation of left-leaning red-black trees in C#</a></li>
+<li><a rel="nofollow" class="external text" href="http://employees.oneonta.edu/zhangs/PowerPointplatform/">PPT slides demonstration of manipulating red black trees to facilitate teaching</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-introduction-to-algorithms-sma-5503-fall-2005/video-lectures/lecture-10-red-black-trees-rotations-insertions-deletions/">OCW MIT Lecture by Prof. Erik Demaine on Red Black Trees</a> -</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.boyet.com/Articles/RedBlack1.html">1</a><a rel="nofollow" class="external text" href="http://www.boyet.com/Articles/RedBlack2.html">2</a><a rel="nofollow" class="external text" href="http://www.boyet.com/Articles/RedBlack3.html">3</a><a rel="nofollow" class="external text" href="http://www.boyet.com/Articles/RedBlack4.html">4</a><a rel="nofollow" class="external text" href="http://www.boyet.com/Articles/RedBlack5.html">5</a>, a C# Article series by Julian M. Bucknall.</li>
+<li><a rel="nofollow" class="external text" href="http://opendatastructures.org/versions/edition-0.1d/ods-java/node46.html">Open Data Structures - Chapter 9 - Red-Black Trees</a></li>
+<li>
+<a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=_VbTnLV8plU">Binary Search Tree Insertion Visualization</a> on <a href="http://en.m.wikipedia.org/wiki/YouTube" title="YouTube">YouTube</a> – Visualization of random and pre-sorted data insertions, in elementary binary search trees, and left-leaning red–black trees</li>
+<li><a rel="nofollow" class="external text" href="http://lwn.net/Articles/184495/">Red Black Tree API in the Linux kernel</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:CS_trees" title="Template:CS trees"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:CS_trees" title="Template talk:CS trees"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:CS_trees&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Trees</a> in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">Binary trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree (BST)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree" title="Cartesian tree">Cartesian tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Top_tree" title="Top tree">Top tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">Self-balancing binary search trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AA_tree" title="AA tree">AA tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/LLRB_tree" title="LLRB tree" class="mw-redirect">LLRB tree</a></li>
+<li><strong class="selflink">Red–black tree</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Splay_tree" title="Splay tree">Splay tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Treap" title="Treap">Treap</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/B%2B_tree" title="B+ tree">B+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B*-tree" title="B*-tree" class="mw-redirect">B*-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bx-tree" title="Bx-tree">B<small><sup>x</sup></small>-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UB-tree" title="UB-tree">UB-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3-4_tree" title="2-3-4 tree">2-3-4 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/%28a,b%29-tree" title="(a,b)-tree">(a,b)-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dancing_tree" title="Dancing tree">Dancing tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Htree" title="Htree">Htree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Trie" title="Trie">Tries</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">Suffix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_search_tree" title="Ternary search tree">Ternary search tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-fast_trie" title="X-fast trie">X-fast trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Y-fast_trie" title="Y-fast trie">Y-fast trie</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Binary_space_partitioning" title="Binary space partitioning">Binary space partitioning (BSP)</a> trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Quadtree" title="Quadtree">Quadtree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Octree" title="Octree">Octree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/K-d_tree" title="K-d tree"><i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Implicit_k-d_tree" title="Implicit k-d tree">Implicit <i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Vp-tree" title="Vp-tree">vp-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Non-binary trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Exponential_tree" title="Exponential tree">Exponential tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fusion_tree" title="Fusion tree">Fusion tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interval_tree" title="Interval tree">Interval tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/PQ_tree" title="PQ tree">PQ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Range_tree" title="Range tree">Range tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SPQR_tree" title="SPQR tree">SPQR tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Van_Emde_Boas_tree" title="Van Emde Boas tree">Van Emde Boas tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Spatial_index" title="Spatial index" class="mw-redirect">Spatial</a> data partitioning trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/R-tree" title="R-tree">R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R%2B_tree" title="R+ tree">R+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R*_tree" title="R* tree">R* tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-tree" title="X-tree">X-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/M-tree" title="M-tree">M-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Segment_tree" title="Segment tree">Segment tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hilbert_R-tree" title="Hilbert R-tree">Hilbert R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Priority_R-tree" title="Priority R-tree">Priority R-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">Heap</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_tree" title="Hash tree">Hash tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Finger_tree" title="Finger tree">Finger tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metric_tree" title="Metric tree">Metric tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cover_tree" title="Cover tree">Cover tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/BK-tree" title="BK-tree">BK-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Doubly_chained_tree" title="Doubly chained tree">Doubly chained tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/IDistance" title="IDistance">iDistance</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Link-cut_tree" title="Link-cut tree" class="mw-redirect">Link-cut tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fenwick_tree" title="Fenwick tree">Fenwick tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+<p><span id="interwiki-de-ga"></span></p>
+
+
+
+
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Red-black_tree&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Red%E2%80%93black+tree&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Red-black_tree&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Red%E2%80%93black+tree&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Red_black_tree_files/load_002.php" type="text/javascript"></script>
+<script src="Red_black_tree_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

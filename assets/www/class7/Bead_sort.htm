@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Bead sort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Bead_sort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 4 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Bead_sort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Bead_sort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Bead_sort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Bead_sort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Bead_sort" selected="selected">English</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8_%D8%B3%D8%A7%D8%B2%DB%8C_%D9%85%D9%87%D8%B1%D9%87%E2%80%8C%D8%A7%DB%8C">فارسی</option><option value="//zh-yue.m.wikipedia.org/wiki/%E7%8F%A0%E6%8E%92%E5%BA%8F">粵語</option><option value="//zh.m.wikipedia.org/wiki/%E7%8F%A0%E6%8E%92%E5%BA%8F">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Bead sort</h1>			
+<p><b>Bead sort</b> is a <span class="new" title="Natural algorithm (page does not exist)">natural</span> <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>, developed by <span class="new" title="Joshua J. Arulanandham (page does not exist)">Joshua J. Arulanandham</span>, <a href="http://en.m.wikipedia.org/wiki/Cristian_S._Calude" title="Cristian S. Calude">Cristian S. Calude</a> and <a href="http://en.m.wikipedia.org/wiki/Michael_J._Dinneen" title="Michael J. Dinneen" class="mw-redirect">Michael J. Dinneen</a> in 2002, and published in The Bulletin of the <a href="http://en.m.wikipedia.org/wiki/European_Association_for_Theoretical_Computer_Science" title="European Association for Theoretical Computer Science">European Association for Theoretical Computer Science</a>. Both <a href="http://en.m.wikipedia.org/wiki/Digital" title="Digital">digital</a> and <a href="http://en.m.wikipedia.org/wiki/Analog_computer" title="Analog computer">analog</a> hardware <a href="http://en.m.wikipedia.org/wiki/Implementation" title="Implementation">implementations</a> of bead sort can achieve a sorting time of <i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(<i>n</i>); however, the implementation of this algorithm tends to be significantly slower in <a href="http://en.m.wikipedia.org/wiki/Software" title="Software">software</a> and can only be used to sort lists of <a href="http://en.m.wikipedia.org/wiki/Positive_integer" title="Positive integer" class="mw-redirect">positive integers</a>. Also, it would seem that even in the best case, the algorithm requires <i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(<i>n<sup>2</sup></i>) space.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Algorithm_overview">Algorithm overview</span></h2><div class="content_block" id="content_1">
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BeadSort-Figure1.svg" class="image"><img alt="" src="Bead_sort_files/220px-BeadSort-Figure1.png" class="thumbimage" width="220" height="174"></a>
+<div class="thumbcaption">
+
+Step 1: Suspended beads on vertical poles.</div>
+</div>
+</div>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:BeadSort-Figure2.svg" class="image"><img alt="" src="Bead_sort_files/220px-BeadSort-Figure2.png" class="thumbimage" width="220" height="174"></a>
+<div class="thumbcaption">
+
+Step 2: The beads have been allowed to fall.</div>
+</div>
+</div>
+<p>The bead sort operation can be compared to the manner in which beads slide on parallel poles, such as on an <a href="http://en.m.wikipedia.org/wiki/Abacus" title="Abacus">abacus</a>.
+ However, each pole may have a distinct number of beads. Initially, it 
+may be helpful to imagine the beads suspended on vertical poles. In Step
+ 1, such an arrangement is displayed using <i>n=5</i> rows of beads on <i>m=4</i>
+ vertical poles. The numbers to the right of each row indicate the 
+number that the row in question represents; rows 1 and 2 are 
+representing the positive integer 3 (because they each contain three 
+beads) while the top row represents the positive integer 2 (as it only 
+contains two beads).<sup id="cite_ref-rowconventions_0-0" class="reference"><a href="#cite_note-rowconventions-0"><span>[</span>1<span>]</span></a></sup></p>
+<p>If we then allow the beads to fall, the rows now represent the same 
+integers in sorted order. Row 1 contains the largest number in the set, 
+while row <i>n</i> contains the smallest. If the above-mentioned convention of rows containing a series of beads on poles 1..<i>k</i> and leaving poles <i>k</i>+1..<i>m</i> empty has been followed, it will continue to be the case here.</p>
+<p>The action of allowing the beads to "fall" in our physical example 
+has allowed the larger values from the higher rows to propagate to the 
+lower rows. If the value represented by row <i>a</i> is smaller than the value contained in row <i>a+1</i>, some of the beads from row <i>a+1</i> will fall into row <i>a</i>; this is certain to happen, as row <i>a</i> does not contain beads in those positions to stop the beads from row <i>a+1</i> from falling.</p>
+<p>The mechanism underlying bead sort is similar to that behind <a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">counting sort</a>; the number of beads on each pole corresponds to the number of elements with value equal or less than the index of that pole.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Complexity">Complexity</span></h2><div class="content_block" id="content_2">
+<p>Bead sort can be implemented with three general levels of complexity, among others:</p>
+<ul>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(1):
+ The beads are all moved simultaneously in the same time unit, as would 
+be the case with the simple physical example above. This is an abstract 
+complexity, and cannot be implemented in practice.</li>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(<img class="tex" alt="\sqrt{n}" src="Bead_sort_files/50a52d4f0509159a4fcb286c896d8b64.png">):
+ In a realistic physical model that uses gravity, the time it takes to 
+let the beads fall is proportional to the square root of the maximum 
+height, which is proportional to n.</li>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(n): The beads are moved one row at a time. This is the case used in the analog and <a href="http://en.m.wikipedia.org/wiki/Digital_hardware" title="Digital hardware" class="mw-redirect">digital hardware</a> solutions.</li>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(S),
+ where S is the sum of the integers in the input set: Each bead is moved
+ individually. This is the case when bead sort is implemented without a 
+mechanism to assist in finding empty spaces below the beads, such as in 
+software implementations.</li>
+</ul>
+<p>Like the <a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a>, bead sort is unusual in that it can perform faster than <i><a href="http://en.m.wikipedia.org/wiki/Big_O_Notation" title="Big O Notation" class="mw-redirect">O</a></i>(<i>n</i><a href="http://en.m.wikipedia.org/wiki/Logarithm" title="Logarithm">log</a><i>n</i>), the fastest performance possible for a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison sort</a>. This is possible because the key for a bead sort is always a positive integer and bead sort exploits its structure.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="References_and_notes">References and notes</span></h2><div class="content_block" id="content_3">
+<ol class="references">
+<li id="cite_note-rowconventions-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-rowconventions_0-0">^</a></b></span> <span class="reference-text">By convention, a row representing the positive integer <i>k</i> should have beads on poles 1..<i>k</i> and poles <i>k</i>+1..<i>m</i> should be empty. This is not a strict requirement, but will most likely simplify implementation.</span>
+</li>
+</ol>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_4">
+<ul>
+<li>
+<span class="PDFlink"><a rel="nofollow" class="external text" href="http://www.cs.auckland.ac.nz/%7Ejaru003/research/publications/journals/beadsort.pdf">The Bead Sort paper</a></span><span style="font-size:smaller;">PDF&nbsp;(114&nbsp;<a href="http://en.m.wikipedia.org/wiki/Kibibyte" title="Kibibyte">KiB</a>)</span>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://mgs.spatial-computing.org/ImageGallery/EXEMPLES/BeadSort/index.html">Bead Sort in MGS</a>, a visualization of a bead sort implemented in the <a rel="nofollow" class="external text" href="http://mgs.spatial-computing.org/">MGS</a> programming language</li>
+<li><a rel="nofollow" class="external text" href="http://mathworld.wolfram.com/Bead-Sort.html">Bead Sort on MathWorld</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><strong class="selflink">Bead sort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Bead_sort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Bead+sort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Bead_sort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Bead+sort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Bead_sort_files/load_002.php" type="text/javascript"></script>
+<script src="Bead_sort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Bloom filter - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Bloom_filter_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 14 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Bloom_filter">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Bloom_filter_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Bloom_filter_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Bloom_filter_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Bloom_filter" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Bloom%C5%AFv_filtr">česky</option><option value="//de.m.wikipedia.org/wiki/Bloomfilter">Deutsch</option><option value="//fa.m.wikipedia.org/wiki/%D9%81%DB%8C%D9%84%D8%AA%D8%B1_%D8%A8%D9%88%D9%84%D9%88%D9%85">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Filtre_de_Bloom">français</option><option value="//ko.m.wikipedia.org/wiki/%EB%B8%94%EB%A3%B8_%ED%95%84%ED%84%B0">한국어</option><option value="//he.m.wikipedia.org/wiki/%D7%A4%D7%99%D7%9C%D7%98%D7%A8_%D7%91%D7%9C%D7%95%D7%9D">עברית</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%96%E3%83%AB%E3%83%BC%E3%83%A0%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF">日本語</option><option value="//pl.m.wikipedia.org/wiki/Filtr_Blooma">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%A4%D0%B8%D0%BB%D1%8C%D1%82%D1%80_%D0%91%D0%BB%D1%83%D0%BC%D0%B0">русский</option><option value="//sk.m.wikipedia.org/wiki/Bloomov_filter">slovenčina</option><option value="//sr.m.wikipedia.org/wiki/%D0%91%D0%BB%D1%83%D0%BC%D0%BE%D0%B2_%D1%84%D0%B8%D0%BB%D1%82%D0%B5%D1%80">српски / srpski</option><option value="//vi.m.wikipedia.org/wiki/B%E1%BB%99_l%E1%BB%8Dc_Bloom">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Bloom filter</h1>			
+<div class="dablink">Not to be confused with <a href="http://en.m.wikipedia.org/wiki/Bloom_%28shader_effect%29" title="Bloom (shader effect)">Bloom shader effect</a>.</div>
+<table class="vertical-navbox nowraplinks" style="float: right; clear: right; background-color: rgb(249, 249, 249); border: 1px solid rgb(170, 170, 170); width: 22em; margin: 0pt 0pt 1em 1em; padding: 0.2em; border-spacing: 0.4em 0pt; text-align: center; line-height: 1.4em; font-size: 88%;" cellpadding="0" cellspacing="5">
+<tbody><tr>
+<td class="" style="padding-top: 0.4em; line-height: 1.2em;">Part of <a href="http://en.m.wikipedia.org/wiki/Category:Probabilistic_data_structures" title="Category:Probabilistic data structures">a series</a> on</td>
+</tr>
+<tr>
+<th class="navbox-title" style="padding: 0pt 0.4em 0.2em; font-size: 145%; line-height: 1.2em;">
+<a href="http://en.m.wikipedia.org/wiki/Randomized_algorithm" title="Randomized algorithm">Probabilistic</a><br><a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structures</a>
+</th>
+</tr>
+<tr>
+<td class="" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+<strong class="selflink">Bloom filter</strong>&nbsp;<span style="font-weight:bold;">·</span> <a href="http://en.m.wikipedia.org/wiki/Skip_list" title="Skip list">Skip list</a>
+</td>
+</tr>
+<tr>
+<th class="navbox-abovebelow" style="padding-top: 0.2em;"><a href="http://en.m.wikipedia.org/wiki/Random_tree_%28disambiguation%29" title="Random tree (disambiguation)" class="mw-redirect">Random trees</a></th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;">
+<p><a href="http://en.m.wikipedia.org/wiki/Random_binary_tree" title="Random binary tree">Random binary tree</a>&nbsp;<span style="font-weight:bold;">·</span>  <a href="http://en.m.wikipedia.org/wiki/Treap" title="Treap">Treap</a><br></p>
+<a href="http://en.m.wikipedia.org/wiki/Rapidly_exploring_random_tree" title="Rapidly exploring random tree">Rapidly exploring random tree</a>
+</td>
+</tr>
+<tr>
+<th class="navbox-abovebelow" style="padding-top: 0.2em;">Related</th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;"><a href="http://en.m.wikipedia.org/wiki/Randomized_algorithm" title="Randomized algorithm">Randomized algorithm</a></td>
+</tr>
+<tr>
+<td class="" style="padding: 0.3em 0.4em; font-weight: bold; border-top: 1px solid rgb(170, 170, 170);"><a href="http://en.m.wikipedia.org/wiki/Portal:Computer_science" title="Portal:Computer science"><small>Computer science Portal</small></a></td>
+</tr>
+<tr>
+<td style="text-align: right; font-size: 115%;">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><span class="new" title="Template:Bloom filter (page does not exist)">v</span></li>
+<li class="nv-talk"><span class="new" title="Template talk:Bloom filter (page does not exist)">t</span></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Bloom_filter&amp;action=edit"><span title="Edit this template" style="">e</span></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p>A <b>Bloom filter</b>, conceived by <span class="new" title="Burton Howard Bloom (page does not exist)">Burton Howard Bloom</span> in 1970,<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> is a space-efficient <a href="http://en.m.wikipedia.org/wiki/Probabilistic" title="Probabilistic" class="mw-redirect">probabilistic</a> <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to test whether an <a href="http://en.m.wikipedia.org/wiki/Element_%28mathematics%29" title="Element (mathematics)">element</a> is a member of a <a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29" title="Set (computer science)" class="mw-redirect">set</a>. <a href="http://en.m.wikipedia.org/wiki/Type_I_and_type_II_errors" title="Type I and type II errors">False positives</a> are possible, but <a href="http://en.m.wikipedia.org/wiki/Type_I_and_type_II_errors" title="Type I and type II errors">false negatives</a>
+ are not; i.e. a query returns either "inside set (may be wrong)" or 
+"definitely not in set". Elements can be added to the set, but not 
+removed (though this can be addressed with a counting filter). The more 
+elements that are added to the set, the larger the probability of false 
+positives.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Algorithm_description">Algorithm description</span></h2><div class="content_block" id="content_1">
+<div class="thumb tright">
+<div class="thumbinner" style="width:362px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Bloom_filter.svg" class="image"><img alt="" src="Bloom_filter_files/360px-Bloom_filter.png" class="thumbimage" width="360" height="129"></a>
+<div class="thumbcaption">
+
+An example of a Bloom filter, representing the set {<i>x</i>, <i>y</i>, <i>z</i>}. The colored arrows show the positions in the bit array that each set element is mapped to. The element <i>w</i> is not in the set {x, y, z}, because it hashes to one bit-array position containing 0. For this figure, m=18 and k=3.</div>
+</div>
+</div>
+<p>An <b>empty Bloom filter</b> is a <a href="http://en.m.wikipedia.org/wiki/Bit_array" title="Bit array">bit array</a> of <i>m</i> bits, all set to 0. There must also be <i>k</i> different <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash functions</a> defined, each of which <a href="http://en.m.wikipedia.org/wiki/Map_%28mathematics%29" title="Map (mathematics)">maps</a> or hashes some set element to one of the <i>m</i> array positions with a uniform random distribution.</p>
+<p>To <b>add</b> an element, feed it to each of the <i>k</i> hash functions to get <i>k</i> array positions. Set the bits at all these positions to 1.</p>
+<p>To <b>query</b> for an element (test whether it is in the set), feed it to each of the <i>k</i> hash functions to get <i>k</i>
+ array positions. If any of the bits at these positions are 0, the 
+element is definitely not in the set – if it were, then all the bits 
+would have been set to 1 when it was inserted. If all are 1, then either
+ the element is in the set, or the bits have by chance been set to 1 
+during the insertion of other elements, resulting in a <a href="http://en.m.wikipedia.org/wiki/False_positive" title="False positive" class="mw-redirect">false positive</a>.
+ In a simple bloom filter, there is no way to distinguish between the 
+two cases, but more advanced techniques can address this problem.</p>
+<p>The requirement of designing <i>k</i> different independent hash functions can be prohibitive for large <i>k</i>. For a good <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash function</a>
+ with a wide output, there should be little if any correlation between 
+different bit-fields of such a hash, so this type of hash can be used to
+ generate multiple "different" hash functions by slicing its output into
+ multiple bit fields. Alternatively, one can pass <i>k</i> different initial values (such as 0, 1, ..., <i>k</i>&nbsp;−&nbsp;1) to a hash function that takes an initial value; or add (or append) these values to the key. For larger <i>m</i> and/or <i>k</i>, independence among the hash functions can be relaxed with negligible increase in false positive rate (<a href="#CITEREFDillingerManolios2004a">Dillinger &amp; Manolios (2004a</a>), <a href="#CITEREFKirschMitzenmacher2006">Kirsch &amp; Mitzenmacher (2006</a>)). Specifically, <a href="#CITEREFDillingerManolios2004b">Dillinger &amp; Manolios (2004b</a>) show the effectiveness of deriving the <i>k</i> indices using <span class="new" title="Enhanced double hashing (page does not exist)">enhanced double hashing</span> or <span class="new" title="Triple hashing (page does not exist)">triple hashing</span>, variants of <a href="http://en.m.wikipedia.org/wiki/Double_hashing" title="Double hashing">double hashing</a> that are effectively simple random number generators seeded with the two or three hash values.</p>
+<p>Removing an element from this simple Bloom filter is impossible because false negatives are not permitted. An element maps to <i>k</i> bits, and although setting any one of those <i>k</i>
+ bits to zero suffices to remove the element, it also results in 
+removing any other elements that happen to map onto that bit. Since 
+there is no way of determining whether any other elements have been 
+added that affect the bits for an element to be removed, clearing any of
+ the bits would introduce the possibility for false negatives.</p>
+<p>One-time removal of an element from a Bloom filter can be simulated 
+by having a second Bloom filter that contains items that have been 
+removed. However, false positives in the second filter become false 
+negatives in the composite filter, which may be undesirable. In this 
+approach re-adding a previously removed item is not possible, as one 
+would have to remove it from the "removed" filter.</p>
+<p>However, it is often the case that all the keys are available but are
+ expensive to enumerate (for example, requiring many disk reads). When 
+the false positive rate gets too high, the filter can be regenerated; 
+this should be a relatively rare event.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Space_and_time_advantages">Space and time advantages</span></h2><div class="content_block" id="content_2">
+<div class="thumb tright">
+<div class="thumbinner" style="width:362px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Bloom_filter_speed.svg" class="image"><img alt="" src="Bloom_filter_files/360px-Bloom_filter_speed.png" class="thumbimage" width="360" height="320"></a>
+<div class="thumbcaption">
+
+Bloom filter used to speed up answers in a key-value storage system. 
+Values are stored on a disk which has slow access times. Bloom filter 
+decisions are much faster. However some unnecessary disk accesses are 
+made when the filter reports a positive (in order to weed out the false 
+positives). Overall answer speed is better with the Bloom filter than 
+without the Bloom filter. Use of a Bloom filter for this purpose, 
+however, does increase memory usage.</div>
+</div>
+</div>
+<p>While risking false positives, Bloom filters have a strong space 
+advantage over other data structures for representing sets, such as <a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">self-balancing binary search trees</a>, <a href="http://en.m.wikipedia.org/wiki/Trie" title="Trie">tries</a>, <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>, or simple <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">arrays</a> or <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked lists</a>
+ of the entries. Most of these require storing at least the data items 
+themselves, which can require anywhere from a small number of bits, for 
+small integers, to an arbitrary number of bits, such as for strings 
+(tries are an exception, since they can share storage between elements 
+with equal prefixes). Linked structures incur an additional linear space
+ overhead for pointers. A Bloom filter with 1% error and an optimal 
+value of <i>k</i>, in contrast, requires only about 9.6 bits per element
+ — regardless of the size of the elements. This advantage comes partly 
+from its compactness, inherited from arrays, and partly from its 
+probabilistic nature. If a 1% false-positive rate seems too high, adding
+ about 4.8 bits per element decreases it by ten times.</p>
+<p>However, if the number of potential values is small and many of them 
+can be in the set, the Bloom filter is easily surpassed by the 
+deterministic <a href="http://en.m.wikipedia.org/wiki/Bit_array" title="Bit array">bit array</a>,
+ which requires only one bit for each potential element. Note also that 
+hash tables gain a space and time advantage if they begin ignoring 
+collisions and store only whether each bucket contains an entry; in this
+ case, they have effectively become Bloom filters with <i>k</i> = 1.</p>
+<p>Bloom filters also have the unusual property that the time needed 
+either to add items or to check whether an item is in the set is a fixed
+ constant, O(<i>k</i>), completely independent of the number of items 
+already in the set. No other constant-space set data structure has this 
+property, but the average access time of sparse <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>
+ can make them faster in practice than some Bloom filters. In a hardware
+ implementation, however, the Bloom filter shines because its <i>k</i> lookups are independent and can be parallelized.</p>
+<p>To understand its space efficiency, it is instructive to compare the general Bloom filter with its special case when <i>k</i> = 1. If <i>k</i>
+ = 1, then in order to keep the false positive rate sufficiently low, a 
+small fraction of bits should be set, which means the array must be very
+ large and contain long runs of zeros. The <a href="http://en.m.wikipedia.org/wiki/Information_content" title="Information content">information content</a> of the array relative to its size is low. The generalized Bloom filter (<i>k</i> greater than 1) allows many more bits to be set while still maintaining a low false positive rate; if the parameters (<i>k</i> and <i>m</i>)
+ are chosen well, about half of the bits will be set, and these will be 
+apparently random, minimizing redundancy and maximizing information 
+content.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Probability_of_false_positives">Probability of false positives</span></h2><div class="content_block" id="content_3">
+<div class="thumb tright">
+<div class="thumbinner" style="width:362px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Bloom_filter_fp_probability.svg" class="image"><img alt="" src="Bloom_filter_files/360px-Bloom_filter_fp_probability.png" class="thumbimage" width="360" height="288"></a>
+<div class="thumbcaption">
+
+The false positive probability <img class="tex" alt="p" src="Bloom_filter_files/83878c91171338902e0fe0fb97a8c47a.png"> as a function of number of elements <img class="tex" alt="n" src="Bloom_filter_files/7b8b965ad4bca0e41ab51de7b31363a1.png"> in the filter and the filter size <img class="tex" alt="m" src="Bloom_filter_files/6f8f57715090da2632453988d9a1501b.png">. An optimal number of hash functions <img class="tex" alt="k= (m/n) \ln 2" src="Bloom_filter_files/00956b96482d58200e2c91a60327103c.png"> has been assumed.</div>
+</div>
+</div>
+<p>Assume that a <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash function</a> selects each array position with equal probability. If <i>m</i> is the number of bits in the array, and <i>k</i>
+ is the number of hash functions, then the probability that a certain 
+bit is not set to 1 by a certain hash function during the insertion of 
+an element is then</p>
+<dl>
+<dd><img class="tex" alt="1-\frac{1}{m}." src="Bloom_filter_files/91c29dea519d84eef92293370529e668.png"></dd>
+</dl>
+<p>The probability that it is not set to 1 by any of the hash functions is</p>
+<dl>
+<dd><img class="tex" alt="\left(1-\frac{1}{m}\right)^k." src="Bloom_filter_files/93c1c6a16fb6a043288abe3b38e50bc4.png"></dd>
+</dl>
+<p>If we have inserted <i>n</i> elements, the probability that a certain bit is still 0 is</p>
+<dl>
+<dd><img class="tex" alt="\left(1-\frac{1}{m}\right)^{kn};" src="Bloom_filter_files/4cd626814ca58918e431b8b2485536f8.png"></dd>
+</dl>
+<p>the probability that it is 1 is therefore</p>
+<dl>
+<dd><img class="tex" alt="1-\left(1-\frac{1}{m}\right)^{kn}." src="Bloom_filter_files/851ec340757b925dc058d263254f14e1.png"></dd>
+</dl>
+<p>Now test membership of an element that is not in the set. Each of the <i>k</i>
+ array positions computed by the hash functions is 1 with a probability 
+as above. The probability of all of them being 1, which would cause the <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> to erroneously claim that the element is in the set, is often given as</p>
+<dl>
+<dd><img class="tex" alt="\left(1-\left[1-\frac{1}{m}\right]^{kn}\right)^k \approx \left( 1-e^{-kn/m} \right)^k." src="Bloom_filter_files/2180ac79da81e5b3721963b4d80cf5a6.png"></dd>
+</dl>
+<p>This is not strictly correct as it assumes independence for the 
+probabilities of each bit being set. However, assuming it is a close 
+approximation we have that the probability of false positives decreases 
+as <i>m</i> (the number of bits in the array) increases, and increases as <i>n</i> (the number of inserted elements) increases. For a given <i>m</i> and <i>n</i>, the value of <i>k</i> (the number of hash functions) that minimizes the probability is</p>
+<dl>
+<dd><img class="tex" alt="\frac{m}{n}\ln 2 \approx 0.7\frac{m}{n}," src="Bloom_filter_files/9c5d47f5977be8a78124bac83801b357.png"></dd>
+</dl>
+<p>which gives the false positive probability of</p>
+<dl>
+<dd><img class="tex" alt="2^{-k} \approx {0.6185}^{m/n}." src="Bloom_filter_files/b034d3e23c33e9fe7748bb05eb4e0dec.png"></dd>
+</dl>
+<p>The required number of bits <i>m</i>, given <i>n</i> (the number of inserted elements) and a desired false positive probability <i>p</i> (and assuming the optimal value of <i>k</i> is used) can be computed by substituting the optimal value of <i>k</i> in the probability expression above:</p>
+<dl>
+<dd><img class="tex" alt="p = \left( 1-e^{-(m/n\ln 2) n/m} \right)^{(m/n\ln 2)}" src="Bloom_filter_files/a851db877e6d966852e07a26af409df5.png"></dd>
+</dl>
+<p>which can be simplified to:</p>
+<dl>
+<dd><img class="tex" alt="\ln p = -\frac{m}{n} \left(\ln 2\right)^2." src="Bloom_filter_files/ee23f71bfda7600216de709c77eec806.png"></dd>
+</dl>
+<p>This results in:</p>
+<dl>
+<dd><img class="tex" alt="m=-\frac{n\ln p}{(\ln 2)^2}." src="Bloom_filter_files/3a7fbb4930336523b2ebd301bb7bd159.png"></dd>
+</dl>
+<p>This means that for a given false positive probability <i>p</i>, the length of a Bloom filter <i>m</i> is proportionate to the number of elements being filtered <i>n</i>.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> While the above formula is asymptotic (i.e. applicable as <i>m</i>,<i>n</i> → ∞), the agreement with finite values of <i>m</i>,<i>n</i> is also quite good; the false positive probability for a finite bloom filter with <i>m</i> bits, <i>n</i> elements, and <i>k</i> hash functions is at most</p>
+<dl>
+<dd><img class="tex" alt="\left( 1-e^{-k(n+0.5)/(m-1)} \right)^k." src="Bloom_filter_files/de7fe8cf33a9d3a561056ac04d171b33.png"></dd>
+</dl>
+<p>So we can use the asymptotic formula if we pay a penalty for at most half an extra element and at most one fewer bit.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Interesting_properties">Interesting properties</span></h2><div class="content_block" id="content_4">
+<ul>
+<li>Unlike sets based on <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>, any Bloom filter can represent the entire <a href="http://en.m.wikipedia.org/wiki/Universe_%28mathematics%29" title="Universe (mathematics)">universe</a> of elements. In this case, all bits are 1. Another consequence of this property is that <b>add</b>
+ never fails due to the data structure "filling up." However, the false 
+positive rate increases steadily as elements are added until all bits in
+ the filter are set to 1, so a negative value is never returned. At this
+ point, the Bloom filter completely ceases to differentiate between 
+differing inputs, and is functionally useless.</li>
+</ul>
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Union_%28set_theory%29" title="Union (set theory)">Union</a> and <a href="http://en.m.wikipedia.org/wiki/Intersection_%28set_theory%29" title="Intersection (set theory)">intersection</a> of Bloom filters with the same size and set of hash functions can be implemented with <a href="http://en.m.wikipedia.org/wiki/Bitwise_operation" title="Bitwise operation">bitwise</a>
+ OR and AND operations, respectively. The union operation on Bloom 
+filters is lossless in the sense that the resulting Bloom filter is the 
+same as the Bloom filter created from scratch using the union of the two
+ sets. The intersect operation satisfies a weaker property: the false 
+positive probability in the resulting Bloom filter is at most the 
+false-positive probability in one of the constituent Bloom filters, but 
+may be larger than the false positive probability in the Bloom filter 
+created from scratch using the intersection of the two sets.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from January 2011">citation needed</span></a></i>]</sup>
+</li>
+</ul>
+<ul>
+<li>Some kinds of <a href="http://en.m.wikipedia.org/wiki/Superimposed_code" title="Superimposed code">superimposed code</a> can be seen as a Bloom filter implemented with physical <a href="http://en.m.wikipedia.org/wiki/Edge-notched_card" title="Edge-notched card">edge-notched cards</a>.</li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Examples">Examples</span></h2><div class="content_block" id="content_5">
+<p>Google <a href="http://en.m.wikipedia.org/wiki/BigTable" title="BigTable">BigTable</a>
+ uses Bloom filters to reduce the disk lookups for non-existent rows or 
+columns. Avoiding costly disk lookups considerably increases the 
+performance of a database query operation.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup></p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Squid_%28software%29" title="Squid (software)">Squid</a> <a href="http://en.m.wikipedia.org/wiki/World_Wide_Web" title="World Wide Web">Web</a> Proxy <a href="http://en.m.wikipedia.org/wiki/Web_cache" title="Web cache">Cache</a> uses Bloom filters for <a rel="nofollow" class="external text" href="http://wiki.squid-cache.org/SquidFaq/CacheDigests">cache digests</a>.<sup id="cite_ref-Wessels172_4-0" class="reference"><a href="#cite_note-Wessels172-4"><span>[</span>5<span>]</span></a></sup></p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Venti" title="Venti">Venti</a> archival storage system uses Bloom filters to detect previously stored data.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/SPIN_model_checker" title="SPIN model checker">SPIN model checker</a> uses Bloom filters to track the reachable state space for large verification problems.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup></p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Google_Chrome" title="Google Chrome">Google Chrome</a> <a href="http://en.m.wikipedia.org/wiki/Web_browser" title="Web browser">web browser</a> uses Bloom filters to speed up its Safe Browsing service.<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup></p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Alternatives">Alternatives</span></h2><div class="content_block" id="content_6">
+<p>Classic Bloom filters use <img class="tex" alt="1.44\log_2(1/\epsilon)" src="Bloom_filter_files/2c90d45cc041b2162a64eea0e6e76570.png"> bits of space per inserted key, where <img class="tex" alt="\epsilon" src="Bloom_filter_files/c50b9e82e318d4c163e4b1b060f7daf5.png">
+ is the false positive rate of the Bloom filter. However, the space that
+ is strictly necessary for any data structure playing the same role as a
+ Bloom filter is only <img class="tex" alt="\log_2(1/\epsilon)" src="Bloom_filter_files/24f7a423f621cb98529ecfb4bb348c82.png"> per key (<a href="#CITEREFPaghPaghRao2005">Pagh, Pagh &amp; Rao 2005</a>).
+ Hence Bloom filters use 44% more space than a hypothetical equivalent 
+optimal data structure. The number of hash functions used to achieve a 
+given false positive rate <img class="tex" alt="\epsilon" src="Bloom_filter_files/c50b9e82e318d4c163e4b1b060f7daf5.png"> is proportional to <img class="tex" alt="1/\epsilon" src="Bloom_filter_files/6d4cbc6430e869bd6965989b9a72d961.png">
+ which is not optimal as it has been proved that an optimal data 
+structure would need only a constant number of hash functions 
+independent of the false positive rate.</p>
+<p><a href="#CITEREFSternDill1996">Stern &amp; Dill (1996</a>) describe a probabilistic structure based on <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>, <span class="new" title="Hash compaction (page does not exist)">hash compaction</span>, which <a href="#CITEREFDillingerManolios2004b">Dillinger &amp; Manolios (2004b</a>)
+ identify as significantly more accurate than a Bloom filter when each 
+is configured optimally. Dillinger and Manolios, however, point out that
+ the reasonable accuracy of any given Bloom filter over a wide range of 
+numbers of additions makes it attractive for probabilistic enumeration 
+of state spaces of unknown size. Hash compaction is, therefore, 
+attractive when the number of additions can be predicted accurately; 
+however, despite being very fast in software, hash compaction is poorly 
+suited for hardware because of worst-case linear access time.</p>
+<p><a href="#CITEREFPutzeSandersSingler2007">Putze, Sanders &amp; Singler (2007</a>)
+ have studied some variants of Bloom filters that are either faster or 
+use less space than classic Bloom filters. The basic idea of the fast 
+variant is to locate the k hash values associated with each key into one
+ or two blocks having the same size as processor's memory cache blocks 
+(usually 64 bytes). This will presumably improve performance by reducing
+ the number of potential memory <a href="http://en.m.wikipedia.org/wiki/Cache_misses" title="Cache misses" class="mw-redirect">cache misses</a>. The proposed variants have however the drawback of using about 32% more space than classic Bloom filters.</p>
+<p>The space efficient variant relies on using a single hash function that generates for each key a value in the range <img class="tex" alt="\left[0,n/\varepsilon\right]" src="Bloom_filter_files/8719561052ee96a6f1c88ae38a05dbe2.png"> where <img class="tex" alt="\epsilon" src="Bloom_filter_files/c50b9e82e318d4c163e4b1b060f7daf5.png"> is the requested false positive rate. The sequence of values is then sorted and compressed using <a href="http://en.m.wikipedia.org/wiki/Golomb_coding" title="Golomb coding">Golomb coding</a> (or some other compression technique) to occupy a space close to <img class="tex" alt="n\log_2(1/\epsilon)" src="Bloom_filter_files/75dfc5084b212a9876270d321d670837.png">
+ bits. To query the Bloom filter for a given key, it will suffice to 
+check if its corresponding value is stored in the Bloom filter. 
+Decompressing the whole Bloom filter for each query would make this 
+variant totally unusable. To overcome this problem the sequence of 
+values is divided into small blocks of equal size that are compressed 
+separately. At query time only half a block will need to be decompressed
+ on average. Because of decompression overhead, this variant may be 
+slower than classic Bloom filters but this may be compensated by the 
+fact that a single hash function need to be computed.</p>
+<p>Another alternative to classic Bloom filter is the one based on space efficient variants of <a href="http://en.m.wikipedia.org/wiki/Cuckoo_hashing" title="Cuckoo hashing">cuckoo hashing</a>.
+ In this case once the hash table is constructed, the keys stored in the
+ hash table are replaced with short signatures of the keys. Those 
+signatures are strings of bits computed using a hash function applied on
+ the keys.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Extensions_and_applications">Extensions and applications</span></h2><div class="content_block" id="content_7">
+<h3> <span class="mw-headline" id="Counting_filters">Counting filters</span>
+</h3>
+<p>Counting filters provide a way to implement a <i>delete</i> operation
+ on a Bloom filter without recreating the filter afresh. In a counting 
+filter the array positions (buckets) are extended from being a single 
+bit, to an n-bit counter. In fact, regular Bloom filters can be 
+considered as counting filters with a bucket size of one bit. Counting 
+filters were introduced by <a href="#CITEREFFanCaoAlmeidaBroder1998">Fan et al. (1998</a>).</p>
+<p>The insert operation is extended to <i>increment</i> the value of the
+ buckets and the lookup operation checks that each of the required 
+buckets is non-zero. The delete operation, obviously, then consists of 
+decrementing the value of each of the respective buckets.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Arithmetic_overflow" title="Arithmetic overflow">Arithmetic overflow</a>
+ of the buckets is a problem and the buckets should be sufficiently 
+large to make this case rare. If it does occur then the increment and 
+decrement operations must leave the bucket set to the maximum possible 
+value in order to retain the properties of a Bloom filter.</p>
+<p>The size of counters is usually 3 or 4 bits. Hence counting Bloom 
+filters use 3 to 4 times more space than static Bloom filters. In 
+theory, an optimal data structure equivalent to a counting Bloom filter 
+should not use more space than a static Bloom filter.</p>
+<p>Another issue with counting filters is limited scalability. Because 
+the counting Bloom filter table cannot be expanded, the maximal number 
+of keys to be stored simultaneously in the filter must be known in 
+advance. Once the designed capacity of the table is exceeded the false 
+positive rate will grow rapidly as more keys are inserted.</p>
+<p><a href="#CITEREFBonomiMitzenmacherPanigrahySingh2006">Bonomi et al. (2006</a>)
+ introduced a data structure based on d-left hashing that is 
+functionally equivalent but uses approximately half as much space as 
+counting Bloom filters. The scalability issue does not occur in this 
+data structure. Once the designed capacity is exceeded, the keys could 
+be reinserted in a new hash table of double size.</p>
+<p>The space efficient variant by <a href="#CITEREFPutzeSandersSingler2007">Putze, Sanders &amp; Singler (2007</a>) could also be used to implement counting filters by supporting insertions and deletions.</p>
+<h3> <span class="mw-headline" id="Data_synchronization">Data synchronization</span>
+</h3>
+<p>Bloom filters can be used for approximate <a href="http://en.m.wikipedia.org/wiki/Data_synchronization" title="Data synchronization">data synchronization</a> as in <a href="#CITEREFByersConsidineMitzenmacherRost2004">Byers et al. (2004</a>).
+ Counting Bloom filters can be used to approximate the number of 
+differences between two sets and this approach is described in <a href="#CITEREFAgarwalTrachtenberg2006">Agarwal &amp; Trachtenberg (2006</a>).</p>
+<h3> <span class="mw-headline" id="Bloomier_filters">Bloomier filters</span>
+</h3>
+<p><a href="#CITEREFChazelleKilianRubinfeldTal2004">Chazelle et al. (2004</a>)
+ designed a generalization of Bloom filters that could associate a value
+ with each element that had been inserted, implementing an <a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a>.
+ Like Bloom filters, these structures achieve a small space overhead by 
+accepting a small probability of false positives. In the case of 
+"Bloomier filters", a <i>false positive</i> is defined as returning a result when the key is not in the map. The map will never return the wrong value for a key that <i>is</i> in the map.</p>
+<p>The simplest Bloomier filter is near-optimal and fairly simple to 
+describe. Suppose initially that the only possible values are 0 and 1. 
+We create a pair of Bloom filters <i>A</i><sub>0</sub> and <i>B</i><sub>0</sub>
+ which contain, respectively, all keys mapping to 0 and all keys mapping
+ to 1. Then, to determine which value a given key maps to, we look it up
+ in both filters. If it is in neither, then the key is not in the map. 
+If the key is in <i>A</i><sub>0</sub> but not <i>B</i><sub>0</sub>, then it does not map to 1, and has a high probability of mapping to 0. Conversely, if the key is in <i>B</i><sub>0</sub> but not <i>A</i><sub>0</sub>, then it does not map to 0 and has a high probability of mapping to 1.</p>
+<p>A problem arises, however, when <i>both</i> filters claim to contain 
+the key. We never insert a key into both, so one or both of the filters 
+is lying (producing a false positive), but we don't know which. To 
+determine this, we have another, smaller pair of filters <i>A</i><sub>1</sub> and <i>B</i><sub>1</sub>. <i>A</i><sub>1</sub> contains keys that map to 0 and which are false positives in <i>B</i><sub>0</sub>; <i>B</i><sub>1</sub> contains keys that map to 1 and which are false positives in <i>A</i><sub>0</sub>. But whenever <i>A</i><sub>0</sub> and <i>B</i><sub>0</sub>
+ both produce positives, at most one of these cases must occur, and so 
+we simply have to determine which if any of the two filters <i>A</i><sub>1</sub> and <i>B</i><sub>1</sub> contains the key, another instance of our original problem.</p>
+<p>It may so happen again that both filters produce a positive; we apply
+ the same idea recursively to solve this problem. Because each pair of 
+filters only contains keys that are in the map <i>and</i> produced false
+ positives on all previous filter pairs, the number of keys is extremely
+ likely to quickly drop to a very small quantity that can be easily 
+stored in an ordinary deterministic map, such as a pair of small arrays 
+with linear search. Moreover, the average total search time is a 
+constant, because almost all queries will be resolved by the first pair,
+ almost all remaining queries by the second pair, and so on. The total 
+space required is independent of <i>n</i>, and is almost entirely occupied by the first filter pair.</p>
+<p>Now that we have the structure and a search algorithm, we also need 
+to know how to insert new key/value pairs. The program must not attempt 
+to insert the same key with both values. If the value is 0, insert the 
+key into <i>A</i><sub>0</sub> and then test if the key is in <i>B</i><sub>0</sub>. If so, this is a false positive for <i>B</i><sub>0</sub>, and the key must also be inserted into <i>A</i><sub>1</sub>
+ recursively in the same manner. If we reach the last level, we simply 
+insert it. When the value is 1, the operation is similar but with <i>A</i> and <i>B</i> reversed.</p>
+<p>Now that we can map a key to the value 0 or 1, how does this help us 
+map to general values? This is simple. We create a single such Bloomier 
+filter for each bit of the result. If the values are large, we can 
+instead map keys to hash values that can be used to retrieve the actual 
+values. The space required for a Bloomier filter with <i>n</i>-bit values is typically slightly more than the space for 2<i>n</i> Bloom filters.</p>
+<p>A very simple way to implement Bloomier filters is by means of minimal <a href="http://en.m.wikipedia.org/wiki/Perfect_hashing" title="Perfect hashing" class="mw-redirect">perfect hashing</a>.
+ A minimal perfect hash function h is first generated for the set of n 
+keys. Then an array is filled with n pairs (signature,value) associated 
+with each key at the positions given by function h when applied on each 
+key. The signature of a key is a string of r bits computed by applying a
+ hash function g of range <img class="tex" alt="2^r" src="Bloom_filter_files/813b90acfe2d36d45b8a51893b557773.png"> on the key. The value of r is chosen such that <img class="tex" alt="2^r&gt;=1/\epsilon" src="Bloom_filter_files/1e7ffe891246059fabaf21bfe817bba1.png">, where <img class="tex" alt="\epsilon" src="Bloom_filter_files/c50b9e82e318d4c163e4b1b060f7daf5.png">
+ is the requested false positive rate. To query for a given key, hash 
+function h is first applied on the key. This will give a position into 
+the array from which we retrieve a pair (signature,value). Then we 
+compute the signature of the key using function g. If the computed 
+signature is the same as retrieved signature we return the retrieved 
+value. The probability of false positive is <img class="tex" alt="1/2^r" src="Bloom_filter_files/219bd4c006bc7b71191182906ced36ab.png">.</p>
+<p>Another alternative to implement static bloomier and bloom filters based on matrix solving has been simultaneously proposed in <a href="#CITEREFPorat2008">Porat (2008</a>) , <a href="#CITEREFDietzfelbingerPagh2008">Dietzfelbinger &amp; Pagh (2008</a>) and <a href="#CITEREFCharlesChellapilla2008">Charles &amp; Chellapilla (2008</a>). The space usage of this method is optimal as it needs only <img class="tex" alt="\log_2(\epsilon)" src="Bloom_filter_files/cb12a979aa9eec8d70eedb0f8768209d.png">
+ bits per key for a bloom filter. However time to generate the bloom or 
+bloomier filter can be very high. The generation time can be reduced to a
+ reasonable value at the price of a small increase in space usage.</p>
+<p>Dynamic Bloomier filters have been studied by <a href="#CITEREFMortensenPaghP.C4.83tra.C5.9Fcu2005">Mortensen, Pagh &amp; Pătraşcu (2005</a>). They proved that any dynamic Bloomier filter needs at least around <img class="tex" alt="\log(l)" src="Bloom_filter_files/17eb8b7897fa18f0657ae50d69492855.png">
+ bits per key where l is the length of the key. A simple dynamic version
+ of Bloomier filters can be implemented using two dynamic data 
+structures. Let the two data structures be noted S1 and S2. S1 will 
+store keys with their associated data while S2 will only store 
+signatures of keys with their associated data. Those signatures are 
+simply hash values of keys in the range <img class="tex" alt="[0,n/\varepsilon]" src="Bloom_filter_files/d1a01f1a6ceceb0621291cf33889d743.png"> where n is the maximal number of keys to be stored in the Bloomier filter and <img class="tex" alt="\epsilon" src="Bloom_filter_files/c50b9e82e318d4c163e4b1b060f7daf5.png">
+ is the requested false positive rate. To insert a key in the Bloomier 
+filter, its hash value is first computed. Then the algorithm checks if a
+ key with the same hash value already exists in S2. If this is not the 
+case, the hash value is inserted in S2 along with data associated with 
+the key. If the same hash value already exists in S2 then the key is 
+inserted into S1 along with its associated data. The deletion is 
+symmetric: if the key already exists in S1 it will be deleted from 
+there, otherwise the hash value associated with the key is deleted from 
+S2. An issue with this algorithm is on how to store efficiently S1 and 
+S2. For S1 any hash algorithm can be used. To store S2 <a href="http://en.m.wikipedia.org/wiki/Golomb_coding" title="Golomb coding">golomb coding</a> could be applied to compress signatures to use a space close to <img class="tex" alt="\log2(1/\epsilon)" src="Bloom_filter_files/2549fb2db77ef0c8e121adf48958635b.png"> per key.</p>
+<h3> <span class="mw-headline" id="Compact_approximators">Compact approximators</span>
+</h3>
+<p><a href="#CITEREFBoldiVigna2005">Boldi &amp; Vigna (2005</a>) proposed a <a href="http://en.m.wikipedia.org/wiki/Lattice_%28order%29" title="Lattice (order)">lattice</a>-based generalization of Bloom filters. A <b>compact approximator</b>
+ associates to each key an element of a lattice (the standard Bloom 
+filters being the case of the Boolean two-element lattice). Instead of a
+ bit array, they have an array of lattice elements. When adding a new 
+association between a key and an element of the lattice, they maximize 
+the current content of the <var>k</var> array locations associated to 
+the key with the lattice element. When reading the value associated to a
+ key, they minimize the values found in the <var>k</var> locations associated to the key. The resulting value approximates from above the original value.</p>
+<h3> <span class="mw-headline" id="Stable_Bloom_filters">Stable Bloom filters</span>
+</h3>
+<p><a href="#CITEREFDengRafiei2006">Deng &amp; Rafiei (2006</a>) 
+proposed Stable Bloom filters as a variant of Bloom filters for 
+streaming data. The idea is that since there is no way to store the 
+entire history of a stream (which can be infinite), Stable Bloom filters
+ continuously evict stale information to make room for more recent 
+elements. Since stale information is evicted, the Stable Bloom filter 
+introduces false negatives, which do not appear in traditional bloom 
+filters. The authors show that a tight upper bound of false positive 
+rates is guaranteed, and the method is superior to standard bloom 
+filters in terms of false positive rates and time efficiency when a 
+small space and an acceptable false positive rate are given.</p>
+<h3> <span class="mw-headline" id="Scalable_Bloom_filters">Scalable Bloom filters</span>
+</h3>
+<p><a href="#CITEREFAlmeidaBaqueroPreguicaHutchison2007">Almeida et al. (2007</a>)
+ proposed a variant of Bloom filters that can adapt dynamically to the 
+number of elements stored, while assuring a minimum false positive 
+probability. The technique is based on sequences of standard bloom 
+filters with increasing capacity and tighter false positive 
+probabilities, so as to ensure that a maximum false positive probability
+ can be set beforehand, regardless of the number of elements to be 
+inserted.</p>
+<h3> <span class="mw-headline" id="Attenuated_Bloom_filters">Attenuated Bloom filters</span>
+</h3>
+<p>An attenuated bloom filter of depth D can be viewed as an array of D 
+normal bloom filters. In the context of service discovery in a network, 
+each node stores regular and attenuated bloom filters locally. The 
+regular or local bloom filter indicates which services are offered by 
+the node itself. The attenuated filter of level i indicates which 
+services can be found on nodes that are i-hops away from the current 
+node. The i-th value is constructed by taking a union of local bloom 
+filters for nodes i-hops away from the node.<sup id="cite_ref-kgsb09_8-0" class="reference"><a href="#cite_note-kgsb09-8"><span>[</span>9<span>]</span></a></sup></p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:AttenuatedBloomFilter.png" class="image"><img alt="" src="Bloom_filter_files/220px-AttenuatedBloomFilter.png" class="thumbimage" width="220" height="125"></a>
+<div class="thumbcaption">
+
+Attenuated Bloom Filter Example</div>
+</div>
+</div>
+<p>Lets take a small network shown on the graph below as an example. Say
+ we are searching for a service A whose id hashes to bits 0,1, and 3 
+(pattern 11010). Let n1 node to be the starting point. First, we check 
+whether service A is offered by n1 by checking its local filter. Since 
+the patterns don't match, we check the attenuated bloom filter in order 
+to determine which node should be the next hop. We see that n2 doesn't 
+offer service A but lies on the path to nodes that do. Hence, we move to
+ n2 and repeat the same procedure. We quickly find that n3 offers the 
+service, and hence the destination is located.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup></p>
+<p>By using attenuated Bloom filters consisting of multiple layers, 
+services at more than one hop distance can be discovered while avoiding 
+saturation of the Bloom filter by attenuating (shifting out) bits set by
+ sources further away.<sup id="cite_ref-kgsb09_8-1" class="reference"><a href="#cite_note-kgsb09-8"><span>[</span>9<span>]</span></a></sup></p>
+<p><br></p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_8">
+<div class="reflist references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation web"><a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a>. <a rel="nofollow" class="external text" href="http://www-cs-faculty.stanford.edu/%7Eknuth/err3.textxt">"</a><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a>, Errata for Volume 3 (2nd ed.)"<span class="printonly">. <a rel="nofollow" class="external free" href="http://www-cs-faculty.stanford.edu/%7Eknuth/err3.textxt">http://www-cs-faculty.stanford.edu/~knuth/err3.textxt</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=%5B%5BThe+Art+of+Computer+Programming%5D%5D%2C+Errata+for+Volume+3+%282nd+ed.%29&amp;rft.atitle=&amp;rft.aulast=%5B%5BDonald+Knuth%5D%5D&amp;rft.au=%5B%5BDonald+Knuth%5D%5D&amp;rft_id=http%3A%2F%2Fwww-cs-faculty.stanford.edu%2F%7Eknuth%2Ferr3.textxt&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a href="#CITEREFStarobinskiTrachtenbergAgarwal2003">Starobinski, Trachtenberg &amp; Agarwal (2003</a>).</span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a href="#CITEREFGoelGupta2010">Goel &amp; Gupta (2010</a>).</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text">(<a href="#CITEREFChangDeanGhemawatHsieh2006">Chang et al. 2006</a>).</span>
+</li>
+<li id="cite_note-Wessels172-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Wessels172_4-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFWessels2004">Wessels, Duane (January 2004), "10.7 Cache Digests", <i>Squid: The Definitive Guide</i> (1st ed.), O'Reilly Media, p.&nbsp;172, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-596-00162-2" title="Special:BookSources/0-596-00162-2">0-596-00162-2</a>,
+ "Cache Digests are based on a technique first published by Pei Cao, 
+called Summary Cache. The fundamental idea is to use a Bloom filter to 
+represent the cache contents."</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=10.7+Cache+Digests&amp;rft.atitle=Squid%3A+The+Definitive+Guide&amp;rft.aulast=Wessels&amp;rft.aufirst=Duane&amp;rft.au=Wessels%2C%26%2332%3BDuane&amp;rft.date=January+2004&amp;rft.pages=p.%26nbsp%3B172&amp;rft.edition=1st&amp;rft.pub=O%27Reilly+Media&amp;rft.isbn=0-596-00162-2&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://plan9.bell-labs.com/magic/man2html/8/venti">http://plan9.bell-labs.com/magic/man2html/8/venti</a></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://spinroot.com/">http://spinroot.com/</a></span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://src.chromium.org/viewvc/chrome/trunk/src/chrome/browser/safe_browsing/bloom_filter.h?view=markup">http://src.chromium.org/viewvc/chrome/trunk/src/chrome/browser/safe_browsing/bloom_filter.h?view=markup</a></span>
+</li>
+<li id="cite_note-kgsb09-8">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-kgsb09_8-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-kgsb09_8-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><a href="#CITEREFKoucheryavyGiambeneStaehleBarcelo-Arroyo2009">Koucheryavy et al. (2009</a>)</span>
+</li>
+<li id="cite_note-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><a href="#CITEREFKubiatowiczBindelCzerwinskiGeels2000">Kubiatowicz et al. (2000</a>)</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_9">
+<table class="metadata plainlinks ambox ambox-style ambox-More_footnotes" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Bloom_filter_files/40px-Text_document_with_red_question_mark.png" width="40" height="40"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article includes a <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">list of references</a>, but <b>its sources remain unclear because it has insufficient <a href="http://en.m.wikipedia.org/wiki/Wikipedia:INCITE" title="Wikipedia:INCITE" class="mw-redirect">inline citations</a></b>. <span class="hide-when-compact">Please help to <a href="http://en.m.wikipedia.org/wiki/Wikipedia:WikiProject_Fact_and_Reference_Check" title="Wikipedia:WikiProject Fact and Reference Check">improve</a> this article by <a href="http://en.m.wikipedia.org/wiki/Wikipedia:When_to_cite" title="Wikipedia:When to cite">introducing</a> more precise citations.</span> <small><i>(November 2009)</i></small> </span></td>
+</tr></tbody></table>
+<div class="refbegin references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em;">
+<ul>
+<li>
+<span class="citation" id="CITEREFKoucheryavyGiambeneStaehleBarcelo-Arroyo2009">Koucheryavy,
+ Y.; Giambene, G.; Staehle, D.; Barcelo-Arroyo, F.; Braun, T.; Siris, V.
+ (2009), "Traffic and QoS Management in Wireless Multimedia Networks", <i>COST 290 Final Report</i> (USA): 111</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Traffic+and+QoS+Management+in+Wireless+Multimedia+Networks&amp;rft.jtitle=COST+290+Final+Report&amp;rft.aulast=Koucheryavy&amp;rft.aufirst=Y.&amp;rft.au=Koucheryavy%2C%26%2332%3BY.&amp;rft.au=Giambene%2C%26%2332%3BG.&amp;rft.au=Staehle%2C%26%2332%3BD.&amp;rft.au=Barcelo-Arroyo%2C%26%2332%3BF.&amp;rft.au=Braun%2C%26%2332%3BT.&amp;rft.au=Siris%2C%26%2332%3BV.&amp;rft.date=2009&amp;rft.pages=111&amp;rft.place=USA&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFKubiatowiczBindelCzerwinskiGeels2000">Kubiatowicz, J.; Bindel, D.; Czerwinski, Y.; Geels, S.; Eaton, D.; Gummadi, R.; Rhea, S.; Weatherspoon, H. et al. (2000), <a rel="nofollow" class="external text" href="http://ftp.csd.uwo.ca/courses/CS9843b/papers/OceanStore.pdf">"Oceanstore: An architecture for global-scale persistent storage"</a>, <i>ACM SIGPLAN NOTICES</i> (USA): 190–201<span class="printonly">, <a rel="nofollow" class="external free" href="http://ftp.csd.uwo.ca/courses/CS9843b/papers/OceanStore.pdf">http://ftp.csd.uwo.ca/courses/CS9843b/papers/OceanStore.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Oceanstore%3A+An+architecture+for+global-scale+persistent+storage&amp;rft.jtitle=ACM+SIGPLAN+NOTICES&amp;rft.aulast=Kubiatowicz&amp;rft.aufirst=J.&amp;rft.au=Kubiatowicz%2C%26%2332%3BJ.&amp;rft.au=Bindel%2C%26%2332%3BD.&amp;rft.au=Czerwinski%2C%26%2332%3BY.&amp;rft.au=Geels%2C%26%2332%3BS.&amp;rft.au=Eaton%2C%26%2332%3BD.&amp;rft.au=Gummadi%2C%26%2332%3BR.&amp;rft.au=Rhea%2C%26%2332%3BS.&amp;rft.au=Weatherspoon%2C%26%2332%3BH.&amp;rft.au=Weimer%2C%26%2332%3BW.&amp;rft.date=2000&amp;rft.pages=190%E2%80%93201&amp;rft.place=USA&amp;rft_id=http%3A%2F%2Fftp.csd.uwo.ca%2Fcourses%2FCS9843b%2Fpapers%2FOceanStore.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFAgarwalTrachtenberg2006">Agarwal, Sachin; Trachtenberg, Ari (2006), <a rel="nofollow" class="external text" href="http://www.deutsche-telekom-laboratories.de/%7Eagarwals/publications/itw2006.pdf">"Approximating the number of differences between remote sets"</a>, <i>IEEE Information Theory Workshop</i> (Punta del Este, Uruguay): 217, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FITW.2006.1633815">10.1109/ITW.2006.1633815</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.deutsche-telekom-laboratories.de/%7Eagarwals/publications/itw2006.pdf">http://www.deutsche-telekom-laboratories.de/~agarwals/publications/itw2006.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Approximating+the+number+of+differences+between+remote+sets&amp;rft.jtitle=IEEE+Information+Theory+Workshop&amp;rft.aulast=Agarwal&amp;rft.aufirst=Sachin&amp;rft.au=Agarwal%2C%26%2332%3BSachin&amp;rft.au=Trachtenberg%2C%26%2332%3BAri&amp;rft.date=2006&amp;rft.pages=217&amp;rft.place=Punta+del+Este%2C+Uruguay&amp;rft_id=info:doi/10.1109%2FITW.2006.1633815&amp;rft_id=http%3A%2F%2Fwww.deutsche-telekom-laboratories.de%2F%7Eagarwals%2Fpublications%2Fitw2006.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFAhmadiWong2007">Ahmadi, Mahmood; Wong, Stephan (2007), <a rel="nofollow" class="external text" href="http://www.ieeexplore.ieee.org/xpls/abs_all.jsp?isnumber=4444031&amp;arnumber=4444089&amp;count=113&amp;index=57">"A Cache Architecture for Counting Bloom Filters"</a>, <i>15th international Conference on Networks (ICON-2007)</i>, pp.&nbsp;218, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FICON.2007.4444089">10.1109/ICON.2007.4444089</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.ieeexplore.ieee.org/xpls/abs_all.jsp?isnumber=4444031&amp;arnumber=4444089&amp;count=113&amp;index=57">http://www.ieeexplore.ieee.org/xpls/abs_all.jsp?isnumber=4444031&amp;arnumber=4444089&amp;count=113&amp;index=57</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=A+Cache+Architecture+for+Counting+Bloom+Filters&amp;rft.atitle=15th+international+Conference+on+Networks+%28ICON-2007%29&amp;rft.aulast=Ahmadi&amp;rft.aufirst=Mahmood&amp;rft.au=Ahmadi%2C%26%2332%3BMahmood&amp;rft.au=Wong%2C%26%2332%3BStephan&amp;rft.date=2007&amp;rft.pages=pp.%26nbsp%3B218&amp;rft_id=info:doi/10.1109%2FICON.2007.4444089&amp;rft_id=http%3A%2F%2Fwww.ieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Fisnumber%3D4444031%26arnumber%3D4444089%26count%3D113%26index%3D57&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFAlmeidaBaqueroPreguicaHutchison2007">Almeida, Paulo; Baquero, Carlos; Preguica, Nuno; Hutchison, David (2007), <a rel="nofollow" class="external text" href="http://gsd.di.uminho.pt/members/cbm/ps/dbloom.pdf">"Scalable Bloom Filters"</a>, <i>Information Processing Letters</i> <b>101</b> (6): 255–261, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2Fj.ipl.2006.10.007">10.1016/j.ipl.2006.10.007</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://gsd.di.uminho.pt/members/cbm/ps/dbloom.pdf">http://gsd.di.uminho.pt/members/cbm/ps/dbloom.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Scalable+Bloom+Filters&amp;rft.jtitle=Information+Processing+Letters&amp;rft.aulast=Almeida&amp;rft.aufirst=Paulo&amp;rft.au=Almeida%2C%26%2332%3BPaulo&amp;rft.au=Baquero%2C%26%2332%3BCarlos&amp;rft.au=Preguica%2C%26%2332%3BNuno&amp;rft.au=Hutchison%2C%26%2332%3BDavid&amp;rft.date=2007&amp;rft.volume=101&amp;rft.issue=6&amp;rft.pages=255%E2%80%93261&amp;rft_id=info:doi/10.1016%2Fj.ipl.2006.10.007&amp;rft_id=http%3A%2F%2Fgsd.di.uminho.pt%2Fmembers%2Fcbm%2Fps%2Fdbloom.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFByersConsidineMitzenmacherRost2004">Byers,
+ John W.; Considine, Jeffrey; Mitzenmacher, Michael; Rost, Stanislav 
+(2004), "Informed content delivery across adaptive overlay networks", <i><a href="http://en.m.wikipedia.org/wiki/IEEE/ACM_Transactions_on_Networking" title="IEEE/ACM Transactions on Networking">IEEE/ACM Transactions on Networking</a></i> <b>12</b> (5): 767, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FTNET.2004.836103">10.1109/TNET.2004.836103</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Informed+content+delivery+across+adaptive+overlay+networks&amp;rft.jtitle=%5B%5BIEEE%2FACM+Transactions+on+Networking%5D%5D&amp;rft.aulast=Byers&amp;rft.aufirst=John+W.&amp;rft.au=Byers%2C%26%2332%3BJohn+W.&amp;rft.au=Considine%2C%26%2332%3BJeffrey&amp;rft.au=Mitzenmacher%2C%26%2332%3BMichael&amp;rft.au=Rost%2C%26%2332%3BStanislav&amp;rft.date=2004&amp;rft.volume=12&amp;rft.issue=5&amp;rft.pages=767&amp;rft_id=info:doi/10.1109%2FTNET.2004.836103&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFBloom1970">Bloom, Burton H. (1970), "Space/time trade-offs in hash coding with allowable errors", <i><a href="http://en.m.wikipedia.org/wiki/Communications_of_the_ACM" title="Communications of the ACM">Communications of the ACM</a></i> <b>13</b> (7): 422–426, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F362686.362692">10.1145/362686.362692</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Space%2Ftime+trade-offs+in+hash+coding+with+allowable+errors&amp;rft.jtitle=%5B%5BCommunications+of+the+ACM%5D%5D&amp;rft.aulast=Bloom&amp;rft.aufirst=Burton+H.&amp;rft.au=Bloom%2C%26%2332%3BBurton+H.&amp;rft.date=1970&amp;rft.volume=13&amp;rft.issue=7&amp;rft.pages=422%E2%80%93426&amp;rft_id=info:doi/10.1145%2F362686.362692&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFBoldiVigna2005">Boldi, Paolo; Vigna, 
+Sebastiano (2005), "Mutable strings in Java: design, implementation and 
+lightweight text-search algorithms", <i>Science of Computer Programming</i> <b>54</b> (1): 3–23, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2Fj.scico.2004.05.003">10.1016/j.scico.2004.05.003</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Mutable+strings+in+Java%3A+design%2C+implementation+and+lightweight+text-search+algorithms&amp;rft.jtitle=Science+of+Computer+Programming&amp;rft.aulast=Boldi&amp;rft.aufirst=Paolo&amp;rft.au=Boldi%2C%26%2332%3BPaolo&amp;rft.au=Vigna%2C%26%2332%3BSebastiano&amp;rft.date=2005&amp;rft.volume=54&amp;rft.issue=1&amp;rft.pages=3%E2%80%9323&amp;rft_id=info:doi/10.1016%2Fj.scico.2004.05.003&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFBonomiMitzenmacherPanigrahySingh2006">Bonomi, Flavio; Mitzenmacher, Michael; Panigrahy, Rina; Singh, Sushil; Varghese, George (2006), <a rel="nofollow" class="external text" href="http://theory.stanford.edu/%7Erinap/papers/esa2006b.pdf">"An Improved Construction for Counting Bloom Filters"</a>, <i>Algorithms – ESA 2006, 14th Annual European Symposium</i>, <b>4168</b>, pp.&nbsp;684–695, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F11841036_61">10.1007/11841036_61</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://theory.stanford.edu/%7Erinap/papers/esa2006b.pdf">http://theory.stanford.edu/~rinap/papers/esa2006b.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+Improved+Construction+for+Counting+Bloom+Filters&amp;rft.atitle=Algorithms+%E2%80%93+ESA+2006%2C+14th+Annual+European+Symposium&amp;rft.aulast=Bonomi&amp;rft.aufirst=Flavio&amp;rft.au=Bonomi%2C%26%2332%3BFlavio&amp;rft.au=Mitzenmacher%2C%26%2332%3BMichael&amp;rft.au=Panigrahy%2C%26%2332%3BRina&amp;rft.au=Singh%2C%26%2332%3BSushil&amp;rft.au=Varghese%2C%26%2332%3BGeorge&amp;rft.date=2006&amp;rft.volume=4168&amp;rft.pages=pp.%26nbsp%3B684%E2%80%93695&amp;rft_id=info:doi/10.1007%2F11841036_61&amp;rft_id=http%3A%2F%2Ftheory.stanford.edu%2F%7Erinap%2Fpapers%2Fesa2006b.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFBroderMitzenmacher2005"><a href="http://en.m.wikipedia.org/wiki/Andrei_Broder" title="Andrei Broder">Broder, Andrei</a>; Mitzenmacher, Michael (2005), <a rel="nofollow" class="external text" href="http://www.eecs.harvard.edu/%7Emichaelm/postscripts/im2005b.pdf">"Network Applications of Bloom Filters: A Survey"</a>, <i>Internet Mathematics</i> <b>1</b> (4): 485–509<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.eecs.harvard.edu/%7Emichaelm/postscripts/im2005b.pdf">http://www.eecs.harvard.edu/~michaelm/postscripts/im2005b.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Network+Applications+of+Bloom+Filters%3A+A+Survey&amp;rft.jtitle=Internet+Mathematics&amp;rft.aulast=Broder&amp;rft.aufirst=Andrei&amp;rft.au=Broder%2C%26%2332%3BAndrei&amp;rft.au=Mitzenmacher%2C%26%2332%3BMichael&amp;rft.date=2005&amp;rft.volume=1&amp;rft.issue=4&amp;rft.pages=485%E2%80%93509&amp;rft_id=http%3A%2F%2Fwww.eecs.harvard.edu%2F%7Emichaelm%2Fpostscripts%2Fim2005b.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFChangDeanGhemawatHsieh2006">Chang, 
+Fay; Dean, Jeffrey; Ghemawat, Sanjay; Hsieh, Wilson; Wallach, Deborah; 
+Burrows, Mike; Chandra, Tushar; Fikes, Andrew et al. (2006), <a rel="nofollow" class="external text" href="http://research.google.com/archive/bigtable.html">"Bigtable: A Distributed Storage System for Structured Data"</a>, <i>Seventh Symposium on Operating System Design and Implementation</i><span class="printonly">, <a rel="nofollow" class="external free" href="http://research.google.com/archive/bigtable.html">http://research.google.com/archive/bigtable.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Bigtable%3A+A+Distributed+Storage+System+for+Structured+Data&amp;rft.atitle=Seventh+Symposium+on+Operating+System+Design+and+Implementation&amp;rft.aulast=Chang&amp;rft.aufirst=Fay&amp;rft.au=Chang%2C%26%2332%3BFay&amp;rft.au=Dean%2C%26%2332%3BJeffrey&amp;rft.au=Ghemawat%2C%26%2332%3BSanjay&amp;rft.au=Hsieh%2C%26%2332%3BWilson&amp;rft.au=Wallach%2C%26%2332%3BDeborah&amp;rft.au=Burrows%2C%26%2332%3BMike&amp;rft.au=Chandra%2C%26%2332%3BTushar&amp;rft.au=Fikes%2C%26%2332%3BAndrew&amp;rft.au=Gruber%2C%26%2332%3BRobert&amp;rft.date=2006&amp;rft_id=http%3A%2F%2Fresearch.google.com%2Farchive%2Fbigtable.html&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFCharlesChellapilla2008">Charles, Denis; Chellapilla, Kumar (2008), "Bloomier Filters: A second look", <i>The Computing Research Repository (CoRR)</i>, <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/0807.0928">0807.0928</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Bloomier+Filters%3A+A+second+look&amp;rft.atitle=The+Computing+Research+Repository+%28CoRR%29&amp;rft.aulast=Charles&amp;rft.aufirst=Denis&amp;rft.au=Charles%2C%26%2332%3BDenis&amp;rft.au=Chellapilla%2C%26%2332%3BKumar&amp;rft.date=2008&amp;rft_id=info:arxiv/0807.0928&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFChazelleKilianRubinfeldTal2004"><a href="http://en.m.wikipedia.org/wiki/Bernard_Chazelle" title="Bernard Chazelle">Chazelle, Bernard</a>; Kilian, Joe; Rubinfeld, Ronitt; Tal, Ayellet (2004), <a rel="nofollow" class="external text" href="http://www.ee.technion.ac.il/%7Eayellet/Ps/nelson.pdf">"The Bloomier filter: an efficient data structure for static support lookup tables"</a>, <i>Proceedings of the Fifteenth Annual ACM-SIAM Symposium on Discrete Algorithms</i>, pp.&nbsp;30–39<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.ee.technion.ac.il/%7Eayellet/Ps/nelson.pdf">http://www.ee.technion.ac.il/~ayellet/Ps/nelson.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=The+Bloomier+filter%3A+an+efficient+data+structure+for+static+support+lookup+tables&amp;rft.atitle=Proceedings+of+the+Fifteenth+Annual+ACM-SIAM+Symposium+on+Discrete+Algorithms&amp;rft.aulast=Chazelle&amp;rft.aufirst=Bernard&amp;rft.au=Chazelle%2C%26%2332%3BBernard&amp;rft.au=Kilian%2C%26%2332%3BJoe&amp;rft.au=Rubinfeld%2C%26%2332%3BRonitt&amp;rft.au=Tal%2C%26%2332%3BAyellet&amp;rft.date=2004&amp;rft.pages=pp.%26nbsp%3B30%E2%80%9339&amp;rft_id=http%3A%2F%2Fwww.ee.technion.ac.il%2F%7Eayellet%2FPs%2Fnelson.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFCohenMatias2003">Cohen, Saar; Matias, Yossi (2003), <a rel="nofollow" class="external text" href="http://www.sigmod.org/sigmod03/eproceedings/papers/r09p02.pdf">"Spectral Bloom Filters"</a>, <i>Proceedings of the 2003 ACM SIGMOD International Conference on Management of Data</i>, pp.&nbsp;241–252, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F872757.872787">10.1145/872757.872787</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.sigmod.org/sigmod03/eproceedings/papers/r09p02.pdf">http://www.sigmod.org/sigmod03/eproceedings/papers/r09p02.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Spectral+Bloom+Filters&amp;rft.atitle=Proceedings+of+the+2003+ACM+SIGMOD+International+Conference+on+Management+of+Data&amp;rft.aulast=Cohen&amp;rft.aufirst=Saar&amp;rft.au=Cohen%2C%26%2332%3BSaar&amp;rft.au=Matias%2C%26%2332%3BYossi&amp;rft.date=2003&amp;rft.pages=pp.%26nbsp%3B241%E2%80%93252&amp;rft_id=info:doi/10.1145%2F872757.872787&amp;rft_id=http%3A%2F%2Fwww.sigmod.org%2Fsigmod03%2Feproceedings%2Fpapers%2Fr09p02.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span><sup class="noprint Inline-Template"><span title="&nbsp;since June 2010" style="white-space: nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Link_rot" title="Wikipedia:Link rot">dead link</a></i>]</span></sup>
+</li>
+<li>
+<span class="citation" id="CITEREFDengRafiei2006">Deng, Fan; Rafiei, Davood (2006), <a rel="nofollow" class="external text" href="http://webdocs.cs.ualberta.ca/%7Edrafiei/papers/DupDet06Sigmod.pdf">"Approximately Detecting Duplicates for Streaming Data using Stable Bloom Filters"</a>, <i>Proceedings of the ACM SIGMOD Conference</i>, pp.&nbsp;25–36<span class="printonly">, <a rel="nofollow" class="external free" href="http://webdocs.cs.ualberta.ca/%7Edrafiei/papers/DupDet06Sigmod.pdf">http://webdocs.cs.ualberta.ca/~drafiei/papers/DupDet06Sigmod.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Approximately+Detecting+Duplicates+for+Streaming+Data+using+Stable+Bloom+Filters&amp;rft.atitle=Proceedings+of+the+ACM+SIGMOD+Conference&amp;rft.aulast=Deng&amp;rft.aufirst=Fan&amp;rft.au=Deng%2C%26%2332%3BFan&amp;rft.au=Rafiei%2C%26%2332%3BDavood&amp;rft.date=2006&amp;rft.pages=pp.%26nbsp%3B25%E2%80%9336&amp;rft_id=http%3A%2F%2Fwebdocs.cs.ualberta.ca%2F%7Edrafiei%2Fpapers%2FDupDet06Sigmod.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFDharmapurikarSongTurnerLockwood2006">Dharmapurikar, Sarang; Song, Haoyu; Turner, Jonathan; Lockwood, John (2006), <a rel="nofollow" class="external text" href="http://www.arl.wustl.edu/%7Esarang/ancs6819-dharmapurikar.pdf">"Fast packet classification using Bloom filters"</a>, <i>Proceedings of the 2006 ACM/IEEE Symposium on Architecture for Networking and Communications Systems</i>, pp.&nbsp;61–70, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1185347.1185356">10.1145/1185347.1185356</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.arl.wustl.edu/%7Esarang/ancs6819-dharmapurikar.pdf">http://www.arl.wustl.edu/~sarang/ancs6819-dharmapurikar.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Fast+packet+classification+using+Bloom+filters&amp;rft.atitle=Proceedings+of+the+2006+ACM%2FIEEE+Symposium+on+Architecture+for+Networking+and+Communications+Systems&amp;rft.aulast=Dharmapurikar&amp;rft.aufirst=Sarang&amp;rft.au=Dharmapurikar%2C%26%2332%3BSarang&amp;rft.au=Song%2C%26%2332%3BHaoyu&amp;rft.au=Turner%2C%26%2332%3BJonathan&amp;rft.au=Lockwood%2C%26%2332%3BJohn&amp;rft.date=2006&amp;rft.pages=pp.%26nbsp%3B61%E2%80%9370&amp;rft_id=info:doi/10.1145%2F1185347.1185356&amp;rft_id=http%3A%2F%2Fwww.arl.wustl.edu%2F%7Esarang%2Fancs6819-dharmapurikar.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFDietzfelbingerPagh2008">Dietzfelbinger, Martin; Pagh, Rasmus (2008), "Succinct Data Structures for Retrieval and Approximate Membership", <i>The Computing Research Repository (CoRR)</i>, <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/0803.3693">0803.3693</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Succinct+Data+Structures+for+Retrieval+and+Approximate+Membership&amp;rft.atitle=The+Computing+Research+Repository+%28CoRR%29&amp;rft.aulast=Dietzfelbinger&amp;rft.aufirst=Martin&amp;rft.au=Dietzfelbinger%2C%26%2332%3BMartin&amp;rft.au=Pagh%2C%26%2332%3BRasmus&amp;rft.date=2008&amp;rft_id=info:arxiv/0803.3693&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFDillingerManolios2004a">Dillinger, Peter C.; Manolios, Panagiotis (2004a), <a rel="nofollow" class="external text" href="http://www.ccs.neu.edu/home/pete/research/spin-3spin.html">"Fast and Accurate Bitstate Verification for SPIN"</a>, <i>Proceedings of the 11th Internation Spin Workshop on Model Checking Software</i>, Springer-Verlag, Lecture Notes in Computer Science 2989<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.ccs.neu.edu/home/pete/research/spin-3spin.html">http://www.ccs.neu.edu/home/pete/research/spin-3spin.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Fast+and+Accurate+Bitstate+Verification+for+SPIN&amp;rft.atitle=Proceedings+of+the+11th+Internation+Spin+Workshop+on+Model+Checking+Software&amp;rft.aulast=Dillinger&amp;rft.aufirst=Peter+C.&amp;rft.au=Dillinger%2C%26%2332%3BPeter+C.&amp;rft.au=Manolios%2C%26%2332%3BPanagiotis&amp;rft.date=2004a&amp;rft.pub=Springer-Verlag%2C+Lecture+Notes+in+Computer+Science+2989&amp;rft_id=http%3A%2F%2Fwww.ccs.neu.edu%2Fhome%2Fpete%2Fresearch%2Fspin-3spin.html&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFDillingerManolios2004b">Dillinger, Peter C.; Manolios, Panagiotis (2004b), <a rel="nofollow" class="external text" href="http://www.ccs.neu.edu/home/pete/research/bloom-filters-verification.html">"Bloom Filters in Probabilistic Verification"</a>, <i>Proceedings of the 5th Internation Conference on Formal Methods in Computer-Aided Design</i>, Springer-Verlag, Lecture Notes in Computer Science 3312<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.ccs.neu.edu/home/pete/research/bloom-filters-verification.html">http://www.ccs.neu.edu/home/pete/research/bloom-filters-verification.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Bloom+Filters+in+Probabilistic+Verification&amp;rft.atitle=Proceedings+of+the+5th+Internation+Conference+on+Formal+Methods+in+Computer-Aided+Design&amp;rft.aulast=Dillinger&amp;rft.aufirst=Peter+C.&amp;rft.au=Dillinger%2C%26%2332%3BPeter+C.&amp;rft.au=Manolios%2C%26%2332%3BPanagiotis&amp;rft.date=2004b&amp;rft.pub=Springer-Verlag%2C+Lecture+Notes+in+Computer+Science+3312&amp;rft_id=http%3A%2F%2Fwww.ccs.neu.edu%2Fhome%2Fpete%2Fresearch%2Fbloom-filters-verification.html&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFDonnetBaynatFriedman2006">Donnet, Benoit; Baynat, Bruno; Friedman, Timur (2006), <a rel="nofollow" class="external text" href="http://adetti.iscte.pt/events/CONEXT06/Conext06_Proceedings/papers/13.html">"Retouched Bloom Filters: Allowing Networked Applications to Flexibly Trade Off False Positives Against False Negatives"</a>, <i>CoNEXT 06 – 2nd Conference on Future Networking Technologies</i><span class="printonly">, <a rel="nofollow" class="external free" href="http://adetti.iscte.pt/events/CONEXT06/Conext06_Proceedings/papers/13.html">http://adetti.iscte.pt/events/CONEXT06/Conext06_Proceedings/papers/13.html</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Retouched+Bloom+Filters%3A+Allowing+Networked+Applications+to+Flexibly+Trade+Off+False+Positives+Against+False+Negatives&amp;rft.atitle=CoNEXT+06+%E2%80%93+2nd+Conference+on+Future+Networking+Technologies&amp;rft.aulast=Donnet&amp;rft.aufirst=Benoit&amp;rft.au=Donnet%2C%26%2332%3BBenoit&amp;rft.au=Baynat%2C%26%2332%3BBruno&amp;rft.au=Friedman%2C%26%2332%3BTimur&amp;rft.date=2006&amp;rft_id=http%3A%2F%2Fadetti.iscte.pt%2Fevents%2FCONEXT06%2FConext06_Proceedings%2Fpapers%2F13.html&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFEppsteinGoodrich2007"><a href="http://en.m.wikipedia.org/wiki/David_Eppstein" title="David Eppstein">Eppstein, David</a>; <a href="http://en.m.wikipedia.org/wiki/Michael_T._Goodrich" title="Michael T. Goodrich">Goodrich, Michael T.</a>
+ (2007), "Space-efficient straggler identification in round-trip data 
+streams via Newton's identities and invertible Bloom filters", <i><a href="http://en.m.wikipedia.org/wiki/Workshop_on_Algorithms_and_Data_Structures" title="Workshop on Algorithms and Data Structures" class="mw-redirect">Algorithms and Data Structures, 10th International Workshop, WADS 2007</a></i>, Springer-Verlag, Lecture Notes in Computer Science 4619, pp.&nbsp;637–648, <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/0704.3313">0704.3313</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Space-efficient+straggler+identification+in+round-trip+data+streams+via+Newton%27s+identities+and+invertible+Bloom+filters&amp;rft.atitle=%5B%5BWorkshop+on+Algorithms+and+Data+Structures%7CAlgorithms+and+Data+Structures%2C+10th+International+Workshop%2C+WADS+2007%5D%5D&amp;rft.aulast=Eppstein&amp;rft.aufirst=David&amp;rft.au=Eppstein%2C%26%2332%3BDavid&amp;rft.au=Goodrich%2C%26%2332%3BMichael+T.&amp;rft.date=2007&amp;rft.pages=pp.%26nbsp%3B637%E2%80%93648&amp;rft.pub=Springer-Verlag%2C+Lecture+Notes+in+Computer+Science+4619&amp;rft_id=info:arxiv/0704.3313&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFFanCaoAlmeidaBroder2000">Fan, Li; Cao, Pei; Almeida, Jussara; <a href="http://en.m.wikipedia.org/wiki/Andrei_Broder" title="Andrei Broder">Broder, Andrei</a> (2000), "Summary Cache: A Scalable Wide-Area Web Cache Sharing Protocol", <i>IEEE/ACM Transactions on Networking</i> <b>8</b> (3): 281–293, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2F90.851975">10.1109/90.851975</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Summary+Cache%3A+A+Scalable+Wide-Area+Web+Cache+Sharing+Protocol&amp;rft.jtitle=IEEE%2FACM+Transactions+on+Networking&amp;rft.aulast=Fan&amp;rft.aufirst=Li&amp;rft.au=Fan%2C%26%2332%3BLi&amp;rft.au=Cao%2C%26%2332%3BPei&amp;rft.au=Almeida%2C%26%2332%3BJussara&amp;rft.au=Broder%2C%26%2332%3BAndrei&amp;rft.date=2000&amp;rft.volume=8&amp;rft.issue=3&amp;rft.pages=281%E2%80%93293&amp;rft_id=info:doi/10.1109%2F90.851975&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>. A preliminary version appeared at SIGCOMM '98.</li>
+<li>
+<span class="citation" id="CITEREFGoelGupta2010">Goel, Ashish; Gupta, 
+Pankaj (2010), "Small subset queries and bloom filters using ternary 
+associative memories, with applications", <i>ACM Sigmetrics 2010</i> <b>38</b>: 143, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1811099.1811056">10.1145/1811099.1811056</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Small+subset+queries+and+bloom+filters+using+ternary+associative+memories%2C+with+applications&amp;rft.jtitle=ACM+Sigmetrics+2010&amp;rft.aulast=Goel&amp;rft.aufirst=Ashish&amp;rft.au=Goel%2C%26%2332%3BAshish&amp;rft.au=Gupta%2C%26%2332%3BPankaj&amp;rft.date=2010&amp;rft.volume=38&amp;rft.pages=143&amp;rft_id=info:doi/10.1145%2F1811099.1811056&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFKirschMitzenmacher2006">Kirsch, Adam; Mitzenmacher, Michael (2006), <a rel="nofollow" class="external text" href="http://www.eecs.harvard.edu/%7Ekirsch/pubs/bbbf/esa06.pdf">"Less Hashing, Same Performance: Building a Better Bloom Filter"</a>, in Azar, Yossi; Erlebach, Thomas, <i>Algorithms – ESA 2006, 14th Annual European Symposium</i>, <b>4168</b>, Springer-Verlag, Lecture Notes in Computer Science 4168, pp.&nbsp;456–467, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F11841036">10.1007/11841036</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.eecs.harvard.edu/%7Ekirsch/pubs/bbbf/esa06.pdf">http://www.eecs.harvard.edu/~kirsch/pubs/bbbf/esa06.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Less+Hashing%2C+Same+Performance%3A+Building+a+Better+Bloom+Filter&amp;rft.atitle=Algorithms+%E2%80%93+ESA+2006%2C+14th+Annual+European+Symposium&amp;rft.aulast=Kirsch&amp;rft.aufirst=Adam&amp;rft.au=Kirsch%2C%26%2332%3BAdam&amp;rft.au=Mitzenmacher%2C%26%2332%3BMichael&amp;rft.date=2006&amp;rft.volume=4168&amp;rft.pages=pp.%26nbsp%3B456%E2%80%93467&amp;rft.pub=Springer-Verlag%2C+Lecture+Notes+in+Computer+Science+4168&amp;rft_id=info:doi/10.1007%2F11841036&amp;rft_id=http%3A%2F%2Fwww.eecs.harvard.edu%2F%7Ekirsch%2Fpubs%2Fbbbf%2Fesa06.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFMortensenPaghP.C4.83tra.C5.9Fcu2005">Mortensen, Christian Worm; Pagh, Rasmus; <a href="http://en.m.wikipedia.org/wiki/Mihai_P%C4%83tra%C5%9Fcu" title="Mihai Pătraşcu">Pătraşcu, Mihai</a> (2005), "On dynamic range reporting in one dimension", <i>Proceedings of the Thirty-seventh Annual ACM Symposium on Theory of Computing</i>, pp.&nbsp;104–111, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1060590.1060606">10.1145/1060590.1060606</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=On+dynamic+range+reporting+in+one+dimension&amp;rft.atitle=Proceedings+of+the+Thirty-seventh+Annual+ACM+Symposium+on+Theory+of+Computing&amp;rft.aulast=Mortensen&amp;rft.aufirst=Christian+Worm&amp;rft.au=Mortensen%2C%26%2332%3BChristian+Worm&amp;rft.au=Pagh%2C%26%2332%3BRasmus&amp;rft.au=P%C4%83tra%C5%9Fcu%2C%26%2332%3BMihai&amp;rft.date=2005&amp;rft.pages=pp.%26nbsp%3B104%E2%80%93111&amp;rft_id=info:doi/10.1145%2F1060590.1060606&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFPaghPaghRao2005">Pagh, Anna; Pagh, Rasmus; Rao, S. Srinivasa (2005), <a rel="nofollow" class="external text" href="http://www.it-c.dk/people/pagh/papers/bloom.pdf">"An optimal Bloom filter replacement"</a>, <i>Proceedings of the Sixteenth Annual ACM-SIAM Symposium on Discrete Algorithms</i>, pp.&nbsp;823–829<span class="printonly">, <a rel="nofollow" class="external free" href="http://www.it-c.dk/people/pagh/papers/bloom.pdf">http://www.it-c.dk/people/pagh/papers/bloom.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+optimal+Bloom+filter+replacement&amp;rft.atitle=Proceedings+of+the+Sixteenth+Annual+ACM-SIAM+Symposium+on+Discrete+Algorithms&amp;rft.aulast=Pagh&amp;rft.aufirst=Anna&amp;rft.au=Pagh%2C%26%2332%3BAnna&amp;rft.au=Pagh%2C%26%2332%3BRasmus&amp;rft.au=Rao%2C%26%2332%3BS.+Srinivasa&amp;rft.date=2005&amp;rft.pages=pp.%26nbsp%3B823%E2%80%93829&amp;rft_id=http%3A%2F%2Fwww.it-c.dk%2Fpeople%2Fpagh%2Fpapers%2Fbloom.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFPorat2008">Porat, Ely (2008), "An Optimal Bloom Filter Replacement Based on Matrix Solving", <i>The Computing Research Repository (CoRR)</i>, <a href="http://en.m.wikipedia.org/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/0804.1845">0804.1845</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=An+Optimal+Bloom+Filter+Replacement+Based+on+Matrix+Solving&amp;rft.atitle=The+Computing+Research+Repository+%28CoRR%29&amp;rft.aulast=Porat&amp;rft.aufirst=Ely&amp;rft.au=Porat%2C%26%2332%3BEly&amp;rft.date=2008&amp;rft_id=info:arxiv/0804.1845&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFPutzeSandersSingler2007">Putze, F.; Sanders, P.; Singler, J. (2007), <a rel="nofollow" class="external text" href="http://algo2.iti.uni-karlsruhe.de/singler/publications/cacheefficientbloomfilters-wea2007.pdf">"Cache-, Hash- and Space-Efficient Bloom Filters"</a>, in Demetrescu, Camil, <i>Experimental Algorithms, 6th International Workshop, WEA 2007</i>, <b>4525</b>, Springer-Verlag, Lecture Notes in Computer Science 4525, pp.&nbsp;108–121, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F978-3-540-72845-0">10.1007/978-3-540-72845-0</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://algo2.iti.uni-karlsruhe.de/singler/publications/cacheefficientbloomfilters-wea2007.pdf">http://algo2.iti.uni-karlsruhe.de/singler/publications/cacheefficientbloomfilters-wea2007.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Cache-%2C+Hash-+and+Space-Efficient+Bloom+Filters&amp;rft.atitle=Experimental+Algorithms%2C+6th+International+Workshop%2C+WEA+2007&amp;rft.aulast=Putze&amp;rft.aufirst=F.&amp;rft.au=Putze%2C%26%2332%3BF.&amp;rft.au=Sanders%2C%26%2332%3BP.&amp;rft.au=Singler%2C%26%2332%3BJ.&amp;rft.date=2007&amp;rft.volume=4525&amp;rft.pages=pp.%26nbsp%3B108%E2%80%93121&amp;rft.pub=Springer-Verlag%2C+Lecture+Notes+in+Computer+Science+4525&amp;rft_id=info:doi/10.1007%2F978-3-540-72845-0&amp;rft_id=http%3A%2F%2Falgo2.iti.uni-karlsruhe.de%2Fsingler%2Fpublications%2Fcacheefficientbloomfilters-wea2007.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFSethumadhavanDesikanBurgerMoore2003">Sethumadhavan, Simha; Desikan, Rajagopalan; Burger, Doug; Moore, Charles R.; Keckler, Stephen W. (2003), <a rel="nofollow" class="external text" href="http://www.cs.utexas.edu/users/simha/publications/lsq.pdf">"Scalable hardware memory disambiguation for high ILP processors"</a>, <i>36th Annual IEEE/ACM International Symposium on Microarchitecture, 2003, MICRO-36</i>, pp.&nbsp;399–410, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FMICRO.2003.1253244">10.1109/MICRO.2003.1253244</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.cs.utexas.edu/users/simha/publications/lsq.pdf">http://www.cs.utexas.edu/users/simha/publications/lsq.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Scalable+hardware+memory+disambiguation+for+high+ILP+processors&amp;rft.atitle=36th+Annual+IEEE%2FACM+International+Symposium+on+Microarchitecture%2C+2003%2C+MICRO-36&amp;rft.aulast=Sethumadhavan&amp;rft.aufirst=Simha&amp;rft.au=Sethumadhavan%2C%26%2332%3BSimha&amp;rft.au=Desikan%2C%26%2332%3BRajagopalan&amp;rft.au=Burger%2C%26%2332%3BDoug&amp;rft.au=Moore%2C%26%2332%3BCharles+R.&amp;rft.au=Keckler%2C%26%2332%3BStephen+W.&amp;rft.date=2003&amp;rft.pages=pp.%26nbsp%3B399%E2%80%93410&amp;rft_id=info:doi/10.1109%2FMICRO.2003.1253244&amp;rft_id=http%3A%2F%2Fwww.cs.utexas.edu%2Fusers%2Fsimha%2Fpublications%2Flsq.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFShanmugasundaramBr.C3.B6nnimannMemon2004">Shanmugasundaram, Kulesh; Brönnimann, Hervé; Memon, Nasir (2004), "Payload attribution via hierarchical Bloom filters", <i>Proceedings of the 11th ACM Conference on Computer and Communications Security</i>, pp.&nbsp;31–41, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1030083.1030089">10.1145/1030083.1030089</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Payload+attribution+via+hierarchical+Bloom+filters&amp;rft.atitle=Proceedings+of+the+11th+ACM+Conference+on+Computer+and+Communications+Security&amp;rft.aulast=Shanmugasundaram&amp;rft.aufirst=Kulesh&amp;rft.au=Shanmugasundaram%2C%26%2332%3BKulesh&amp;rft.au=Br%C3%B6nnimann%2C%26%2332%3BHerv%C3%A9&amp;rft.au=Memon%2C%26%2332%3BNasir&amp;rft.date=2004&amp;rft.pages=pp.%26nbsp%3B31%E2%80%9341&amp;rft_id=info:doi/10.1145%2F1030083.1030089&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFStarobinskiTrachtenbergAgarwal2003">Starobinski, David; Trachtenberg, Ari; Agarwal, Sachin (2003), "Efficient PDA Synchronization", <i>IEEE Transactions on Mobile Computing</i> <b>2</b> (1): 40, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FTMC.2003.1195150">10.1109/TMC.2003.1195150</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Efficient+PDA+Synchronization&amp;rft.jtitle=IEEE+Transactions+on+Mobile+Computing&amp;rft.aulast=Starobinski&amp;rft.aufirst=David&amp;rft.au=Starobinski%2C%26%2332%3BDavid&amp;rft.au=Trachtenberg%2C%26%2332%3BAri&amp;rft.au=Agarwal%2C%26%2332%3BSachin&amp;rft.date=2003&amp;rft.volume=2&amp;rft.issue=1&amp;rft.pages=40&amp;rft_id=info:doi/10.1109%2FTMC.2003.1195150&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+<li>
+<span class="citation" id="CITEREFSternDill1996">Stern, Ulrich; Dill, David L. (1996), <a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.47.4101">"A New Scheme for Memory-Efficient Probabilistic Verification"</a>, <i>Proceedings
+ of Formal Description Techniques for Distributed Systems and 
+Communication Protocols, and Protocol Specification, Testing, and 
+Verification: IFIP TC6/WG6.1 Joint International Conference</i>, Chapman &amp; Hall, IFIP Conference Proceedings, pp.&nbsp;333–348<span class="printonly">, <a rel="nofollow" class="external free" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.47.4101">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.47.4101</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=A+New+Scheme+for+Memory-Efficient+Probabilistic+Verification&amp;rft.atitle=Proceedings+of+Formal+Description+Techniques+for+Distributed+Systems+and+Communication+Protocols%2C+and+Protocol+Specification%2C+Testing%2C+and+Verification%3A+IFIP+TC6%2FWG6.1+Joint+International+Conference&amp;rft.aulast=Stern&amp;rft.aufirst=Ulrich&amp;rft.au=Stern%2C%26%2332%3BUlrich&amp;rft.au=Dill%2C%26%2332%3BDavid+L.&amp;rft.date=1996&amp;rft.pages=pp.%26nbsp%3B333%E2%80%93348&amp;rft.pub=Chapman+%26+Hall%2C+IFIP+Conference+Proceedings&amp;rft_id=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fsummary%3Fdoi%3D10.1.1.47.4101&amp;rfr_id=info:sid/en.wikipedia.org:Bloom_filter"><span style="display: none;">&nbsp;</span></span>
+</li>
+</ul>
+</div>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_10">
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cs.wisc.edu/%7Ecao/papers/summary-cache/node8.html">Table of false-positive rates for different configurations</a> from a <a href="http://en.m.wikipedia.org/wiki/University_of_Wisconsin%E2%80%93Madison" title="University of Wisconsin–Madison">University of Wisconsin–Madison</a> website</li>
+<li>
+<a rel="nofollow" class="external text" href="http://blogs.sun.com/bblfish/entry/my_bloomin_friends">Bloom Filters and Social Networks with Java applet demo</a> from a <a href="http://en.m.wikipedia.org/wiki/Sun_Microsystems" title="Sun Microsystems">Sun Microsystems</a> website</li>
+<li>
+<a rel="nofollow" class="external text" href="http://tr.ashcan.org/2008/12/bloomers.html">Interactive Processing demonstration</a> from ashcan.org</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.youtube.com/watch?v=947gWqwkhu0">"More Optimal Bloom Filters," Ely Porat (Nov/2007) Google TechTalk video</a> on <a href="http://en.m.wikipedia.org/wiki/YouTube" title="YouTube">YouTube</a>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.perl.com/pub/2004/04/08/bloom_filters.html">"Using Bloom Filters"</a> Detailed Bloom Filter explanation using <a href="http://en.m.wikipedia.org/wiki/Perl" title="Perl">Perl</a>
+</li>
+</ul>
+<h3> <span class="mw-headline" id="Implementations">Implementations</span>
+</h3>
+<table class="metadata plainlinks ambox ambox-style ambox-external_links" style=""><tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="Bloom_filter_files/40px-Edit-clear.png" width="40" height="40"></div>
+</td>
+<td class="mbox-text" style=""><span class="mbox-text-span">This article's <b>use of <a href="http://en.m.wikipedia.org/wiki/Wikipedia:External_links" title="Wikipedia:External links">external links</a> may not follow Wikipedia's policies or guidelines</b>. <span class="hide-when-compact">Please <a class="external text" href="http://en.wikipedia.org/w/index.php?title=Bloom_filter&amp;action=edit">improve this article</a> by removing <a href="http://en.m.wikipedia.org/wiki/Wikipedia:What_Wikipedia_is_not#Wikipedia_is_not_a_mirror_or_a_repository_of_links.2C_images.2C_or_media_files" title="Wikipedia:What Wikipedia is not">excessive</a> or <a href="http://en.m.wikipedia.org/wiki/Wikipedia:External_links" title="Wikipedia:External links">inappropriate</a> external links, and converting useful links where appropriate into <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">footnote references</a>.</span> <small><i>(August 2010)</i></small> </span></td>
+</tr></tbody></table>
+<div class="column-count column-count-2" style="-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;">
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://en.literateprograms.org/Bloom_filter_%28C%29">Implementation in C</a> from literateprograms.org</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.partow.net/programming/hashfunctions/index.html">Implementation in C++ and Object Pascal</a> from partow.net</li>
+<li>
+<a rel="nofollow" class="external text" href="http://codeplex.com/bloomfilter">Implementation in C#</a> from codeplex.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://sites.google.com/site/scalablebloomfilters/">Implementation in Erlang</a> from sites.google.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/bloomfilter">Implementation in Haskell</a> from haskell.org</li>
+<li>
+<a rel="nofollow" class="external text" href="https://github.com/MagnusS/Java-BloomFilter">Implementation in Java</a> from MagnusS on github.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://la.ma.la/misc/js/bloomfilter/">Implementation in Javascript</a> from la.ma.la</li>
+<li>
+<a rel="nofollow" class="external text" href="http://lemonodor.com/archives/000881.html">Implementation in Lisp</a> from lemonodor.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://search.cpan.org/dist/Bloom-Filter/">Implementation in Perl</a> from cpan.org</li>
+<li>
+<a rel="nofollow" class="external text" href="http://code.google.com/p/php-bloom-filter/">Implementation in PHP</a> from code.google.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://pypi.python.org/pypi/pybloom/1.0.2">Implementation in Python, Scalable Bloom Filter</a> from pypi.python.org</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.rubyinside.com/bloom-filters-a-powerful-tool-599.html">Implementation in Ruby</a> from rubyinside.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.codecommit.com/blog/scala/bloom-filters-in-scala">Implementation in Scala</a> from codecommit.com</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.kocjan.org/tclmentor/61-bloom-filters-in-tcl.html">Implementation in Tcl</a> from kocjan.org</li>
+</ul>
+</div>
+
+
+
+
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Bloom_filter&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Bloom+filter&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Bloom_filter&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Bloom+filter&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Bloom_filter_files/load_002.php" type="text/javascript"></script>
+<script src="Bloom_filter_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

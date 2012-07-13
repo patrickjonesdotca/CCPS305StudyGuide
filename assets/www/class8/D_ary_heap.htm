@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>d-ary heap - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="D-ary_heap_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 3 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/D-ary_heap">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="D-ary_heap_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="D-ary_heap_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="D-ary_heap_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/D-ary_heap" selected="selected">English</option><option value="//fa.m.wikipedia.org/wiki/%D9%87%DB%8C%D9%BE_%D8%AF%DB%8C_%D8%AA%D8%A7%DB%8C%DB%8C">فارسی</option><option value="//pl.m.wikipedia.org/wiki/Kopiec_a-arny">polski</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading"><i>d</i>-ary heap</h1>			
+<p>The <b><span class="texhtml"><i>d</i></span>-ary heap</b> or <b><span class="texhtml"><i>d</i></span>-heap</b> is a <a href="http://en.m.wikipedia.org/wiki/Priority_queue" title="Priority queue">priority queue</a> <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a>, a generalization of the <a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">binary heap</a> in which the nodes have <span class="texhtml"><i>d</i></span> children instead of 2.<sup id="cite_ref-j75_0-0" class="reference"><a href="#cite_note-j75-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-t83_1-0" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-0" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup> Thus, a binary heap is a 2-heap. According to Tarjan<sup id="cite_ref-t83_1-1" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup> and Jensen et al.,<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup><span class="texhtml"><i>d</i></span>-ary heaps were invented by <a href="http://en.m.wikipedia.org/wiki/Donald_B._Johnson" title="Donald B. Johnson">Donald B. Johnson</a> in 1975.<sup id="cite_ref-j75_0-1" class="reference"><a href="#cite_note-j75-0"><span>[</span>1<span>]</span></a></sup></p>
+<p>This data structure allows decrease priority operations to be 
+performed more quickly than binary heaps, at the expense of slower 
+delete minimum operations. This tradeoff leads to better running times 
+for algorithms such as <a href="http://en.m.wikipedia.org/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra's algorithm</a> in which decrease priority operations are more common than delete min operations.<sup id="cite_ref-j75_0-2" class="reference"><a href="#cite_note-j75-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-t2_4-0" class="reference"><a href="#cite_note-t2-4"><span>[</span>5<span>]</span></a></sup> Additionally, <span class="texhtml"><i>d</i></span>-ary heaps have better <a href="http://en.m.wikipedia.org/wiki/Memory_cache" title="Memory cache" class="mw-redirect">memory cache</a>
+ behavior than a binary heap, allowing them to run more quickly in 
+practice despite having a theoretically larger worst-case running time.<sup id="cite_ref-nmm91_5-0" class="reference"><a href="#cite_note-nmm91-5"><span>[</span>6<span>]</span></a></sup><sup id="cite_ref-k10_6-0" class="reference"><a href="#cite_note-k10-6"><span>[</span>7<span>]</span></a></sup> Like binary heaps, <span class="texhtml"><i>d</i></span>-ary heaps are an <a href="http://en.m.wikipedia.org/wiki/In-place_algorithm" title="In-place algorithm">in-place data structure</a> that uses no additional storage beyond that needed to store the array of items in the heap.<sup id="cite_ref-t83_1-2" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-mp05_7-0" class="reference"><a href="#cite_note-mp05-7"><span>[</span>8<span>]</span></a></sup></p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Data_structure">Data structure</span></h2><div class="content_block" id="content_1">
+<p>The <span class="texhtml"><i>d</i></span>-ary heap consists of an <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a> of <span class="texhtml"><i>n</i></span> items, each of which has a priority associated with it. These items may be viewed as the nodes in a complete <span class="texhtml"><i>d</i></span>-ary tree, listed in <a href="http://en.m.wikipedia.org/wiki/Breadth-first_search" title="Breadth-first search">breadth first traversal order</a>: the item at position 0 of the array forms the root of the tree, the items at positions 1–<span class="texhtml"><i>d</i></span> are its children, the next <span class="texhtml"><i>d</i><sup>2</sup></span> items are its grandchildren, etc. Thus, the parent of the item at position <span class="texhtml"><i>i</i></span> (for any <span class="texhtml"><i>i</i> &gt; 0</span>) is the item at position <span class="texhtml">floor((<i>i</i> − 1)/<i>d</i>)</span> and its children are the items at positions <span class="texhtml"><i>di</i> + 1</span> through <span class="texhtml"><i>di</i> + <i>d</i></span>. According to the <a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">heap property</a>,
+ in a min-heap, each item has a priority that is at least as large as 
+its parent; in a max-heap, each item has a priority that is no larger 
+than its parent.<sup id="cite_ref-t83_1-3" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-1" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>The minimum priority item in a min-heap (or the maximum priority item
+ in a max-heap) may always be found at position 0 of the array. To 
+remove this item from the priority queue, the last item <i>x</i> in the array is moved into its place, and the length of the array is decreased by one. Then, while item <i>x</i> and its children do not satisfy the heap property, item <i>x</i>
+ is swapped with one of its children (the one with the smallest priority
+ in a min-heap, or the one with the largest priority in a max-heap), 
+moving it downward in the tree and later in the array, until eventually 
+the heap property is satisfied. The same downward swapping procedure may
+ be used to increase the priority of an item in a min-heap, or to 
+decrease the priority of an item in a max-heap.<sup id="cite_ref-t83_1-4" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-2" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>To insert a new item into the heap, the item is appended to the end 
+of the array, and then while the heap property is violated it is swapped
+ with its parent, moving it upward in the tree and earlier in the array,
+ until eventually the heap property is satisfied. The same 
+upward-swapping procedure may be used to decrease the priority of an 
+item in a min-heap, or to increase the priority of an item in a 
+max-heap.<sup id="cite_ref-t83_1-5" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-3" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>To create a new heap from an array of <span class="texhtml"><i>n</i></span> items, one may loop over the items in reverse order, starting from the item at position <span class="texhtml"><i>n</i> − 1</span> and ending at the item at position 0, applying the downward-swapping procedure for each item.<sup id="cite_ref-t83_1-6" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-4" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup></p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Analysis">Analysis</span></h2><div class="content_block" id="content_2">
+<p>In a <span class="texhtml"><i>d</i></span>-ary heap with <span class="texhtml"><i>n</i></span> items in it, both the upward-swapping procedure and the downward-swapping procedure may perform as many as <span class="texhtml">log<sub><i>d</i></sub><i>n</i> = log <i>n</i> / log <i>d</i></span>
+ swaps. In the upward-swapping procedure, each swap involves a single 
+comparison of an item with its parent, and takes constant time. 
+Therefore, the time to insert a new item into the heap, to decrease the 
+priority of an item in a min-heap, or to increase the priority of an 
+item in a max-heap, is <span class="texhtml">O(log <i>n</i> / log <i>d</i>)</span>. In the downward-swapping procedure, each swap involves <span class="texhtml"><i>d</i></span> comparisons and takes <span class="texhtml">O(<i>d</i>)</span> time: it takes <span class="texhtml"><i>d</i> − 1</span>
+ comparisons to determine the minimum or maximum of the children and 
+then one more comparison against the parent to determine whether a swap 
+is needed. Therefore, the time to delete the root item, to increase the 
+priority of an item in a min-heap, or to decrease the priority of an 
+item in a max-heap, is <span class="texhtml">O(<i>d</i> log <i>n</i> / log <i>d</i>)</span>.<sup id="cite_ref-t83_1-7" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-5" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup></p>
+<p>When creating a <span class="texhtml"><i>d</i></span>-ary heap from a set of <i>n</i> items, most of the items are in positions that will eventually hold leaves of the <span class="texhtml"><i>d</i></span>-ary tree, and no downward swapping is performed for those items. At most <span class="texhtml"><i>n</i>/<i>d</i> + 1</span> items are non-leaves, and may be swapped downwards at least once, at a cost of <span class="texhtml">O(<i>d</i>)</span> time to find the child to swap them with. At most <span class="texhtml"><i>n</i>/<i>d</i><sup>2</sup> + 1</span> nodes may be swapped downward two times, incurring an additional <span class="texhtml">O(<i>d</i>)</span>
+ cost for the second swap beyond the cost already counted in the first 
+term, etc. Therefore, the total amount of time to create a heap in this 
+way is</p>
+<dl>
+<dd>
+<img class="tex" alt="\sum_{i=1}^{\log_d n} \left(\frac{n}{d^i}+1\right) O(d) = O(n)." src="D-ary_heap_files/857390bb31128bade8c8a0559ff07dfa.png"><sup id="cite_ref-t83_1-8" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-6" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup>
+</dd>
+</dl>
+<p>The space usage of the <span class="texhtml"><i>d</i>-ary</span> 
+heap, with insert and delete-min operations, is linear, as it uses no 
+extra storage other than an array containing a list of the items in the 
+heap.<sup id="cite_ref-t83_1-9" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-mp05_7-1" class="reference"><a href="#cite_note-mp05-7"><span>[</span>8<span>]</span></a></sup>
+ If changes to the priorities of existing items need to be supported, 
+then one must also maintain pointers from the items to their positions 
+in the heap, which again uses only linear storage.<sup id="cite_ref-t83_1-10" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup></p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_3">
+<p><a href="http://en.m.wikipedia.org/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra's algorithm</a> for <a href="http://en.m.wikipedia.org/wiki/Shortest_path" title="Shortest path" class="mw-redirect">shortest paths</a> in graphs and <a href="http://en.m.wikipedia.org/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim's algorithm</a> for <a href="http://en.m.wikipedia.org/wiki/Minimum_spanning_tree" title="Minimum spanning tree">minimum spanning trees</a> both use a min-heap in which there are <span class="texhtml"><i>n</i></span> delete-min operations and as many as <span class="texhtml"><i>m</i></span> decrease-priority operations, where <span class="texhtml"><i>n</i></span> is the number of vertices in the graph and <i>m</i> is the number of edges. By using a <span class="texhtml"><i>d</i></span>-ary heap with <span class="texhtml"><i>d</i> = <i>m</i>/<i>n</i></span>, the total times for these two types of operations may be balanced against each other, leading to a total time of <span class="texhtml">O(<i>m</i> log<sub><i>m</i>/<i>n</i></sub><i>n</i>)</span> for the algorithm, an improvement over the <span class="texhtml">O(<i>m</i> log <i>n</i>)</span>
+ running time of binary heap versions of these algorithms whenever the 
+number of edges is significantly larger than the number of vertices.<sup id="cite_ref-j75_0-3" class="reference"><a href="#cite_note-j75-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-t2_4-1" class="reference"><a href="#cite_note-t2-4"><span>[</span>5<span>]</span></a></sup> An alternative priority queue data structure, the <a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci heap</a>, gives an even better theoretical running time of <span class="texhtml">O(<i>m</i> + <i>n</i> log <i>n</i>)</span>, but in practice <span class="texhtml"><i>d</i></span>-ary heaps are generally at least as fast, and often faster, than Fibonacci heaps for this application.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup></p>
+<p>4-heaps may perform better than binary heaps in practice, even for delete-min operations.<sup id="cite_ref-t83_1-11" class="reference"><a href="#cite_note-t83-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-w07_2-7" class="reference"><a href="#cite_note-w07-2"><span>[</span>3<span>]</span></a></sup> Additionally, a <span class="texhtml"><i>d</i></span>-ary heap typically runs much faster than a binary heap for heap sizes that exceed the size of the computer's <a href="http://en.m.wikipedia.org/wiki/Cache_memory" title="Cache memory" class="mw-redirect">cache memory</a>: A binary heap typically requires more <a href="http://en.m.wikipedia.org/wiki/Cache_miss" title="Cache miss" class="mw-redirect">cache misses</a> and <a href="http://en.m.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">virtual memory</a> <a href="http://en.m.wikipedia.org/wiki/Page_fault" title="Page fault">page faults</a> than a <span class="texhtml"><i>d</i></span>-ary heap, each one taking far more time than the extra work incurred by the additional comparisons a <span class="texhtml"><i>d</i></span>-ary heap makes compared to a binary heap.<sup id="cite_ref-nmm91_5-1" class="reference"><a href="#cite_note-nmm91-5"><span>[</span>6<span>]</span></a></sup><sup id="cite_ref-k10_6-1" class="reference"><a href="#cite_note-k10-6"><span>[</span>7<span>]</span></a></sup></p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_4">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-j75-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-j75_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-j75_0-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-j75_0-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-j75_0-3"><sup><i><b>d</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFJohnson1975"><a href="http://en.m.wikipedia.org/wiki/Donald_B._Johnson" title="Donald B. Johnson">Johnson, D. B.</a> (1975), "Priority queues with update and finding minimum spanning trees", <i>Information Processing Letters</i> <b>4</b> (3): 53–57, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2F0020-0190%2875%2990001-0">10.1016/0020-0190(75)90001-0</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Priority+queues+with+update+and+finding+minimum+spanning+trees&amp;rft.jtitle=Information+Processing+Letters&amp;rft.aulast=Johnson&amp;rft.aufirst=D.+B.&amp;rft.au=Johnson%2C%26%2332%3BD.+B.&amp;rft.date=1975&amp;rft.volume=4&amp;rft.issue=3&amp;rft.pages=53%E2%80%9357&amp;rft_id=info:doi/10.1016%2F0020-0190%2875%2990001-0&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-t83-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-t83_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-t83_1-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-t83_1-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-t83_1-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-t83_1-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-t83_1-5"><sup><i><b>f</b></i></sup></a> <a href="#cite_ref-t83_1-6"><sup><i><b>g</b></i></sup></a> <a href="#cite_ref-t83_1-7"><sup><i><b>h</b></i></sup></a> <a href="#cite_ref-t83_1-8"><sup><i><b>i</b></i></sup></a> <a href="#cite_ref-t83_1-9"><sup><i><b>j</b></i></sup></a> <a href="#cite_ref-t83_1-10"><sup><i><b>k</b></i></sup></a> <a href="#cite_ref-t83_1-11"><sup><i><b>l</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFTarjan1983"><a href="http://en.m.wikipedia.org/wiki/Robert_Tarjan" title="Robert Tarjan">Tarjan, R. E.</a> (1983), "3.2. <i>d</i>-heaps", <i>Data Structures and Network Algorithms</i>, CBMS-NSF Regional Conference Series in Applied Mathematics, <b>44</b>, <a href="http://en.m.wikipedia.org/wiki/Society_for_Industrial_and_Applied_Mathematics" title="Society for Industrial and Applied Mathematics">Society for Industrial and Applied Mathematics</a>, pp.&nbsp;34–38</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=3.2.+%27%27d%27%27-heaps&amp;rft.atitle=Data+Structures+and+Network+Algorithms&amp;rft.aulast=Tarjan&amp;rft.aufirst=R.+E.&amp;rft.au=Tarjan%2C%26%2332%3BR.+E.&amp;rft.date=1983&amp;rft.series=CBMS-NSF+Regional+Conference+Series+in+Applied+Mathematics&amp;rft.volume=44&amp;rft.pages=pp.%26nbsp%3B34%E2%80%9338&amp;rft.pub=%5B%5BSociety+for+Industrial+and+Applied+Mathematics%5D%5D&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-w07-2">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-w07_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-w07_2-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-w07_2-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-w07_2-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-w07_2-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-w07_2-5"><sup><i><b>f</b></i></sup></a> <a href="#cite_ref-w07_2-6"><sup><i><b>g</b></i></sup></a> <a href="#cite_ref-w07_2-7"><sup><i><b>h</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFWeiss2007">Weiss, M. A. (2007), "<i>d</i>-heaps", <i>Data Structures and Algorithm Analysis</i> (2nd ed.), Addison-Wesley, p.&nbsp;216, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-321-37013-9" title="Special:BookSources/0-321-37013-9">0-321-37013-9</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=%27%27d%27%27-heaps&amp;rft.atitle=Data+Structures+and+Algorithm+Analysis&amp;rft.aulast=Weiss&amp;rft.aufirst=M.+A.&amp;rft.au=Weiss%2C%26%2332%3BM.+A.&amp;rft.date=2007&amp;rft.pages=p.%26nbsp%3B216&amp;rft.edition=2nd&amp;rft.pub=Addison-Wesley&amp;rft.isbn=0-321-37013-9&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFJensenKatajainenVitale2004">Jensen, C.; Katajainen, J.; Vitale, F. (2004), <a rel="nofollow" class="external text" href="http://www.cphstl.dk/Report/In-place-multiway-heaps/experimental-study.pdf"><i>An extended truth about heaps</i></a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.cphstl.dk/Report/In-place-multiway-heaps/experimental-study.pdf">http://www.cphstl.dk/Report/In-place-multiway-heaps/experimental-study.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=An+extended+truth+about+heaps&amp;rft.aulast=Jensen&amp;rft.aufirst=C.&amp;rft.au=Jensen%2C%26%2332%3BC.&amp;rft.au=Katajainen%2C%26%2332%3BJ.&amp;rft.au=Vitale%2C%26%2332%3BF.&amp;rft.date=2004&amp;rft_id=http%3A%2F%2Fwww.cphstl.dk%2FReport%2FIn-place-multiway-heaps%2Fexperimental-study.pdf&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-t2-4">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-t2_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-t2_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><a href="#CITEREFTarjan1983">Tarjan (1983</a>), pp. 77 and 91.</span>
+</li>
+<li id="cite_note-nmm91-5">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-nmm91_5-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-nmm91_5-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFNaorMartelMatloff1991">Naor, D.; Martel, C. U.; Matloff, N. S. (1991), "Performance of priority queue structures in a virtual memory environment", <i>Computer Journal</i> <b>34</b> (5): 428–437, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1093%2Fcomjnl%2F34.5.428">10.1093/comjnl/34.5.428</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Performance+of+priority+queue+structures+in+a+virtual+memory+environment&amp;rft.jtitle=Computer+Journal&amp;rft.aulast=Naor&amp;rft.aufirst=D.&amp;rft.au=Naor%2C%26%2332%3BD.&amp;rft.au=Martel%2C%26%2332%3BC.+U.&amp;rft.au=Matloff%2C%26%2332%3BN.+S.&amp;rft.date=1991&amp;rft.volume=34&amp;rft.issue=5&amp;rft.pages=428%E2%80%93437&amp;rft_id=info:doi/10.1093%2Fcomjnl%2F34.5.428&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-k10-6">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-k10_6-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-k10_6-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFKamp2010">Kamp, Poul-Henning (2010), <a rel="nofollow" class="external text" href="http://queue.acm.org/detail.cfm?id=1814327">"You're doing it wrong"</a>, <i>ACM Queue</i> <b>8</b> (6)<span class="printonly">, <a rel="nofollow" class="external free" href="http://queue.acm.org/detail.cfm?id=1814327">http://queue.acm.org/detail.cfm?id=1814327</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=You%27re+doing+it+wrong&amp;rft.jtitle=ACM+Queue&amp;rft.aulast=Kamp&amp;rft.aufirst=Poul-Henning&amp;rft.au=Kamp%2C%26%2332%3BPoul-Henning&amp;rft.date=2010&amp;rft.volume=8&amp;rft.issue=6&amp;rft_id=http%3A%2F%2Fqueue.acm.org%2Fdetail.cfm%3Fid%3D1814327&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-mp05-7">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-mp05_7-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-mp05_7-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFMortensenPettie2005">Mortensen, C. W.; Pettie, S. (2005), "The complexity of implicit and space efficient priority queues", <i><a href="http://en.m.wikipedia.org/wiki/SWAT_and_WADS_conferences" title="SWAT and WADS conferences">Algorithms and Data Structures: 9th International Workshop, WADS 2005, Waterloo, Canada, August 15-17, 2005, Proceedings</a></i>, Lecture Notes in Computer Science, <b>3608</b>, Springer-Verlag, pp.&nbsp;49–60, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F11534273_6">10.1007/11534273_6</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/978-3-540-28101-6" title="Special:BookSources/978-3-540-28101-6">978-3-540-28101-6</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=The+complexity+of+implicit+and+space+efficient+priority+queues&amp;rft.atitle=%5B%5BSWAT+and+WADS+conferences%7CAlgorithms+and+Data+Structures%3A+9th+International+Workshop%2C+WADS+2005%2C+Waterloo%2C+Canada%2C+August+15-17%2C+2005%2C+Proceedings%5D%5D&amp;rft.aulast=Mortensen&amp;rft.aufirst=C.+W.&amp;rft.au=Mortensen%2C%26%2332%3BC.+W.&amp;rft.au=Pettie%2C%26%2332%3BS.&amp;rft.date=2005&amp;rft.series=Lecture+Notes+in+Computer+Science&amp;rft.volume=3608&amp;rft.pages=pp.%26nbsp%3B49%E2%80%9360&amp;rft.pub=Springer-Verlag&amp;rft_id=info:doi/10.1007%2F11534273_6&amp;rft.isbn=978-3-540-28101-6&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFCherkasskyGoldbergRadzik1996">Cherkassky, B. V.; Goldberg, A. V.; Radzik, T. (1996), "Shortest paths algorithms: Theory and experimental evaluation", <i>Mathematical Programming</i> <b>73</b> (2): 129–174, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF02592101">10.1007/BF02592101</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Shortest+paths+algorithms%3A+Theory+and+experimental+evaluation&amp;rft.jtitle=Mathematical+Programming&amp;rft.aulast=Cherkassky&amp;rft.aufirst=B.+V.&amp;rft.au=Cherkassky%2C%26%2332%3BB.+V.&amp;rft.au=Goldberg%2C%26%2332%3BA.+V.&amp;rft.au=Radzik%2C%26%2332%3BT.&amp;rft.date=1996&amp;rft.volume=73&amp;rft.issue=2&amp;rft.pages=129%E2%80%93174&amp;rft_id=info:doi/10.1007%2FBF02592101&amp;rfr_id=info:sid/en.wikipedia.org:D-ary_heap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_5">
+<ul>
+<li><a rel="nofollow" class="external text" href="https://github.com/valyala/gheap">C++ implementation of generalized heap with D-Heap support</a></li>
+</ul>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=D-ary_heap&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=D-ary+heap&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=D-ary_heap&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=D-ary+heap&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="D-ary_heap_files/load_002.php" type="text/javascript"></script>
+<script src="D-ary_heap_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

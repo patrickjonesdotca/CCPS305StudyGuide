@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>In-place algorithm - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="In-place_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 9 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/In-place_algorithm">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="In-place_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="In-place_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="In-place_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/In-place" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/In-place_algoritmus">česky</option><option value="//de.m.wikipedia.org/wiki/In-place">Deutsch</option><option value="//fa.m.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%D8%AF%D8%B1%D8%AC%D8%A7">فارسی</option><option value="//it.m.wikipedia.org/wiki/Algoritmo_in_loco">italiano</option><option value="//he.m.wikipedia.org/wiki/%D7%90%D7%9C%D7%92%D7%95%D7%A8%D7%99%D7%AA%D7%9D_%D7%AA%D7%95%D7%9A-%D7%9E%D7%A7%D7%95%D7%9E%D7%99">עברית</option><option value="//ja.m.wikipedia.org/wiki/In-place%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">日本語</option><option value="//pl.m.wikipedia.org/wiki/Algorytm_in_situ">polski</option><option value="//zh.m.wikipedia.org/wiki/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">In-place algorithm</h1>			
+<div class="dablink">"In-place" redirects here. For execute in place file systems, see <a href="http://en.m.wikipedia.org/wiki/Execute_in_place" title="Execute in place">Execute in place</a>.</div>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, an <b>in-place algorithm</b> (or in <a href="http://en.m.wikipedia.org/wiki/Latin" title="Latin">Latin</a> <b>in situ</b>) is an <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> which transforms input using a <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a>
+ with a small, constant amount of extra storage space. The input is 
+usually overwritten by the output as the algorithm executes. An 
+algorithm which is not in-place is sometimes called <b>not-in-place</b> or <b>out-of-place</b>.</p>
+<p>An algorithm is sometimes, informally, called in-place as long as it 
+overwrites its input with its output. In reality, this is not sufficient
+ (as the case of quicksort demonstrates), nor is it necessary; the 
+output space may be constant, or may not even be counted, for example if
+ the output is to a stream. On the other hand, sometimes it may be more 
+practical to count the output space in determining whether an algorithm 
+is in-place, such as in the first reverse example below; this makes it 
+difficult to strictly define in-place algorithms. In theory applications
+ such as <a href="http://en.m.wikipedia.org/wiki/Log-space_reduction" title="Log-space reduction">log-space reductions</a>, it's more typical to always ignore output space (in these cases it's more essential that the output is <i>write-only</i>).</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Examples">Examples</span></h2><div class="content_block" id="content_1">
+<p>Suppose we want to reverse an <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a> of <i>n</i> items. One simple way to do this is:</p>
+<pre> <b>function</b> reverse(a[0..n])
+     allocate b[0..n]
+     <b>for</b> i <b>from</b> 0 <b>to</b> n
+         b[n - i] = a[i]
+     <b>return</b> b
+</pre>
+<p>Unfortunately, this requires O(<i>n</i>) extra space to create the array <i>b</i>, and allocation is often a slow operation. If we no longer need <i>a</i>, we can instead overwrite it with its own reversal using this in-place algorithm:</p>
+<pre> <b>function</b> reverse_in_place(a[0..n])
+     <b>for</b> i <b>from</b> 0 <b>to</b> floor(n/2)
+         swap(a[i], a[n-i])
+</pre>
+<p>As another example, there are a number of <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithms</a> that can rearrange arrays into sorted order in-place, including: <a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a>, <a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a>, <a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a>, <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a>, <a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a>, <a href="http://en.m.wikipedia.org/wiki/Shell_sort" title="Shell sort" class="mw-redirect">Shell sort</a>.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a> is commonly described as an in-place algorithm<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from November 2010">citation needed</span></a></i>]</sup>, but is not in fact one. Most implementations require O(log <i>n</i>) space to support its <a href="http://en.m.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">divide and conquer</a> recursion.</p>
+<p>Most <a href="http://en.m.wikipedia.org/wiki/Selection_algorithm" title="Selection algorithm">selection algorithms</a>
+ are also in-place, although some considerably rearrange the input array
+ in the process of finding the final, constant-sized result.</p>
+<p>Some text manipulation algorithms such as <a href="http://en.m.wikipedia.org/wiki/Trim_%28programming%29" title="Trim (programming)" class="mw-redirect">trim</a> and reverse may be done in-place.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="In_computational_complexity">In computational complexity</span></h2><div class="content_block" id="content_2">
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">computational complexity theory</a>, in-place algorithms include all algorithms with O(1) space complexity, the class <a href="http://en.m.wikipedia.org/wiki/Deterministic_space" title="Deterministic space" class="mw-redirect"><b>DSPACE</b></a>(1). This class is very limited; it equals the <a href="http://en.m.wikipedia.org/wiki/Regular_language" title="Regular language">regular languages</a>.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> In fact, it does not even include any of the examples listed above.</p>
+<p>For this reason, we also consider algorithms in <a href="http://en.m.wikipedia.org/wiki/L_%28complexity%29" title="L (complexity)">L</a>, the class of problems requiring O(log <i>n</i>)
+ additional space, to be in-place. Although this seems to contradict our
+ earlier definition, we have to consider that in the abstract world our 
+input can be arbitrarily large. On a real computer, a <a href="http://en.m.wikipedia.org/wiki/Pointer_%28computer_programming%29" title="Pointer (computer programming)">pointer</a> requires only a small fixed amount of space, because the amount of physical memory is limited, but in general O(log <i>n</i>) bits are required to specify an index into a list of size <i>n</i>.</p>
+<p>Does this mean quicksort is in-place after all? Not at all—technically, it requires O(log<sup>2</sup><i>n</i>) space, since each of its O(log <i>n</i>) stack frames contains a constant number of pointers (each of size O(log <i>n</i>)).</p>
+<p>Identifying the in-place algorithms with L has some interesting 
+implications; for example, it means that there is a (rather complex) 
+in-place algorithm to determine whether a path exists between two nodes 
+in an <a href="http://en.m.wikipedia.org/wiki/Undirected_graph" title="Undirected graph" class="mw-redirect">undirected graph</a>,<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> a problem that requires O(<i>n</i>) extra space using typical algorithms such as <a href="http://en.m.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first search</a> (a visited bit for each node). This in turn yields in-place algorithms for problems such as determining if a graph is <a href="http://en.m.wikipedia.org/wiki/Bipartite_graph" title="Bipartite graph">bipartite</a> or testing whether two graphs have the same number of <a href="http://en.m.wikipedia.org/wiki/Connected_component_%28graph_theory%29" title="Connected component (graph theory)">connected components</a>. See <a href="http://en.m.wikipedia.org/wiki/SL_%28complexity%29" title="SL (complexity)">SL</a> for more information.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Role_of_randomness">Role of randomness</span></h2><div class="content_block" id="content_3">
+<p>In many cases, the space requirements for an algorithm can be drastically cut by using a <a href="http://en.m.wikipedia.org/wiki/Randomized_algorithm" title="Randomized algorithm">randomized algorithm</a>. For example, say we wish to know if two vertices in a graph of <i>n</i> vertices are in the same <a href="http://en.m.wikipedia.org/wiki/Connected_component_%28graph_theory%29" title="Connected component (graph theory)">connected component</a>
+ of the graph. There is no known simple, deterministic, in-place 
+algorithm to determine this, but if we simply start at one vertex and 
+perform a <a href="http://en.m.wikipedia.org/wiki/Random_walk" title="Random walk">random walk</a> of about 20<i>n</i><sup>3</sup>
+ steps, the chance that we will stumble across the other vertex provided
+ that it's in the same component is very high. Similarly, there are 
+simple randomized in-place algorithms for primality testing such as the <a href="http://en.m.wikipedia.org/wiki/Miller-Rabin_primality_test" title="Miller-Rabin primality test" class="mw-redirect">Miller-Rabin primality test</a>, and there are also simple in-place randomized factoring algorithms such as <a href="http://en.m.wikipedia.org/wiki/Pollard%27s_rho_algorithm" title="Pollard's rho algorithm">Pollard's rho algorithm</a>. See <a href="http://en.m.wikipedia.org/wiki/RL_%28complexity%29" title="RL (complexity)">RL</a> and <a href="http://en.m.wikipedia.org/wiki/BPL_%28complexity%29" title="BPL (complexity)">BPL</a> for more discussion of this phenomenon.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="In_functional_programming">In functional programming</span></h2><div class="content_block" id="content_4">
+<p><a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">Functional programming</a> languages often discourage or don't support explicit in-place algorithms that overwrite data, since this is a type of <a href="http://en.m.wikipedia.org/wiki/Side_effect_%28computer_science%29" title="Side effect (computer science)">side effect</a>;
+ instead, they only allow new data to be constructed. However, good 
+functional language compilers will often recognize when an object very 
+similar to an existing one is created and then the old one thrown away, 
+and will optimize this into a simple mutation "under-the-hood".</p>
+<p>Note that it is possible in principle to carefully construct in-place
+ algorithms that don't modify data (unless the data is no longer being 
+used), but this is rarely done in practice. See <a href="http://en.m.wikipedia.org/wiki/Purely_functional_data_structure" title="Purely functional data structure" class="mw-redirect">purely functional data structures</a>.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_5">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Comparison_of_algorithms" title="Sorting algorithm">Table of in-place and not-in-place algorithms</a></li>
+</ul>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_6">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">Maciej Liśkiewicz and Rüdiger Reischuk. <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/34203.html">The Complexity World below Logarithmic Space</a>. <i>Structure in Complexity Theory Conference</i>, pp. 64-78. 1994. Online: p. 3, Theorem 2.</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">Omer Reingold. <a rel="nofollow" class="external text" href="http://www.wisdom.weizmann.ac.il/%7Ereingold/publications/sl.ps">Undirected ST-connectivity in Log-Space</a>. Electronic Colloquium on Computational Complexity. No. 94.</span>
+</li>
+</ol>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=In-place&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=In-place+algorithm&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=In-place&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=In-place+algorithm&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="In-place_files/load_002.php" type="text/javascript"></script>
+<script src="In-place_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

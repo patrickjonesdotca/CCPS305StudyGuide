@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Splay tree - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Splay_tree_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 15 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Splay_tree">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Splay_tree_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Splay_tree_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Splay_tree_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Splay_tree" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Splay_strom">česky</option><option value="//de.m.wikipedia.org/wiki/Splay-Baum">Deutsch</option><option value="//es.m.wikipedia.org/wiki/%C3%81rbol_biselado">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%AF%D8%B1%D8%AE%D8%AA_%D8%A7%D8%B3%D9%BE%D9%84%DB%8C">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Arbre_splay">français</option><option value="//it.m.wikipedia.org/wiki/Albero_splay">italiano</option><option value="//nl.m.wikipedia.org/wiki/Splayboom">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%82%B9%E3%83%97%E3%83%AC%E3%83%BC%E6%9C%A8">日本語</option><option value="//pl.m.wikipedia.org/wiki/Drzewo_splay">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%88%D0%B8%D1%80%D1%8F%D1%8E%D1%89%D0%B5%D0%B5%D1%81%D1%8F_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">русский</option><option value="//fi.m.wikipedia.org/wiki/Splay-puu">suomi</option><option value="//th.m.wikipedia.org/wiki/Splay_tree">ไทย</option><option value="//vi.m.wikipedia.org/wiki/C%C3%A2y_splay">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E4%BC%B8%E5%B1%95%E6%A0%91">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Splay tree</h1>			
+<table class="infobox" style="width: 22em;">
+<tbody><tr>
+<th colspan="3" style="font-size: 125%; text-align: center;">Splay tree</th>
+</tr>
+<tr>
+<th><a href="http://en.m.wikipedia.org/wiki/List_of_data_structures" title="List of data structures">Type</a></th>
+<td colspan="2"><a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Tree</a></td>
+</tr>
+<tr>
+<th>Invented</th>
+<td colspan="2">1985</td>
+</tr>
+<tr>
+<th>Invented by</th>
+<td colspan="2">
+<a href="http://en.m.wikipedia.org/wiki/Daniel_Dominic_Sleator" title="Daniel Dominic Sleator" class="mw-redirect">Daniel Dominic Sleator</a> and <a href="http://en.m.wikipedia.org/wiki/Robert_Endre_Tarjan" title="Robert Endre Tarjan" class="mw-redirect">Robert Endre Tarjan</a>
+</td>
+</tr>
+<tr>
+<th colspan="3" class="navbox-abovebelow">
+<a href="http://en.m.wikipedia.org/wiki/Time_complexity" title="Time complexity">Time complexity</a><br>
+in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">big O notation</a>
+</th>
+</tr>
+<tr>
+<td></td>
+<td>Average</td>
+<td>Worst case</td>
+</tr>
+<tr>
+<th>Space</th>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<th>Search</th>
+<td>O(log n)</td>
+<td>amortized O(n)</td>
+</tr>
+<tr>
+<th>Insert</th>
+<td>O(log n)</td>
+<td>amortized O(log n)</td>
+</tr>
+<tr>
+<th>Delete</th>
+<td>O(log n)</td>
+<td>amortized O(log n)</td>
+</tr>
+</tbody></table>
+<p>A <b>splay tree</b> is a self-adjusting <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>
+ with the additional property that recently accessed elements are quick 
+to access again. It performs basic operations such as insertion, look-up
+ and removal in <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">O</a>(log n) <a href="http://en.m.wikipedia.org/wiki/Amortized_analysis" title="Amortized analysis">amortized</a>
+ time. For many sequences of nonrandom operations, splay trees perform 
+better than other search trees, even when the specific pattern of the 
+sequence is unknown. The splay tree was invented by <a href="http://en.m.wikipedia.org/wiki/Daniel_Dominic_Sleator" title="Daniel Dominic Sleator" class="mw-redirect">Daniel Dominic Sleator</a> and <a href="http://en.m.wikipedia.org/wiki/Robert_Endre_Tarjan" title="Robert Endre Tarjan" class="mw-redirect">Robert Endre Tarjan</a> in 1985.<sup id="cite_ref-SleatorTarjan_0-0" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup></p>
+<p>All normal operations on a binary search tree are combined with one basic operation, called <i>splaying</i>.
+ Splaying the tree for a certain element rearranges the tree so that the
+ element is placed at the root of the tree. One way to do this is to 
+first perform a standard binary tree search for the element in question,
+ and then use <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">tree rotations</a>
+ in a specific fashion to bring the element to the top. Alternatively, a
+ top-down algorithm can combine the search and the tree reorganization 
+into a single phase.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Advantages">Advantages</span></h2><div class="content_block" id="content_1">
+<p>Good performance for a splay tree depends on the fact that it is 
+self-optimizing, in that frequently accessed nodes will move nearer to 
+the root where they can be accessed more quickly. The worst-case 
+height—though unlikely—is O(n), with the average being O(log <i>n</i>). Having frequently used nodes near the root is an advantage for nearly all practical applications (also see <a href="http://en.m.wikipedia.org/wiki/Locality_of_reference" title="Locality of reference">Locality of reference</a>),<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from January 2010">citation needed</span></a></i>]</sup> and is particularly useful for implementing <a href="http://en.m.wikipedia.org/wiki/Cache_%28computing%29" title="Cache (computing)">caches</a> and <a href="http://en.m.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" title="Garbage collection (computer science)">garbage collection</a> algorithms.</p>
+<p>Advantages include:</p>
+<ul>
+<li>Simple implementation—simpler than other self-balancing binary search trees, such as <a href="http://en.m.wikipedia.org/wiki/Red-black_tree" title="Red-black tree" class="mw-redirect">red-black trees</a> or <a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL trees</a>.</li>
+<li>Comparable performance—<span class="new" title="Average-case performance (page does not exist)">average-case performance</span> is as efficient as other trees.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from January 2010">citation needed</span></a></i>]</sup>
+</li>
+<li>Small memory footprint—splay trees do not need to store any bookkeeping data.</li>
+<li>Possibility of creating a <a href="http://en.m.wikipedia.org/wiki/Persistent_data_structure" title="Persistent data structure">persistent data structure</a> version of splay trees—which allows access to both the previous and new versions after an update. This can be useful in <a href="http://en.m.wikipedia.org/wiki/Functional_programming" title="Functional programming">functional programming</a>, and requires amortized O(log <i>n</i>) space per update.</li>
+<li>Working well with nodes containing identical keys—contrary to other 
+types of self-balancing trees. Even with identical keys, performance 
+remains amortized O(log <i>n</i>). All tree operations preserve the order of the identical nodes within the tree, which is a property similar to <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Classification" title="Sorting algorithm">stable sorting algorithms</a>. A carefully designed find operation can return the leftmost or rightmost node of a given key.</li>
+</ul>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Disadvantages">Disadvantages</span></h2><div class="content_block" id="content_2">
+<p>Perhaps the most significant disadvantage of splay trees is that the 
+height of a splay tree can be linear. For example, this will be the case
+ after accessing all <i>n</i> elements in non-decreasing order. Since 
+the height of a tree corresponds to the worst-case access time, this 
+means that the actual cost of an operation can be slow. However the <a href="http://en.m.wikipedia.org/wiki/Amortized" title="Amortized" class="mw-redirect">amortized</a> access cost of this worst case is logarithmic, O(log <i>n</i>). Also, the expected access cost can be reduced to O(log <i>n</i>) by using a randomized variant<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup>.</p>
+<p>A splay tree can be worse than a static tree by at most a constant factor.</p>
+<p>Splay trees can change even when they are accessed in a 'read-only' manner (i.e. by <i>find</i>
+ operations). This complicates the use of such splay trees in a 
+multi-threaded environment. Specifically, extra management is needed if 
+multiple threads are allowed to perform <i>find</i> operations concurrently.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Operations">Operations</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Splaying">Splaying</span>
+</h3>
+<p>When a node <i>x</i> is accessed, a splay operation is performed on <i>x</i> to move it to the root. To perform a splay operation we carry out a sequence of <i>splay steps</i>, each of which moves <i>x</i>
+ closer to the root. By performing a splay operation on the node of 
+interest after every access, the recently accessed nodes are kept near 
+the root and the tree remains roughly balanced, so that we achieve the 
+desired amortized time bounds.</p>
+<p>Each particular step depends on three factors:</p>
+<ul>
+<li>Whether <i>x</i> is the left or right child of its parent node, <i>p</i>,</li>
+<li>whether <i>p</i> is the root or not, and if not</li>
+<li>whether <i>p</i> is the left or right child of <i>its</i> parent, <i>g</i> (the <i>grandparent</i> of x).</li>
+</ul>
+<p>It is important to remember to set <i>gg</i> (the <i>great-grandparent</i> of x) to now point to x after any splay operation. If <i>gg</i> is null, then x obviously is now the root and must be updated as such.</p>
+<p>The three types of splay steps are:</p>
+<p><b>Zig Step:</b> This step is done when <i>p</i> is the root. The tree is <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">rotated</a> on the edge between <i>x</i> and <i>p</i>. Zig steps exist to deal with the parity issue and will be done only as the last step in a splay operation and only when <i>x</i> has odd depth at the beginning of the operation.</p>
+<div class="center">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Splay_tree_zig.svg" class="image"><img alt="Splay tree zig.svg" src="Splay_tree_files/709px-Splay_tree_zig.png" width="709" height="237"></a></div>
+</div>
+<p><b>Zig-zig Step:</b> This step is done when <i>p</i> is not the root and <i>x</i> and <i>p</i> are either both right children or are both left children. The picture below shows the case where <i>x</i> and <i>p</i> are both left children. The tree is <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">rotated</a> on the edge joining <i>p</i> with <i>its</i> parent <i>g</i>, then rotated on the edge joining <i>x</i> with <i>p</i>. Note that zig-zig steps are the only thing that differentiate splay trees from the <i>rotate to root</i> method introduced by Allen and Munro<sup id="cite_ref-AllenMunro_2-0" class="reference"><a href="#cite_note-AllenMunro-2"><span>[</span>3<span>]</span></a></sup> prior to the introduction of splay trees.</p>
+<div class="center">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Zigzig.gif" class="image"><img alt="Zigzig.gif" src="Splay_tree_files/Zigzig.gif" width="367" height="154"></a></div>
+</div>
+<p><b>Zig-zag Step:</b> This step is done when <i>p</i> is not the root and <i>x</i> is a right child and <i>p</i> is a left child or vice versa. The tree is <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">rotated</a> on the edge between <i>x</i> and <i>p</i>, then rotated on the edge between <i>x</i> and its new parent <i>g</i>.</p>
+<div class="center">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Zigzag.gif" class="image"><img alt="Zigzag.gif" src="Splay_tree_files/Zigzag.gif" width="426" height="180"></a></div>
+</div>
+<h3> <span class="mw-headline" id="Insertion">Insertion</span>
+</h3>
+<p>To insert a node <i>x</i> into a splay tree:</p>
+<ol>
+<li>First insert the node as with a normal <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>.</li>
+<li>Then splay the newly inserted node <i>x</i> to the top of the tree.</li>
+</ol>
+<h3> <span class="mw-headline" id="Deletion">Deletion</span>
+</h3>
+<p>To delete a node <i>x</i>, we use the same method as with a binary search tree: if <i>x</i>
+ has two children, we swap its value with that of either the rightmost 
+node of its left sub tree (its in-order predecessor) or the leftmost 
+node of its right subtree (its in-order successor). Then we remove that 
+node instead. In this way, deletion is reduced to the problem of 
+removing a node with 0 or 1 children.</p>
+<p>Unlike a binary search tree, in a splay tree after deletion, we splay the parent of the removed node to the top of the tree. <b>OR</b>
+ The node to be deleted is first splayed, i.e. brought to the root of 
+the tree and then deleted. This leaves the tree with two sub trees. The 
+maximum element of the left sub tree (<b>: METHOD 1</b>), or minimum of the right sub tree (<b>: METHOD 2</b>) is then splayed to the root. The right sub tree is made the right child of the resultant left sub tree (for <b>METHOD 1</b>). The root of left sub tree is the root of melded tree.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Code_in_C_language">Code in C language</span></h2><div class="content_block" id="content_4">
+<h3> <span class="mw-headline" id="Splay_operation_in_BST">Splay operation in BST</span>
+</h3>
+<p>Here x is the node on which the splay operation is performed and root is the root node of the tree.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="co2">#include&lt;stdio.h&gt;</span>
+<span class="co2">#include&lt;malloc.h&gt;</span>
+<span class="co2">#include&lt;stdlib.h&gt;</span>
+<span class="kw4">struct</span> node 
+<span class="br0">{</span>
+        <span class="kw4">int</span> data<span class="sy0">;</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>parent<span class="sy0">;</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>left<span class="sy0">;</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>right<span class="sy0">;</span>
+<span class="br0">}</span><span class="sy0">;</span>
+<span class="kw4">int</span> data_print<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>rightrotation<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>leftrotation<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">void</span> splay <span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">,</span> <span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>insert<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>inorder<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>delete<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>successor<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="br0">)</span><span class="sy0">;</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>lookup<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span><span class="sy0">;</span>
+ 
+<span class="kw4">void</span> splay <span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">,</span> <span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,*</span>g<span class="sy0">;</span>
+        <span class="coMULTI">/*check if node x is the root node*/</span>
+        <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>root<span class="br0">)</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="coMULTI">/*Performs Zig step*/</span>
+        <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">==</span>root<span class="br0">)</span>
+        <span class="br0">{</span>
+                <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                        root<span class="sy0">=</span>rightrotation<span class="br0">(</span>root<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">else</span>
+                        root<span class="sy0">=</span>leftrotation<span class="br0">(</span>root<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">else</span>
+        <span class="br0">{</span>
+                p<span class="sy0">=</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span> <span class="coMULTI">/*now points to parent of x*/</span>
+                g<span class="sy0">=</span>p<span class="sy0">-&gt;</span>parent<span class="sy0">;</span> <span class="coMULTI">/*now points to parent of x's parent*/</span>
+                <span class="coMULTI">/*Performs the Zig-zig step when x is left and x's parent is left*/</span>
+                <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>p<span class="sy0">-&gt;</span>left<span class="sy0">&amp;&amp;</span>p<span class="sy0">==</span>g<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                <span class="br0">{</span>
+                        root<span class="sy0">=</span>rightrotation<span class="br0">(</span>g<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                        root<span class="sy0">=</span>rightrotation<span class="br0">(</span>p<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="coMULTI">/*Performs the Zig-zig step when x is right and x's parent is right*/</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>p<span class="sy0">-&gt;</span>right<span class="sy0">&amp;&amp;</span>p<span class="sy0">==</span>g<span class="sy0">-&gt;</span>right<span class="br0">)</span>
+                <span class="br0">{</span>
+                        root<span class="sy0">=</span>leftrotation<span class="br0">(</span>g<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                        root<span class="sy0">=</span>leftrotation<span class="br0">(</span>p<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="coMULTI">/*Performs the Zig-zag step when x's is right and x's parent is left*/</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>p<span class="sy0">-&gt;</span>right<span class="sy0">&amp;&amp;</span>p<span class="sy0">==</span>g<span class="sy0">-&gt;</span>left<span class="br0">)</span>
+                <span class="br0">{</span>
+                        root<span class="sy0">=</span>leftrotation<span class="br0">(</span>p<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                        root<span class="sy0">=</span>rightrotation<span class="br0">(</span>g<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="coMULTI">/*Performs the Zig-zag step when x's is left and x's parent is right*/</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">==</span>p<span class="sy0">-&gt;</span>left<span class="sy0">&amp;&amp;</span>p<span class="sy0">==</span>g<span class="sy0">-&gt;</span>right<span class="br0">)</span>
+                <span class="br0">{</span>
+                        root<span class="sy0">=</span>rightrotation<span class="br0">(</span>p<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                        root<span class="sy0">=</span>leftrotation<span class="br0">(</span>g<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                splay<span class="br0">(</span>x<span class="sy0">,</span> root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>rightrotation<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">;</span>
+        x <span class="sy0">=</span> p<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+        p<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>right<span class="sy0">!=</span>NULL<span class="br0">)</span> x<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> p<span class="sy0">;</span>
+        x<span class="sy0">-&gt;</span>right <span class="sy0">=</span> p<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>p<span class="sy0">-&gt;</span>parent<span class="sy0">!=</span>NULL<span class="br0">)</span>
+                <span class="kw1">if</span><span class="br0">(</span>p<span class="sy0">==</span>p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="br0">)</span> p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="sy0">=</span>x<span class="sy0">;</span>
+                <span class="kw1">else</span>
+                         p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="sy0">=</span>x<span class="sy0">;</span>
+        x<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> p<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+        p<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>p<span class="sy0">==</span>root<span class="br0">)</span>
+                <span class="kw1">return</span> x<span class="sy0">;</span>
+        <span class="kw1">else</span> 
+                <span class="kw1">return</span> root<span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>leftrotation<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">;</span>
+        x <span class="sy0">=</span> p<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        p<span class="sy0">-&gt;</span>right <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>left<span class="sy0">!=</span>NULL<span class="br0">)</span> x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> p<span class="sy0">;</span>
+        x<span class="sy0">-&gt;</span>left <span class="sy0">=</span> p<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>p<span class="sy0">-&gt;</span>parent<span class="sy0">!=</span>NULL<span class="br0">)</span>
+                <span class="kw1">if</span> <span class="br0">(</span>p<span class="sy0">==</span>p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span> p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="sy0">=</span>x<span class="sy0">;</span>
+                <span class="kw1">else</span>
+                         p<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="sy0">=</span>x<span class="sy0">;</span>
+        x<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> p<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+        p<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">(</span>p<span class="sy0">==</span>root<span class="br0">)</span> 
+                <span class="kw1">return</span> x<span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> root<span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>insert<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>temp1<span class="sy0">,*</span>temp2<span class="sy0">,*</span>par<span class="sy0">,*</span>x<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">(</span>p <span class="sy0">==</span> NULL<span class="br0">)</span>
+        <span class="br0">{</span>
+                p<span class="sy0">=</span><span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span><span class="br0">)</span><span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> node<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">(</span>p <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                <span class="br0">{</span>
+                        p<span class="sy0">-&gt;</span>data <span class="sy0">=</span> value<span class="sy0">;</span>
+                        p<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                        p<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                        p<span class="sy0">-&gt;</span>right <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="kw1">else</span>
+                <span class="br0">{</span>
+                        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"No memory is allocated<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                        <span class="kw3">exit</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="kw1">return</span><span class="br0">(</span>p<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span> <span class="co1">//the case 2 says that we must splay newly inserted node to root</span>
+        <span class="kw1">else</span>
+        <span class="br0">{</span>
+                        temp2 <span class="sy0">=</span> p<span class="sy0">;</span>
+                        <span class="kw1">while</span><span class="br0">(</span>temp2 <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                        <span class="br0">{</span>
+                                temp1 <span class="sy0">=</span> temp2<span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>temp2<span class="sy0">-&gt;</span>data <span class="sy0">&gt;</span> value<span class="br0">)</span>
+                                        temp2 <span class="sy0">=</span> temp2<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>temp2<span class="sy0">-&gt;</span>data <span class="sy0">&lt;</span> value<span class="br0">)</span>
+                                        temp2 <span class="sy0">=</span> temp2<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                <span class="kw1">else</span>
+                                        <span class="kw1">if</span><span class="br0">(</span>temp2<span class="sy0">-&gt;</span>data <span class="sy0">==</span> value<span class="br0">)</span>
+                                                <span class="kw1">return</span> temp2<span class="sy0">;</span>
+                        <span class="br0">}</span>
+                        <span class="kw1">if</span><span class="br0">(</span>temp1<span class="sy0">-&gt;</span>data <span class="sy0">&gt;</span> value<span class="br0">)</span>
+                        <span class="br0">{</span>
+                                par <span class="sy0">=</span> temp1<span class="sy0">;</span><span class="co1">//temp1 having the parent address,so that's it </span>
+                                temp1<span class="sy0">-&gt;</span>left <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span><span class="br0">)</span><span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> node<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                                temp1<span class="sy0">=</span> temp1<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>temp1 <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        temp1<span class="sy0">-&gt;</span>data <span class="sy0">=</span> value<span class="sy0">;</span>
+                                        temp1<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> par<span class="sy0">;</span><span class="co1">//store the parent address.</span>
+                                        temp1<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                        temp1<span class="sy0">-&gt;</span>right <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw1">else</span>
+                                <span class="br0">{</span>
+                                        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"No memory is allocated<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                                        <span class="kw3">exit</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="br0">}</span>
+                        <span class="br0">}</span>
+                        <span class="kw1">else</span>
+                        <span class="br0">{</span>
+                                par <span class="sy0">=</span> temp1<span class="sy0">;</span><span class="co1">//temp1 having the parent node address.</span>
+                                temp1<span class="sy0">-&gt;</span>right <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span><span class="br0">)</span><span class="kw3">malloc</span><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> node<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                                temp1 <span class="sy0">=</span> temp1<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>temp1 <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        temp1<span class="sy0">-&gt;</span>data <span class="sy0">=</span> value<span class="sy0">;</span>
+                                        temp1<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> par<span class="sy0">;</span><span class="co1">//store the parent address</span>
+                                        temp1<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                        temp1<span class="sy0">-&gt;</span>right <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw1">else</span>
+                                <span class="br0">{</span>
+                                        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"No memory is allocated<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                                        <span class="kw3">exit</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="br0">}</span>
+                        <span class="br0">}</span>
+        <span class="br0">}</span>
+        splay<span class="br0">(</span>temp1<span class="sy0">,</span>p<span class="br0">)</span><span class="sy0">;</span><span class="co1">//temp1 will be new root after splaying</span>
+        <span class="kw1">return</span> <span class="br0">(</span>temp1<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>inorder<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span><span class="br0">(</span>p <span class="sy0">!=</span> NULL<span class="br0">)</span>
+        <span class="br0">{</span>
+                inorder<span class="br0">(</span>p<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"CURRENT %d<span class="es1">\t</span>"</span><span class="sy0">,</span>p<span class="sy0">-&gt;</span>data<span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"LEFT %d<span class="es1">\t</span>"</span><span class="sy0">,</span>data_print<span class="br0">(</span>p<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"PARENT %d<span class="es1">\t</span>"</span><span class="sy0">,</span>data_print<span class="br0">(</span>p<span class="sy0">-&gt;</span>parent<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"RIGHT %d<span class="es1">\t</span><span class="es1">\n</span>"</span><span class="sy0">,</span>data_print<span class="br0">(</span>p<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+                inorder<span class="br0">(</span>p<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>delete<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">,*</span>y<span class="sy0">,*</span>p1<span class="sy0">;</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="sy0">;</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>s<span class="sy0">;</span>
+        root <span class="sy0">=</span> p<span class="sy0">;</span>
+        x <span class="sy0">=</span> lookup<span class="br0">(</span>p<span class="sy0">,</span>value<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>data <span class="sy0">==</span> value<span class="br0">)</span>
+        <span class="br0">{</span>       <span class="co1">//if the deleted element is leaf</span>
+                <span class="kw1">if</span><span class="br0">(</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>left <span class="sy0">==</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>right <span class="sy0">==</span> NULL<span class="br0">)</span><span class="br0">)</span>
+                <span class="br0">{</span>
+                        y <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                        <span class="kw1">if</span><span class="br0">(</span>x <span class="sy0">==</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="br0">)</span> 
+                                y<span class="sy0">-&gt;</span>right <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                        <span class="kw1">else</span> 
+                                y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                        <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="co1">//if deleted element having left child only</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>left <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>right <span class="sy0">==</span> NULL<span class="br0">)</span><span class="br0">)</span>
+                <span class="br0">{</span>
+                        <span class="kw1">if</span><span class="br0">(</span>x <span class="sy0">==</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="br0">)</span>
+                        <span class="br0">{</span>
+                                y <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                        <span class="kw1">else</span>
+                        <span class="br0">{</span>
+                                y <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                y<span class="sy0">-&gt;</span>right <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                <span class="br0">}</span>
+                <span class="co1">//if deleted element having right child only</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>left <span class="sy0">==</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>right <span class="sy0">!=</span> NULL<span class="br0">)</span><span class="br0">)</span>
+                <span class="br0">{</span>
+                        <span class="kw1">if</span><span class="br0">(</span>x <span class="sy0">==</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="br0">)</span>
+                        <span class="br0">{</span>
+                                y <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                x<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                        <span class="kw1">else</span>
+                        <span class="br0">{</span>
+                                y <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                x<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                y<span class="sy0">-&gt;</span>right <span class="sy0">=</span> x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                <span class="br0">}</span>
+                <span class="co1">//if the deleted element having two children</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>left <span class="sy0">!=</span> NULL<span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>right <span class="sy0">!=</span> NULL<span class="br0">)</span><span class="br0">)</span>
+                <span class="br0">{</span>
+                        <span class="kw1">if</span><span class="br0">(</span>x <span class="sy0">==</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left<span class="br0">)</span><span class="br0">)</span>
+                        <span class="br0">{</span>
+                                s <span class="sy0">=</span> successor<span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>s <span class="sy0">!=</span> x<span class="sy0">-&gt;</span>right<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        y <span class="sy0">=</span> s<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        <span class="kw1">if</span><span class="br0">(</span>s<span class="sy0">-&gt;</span>right <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                                        <span class="br0">{</span>
+                                                s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                                y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> s<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                        <span class="br0">}</span>
+                                        <span class="kw1">else</span> y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>right <span class="sy0">=</span> x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left <span class="sy0">=</span> s<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw1">else</span>
+                                <span class="br0">{</span>
+                                        y <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>left <span class="sy0">=</span> s<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+                        <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>x <span class="sy0">==</span> <span class="br0">(</span>x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right<span class="br0">)</span><span class="br0">)</span>
+                        <span class="br0">{</span>
+                                s <span class="sy0">=</span> successor<span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>s <span class="sy0">!=</span> x<span class="sy0">-&gt;</span>right<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        y <span class="sy0">=</span> s<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        <span class="kw1">if</span><span class="br0">(</span>s<span class="sy0">-&gt;</span>right <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                                        <span class="br0">{</span>
+                                                s<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> y<span class="sy0">;</span>
+                                                y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> s<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                        <span class="br0">}</span>
+                                        <span class="kw1">else</span> y<span class="sy0">-&gt;</span>left <span class="sy0">=</span> NULL<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>right<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>right <span class="sy0">=</span> x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right <span class="sy0">=</span> s<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw1">else</span>
+                                <span class="br0">{</span>
+                                        y <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> x<span class="sy0">-&gt;</span>parent<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>left<span class="sy0">-&gt;</span>parent <span class="sy0">=</span> s<span class="sy0">;</span>
+                                        s<span class="sy0">-&gt;</span>left <span class="sy0">=</span> x<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                                        x<span class="sy0">-&gt;</span>parent<span class="sy0">-&gt;</span>right <span class="sy0">=</span> s<span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw3">free</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">;</span>
+                        <span class="br0">}</span>
+ 
+                <span class="br0">}</span>
+                splay<span class="br0">(</span>y<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">else</span>
+        <span class="br0">{</span>
+                splay<span class="br0">(</span>x<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>successor<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>temp<span class="sy0">,*</span>temp2<span class="sy0">;</span>
+        temp<span class="sy0">=</span>temp2<span class="sy0">=</span>x<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+        <span class="kw1">while</span><span class="br0">(</span>temp <span class="sy0">!=</span> NULL<span class="br0">)</span>
+        <span class="br0">{</span>
+                temp2 <span class="sy0">=</span> temp<span class="sy0">;</span>
+                temp <span class="sy0">=</span> temp<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">return</span> temp2<span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="co1">//p is a root element of the tree</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>lookup<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>temp1<span class="sy0">,*</span>temp2<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">(</span>p <span class="sy0">!=</span> NULL<span class="br0">)</span>
+        <span class="br0">{</span>
+                temp1 <span class="sy0">=</span> p<span class="sy0">;</span>
+                <span class="kw1">while</span><span class="br0">(</span>temp1 <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                <span class="br0">{</span>
+                        temp2 <span class="sy0">=</span> temp1<span class="sy0">;</span>
+                        <span class="kw1">if</span><span class="br0">(</span>temp1<span class="sy0">-&gt;</span>data <span class="sy0">&gt;</span> value<span class="br0">)</span>
+                                temp1 <span class="sy0">=</span> temp1<span class="sy0">-&gt;</span>left<span class="sy0">;</span>
+                        <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">(</span>temp1<span class="sy0">-&gt;</span>data <span class="sy0">&lt;</span> value<span class="br0">)</span>
+                                temp1 <span class="sy0">=</span> temp1<span class="sy0">-&gt;</span>right<span class="sy0">;</span>
+                        <span class="kw1">else</span>
+                                        <span class="kw1">return</span> temp1<span class="sy0">;</span>
+                <span class="br0">}</span>
+                <span class="kw1">return</span> temp2<span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">else</span>
+        <span class="br0">{</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"NO element in the tree<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">exit</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+<span class="kw4">struct</span> node <span class="sy0">*</span>search<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>p<span class="sy0">,</span><span class="kw4">int</span> value<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">,*</span>root<span class="sy0">;</span>
+        root <span class="sy0">=</span> p<span class="sy0">;</span>
+        x <span class="sy0">=</span> lookup<span class="br0">(</span>p<span class="sy0">,</span>value<span class="br0">)</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">(</span>x<span class="sy0">-&gt;</span>data <span class="sy0">==</span> value<span class="br0">)</span>
+        <span class="br0">{</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"Inside search if<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                splay<span class="br0">(</span>x<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+        <span class="kw1">else</span>
+        <span class="br0">{</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"Inside search else<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                splay<span class="br0">(</span>x<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+main<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>root<span class="sy0">;</span><span class="co1">//the root element</span>
+        <span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="sy0">;</span><span class="co1">//x is which element will come to root.</span>
+        <span class="kw4">int</span> i<span class="sy0">;</span>
+        root <span class="sy0">=</span> NULL<span class="sy0">;</span>
+        <span class="kw4">int</span> choice <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ele<span class="sy0">;</span>
+        <span class="kw1">while</span><span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>
+        <span class="br0">{</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> 1.Insert"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> 2.Delete"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> 3.Search"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> 4.Display<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> Enter your choice:"</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw3">scanf</span><span class="br0">(</span><span class="st0">"%d"</span><span class="sy0">,&amp;</span>choice<span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">(</span>choice<span class="sy0">==</span><span class="nu0">5</span><span class="br0">)</span>
+                        <span class="kw3">exit</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><span class="sy0">;</span>
+                <span class="kw1">switch</span><span class="br0">(</span>choice<span class="br0">)</span>
+                <span class="br0">{</span>
+                        <span class="kw1">case</span> <span class="nu0">1</span><span class="sy0">:</span>
+                                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> Enter the element to be inserted:"</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw3">scanf</span><span class="br0">(</span><span class="st0">"%d"</span><span class="sy0">,&amp;</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                x <span class="sy0">=</span> insert<span class="br0">(</span>root<span class="sy0">,</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw1">if</span><span class="br0">(</span>root <span class="sy0">!=</span> NULL<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        splay<span class="br0">(</span>x<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                root <span class="sy0">=</span> x<span class="sy0">;</span>
+                                <span class="kw2">break</span><span class="sy0">;</span>
+                        <span class="kw1">case</span> <span class="nu0">2</span><span class="sy0">:</span>
+                                <span class="kw1">if</span><span class="br0">(</span>root <span class="sy0">==</span> NULL<span class="br0">)</span>
+                                <span class="br0">{</span>
+                                        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span> Empty tree..."</span><span class="br0">)</span><span class="sy0">;</span>
+                                        <span class="kw1">continue</span><span class="sy0">;</span>
+                                <span class="br0">}</span>
+                                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\n</span><span class="es1">\n</span> Enter the element to be delete:"</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw3">scanf</span><span class="br0">(</span><span class="st0">"%d"</span><span class="sy0">,&amp;</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                root <span class="sy0">=</span> delete<span class="br0">(</span>root<span class="sy0">,</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw2">break</span><span class="sy0">;</span>
+                        <span class="kw1">case</span> <span class="nu0">3</span><span class="sy0">:</span>
+                                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"Enter the element to be search<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw3">scanf</span><span class="br0">(</span><span class="st0">"%d"</span><span class="sy0">,&amp;</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                x <span class="sy0">=</span> lookup<span class="br0">(</span>root<span class="sy0">,</span>ele<span class="br0">)</span><span class="sy0">;</span>
+                                        splay<span class="br0">(</span>x<span class="sy0">,</span>root<span class="br0">)</span><span class="sy0">;</span>
+                                root <span class="sy0">=</span> x<span class="sy0">;</span>
+                                <span class="kw2">break</span><span class="sy0">;</span>
+                        <span class="kw1">case</span> <span class="nu0">4</span><span class="sy0">:</span>
+                                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"The elements are<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                                inorder<span class="br0">(</span>root<span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw2">break</span><span class="sy0">;</span>
+                        <span class="kw1">default</span><span class="sy0">:</span>
+                                <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"Wrong choice<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+                                <span class="kw2">break</span><span class="sy0">;</span>
+                <span class="br0">}</span>
+        <span class="br0">}</span>
+<span class="br0">}</span>
+<span class="kw4">int</span> data_print<span class="br0">(</span><span class="kw4">struct</span> node <span class="sy0">*</span>x<span class="br0">)</span>
+<span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span> x<span class="sy0">==</span>NULL <span class="br0">)</span>
+                <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+                <span class="kw1">return</span> x<span class="sy0">-&gt;</span>data<span class="sy0">;</span>
+<span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Analysis">Analysis</span></h2><div class="content_block" id="content_5">
+<p>A simple <a href="http://en.m.wikipedia.org/wiki/Amortized_analysis" title="Amortized analysis">amortized analysis</a> of static splay trees can be carried out using the <a href="http://en.m.wikipedia.org/wiki/Potential_method" title="Potential method">potential method</a>. Suppose that size(<i>r</i>) is the number of nodes in the subtree rooted at <i>r</i> (including <i>r</i>) and rank(<i>r</i>) = log<sub>2</sub>(size(<i>r</i>)). Then the potential function P(<i>t</i>) for a splay tree <i>t</i>
+ is the sum of the ranks of all the nodes in the tree. This will tend to
+ be high for poorly balanced trees, and low for well-balanced trees. We 
+can bound the amortized cost of any zig-zig or zig-zag operation by:</p>
+<dl>
+<dd>amortized cost = cost + P(t<sub>f</sub>) - P(t<sub>i</sub>) ≤ 3(rank<sub>f</sub>(<i>x</i>) - rank<sub>i</sub>(<i>x</i>)),</dd>
+</dl>
+<p>where <i>x</i> is the node being moved towards the root, and the 
+subscripts "f" and "i" indicate after and before the operation, 
+respectively. When summed over the entire splay operation, this <a href="http://en.m.wikipedia.org/wiki/Telescoping_series" title="Telescoping series">telescopes</a> to 3(rank(root)) which is O(log <i>n</i>). Since there's at most one zig operation, this only adds a constant.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Performance_theorems">Performance theorems</span></h2><div class="content_block" id="content_6">
+<p>There are several theorems and conjectures regarding the worst-case runtime for performing a sequence <i>S</i> of <i>m</i> accesses in a splay tree containing <i>n</i> elements.</p>
+<dl>
+<dt>Balance Theorem<sup id="cite_ref-SleatorTarjan_0-1" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup>
+</dt>
+<dd>The cost of performing the sequence <i>S</i> is <img class="tex" alt="O\Bigl(m(1+\log n)+n\log n\Bigr)." src="Splay_tree_files/ae6fa9603cbdc52f17dea5860ea107d6.png"> In other words, splay trees perform as well as static balanced binary search trees on sequences of at least <i>n</i> accesses.</dd>
+<dt>Static Optimality Theorem<sup id="cite_ref-SleatorTarjan_0-2" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup>
+</dt>
+<dd>Let <img class="tex" alt="q_i" src="Splay_tree_files/055c210a7797b4e842635accb13e32a7.png"> be the number of times element <i>i</i> is accessed in <i>S</i>. The cost of performing <i>S</i> is <img class="tex" alt="O\left (m+\sum_{i=1}^n q_i\log\frac{m}{q_i}\right)." src="Splay_tree_files/475958d0eebfd0322d89d95f22432366.png"> In other words, splay trees perform as well as optimum static binary search trees on sequences of at least <i>n</i> accesses.</dd>
+<dt>Static Finger Theorem<sup id="cite_ref-SleatorTarjan_0-3" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup>
+</dt>
+<dd>Let <img class="tex" alt="i_j" src="Splay_tree_files/815147f41410ea2dc02e7b52dfcd711b.png"> be the element accessed in the <img class="tex" alt="j^{th}" src="Splay_tree_files/b35be813c0c020ea8a099c67d611e463.png"> access of <i>S</i> and let <i>f</i> be any fixed element (the finger). The cost of performing <i>S</i> is <img class="tex" alt="O\Bigl(m+n\log n+\sum_{j=1}^m \log(|i_j-f|+1)\Bigr)." src="Splay_tree_files/bc7731a52cab6e7c30643bb708bef545.png">
+</dd>
+<dt>Working Set Theorem<sup id="cite_ref-SleatorTarjan_0-4" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup>
+</dt>
+<dd>Let <img class="tex" alt="t(j)" src="Splay_tree_files/77abd43570d9166a4ddc4a57bb10865d.png"> be the number of distinct elements accessed between access <i>j</i> and the previous time element <img class="tex" alt="i_j" src="Splay_tree_files/815147f41410ea2dc02e7b52dfcd711b.png"> was accessed. The cost of performing <i>S</i> is <img class="tex" alt="O\Bigl(m+n\log n+\sum_{j=1}^m \log(t(j)+1)\Bigr)." src="Splay_tree_files/c4440ef1e3dbee50317cedd1e4859e7a.png">
+</dd>
+<dt>Dynamic Finger Theorem<sup id="cite_ref-ColeEtAl_3-0" class="reference"><a href="#cite_note-ColeEtAl-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-Cole_4-0" class="reference"><a href="#cite_note-Cole-4"><span>[</span>5<span>]</span></a></sup>
+</dt>
+<dd>The cost of performing <i>S</i> is <img class="tex" alt="O\Bigl(m+n+\sum_{j=1}^m \log(|i_{j+1}-i_j|+1)\Bigr)." src="Splay_tree_files/956de676a365b50d74f97fdddc5daffc.png">
+</dd>
+<dt>Scanning Theorem<sup id="cite_ref-Tarjan_5-0" class="reference"><a href="#cite_note-Tarjan-5"><span>[</span>6<span>]</span></a></sup>
+</dt>
+<dd>Also known as the <b>Sequential Access Theorem</b>. Accessing the <i>n</i> elements of a splay tree in symmetric order takes O(<i>n</i>) time, regardless of the initial structure of the splay tree. The tightest upper bound proven so far is <img class="tex" alt="4.5n" src="Splay_tree_files/3c451698bc6dc37d3bc43da378320db2.png">.<sup id="cite_ref-Elmasry_6-0" class="reference"><a href="#cite_note-Elmasry-6"><span>[</span>7<span>]</span></a></sup>
+</dd>
+</dl>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Dynamic_optimality_conjecture">Dynamic optimality conjecture</span></h2><div class="content_block" id="content_7">
+<table class="wikitable" style="float: right; width: 30%; margin: 0em 1em 1em;">
+<caption><a href="http://en.m.wikipedia.org/wiki/Unsolved_problems_in_computer_science" title="Unsolved problems in computer science" class="mw-redirect">Unsolved problems in computer science</a></caption>
+<tbody><tr>
+<td><i>Do splay trees perform as well as any other binary search tree algorithm?</i></td>
+</tr>
+</tbody></table>
+<p>In addition to the proven performance guarantees for splay trees 
+there is an unproven conjecture of great interest from the original 
+Sleator and Tarjan paper. This conjecture is known as the <i>dynamic optimality conjecture</i> and it basically claims that splay trees perform as well as any other binary search tree algorithm up to a constant factor.</p>
+<dl>
+<dd>
+<b>Dynamic Optimality Conjecture:<sup id="cite_ref-SleatorTarjan_0-5" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup></b> Let <img class="tex" alt="A" src="Splay_tree_files/7fc56270e7a70fa81a5935b72eacbe29.png"> be any binary search tree algorithm that accesses an element <img class="tex" alt="x" src="Splay_tree_files/9dd4e461268c8034f5c8564e155c67a6.png"> by traversing the path from the root to <img class="tex" alt="x" src="Splay_tree_files/9dd4e461268c8034f5c8564e155c67a6.png"> at a cost of <img class="tex" alt="d(x)+1" src="Splay_tree_files/a17406bfaeb7fe41faaa72ad3ee8a3c7.png">, and that between accesses can make any rotations in the tree at a cost of 1 per rotation. Let <img class="tex" alt="A(S)" src="Splay_tree_files/6ad5c869270583e74702774c699150a0.png"> be the cost for <img class="tex" alt="A" src="Splay_tree_files/7fc56270e7a70fa81a5935b72eacbe29.png"> to perform the sequence <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> of accesses. Then the cost for a splay tree to perform the same accesses is <img class="tex" alt="O(n + A(S))" src="Splay_tree_files/5d046861b54ec5cb135e06190bbde6b9.png">.</dd>
+</dl>
+<p>There are several corollaries of the dynamic optimality conjecture that remain unproven:</p>
+<dl>
+<dd>
+<b>Traversal Conjecture:<sup id="cite_ref-SleatorTarjan_0-6" class="reference"><a href="#cite_note-SleatorTarjan-0"><span>[</span>1<span>]</span></a></sup></b> Let <img class="tex" alt="T_1" src="Splay_tree_files/a5749ec33f2c95fe8c19d702d76d4968.png"> and <img class="tex" alt="T_2" src="Splay_tree_files/f066e1184caa1b9991cbceb207ea6341.png"> be two splay trees containing the same elements. Let <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> be the sequence obtained by visiting the elements in <img class="tex" alt="T_2" src="Splay_tree_files/f066e1184caa1b9991cbceb207ea6341.png"> in preorder (<i>i.e.</i> depth first search order). The total cost of performing the sequence <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> of accesses on <img class="tex" alt="T_1" src="Splay_tree_files/a5749ec33f2c95fe8c19d702d76d4968.png"> is <img class="tex" alt="O(n)" src="Splay_tree_files/7ba55e7c64a9405a0b39a1107e90ca94.png">.</dd>
+</dl>
+<dl>
+<dd>
+<b>Deque Conjecture:<sup id="cite_ref-Pettie_7-0" class="reference"><a href="#cite_note-Pettie-7"><span>[</span>8<span>]</span></a></sup><sup id="cite_ref-Tarjan_5-1" class="reference"><a href="#cite_note-Tarjan-5"><span>[</span>6<span>]</span></a></sup><sup id="cite_ref-Sundar_8-0" class="reference"><a href="#cite_note-Sundar-8"><span>[</span>9<span>]</span></a></sup></b> Let <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> be a sequence of <img class="tex" alt="m" src="Splay_tree_files/6f8f57715090da2632453988d9a1501b.png"> double-ended queue operations (push, pop, inject, eject). Then the cost of performing <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> on a splay tree is <img class="tex" alt="O(m + n)" src="Splay_tree_files/cfda60c744b8119ed03fe07e5c3722c9.png">.</dd>
+</dl>
+<dl>
+<dd>
+<b>Split Conjecture:<sup id="cite_ref-Lucas_9-0" class="reference"><a href="#cite_note-Lucas-9"><span>[</span>10<span>]</span></a></sup></b> Let <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> be any permutation of the elements of the splay tree. Then the cost of deleting the elements in the order <img class="tex" alt="S" src="Splay_tree_files/5dbc98dcc983a70728bd082d1a47546e.png"> is <img class="tex" alt="O(n)" src="Splay_tree_files/7ba55e7c64a9405a0b39a1107e90ca94.png">.</dd>
+</dl>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_8">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald</a>. <i><a href="http://en.m.wikipedia.org/wiki/The_Art_of_Computer_Programming" title="The Art of Computer Programming">The Art of Computer Programming</a></i>, Volume 3: <i>Sorting and Searching</i>, Third Edition. Addison-Wesley, 1997. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0201896850" class="internal mw-magiclink-isbn">ISBN 0-201-89685-0</a>. Page 478 of section 6.2.3.</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Finger_tree" title="Finger tree">Finger tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Link/cut_tree" title="Link/cut tree">Link/cut tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Zipper_%28data_structure%29" title="Zipper (data structure)">Zipper (data structure)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_data_structure" title="Tree data structure" class="mw-redirect">Trees</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">Tree rotation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_of_data_structures" title="List of data structures">List of data structures</a></li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_9">
+<ol class="references">
+<li id="cite_note-SleatorTarjan-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-SleatorTarjan_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-5"><sup><i><b>f</b></i></sup></a> <a href="#cite_ref-SleatorTarjan_0-6"><sup><i><b>g</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFSleatorTarjan1985">Sleator, Daniel D.; Tarjan, Robert E. (1985), <a rel="nofollow" class="external text" href="http://www.cs.cmu.edu/%7Esleator/papers/self-adjusting.pdf">"Self-Adjusting Binary Search Trees"</a>, <i>Journal of the ACM (<a href="http://en.m.wikipedia.org/wiki/Association_for_Computing_Machinery" title="Association for Computing Machinery">Association for Computing Machinery</a>)</i> <b>32</b> (3): 652–686, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F3828.3835">10.1145/3828.3835</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.cs.cmu.edu/%7Esleator/papers/self-adjusting.pdf">http://www.cs.cmu.edu/~sleator/papers/self-adjusting.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Self-Adjusting+Binary+Search+Trees&amp;rft.jtitle=Journal+of+the+ACM+%28%5B%5BAssociation+for+Computing+Machinery%5D%5D%29&amp;rft.aulast=Sleator&amp;rft.aufirst=Daniel+D.&amp;rft.au=Sleator%2C%26%2332%3BDaniel+D.&amp;rft.au=Tarjan%2C%26%2332%3BRobert+E.&amp;rft.date=1985&amp;rft.volume=32&amp;rft.issue=3&amp;rft.pages=652%E2%80%93686&amp;rft_id=info:doi/10.1145%2F3828.3835&amp;rft_id=http%3A%2F%2Fwww.cs.cmu.edu%2F%7Esleator%2Fpapers%2Fself-adjusting.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><span class="citation web"><a rel="nofollow" class="external text" href="http://www2.informatik.hu-berlin.de/%7Ealbers/papers/ipl02.pdf">"Randomized Splay Trees: Theoretical and Experimental Results"</a><span class="printonly">. <a rel="nofollow" class="external free" href="http://www2.informatik.hu-berlin.de/%7Ealbers/papers/ipl02.pdf">http://www2.informatik.hu-berlin.de/~albers/papers/ipl02.pdf</a></span><span class="reference-accessdate">. Retrieved 31 May 2011</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Randomized+Splay+Trees%3A+Theoretical+and+Experimental+Results&amp;rft.atitle=&amp;rft_id=http%3A%2F%2Fwww2.informatik.hu-berlin.de%2F%7Ealbers%2Fpapers%2Fipl02.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-AllenMunro-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-AllenMunro_2-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFAllen.2C_Brian.3B_and_Munro.2C_Ian1978">Allen, Brian; and Munro, Ian (1978), "Self-organizing search trees", <i>Journal of the ACM</i> <b>25</b> (4): 526–535, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F322092.322094">10.1145/322092.322094</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Self-organizing+search+trees&amp;rft.jtitle=Journal+of+the+ACM&amp;rft.aulast=Allen%2C+Brian%3B+and+Munro%2C+Ian&amp;rft.au=Allen%2C+Brian%3B+and+Munro%2C+Ian&amp;rft.date=1978&amp;rft.volume=25&amp;rft.issue=4&amp;rft.pages=526%E2%80%93535&amp;rft_id=info:doi/10.1145%2F322092.322094&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-ColeEtAl-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-ColeEtAl_3-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFCole.2C_Richard2000">Cole,
+ Richard; Mishra, Bud; Schmidt, Jeanette; and Siegel, Alan (2000), "On 
+the Dynamic Finger Conjecture for Splay Trees. Part I: Splay Sorting log
+ n-Block Sequences", <i>SIAM (<a href="http://en.m.wikipedia.org/wiki/Society_for_Industrial_and_Applied_Mathematics" title="Society for Industrial and Applied Mathematics">Society for Industrial and Applied Mathematics</a>) Journal on Computing</i> <b>30</b>: 1–43</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+Dynamic+Finger+Conjecture+for+Splay+Trees.+Part+I%3A+Splay+Sorting+log+n-Block+Sequences&amp;rft.jtitle=SIAM+%28%5B%5BSociety+for+Industrial+and+Applied+Mathematics%5D%5D%29+Journal+on+Computing&amp;rft.aulast=Cole%2C+Richard&amp;rft.au=Cole%2C+Richard&amp;rft.date=2000&amp;rft.volume=30&amp;rft.pages=1%E2%80%9343&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Cole-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Cole_4-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFCole.2C_Richard2000">Cole, Richard (2000), "On the Dynamic Finger Conjecture for Splay Trees. Part II: The Proof", <i>SIAM Journal on Computing</i> <b>30</b>: 44–85, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1137%2FS009753979732699X">10.1137/S009753979732699X</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+Dynamic+Finger+Conjecture+for+Splay+Trees.+Part+II%3A+The+Proof&amp;rft.jtitle=SIAM+Journal+on+Computing&amp;rft.aulast=Cole%2C+Richard&amp;rft.au=Cole%2C+Richard&amp;rft.date=2000&amp;rft.volume=30&amp;rft.pages=44%E2%80%9385&amp;rft_id=info:doi/10.1137%2FS009753979732699X&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Tarjan-5">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Tarjan_5-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Tarjan_5-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFTarjan.2C_Robert_E.1985">Tarjan, Robert E. (1985), "Sequential access in splay trees takes linear time", <i>Combinatorica</i> <b>5</b> (4): 367–378, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF02579253">10.1007/BF02579253</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Sequential+access+in+splay+trees+takes+linear+time&amp;rft.jtitle=Combinatorica&amp;rft.aulast=Tarjan%2C+Robert+E.&amp;rft.au=Tarjan%2C+Robert+E.&amp;rft.date=1985&amp;rft.volume=5&amp;rft.issue=4&amp;rft.pages=367%E2%80%93378&amp;rft_id=info:doi/10.1007%2FBF02579253&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Elmasry-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Elmasry_6-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFElmasry.2C_Amr2004">Elmasry, Amr (2004), "On the sequential access theorem and Deque conjecture for splay trees", <i>Theoretical Computer Science</i> <b>314</b> (3): 459–466, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1016%2Fj.tcs.2004.01.019">10.1016/j.tcs.2004.01.019</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+sequential+access+theorem+and+Deque+conjecture+for+splay+trees&amp;rft.jtitle=Theoretical+Computer+Science&amp;rft.aulast=Elmasry%2C+Amr&amp;rft.au=Elmasry%2C+Amr&amp;rft.date=2004&amp;rft.volume=314&amp;rft.issue=3&amp;rft.pages=459%E2%80%93466&amp;rft_id=info:doi/10.1016%2Fj.tcs.2004.01.019&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Pettie-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Pettie_7-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFPettie.2C_Seth2008">Pettie, Seth (2008), "Splay Trees, Davenport-Schinzel Sequences, and the Deque Conjecture", <i>Proceedings of the 19th ACM-SIAM Symposium on Discrete Algorithms</i>: 1115–1124</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Splay+Trees%2C+Davenport-Schinzel+Sequences%2C+and+the+Deque+Conjecture&amp;rft.jtitle=Proceedings+of+the+19th+ACM-SIAM+Symposium+on+Discrete+Algorithms&amp;rft.aulast=Pettie%2C+Seth&amp;rft.au=Pettie%2C+Seth&amp;rft.date=2008&amp;rft.pages=1115%E2%80%931124&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Sundar-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Sundar_8-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFSundar.2C_Rajamani1992">Sundar, Rajamani (1992), "On the Deque conjecture for the splay algorithm", <i>Combinatorica</i> <b>12</b> (1): 95–124, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2FBF01191208">10.1007/BF01191208</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+Deque+conjecture+for+the+splay+algorithm&amp;rft.jtitle=Combinatorica&amp;rft.aulast=Sundar%2C+Rajamani&amp;rft.au=Sundar%2C+Rajamani&amp;rft.date=1992&amp;rft.volume=12&amp;rft.issue=1&amp;rft.pages=95%E2%80%93124&amp;rft_id=info:doi/10.1007%2FBF01191208&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-Lucas-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-Lucas_9-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFLucas.2C_Joan_M.1991">Lucas, Joan M. (1991), "On the Competitiveness of Splay Trees: Relations to the Union-Find Problem", <i>Online Algorithms, Center for Discrete Mathematics and Theoretical Computer Science (<a href="http://en.m.wikipedia.org/wiki/DIMACS" title="DIMACS">DIMACS</a>) Series in Discrete Mathematics and Theoretical Computer Science Vol. 7</i>: 95–124</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=On+the+Competitiveness+of+Splay+Trees%3A+Relations+to+the+Union-Find+Problem&amp;rft.jtitle=Online+Algorithms%2C+Center+for+Discrete+Mathematics+and+Theoretical+Computer+Science+%28%5B%5BDIMACS%5D%5D%29+Series+in+Discrete+Mathematics+and+Theoretical+Computer+Science+Vol.+7&amp;rft.aulast=Lucas%2C+Joan+M.&amp;rft.au=Lucas%2C+Joan+M.&amp;rft.date=1991&amp;rft.pages=95%E2%80%93124&amp;rfr_id=info:sid/en.wikipedia.org:Splay_tree"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_10">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.nist.gov/dads/HTML/splaytree.html">NIST's Dictionary of Algorithms and Data Structures: Splay Tree</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.link.cs.cmu.edu/link/ftp-site/splaying/">Implementations in C and Java (by Daniel Sleator)</a></li>
+<li><a rel="nofollow" class="external text" href="http://wiki.algoviz.org/AlgovizWiki/SplayTrees">Pointers to splay tree visualizations</a></li>
+<li><a rel="nofollow" class="external text" href="http://github.com/fbuihuu/libtree">Fast and efficient implentation of Splay trees</a></li>
+<li><a rel="nofollow" class="external text" href="http://github.com/cpdomina/SplayTree">Top-Down Splay Tree Java implementation</a></li>
+<li><a rel="nofollow" class="external text" href="http://arxiv.org/abs/1003.0139">Zipper Trees</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:CS_trees" title="Template:CS trees"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:CS_trees" title="Template talk:CS trees"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:CS_trees&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Trees</a> in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">Binary trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree (BST)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree" title="Cartesian tree">Cartesian tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Top_tree" title="Top tree">Top tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">Self-balancing binary search trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AA_tree" title="AA tree">AA tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/LLRB_tree" title="LLRB tree" class="mw-redirect">LLRB tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Red%E2%80%93black_tree" title="Red–black tree">Red–black tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><strong class="selflink">Splay tree</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Treap" title="Treap">Treap</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/B%2B_tree" title="B+ tree">B+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B*-tree" title="B*-tree" class="mw-redirect">B*-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bx-tree" title="Bx-tree">B<small><sup>x</sup></small>-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UB-tree" title="UB-tree">UB-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3-4_tree" title="2-3-4 tree">2-3-4 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/%28a,b%29-tree" title="(a,b)-tree">(a,b)-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dancing_tree" title="Dancing tree">Dancing tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Htree" title="Htree">Htree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Trie" title="Trie">Tries</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">Suffix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_search_tree" title="Ternary search tree">Ternary search tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-fast_trie" title="X-fast trie">X-fast trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Y-fast_trie" title="Y-fast trie">Y-fast trie</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Binary_space_partitioning" title="Binary space partitioning">Binary space partitioning (BSP)</a> trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Quadtree" title="Quadtree">Quadtree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Octree" title="Octree">Octree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/K-d_tree" title="K-d tree"><i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Implicit_k-d_tree" title="Implicit k-d tree">Implicit <i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Vp-tree" title="Vp-tree">vp-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Non-binary trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Exponential_tree" title="Exponential tree">Exponential tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fusion_tree" title="Fusion tree">Fusion tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interval_tree" title="Interval tree">Interval tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/PQ_tree" title="PQ tree">PQ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Range_tree" title="Range tree">Range tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SPQR_tree" title="SPQR tree">SPQR tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Van_Emde_Boas_tree" title="Van Emde Boas tree">Van Emde Boas tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Spatial_index" title="Spatial index" class="mw-redirect">Spatial</a> data partitioning trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/R-tree" title="R-tree">R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R%2B_tree" title="R+ tree">R+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R*_tree" title="R* tree">R* tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-tree" title="X-tree">X-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/M-tree" title="M-tree">M-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Segment_tree" title="Segment tree">Segment tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hilbert_R-tree" title="Hilbert R-tree">Hilbert R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Priority_R-tree" title="Priority R-tree">Priority R-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">Heap</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_tree" title="Hash tree">Hash tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Finger_tree" title="Finger tree">Finger tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metric_tree" title="Metric tree">Metric tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cover_tree" title="Cover tree">Cover tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/BK-tree" title="BK-tree">BK-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Doubly_chained_tree" title="Doubly chained tree">Doubly chained tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/IDistance" title="IDistance">iDistance</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Link-cut_tree" title="Link-cut tree" class="mw-redirect">Link-cut tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fenwick_tree" title="Fenwick tree">Fenwick tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Splay_tree&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Splay+tree&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Splay_tree&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Splay+tree&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Splay_tree_files/load_002.php" type="text/javascript"></script>
+<script src="Splay_tree_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

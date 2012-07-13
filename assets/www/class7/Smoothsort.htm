@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Smoothsort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Smoothsort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 5 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Smoothsort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Smoothsort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Smoothsort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Smoothsort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Smoothsort" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Smoothsort">Deutsch</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%B1%D9%88%D8%A7%D9%86">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Smoothsort">français</option><option value="//tr.m.wikipedia.org/wiki/Rahat_s%C4%B1ralama">Türkçe</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Smoothsort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Smoothsort</caption>
+<tbody><tr class="">
+<td colspan="2" class="" style="text-align: center;">
+<div class="floatnone"><a href="http://en.m.wikipedia.org/wiki/File:Smoothsort.gif" class="image" title="A run of the smoothsort algorithm sorting an array that is mainly in order but with a few out-of-sequence elements."><img alt="A run of the smoothsort algorithm sorting an array that is mainly in order but with a few out-of-sequence elements." src="Smoothsort_files/Smoothsort.gif" width="295" height="226"></a></div>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n\log n)" src="Smoothsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n)" src="Smoothsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style=""><img class="tex" alt="O(n\log n)" src="Smoothsort_files/f49341ab621f12e8cb93d0146ea51d34.png"></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style="">
+<img class="tex" alt="O(n)" src="Smoothsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"> total, <img class="tex" alt="O(1)" src="Smoothsort_files/5e079a28737d5dd019a3b8f6133ee55e.png"> auxiliary</td>
+</tr>
+</tbody></table>
+<p><b>Smoothsort</b><sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> (method) is a <a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">comparison-based</a> <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>. It is a variation of <a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">heapsort</a> developed by <a href="http://en.m.wikipedia.org/wiki/Edsger_Dijkstra" title="Edsger Dijkstra" class="mw-redirect">Edsger Dijkstra</a> in 1981. Like heapsort, smoothsort's upper bound is <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">O</a>(<i>n</i> log&nbsp;<i>n</i>). The advantage of smoothsort is that it comes closer to O(<i>n</i>) time if the <a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">input is already sorted to some degree</a>, whereas heapsort averages O(<i>n</i> log&nbsp;<i>n</i>) regardless of the initial sorted state.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Overview">Overview</span></h2><div class="content_block" id="content_1">
+<p>Like <a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">heapsort</a>,
+ smoothsort builds up an implicit heap data structure in the array to be
+ sorted, then sorts the array by continuously extracting the maximum 
+element from that heap. Unlike heapsort, smoothsort does not use a <a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">binary heap</a>, but rather a custom heap based on the <a href="http://en.m.wikipedia.org/wiki/Leonardo_numbers" title="Leonardo numbers" class="mw-redirect">Leonardo numbers</a>
+ L(n). The heap structure consists of a string of heaps, the sizes of 
+which are all Leonardo numbers, and whose roots are stored in ascending 
+order. The advantage of this custom heap over binary heaps is that if 
+the sequence is already sorted, it takes only <img class="tex" alt="O(n)" src="Smoothsort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"> time to construct and deconstruct the heap, hence the better runtime.</p>
+<p>Breaking the input up into a sequence of heaps is simple – the 
+leftmost nodes of the array are made into the largest heap possible, and
+ the remainder is likewise divided up. It can be proven <sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> that:</p>
+<ul>
+<li>Any array of any length can so be divided up into sections of size L(x).</li>
+<li>No two heaps will have the same size. The string will therefore be a string of heaps strictly descending in size.</li>
+<li>No two heaps will have sizes that are consecutive Leonardo numbers, except for possibly the final two.</li>
+</ul>
+<p>Each heap, having a size of L(x), is structured from left to right as
+ a sub-heap of size L(x-1), a sub-heap of size L(x-2), and a root node, 
+with the exception of heaps with a size of L(1) and L(0), which are 
+singleton nodes. Each heap maintains the heap property that a root node 
+is always at least as large as the root nodes of its child heaps (and 
+therefore at least as large as all nodes in its child heaps), and the 
+string of heaps as a whole maintains the string property that the root 
+node of each heap is at least as large as the root node of the heap to 
+the left.</p>
+<p>The consequence of this is that the rightmost node in the string will
+ always be the largest of the nodes, and, importantly, an array that is 
+already sorted needs no rearrangement to be made into a valid series of 
+heaps. This is the source of the adaptive qualities of the algorithm.</p>
+<p>The algorithm is simple. We start by dividing up our unsorted array 
+into a single heap of one element, followed by an unsorted portion. A 
+one-element array is trivially a valid sequence of heaps. This sequence 
+is then grown by adding one element at a time to the right, performing 
+swaps to keep the sequence property and the heap property, until it 
+fills the entire original array.</p>
+<p>From this point on, the rightmost element of the sequence of heaps 
+will be the largest element in any of the heaps, and will therefore be 
+in its correct, final position. We then reduce the series of heaps back 
+down to a single heap of one element by removing the rightmost node 
+(which stays in place) and performing re-arrangements to restore the 
+heap condition. When we are back down to a single heap of one element, 
+the array is sorted.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Operations">Operations</span></h2><div class="content_block" id="content_2">
+<p>Ignoring (for the moment) Dijkstra's optimisations, two operations 
+are necessary – increase the string by adding one element to the right, 
+and decrease the string by removing the right most element (the root of 
+the last heap), preserving the heap and string conditions.</p>
+<h3> <span class="mw-headline" id="Grow_the_string_by_adding_an_element_to_the_right">Grow the string by adding an element to the right</span>
+</h3>
+<ul>
+<li>If the last two heaps are of size L(x+1) and L(x) (i.e.: consecutive
+ leonardo numbers), the new element becomes the root node of a bigger 
+heap of size L(x+2). This heap will not necessarily have the heap 
+property.</li>
+<li>If the last two heaps of the string are not consecutive Leonardo 
+numbers, then the rightmost element becomes a new heap of size 1. This 1
+ is taken to be L(1), unless the rightmost heap already has size L(1), 
+in which case the new one-element heap is taken to be of size L(0).</li>
+</ul>
+<p>After this, the heap and string properties must be restored, which is usually done via a variant of <a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">insertion sort</a>. This is done as follows:</p>
+<ol>
+<li>The rightmost heap (the one that has just been created) becomes the "current" heap</li>
+<li>While there is a heap to the left of the current heap and its root is larger than the current root <b>and</b> both of its child heap roots
+<ul>
+<li>Then swap the new root with the root on the heap to the left (this 
+will not disturb the heap property of the current heap). That heap then 
+becomes the current heap.</li>
+</ul>
+</li>
+<li>Perform a "filter" operation on the current heap to establish the heap property:
+<ul>
+<li>While the current heap has a size greater than 1 and either child 
+heap of the current heap has a root node greater than the root of the 
+current heap
+<ul>
+<li>Swap the greater child root with the current root. That child heap becomes the current heap.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>The filter operation is greatly simplified by the use of Leonardo 
+numbers, as a heap will always either be a single node, or will have two
+ children. One does not need to manage the condition of one of the child
+ heaps not being present.</p>
+<h4> <span class="mw-headline" id="Optimisation">Optimisation</span>
+</h4>
+<ul>
+<li>If the new heap is going to become part of a larger heap by the time
+ we are done, then don't bother establishing the string property: it 
+only needs to be done when a heap has reached its final size.
+<ul>
+<li>To do this, look at how many elements are left after the new heap of
+ size L(x). If there are more than L(x-1)+1, then this new heap is going
+ to be merged.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Do not maintain the heap property of the rightmost heap. If that 
+heap becomes one of the final heaps of the string, then maintaining the 
+string property will restore the heap property. Of course, whenever a 
+new heap is created, then the rightmost heap is no longer the rightmost 
+and the heap property needs to be restored.</li>
+</ul>
+<h3> <span class="mw-headline" id="Shrink_the_string_by_removing_the_rightmost_element">Shrink the string by removing the rightmost element</span>
+</h3>
+<p>If the rightmost heap has a size of 1 (i.e., L(1) or L(0)), then nothing needs to be done. Simply remove that rightmost heap.</p>
+<p>If the rightmost heap does not have a size of 1, then remove the 
+root, exposing the two sub-heaps as members of the string. Restore the 
+string property first on the left one and then on the right one.</p>
+<h4> <span class="mw-headline" id="Optimisation_2">Optimisation</span>
+</h4>
+<ul>
+<li>When restoring the string property, we do not need to compare the 
+root of the heap to the left with the two child nodes of the heaps that 
+have just been exposed, because we know that these newly exposed heaps 
+have the heap property. Just compare it to the root.</li>
+</ul>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Memory_usage">Memory usage</span></h2><div class="content_block" id="content_3">
+<p>The smoothsort algorithm needs to be able to hold in memory the sizes
+ of all of the heaps in the string. Since all these values are distinct,
+ this is usually done using a <a href="http://en.m.wikipedia.org/wiki/Bit_vector" title="Bit vector" class="mw-redirect">bit vector</a>.
+ Moreover, since there are at most O(log n) numbers in the sequence, 
+these bits can be encoded in O(1) machine words, assuming a <a href="http://en.m.wikipedia.org/wiki/Transdichotomous_model" title="Transdichotomous model">transdichotomous machine model</a>.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Java_implementation">Java implementation</span></h2><div class="content_block" id="content_4">
+<p>This code uses <b>lo</b> and <b>hi</b> as the bounds of the array <i>inclusive</i>.
+ Note that this is not the usual convention. Further note, that this 
+implementation is a little flawed: The bitmap p only holds 32 bits and 
+therefore limits the maximum number of heaps in the entire string to 32 
+(not counting the right-most heap of size LP[0]), which will eventually 
+overflow if you try to sort an array of more than LP[32]+1 = 7049156 
+elements. This can be solved by using a long-bitmap wide enough to hold a
+ single bit for every Leonardo-number that could be used as an array 
+index in Java, which is exactly one more than the index of the largest 
+such number (i.e. the largest one that fits into a 32-bit signed 
+integer, as commented on LP) and is therefore equal to the length of LP 
+which is 43.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="java5 source-java5">
+<pre class="de1">  <span class="co1">// by keeping these constants, we can avoid the tiresome business</span>
+  <span class="co1">// of keeping track of Dijkstra's b and c. Instead of keeping</span>
+  <span class="co1">// b and c, I will keep an index into this array.</span>
+ 
+  <span class="kw2">static</span> <span class="kw2">final</span> <span class="kw3">int</span> LP<span class="br0">[</span><span class="br0">]</span> = <span class="br0">{</span> <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">3</span>, <span class="nu0">5</span>, <span class="nu0">9</span>, <span class="nu0">15</span>, <span class="nu0">25</span>, <span class="nu0">41</span>, <span class="nu0">67</span>, <span class="nu0">109</span>,
+      <span class="nu0">177</span>, <span class="nu0">287</span>, <span class="nu0">465</span>, <span class="nu0">753</span>, <span class="nu0">1219</span>, <span class="nu0">1973</span>, <span class="nu0">3193</span>, <span class="nu0">5167</span>, <span class="nu0">8361</span>, <span class="nu0">13529</span>, <span class="nu0">21891</span>,
+      <span class="nu0">35421</span>, <span class="nu0">57313</span>, <span class="nu0">92735</span>, <span class="nu0">150049</span>, <span class="nu0">242785</span>, <span class="nu0">392835</span>, <span class="nu0">635621</span>, <span class="nu0">1028457</span>,
+      <span class="nu0">1664079</span>, <span class="nu0">2692537</span>, <span class="nu0">4356617</span>, <span class="nu0">7049155</span>, <span class="nu0">11405773</span>, <span class="nu0">18454929</span>, <span class="nu0">29860703</span>,
+      <span class="nu0">48315633</span>, <span class="nu0">78176337</span>, <span class="nu0">126491971</span>, <span class="nu0">204668309</span>, <span class="nu0">331160281</span>, <span class="nu0">535828591</span>,
+      <span class="nu0">866988873</span> <span class="co1">// the next number is &gt; 31 bits.</span>
+  <span class="br0">}</span><span class="sy0">;</span>
+ 
+  <span class="kw2">public</span> <span class="kw2">static</span> <span class="sy0">&lt;</span>C <span class="kw2">extends</span> <span class="kw21">Comparable</span><span class="sy0">&lt;?</span> <span class="kw2">super</span> C<span class="sy0">&gt;&gt;</span> <span class="kw3">void</span> sort<span class="br0">(</span>C<span class="br0">[</span><span class="br0">]</span> m,
+      <span class="kw3">int</span> lo, <span class="kw3">int</span> hi<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw3">int</span> head = lo<span class="sy0">;</span> <span class="co1">// the offset of the first element of the prefix into m</span>
+ 
+    <span class="co1">// These variables need a little explaining. If our string of heaps</span>
+    <span class="co1">// is of length 38, then the heaps will be of size 25+9+3+1, which are</span>
+    <span class="co1">// Leonardo numbers 6, 4, 2, 1. </span>
+    <span class="co1">// Turning this into a binary number, we get b01010110 = 0x56. We represent</span>
+    <span class="co1">// this number as a pair of numbers by right-shifting all the zeros and </span>
+    <span class="co1">// storing the mantissa and exponent as "p" and "pshift".</span>
+    <span class="co1">// This is handy, because the exponent is the index into L[] giving the</span>
+    <span class="co1">// size of the rightmost heap, and because we can instantly find out if</span>
+    <span class="co1">// the rightmost two heaps are consecutive Leonardo numbers by checking</span>
+    <span class="co1">// (p&amp;3)==3</span>
+ 
+    <span class="kw3">int</span> p = <span class="nu0">1</span><span class="sy0">;</span> <span class="co1">// the bitmap of the current standard concatenation &gt;&gt; pshift</span>
+    <span class="kw3">int</span> pshift = <span class="nu0">1</span><span class="sy0">;</span>
+ 
+    <span class="kw1">while</span> <span class="br0">(</span>head <span class="sy0">&lt;</span> hi<span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>p <span class="sy0">&amp;</span> <span class="nu0">3</span><span class="br0">)</span> == <span class="nu0">3</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="co1">// Add 1 by merging the first two blocks into a larger one.</span>
+        <span class="co1">// The next Leonardo number is one bigger.</span>
+        sift<span class="br0">(</span>m, pshift, head<span class="br0">)</span><span class="sy0">;</span>
+        p <span class="sy0">&gt;&gt;&gt;</span>= <span class="nu0">2</span><span class="sy0">;</span>
+        pshift += <span class="nu0">2</span><span class="sy0">;</span>
+      <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        <span class="co1">// adding a new block of length 1</span>
+        <span class="kw1">if</span> <span class="br0">(</span>LP<span class="br0">[</span>pshift - <span class="nu0">1</span><span class="br0">]</span> <span class="sy0">&gt;</span>= hi - head<span class="br0">)</span> <span class="br0">{</span>
+          <span class="co1">// this block is its final size.</span>
+          trinkle<span class="br0">(</span>m, p, pshift, head, <span class="kw4">false</span><span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+          <span class="co1">// this block will get merged. Just make it trusty.</span>
+          sift<span class="br0">(</span>m, pshift, head<span class="br0">)</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+ 
+        <span class="kw1">if</span> <span class="br0">(</span>pshift == <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+          <span class="co1">// LP[1] is being used, so we add use LP[0]</span>
+          p <span class="sy0">&lt;&lt;</span>= <span class="nu0">1</span><span class="sy0">;</span>
+          pshift--<span class="sy0">;</span>
+        <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+          <span class="co1">// shift out to position 1, add LP[1]</span>
+          p <span class="sy0">&lt;&lt;</span>= <span class="br0">(</span>pshift - <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+          pshift = <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+      <span class="br0">}</span>
+      p |= <span class="nu0">1</span><span class="sy0">;</span>
+      head++<span class="sy0">;</span>
+    <span class="br0">}</span>
+ 
+    trinkle<span class="br0">(</span>m, p, pshift, head, <span class="kw4">false</span><span class="br0">)</span><span class="sy0">;</span>
+ 
+    <span class="kw1">while</span> <span class="br0">(</span>pshift <span class="sy0">!</span>= <span class="nu0">1</span> || p <span class="sy0">!</span>= <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw1">if</span> <span class="br0">(</span>pshift <span class="sy0">&lt;</span>= <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="co1">// block of length 1. No fiddling needed</span>
+        <span class="kw3">int</span> trail = <span class="kw21">Integer</span>.<span class="me1">numberOfTrailingZeros</span><span class="br0">(</span>p <span class="sy0">&amp;</span> ~<span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+        p <span class="sy0">&gt;&gt;&gt;</span>= trail<span class="sy0">;</span>
+        pshift += trail<span class="sy0">;</span>
+      <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        p <span class="sy0">&lt;&lt;</span>= <span class="nu0">2</span><span class="sy0">;</span>
+        p ^= <span class="nu0">7</span><span class="sy0">;</span>
+        pshift -= <span class="nu0">2</span><span class="sy0">;</span>
+ 
+        <span class="co1">// This block gets broken into three bits. The rightmost</span>
+        <span class="co1">// bit is a block of length 1. The left hand part is split into</span>
+        <span class="co1">// two, a block of length LP[pshift+1] and one of LP[pshift].</span>
+        <span class="co1">// Both these two are appropriately heapified, but the root</span>
+        <span class="co1">// nodes are not necessarily in order. We therefore semitrinkle</span>
+        <span class="co1">// both of them</span>
+ 
+        trinkle<span class="br0">(</span>m, p <span class="sy0">&gt;&gt;&gt;</span> <span class="nu0">1</span>, pshift + <span class="nu0">1</span>, head - LP<span class="br0">[</span>pshift<span class="br0">]</span> - <span class="nu0">1</span>, <span class="kw4">true</span><span class="br0">)</span><span class="sy0">;</span>
+        trinkle<span class="br0">(</span>m, p, pshift, head - <span class="nu0">1</span>, <span class="kw4">true</span><span class="br0">)</span><span class="sy0">;</span>
+      <span class="br0">}</span>
+ 
+      head--<span class="sy0">;</span>
+    <span class="br0">}</span>
+  <span class="br0">}</span>
+ 
+  <span class="kw2">private</span> <span class="kw2">static</span> <span class="sy0">&lt;</span>C <span class="kw2">extends</span> <span class="kw21">Comparable</span><span class="sy0">&lt;?</span> <span class="kw2">super</span> C<span class="sy0">&gt;&gt;</span> <span class="kw3">void</span> sift<span class="br0">(</span>C<span class="br0">[</span><span class="br0">]</span> m, <span class="kw3">int</span> pshift,
+      <span class="kw3">int</span> head<span class="br0">)</span> <span class="br0">{</span>
+    <span class="co1">// we do not use Floyd's improvements to the heapsort sift, because we</span>
+    <span class="co1">// are not doing what heapsort does - always moving nodes from near</span>
+    <span class="co1">// the bottom of the tree to the root.</span>
+ 
+    C val = m<span class="br0">[</span>head<span class="br0">]</span><span class="sy0">;</span>
+ 
+    <span class="kw1">while</span> <span class="br0">(</span>pshift <span class="sy0">&gt;</span> <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw3">int</span> rt = head - <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="kw3">int</span> lf = head - <span class="nu0">1</span> - LP<span class="br0">[</span>pshift - <span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>
+ 
+      <span class="kw1">if</span> <span class="br0">(</span>val.<span class="me1">compareTo</span><span class="br0">(</span>m<span class="br0">[</span>lf<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&gt;</span>= <span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> val.<span class="me1">compareTo</span><span class="br0">(</span>m<span class="br0">[</span>rt<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&gt;</span>= <span class="nu0">0</span><span class="br0">)</span>
+        <span class="kw2">break</span><span class="sy0">;</span>
+      <span class="kw1">if</span> <span class="br0">(</span>m<span class="br0">[</span>lf<span class="br0">]</span>.<span class="me1">compareTo</span><span class="br0">(</span>m<span class="br0">[</span>rt<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&gt;</span>= <span class="nu0">0</span><span class="br0">)</span> <span class="br0">{</span>
+        m<span class="br0">[</span>head<span class="br0">]</span> = m<span class="br0">[</span>lf<span class="br0">]</span><span class="sy0">;</span>
+        head = lf<span class="sy0">;</span>
+        pshift -= <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span>
+        m<span class="br0">[</span>head<span class="br0">]</span> = m<span class="br0">[</span>rt<span class="br0">]</span><span class="sy0">;</span>
+        head = rt<span class="sy0">;</span>
+        pshift -= <span class="nu0">2</span><span class="sy0">;</span>
+      <span class="br0">}</span>
+    <span class="br0">}</span>
+ 
+    m<span class="br0">[</span>head<span class="br0">]</span> = val<span class="sy0">;</span>
+  <span class="br0">}</span>
+ 
+  <span class="kw2">private</span> <span class="kw2">static</span> <span class="sy0">&lt;</span>C <span class="kw2">extends</span> <span class="kw21">Comparable</span><span class="sy0">&lt;?</span> <span class="kw2">super</span> C<span class="sy0">&gt;&gt;</span> <span class="kw3">void</span> trinkle<span class="br0">(</span>C<span class="br0">[</span><span class="br0">]</span> m, <span class="kw3">int</span> p,
+      <span class="kw3">int</span> pshift, <span class="kw3">int</span> head, <span class="kw3">boolean</span> isTrusty<span class="br0">)</span> <span class="br0">{</span>
+ 
+    C val = m<span class="br0">[</span>head<span class="br0">]</span><span class="sy0">;</span>
+ 
+    <span class="kw1">while</span> <span class="br0">(</span>p <span class="sy0">!</span>= <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+      <span class="kw3">int</span> stepson = head - LP<span class="br0">[</span>pshift<span class="br0">]</span><span class="sy0">;</span>
+ 
+      <span class="kw1">if</span> <span class="br0">(</span>m<span class="br0">[</span>stepson<span class="br0">]</span>.<span class="me1">compareTo</span><span class="br0">(</span>val<span class="br0">)</span> <span class="sy0">&lt;</span>= <span class="nu0">0</span><span class="br0">)</span>
+        <span class="kw2">break</span><span class="sy0">;</span> <span class="co1">// current node is greater than head. Sift.</span>
+ 
+      <span class="co1">// no need to check this if we know the current node is trusty,</span>
+      <span class="co1">// because we just checked the head (which is val, in the first</span>
+      <span class="co1">// iteration)</span>
+      <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span>isTrusty <span class="sy0">&amp;&amp;</span> pshift <span class="sy0">&gt;</span> <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw3">int</span> rt = head - <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw3">int</span> lf = head - <span class="nu0">1</span> - LP<span class="br0">[</span>pshift - <span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">(</span>m<span class="br0">[</span>rt<span class="br0">]</span>.<span class="me1">compareTo</span><span class="br0">(</span>m<span class="br0">[</span>stepson<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&gt;</span>= <span class="nu0">0</span>
+            || m<span class="br0">[</span>lf<span class="br0">]</span>.<span class="me1">compareTo</span><span class="br0">(</span>m<span class="br0">[</span>stepson<span class="br0">]</span><span class="br0">)</span> <span class="sy0">&gt;</span>= <span class="nu0">0</span><span class="br0">)</span>
+          <span class="kw2">break</span><span class="sy0">;</span>
+      <span class="br0">}</span>
+ 
+      m<span class="br0">[</span>head<span class="br0">]</span> = m<span class="br0">[</span>stepson<span class="br0">]</span><span class="sy0">;</span>
+ 
+      head = stepson<span class="sy0">;</span>
+      <span class="kw3">int</span> trail = <span class="kw21">Integer</span>.<span class="me1">numberOfTrailingZeros</span><span class="br0">(</span>p <span class="sy0">&amp;</span> ~<span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span>
+      p <span class="sy0">&gt;&gt;&gt;</span>= trail<span class="sy0">;</span>
+      pshift += trail<span class="sy0">;</span>
+      isTrusty = <span class="kw4">false</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+ 
+    <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span>isTrusty<span class="br0">)</span> <span class="br0">{</span>
+      m<span class="br0">[</span>head<span class="br0">]</span> = val<span class="sy0">;</span>
+      sift<span class="br0">(</span>m, pshift, head<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+  <span class="br0">}</span>
+</pre>
+</div>
+</div>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Notes">Notes</span></h2><div class="content_block" id="content_5">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text"><span class="citation book"><a href="http://en.m.wikipedia.org/wiki/Edsger_W._Dijkstra" title="Edsger W. Dijkstra">Dijkstra, Edsger W</a>. <i>Smoothsort – an alternative to sorting in situ (EWD-796a)</i>. E.W. Dijkstra Archive. Center for American History, <a href="http://en.m.wikipedia.org/wiki/University_of_Texas_at_Austin" title="University of Texas at Austin">University of Texas at Austin</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Smoothsort+%E2%80%93+an+alternative+to+sorting+in+situ+%28EWD-796a%29&amp;rft.aulast=Dijkstra&amp;rft.aufirst=Edsger+W&amp;rft.au=Dijkstra%2C%26%2332%3BEdsger+W&amp;rft.series=E.W.+Dijkstra+Archive&amp;rft.pub=Center+for+American+History%2C+%5B%5BUniversity+of+Texas+at+Austin%5D%5D&amp;rfr_id=info:sid/en.wikipedia.org:Smoothsort"><span style="display: none;">&nbsp;</span></span> (<a rel="nofollow" class="external text" href="http://www.cs.utexas.edu/users/EWD/ewd07xx/EWD796a.PDF">original</a>; <a rel="nofollow" class="external text" href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD07xx/EWD796a.html">transcription</a>)</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://www.keithschwarz.com/smoothsort/">Smoothsort Demystified</a>. Keithschwarz.com. Retrieved on 2010-11-20.</span>
+</li>
+</ol>
+</div>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.enterag.ch/hartwig/order/smoothsort.pdf">Commented transcription of EWD796a</a></li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bogosort" title="Bogosort">Bogosort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><strong class="selflink">Smoothsort</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Smoothsort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Smoothsort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Smoothsort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Smoothsort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Smoothsort_files/load_002.php" type="text/javascript"></script>
+<script src="Smoothsort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

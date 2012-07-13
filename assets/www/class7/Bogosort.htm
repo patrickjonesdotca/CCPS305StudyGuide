@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Bogosort - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Bogosort_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 18 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Bogosort">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Bogosort_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Bogosort_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Bogosort_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Bogosort" selected="selected">English</option><option value="//ca.m.wikipedia.org/wiki/Bogosort">català</option><option value="//cs.m.wikipedia.org/wiki/Stupid_sort">česky</option><option value="//de.m.wikipedia.org/wiki/Bogosort">Deutsch</option><option value="//es.m.wikipedia.org/wiki/Stupid_sort">español</option><option value="//fa.m.wikipedia.org/wiki/%D9%85%D8%B1%D8%AA%D8%A8%E2%80%8C%D8%B3%D8%A7%D8%B2%DB%8C_%D8%A8%D9%88%DA%AF%D9%88">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Tri_stupide">français</option><option value="//it.m.wikipedia.org/wiki/Stupid_sort">italiano</option><option value="//nl.m.wikipedia.org/wiki/Bogosort">Nederlands</option><option value="//ja.m.wikipedia.org/wiki/%E3%83%9C%E3%82%B4%E3%82%BD%E3%83%BC%E3%83%88">日本語</option><option value="//no.m.wikipedia.org/wiki/Bogosortering">‪norsk (bokmål)‬</option><option value="//pl.m.wikipedia.org/wiki/Bogosort">polski</option><option value="//pt.m.wikipedia.org/wiki/Bogosort">português</option><option value="//ru.m.wikipedia.org/wiki/Bogosort">русский</option><option value="//sr.m.wikipedia.org/wiki/%D0%93%D0%BB%D1%83%D0%BF%D0%B8_%D1%81%D0%BE%D1%80%D1%82">српски / srpski</option><option value="//tr.m.wikipedia.org/wiki/Sa%C3%A7ma_s%C4%B1ralama">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%91%D0%BE%D0%B3%D0%BE">українська</option><option value="//zh.m.wikipedia.org/wiki/Bogo%E6%8E%92%E5%BA%8F">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Bogosort</h1>			
+<table class="infobox" style="width: 22em;" cellspacing="5">
+<caption class="" style="">Bogosort</caption>
+<tbody><tr class="">
+<th scope="row" style="text-align: left;">Class</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Data structure</th>
+<td class="" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case performance</a></th>
+<td class="" style="">Unbounded<sup id="cite_ref-Fun07_0-0" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best case performance</a></th>
+<td class="" style="">
+<span class="texhtml"><i>Ω</i>(n)</span><sup id="cite_ref-Fun07_0-1" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average case performance</a></th>
+<td class="" style="">
+<span class="texhtml"><i>O</i>(n × n!)</span><sup id="cite_ref-Fun07_0-2" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup>
+</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.m.wikipedia.org/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst case space complexity</a></th>
+<td class="" style=""><img class="tex" alt="O(n)" src="Bogosort_files/7ba55e7c64a9405a0b39a1107e90ca94.png"></td>
+</tr>
+</tbody></table>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <b>bogosort</b><sup id="cite_ref-Fun07_0-3" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-KSFS_1-0" class="reference"><a href="#cite_note-KSFS-1"><span>[</span>2<span>]</span></a></sup> (also <b>stupid sort</b><sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> or <b>slowsort</b><sup id="cite_ref-Naish86_3-0" class="reference"><a href="#cite_note-Naish86-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-Naish95_4-0" class="reference"><a href="#cite_note-Naish95-4"><span>[</span>5<span>]</span></a></sup>) is a particularly ineffective <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a> based on the <a href="http://en.m.wikipedia.org/wiki/Trial_and_error" title="Trial and error">generate and test</a>
+ paradigm. It is not useful for sorting, but may be used for educational
+ purposes, to contrast it with other more realistic algorithms; it has 
+also been used as an example in <a href="http://en.m.wikipedia.org/wiki/Logic_programming" title="Logic programming">logic programming</a>.<sup id="cite_ref-KSFS_1-1" class="reference"><a href="#cite_note-KSFS-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-Naish86_3-1" class="reference"><a href="#cite_note-Naish86-3"><span>[</span>4<span>]</span></a></sup><sup id="cite_ref-Naish95_4-1" class="reference"><a href="#cite_note-Naish95-4"><span>[</span>5<span>]</span></a></sup> If bogosort were used to sort a <a href="http://en.m.wikipedia.org/wiki/Deck_of_cards" title="Deck of cards" class="mw-redirect">deck of cards</a>,
+ it would consist of checking if the deck were in order, and if it were 
+not, throwing the deck into the air, picking the cards up at random, and
+ repeating the process until the deck is sorted. Its name comes from the
+ word <i>bogus</i>.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Description_of_the_algorithm">Description of the algorithm</span></h2><div class="content_block" id="content_1">
+<p>Following is a description of the algorithm in <a href="http://en.m.wikipedia.org/wiki/Pseudocode" title="Pseudocode">pseudocode</a>.</p>
+<pre><b>while</b> <b>not</b> isInOrder(deck) <b>do</b>
+    shuffle(deck);
+</pre>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Running_time_and_termination">Running time and termination</span></h2><div class="content_block" id="content_2">
+<p>This <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithm</a>
+ is probabilistic in nature. If all elements to be sorted are distinct, 
+the expected number of comparisons in the average case is <a href="http://en.m.wikipedia.org/wiki/Asymptotic_analysis" title="Asymptotic analysis">asymptotically equivalent to</a> <img class="tex" alt="(e-1) n!" src="Bogosort_files/39d5044e2c0fce24cc2b16654d9794ed.png">, and the expected number of swaps in the average case equals <img class="tex" alt="(n-1) n!" src="Bogosort_files/1bbf86b63988b36021dcb511edece5de.png">.<sup id="cite_ref-Fun07_0-4" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup>
+ The expected number of swaps grows faster than the expected number of 
+comparisons, because if the elements are not in order, this will usually
+ be discovered after only a few comparisons no matter how many elements 
+there are, but the work of shuffling the collection is proportional to 
+its size. In the worst case, the number of comparisons and swaps are 
+both unbounded, for the same reason that a tossed coin might turn up 
+heads any number of times in a row.</p>
+<p>The best case occurs if the list as given is already sorted; in this case the expected number of comparisons is <img class="tex" alt="n-1" src="Bogosort_files/a438673491daae8148eae77373b6a467.png">, and no swaps at all are carried out.<sup id="cite_ref-Fun07_0-5" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup></p>
+<p>For any collection of fixed size, the expected running time of the algorithm is finite for much the same reason that the <a href="http://en.m.wikipedia.org/wiki/Infinite_monkey_theorem" title="Infinite monkey theorem">infinite monkey theorem</a> holds: there is some probability of getting the right permutation, so given an unbounded number of tries it will <a href="http://en.m.wikipedia.org/wiki/Almost_surely" title="Almost surely">almost surely</a> eventually be chosen. However, if a <a href="http://en.m.wikipedia.org/wiki/Pseudorandom_number_generator" title="Pseudorandom number generator">pseudorandom number generator</a> is used in place of a random source, it may never terminate, since these exhibit long-term cyclic behavior.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Related_algorithms">Related algorithms</span></h2><div class="content_block" id="content_3">
+<dl>
+<dt>Goro sort</dt>
+<dd>is a sorting algorithm introduced in the 2011 <a href="http://en.m.wikipedia.org/wiki/Google_Code_Jam" title="Google Code Jam">Google Code Jam</a>.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>
+ As long as the list is not in order, a subset of all elements is 
+randomly permuted. If this subset is optimally chosen each time this is 
+performed, the <a href="http://en.m.wikipedia.org/wiki/Expected_value" title="Expected value">expected value</a> of the total number of times this operation needs to be done is equal to the number of misplaced elements.</dd>
+</dl>
+<dl>
+<dt>Bozo sort</dt>
+<dd>is another sorting algorithm based on random numbers. If the list is
+ not in order, it picks two items at random and swaps them, then checks 
+to see if the list is sorted. The running time analysis of Bozo Sort is 
+more difficult, but some estimates are found in H. Gruber's analysis of 
+perversely awful randomized sorting algorithms.<sup id="cite_ref-Fun07_0-6" class="reference"><a href="#cite_note-Fun07-0"><span>[</span>1<span>]</span></a></sup> O(n!) is found to be the expected average case.</dd>
+</dl>
+<dl>
+<dt>Quantum bogosort</dt>
+<dd>An <a href="http://en.m.wikipedia.org/wiki/In-joke" title="In-joke">in-joke</a> among some computer scientists is that <a href="http://en.m.wikipedia.org/wiki/Quantum_computing" title="Quantum computing" class="mw-redirect">quantum computing</a>
+ could be used to effectively implement a bogosort with a time 
+complexity of O(n). It uses true quantum randomness to randomly permute 
+the list. The list is then inspected, and if it is not in order, the 
+universe is destroyed. By the <a href="http://en.m.wikipedia.org/wiki/Many-worlds_interpretation" title="Many-worlds interpretation">many-worlds interpretation</a> of quantum physics, the quantum randomization spawns <img class="tex" alt="2^N" src="Bogosort_files/51a00a634fd5e0ad8b398a5d65c9cd6d.png">
+ (where N is the number of random bits) universes and one of these will 
+be such that this single shuffle had produced the list in sorted order.</dd>
+</dl>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_4">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Las_Vegas_algorithm" title="Las Vegas algorithm">Las Vegas algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+</ul>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_5">
+<ol class="references">
+<li id="cite_note-Fun07-0">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Fun07_0-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Fun07_0-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-Fun07_0-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-Fun07_0-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-Fun07_0-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-Fun07_0-5"><sup><i><b>f</b></i></sup></a> <a href="#cite_ref-Fun07_0-6"><sup><i><b>g</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFGruberHolzerRuepp">Gruber, H.; Holzer, M.; Ruepp, O., <a rel="nofollow" class="external text" href="http://www.hermann-gruber.com/data/fun07-final.pdf">"Sorting the slow way: an analysis of perversely awful randomized sorting algorithms"</a>, <i>4th International Conference on Fun with Algorithms, Castiglioncello, Italy, 2007</i>, Lecture Notes in Computer Science, <b>4475</b>, Springer-Verlag, pp.&nbsp;183–197, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F978-3-540-72914-3_17">10.1007/978-3-540-72914-3_17</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.hermann-gruber.com/data/fun07-final.pdf">http://www.hermann-gruber.com/data/fun07-final.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Sorting+the+slow+way%3A+an+analysis+of+perversely+awful+randomized+sorting+algorithms&amp;rft.atitle=4th+International+Conference+on+Fun+with+Algorithms%2C+Castiglioncello%2C+Italy%2C+2007&amp;rft.aulast=Gruber&amp;rft.aufirst=H.&amp;rft.au=Gruber%2C%26%2332%3BH.&amp;rft.au=Holzer%2C%26%2332%3BM.&amp;rft.au=Ruepp%2C%26%2332%3BO.&amp;rft.series=Lecture+Notes+in+Computer+Science&amp;rft.volume=4475&amp;rft.pages=pp.%26nbsp%3B183%E2%80%93197&amp;rft.pub=Springer-Verlag&amp;rft_id=info:doi/10.1007%2F978-3-540-72914-3_17&amp;rft_id=http%3A%2F%2Fwww.hermann-gruber.com%2Fdata%2Ffun07-final.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bogosort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-KSFS-1">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-KSFS_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-KSFS_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFKiselyovShanFriedmanSabry2005">Kiselyov, Oleg; Shan, Chung-chieh; Friedman, Daniel P.; Sabry, Amr (2005), <a rel="nofollow" class="external text" href="http://www.dicta.org.uk/programming/LogicT.pdf">"Backtracking, interleaving, and terminating monad transformers: (functional pearl)"</a>, <i>Proceedings of the Tenth ACM SIGPLAN International Conference on Functional Programming (ICFP '05)</i>, SIGPLAN Notices, pp.&nbsp;192–203, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F1086365.1086390">10.1145/1086365.1086390</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://www.dicta.org.uk/programming/LogicT.pdf">http://www.dicta.org.uk/programming/LogicT.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Backtracking%2C+interleaving%2C+and+terminating+monad+transformers%3A+%28functional+pearl%29&amp;rft.atitle=Proceedings+of+the+Tenth+ACM+SIGPLAN+International+Conference+on+Functional+Programming+%28ICFP+%2705%29&amp;rft.aulast=Kiselyov&amp;rft.aufirst=Oleg&amp;rft.au=Kiselyov%2C%26%2332%3BOleg&amp;rft.au=Shan%2C%26%2332%3BChung-chieh&amp;rft.au=Friedman%2C%26%2332%3BDaniel+P.&amp;rft.au=Sabry%2C%26%2332%3BAmr&amp;rft.date=2005&amp;rft.series=SIGPLAN+Notices&amp;rft.pages=pp.%26nbsp%3B192%E2%80%93203&amp;rft_id=info:doi/10.1145%2F1086365.1086390&amp;rft_id=http%3A%2F%2Fwww.dicta.org.uk%2Fprogramming%2FLogicT.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Bogosort"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text">E. S. Raymond. "bogo-sort". <i>The New Hacker’s Dictionary</i>. MIT Press, 1996.</span>
+</li>
+<li id="cite_note-Naish86-3">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Naish86_3-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Naish86_3-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFNaish1986">Naish, Lee (1986), "Negation and quantifiers in NU-Prolog", <i>Proceedings of the Third International Conference on Logic Programming</i>, Lecture Notes in Computer Science, <b>225</b>, Springer-Verlag, pp.&nbsp;624–634, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2F3-540-16492-8_111">10.1007/3-540-16492-8_111</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Negation+and+quantifiers+in+NU-Prolog&amp;rft.atitle=Proceedings+of+the+Third+International+Conference+on+Logic+Programming&amp;rft.aulast=Naish&amp;rft.aufirst=Lee&amp;rft.au=Naish%2C%26%2332%3BLee&amp;rft.date=1986&amp;rft.series=Lecture+Notes+in+Computer+Science&amp;rft.volume=225&amp;rft.pages=pp.%26nbsp%3B624%E2%80%93634&amp;rft.pub=Springer-Verlag&amp;rft_id=info:doi/10.1007%2F3-540-16492-8_111&amp;rfr_id=info:sid/en.wikipedia.org:Bogosort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-Naish95-4">
+<span class="mw-cite-backlink">^ <a href="#cite_ref-Naish95_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Naish95_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><span class="citation" id="CITEREFNaish1995">Naish, Lee (June 1995), <a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.2347"><i>Pruning in logic programming</i></a>, Tech. Report 95/16, Melbourne, Australia: Department of Computer Science, University of Melbourne<span class="printonly">, <a rel="nofollow" class="external free" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.2347">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.2347</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Pruning+in+logic+programming&amp;rft.aulast=Naish&amp;rft.aufirst=Lee&amp;rft.au=Naish%2C%26%2332%3BLee&amp;rft.date=June+1995&amp;rft.series=Tech.+Report+95%2F16&amp;rft.place=Melbourne%2C+Australia&amp;rft.pub=Department+of+Computer+Science%2C+University+of+Melbourne&amp;rft_id=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fsummary%3Fdoi%3D10.1.1.54.2347&amp;rfr_id=info:sid/en.wikipedia.org:Bogosort"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://code.google.com/codejam/contest/dashboard?c=975485#s=p3">Google Code Jam 2011, Qualification Rounds, Problem D</a></span>
+</li>
+</ol>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_6">
+<table class="metadata mbox-small plainlinks" style="border: 1px solid rgb(170, 170, 170); background-color: rgb(249, 249, 249);"><tbody><tr>
+<td class="mbox-image"><img alt="" src="Bogosort_files/40px-Wikibooks-logo-en-noslogan.png" width="40" height="40"></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_Implementation">Algorithm Implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="http://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Bogosort">Bogosort</a></b></i></div>
+</td>
+</tr></tbody></table>
+<ul>
+<li>
+<a href="http://c2.com/cgi/wiki?BogoSort" class="extiw" title="wiki:BogoSort">BogoSort</a> on <a href="http://en.m.wikipedia.org/wiki/WikiWikiWeb" title="WikiWikiWeb">WikiWikiWeb</a>
+</li>
+<li><a rel="nofollow" class="external text" href="http://home.tiac.net/%7Ecri_d/cri/2001/badsort.html">Inefficient sort algorithms</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.lysator.liu.se/%7Eqha/bogosort/">Bogosort</a>: an implementation that runs on <a href="http://en.m.wikipedia.org/wiki/Unix-like" title="Unix-like">Unix-like</a> systems, similar to the standard <a href="http://en.m.wikipedia.org/wiki/Sort_%28Unix%29" title="Sort (Unix)">sort</a> program.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://github.com/versesane/algorithms-and-data-structures-in-c/tree/master/bogosort.c">Bogosort</a> and <a rel="nofollow" class="external text" href="http://libjmmcg.cvs.sourceforge.net/viewvc/libjmmcg/libjmmcg/core/bogo_sort.hpp">jmmcg::bogosort</a>: Simple, yet perverse, C++ implementations of the bogosort algorithm.</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Sorting" title="Template:Sorting"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Sorting" title="Template talk:Sorting"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Sorting&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithms</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Theory</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">Computational complexity theory</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">Big O notation</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Total_order" title="Total order">Total order</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">Lists</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm#Stability" title="Sorting algorithm">Stability</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_sort" title="Comparison sort">Comparison sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Adaptive_sort" title="Adaptive sort">Adaptive sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sorting_network" title="Sorting network">Sorting network</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Integer_sorting" title="Integer sorting">Integer sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Exchange sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bubble_sort" title="Bubble sort">Bubble sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cocktail_sort" title="Cocktail sort">Cocktail sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Odd%E2%80%93even_sort" title="Odd–even sort">Odd–even sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comb_sort" title="Comb sort">Comb sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gnome_sort" title="Gnome sort">Gnome sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Quicksort" title="Quicksort">Quicksort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stooge_sort" title="Stooge sort">Stooge sort</a></li>
+<li><strong class="selflink">Bogosort</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Selection sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting" title="Cartesian tree">Cartesian tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tournament_sort" title="Tournament sort">Tournament sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cycle_sort" title="Cycle sort">Cycle sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Insertion sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Shellsort" title="Shellsort">Shellsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Library_sort" title="Library sort">Library sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Patience_sorting" title="Patience sorting">Patience sorting</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Merge sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Merge_sort" title="Merge sort">Merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Polyphase_merge_sort" title="Polyphase merge sort">Polyphase merge sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Strand_sort" title="Strand sort">Strand sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Distribution sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/American_flag_sort" title="American flag sort">American flag sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bead_sort" title="Bead sort">Bead sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bucket_sort" title="Bucket sort">Bucket sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Burstsort" title="Burstsort">Burstsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Counting_sort" title="Counting sort">Counting sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pigeonhole_sort" title="Pigeonhole sort">Pigeonhole sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Proxmap_sort" title="Proxmap sort">Proxmap sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_sort" title="Radix sort">Radix sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Flashsort" title="Flashsort">Flashsort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Concurrent sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Bitonic_sorter" title="Bitonic sorter">Bitonic sorter</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort" title="Batcher odd–even mergesort">Batcher odd–even mergesort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pairwise_sorting_network" title="Pairwise sorting network">Pairwise sorting network</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Hybrid sorts</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Timsort" title="Timsort">Timsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Introsort" title="Introsort">Introsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spreadsort" title="Spreadsort">Spreadsort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UnShuffle_sort" title="UnShuffle sort">UnShuffle sort</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JSort" title="JSort">JSort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Topological_sorting" title="Topological sorting">Topological sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Pancake_sorting" title="Pancake sorting">Pancake sorting</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Spaghetti_sort" title="Spaghetti sort">Spaghetti sort</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Bogosort&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Bogosort&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Bogosort&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Bogosort&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Bogosort_files/load_002.php" type="text/javascript"></script>
+<script src="Bogosort_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

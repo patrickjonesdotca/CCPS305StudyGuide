@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Cryptographic hash function - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Cryptographic_hash_function_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 20 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Cryptographic_hash_function_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Cryptographic_hash_function_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Cryptographic_hash_function_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Cryptographic_hash_function" selected="selected">English</option><option value="//cs.m.wikipedia.org/wiki/Kryptografick%C3%A1_ha%C5%A1ovac%C3%AD_funkce">česky</option><option value="//de.m.wikipedia.org/wiki/Kryptologische_Hashfunktion">Deutsch</option><option value="//el.m.wikipedia.org/wiki/%CE%9A%CF%81%CF%85%CF%80%CF%84%CE%BF%CE%B3%CF%81%CE%B1%CF%86%CE%B9%CE%BA%CE%AE_%CE%A3%CF%85%CE%BD%CE%AC%CF%81%CF%84%CE%B7%CF%83%CE%B7_%CE%9A%CE%B1%CF%84%CE%B1%CF%84%CE%B5%CE%BC%CE%B1%CF%87%CE%B9%CF%83%CE%BC%CE%BF%CF%8D">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Funci%C3%B3n_hash_criptogr%C3%A1fica">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%AA%D8%A7%D8%A8%D8%B9_%D8%AF%D8%B1%D9%87%D9%85%E2%80%8C%D8%B3%D8%A7%D8%B2_%D8%B1%D9%85%D8%B2%D9%86%DA%AF%D8%A7%D8%B1%D8%A7%D9%86%D9%87">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Fonction_de_hachage#Fonction_de_hachage_cryptographique">français</option><option value="//ko.m.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%ED%95%B4%EC%8B%9C_%ED%95%A8%EC%88%98">한국어</option><option value="//he.m.wikipedia.org/wiki/%D7%A4%D7%95%D7%A0%D7%A7%D7%A6%D7%99%D7%99%D7%AA_%D7%92%D7%99%D7%91%D7%95%D7%91_%D7%A7%D7%A8%D7%99%D7%A4%D7%98%D7%95%D7%92%D7%A8%D7%A4%D7%99%D7%AA">עברית</option><option value="//ml.m.wikipedia.org/wiki/%E0%B4%97%E0%B5%82%E0%B4%A2%E0%B4%B6%E0%B4%BE%E0%B4%B8%E0%B5%8D%E0%B4%A4%E0%B5%8D%E0%B4%B0_%E0%B4%B9%E0%B4%BE%E0%B4%B7%E0%B5%8D_%E0%B4%AB%E0%B4%99%E0%B5%8D%E0%B4%B7%E0%B5%BB">മലയാളം</option><option value="//ja.m.wikipedia.org/wiki/%E6%9A%97%E5%8F%B7%E5%AD%A6%E7%9A%84%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E9%96%A2%E6%95%B0">日本語</option><option value="//pt.m.wikipedia.org/wiki/Fun%C3%A7%C3%A3o_de_embaralhamento_criptogr%C3%A1fico">português</option><option value="//ru.m.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%85%D0%B5%D1%88-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F">русский</option><option value="//simple.m.wikipedia.org/wiki/Cryptographic_hash_function">Simple English</option><option value="//sk.m.wikipedia.org/wiki/Kryptografick%C3%A1_ha%C5%A1ovacia_funkcia">slovenčina</option><option value="//sr.m.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B0_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%98%D0%B0_%D0%B7%D0%B0_%D1%81%D0%B0%D0%B6%D0%B8%D0%BC%D0%B0%D1%9A%D0%B5">српски / srpski</option><option value="//tr.m.wikipedia.org/wiki/Kriptografik_%C3%B6zet_fonksiyonu">Türkçe</option><option value="//uk.m.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D1%96%D1%87%D0%BD%D0%B0_%D0%B3%D0%B5%D1%88-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D1%96%D1%8F">українська</option><option value="//vi.m.wikipedia.org/wiki/H%C3%A0m_b%C4%83m_m%E1%BA%ADt_m%C3%A3_h%E1%BB%8Dc">Tiếng Việt</option><option value="//zh-yue.m.wikipedia.org/wiki/Cryptographic_hash_function">粵語</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Cryptographic hash function</h1>			
+<div class="thumb tright">
+<div class="thumbinner" style="width:377px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Cryptographic_Hash_Function.svg" class="image"><img alt="" src="Cryptographic_hash_function_files/375px-Cryptographic_Hash_Function.png" class="thumbimage" width="375" height="272"></a>
+<div class="thumbcaption">
+
+A cryptographic hash function (specifically, <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a>)
+ at work. Note that even small changes in the source input (here in the 
+word "over") drastically change the resulting output, by the so-called <a href="http://en.m.wikipedia.org/wiki/Avalanche_effect" title="Avalanche effect">avalanche effect</a>.</div>
+</div>
+</div>
+<p>A <b>cryptographic hash function</b> is a <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash function</a>, that is, an <a href="http://en.m.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that takes an arbitrary block of <a href="http://en.m.wikipedia.org/wiki/Data" title="Data">data</a> and returns a fixed-size <a href="http://en.m.wikipedia.org/wiki/Bit" title="Bit">bit</a> string, the (<b>cryptographic</b>) <b>hash value</b>,
+ such that an (accidental or intentional) change to the data will (with 
+very high probability) change the hash value. The data to be encoded is 
+often called the "message," and the hash value is sometimes called the <b>message digest</b> or simply <b>digest.</b></p>
+<p>The ideal cryptographic hash function has four main or significant properties:</p>
+<ul>
+<li>it is easy to compute the hash value for any given message</li>
+<li>it is <a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory#Intractability" title="Computational complexity theory">infeasible</a> to generate a message that has a given hash</li>
+<li>it is infeasible to modify a message without changing the hash</li>
+<li>it is infeasible to find two different messages with the same hash</li>
+</ul>
+<p>Cryptographic hash functions have many <a href="http://en.m.wikipedia.org/wiki/Information_security" title="Information security">information security</a> applications, notably in <a href="http://en.m.wikipedia.org/wiki/Digital_signature" title="Digital signature">digital signatures</a>, <a href="http://en.m.wikipedia.org/wiki/Message_authentication_codes" title="Message authentication codes" class="mw-redirect">message authentication codes</a> (MACs), and other forms of <a href="http://en.m.wikipedia.org/wiki/Authentication" title="Authentication">authentication</a>. They can also be used as ordinary <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash functions</a>, to index data in <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash tables</a>, for <a href="http://en.m.wikipedia.org/wiki/Fingerprint_%28computing%29" title="Fingerprint (computing)">fingerprinting</a>, to detect duplicate data or uniquely identify files, and as <a href="http://en.m.wikipedia.org/wiki/Checksum" title="Checksum">checksums</a>
+ to detect accidental data corruption. Indeed, in information security 
+contexts, cryptographic hash values are sometimes called (<b>digital</b>) <b>fingerprints,</b> <b>checksums,</b> or just <b>hash values,</b> even though all these terms stand for functions with rather different properties and purposes.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Properties">Properties</span></h2><div class="content_block" id="content_1">
+<p>Most cryptographic hash functions are designed to take a <a href="http://en.m.wikipedia.org/wiki/String_%28computer_science%29" title="String (computer science)">string</a> of any length as input and produce a fixed-length hash value.</p>
+<p>A cryptographic hash function must be able to withstand all known <a href="http://en.m.wikipedia.org/wiki/Cryptanalysis#Types_of_cryptanalytic_attack" title="Cryptanalysis">types of cryptanalytic attack</a>. As a minimum, it must have the following properties:</p>
+<ul>
+<li>
+<i>Preimage resistance</i>
+<dl>
+<dd>Given a hash <img class="tex" alt="h\," src="Cryptographic_hash_function_files/7c4073ca34bcc95361750a3f1fddc7a8.png"> it should be difficult to find any message <img class="tex" alt="m\," src="Cryptographic_hash_function_files/79dd9720ffa5bbe026e23afc9ab4df3c.png"> such that <img class="tex" alt="h=\mathrm{hash}(m)\," src="Cryptographic_hash_function_files/7076c2910ad45c59297b9a22d65675fa.png">. This concept is related to that of <a href="http://en.m.wikipedia.org/wiki/One-way_function" title="One-way function">one-way function</a>. Functions that lack this property are vulnerable to <a href="http://en.m.wikipedia.org/wiki/Preimage_attack" title="Preimage attack">preimage attacks</a>.</dd>
+</dl>
+</li>
+</ul>
+<ul>
+<li>
+<i>Second-preimage resistance</i>
+<dl>
+<dd>Given an input <img class="tex" alt="m_1\," src="Cryptographic_hash_function_files/42a6801b6f8351da21c095761aa4c9fa.png"> it should be difficult to find another input <img class="tex" alt="m_2\," src="Cryptographic_hash_function_files/98e4fcac0b2b86010ac519d55699a399.png"> — where <img class="tex" alt="m_1 \ne m_2\," src="Cryptographic_hash_function_files/6385948fba52d59b4c76f9185e9805fe.png"> — such that <img class="tex" alt="\mathrm{hash}(m_1) = \mathrm{hash}(m_2)\," src="Cryptographic_hash_function_files/e84d6f03d1d7de7ed626d9cfbb201f8c.png">. This property is sometimes referred to as <i>weak collision resistance,</i> and functions that lack this property are vulnerable to <a href="http://en.m.wikipedia.org/wiki/Preimage_attack" title="Preimage attack">second-preimage attacks</a>.</dd>
+</dl>
+</li>
+</ul>
+<ul>
+<li>
+<i><a href="http://en.m.wikipedia.org/wiki/Collision_resistance" title="Collision resistance">Collision resistance</a></i>
+<dl>
+<dd>It should be difficult to find two different messages <img class="tex" alt="m_1\," src="Cryptographic_hash_function_files/42a6801b6f8351da21c095761aa4c9fa.png"> and <img class="tex" alt="m_2\," src="Cryptographic_hash_function_files/98e4fcac0b2b86010ac519d55699a399.png"> such that <img class="tex" alt="\mathrm{hash}(m_1) = \mathrm{hash}(m_2)\," src="Cryptographic_hash_function_files/e84d6f03d1d7de7ed626d9cfbb201f8c.png">. Such a pair is called a cryptographic <a href="http://en.m.wikipedia.org/wiki/Hash_collision" title="Hash collision" class="mw-redirect">hash collision</a>. This property is sometimes referred to as <i>strong collision resistance.</i>
+ It requires a hash value at least twice as long as that required for 
+preimage-resistance, otherwise collisions may be found by a <a href="http://en.m.wikipedia.org/wiki/Birthday_attack" title="Birthday attack">birthday attack</a>.</dd>
+</dl>
+</li>
+</ul>
+<p>These properties imply that a <a href="http://en.m.wikipedia.org/wiki/Adversary_%28cryptography%29" title="Adversary (cryptography)">malicious adversary</a>
+ cannot replace or modify the input data without changing its digest. 
+Thus, if two strings have the same digest, one can be very confident 
+that they are identical.</p>
+<p>A function meeting these criteria may still have undesirable 
+properties. Currently popular cryptographic hash functions are 
+vulnerable to <i>length-extension</i> attacks: given <img class="tex" alt="h(m)\," src="Cryptographic_hash_function_files/51196af55352fe72d5338d31629e9a90.png"> and <img class="tex" alt="\mathrm{len}(m)\," src="Cryptographic_hash_function_files/f28aba544001cce0c0cc2a567059a9c4.png"> but not <img class="tex" alt="m\," src="Cryptographic_hash_function_files/79dd9720ffa5bbe026e23afc9ab4df3c.png">, by choosing a suitable <img class="tex" alt="m'\," src="Cryptographic_hash_function_files/19abfe4c3cc868998f84e98086dc1540.png"> an attacker can calculate <img class="tex" alt="h (m||m')\," src="Cryptographic_hash_function_files/8a6bc6872814e93976ac77260928c3d6.png"> where <img class="tex" alt="||" src="Cryptographic_hash_function_files/7d010443693eec253a121e2aa2ba177c.png"> denotes <a href="http://en.m.wikipedia.org/wiki/Concatenation" title="Concatenation">concatenation</a>.<sup class="Template-Fact" style="white-space:nowrap;">[<i><a href="http://en.m.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources from December 2010">citation needed</span></a></i>]</sup> This property can be used to break naive authentication schemes based on hash functions. The <a href="http://en.m.wikipedia.org/wiki/HMAC" title="HMAC" class="mw-redirect">HMAC</a> construction works around these problems.</p>
+<p>Ideally, one may wish for even stronger conditions. It should be 
+impossible for an adversary to find two messages with substantially 
+similar digests; or to infer any useful information about the data, 
+given only its digest. Therefore, a cryptographic hash function should 
+behave as much as possible like a <a href="http://en.m.wikipedia.org/wiki/Random_function" title="Random function">random function</a> while still being deterministic and efficiently computable.</p>
+<p>Checksum algorithms, such as <a href="http://en.m.wikipedia.org/wiki/CRC32" title="CRC32" class="mw-redirect">CRC32</a> and other <a href="http://en.m.wikipedia.org/wiki/Cyclic_redundancy_check" title="Cyclic redundancy check">cyclic redundancy checks</a>,
+ are designed to meet much weaker requirements, and are generally 
+unsuitable as cryptographic hash functions. For example, a CRC was used 
+for message integrity in the <a href="http://en.m.wikipedia.org/wiki/Wired_Equivalent_Privacy" title="Wired Equivalent Privacy">WEP</a> encryption standard, but an attack was readily discovered which exploited the linearity of the checksum.</p>
+<h3> <span class="mw-headline" id="Degree_of_difficulty">Degree of difficulty</span>
+</h3>
+<p>In cryptographic practice, “difficult” generally means “almost 
+certainly beyond the reach of any adversary who must be prevented from 
+breaking the system for as long as the security of the system is deemed 
+important.” The meaning of the term is therefore somewhat dependent on 
+the application, since the effort that a malicious agent may put into 
+the task is usually proportional to his expected gain. However, since 
+the needed effort usually grows very quickly with the digest length, 
+even a thousand-fold advantage in processing power can be neutralized by
+ adding a few dozen bits to the latter.</p>
+<p>In some <a href="http://en.m.wikipedia.org/wiki/Computational_complexity_theory" title="Computational complexity theory">theoretical analyses</a> “difficult” has a specific mathematical meaning, such as <i>not solvable in <a href="http://en.m.wikipedia.org/wiki/Asymptotic_computational_complexity" title="Asymptotic computational complexity">asymptotic</a> <a href="http://en.m.wikipedia.org/wiki/Polynomial_time" title="Polynomial time" class="mw-redirect">polynomial time</a>.</i> Such interpretations of <i>difficulty</i> are important in the study of <a href="http://en.m.wikipedia.org/wiki/Provably_secure_cryptographic_hash_function" title="Provably secure cryptographic hash function">provably secure cryptographic hash functions</a> but do not usually have a strong connection to practical security. For example, an <a href="http://en.m.wikipedia.org/wiki/Exponential_time" title="Exponential time" class="mw-redirect">exponential time</a>
+ algorithm can sometimes still be fast enough to make a feasible attack.
+ Conversely, a polynomial time algorithm (e.g., one that requires <i>n</i><sup>20</sup> steps for <i>n</i>-digit keys) may be too slow for any practical use.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Illustration">Illustration</span></h2><div class="content_block" id="content_2">
+<p>An illustration of the potential use of a cryptographic hash is as follows: <a href="http://en.m.wikipedia.org/wiki/Alice_and_Bob" title="Alice and Bob">Alice</a> poses a tough math problem to <a href="http://en.m.wikipedia.org/wiki/Alice_and_Bob" title="Alice and Bob">Bob</a>,
+ and claims she has solved it. Bob would like to try it himself, but 
+would yet like to be sure that Alice is not bluffing. Therefore, Alice 
+writes down her solution, appends a random <a href="http://en.m.wikipedia.org/wiki/Cryptographic_nonce" title="Cryptographic nonce">nonce</a>,
+ computes its hash and tells Bob the hash value (whilst keeping the 
+solution and nonce secret). This way, when Bob comes up with the 
+solution himself a few days later, Alice can prove that she had the 
+solution earlier by revealing the nonce to Bob. (This is an example of a
+ simple <a href="http://en.m.wikipedia.org/wiki/Commitment_scheme" title="Commitment scheme">commitment scheme</a>;
+ in actual practice, Alice and Bob will often be computer programs, and 
+the secret would be something less easily spoofed than a claimed puzzle 
+solution).</p>
+<p>This Illustration is misleading as a nonce is not necessary in this 
+example. The hash value alone would be sufficient to determine Alice's 
+answer. A nonce is used to thwart the 'replay-attack', in which the 
+attacker can resend another, duplicate message twice or more. Example is
+ in ordering products over the internet, an attacker could take the 
+encrypted information, and without needing to decrypt, could continue to
+ send the order into the company, thereby ordering products over and 
+over again under the same name and purchase information. The nonce is 
+used to give 'originality' to the message, where a nonce is used once 
+and only once, and if the company receives any other orders from the 
+same person with the same nonce, will discard those as invalid orders. 
+Many nonces also include a timestamp to ensure exact timeliness, though 
+this requires clock sychronization between organizations.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Verifying_the_integrity_of_files_or_messages">Verifying the integrity of files or messages</span>
+</h3>
+<p>An important application of secure hashes is verification of <a href="http://en.m.wikipedia.org/wiki/Message_integrity" title="Message integrity" class="mw-redirect">message integrity</a>. Determining whether any changes have been made to a message (or a <a href="http://en.m.wikipedia.org/wiki/Computer_file" title="Computer file">file</a>),
+ for example, can be accomplished by comparing message digests 
+calculated before, and after, transmission (or any other event).</p>
+<p>For this reason, most <a href="http://en.m.wikipedia.org/wiki/Digital_signature" title="Digital signature">digital signature</a>
+ algorithms only confirm the authenticity of a hashed digest of the 
+message to be "signed." Verifying the authenticity of a hashed digest of
+ the message is considered proof that the message itself is authentic.</p>
+<p>A related application is <a href="http://en.m.wikipedia.org/wiki/Password" title="Password">password</a> verification. Passwords are usually not stored in <a href="http://en.m.wikipedia.org/wiki/Cleartext" title="Cleartext" class="mw-redirect">cleartext</a>,
+ to improve security, but instead in digest form. To authenticate a 
+user, the password presented by the user is hashed and compared with the
+ stored hash. This also means that the original passwords cannot be 
+retrieved if forgotten or lost, and they'll have to be replaced with new
+ ones.</p>
+<h3> <span class="mw-headline" id="File_or_data_identifier">File or data identifier</span>
+</h3>
+<p>A message digest can also serve as a means of reliably identifying a file; several <a href="http://en.m.wikipedia.org/wiki/Source_Code_Management" title="Source Code Management" class="mw-redirect">source code management</a> systems, including <a href="http://en.m.wikipedia.org/wiki/Git_%28software%29" title="Git (software)">Git</a>, <a href="http://en.m.wikipedia.org/wiki/Mercurial_%28software%29" title="Mercurial (software)" class="mw-redirect">Mercurial</a> and <a href="http://en.m.wikipedia.org/wiki/Monotone_%28software%29" title="Monotone (software)">Monotone</a>, use the <a href="http://en.m.wikipedia.org/wiki/Sha1sum" title="Sha1sum">sha1sum</a>
+ of various types of content (file content, directory trees, ancestry 
+information, etc.) to uniquely identify them. Hashes are used to 
+identify files on <a href="http://en.m.wikipedia.org/wiki/Peer-to-peer" title="Peer-to-peer">peer-to-peer</a> <a href="http://en.m.wikipedia.org/wiki/Filesharing" title="Filesharing" class="mw-redirect">filesharing</a> networks. For example, in an <a href="http://en.m.wikipedia.org/wiki/Ed2k_link" title="Ed2k link" class="mw-redirect">ed2k link</a>, an <a href="http://en.m.wikipedia.org/wiki/MD4" title="MD4">MD4</a>-variant
+ hash is combined with the file size, providing sufficient information 
+for locating file sources, downloading the file and verifying its 
+contents. <a href="http://en.m.wikipedia.org/wiki/Magnet_URI_scheme" title="Magnet URI scheme">Magnet links</a> are another example. Such file hashes are often the top hash of a <a href="http://en.m.wikipedia.org/wiki/Hash_list" title="Hash list">hash list</a> or a <a href="http://en.m.wikipedia.org/wiki/Hash_tree" title="Hash tree">hash tree</a> which allows for additional benefits.</p>
+<p>One of the main applications of a <a href="http://en.m.wikipedia.org/wiki/Hash_function" title="Hash function">hash function</a> is to allow the fast look-up of a data in a <a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">hash table</a>. Being hash functions of a particular kind, cryptographic hash functions lend themselves well to this application too.</p>
+<p>However, compared with standard hash functions, cryptographic hash 
+functions tend to be much more expensive computationally. For this 
+reason, they tend to be used in contexts where it is necessary for users
+ to protect themselves against the possibility of forgery (the creation 
+of data with the same digest as the expected data) by potentially 
+malicious participants.</p>
+<h3> <span class="mw-headline" id="Pseudorandom_generation_and_key_derivation">Pseudorandom generation and key derivation</span>
+</h3>
+<p>Hash functions can also be used in the generation of <a href="http://en.m.wikipedia.org/wiki/Pseudorandom" title="Pseudorandom" class="mw-redirect">pseudorandom</a> bits, or to <a href="http://en.m.wikipedia.org/wiki/Key_derivation_function" title="Key derivation function">derive new keys or passwords</a> from a single, secure key or password.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Hash_functions_based_on_block_ciphers">Hash functions based on block ciphers</span></h2><div class="content_block" id="content_4">
+<p>There are several methods to use a <a href="http://en.m.wikipedia.org/wiki/Block_cipher" title="Block cipher">block cipher</a> to build a cryptographic hash function, specifically a <a href="http://en.m.wikipedia.org/wiki/One-way_compression_function" title="One-way compression function">one-way compression function</a>.</p>
+<p>The methods resemble the <a href="http://en.m.wikipedia.org/wiki/Block_cipher_modes_of_operation" title="Block cipher modes of operation">block cipher modes of operation</a> usually used for encryption. All well-known hash functions, including <a href="http://en.m.wikipedia.org/wiki/MD4" title="MD4">MD4</a>, <a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a>, <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a> and <a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-2</a>
+ are built from block-cipher-like components designed for the purpose, 
+with feedback to ensure that the resulting function is not <a href="http://en.m.wikipedia.org/wiki/Bijective" title="Bijective" class="mw-redirect">bijective</a>. <a href="http://en.m.wikipedia.org/wiki/NIST_hash_function_competition" title="NIST hash function competition">SHA-3</a> finalists include functions with block-cipher-like components (e.g., <a href="http://en.m.wikipedia.org/wiki/Skein_hash_function" title="Skein hash function" class="mw-redirect">Skein</a>, BLAKE) and functions based on other designs (e.g., <a href="http://en.m.wikipedia.org/wiki/JH_%28hash_function%29" title="JH (hash function)">JH</a>, <a href="http://en.m.wikipedia.org/wiki/Keccak" title="Keccak">Keccak</a>).</p>
+<p>A standard block cipher such as <a href="http://en.m.wikipedia.org/wiki/Advanced_Encryption_Standard" title="Advanced Encryption Standard">AES</a> can be used in place of these custom block ciphers; that might be useful when an <a href="http://en.m.wikipedia.org/wiki/Embedded_system" title="Embedded system">embedded system</a>
+ needs to implement both encryption and hashing with minimal code size 
+or hardware area. However, that approach can have costs in efficiency 
+and security. The ciphers in hash functions are built for hashing: they 
+use large keys and blocks, can efficiently change keys every block, and 
+have been designed and vetted for resistance to <a href="http://en.m.wikipedia.org/wiki/Related-key_attack" title="Related-key attack">related-key attacks</a>.
+ General-purpose ciphers tend to have different design goals. In 
+particular, AES has key and block sizes that make it nontrivial to use 
+to generate long hash values; AES encryption becomes less efficient when
+ the key changes each block; and related-key attacks make it potentially
+ less secure for use in a hash function than for encryption.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Merkle.E2.80.93Damg.C3.A5rd_construction">Merkle–Damgård construction</span></h2><div class="content_block" id="content_5">
+<div class="rellink relarticle mainarticle">Main article: <a href="http://en.m.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction" title="Merkle–Damgård construction">Merkle–Damgård construction</a>
+</div>
+<div class="thumb tright">
+<div class="thumbinner" style="width:402px;">
+<a href="http://en.m.wikipedia.org/wiki/File:Merkle-Damgard_hash_big.svg" class="image"><img alt="" src="Cryptographic_hash_function_files/400px-Merkle-Damgard_hash_big.png" class="thumbimage" width="400" height="187"></a>
+<div class="thumbcaption">
+
+The Merkle–Damgård hash construction.</div>
+</div>
+</div>
+<p>A hash function must be able to process an arbitrary-length message 
+into a fixed-length output. This can be achieved by breaking the input 
+up into a series of equal-sized blocks, and operating on them in 
+sequence using a one-way compression function. The compression function 
+can either be specially designed for hashing or be built from a block 
+cipher. A hash function built with the Merkle–Damgård construction is as
+ resistant to collisions as is its compression function; any collision 
+for the full hash function can be traced back to a collision in the 
+compression function.</p>
+<p>The last block processed should also be unambiguously <a href="http://en.m.wikipedia.org/wiki/Padding_%28cryptography%29" title="Padding (cryptography)">length padded</a>; this is crucial to the security of this construction. This construction is called the <a href="http://en.m.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction" title="Merkle–Damgård construction">Merkle–Damgård construction</a>. Most widely used hash functions, including <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a> and <a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a>, take this form.</p>
+<p>The construction has certain inherent flaws, including 
+length-extension and generate-and-paste attacks, and cannot be 
+parallelized. As a result, many entrants in the current <a href="http://en.m.wikipedia.org/wiki/NIST_hash_function_competition" title="NIST hash function competition">NIST hash function competition</a> are built on different, sometimes novel, constructions.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="Use_in_building_other_cryptographic_primitives">Use in building other cryptographic primitives</span></h2><div class="content_block" id="content_6">
+<p>Hash functions can be used to build other cryptographic primitives. 
+For these other primitives to be cryptographically secure, care must be 
+taken to build them correctly.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Message_authentication_code" title="Message authentication code">Message authentication codes</a> (MACs) (also called keyed hash functions) are often built from hash functions. <a href="http://en.m.wikipedia.org/wiki/HMAC" title="HMAC" class="mw-redirect">HMAC</a> is such a MAC.</p>
+<p>Just as <a href="http://en.m.wikipedia.org/wiki/Block_cipher" title="Block cipher">block ciphers</a> can be used to build hash functions, hash functions can be used to build block ciphers. <a href="http://en.m.wikipedia.org/wiki/Luby-Rackoff" title="Luby-Rackoff" class="mw-redirect">Luby-Rackoff</a>
+ constructions using hash functions can be provably secure if the 
+underlying hash function is secure. Also, many hash functions (including
+ <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a> and <a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-2</a>) are built by using a special-purpose block cipher in a <a href="http://en.m.wikipedia.org/wiki/One-way_compression_function#Davies.E2.80.93Meyer" title="One-way compression function">Davies-Meyer</a>
+ or other construction. That cipher can also be used in a conventional 
+mode of operation, without the same security guarantees. See <a href="http://en.m.wikipedia.org/wiki/SHACAL" title="SHACAL">SHACAL</a>, <a href="http://en.m.wikipedia.org/wiki/BEAR_%28cipher%29" title="BEAR (cipher)" class="mw-redirect">BEAR</a> and <a href="http://en.m.wikipedia.org/wiki/LION_%28cipher%29" title="LION (cipher)" class="mw-redirect">LION</a>.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Pseudorandom_number_generator" title="Pseudorandom number generator">Pseudorandom number generators</a> (PRNGs) can be built using hash functions. This is done by combining a (secret) random seed with a counter and hashing it.</p>
+<p>Some hash functions, such as <a href="http://en.m.wikipedia.org/wiki/Skein_%28hash_function%29" title="Skein (hash function)">Skein</a>, <a href="http://en.m.wikipedia.org/wiki/Keccak" title="Keccak">Keccak</a>, and <a href="http://en.m.wikipedia.org/wiki/RadioGat%C3%BAn" title="RadioGatún">RadioGatún</a> output an arbitrarily long stream and can be used as a <a href="http://en.m.wikipedia.org/wiki/Stream_cipher" title="Stream cipher">stream cipher</a>, and stream ciphers can also be built from fixed-length digest hash functions. Often this is done by first building a <a href="http://en.m.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator" title="Cryptographically secure pseudorandom number generator">cryptographically secure pseudorandom number generator</a> and then using its stream of random bytes as <a href="http://en.m.wikipedia.org/wiki/Keystream" title="Keystream">keystream</a>. <a href="http://en.m.wikipedia.org/wiki/SEAL_%28cipher%29" title="SEAL (cipher)">SEAL</a> is a stream cipher that uses <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a>
+ to generate internal tables, which are then used in a keystream 
+generator more or less unrelated to the hash algorithm. SEAL is not 
+guaranteed to be as strong (or weak) as SHA-1.</p>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="Concatenation_of_cryptographic_hash_functions">Concatenation of cryptographic hash functions</span></h2><div class="content_block" id="content_7">
+<p>Concatenating outputs from multiple hash functions provides collision
+ resistance as good as the strongest of the algorithms included in the 
+concatenated result. For example, older versions of <a href="http://en.m.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">TLS/SSL</a> use concatenated <a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a> and <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a>
+ sums; that ensures that a method to find collisions in one of the 
+functions doesn't allow forging traffic protected with both functions.</p>
+<p>For Merkle-Damgård hash functions, the concatenated function is as collision-resistant as its strongest component,<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> but not more collision-resistant.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup> Joux<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup>
+ noted that 2-collisions lead to n-collisions: if it is feasible to find
+ two messages with the same MD5 hash, it is effectively no more 
+difficult to find as many messages as the attacker desires with 
+identical MD5 hashes. Among the n messages with the same MD5 hash, there
+ is likely to be a collision in SHA-1. The additional work needed to 
+find the SHA-1 collision (beyond the exponential birthday search) is <a href="http://en.m.wikipedia.org/wiki/Polynomial_time" title="Polynomial time" class="mw-redirect">polynomial</a>. This argument is summarized by <a rel="nofollow" class="external text" href="http://article.gmane.org/gmane.comp.encryption.general/5154">Finney</a>.
+ A more current paper and full proof of the security of such a combined 
+construction gives a clearer and more complete explanation of the above.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup></p>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Cryptographic_hash_algorithms">Cryptographic hash algorithms</span></h2><div class="content_block" id="content_8">
+<p>There is a long list of cryptographic hash functions, although many 
+have been found to be vulnerable and should not be used. Even if a hash 
+function has never been broken, a successful attack against a weakened 
+variant thereof may undermine the experts' confidence and lead to its 
+abandonment. For instance, in August 2004 weaknesses were found in a 
+number of hash functions that were popular at the time, including SHA-0,
+ RIPEMD, and MD5. This has called into question the long-term security 
+of later algorithms which are derived from these hash functions&nbsp;— 
+in particular, SHA-1 (a strengthened version of SHA-0), RIPEMD-128, and 
+RIPEMD-160 (both strengthened versions of RIPEMD). Neither SHA-0 nor 
+RIPEMD are widely used since they were replaced by their strengthened 
+versions.</p>
+<p>As of 2009, the two most commonly used cryptographic hash functions are <a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a> and <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a>. However, MD5 has been broken; an attack against it was used to break <a href="http://en.m.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">SSL</a> in 2008.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup></p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/SHA-0" title="SHA-0" class="mw-redirect">SHA-0</a> and <a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a> hash functions were developed by the <a href="http://en.m.wikipedia.org/wiki/NSA" title="NSA" class="mw-redirect">NSA</a>. In February 2005, a successful attack on SHA-1 was reported, finding collisions in about 2<sup>69</sup> hashing operations, rather than the 2<sup>80</sup> expected for a 160-bit hash function. In August 2005, another successful attack on SHA-1 was reported, finding collisions in 2<sup>63</sup> operations. Theoretical weaknesses of SHA-1 exist as well,<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup><sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup>
+ suggesting that it may be practical to break within years. New 
+applications can avoid these problems by using more advanced members of 
+the SHA family, such as <a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-2</a>, or using techniques such as randomized hashing<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span>[</span>8<span>]</span></a></sup><sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup> that do not require collision resistance.</p>
+<p>However, to ensure the long-term robustness of applications that use hash functions, there is a <a href="http://en.m.wikipedia.org/wiki/NIST_hash_function_competition" title="NIST hash function competition">competition</a> to design a replacement for SHA-2, which will be given the name SHA-3 and become a <a href="http://en.m.wikipedia.org/wiki/Federal_Information_Processing_Standard" title="Federal Information Processing Standard">FIPS</a> standard around 2012.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup></p>
+<p>Some of the following algorithms are used often in cryptography; 
+consult the article for each specific algorithm for more information on 
+the status of each algorithm. Note that this list does not include 
+candidates in the current NIST hash function competition. For additional
+ hash functions see the box at the bottom of the page.</p>
+<table class="wikitable">
+<tbody><tr>
+<th rowspan="2">Algorithm</th>
+<th rowspan="2">Output size (bits)</th>
+<th rowspan="2">Internal state size<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>c 1<span>]</span></a></sup>
+</th>
+<th rowspan="2">Block size</th>
+<th rowspan="2">Length size</th>
+<th rowspan="2">Word size</th>
+<th rowspan="2">Rounds</th>
+<th colspan="3">Best known attacks<br>
+(complexity:rounds)<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>c 2<span>]</span></a></sup>
+</th>
+</tr>
+<tr>
+<th><a href="http://en.m.wikipedia.org/wiki/Birthday_attack" title="Birthday attack">Collision</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Preimage_attack" title="Preimage attack">Second<br>
+preimage</a></th>
+<th><a href="http://en.m.wikipedia.org/wiki/Preimage_attack" title="Preimage attack">Preimage</a></th>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/GOST_%28hash_function%29" title="GOST (hash function)">GOST</a></b></td>
+<td>256</td>
+<td>256</td>
+<td>256</td>
+<td>256</td>
+<td>32</td>
+<td>256</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/2514122231284103/">2<sup>105</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/2514122231284103/">2<sup>192</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/2514122231284103/">2<sup>192</sup></a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/HAVAL" title="HAVAL">HAVAL</a></b></td>
+<td>256/224/192/160/128</td>
+<td>256</td>
+<td>1,024</td>
+<td>64</td>
+<td>32</td>
+<td>160/128/96</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/MD2_%28cryptography%29" title="MD2 (cryptography)">MD2</a></b></td>
+<td>128</td>
+<td>384</td>
+<td>128</td>
+<td>-</td>
+<td>32</td>
+<td>864</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/n5vrtdha97a2udkx/">2<sup>63.3</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/089.pdf">2<sup>73</sup></a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/MD4" title="MD4">MD4</a></b></td>
+<td>128</td>
+<td>128</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>48</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/v6526284mu858v37/">3</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2010/016.pdf">2<sup>64</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2010/016.pdf">2<sup>78.4</sup></a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a></b></td>
+<td>128</td>
+<td>128</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2009/223.pdf">2<sup>20.96</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://springerlink.com/content/d7pm142n58853467/">2<sup>123.4</sup></a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/PANAMA" title="PANAMA" class="mw-redirect">PANAMA</a></b></td>
+<td>256</td>
+<td>8,736</td>
+<td>256</td>
+<td>-</td>
+<td>32</td>
+<td>-</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/RadioGat%C3%BAn" title="RadioGatún">RadioGatún</a></b></td>
+<td>Up to 608/1,216 (19 words)</td>
+<td>58 words</td>
+<td>3 words</td>
+<td>-</td>
+<td>1–64</td>
+<td>-</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">With flaws (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/515">2<sup>352</sup> or 2<sup>704</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/RIPEMD" title="RIPEMD">RIPEMD</a></b></td>
+<td>128</td>
+<td>128</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>48</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/n5vrtdha97a2udkx/">2<sup>18</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/RIPEMD" title="RIPEMD">RIPEMD-128/256</a></b></td>
+<td>128/256</td>
+<td>128/256</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/RIPEMD" title="RIPEMD">RIPEMD-160</a></b></td>
+<td>160</td>
+<td>160</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>80</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/3540l03h1w31n6w7">2<sup>51</sup>:48</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/RIPEMD" title="RIPEMD">RIPEMD-320</a></b></td>
+<td>320</td>
+<td>320</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>80</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-0</a></b></td>
+<td>160</td>
+<td>160</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>80</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/3810jp9730369045/">2<sup>33.6</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a></b></td>
+<td>160</td>
+<td>160</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>80</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/469.pdf">2<sup>51</sup></a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-256/224</a></b></td>
+<td>256/224</td>
+<td>256</td>
+<td>512</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/270.pdf">2<sup>28.5</sup>:24</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2010/016.pdf">2<sup>248.4</sup>:42</a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-512/384</a></b></td>
+<td>512/384</td>
+<td>512</td>
+<td>1,024</td>
+<td>128</td>
+<td>64</td>
+<td>80</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/270.pdf">2<sup>32.5</sup>:24</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2010/016.pdf">2<sup>494.6</sup>:42</a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/Tiger_%28cryptography%29" title="Tiger (cryptography)">Tiger(2)-192/160/128</a></b></td>
+<td>192/160/128</td>
+<td>192</td>
+<td>512</td>
+<td>64</td>
+<td>64</td>
+<td>24</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://www.springerlink.com/content/u762587644802p38/">2<sup>62</sup>:19</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="http://eprint.iacr.org/2010/016.pdf">2<sup>184.3</sup></a>)</td>
+</tr>
+<tr style="text-align: center;">
+<td><b><a href="http://en.m.wikipedia.org/wiki/WHIRLPOOL" title="WHIRLPOOL" class="mw-redirect">WHIRLPOOL</a></b></td>
+<td>512</td>
+<td>512</td>
+<td>512</td>
+<td>256</td>
+<td>8</td>
+<td>10</td>
+<td style="background: none repeat scroll 0% 0% rgb(255, 144, 144); color: black; vertical-align: middle; text-align: center;" class="no table-no">Yes (<a rel="nofollow" class="external text" href="https://www.cosic.esat.kuleuven.be/fse2009/slides/2402_1150_Schlaeffer.pdf">2<sup>120</sup>:4.5</a>)</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+<td style="background: none repeat scroll 0% 0% rgb(152, 251, 152); color: black; vertical-align: middle; text-align: center;" class="yes2 table-yes2">No</td>
+</tr>
+</tbody></table>
+<h3> <span class="mw-headline" id="Notes">Notes</span>
+</h3>
+<ol class="references">
+<li id="cite_note-10">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text">The <i>internal state</i>
+ here means the "internal hash sum" after each compression of a data 
+block. Most hash algorithms also internally use some additional 
+variables such as length of the data compressed so far since that is 
+needed for the length padding in the end. See the <a href="http://en.m.wikipedia.org/wiki/Merkle-Damg%C3%A5rd_construction" title="Merkle-Damgård construction" class="mw-redirect">Merkle-Damgård construction</a> for details.</span>
+</li>
+<li id="cite_note-11">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text">When omitted, rounds are full number.</span>
+</li>
+</ol>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_9">
+<table class="multicol" style="background: none repeat scroll 0% 0% transparent; width: 100%;" cellpadding="0" cellspacing="0"><tbody><tr>
+<td valign="top" align="left">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Avalanche_effect" title="Avalanche effect">Avalanche effect</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Comparison_of_cryptographic_hash_functions" title="Comparison of cryptographic hash functions">Comparison of cryptographic hash functions</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/CRYPTREC" title="CRYPTREC">CRYPTREC</a> and <a href="http://en.m.wikipedia.org/wiki/NESSIE" title="NESSIE">NESSIE</a> - Projects which recommend hash functions</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Keyed-hash_message_authentication_code" title="Keyed-hash message authentication code" class="mw-redirect">Keyed-hash message authentication code</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/MD5CRK" title="MD5CRK">MD5CRK</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Message_authentication_code" title="Message authentication code">Message authentication code</a></li>
+</ul>
+</td>
+<td valign="top" align="left">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/PGP_word_list" title="PGP word list">PGP word list</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Provably_secure_cryptographic_hash_function" title="Provably secure cryptographic hash function">Provably secure cryptographic hash function</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/NIST_hash_function_competition" title="NIST hash function competition">SHA-3</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/UOWHF" title="UOWHF" class="mw-redirect">UOWHF</a> - Universal One Way Hash Functions</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_chain" title="Hash chain">Hash chain</a></li>
+</ul>
+</td>
+<td valign="top" align="left">
+<div class="noprint tright portal" style="border:solid #aaa 1px; margin:0.5em 0 0.5em 0.5em;">
+<table style="background: none repeat scroll 0% 0% rgb(249, 249, 249); font-size: 85%; line-height: 110%; max-width: 175px;"><tbody><tr>
+<td style="text-align: center;"><a href="http://en.m.wikipedia.org/wiki/File:Crypto_key.svg" class="image"><img alt="Portal icon" src="Cryptographic_hash_function_files/32px-Crypto_key.png" width="32" height="17"></a></td>
+<td style="padding: 0pt 0.2em; vertical-align: middle; font-style: italic; font-weight: bold;"><a href="http://en.m.wikipedia.org/wiki/Portal:Cryptography" title="Portal:Cryptography">Cryptography  portal</a></td>
+</tr></tbody></table>
+</div>
+</td>
+</tr></tbody></table>
+</div><a id="anchor_9" href="#section_9" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_10"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_10">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-0">^</a></b></span> <span class="reference-text">Note
+ that any two messages that collide the concatenated function also 
+collide each component function, by the nature of concatenation. For 
+example, if concat(sha1(message1), md5(message1)) == 
+concat(sha1(message2), md5(message2)) then sha1(message1) == 
+sha1(message2) and md5(message1)==md5(message2). The concatenated 
+function could have other problems that the strongest hash lacks -- for 
+example, it might leak information about the message when the strongest 
+component does not, or it might be detectably nonrandom when the 
+strongest component is not -- but it can't be less collision-resistant.</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">More generally, if an attack can produce a collision in one hash function's <i>internal state,</i> attacking the combined construction is only as difficult as a <a href="http://en.m.wikipedia.org/wiki/Birthday_attack" title="Birthday attack">birthday attack</a> against the other function(s). For the detailed argument, see the Joux and Finney references that follow.</span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="new" title="Antoine Joux (page does not exist)">Antoine Joux</span>. <i>Multicollisions in Iterated Hash Functions. Application to Cascaded Constructions</i>. LNCS 3152/2004, pages 306-316 <a rel="nofollow" class="external text" href="http://www.springerlink.com/index/DWWVMQJU0N0A3UGJ.pdf">Full text</a>.</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><span class="citation Journal">Jonathan J. Hoch and Adi Shamir (2008-02-20). <a rel="nofollow" class="external text" href="http://eprint.iacr.org/2008/075.pdf"><i>On the Strength of the Concatenated Hash Combiner when all the Hash Functions are Weak</i></a><span class="printonly">. <a rel="nofollow" class="external free" href="http://eprint.iacr.org/2008/075.pdf">http://eprint.iacr.org/2008/075.pdf</a></span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=On+the+Strength+of+the+Concatenated+Hash+Combiner+when+all+the+Hash+Functions+are+Weak&amp;rft.aulast=Jonathan+J.+Hoch+and+Adi+Shamir&amp;rft.au=Jonathan+J.+Hoch+and+Adi+Shamir&amp;rft.date=2008-02-20&amp;rft_id=http%3A%2F%2Feprint.iacr.org%2F2008%2F075.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Cryptographic_hash_function"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text">Alexander Sotirov, Marc Stevens, Jacob Appelbaum, Arjen Lenstra, David Molnar, Dag Arne Osvik, Benne de Weger, <a rel="nofollow" class="external text" href="http://www.win.tue.nl/hashclash/rogue-ca/">MD5 considered harmful today: Creating a rogue CA certificate</a>, accessed March 29, 2009</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text">Xiaoyun Wang, Yiqun Lisa Yin, and Hongbo Yu, <a rel="nofollow" class="external text" href="http://people.csail.mit.edu/yiqun/SHA1AttackProceedingVersion.pdf">Finding Collisions in the Full SHA-1</a></span>
+</li>
+<li id="cite_note-6">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text">Bruce Schneier, <a rel="nofollow" class="external text" href="http://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html">Cryptanalysis of SHA-1</a> (summarizes Wang et al. results and their implications)</span>
+</li>
+<li id="cite_note-7">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text">Shai Halevi, Hugo Krawczyk, <a rel="nofollow" class="external text" href="http://csrc.nist.gov/groups/ST/hash/documents/HALEVI_UpdateonRandomizedHashing0824.pdf">Update on Randomized Hashing</a></span>
+</li>
+<li id="cite_note-8">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text">Shai Halevi and Hugo Krawczyk, <a rel="nofollow" class="external text" href="http://www.ee.technion.ac.il/%7Ehugo/rhash/">Randomized Hashing and Digital Signatures</a></span>
+</li>
+<li id="cite_note-9">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://csrc.nist.gov/groups/ST/hash/sha-3/index.html">NIST.gov - Computer Security Division - Computer Security Resource Center</a></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_10" href="#section_10" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_11"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_11">
+<ul>
+<li>Christof Paar, Jan Pelzl, <a rel="nofollow" class="external text" href="http://wiki.crypto.rub.de/Buch/movies.php">"Hash Functions"</a>,
+ Chapter 11 of "Understanding Cryptography, A Textbook for Students and 
+Practitioners". (companion web site contains online cryptography course 
+that covers hash functions), <a href="http://en.m.wikipedia.org/wiki/Springer_Science%2BBusiness_Media" title="Springer Science+Business Media">Springer</a>, 2009.</li>
+<li><a rel="nofollow" class="external text" href="http://ehash.iaik.tugraz.at/wiki/The_eHash_Main_Page">"The ECRYPT Hash Function Website"</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.guardtime.com/educational-series-on-hashes/">"Series of mini-lectures about cryptographic hash functions"</a> by A. Buldas, 2011.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.3.6200">"Cryptographic
+ Hash-Function Basics: Definitions, Implications, and Separations for 
+Preimage Resistance, Second-Preimage Resistance, and Collision 
+Resistance"</a> by P. Rogaway, T. Shrimpton, 2004</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Cryptography_hash" title="Template:Cryptography hash"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Cryptography_hash" title="Template talk:Cryptography hash"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Cryptography_hash&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<span style="float:right;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;">
+<strong class="selflink">Cryptographic hash functions</strong> and <a href="http://en.m.wikipedia.org/wiki/Message_authentication_code" title="Message authentication code">message authentication codes (MACs)</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Common functions</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/MD5" title="MD5">MD5</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SHA-1" title="SHA-1">SHA-1</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SHA-2" title="SHA-2">SHA-2</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Functions</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Fast_Syndrome_Based_Hash" title="Fast Syndrome Based Hash">FSB</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SHA-3" title="SHA-3" class="mw-redirect">SHA-3</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Elliptic_curve_only_hash" title="Elliptic curve only hash">ECOH</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/GOST_%28hash_function%29" title="GOST (hash function)">GOST</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/HAS-160" title="HAS-160">HAS-160</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/HAVAL" title="HAVAL">HAVAL</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/LM_hash" title="LM hash">LM hash</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/MDC-2" title="MDC-2">MDC-2</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/MD2_%28cryptography%29" title="MD2 (cryptography)">MD2</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/MD4" title="MD4">MD4</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/MD6" title="MD6">MD6</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/N-Hash" title="N-Hash">N-Hash</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/RadioGat%C3%BAn" title="RadioGatún">RadioGatún</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/RIPEMD" title="RIPEMD">RIPEMD</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Snefru" title="Snefru">Snefru</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SWIFFT" title="SWIFFT">SWIFFT</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Tiger_%28cryptography%29" title="Tiger (cryptography)">Tiger</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Very_smooth_hash" title="Very smooth hash">VSH</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Whirlpool_%28cryptography%29" title="Whirlpool (cryptography)">WHIRLPOOL</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Crypt_%28Unix%29#Library_Function" title="Crypt (Unix)">crypt(3)</a> (DES)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/SHA-3" title="SHA-3" class="mw-redirect">SHA-3</a> finalists</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/BLAKE_%28hash_function%29" title="BLAKE (hash function)">BLAKE</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Gr%C3%B8stl" title="Grøstl">Grøstl</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/JH_%28hash_function%29" title="JH (hash function)">JH</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Keccak" title="Keccak">Keccak</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Skein_%28hash_function%29" title="Skein (hash function)">Skein</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">MAC algorithms</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Data_Authentication_Algorithm" title="Data Authentication Algorithm">DAA</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/CBC-MAC" title="CBC-MAC">CBC-MAC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/HMAC" title="HMAC" class="mw-redirect">HMAC</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/One-key_MAC" title="One-key MAC">OMAC</a>/<a href="http://en.m.wikipedia.org/wiki/CMAC" title="CMAC">CMAC</a>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/PMAC_%28cryptography%29" title="PMAC (cryptography)">PMAC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/VMAC" title="VMAC">VMAC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UMAC" title="UMAC">UMAC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Poly1305-AES" title="Poly1305-AES">Poly1305-AES</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Authenticated_encryption" title="Authenticated encryption">Authenticated<br>
+encryption</a> modes</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/CCM_mode" title="CCM mode">CCM</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/CWC_mode" title="CWC mode">CWC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/EAX_mode" title="EAX mode">EAX</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Galois/Counter_Mode" title="Galois/Counter Mode">GCM</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/IAPM_%28mode%29" title="IAPM (mode)">IAPM</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/OCB_mode" title="OCB mode">OCB</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Attacks</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Collision_attack" title="Collision attack">Collision attack</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Preimage_attack" title="Preimage attack">Preimage attack</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Birthday_attack" title="Birthday attack">Birthday attack</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Brute_force_attack" title="Brute force attack" class="mw-redirect">Brute force attack</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Rainbow_table" title="Rainbow table">Rainbow table</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Distinguishing_attack" title="Distinguishing attack">Distinguishing attack</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Side-channel_attack" title="Side-channel attack" class="mw-redirect">Side-channel attack</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Misc.</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Avalanche_effect" title="Avalanche effect">Avalanche effect</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Collision_%28computer_science%29" title="Collision (computer science)">Hash collision</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction" title="Merkle–Damgård construction">Merkle–Damgård construction</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Salt_%28cryptography%29" title="Salt (cryptography)">Salt</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Standardization</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/CRYPTREC" title="CRYPTREC">CRYPTREC</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/NESSIE" title="NESSIE">NESSIE</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/NIST_hash_function_competition" title="NIST hash function competition">NIST hash function competition</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing: 0pt;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Cryptography_navbox" title="Template:Cryptography navbox"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Cryptography_navbox" title="Template talk:Cryptography navbox"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Cryptography_navbox&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<span style="float:right;width:6em;">&nbsp;</span>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Cryptography" title="Cryptography">Cryptography</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/History_of_cryptography" title="History of cryptography">History of cryptography</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cryptanalysis" title="Cryptanalysis">Cryptanalysis</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Portal:Cryptography" title="Portal:Cryptography">Cryptography portal</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Outline_of_cryptography" title="Outline of cryptography">Outline of cryptography</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td colspan="2" style="width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Symmetric-key_algorithm" title="Symmetric-key algorithm">Symmetric-key algorithm</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Block_cipher" title="Block cipher">Block cipher</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stream_cipher" title="Stream cipher">Stream cipher</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Public-key_cryptography" title="Public-key cryptography">Public-key cryptography</a></li>
+<li><strong class="selflink">Cryptographic hash function</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Message_authentication_code" title="Message authentication code">Message authentication code</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator" title="Cryptographically secure pseudorandom number generator">Random numbers</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Steganography" title="Steganography">Steganography</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Cryptographic_hash_function&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Cryptographic+hash+function&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Cryptographic_hash_function&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Cryptographic+hash+function&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Cryptographic_hash_function_files/load_002.php" type="text/javascript"></script>
+<script src="Cryptographic_hash_function_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

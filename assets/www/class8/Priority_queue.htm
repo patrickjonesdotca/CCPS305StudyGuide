@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Priority queue - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Priority_queue_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 16 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Priority_queue">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Priority_queue_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Priority_queue_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Priority_queue_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Priority_queue" selected="selected">English</option><option value="//ca.m.wikipedia.org/wiki/Cua_de_prioritats">català</option><option value="//de.m.wikipedia.org/wiki/Vorrangwarteschlange">Deutsch</option><option value="//el.m.wikipedia.org/wiki/%CE%9F%CF%85%CF%81%CE%AC_%CF%80%CF%81%CE%BF%CF%84%CE%B5%CF%81%CE%B1%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B1%CF%82_(%CE%B4%CE%BF%CE%BC%CE%AE_%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD)">Ελληνικά</option><option value="//es.m.wikipedia.org/wiki/Cola_de_prioridades_(estructura_de_datos)">español</option><option value="//fa.m.wikipedia.org/wiki/%D8%B5%D9%81_%D8%A7%D9%88%D9%84%D9%88%DB%8C%D8%AA%E2%80%8C%D8%AF%D8%A7%D8%B1">فارسی</option><option value="//fr.m.wikipedia.org/wiki/File_de_priorit%C3%A9">français</option><option value="//he.m.wikipedia.org/wiki/%D7%AA%D7%95%D7%A8_%D7%A2%D7%93%D7%99%D7%A4%D7%95%D7%99%D7%95%D7%AA">עברית</option><option value="//lt.m.wikipedia.org/wiki/Prioritet%C5%B3_eil%C4%97">lietuvių</option><option value="//ja.m.wikipedia.org/wiki/%E5%84%AA%E5%85%88%E5%BA%A6%E3%81%A4%E3%81%8D%E3%82%AD%E3%83%A5%E3%83%BC">日本語</option><option value="//pl.m.wikipedia.org/wiki/Kolejka_priorytetowa">polski</option><option value="//ru.m.wikipedia.org/wiki/%D0%9E%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D1%8C_%D1%81_%D0%BF%D1%80%D0%B8%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82%D0%BE%D0%BC">русский</option><option value="//fi.m.wikipedia.org/wiki/Prioriteettijono">suomi</option><option value="//sv.m.wikipedia.org/wiki/Prioritetsk%C3%B6">svenska</option><option value="//th.m.wikipedia.org/wiki/%E0%B9%81%E0%B8%96%E0%B8%A7%E0%B8%84%E0%B8%AD%E0%B8%A2%E0%B8%A5%E0%B8%B3%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B3%E0%B8%84%E0%B8%B1%E0%B8%8D">ไทย</option><option value="//uk.m.wikipedia.org/wiki/%D0%A7%D0%B5%D1%80%D0%B3%D0%B0_%D0%B7_%D0%BF%D1%80%D1%96%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82%D0%BE%D0%BC">українська</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Priority queue</h1>			
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <b>priority queue</b> is an <a href="http://en.m.wikipedia.org/wiki/Abstract_data_type" title="Abstract data type">abstract data type</a> which is like a regular <a href="http://en.m.wikipedia.org/wiki/Queue_%28data_structure%29" title="Queue (data structure)" class="mw-redirect">queue</a> or <a href="http://en.m.wikipedia.org/wiki/Stack_%28data_structure%29" title="Stack (data structure)" class="mw-redirect">stack</a>
+ data structure, but where additionally each element has a "priority" 
+associated with it. In a priority queue, an element with high priority 
+is served before an element with low priority. If two elements have the 
+same priority, they are served according to their order in the queue.</p>
+<ul>
+<li>
+<i>stack</i> — elements are pulled in <a href="http://en.m.wikipedia.org/wiki/LIFO_%28computing%29" title="LIFO (computing)">last-in first-out</a>-order (e.g. a stack of papers)</li>
+<li>
+<i>queue</i> — elements are pulled in <a href="http://en.m.wikipedia.org/wiki/First-in_first-out" title="First-in first-out" class="mw-redirect">first-in first-out</a>-order (e.g. a line in a cafeteria)</li>
+</ul>
+<p>It is a common misconception that a priority queue is a <a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">heap</a>. A priority queue is an abstract concept like "a list" or "a map"; just as a list can be implemented with a <a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">linked list</a> or an <a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">array</a>, a priority queue can be implemented with a heap or a variety of other methods.</p>
+<p>A priority queue must at least support the following operations:</p>
+<ul>
+<li>
+<code>insert_with_priority</code>: add an <a href="http://en.m.wikipedia.org/wiki/Element_%28mathematics%29" title="Element (mathematics)">element</a> to the <a href="http://en.m.wikipedia.org/wiki/Queue_%28data_structure%29" title="Queue (data structure)" class="mw-redirect">queue</a> with an associated priority</li>
+<li>
+<code>pull_highest_priority_element</code>: remove the element from the queue that has the <i>highest priority</i>,
+ and return it (also known as "pop_element(Off)", "get_maximum_element",
+ or "get_front(most)_element"; some conventions consider lower 
+priorities to be higher, so this may also be known as 
+"get_minimum_element", and is often referred to as "get-min" in the 
+literature; the literature also sometimes implement separate 
+"peek_at_highest_priority_element" and "delete_element" functions, which
+ can be combined to produce "pull_highest_priority_element")</li>
+</ul>
+<p>More advanced implementations may support more complicated operations, such as <i>pull_lowest_priority_element</i>,
+ inspecting the first few highest- or lowest-priority elements (peeking 
+at the highest priority element can be made O(1) time in nearly all 
+implementations), clearing the queue, clearing subsets of the queue, 
+performing a batch insert, merging two or more queues into one, 
+incrementing priority of any element, etc.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Similarity_to_queues">Similarity to queues</span></h2><div class="content_block" id="content_1">
+<p>One can imagine a priority queue as a modified <a href="http://en.m.wikipedia.org/wiki/Queue_%28data_structure%29" title="Queue (data structure)" class="mw-redirect">queue</a>, but when one would get the next element off the queue, the highest-priority element is retrieved first.</p>
+<p>Stacks and queues may be modeled as particular kinds of priority 
+queues. In a stack, the priority of each inserted element is 
+monotonically increasing; thus, the last element inserted is always the 
+first retrieved. In a queue, the priority of each inserted element is 
+monotonically decreasing; thus, the first element inserted is always the
+ first retrieved.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Implementation">Implementation</span></h2><div class="content_block" id="content_2">
+<h3> <span class="mw-headline" id="Naive_implementations">Naive implementations</span>
+</h3>
+<p>There are a variety of simple, usually inefficient, ways to implement
+ a priority queue. They provide an analogy to help one understand what a
+ priority queue is. For instance, one can keep all the elements in an 
+unsorted list. Whenever the highest-priority element is requested, 
+search through all elements for the one with the highest priority. (In <a href="http://en.m.wikipedia.org/wiki/Big_O_notation" title="Big O notation">big O notation</a>: O(1) insertion time, O(<i>n</i>) pull time due to search.)</p>
+<h3> <span class="mw-headline" id="Usual_implementation">Usual implementation</span>
+</h3>
+<p>To improve performance, priority queues typically use a <a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">heap</a> as their backbone, giving O(log <i>n</i>) performance for inserts and removals, and O(<i>n</i>) to build initially. Alternatively, when a <a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">self-balancing binary search tree</a> is used, insertion and removal also take O(log <i>n</i>) time, although building trees from existing sequences of elements takes O(<i>n</i> log <i>n</i>)
+ time; this typical where one might already have access to these data 
+structures, such as with third-party or standard libraries.</p>
+<p>Note that from a computational-complexity standpoint, priority queues are congruent to sorting algorithms. See <a href="http://en.m.wikipedia.org/wiki/Priority_queue#Equivalence_of_priority_queues_and_sorting_algorithms" title="Priority queue">the next section</a> for how efficient sorting algorithms can create efficient priority queues.</p>
+<p>There are several specialized <a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">heap</a> <a href="http://en.m.wikipedia.org/wiki/Data_structures" title="Data structures" class="mw-redirect">data structures</a> that either supply additional operations or outperform these approaches. The <a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">binary heap</a> uses O(log <i>n</i>) time for both operations, but also allow queries of the element of highest priority without removing it in constant time. <a href="http://en.m.wikipedia.org/wiki/Binomial_heap" title="Binomial heap">Binomial heaps</a> add several more operations, but require O(log <i>n</i>) time for requests. <a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci heaps</a> can insert elements, query the highest priority element, and increase an element's priority in <a href="http://en.m.wikipedia.org/wiki/Amortized_analysis" title="Amortized analysis">amortized</a> constant time<sup id="cite_ref-CLRS_0-0" class="reference"><a href="#cite_note-CLRS-0"><span>[</span>1<span>]</span></a></sup> though deletions are still O(log <i>n</i>)). <a href="http://en.m.wikipedia.org/wiki/Brodal_queue" title="Brodal queue">Brodal queues</a> can do this in worst-case constant time.</p>
+<p>While relying on a heap is a common way to implement priority queues,
+ for integer data, faster implementations exist. This can even apply to 
+data-types that have a finite range, such as floats:</p>
+<ul>
+<li>When the set of keys is {1, 2, ..., <i>C</i>}, a <a href="http://en.m.wikipedia.org/wiki/Van_Emde_Boas_tree" title="Van Emde Boas tree">van Emde Boas tree</a> would support the <i><a href="http://en.m.wikipedia.org/wiki/Minimum" title="Minimum" class="mw-redirect">minimum</a></i>, <i><a href="http://en.m.wikipedia.org/wiki/Maximum" title="Maximum" class="mw-redirect">maximum</a></i>, <i><a href="http://en.m.wikipedia.org/wiki/Insert" title="Insert">insert</a></i>, <i><a href="http://en.m.wikipedia.org/wiki/Delete" title="Delete" class="mw-redirect">delete</a></i>, <i><a href="http://en.m.wikipedia.org/wiki/Search" title="Search" class="mw-redirect">search</a></i>, <i><span class="new" title="Extract-min (page does not exist)">extract-min</span></i>, <i><span class="new" title="Extract-max (page does not exist)">extract-max</span></i>, <i><a href="http://en.m.wikipedia.org/wiki/Predecessor" title="Predecessor" class="mw-redirect">predecessor</a></i> and <i><a href="http://en.m.wikipedia.org/wiki/Successor" title="Successor">successor</a></i> operations in <img class="tex" alt="O(\log \log C)" src="Priority_queue_files/8c74ece8a2397570daca483cfc55d5ee.png"> time, but has a space cost for small queues of about O(2<sup><i>m</i>/2</sup>), where <i>m</i> is the number of bits in the priority value.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup>
+</li>
+<li>The <a href="http://en.m.wikipedia.org/wiki/Fusion_tree" title="Fusion tree">Fusion tree</a> algorithm by <a href="http://en.m.wikipedia.org/wiki/Michael_Fredman" title="Michael Fredman">Fredman</a> and Willard implements the <i>minimum</i> operation in O(1) time and <i>insert</i> and <i>extract-min</i> operations in <img class="tex" alt="O(\sqrt{\log n})" src="Priority_queue_files/aa03985bf68ddaf06eba1e1ec692d200.png"> time.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup>
+</li>
+</ul>
+<p>For applications that do many "<a href="http://en.m.wikipedia.org/wiki/Peek" title="Peek">peek</a>"
+ operations for every "extract-min" operation, the time complexity for 
+peek actions can be reduced to O(1) in all tree and heap implementations
+ by caching the highest priority element after every insertion and 
+removal. For insertion, this adds at most a constant cost, since the 
+newly inserted element is compared only to the previously cached minimum
+ element. For deletion, this at most adds an additional "peek" cost, 
+which is typically cheaper than the deletion cost, so overall time 
+complexity is not significantly impacted.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Equivalence_of_priority_queues_and_sorting_algorithms">Equivalence of priority queues and sorting algorithms</span></h2><div class="content_block" id="content_3">
+<h3> <span class="mw-headline" id="Using_a_priority_queue_to_sort">Using a priority queue to sort</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Operational_semantics" title="Operational semantics">semantics</a>
+ of priority queues naturally suggest a sorting method: insert all the 
+elements to be sorted into a priority queue, and sequentially remove 
+them; they will come out in sorted order. This is actually the procedure
+ used by several <a href="http://en.m.wikipedia.org/wiki/Sorting_algorithm" title="Sorting algorithm">sorting algorithms</a>, once the layer of <a href="http://en.m.wikipedia.org/wiki/Abstraction_%28computer_science%29" title="Abstraction (computer science)">abstraction</a> provided by the priority queue is removed. This sorting method is equivalent to the following sorting algorithms:</p>
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Heapsort" title="Heapsort">Heapsort</a> if the priority queue is implemented with a heap.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Smoothsort" title="Smoothsort">Smoothsort</a> if the priority queue is implemented with a Leonardo heap.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Selection_sort" title="Selection sort">Selection sort</a> if the priority queue is implemented with an unordered array.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Insertion_sort" title="Insertion sort">Insertion sort</a> if the priority queue is implemented with an ordered array.</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Tree_sort" title="Tree sort">Tree sort</a> if the priority queue is implemented with a <a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">self-balancing binary search tree</a>.</li>
+</ul>
+<h3> <span class="mw-headline" id="Using_a_sorting_algorithm_to_make_a_priority_queue">Using a sorting algorithm to make a priority queue</span>
+</h3>
+<p>A sorting algorithm can also be used to implement a priority queue. Specifically, Thorup says<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup>:</p>
+<blockquote>
+<p>We present a general deterministic linear space reduction from 
+priority queues to sorting implying that if we can sort up to n keys in 
+S(n) time per key, then there is a priority queue supporting <i>delete</i> and <i>insert</i> in O(S(n)) time and find-min in constant time.</p>
+</blockquote>
+<p>That is, if there is a sorting algorithm which can sort in O(S) time per key, where S is some function of n and <a href="http://en.m.wikipedia.org/wiki/Word_size" title="Word size" class="mw-redirect">word size</a> <sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup>,
+ then one can use the given procedure to create a priority queue where 
+pulling the highest-priority element is O(1) time, and inserting new 
+elements (and deleting elements) is O(S) time. For example if one has an
+ O(n lg(lg(n))) sort algorithm, one can easily create a priority queue 
+with O(1) pulling and O(lg(lg(n))) insertion.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="Libraries">Libraries</span></h2><div class="content_block" id="content_4">
+<p>A priority queue is often considered to be a "<a href="http://en.m.wikipedia.org/wiki/Container_%28data_structure%29" title="Container (data structure)" class="mw-redirect">container data structure</a>".</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Standard_Template_Library" title="Standard Template Library">Standard Template Library</a> (STL), and the <a href="http://en.m.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a> 1998 standard, specifies <code>priority_queue</code> as one of the STL <a href="http://en.m.wikipedia.org/wiki/Container_%28programming%29" title="Container (programming)" class="mw-redirect">container</a> <a href="http://en.m.wikipedia.org/wiki/Adaptor_%28programming%29" title="Adaptor (programming)" class="mw-redirect">adaptor</a> <a href="http://en.m.wikipedia.org/wiki/Template_%28programming%29" title="Template (programming)" class="mw-redirect">class templates</a>. It implements a max-priority-queue. Unlike actual STL containers, it does not allow <a href="http://en.m.wikipedia.org/wiki/Iterator" title="Iterator">iteration</a>
+ of its elements (it strictly adheres to its abstract data type 
+definition). STL also has utility functions for manipulating another 
+random-access container as a binary max-heap.</p>
+<p>Python's <a rel="nofollow" class="external text" href="http://docs.python.org/library/heapq.html">heapq</a> module implements a binary min-heap on top of a list.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Java_%28programming_language%29" title="Java (programming language)">Java</a>'s library contains a <code><a rel="nofollow" class="external text" href="http://download.oracle.com/javase/7/docs/api/java/util/PriorityQueue.html">PriorityQueue</a></code> class, which implements a min-priority-queue.</p>
+<p><a href="http://en.m.wikipedia.org/wiki/Go_%28programming_language%29" title="Go (programming language)">Go</a>'s library contains a <a rel="nofollow" class="external text" href="http://golang.org/pkg/container/heap/">container/heap</a> module, which implements a min-heap on top of any compatible data structure.</p>
+<p>The <a href="http://en.m.wikipedia.org/wiki/Standard_PHP_Library" title="Standard PHP Library" class="mw-redirect">Standard PHP Library</a> extension contains the class <a rel="nofollow" class="external text" href="http://us2.php.net/manual/en/class.splpriorityqueue.php">SplPriorityQueue</a>.</p>
+<p>Apple's <a href="http://en.m.wikipedia.org/wiki/Core_Foundation" title="Core Foundation">Core Foundation</a> framework contains a <a rel="nofollow" class="external text" href="http://developer.apple.com/library/mac/#documentation/CoreFoundation/Reference/CFBinaryHeapRef/Reference/reference.html">CFBinaryHeap</a> structure, which implements a min-heap.</p>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="Applications">Applications</span></h2><div class="content_block" id="content_5">
+<h3> <span class="mw-headline" id="Bandwidth_management">Bandwidth management</span>
+</h3>
+<p>Priority queuing can be used to manage limited resources such as <a href="http://en.m.wikipedia.org/wiki/Bandwidth_%28computing%29" title="Bandwidth (computing)">bandwidth</a> on a transmission line from a <a href="http://en.m.wikipedia.org/wiki/Computer_network" title="Computer network">network</a> <a href="http://en.m.wikipedia.org/wiki/Router_%28computing%29" title="Router (computing)">router</a>. In the event of outgoing <a href="http://en.m.wikipedia.org/wiki/Traffic" title="Traffic">traffic</a>
+ queuing due to insufficient bandwidth, all other queues can be halted 
+to send the traffic from the highest priority queue upon arrival. This 
+ensures that the prioritized traffic (such as real-time traffic, e.g. an
+ <a href="http://en.m.wikipedia.org/wiki/Real-time_Transport_Protocol" title="Real-time Transport Protocol">RTP</a> stream of a <a href="http://en.m.wikipedia.org/wiki/Voice_over_Internet_Protocol" title="Voice over Internet Protocol" class="mw-redirect">VoIP</a>
+ connection) is forwarded with the least delay and the least likelihood 
+of being rejected due to a queue reaching its maximum capacity. All 
+other traffic can be handled when the highest priority queue is empty. 
+Another approach used is to send disproportionately more traffic from 
+higher priority queues.</p>
+<p>Many modern protocols for <a href="http://en.m.wikipedia.org/wiki/Local_Area_Network" title="Local Area Network" class="mw-redirect">Local Area Networks</a> also include the concept of Priority Queues at the <a href="http://en.m.wikipedia.org/wiki/Media_Access_Control" title="Media Access Control" class="mw-redirect">Media Access Control</a> (MAC) sub-layer to ensure that high-priority applications (such as <a href="http://en.m.wikipedia.org/wiki/VoIP" title="VoIP" class="mw-redirect">VoIP</a> or <a href="http://en.m.wikipedia.org/wiki/IPTV" title="IPTV">IPTV</a>) experience lower latency than other applications which can be served with <a href="http://en.m.wikipedia.org/wiki/Best_effort" title="Best effort" class="mw-redirect">Best effort</a> service. Examples include <a href="http://en.m.wikipedia.org/wiki/IEEE_802.11e" title="IEEE 802.11e" class="mw-redirect">IEEE 802.11e</a> (an amendment to <a href="http://en.m.wikipedia.org/wiki/IEEE_802.11" title="IEEE 802.11">IEEE 802.11</a> which provides <a href="http://en.m.wikipedia.org/wiki/Quality_of_Service" title="Quality of Service" class="mw-redirect">Quality of Service</a>) and <a href="http://en.m.wikipedia.org/wiki/ITU-T" title="ITU-T">ITU-T</a> <a href="http://en.m.wikipedia.org/wiki/G.hn" title="G.hn">G.hn</a> (a standard for high-speed <a href="http://en.m.wikipedia.org/wiki/Local_area_network" title="Local area network">Local area network</a> using existing home wiring (<a href="http://en.m.wikipedia.org/wiki/Power_line_communication" title="Power line communication">power lines</a>, phone lines and <a href="http://en.m.wikipedia.org/wiki/Ethernet_over_coax" title="Ethernet over coax">coaxial cables</a>).</p>
+<p>Usually a limitation (policer) is set to limit the bandwidth that 
+traffic from the highest priority queue can take, in order to prevent 
+high priority packets from choking off all other traffic. This limit is 
+usually never reached due to high level control instances such as the <a href="http://en.m.wikipedia.org/wiki/Cisco_Systems,_Inc." title="Cisco Systems, Inc." class="mw-redirect">Cisco</a> <a href="http://en.m.wikipedia.org/wiki/Callmanager" title="Callmanager" class="mw-redirect">Callmanager</a>, which can be programmed to inhibit calls which would exceed the programmed bandwidth limit.</p>
+<h3> <span class="mw-headline" id="Discrete_event_simulation">Discrete event simulation</span>
+</h3>
+<p>Another use of a priority queue is to manage the events in a <a href="http://en.m.wikipedia.org/wiki/Discrete_event_simulation" title="Discrete event simulation">discrete event simulation</a>.
+ The events are added to the queue with their simulation time used as 
+the priority. The execution of the simulation proceeds by repeatedly 
+pulling the top of the queue and executing the event thereon.</p>
+<p><i>See also</i>: <a href="http://en.m.wikipedia.org/wiki/Scheduling_%28computing%29" title="Scheduling (computing)">Scheduling (computing)</a>, <a href="http://en.m.wikipedia.org/wiki/Queueing_theory" title="Queueing theory">queueing theory</a></p>
+<h3> <span class="mw-headline" id="Dijkstra.27s_algorithm">Dijkstra's algorithm</span>
+</h3>
+<p>When the graph is stored in the form of adjacency list or matrix, 
+priority queue can be used to extract minimum efficiently when 
+implementing <a href="http://en.m.wikipedia.org/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra's algorithm</a>, although one also needs the ability to alter the priority of a particular vertex in the priority queue efficiently.</p>
+<h3> <span class="mw-headline" id="Huffman_coding">Huffman coding</span>
+</h3>
+<p><a href="http://en.m.wikipedia.org/wiki/Huffman_coding" title="Huffman coding">Huffman coding</a> requires one to repeatedly obtain the two lowest-frequency trees. A priority queue makes this efficient.</p>
+<h3> <span class="mw-headline" id="A.2A_and_SMA.2A_search_algorithms">A* and SMA* search algorithms</span>
+</h3>
+<p>The <a href="http://en.m.wikipedia.org/wiki/A*_search_algorithm" title="A* search algorithm">A* search algorithm</a> finds the shortest path between two <a href="http://en.m.wikipedia.org/wiki/Vertex_%28graph_theory%29" title="Vertex (graph theory)">vertices</a> or <a href="http://en.m.wikipedia.org/wiki/Node_%28graph_theory%29" title="Node (graph theory)" class="mw-redirect">nodes</a> of a <a href="http://en.m.wikipedia.org/wiki/Weighted_graph" title="Weighted graph" class="mw-redirect">weighted graph</a>, trying out the most promising routes first. The priority queue (also known as the <i>fringe</i>)
+ is used to keep track of unexplored routes; the one for which a lower 
+bound on the total path length is smallest is given highest priority. If
+ memory limitations make <a href="http://en.m.wikipedia.org/wiki/A*" title="A*" class="mw-redirect">A*</a> impractical, the <a href="http://en.m.wikipedia.org/wiki/SMA*" title="SMA*">SMA*</a> algorithm can be used instead, with a <a href="http://en.m.wikipedia.org/wiki/Double-ended_priority_queue" title="Double-ended priority queue">double-ended priority queue</a> to allow removal of low-priority items.</p>
+<h3> <span class="mw-headline" id="ROAM_triangulation_algorithm">ROAM triangulation algorithm</span>
+</h3>
+<p>The Real-time Optimally Adapting Meshes (<a href="http://en.m.wikipedia.org/wiki/ROAM" title="ROAM">ROAM</a>)
+ algorithm computes a dynamically changing triangulation of a terrain. 
+It works by splitting triangles where more detail is needed and merging 
+them where less detail is needed. The algorithm assigns each triangle in
+ the terrain a priority, usually related to the error decrease if that 
+triangle would be split. The algorithm uses two priority queues, one for
+ triangles that can be split and another for triangles that can be 
+merged. In each step the triangle from the split queue with the highest 
+priority is split, or the triangle from the merge queue with the lowest 
+priority is merged with its neighbours.</p>
+</div><a id="anchor_5" href="#section_5" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_6"><button>Show</button><span id="See_also">See also</span></h2><div class="content_block" id="content_6">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Batch_queue" title="Batch queue" class="mw-redirect">Batch queue</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Closure_%28computer_science%29" title="Closure (computer science)">Closure</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Command_pattern" title="Command pattern">Command pattern</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Command_queue" title="Command queue">Command queue</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Function_object" title="Function object">Function object</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Job_scheduler" title="Job scheduler">Job scheduler</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Model-view-controller" title="Model-view-controller" class="mw-redirect">Model-view-controller</a></li>
+</ul>
+</div><a id="anchor_6" href="#section_6" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_7"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_7">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-CLRS-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-CLRS_0-0">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, and <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. <a href="http://en.m.wikipedia.org/wiki/MIT_Press" title="MIT Press">MIT Press</a> and McGraw-Hill, 2001. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a>. Chapter 20: Fibonacci Heaps, pp.476–497. Third edition p518.</span>
+</li>
+<li id="cite_note-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">P. van Emde Boas. Preserving order in a forest in less than logarithmic time. In <i>Proceedings of the 16th Annual Symposium on Foundations of Computer Science</i>, pages 75-84. IEEE Computer Society, 1975.</span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Michael_Fredman" title="Michael Fredman">Michael L. Fredman</a> and Dan E. Willard. Surpassing the information theoretic bound with fusion trees. <i>Journal of Computer and System Sciences</i>, 48(3):533-551, 1994</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><a href="http://en.m.wikipedia.org/wiki/Mikkel_Thorup" title="Mikkel Thorup">Mikkel Thorup</a>. 2007. Equivalence between priority queues and sorting. J. ACM 54, 6, Article 28 (December 2007). DOI=10.1145/1314690.1314692 <a rel="nofollow" class="external autonumber" href="http://doi.acm.org/10.1145/1314690.1314692">[1]</a></span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="http://courses.csail.mit.edu/6.851/spring07/scribe/lec17.pdf">http://courses.csail.mit.edu/6.851/spring07/scribe/lec17.pdf</a></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_7" href="#section_7" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_8"><button>Show</button><span id="Further_reading">Further reading</span></h2><div class="content_block" id="content_8">
+<ul>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="http://en.m.wikipedia.org/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="http://en.m.wikipedia.org/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a>, and <a href="http://en.m.wikipedia.org/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="http://en.m.wikipedia.org/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. MIT Press and McGraw-Hill, 2001. <a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0262032937" class="internal mw-magiclink-isbn">ISBN 0-262-03293-7</a>. Section 6.5: Priority queues, pp.138–142.</li>
+</ul>
+</div><a id="anchor_8" href="#section_8" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_9"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_9">
+<ul>
+<li><a rel="nofollow" class="external text" href="http://en.cppreference.com/w/cpp/container/priority_queue">C++ reference for <code>std::priority_queue</code></a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://leekillough.com/heaps/">Descriptions</a> by <a href="http://en.m.wikipedia.org/wiki/Lee_Killough_%28programmer%29" title="Lee Killough (programmer)">Lee Killough</a>
+</li>
+<li>
+<a rel="nofollow" class="external text" href="http://bitbucket.org/trijezdci/pqlib/src/">PQlib</a> - Open source Priority Queue library for C</li>
+<li>
+<a rel="nofollow" class="external text" href="http://github.com/vy/libpqueue">libpqueue</a> is a generic priority queue (heap) implementation (in C) used by the Apache HTTP Server project.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.theturingmachine.com/algorithms/heaps.html">Survey of known priority queue structures</a> by Stefan Xenos</li>
+<li>
+<a rel="nofollow" class="external text" href="http://video.google.com/videoplay?docid=3499489585174920878">UC Berkeley - Computer Science 61B - Lecture 24: Priority Queues</a> (video) - introduction to priority queues using binary heap</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cise.ufl.edu/%7Esahni/dsaaj/enrich/c13/double.htm">Double-Ended Priority Queues</a> by <a href="http://en.m.wikipedia.org/wiki/Sartaj_Sahni" title="Sartaj Sahni">Sartaj Sahni</a>
+</li>
+</ul>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:Data_structures" title="Template:Data structures"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:Data_structures" title="Template talk:Data structures"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Data_structures&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;"><a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">Data structures</a></div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Types</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Collection_%28computing%29" title="Collection (computing)" class="mw-redirect">Collection</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Container_%28data_structure%29" title="Container (data structure)" class="mw-redirect">Container</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Abstract_data_type" title="Abstract data type">Abstract</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/List_%28computing%29" title="List (computing)" class="mw-redirect">List</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Associative_array" title="Associative array">Associative array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Multimap" title="Multimap">Multimap</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29" title="Set (computer science)" class="mw-redirect">Set</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29#Multiset" title="Set (computer science)" class="mw-redirect">Multiset</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Queue_%28abstract_data_type%29" title="Queue (abstract data type)">Queue</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Double-ended_queue" title="Double-ended queue">Double-ended queue</a></li>
+<li><strong class="selflink">Priority queue</strong></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Double-ended_priority_queue" title="Double-ended priority queue">Double-ended priority queue</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Stack_%28abstract_data_type%29" title="Stack (abstract data type)">Stack</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Array_data_structure" title="Array data structure">Arrays</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Dynamic_array" title="Dynamic array">Dynamic array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hashed_array_tree" title="Hashed array tree">Hashed array tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Sparse_array" title="Sparse array">Sparse array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Circular_buffer" title="Circular buffer">Circular buffer</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bit_array" title="Bit array">Bit array</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_table" title="Hash table">Hash table</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Linked_data_structure" title="Linked data structure">Linked</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Linked_list" title="Linked list">Linked list</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Unrolled_linked_list" title="Unrolled linked list">Unrolled linked list</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/XOR_linked_list" title="XOR linked list">XOR linked list</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Skip_list" title="Skip list">Skip list</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Association_list" title="Association list">Association list</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-tree</a></li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">self-balancing</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AA_tree" title="AA tree">AA</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Red-black_tree" title="Red-black tree" class="mw-redirect">red-black</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Splay_tree" title="Splay tree">splay</a></li>
+</ul>
+</li>
+<li>
+<a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">Heap</a>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_heap" title="Binary heap">binary</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Binomial_heap" title="Binomial heap">binomial</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fibonacci_heap" title="Fibonacci heap">Fibonacci</a></li>
+</ul>
+</li>
+<li><a href="http://en.m.wikipedia.org/wiki/Trie" title="Trie">Trie</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Graph_%28data_structure%29" title="Graph (data structure)" class="mw-redirect">Graphs</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Directed_graph" title="Directed graph">Directed graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Directed_acyclic_graph" title="Directed acyclic graph">Directed acyclic graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Directed_acyclic_word_graph" title="Directed acyclic word graph">Directed acyclic word graph</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_decision_diagram" title="Binary decision diagram">Binary decision diagram</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hypergraph" title="Hypergraph">Hypergraph</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" style="" colspan="2">
+<div>
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/List_of_data_structures" title="List of data structures">List of data structures</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Priority_queue&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Priority+queue&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Priority_queue&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Priority+queue&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Priority_queue_files/load_002.php" type="text/javascript"></script>
+<script src="Priority_queue_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>

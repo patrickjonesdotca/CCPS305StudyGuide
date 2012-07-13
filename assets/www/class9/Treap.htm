@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="jsEnabled togglingEnabled" dir="ltr" lang="en"><head>
+		<title>Treap - Wikipedia, the free encyclopedia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex,nofollow">		<link rel="stylesheet" href="Treap_files/load.css" type="text/css" media="all">		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">		<script type="text/javascript">
+			if( typeof mw === 'undefined' ) {
+				mw = {};
+			}
+			var mwMobileFrontendConfig = {"messages":{"expand-section":"Show","collapse-section":"Hide","remove-results":"Back...","mobile-frontend-search-noresults":"No article titles match your search. Change your search, or press the keyboard search button to search inside articles.","mobile-frontend-search-help":"Type search term above and matching article titles will appear here.","contents-heading":"Contents","language-heading":"Read this article in","mobile-frontend-close-section":"Close this section","mobile-frontend-language-header":"This article is available in 11 languages","mobile-frontend-language-footer":"<a href=\"\/wiki\/Special:Special:MobileOptions\/Language\">Wikipedia is available in other languages.<\/a>","mobile-frontend-language-site-choose":"Search language","mobile-frontend-language-site-nomatches":"No matching languages"},"settings":{"scriptPath":"\/w","useFormatCookieName":"mf_mobileFormat","useFormatCookieDuration":-1,"useFormatCookieDomain":"en.wikipedia.org","useFormatCookiePath":"\/","stopMobileRedirectCookieName":"stopMobileRedirect","stopMobileRedirectCookieDuration":15552000,"stopMobileRedirectCookieDomain":".wikipedia.org","hookOptions":""}};
+			document.documentElement.className = 'jsEnabled page-loading';		</script>
+		<link rel="canonical" href="http://en.wikipedia.org/wiki/Treap">
+	</head>
+	<body class="mobile mw-mf-checkboxes">
+							<div id="mw-mf-header">
+					<form id="mw-mf-searchForm" action="/w/index.php" class="search_bar" method="get">
+							<img alt="Logo" id="mw-mf-logo" src="Treap_files/W_logo_for_Mobile_Frontend.gif" width="35" height="22">
+						<input value="Special:Search" name="title" type="hidden">
+			<div id="mw-mf-sq" class="divclearable">
+				<input name="search" id="mw-mf-search" size="22" autocomplete="off" maxlength="1024" class="search" placeholder="Type your search here..." type="search">
+				<img src="Treap_files/blank.gif" alt="Clear" class="clearlink" id="mw-mf-clearsearch" title="Clear">
+			</div>
+						<button id="goButton" class="goButton" type="submit">
+				<img src="Treap_files/blank.gif" alt="Go" title="Go">
+			</button>
+					</form>
+									<div class="nav" id="nav">
+				<div id="mw-mf-language-selection">
+		Language:<br>
+		<select id="languageselection"><option value="http://en.wikipedia.org/wiki/Treap" selected="selected">English</option><option value="//de.m.wikipedia.org/wiki/Treap">Deutsch</option><option value="//fa.m.wikipedia.org/wiki/%D8%AF%D8%A7%D8%AF%D9%87_%D8%B3%D8%A7%D8%AE%D8%AA%D8%A7%D8%B1_%D8%AA%DB%8C%D8%B1%DB%8C%D9%BE">فارسی</option><option value="//fr.m.wikipedia.org/wiki/Treap">français</option><option value="//it.m.wikipedia.org/wiki/Treap">italiano</option><option value="//ja.m.wikipedia.org/wiki/Treap">日本語</option><option value="//ru.m.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B2%D0%BE_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">русский</option><option value="//th.m.wikipedia.org/wiki/%E0%B8%97%E0%B8%A3%E0%B8%B5%E0%B8%9E">ไทย</option><option value="//uk.m.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B2%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">українська</option><option value="//vi.m.wikipedia.org/wiki/Treap">Tiếng Việt</option><option value="//zh.m.wikipedia.org/wiki/%E6%A0%91%E5%A0%86">中文</option></select>
+	</div><br>
+			<a href="http://en.m.wikipedia.org/wiki/Main_Page" id="homeButton" class="button">Home</a>
+			<a href="http://en.m.wikipedia.org/wiki/Special:Random" id="randomButton" class="button">Random</a>
+			</div>
+		</div>
+				<div id="results"><ul class="suggestions-results" title="No Results"><li class="suggestions-result">Type search term above and matching article titles will appear here.</li></ul></div>
+		<div class="show" id="content_wrapper">
+				<div id="content">
+			<h1 id="firstHeading">Treap</h1>			
+<table class="vertical-navbox nowraplinks" style="float: right; clear: right; background-color: rgb(249, 249, 249); border: 1px solid rgb(170, 170, 170); width: 22em; margin: 0pt 0pt 1em 1em; padding: 0.2em; border-spacing: 0.4em 0pt; text-align: center; line-height: 1.4em; font-size: 88%;" cellpadding="0" cellspacing="5">
+<tbody><tr>
+<td class="" style="padding-top: 0.4em; line-height: 1.2em;">Part of <a href="http://en.m.wikipedia.org/wiki/Category:Probabilistic_data_structures" title="Category:Probabilistic data structures">a series</a> on</td>
+</tr>
+<tr>
+<th class="navbox-title" style="padding: 0pt 0.4em 0.2em; font-size: 145%; line-height: 1.2em;">
+<a href="http://en.m.wikipedia.org/wiki/Randomized_algorithm" title="Randomized algorithm">Probabilistic</a><br><a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structures</a>
+</th>
+</tr>
+<tr>
+<td class="" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+<a href="http://en.m.wikipedia.org/wiki/Bloom_filter" title="Bloom filter">Bloom filter</a>&nbsp;<span style="font-weight:bold;">·</span> <a href="http://en.m.wikipedia.org/wiki/Skip_list" title="Skip list">Skip list</a>
+</td>
+</tr>
+<tr>
+<th class="navbox-abovebelow" style="padding-top: 0.2em;"><a href="http://en.m.wikipedia.org/wiki/Random_tree_%28disambiguation%29" title="Random tree (disambiguation)" class="mw-redirect">Random trees</a></th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;">
+<p><a href="http://en.m.wikipedia.org/wiki/Random_binary_tree" title="Random binary tree">Random binary tree</a>&nbsp;<span style="font-weight:bold;">·</span>  <strong class="selflink">Treap</strong><br></p>
+<a href="http://en.m.wikipedia.org/wiki/Rapidly_exploring_random_tree" title="Rapidly exploring random tree">Rapidly exploring random tree</a>
+</td>
+</tr>
+<tr>
+<th class="navbox-abovebelow" style="padding-top: 0.2em;">Related</th>
+</tr>
+<tr>
+<td class="" style="padding-bottom: 0.2em;"><a href="http://en.m.wikipedia.org/wiki/Randomized_algorithm" title="Randomized algorithm">Randomized algorithm</a></td>
+</tr>
+<tr>
+<td class="" style="padding: 0.3em 0.4em; font-weight: bold; border-top: 1px solid rgb(170, 170, 170);"><a href="http://en.m.wikipedia.org/wiki/Portal:Computer_science" title="Portal:Computer science"><small>Computer science Portal</small></a></td>
+</tr>
+<tr>
+<td style="text-align: right; font-size: 115%;">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><span class="new" title="Template:Treap (page does not exist)">v</span></li>
+<li class="nv-talk"><span class="new" title="Template talk:Treap (page does not exist)">t</span></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:Treap&amp;action=edit"><span title="Edit this template" style="">e</span></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+<p>In <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, the <b>treap</b> and the <b>randomized binary search tree</b> are two closely related forms of <a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a> <a href="http://en.m.wikipedia.org/wiki/Data_structure" title="Data structure">data structures</a> that maintain a dynamic set of ordered keys and allow <a href="http://en.m.wikipedia.org/wiki/Binary_search" title="Binary search" class="mw-redirect">binary searches</a> among the keys. After any sequence of insertions and deletions of keys, the shape of the tree is a <a href="http://en.m.wikipedia.org/wiki/Random_variable" title="Random variable">random variable</a> with the same probability distribution as a <a href="http://en.m.wikipedia.org/wiki/Random_binary_tree" title="Random binary tree">random binary tree</a>; in particular, with high probability its height is proportional to the <a href="http://en.m.wikipedia.org/wiki/Logarithm" title="Logarithm">logarithm</a> of the number of keys, so that each search, insertion, or deletion operation takes logarithmic time to perform.</p>
+<div class="section"><h2 class="section_heading" id="section_1"><button>Show</button><span id="Treap">Treap</span></h2><div class="content_block" id="content_1">
+<div class="thumb tleft">
+<div class="thumbinner" style="width:222px;">
+<a href="http://en.m.wikipedia.org/wiki/File:TreapAlphaKey.svg" class="image"><img alt="" src="Treap_files/220px-TreapAlphaKey.png" class="thumbimage" width="220" height="270"></a>
+<div class="thumbcaption">
+
+A treap with alphabetic key and numeric max heap order</div>
+</div>
+</div>
+<p>The treap was first described by <a href="http://en.m.wikipedia.org/wiki/Cecilia_R._Aragon" title="Cecilia R. Aragon">Cecilia R. Aragon</a> and <a href="http://en.m.wikipedia.org/wiki/Raimund_Seidel" title="Raimund Seidel">Raimund Seidel</a> in 1989;<sup id="cite_ref-paper89_0-0" class="reference"><a href="#cite_note-paper89-0"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-paper96_1-0" class="reference"><a href="#cite_note-paper96-1"><span>[</span>2<span>]</span></a></sup> its name is a <a href="http://en.m.wikipedia.org/wiki/Portmanteau_word" title="Portmanteau word" class="mw-redirect">portmanteau</a> of <a href="http://en.m.wikipedia.org/wiki/Tree_data_structure" title="Tree data structure" class="mw-redirect">tree</a> and <a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">heap</a>. It is a <a href="http://en.m.wikipedia.org/wiki/Cartesian_tree" title="Cartesian tree">Cartesian tree</a><sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup> in which each key is given a (randomly chosen) numeric priority. As with any binary search tree, the <a href="http://en.m.wikipedia.org/wiki/Inorder_traversal" title="Inorder traversal" class="mw-redirect">inorder traversal</a>
+ order of the nodes is the same as the sorted order of the keys. The 
+structure of the tree is determined by the requirement that it be 
+heap-ordered: that is, the priority number for any non-leaf node must be
+ greater than or equal to the priority of its children. Thus, as with 
+Cartesian trees more generally, the root node is the maximum-priority 
+node, and its left and right subtrees are formed in the same manner from
+ the subsequences of the sorted order to the left and right of that 
+node.</p>
+<p>An equivalent way of describing the treap is that it could be formed 
+by inserting the nodes highest-priority-first into a binary search tree 
+without doing any rebalancing. Therefore, if the priorities are 
+independent random numbers (from a distribution over a large enough 
+space of possible priorities to ensure that two nodes are very unlikely 
+to have the same priority) then the shape of a treap has the same 
+probability distribution as the shape of a <a href="http://en.m.wikipedia.org/wiki/Random_binary_search_tree" title="Random binary search tree" class="mw-redirect">random binary search tree</a>,
+ a search tree formed by inserting the nodes without rebalancing in a 
+randomly chosen insertion order. Because random binary search trees are 
+known to have logarithmic height with high probability, the same is true
+ for treaps.</p>
+<p>Specifically, the treap supports the following operations:</p>
+<ul>
+<li>To search for a given key value, apply a standard <a href="http://en.m.wikipedia.org/wiki/Binary_search_algorithm" title="Binary search algorithm">binary search algorithm</a> in a binary search tree, ignoring the priorities.</li>
+<li>To insert a new key <i>x</i> into the treap, generate a random priority <i>y</i> for <i>x</i>. Binary search for <i>x</i> in the tree, and create a new node at the leaf position where the binary search determines a node for <i>x</i> should exist. Then, as long as <i>x</i> is not the root of the tree and has a larger priority number than its parent <i>z</i>, perform a <a href="http://en.m.wikipedia.org/wiki/Tree_rotation" title="Tree rotation">tree rotation</a> that reverses the parent-child relation between <i>x</i> and <i>z</i>.</li>
+<li>To delete a node <i>x</i> from the treap, if <i>x</i> is a leaf of the tree, simply remove it. If <i>x</i> has a single child <i>z</i>, remove <i>x</i> from the tree and make <i>z</i> be the child of the parent of <i>x</i> (or make <i>z</i> the root of the tree if <i>x</i> had no parent). Finally, if <i>x</i> has two children, swap its position in the tree with the position of its immediate successor <i>z</i>
+ in the sorted order, resulting in one of the previous cases. In this 
+final case, the swap may violate the heap-ordering property for <i>z</i>, so additional rotations may need to be performed to restore this property.</li>
+<li>To split a treap into two smaller treaps, those smaller than key <i>x</i>, and those larger than key <i>x</i>, insert <i>x</i> into the treap with maximum priority—larger than the priority of any node in the treap. After this insertion, <i>x</i> will be the root node of the treap, all values less than <i>x</i> will be found in the left subtreap, and all values greater than <i>x</i> will be found in the right subtreap. This costs as much as a single insertion into the treap.</li>
+<li>Merging two treaps (assumed to be the product of a former split), 
+one can safely assume that the greatest value in the first treap is less
+ than the smallest value in the second treap. Insert a value <i>x</i>, such that <i>x</i>
+ is larger than this max-value in the first treap, and smaller than the 
+min-value in the second treap, and assign it the minimum priority. After
+ insertion it will be a leaf node, and can easily be deleted. The result
+ is one treap merged from the two original treaps. This is effectively 
+"undoing" a split, and costs the same.</li>
+</ul>
+<p>Aragon and Seidel also suggest assigning higher priorities to 
+frequently accessed nodes, for instance by a process that, on each 
+access, chooses a random number and replaces the priority of the node 
+with that number if it is higher than the previous priority. This 
+modification would cause the tree to lose its random shape; instead, 
+frequently accessed nodes would be more likely to be near the root of 
+the tree, causing searches for them to be faster.</p>
+<p>Blelloch and Reid-Miller<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup> describe an application of treaps to a problem of maintaining <a href="http://en.m.wikipedia.org/wiki/Set_%28computer_science%29" title="Set (computer science)" class="mw-redirect">sets</a> of items and performing <a href="http://en.m.wikipedia.org/wiki/Set_union" title="Set union" class="mw-redirect">set union</a>, <a href="http://en.m.wikipedia.org/wiki/Set_intersection" title="Set intersection" class="mw-redirect">set intersection</a>, and <a href="http://en.m.wikipedia.org/wiki/Set_difference" title="Set difference" class="mw-redirect">set difference</a> operations, using a treap to represent each set. Naor and Nissim<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup> describe another application, for maintaining <a href="http://en.m.wikipedia.org/wiki/Public_key_certificate" title="Public key certificate">authorization certificates</a> in <a href="http://en.m.wikipedia.org/wiki/Public-key_cryptography" title="Public-key cryptography">public-key cryptosystems</a>.</p>
+</div><a id="anchor_1" href="#section_1" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_2"><button>Show</button><span id="Randomized_binary_search_tree">Randomized binary search tree</span></h2><div class="content_block" id="content_2">
+<p>The randomized binary search tree, introduced by Martínez and Roura subsequently to the work of Aragon and Seidel on treaps<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup>,
+ stores the same nodes with the same random distribution of tree shape, 
+but maintains different information within the nodes of the tree in 
+order to maintain its randomized structure.</p>
+<p>Rather than storing random priorities on each node, the randomized 
+binary search tree stores at each node a small integer, the number of 
+its descendants (counting itself as one); these numbers may be 
+maintained during tree rotation operations at only a constant additional
+ amount of time per rotation. When a key <i>x</i> is to be inserted into a tree that already has <i>n</i> nodes, the insertion algorithm chooses with probability 1/(<i>n</i>&nbsp;+&nbsp;1) to place <i>x</i> as the new root of the tree, and otherwise it calls the insertion procedure recursively to insert <i>x</i>
+ within the left or right subtree (depending on whether its key is less 
+than or greater than the root). The numbers of descendants are used by 
+the algorithm to calculate the necessary probabilities for the random 
+choices at each step. Placing <i>x</i> at the root of a subtree may be 
+performed either as in the treap by inserting it at a leaf and then 
+rotating it upwards, or by an alternative algorithm described by 
+Martínez and Roura that splits the subtree into two pieces to be used as
+ the left and right children of the new node.</p>
+<p>The deletion procedure for a randomized binary search tree uses the 
+same information per node as the insertion procedure, and like the 
+insertion procedure it makes a sequence of O(log&nbsp;<i>n</i>) random 
+decisions in order to join the two subtrees descending from the left and
+ right children of the deleted node into a single tree. If the left or 
+right subtree of the node to be deleted is empty, the join operation is 
+trivial; otherwise, the left or right child of the deleted node is 
+selected as the new subtree root with probability proportional to its 
+number of descendants, and the join proceeds recursively.</p>
+</div><a id="anchor_2" href="#section_2" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_3"><button>Show</button><span id="Comparison">Comparison</span></h2><div class="content_block" id="content_3">
+<p>The information stored per node in the randomized binary tree is 
+simpler than in a treap (a small integer rather than a high-precision 
+random number), but it makes a greater number of calls to the random 
+number generator (O(log&nbsp;<i>n</i>) calls per insertion or deletion 
+rather than one call per insertion) and the insertion procedure is 
+slightly more complicated due to the need to update the numbers of 
+descendants per node. A minor technical difference is that, in a treap, 
+there is a small probability of a collision (two keys getting the same 
+priority), and in both cases there will be statistical differences 
+between a true random number generator and the <a href="http://en.m.wikipedia.org/wiki/PRNG" title="PRNG" class="mw-redirect">pseudo-random number generator</a>
+ typically used on digital computers. However, in any case the 
+differences between the theoretical model of perfect random choices used
+ to design the algorithm and the capabilities of actual random number 
+generators are vanishingly small.</p>
+<p>Although the treap and the randomized binary search tree both have 
+the same random distribution of tree shapes after each update, the 
+history of modifications to the trees performed by these two data 
+structures over a sequence of insertion and deletion operations may be 
+different. For instance, in a treap, if the three numbers 1, 2, and 3 
+are inserted in the order 1, 3, 2, and then the number 2 is deleted, the
+ remaining two nodes will have the same parent-child relationship that 
+they did prior to the insertion of the middle number. In a randomized 
+binary search tree, the tree after the deletion is equally likely to be 
+either of the two possible trees on its two nodes, independently of what
+ the tree looked like prior to the insertion of the middle number.</p>
+</div><a id="anchor_3" href="#section_3" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_4"><button>Show</button><span id="References">References</span></h2><div class="content_block" id="content_4">
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-paper89-0">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-paper89_0-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFAragonSeidel1989">Aragon, Cecilia R.; Seidel, Raimund (1989), <a rel="nofollow" class="external text" href="http://faculty.washington.edu/aragon/pubs/rst89.pdf">"Randomized Search Trees"</a>, <i><a href="http://en.m.wikipedia.org/wiki/Symposium_on_Foundations_of_Computer_Science" title="Symposium on Foundations of Computer Science">Proc. 30th Symp. Foundations of Computer Science (FOCS 1989)</a></i>, Washington, D.C.: IEEE Computer Society Press, pp.&nbsp;540–545, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSFCS.1989.63531">10.1109/SFCS.1989.63531</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-8186-1982-1" title="Special:BookSources/0-8186-1982-1">0-8186-1982-1</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://faculty.washington.edu/aragon/pubs/rst89.pdf">http://faculty.washington.edu/aragon/pubs/rst89.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Randomized+Search+Trees&amp;rft.atitle=%5B%5BSymposium+on+Foundations+of+Computer+Science%7CProc.+30th+Symp.+Foundations+of+Computer+Science+%28FOCS+1989%29%5D%5D&amp;rft.aulast=Aragon&amp;rft.aufirst=Cecilia+R.&amp;rft.au=Aragon%2C%26%2332%3BCecilia+R.&amp;rft.au=Seidel%2C%26%2332%3BRaimund&amp;rft.date=1989&amp;rft.pages=pp.%26nbsp%3B540%E2%80%93545&amp;rft.place=Washington%2C+D.C.&amp;rft.pub=IEEE+Computer+Society+Press&amp;rft_id=info:doi/10.1109%2FSFCS.1989.63531&amp;rft.isbn=0-8186-1982-1&amp;rft_id=http%3A%2F%2Ffaculty.washington.edu%2Faragon%2Fpubs%2Frst89.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-paper96-1">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-paper96_1-0">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFSeidelAragon1996">Seidel, Raimund; Aragon, Cecilia R. (1996), <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.8602">"Randomized Search Trees"</a>, <i>Algorithmica</i> <b>16</b> (4/5): 464–497, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1007%2Fs004539900061">10.1007/s004539900061</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.8602">http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.8602</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Randomized+Search+Trees&amp;rft.jtitle=Algorithmica&amp;rft.aulast=Seidel&amp;rft.aufirst=Raimund&amp;rft.au=Seidel%2C%26%2332%3BRaimund&amp;rft.au=Aragon%2C%26%2332%3BCecilia+R.&amp;rft.date=1996&amp;rft.volume=16&amp;rft.issue=4%2F5&amp;rft.pages=464%E2%80%93497&amp;rft_id=info:doi/10.1007%2Fs004539900061&amp;rft_id=http%3A%2F%2Fciteseer.ist.psu.edu%2Fviewdoc%2Fsummary%3Fdoi%3D10.1.1.30.8602&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+<li id="cite_note-2">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFVuillemin1980">Vuillemin, Jean (1980), "A unifying look at data structures", <i>Commun. ACM</i> (New York, NY, USA: ACM) <b>23</b> (4): 229–239, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F358841.358852">10.1145/358841.358852</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+unifying+look+at+data+structures&amp;rft.jtitle=Commun.+ACM&amp;rft.aulast=Vuillemin&amp;rft.aufirst=Jean&amp;rft.au=Vuillemin%2C%26%2332%3BJean&amp;rft.date=1980&amp;rft.volume=23&amp;rft.issue=4&amp;rft.pages=229%E2%80%93239&amp;rft.place=New+York%2C+NY%2C+USA&amp;rft.pub=ACM&amp;rft_id=info:doi/10.1145%2F358841.358852&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-3">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFBlellochReid-Miller1998">Blelloch, Guy E.,; Reid-Miller, Margaret, (1998), "Fast set operations using treaps", <i><a href="http://en.m.wikipedia.org/wiki/Symposium_on_Parallel_Algorithms_and_Architectures" title="Symposium on Parallel Algorithms and Architectures" class="mw-redirect">Proc. 10th ACM Symp. Parallel Algorithms and Architectures (SPAA 1998)</a></i>, New York, NY, USA: ACM, pp.&nbsp;16–26, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F277651.277660">10.1145/277651.277660</a>, <a href="http://en.m.wikipedia.org/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Special:BookSources/0-89791-989-0" title="Special:BookSources/0-89791-989-0">0-89791-989-0</a></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Fast+set+operations+using+treaps&amp;rft.atitle=%5B%5BSymposium+on+Parallel+Algorithms+and+Architectures%7CProc.+10th+ACM+Symp.+Parallel+Algorithms+and+Architectures+%28SPAA+1998%29%5D%5D&amp;rft.aulast=Blelloch&amp;rft.aufirst=Guy+E.%2C&amp;rft.au=Blelloch%2C%26%2332%3BGuy+E.%2C&amp;rft.au=Reid-Miller%2C%26%2332%3BMargaret%2C&amp;rft.date=1998&amp;rft.pages=pp.%26nbsp%3B16%E2%80%9326&amp;rft.place=New+York%2C+NY%2C+USA&amp;rft.pub=ACM&amp;rft_id=info:doi/10.1145%2F277651.277660&amp;rft.isbn=0-89791-989-0&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-4">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFNaorNissim2000"><a href="http://en.m.wikipedia.org/wiki/Moni_Naor" title="Moni Naor">Naor, M.</a>; Nissim, K. (April 2000), <a rel="nofollow" class="external text" href="http://eprints.kfupm.edu.sa/29443/1/29443.pdf">"Certificate revocation and certificate update"</a>, <i>IEEE Journal on Selected Areas in Communications</i> <b>18</b> (4): 561–570, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2F49.839932">10.1109/49.839932</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://eprints.kfupm.edu.sa/29443/1/29443.pdf">http://eprints.kfupm.edu.sa/29443/1/29443.pdf</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Certificate+revocation+and+certificate+update&amp;rft.jtitle=IEEE+Journal+on+Selected+Areas+in+Communications&amp;rft.aulast=Naor&amp;rft.aufirst=M.&amp;rft.au=Naor%2C%26%2332%3BM.&amp;rft.au=Nissim%2C%26%2332%3BK.&amp;rft.date=April+2000&amp;rft.volume=18&amp;rft.issue=4&amp;rft.pages=561%E2%80%93570&amp;rft_id=info:doi/10.1109%2F49.839932&amp;rft_id=http%3A%2F%2Feprints.kfupm.edu.sa%2F29443%2F1%2F29443.pdf&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span>.</span>
+</li>
+<li id="cite_note-5">
+<span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><span class="citation" id="CITEREFMart.C3.ADnezRoura1997">Martínez, Conrado; Roura, Salvador (1997), <a rel="nofollow" class="external text" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.243">"Randomized binary search trees"</a>, <i>Journal of the ACM</i> <b>45</b> (2): 288–323, <a href="http://en.m.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">DOI</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F274787.274812">10.1145/274787.274812</a><span class="printonly">, <a rel="nofollow" class="external free" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.243">http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.243</a></span></span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Randomized+binary+search+trees&amp;rft.jtitle=Journal+of+the+ACM&amp;rft.aulast=Mart%C3%ADnez&amp;rft.aufirst=Conrado&amp;rft.au=Mart%C3%ADnez%2C%26%2332%3BConrado&amp;rft.au=Roura%2C%26%2332%3BSalvador&amp;rft.date=1997&amp;rft.volume=45&amp;rft.issue=2&amp;rft.pages=288%E2%80%93323&amp;rft_id=info:doi/10.1145%2F274787.274812&amp;rft_id=http%3A%2F%2Fciteseer.ist.psu.edu%2Fviewdoc%2Fsummary%3Fdoi%3D10.1.1.17.243&amp;rfr_id=info:sid/en.wikipedia.org:Treap"><span style="display: none;">&nbsp;</span></span></span>
+</li>
+</ol>
+</div>
+</div><a id="anchor_4" href="#section_4" class="section_anchors back_to_top">↑Jump back a section</a></div><div class="section"><h2 class="section_heading" id="section_5"><button>Show</button><span id="External_links">External links</span></h2><div class="content_block" id="content_5">
+<ul>
+<li>
+<a rel="nofollow" class="external text" href="http://faculty.washington.edu/aragon/treaps.html">Collection of treap references and info</a> by Cecilia Aragon</li>
+<li>
+<a rel="nofollow" class="external text" href="http://people.ksp.sk/%7Ekuko/bak/index.html">Treap Applet</a> by Kubo Kovac</li>
+<li><a rel="nofollow" class="external text" href="http://www.ibr.cs.tu-bs.de/lehre/ss98/audii/applets/BST/Treap-Example.html">Animated treap</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.cs.uiuc.edu/class/sp09/cs473/notes/08-treaps.pdf">Randomized binary search trees</a>. Lecture notes from a course by Jeff Erickson at UIUC. Despite the title, this is primarily about treaps and <a href="http://en.m.wikipedia.org/wiki/Skip_list" title="Skip list">skip lists</a>; randomized binary search trees are mentioned only briefly.</li>
+<li>
+<a rel="nofollow" class="external text" href="http://code.google.com/p/treapdb/">A high performance key-value store based on treap</a> by Junyi Sun</li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.fernando-rodriguez.com/a-high-performance-alternative-to-dictionary">VB6 implementation of treaps</a>. Visual basic 6 implementation of treaps as a COM object.</li>
+<li><a rel="nofollow" class="external text" href="http://code.google.com/p/as3-commons/source/browse/trunk/as3-commons-collections/src/main/actionscript/org/as3commons/collections/Treap.as">ActionScript3 implementation of a treap</a></li>
+<li><a rel="nofollow" class="external text" href="http://stromberg.dnsalias.org/%7Edstromberg/treap/">Pure Python and Cython in-memory treap and duptreap</a></li>
+<li>
+<a rel="nofollow" class="external text" href="http://www.codeproject.com/Articles/8184/Treaps-in-C">Treaps in C#</a>. By Roy Clemmons</li>
+</ul>
+<p><br></p>
+<table class="navbox" style="border-spacing: 0pt;" cellspacing="0"><tbody><tr>
+<td style="padding: 2px;">
+<table class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing: 0pt; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th scope="col" style="" class="navbox-title" colspan="2">
+<div class="noprint plainlinks hlist navbar mini" style="">
+<ul>
+<li class="nv-view"><a href="http://en.m.wikipedia.org/wiki/Template:CS_trees" title="Template:CS trees"><span title="View this template" style=";;background:none transparent;border:none;">v</span></a></li>
+<li class="nv-talk"><a href="http://en.m.wikipedia.org/wiki/Template_talk:CS_trees" title="Template talk:CS trees"><span title="Discuss this template" style=";;background:none transparent;border:none;">t</span></a></li>
+<li class="nv-edit"><a class="external text" href="http://en.wikipedia.org/w/index.php?title=Template:CS_trees&amp;action=edit"><span title="Edit this template" style=";;background:none transparent;border:none;">e</span></a></li>
+</ul>
+</div>
+<div class="" style="font-size:110%;">
+<a href="http://en.m.wikipedia.org/wiki/Tree_%28data_structure%29" title="Tree (data structure)">Trees</a> in <a href="http://en.m.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>
+</div>
+</th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Binary_tree" title="Binary tree">Binary trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">Binary search tree (BST)</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cartesian_tree" title="Cartesian tree">Cartesian tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Top_tree" title="Top tree">Top tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/T-tree" title="T-tree">T-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Self-balancing_binary_search_tree" title="Self-balancing binary search tree">Self-balancing binary search trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/AA_tree" title="AA tree">AA tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/AVL_tree" title="AVL tree">AVL tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/LLRB_tree" title="LLRB tree" class="mw-redirect">LLRB tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Red%E2%80%93black_tree" title="Red–black tree">Red–black tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Scapegoat_tree" title="Scapegoat tree">Scapegoat tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Splay_tree" title="Splay tree">Splay tree</a></li>
+<li><strong class="selflink">Treap</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/B-tree" title="B-tree">B-trees</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/B%2B_tree" title="B+ tree">B+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/B*-tree" title="B*-tree" class="mw-redirect">B*-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Bx-tree" title="Bx-tree">B<small><sup>x</sup></small>-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/UB-tree" title="UB-tree">UB-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3_tree" title="2-3 tree">2-3 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/2-3-4_tree" title="2-3-4 tree">2-3-4 tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/%28a,b%29-tree" title="(a,b)-tree">(a,b)-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Dancing_tree" title="Dancing tree">Dancing tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Htree" title="Htree">Htree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style=""><a href="http://en.m.wikipedia.org/wiki/Trie" title="Trie">Tries</a></th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Suffix_tree" title="Suffix tree">Suffix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Radix_tree" title="Radix tree">Radix tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Ternary_search_tree" title="Ternary search tree">Ternary search tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-fast_trie" title="X-fast trie">X-fast trie</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Y-fast_trie" title="Y-fast trie">Y-fast trie</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Binary_space_partitioning" title="Binary space partitioning">Binary space partitioning (BSP)</a> trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Quadtree" title="Quadtree">Quadtree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Octree" title="Octree">Octree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/K-d_tree" title="K-d tree"><i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Implicit_k-d_tree" title="Implicit k-d tree">Implicit <i>k</i>-d tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Vp-tree" title="Vp-tree">vp-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Non-binary trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Exponential_tree" title="Exponential tree">Exponential tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fusion_tree" title="Fusion tree">Fusion tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Interval_tree" title="Interval tree">Interval tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/PQ_tree" title="PQ tree">PQ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Range_tree" title="Range tree">Range tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/SPQR_tree" title="SPQR tree">SPQR tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Van_Emde_Boas_tree" title="Van Emde Boas tree">Van Emde Boas tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">
+<a href="http://en.m.wikipedia.org/wiki/Spatial_index" title="Spatial index" class="mw-redirect">Spatial</a> data partitioning trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/R-tree" title="R-tree">R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R%2B_tree" title="R+ tree">R+ tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/R*_tree" title="R* tree">R* tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/X-tree" title="X-tree">X-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/M-tree" title="M-tree">M-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Segment_tree" title="Segment tree">Segment tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hilbert_R-tree" title="Hilbert R-tree">Hilbert R-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Priority_R-tree" title="Priority R-tree">Priority R-tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="">Other trees</th>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even hlist">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="http://en.m.wikipedia.org/wiki/Heap_%28data_structure%29" title="Heap (data structure)">Heap</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Hash_tree" title="Hash tree">Hash tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Finger_tree" title="Finger tree">Finger tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Metric_tree" title="Metric tree">Metric tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Cover_tree" title="Cover tree">Cover tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/BK-tree" title="BK-tree">BK-tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Doubly_chained_tree" title="Doubly chained tree">Doubly chained tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/IDistance" title="IDistance">iDistance</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Link-cut_tree" title="Link-cut tree" class="mw-redirect">Link-cut tree</a></li>
+<li><a href="http://en.m.wikipedia.org/wiki/Fenwick_tree" title="Fenwick tree">Fenwick tree</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr></tbody></table>
+
+</div>
+</div>		</div>
+	</div>
+			<div id="footer">
+			<h2 class="section_heading" id="section_footer"><button>Show</button>
+		<div class="license">Wikipedia ™</div>		<span class="toggleCopyright">
+			<span class="more">more</span><span class="less">less</span>
+		</span>
+	</h2>
+	<div class="content_block" id="content_footer">
+		<ul class="settings">
+			<li>
+				<span class="left separator"><a id="mw-mf-display-toggle" href="http://en.wikipedia.org/w/index.php?title=Treap&amp;mobileaction=toggle_view_desktop">Desktop</a></span><span class="right">Mobile</span>
+			</li>
+			<li>
+				<span class="left"><a href="http://wikimediafoundation.org/wiki/Terms_of_use?useformat=mobile">Terms of Use</a></span><span class="right">Images ON / <a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileOptions/DisableImages&amp;returnto=Treap&amp;mobiletoken=5c89e355d2af09275b3b2ed3653e1683" title="Special:MobileOptions/DisableImages" id="imagetoggle">OFF</a></span>
+			</li>
+			<li class="notice">
+				Article by <a href="http://en.m.wikipedia.org/w/index.php?title=Treap&amp;action=history">contributors</a> like you<br>
+				Content available under <a href="http://en.m.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License?useformat=mobile">CC BY-SA 3.0</a>			</li>
+		</ul>
+		<ul class="links">
+			<li>
+				<a href="http://en.m.wikipedia.org/w/index.php?title=Special:MobileFeedback&amp;returnto=Treap&amp;feedbacksource=MobileFrontend">Contact</a>
+			</li><li>
+			<a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About</a></li><li>
+			<a href="http://en.m.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+		</ul>
+	</div>
+	</div>
+				<!--[if gt IE 7]><!-->
+		<script type="text/javascript">mw={loader:{state:function(){}}};</script>		<script src="Treap_files/load_002.php" type="text/javascript"></script>
+<script src="Treap_files/load.php" type="text/javascript"></script>	<script type="text/javascript">
+	window.onload = function() {
+		mw.mobileFrontend.init();
+	};
+	</script>
+	<!----><!--[endif]---->
+	
+	<div style="display: none;" id="mf-references"><div></div><button>close</button></div></body></html>
